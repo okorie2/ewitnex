@@ -101,7 +101,7 @@ export default function WhoWeArePaper() {
       <div
         css={{
           position: "relative",
-          width: "723px",
+          width: "51.5vw",
           height: "413px",
           [screen.desktop]: {
             width: "54vw",
