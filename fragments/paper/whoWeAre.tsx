@@ -3,7 +3,7 @@
 import { useTheme } from "@emotion/react";
 import { Poppins } from "@next/font/google";
 import Image from "next/image";
-import Phones from "public/assets/pngs/phones.png";
+import Phones from "public/assets/svgs/phones.svg";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
@@ -101,14 +101,14 @@ export default function WhoWeArePaper() {
       <div
         css={{
           position: "relative",
-          width: "43vw",
-          height: "27rem",
+          width: "48vw",
+          height: "29rem",
           [screen.desktop]: {
             width: "54vw",
           },
         }}
       >
-        <Image src={Phones} alt="phones" fill />
+        <Image src={Phones} alt="phones" fill css={{ objectFit: "cover" }} />
       </div>
     </div>
   );
