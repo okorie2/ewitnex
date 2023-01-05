@@ -108,7 +108,7 @@ export default function WhoWeArePaper() {
           },
         }}
       >
-        <Image src={Phones} alt="phones" fill css={{ objectFit: "cover" }} />
+        <Image src={Phones} alt="phones" fill css={{ objectFit: "contain" }} />
       </div>
     </div>
   );
