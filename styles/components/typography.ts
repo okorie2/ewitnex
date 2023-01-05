@@ -18,6 +18,9 @@ export const H1 = styled.h1<Props>`
   @media screen and (max-width: 1024px) {
     font-size: 1.8rem;
   }
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const H2 = styled.h2`
