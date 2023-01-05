@@ -40,7 +40,7 @@ export default function Home() {
       {/* <FindEventFragment /> */}
       <EventsAroundYouFragment />
       <div css={{ overflowX: "hidden" }}>
-        <Image src={Tri_L} alt="line" css={{ marginLeft: "-7px" }} />
+        <Image src={Tri_L} alt="line" />
       </div>
       <UpcomingEventsFragment />
       <div
@@ -50,7 +50,7 @@ export default function Home() {
           justifyContent: "flex-end",
         }}
       >
-        <Image src={Tri_R} alt="line_r" css={{ marginRight: "-7px" }} />
+        <Image src={Tri_R} alt="line_r" />
       </div>
       <FeaturedEventsFragment />
       <Lines />
