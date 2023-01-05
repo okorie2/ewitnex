@@ -101,14 +101,14 @@ export default function WhoWeArePaper() {
       <div
         css={{
           position: "relative",
-          width: "48vw",
-          height: "29rem",
+          width: "723px",
+          height: "413px",
           [screen.desktop]: {
             width: "54vw",
           },
         }}
       >
-        <Image src={Phones} alt="phones" fill css={{ objectFit: "contain" }} />
+        <Image src={Phones} alt="phones" fill />
       </div>
     </div>
   );
