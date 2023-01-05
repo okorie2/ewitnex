@@ -102,7 +102,7 @@ export default function WhoWeArePaper() {
         css={{
           position: "relative",
           width: "43vw",
-          height: "46vh",
+          height: "27rem",
           [screen.desktop]: {
             width: "54vw",
           },
