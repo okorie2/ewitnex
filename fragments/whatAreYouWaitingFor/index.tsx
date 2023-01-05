@@ -28,7 +28,7 @@ export default function WhatAreYouWaitingForFragment() {
       <div css={{ position: "relative", width: "13.5vw", height: "53vh" }}>
         <Image src="/assets/pngs/circle_r.png" alt="circle_r" fill />
       </div>
-      <div css={{ width: "42%", padding: "3rem 0" }}>
+      <div css={{ width: "42%" }}>
         <H1 small color={theme.common.black}>
           What are you waiting for? Sign up, create event, find event, get
           attendees and get involve
@@ -65,7 +65,12 @@ export default function WhatAreYouWaitingForFragment() {
           <Image src="/assets/pngs/fone.png" alt="fones" fill />
         </div> */}
         <div css={{ width: "17.5vw", height: "53vh", position: "relative" }}>
-          <Image src="/assets/pngs/circle_l.png" alt="circle_l" fill />
+          <Image
+            src="/assets/pngs/circle_l.png"
+            alt="circle_l"
+            fill
+            css={{ objectFit: "cover" }}
+          />
         </div>
       </div>
     </div>
