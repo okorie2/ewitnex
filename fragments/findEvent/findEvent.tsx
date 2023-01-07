@@ -37,6 +37,10 @@ export default function FindEventFragment() {
           gap: "3%",
           padding: "0 2rem",
         },
+        [screen.lg]: {
+          gap: "5%",
+          padding: "0 2rem",
+        },
       }}
     >
       <SearchSelect
@@ -64,7 +68,13 @@ export default function FindEventFragment() {
         inputWidth={desktop ? "11vw" : "9vw"}
       />
 
-      <Button css={{ width: "13rem", [screen.desktop]: { width: "12rem" } }}>
+      <Button
+        css={{
+          width: "13rem",
+          [screen.desktop]: { width: "12rem" },
+          [screen.lg]: {},
+        }}
+      >
         Find Event
       </Button>
     </div>

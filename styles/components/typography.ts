@@ -15,7 +15,10 @@ export const H1 = styled.h1<Props>`
   font-family: ${poppins.style.fontFamily};
   text-transform: ${(props) => (props.small ? "none" : "uppercase")};
   color: ${(props) => (props.color ? props.color : props.theme.common.white)};
-  @media screen and (max-width: 1024px) {
+  /* @media screen and (max-width: 1024px) {
+    font-size: 1.8rem;
+  } */
+  @media screen and (max-width: 1340px) {
     font-size: 1.8rem;
   }
   @media screen and (max-width: 768px) {

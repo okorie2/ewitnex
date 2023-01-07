@@ -43,6 +43,9 @@ export default function UpcomingEventsFragment() {
             [screen.desktop]: {
               width: "14%",
             },
+            [screen.lg]: {
+              width: "13%",
+            },
           }}
         >
           <p

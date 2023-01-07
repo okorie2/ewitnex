@@ -22,19 +22,28 @@ export default function WhoWeArePaper() {
         display: "flex",
         justifyContent: "space-between",
         fontFamily: poppins.style.fontFamily,
+        marginTop: "5rem",
+
         [screen.desktop]: {
-          marginTop: "7%",
+          // marginTop: "7%",
           // height: "30vw",
+        },
+        [screen.lg]: {
+          // marginTop: "8%",
         },
       }}
     >
       <div
         css={{
           width: "37%",
-          paddingTop: "9.5rem",
+          paddingTop: "6.5rem",
           paddingLeft: "4%",
           [screen.desktop]: {
             paddingTop: "3rem",
+            // height: "30vw",
+          },
+          [screen.lg]: {
+            paddingTop: "5rem",
             // height: "30vw",
           },
         }}
@@ -62,6 +71,9 @@ export default function WhoWeArePaper() {
               [screen.desktop]: {
                 gap: "14px",
               },
+              [screen.lg]: {
+                gap: "1.5rem",
+              },
             }}
           >
             <span> EVENT </span> MANAGEMENT
@@ -73,6 +85,9 @@ export default function WhoWeArePaper() {
               fontSize: "1.25rem",
               [screen.desktop]: {
                 marginLeft: "10rem",
+              },
+              [screen.lg]: {
+                marginLeft: "10.4rem",
               },
             }}
           >

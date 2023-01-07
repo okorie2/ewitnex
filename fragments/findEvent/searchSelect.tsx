@@ -44,6 +44,9 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           [screen.desktop]: {
             fontSize: "1.3rem",
           },
+          [screen.lg]: {
+            fontSize: "1.3rem",
+          },
         }}
       />
       <div css={{ marginTop: "7px" }}>
