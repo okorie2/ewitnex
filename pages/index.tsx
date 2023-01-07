@@ -37,7 +37,7 @@ export default function Home() {
       </Head>
       <Navbar />
       <HomeSlide />
-      {/* <FindEventFragment /> */}
+      <FindEventFragment />
       <EventsAroundYouFragment />
       <div css={{ overflowX: "hidden" }}>
         <Image src={Tri_L} alt="line" />

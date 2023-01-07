@@ -22,9 +22,23 @@ export default function WhoWeArePaper() {
         display: "flex",
         justifyContent: "space-between",
         fontFamily: poppins.style.fontFamily,
+        [screen.desktop]: {
+          marginTop: "7%",
+          // height: "30vw",
+        },
       }}
     >
-      <div css={{ width: "37%", paddingTop: "7rem", paddingLeft: "4%" }}>
+      <div
+        css={{
+          width: "37%",
+          paddingTop: "9.5rem",
+          paddingLeft: "4%",
+          [screen.desktop]: {
+            paddingTop: "3rem",
+            // height: "30vw",
+          },
+        }}
+      >
         <div>
           <H1
             css={{
@@ -101,10 +115,11 @@ export default function WhoWeArePaper() {
       <div
         css={{
           position: "relative",
-          width: "43.5vw",
-          height: "45vh",
+          width: "47.5vw",
+          height: "27vw",
           [screen.desktop]: {
-            width: "54vw",
+            // width: "54vw",
+            // height: "30vw",
           },
         }}
       >

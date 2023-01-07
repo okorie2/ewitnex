@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
+import { useMediaQuery } from "@mui/material";
 import { Poppins } from "@next/font/google";
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { Button } from "styles/components/button";
+import { screen } from "styles/theme";
 import SearchSelect from "./searchSelect";
 
 const poppins = Poppins({
@@ -15,6 +17,7 @@ const poppins = Poppins({
 });
 export default function FindEventFragment() {
   const theme = useTheme();
+  const desktop = useMediaQuery("(max-width:1024px)");
   return (
     <div
       css={{
@@ -28,36 +31,42 @@ export default function FindEventFragment() {
         height: "6.5rem",
         display: "flex",
         alignItems: "center",
-        padding: "0 2rem",
-        gap: "6rem",
+        padding: "0 3rem",
+        gap: "8%",
+        [screen.desktop]: {
+          gap: "3%",
+          padding: "0 2rem",
+        },
       }}
     >
       <SearchSelect
         menuList={[""]}
         placeholder="Witness Events In"
         onChange={(e) => console.log(e.target.value)}
-        inputWidth="15rem"
+        inputWidth={desktop ? "16vw" : "14vw"}
       />
       <SearchSelect
         menuList={[""]}
         placeholder="Event Type"
         onChange={(e) => console.log(e.target.value)}
-        inputWidth="10rem"
+        inputWidth={desktop ? "11vw" : "12vw"}
       />
       <SearchSelect
         menuList={[""]}
         placeholder="Price Range"
         onChange={(e) => console.log(e.target.value)}
-        inputWidth="10rem"
+        inputWidth={desktop ? "12vw" : "14vw"}
       />
       <SearchSelect
         menuList={[""]}
         placeholder="Category"
         onChange={(e) => console.log(e.target.value)}
-        inputWidth="10rem"
+        inputWidth={desktop ? "11vw" : "9vw"}
       />
 
-      <Button css={{ width: "15.5%" }}>Find Event</Button>
+      <Button css={{ width: "13.5%", [screen.desktop]: { width: "17.5%" } }}>
+        Find Event
+      </Button>
     </div>
   );
 }

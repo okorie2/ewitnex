@@ -28,6 +28,10 @@ export default function Navbar() {
         padding: "0% 1%",
         height: "5rem",
         fontFamily: poppins.style.fontFamily,
+        position: "fixed",
+        left: "0",
+        right: "0",
+        zIndex: "2",
       }}
     >
       <div>
@@ -92,7 +96,10 @@ export default function Navbar() {
           },
         }}
       >
-        <div>Home</div>
+        <div>
+          {" "}
+          <Link href="/"> Home</Link>
+        </div>
         <div>Events</div>
         <div>
           <Link href="/about">About</Link>{" "}

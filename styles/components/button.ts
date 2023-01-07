@@ -14,4 +14,7 @@ export const Button = styled.button<Props>`
   font-size: 1.5rem;
   font-weight: bold;
   border: none;
+  @media screen and (max-width: 1024px) {
+    font-size: 1.3rem;
+  }
 `;

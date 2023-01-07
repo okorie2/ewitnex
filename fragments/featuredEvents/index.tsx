@@ -38,7 +38,7 @@ export default function FeaturedEventsFragment() {
             justifyContent: "center",
             alignItems: "center",
             gap: "5%",
-            width: "8%",
+            width: "9%",
             cursor: "pointer",
             [screen.desktop]: {
               width: "14%",

@@ -3,7 +3,7 @@
 import { Poppins } from "@next/font/google";
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
-import { theme } from "styles/theme";
+import { screen, theme } from "styles/theme";
 
 interface SearchSelectProps {
   placeholder: string;
@@ -41,6 +41,9 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           fontWeight: "bold",
           width: rest.inputWidth,
           fontFamily: poppins.style.fontFamily,
+          [screen.desktop]: {
+            fontSize: "1.3rem",
+          },
         }}
       />
       <div css={{ marginTop: "7px" }}>
