@@ -32,7 +32,7 @@ export default function FindEventFragment() {
         display: "flex",
         alignItems: "center",
         padding: "0 3rem",
-        gap: "8%",
+        gap: "6%",
         [screen.desktop]: {
           gap: "3%",
           padding: "0 2rem",
@@ -64,7 +64,7 @@ export default function FindEventFragment() {
         inputWidth={desktop ? "11vw" : "9vw"}
       />
 
-      <Button css={{ width: "13.5%", [screen.desktop]: { width: "17.5%" } }}>
+      <Button css={{ width: "13rem", [screen.desktop]: { width: "12rem" } }}>
         Find Event
       </Button>
     </div>
