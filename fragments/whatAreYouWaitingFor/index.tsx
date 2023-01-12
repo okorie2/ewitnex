@@ -23,9 +23,10 @@ export default function WhatAreYouWaitingForFragment() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        fontFamily: poppins.style.fontFamily,
       }}
     >
-      <div css={{ position: "relative", width: "13.5vw", height: "53vh" }}>
+      <div css={{ position: "relative", width: "12.9vw", height: "27.2vw" }}>
         <Image src="/assets/pngs/circle_r.png" alt="circle_r" fill />
       </div>
       <div css={{ width: "42%" }}>
@@ -64,7 +65,7 @@ export default function WhatAreYouWaitingForFragment() {
         >
           <Image src="/assets/pngs/fone.png" alt="fones" fill />
         </div> */}
-        <div css={{ width: "17.5vw", height: "53vh", position: "relative" }}>
+        <div css={{ width: "16.5vw", height: "27.4vw", position: "relative" }}>
           <Image
             src="/assets/pngs/circle_l.png"
             alt="circle_l"

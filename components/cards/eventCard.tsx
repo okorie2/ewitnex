@@ -49,7 +49,7 @@ export default function EventCard(props: IEventCard) {
         <Image
           src={props.img}
           alt="card_img"
-          css={{ borderRadius: "10px" }}
+          css={{ borderRadius: "10px", objectFit: "cover" }}
           fill
         />
         <div

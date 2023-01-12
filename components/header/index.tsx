@@ -31,6 +31,7 @@ export default function Navbar() {
         position: "fixed",
         left: "0",
         right: "0",
+        top: "0",
         zIndex: "2",
       }}
     >
@@ -100,11 +101,16 @@ export default function Navbar() {
           {" "}
           <Link href="/"> Home</Link>
         </div>
-        <div>Events</div>
+        <div>
+          {" "}
+          <Link href="/events">Events</Link>
+        </div>
         <div>
           <Link href="/about">About</Link>{" "}
         </div>
-        <div>How It Works</div>
+        <div>
+          <Link href="/how-it-works">How It Works</Link>
+        </div>
       </div>
       <div>
         <hr css={{ width: "1px", height: "36px" }} />

@@ -8,7 +8,7 @@ import { Poppins } from "@next/font/google";
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import Image from "next/image";
 import React from "react";
-import { H1, H2 } from "styles/components/typography";
+import { H1, H2, H3 } from "styles/components/typography";
 
 const poppins = Poppins({
   weight: ["400", "500", "700"],
@@ -25,15 +25,17 @@ export default function Index() {
       <div
         css={{
           //   backgroundImage: "url(/assets/pngs/about.png)",
-          backgroundImage:
-            "linear-gradient(to bottom, #878080, rgba(117, 19, 93, 0.73)), url(/assets/pngs/about.png) ",
+          backgroundImage: " url(/assets/pngs/about.png) ",
           height: "413px",
           //   width: "100vw",
           display: "flex",
+          backgroundSize: "cover",
           justifyContent: "space-between",
           alignItems: "center",
           fontFamily: poppins.style.fontFamily,
-          //   backdropFilter: "blur(80%)",
+          // opacity: "90%",
+          marginTop: "5rem",
+          backdropFilter: "blur(5px) brightness(25%) contrast(100%)",
         }}
       >
         <H1 css={{ width: "45%", paddingLeft: "4%" }} small>
@@ -80,8 +82,114 @@ export default function Index() {
           </p>
         </div>
       </div>
-      <div>
-        <H2>What you get with Ewitnex </H2>
+      <div css={{ marginTop: "4rem" }}>
+        <H2 css={{ textAlign: "center" }}>What you get with Ewitnex </H2>
+        <div
+          css={{
+            display: "grid",
+            gridTemplateColumns: "30% 30% 30%",
+            gap: "4rem",
+            alignItems: "center",
+            // marginTop: "3rem",
+            padding: "3% 5%",
+          }}
+        >
+          <div>
+            <H3>Express ticket bookings</H3>
+            <p css={{ font: "1.125rem" }}>
+              Booking ticket on ewitnex is very easy and fast! It takes less
+              than 2mins to register and you&apos;ll have your ticket sent to
+              your account ticket manager and email. No problem if you
+              don&apos;t want to sign in to purchase ticket, ticket will always
+              be sent to your email.
+            </p>
+          </div>
+          <div>
+            <H3>Social user friendly platform</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              Ewitnex is designed and developed in a way that is able to be to
+              use by all. the focus is to build a solution that is easy use,
+              navigate, intuitive and enjoyable by all event lovers and
+              organizers.
+            </p>
+          </div>
+          <div>
+            <H3>Secure Payment platforms</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              At our core is a powerful payments platforms and engine that makes
+              it easy to receive payments and making sure that&apos;s all card
+              information is processed in a completely safe environment.
+            </p>
+          </div>
+        </div>
+        <div
+          css={{
+            display: "grid",
+            gridTemplateColumns: "30% 30% 30%",
+            gap: "4rem",
+            alignItems: "center",
+            // marginTop: "3rem",
+            padding: "3% 5%",
+          }}
+        >
+          <div>
+            <H3>Account Manager</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              Sitting atop of our payment platforms are applications to manage
+              revenue, events, ticketing, know who is attending your event and
+              prevent fraud.
+            </p>
+          </div>
+          <div>
+            <H3>Payout Request</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              Ewitnex is designed and developed in a way that is able to be to
+              use by all. the focus is to build a solution that is easy use,
+              navigate, intuitive and enjoyable by all event lovers and
+              organizers.
+            </p>
+          </div>
+          <div>
+            <H3>Infrastructure</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              Our cloud-based infrastructure provides reliability, scalability,
+              and security.
+            </p>
+          </div>
+        </div>
+        <div
+          css={{
+            display: "grid",
+            gridTemplateColumns: "30% 30% 30%",
+            gap: "4rem",
+            alignItems: "center",
+            marginBottom: "5rem",
+            padding: "3% 5%",
+          }}
+        >
+          <div>
+            <H3>Social engagement</H3>
+            <p css={{ font: "1.125rem" }}>
+              Get involve in attendees post on other event, comment, like and
+              share on them like you do your other social platforms.
+            </p>
+          </div>
+          <div>
+            <H3>Witness your attended event</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              Let people know about the event that is going on by taking photo,
+              videos, or just text of it and post for other event lovers to
+              interact.
+            </p>
+          </div>
+          <div>
+            <H3>24/7 customer support</H3>
+            <p css={{ font: "1.125rem", marginTop: "0.8rem" }}>
+              Our support team is always available even at night to assist you
+              with any challenge.
+            </p>
+          </div>
+        </div>
       </div>
       <WhatAreYouWaitingForFragment />
       <Lines />

@@ -8,6 +8,7 @@ interface CustomTheme {
   shadow: {
     secondary: string;
     tertiary: string;
+    border: string;
   };
   background: {
     primary: string;
