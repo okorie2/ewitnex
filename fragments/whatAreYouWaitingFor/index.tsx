@@ -1,19 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React from "react";
 import { Button } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function WhatAreYouWaitingForFragment() {
   const theme = useTheme();
   return (
@@ -23,7 +17,7 @@ export default function WhatAreYouWaitingForFragment() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
       }}
     >
       <div css={{ position: "relative", width: "12.9vw", height: "27.2vw" }}>

@@ -1,23 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React, { ReactNode } from "react";
 import Filter from "public/assets/svgs/filter.svg";
 import Left from "public/assets/svgs/left_ar.svg";
 import Down from "public/assets/svgs/down_ar.svg";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function Layout({ children }: { children: ReactNode }) {
   const theme = useTheme();
   return (
-    <div css={{ fontFamily: poppins.style.fontFamily }}>
+    <div css={{ fontFamily: "'Poppins', sans-serif" }}>
       <div
         css={{
           display: "flex",

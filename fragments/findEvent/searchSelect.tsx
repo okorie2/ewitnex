@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import { Poppins } from "@next/font/google";
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { screen, theme } from "styles/theme";
@@ -11,12 +10,7 @@ interface SearchSelectProps {
   menuList: string[];
   inputWidth: string;
 }
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
+
 export default function SearchSelect({ ...rest }: SearchSelectProps) {
   return (
     <div
@@ -40,7 +34,7 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           fontSize: "1.5rem",
           fontWeight: "bold",
           width: rest.inputWidth,
-          fontFamily: poppins.style.fontFamily,
+          fontFamily: "'Poppins', sans-serif",
           [screen.desktop]: {
             fontSize: "1.3rem",
           },

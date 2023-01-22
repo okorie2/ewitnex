@@ -19,6 +19,7 @@ export const theme: Theme = {
     secondary: "#AEAEAE",
     tertiary: "#707070",
     border: "#E4E4E4",
+    border2: "#C0C0C0",
   },
   color: {
     primary: "#7C35AB",

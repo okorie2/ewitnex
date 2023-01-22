@@ -1,23 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React from "react";
 import { screen } from "styles/theme";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function PublicSiteFooter() {
   const theme = useTheme();
   return (
     <div
       css={{
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
         background: theme.common.white,
       }}
     >

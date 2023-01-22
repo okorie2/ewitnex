@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import { Poppins } from "@next/font/google";
+
 import { H2 } from "styles/components/typography";
 import { BsArrowRight } from "react-icons/bs";
 import { useTheme } from "@emotion/react";
@@ -9,12 +9,6 @@ import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";
 import { screen } from "styles/theme";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function EventsAroundYouFragment() {
   const theme = useTheme();
   return (
@@ -25,7 +19,7 @@ export default function EventsAroundYouFragment() {
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: " 2%",
-          fontFamily: poppins.style.fontFamily,
+          fontFamily: "'Poppins', sans-serif",
         }}
       >
         <div>

@@ -9,6 +9,7 @@ interface CustomTheme {
     secondary: string;
     tertiary: string;
     border: string;
+    border2: string;
   };
   background: {
     primary: string;

@@ -4,15 +4,8 @@ import React from "react";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import Image from "next/image";
-import { Poppins } from "@next/font/google";
-import Link from "next/link";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
+import Link from "next/link";
 
 export default function Navbar() {
   const theme = useTheme();
@@ -27,7 +20,7 @@ export default function Navbar() {
         boxShadow: "#00000029 0px 0px 10px ",
         padding: "0% 1%",
         height: "5rem",
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
         position: "fixed",
         left: "0",
         right: "0",
@@ -116,7 +109,7 @@ export default function Navbar() {
         <hr css={{ width: "1px", height: "36px" }} />
       </div>
       <div css={{ color: theme.background.primary, fontWeight: "500" }}>
-        Log in
+        <Link href="/auth/signin">Log in</Link>
       </div>
       <div
         css={{
@@ -132,7 +125,7 @@ export default function Navbar() {
           color: theme.background.primary,
         }}
       >
-        Create Event
+        <Link href="/auth/signup">Create Event</Link>
       </div>
     </div>
   );

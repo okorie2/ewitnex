@@ -1,18 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import Phones from "public/assets/svgs/phones.svg";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function WhoWeArePaper() {
   const theme = useTheme();
   return (
@@ -21,7 +15,7 @@ export default function WhoWeArePaper() {
         backgroundImage: `linear-gradient(${theme.background.tertiary}, ${theme.background.primary})`,
         display: "flex",
         justifyContent: "space-between",
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
         marginTop: "5rem",
 
         [screen.desktop]: {

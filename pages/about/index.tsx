@@ -4,22 +4,16 @@ import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import Image from "next/image";
 import React from "react";
 import { H1, H2, H3 } from "styles/components/typography";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function Index() {
   const theme = useTheme();
   return (
-    <div css={{ fontFamily: poppins.style.fontFamily }}>
+    <div css={{ fontFamily: "'Poppins', sans-serif" }}>
       <Navbar />
 
       <div
@@ -32,7 +26,7 @@ export default function Index() {
           backgroundSize: "cover",
           justifyContent: "space-between",
           alignItems: "center",
-          fontFamily: poppins.style.fontFamily,
+          fontFamily: "'Poppins', sans-serif",
           // opacity: "90%",
           marginTop: "5rem",
           backdropFilter: "blur(5px) brightness(25%) contrast(100%)",

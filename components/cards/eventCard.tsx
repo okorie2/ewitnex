@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { Interpolation, Theme, useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React from "react";
 import { H3, H4 } from "styles/components/typography";
@@ -21,13 +21,6 @@ interface IEventCard {
   width?: string;
 }
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
-
 export default function EventCard(props: IEventCard) {
   const theme = useTheme();
   return (
@@ -38,7 +31,7 @@ export default function EventCard(props: IEventCard) {
         borderRadius: "10px",
         backgroundColor: theme.common.white,
         boxShadow: "#00000029 0px 0px 10px",
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
         marginBottom: "5%",
         // [screen.desktop]: {
         //   width:

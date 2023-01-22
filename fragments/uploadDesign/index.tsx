@@ -1,19 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React from "react";
 import { Button } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function UploadDesignFragment() {
   const theme = useTheme();
   return (

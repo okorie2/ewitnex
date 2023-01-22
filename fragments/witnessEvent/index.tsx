@@ -1,17 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React from "react";
 import { H1 } from "styles/components/typography";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function WitnessEventFragment() {
   const theme = useTheme();
   return (
@@ -20,7 +14,7 @@ export default function WitnessEventFragment() {
         display: "flex",
         justifyContent: "space-between",
         background: theme.common.white,
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
         padding: "10% 4%",
       }}
     >

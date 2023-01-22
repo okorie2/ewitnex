@@ -1,16 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { useTheme } from "@emotion/react";
-import { Poppins } from "@next/font/google";
+
 import Image from "next/image";
 import React from "react";
 import { H1 } from "styles/components/typography";
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
 export default function TicketToSaleFragment() {
   const theme = useTheme();
   return (
@@ -20,7 +14,7 @@ export default function TicketToSaleFragment() {
         justifyContent: "space-between",
         alignItems: "flex-start",
         background: theme.common.white,
-        fontFamily: poppins.style.fontFamily,
+        fontFamily: "'Poppins', sans-serif",
         padding: "0% 4%",
       }}
     >
