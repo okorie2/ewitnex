@@ -7,6 +7,8 @@ import React from "react";
 import { H3, H4 } from "styles/components/typography";
 import Card_img from "public/assets/pngs/card_img.png";
 import { screen } from "styles/theme";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface IEventCard {
   img: string;
@@ -23,7 +25,9 @@ interface IEventCard {
 
 export default function EventCard(props: IEventCard) {
   const theme = useTheme();
+
   return (
+   <Link href={`/events/${props.id}`}>
     <div
       css={{
         height: "500px",
@@ -37,6 +41,7 @@ export default function EventCard(props: IEventCard) {
         //   width:
         // },
       }}
+      onClick={()=>{console.log("first")}}
     >
       <div css={{ position: "relative", width: "100%", height: "171px" }}>
         <Image
@@ -155,5 +160,6 @@ export default function EventCard(props: IEventCard) {
         <H4>{props.organizer}</H4>
       </div>
     </div>
+   </Link>
   );
 }
