@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
+import Speaker from "@/components/cards/speaker";
 import Image from "next/image";
 import React from "react";
-import { theme } from "styles/theme";
+import { theme, screen } from "styles/theme";
 
 const EventDetails = () => {
   return (
@@ -56,16 +57,16 @@ const EventDetails = () => {
             height={19.39}
           />
         </div>
-        <img
+        <Image
           src="/assets/pngs/card_2.png"
           alt="header-img"
           css={{
             borderRadius: "10px 10px 0 0",
             objectFit: "cover",
             objectPosition: "center",
-            width: "100%",
-            height: "100%",
+            zIndex: "-1",
           }}
+          fill
         />
         <div
           css={{
@@ -73,6 +74,7 @@ const EventDetails = () => {
             height: "266px",
             borderRadius: "10px",
             backgroundColor: theme.common.white,
+            boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -81,15 +83,13 @@ const EventDetails = () => {
             left: "2%",
           }}
         >
-          <img
-            src="https://camo.githubusercontent.com/6674da7fef8660e18065348a928e7543dceb737629d6fe4f6557a88c42a269ed/68747470733a2f2f692e696d6775722e636f6d2f503231486b30752e706e67"
+          <Image
+            src="/assets/pngs/gdg.png"
             alt="card_img"
             css={{
-              width: "193px",
-              height: "266px",
               borderRadius: "10px",
-              boxShadow: " 0px 0px 10px #00000029",
             }}
+            fill
           />
         </div>
         <div
@@ -115,7 +115,19 @@ const EventDetails = () => {
         </div>
       </div>
       <div>
-        <div css={{ width: "82%", marginLeft: "auto" }}>
+        <div
+          css={{
+            width: "82%",
+            marginLeft: "auto",
+            [screen.desktopLg]: {
+              width: "70%",
+            },
+            [screen.desktop]: {
+              width: "96%",
+              marginTop: "8rem",
+            },
+          }}
+        >
           <h1
             css={{
               marginBlock: "1rem 0.5rem",
@@ -126,14 +138,20 @@ const EventDetails = () => {
             Medical Crusade with Doctor West
           </h1>
           <div css={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <p css={{ color: "#707070", fontSize: "1.125rem" }}>Heal12548</p>
-            <img src="/assets/svgs/copy.svg" alt="" />
+            <p css={{ color: theme.color.tertiary, fontSize: "1.125rem" }}>
+              Heal12548
+            </p>
+            <Image src="/assets/svgs/copy.svg" alt="" width={24} height={24} />
           </div>
           <div
             css={{
               marginTop: "2.5rem",
               display: "grid",
               gridTemplateColumns: "1.3fr 0.7fr",
+              [screen.desktopLg]: {
+                gridTemplateColumns: "auto ",
+                gap: "2rem",
+              },
             }}
           >
             <div>
@@ -146,7 +164,7 @@ const EventDetails = () => {
                 <div
                   css={{
                     padding: "1rem 0.5rem",
-                    border: "1px solid #707070",
+                    border: `1px solid ${theme.shadow.tertiary}`,
                     borderRadius: "10px",
                   }}
                 >
@@ -155,7 +173,7 @@ const EventDetails = () => {
                 <div
                   css={{
                     padding: "1rem 0.5rem",
-                    border: "1px solid #707070",
+                    border: `1px solid ${theme.shadow.tertiary}`,
                     borderRadius: "10px",
                   }}
                 >
@@ -164,7 +182,7 @@ const EventDetails = () => {
                 <div
                   css={{
                     padding: "1rem 0.5rem",
-                    border: "1px solid #707070",
+                    border: `1px solid ${theme.shadow.tertiary}`,
                     borderRadius: "10px",
                   }}
                 >
@@ -173,7 +191,7 @@ const EventDetails = () => {
                 <div
                   css={{
                     padding: "1rem 0.5rem",
-                    border: "1px solid #707070",
+                    border: `1px solid ${theme.shadow.tertiary}`,
                     borderRadius: "10px",
                   }}
                 >
@@ -194,12 +212,17 @@ const EventDetails = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/svgs/calender.svg" alt="" />
-                  <p css={{ color: "#707070" }}>Date and time</p>
+                  <Image
+                    src="/assets/svgs/calender.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
+                  <p css={{ color: theme.color.tertiary }}>Date and time</p>
                 </div>
                 <p
                   css={{
-                    color: " #F05E78",
+                    color: theme.color.negative,
                     fontSize: "1.125rem",
                     fontWeight: "600",
                   }}
@@ -221,8 +244,13 @@ const EventDetails = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/svgs/location.svg" alt="" />
-                  <p css={{ color: "#707070" }}>Location</p>
+                  <Image
+                    src="/assets/svgs/location.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
+                  <p css={{ color: theme.color.tertiary }}>Location</p>
                 </div>
                 <p
                   css={{
@@ -250,8 +278,13 @@ const EventDetails = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/svgs/cost.svg" alt="" />
-                  <p css={{ color: "#707070" }}>$500 - $2K</p>
+                  <Image
+                    src="/assets/svgs/cost.svg"
+                    alt=""
+                    width={25.5}
+                    height={21.6}
+                  />
+                  <p css={{ color: theme.color.tertiary }}>$500 - $2K</p>
                 </div>
                 <div
                   css={{
@@ -260,8 +293,13 @@ const EventDetails = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/svgs/people.svg" alt="" />
-                  <p css={{ color: "#707070" }}>609 Attending</p>
+                  <Image
+                    src="/assets/svgs/people.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
+                  <p css={{ color: theme.color.tertiary }}>609 Attending</p>
                 </div>
               </div>
               <div
@@ -279,7 +317,7 @@ const EventDetails = () => {
                     marginBlock: "1rem",
                   }}
                 >
-                  <p css={{ color: "#707070" }}>Organized by</p>
+                  <p css={{ color: theme.color.tertiary }}>Organized by</p>
                   <p
                     css={{
                       fontSize: "1.125rem",
@@ -292,8 +330,8 @@ const EventDetails = () => {
                 <button
                   type="button"
                   css={{
-                    border: "1px solid  #7C35AB",
-                    color: " #7C35AB",
+                    border: `1px solid ${theme.color.primary}`,
+                    color: theme.color.primary,
                     borderRadius: "56px",
                     padding: "0.75rem",
                     backgroundColor: theme.common.white,
@@ -318,8 +356,13 @@ const EventDetails = () => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/svgs/audience.svg" alt="" />
-                  <p css={{ color: "#707070" }}>Audience Type</p>
+                  <Image
+                    src="/assets/svgs/audience.svg"
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
+                  <p css={{ color: theme.color.tertiary }}>Audience Type</p>
                 </div>
                 <p
                   css={{
@@ -339,10 +382,10 @@ const EventDetails = () => {
               display: "flex",
               gap: "0.5rem",
               alignItems: "center",
-              color: "#707070",
+              color: theme.color.tertiary,
             }}
           >
-            <img src="/assets/svgs/info.svg" />
+            <Image src="/assets/svgs/info.svg" alt="" width={24} height={24} />
             <p>About</p>
           </div>
           <div css={{ marginTop: "1.25rem", lineHeight: "22px" }}>
@@ -380,10 +423,15 @@ const EventDetails = () => {
               display: "flex",
               gap: "0.5rem",
               alignItems: "center",
-              color: "#707070",
+              color: theme.color.tertiary,
             }}
           >
-            <img src="/assets/svgs/speakers.svg" />
+            <Image
+              src="/assets/svgs/speakers.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
             <p>Speakers</p>
           </div>
           <div
@@ -393,98 +441,26 @@ const EventDetails = () => {
               gap: "1.38rem",
             }}
           >
-            <div>
-              <div
-                css={{
-                  width: "177px",
-                  height: "194px",
-                  borderRadius: "10px",
-                }}
-              >
-                <img
-                  src="/assets/pngs/card_2.png"
-                  alt=""
-                  css={{
-                    width: "100%",
-                    height: "100%",
-                    objectPosition: "center",
-                  }}
-                />
-              </div>
-              <div css={{ marginTop: "0.7rem" }}>
-                <h4 css={{ fontSize: "1rem" }}>John Bosko</h4>
-                <p css={{ fontSize: "0.75rem" }}>Software Engineer</p>
-              </div>
-            </div>
-            <div>
-              <div
-                css={{
-                  width: "177px",
-                  height: "194px",
-                  borderRadius: "10px",
-                }}
-              >
-                <img
-                  src="/assets/pngs/card_2.png"
-                  alt=""
-                  css={{
-                    width: "100%",
-                    height: "100%",
-                    objectPosition: "center",
-                  }}
-                />
-              </div>
-              <div css={{ marginTop: "0.7rem" }}>
-                <h4 css={{ fontSize: "1rem" }}>John Bosko</h4>
-                <p css={{ fontSize: "0.75rem" }}>Software Engineer</p>
-              </div>
-            </div>
-            <div>
-              <div
-                css={{
-                  width: "177px",
-                  height: "194px",
-                  borderRadius: "10px",
-                }}
-              >
-                <img
-                  src="/assets/pngs/card_2.png"
-                  alt=""
-                  css={{
-                    width: "100%",
-                    height: "100%",
-                    objectPosition: "center",
-                  }}
-                />
-              </div>
-              <div css={{ marginTop: "0.7rem" }}>
-                <h4 css={{ fontSize: "1rem" }}>John Bosko</h4>
-                <p css={{ fontSize: "0.75rem" }}>Software Engineer</p>
-              </div>
-            </div>
-            <div>
-              <div
-                css={{
-                  width: "177px",
-                  height: "194px",
-                  borderRadius: "10px",
-                }}
-              >
-                <img
-                  src="/assets/pngs/card_2.png"
-                  alt=""
-                  css={{
-                    width: "100%",
-                    height: "100%",
-                    objectPosition: "center",
-                  }}
-                />
-              </div>
-              <div css={{ marginTop: "0.7rem" }}>
-                <h4 css={{ fontSize: "1rem" }}>John Bosko</h4>
-                <p css={{ fontSize: "0.75rem" }}>Software Engineer</p>
-              </div>
-            </div>
+            <Speaker
+              img="/assets/pngs/card_2.png"
+              name="John Bosko"
+              role="Software Engineer"
+            />
+            <Speaker
+              img="/assets/pngs/card_2.png"
+              name="John Bosko"
+              role="Software Engineer"
+            />
+            <Speaker
+              img="/assets/pngs/card_2.png"
+              name="John Bosko"
+              role="Software Engineer"
+            />
+            <Speaker
+              img="/assets/pngs/card_2.png"
+              name="John Bosko"
+              role="Software Engineer"
+            />
           </div>
         </div>
       </div>

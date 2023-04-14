@@ -27,6 +27,7 @@ export const theme: Theme = {
     primary: "#7C35AB",
     positive: "",
     negative: "#F05E78",
+    tertiary: "#707070",
     grey: "#AEAEAE",
   },
   background: {
