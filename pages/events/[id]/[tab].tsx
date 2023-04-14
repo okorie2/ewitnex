@@ -9,7 +9,6 @@ import React, { useMemo } from "react";
 
 const EventTab = () => {
   const router = useRouter();
-  const { id } = router.query;
   const activeTab = router.query?.tab || ("Details" as string | undefined);
 
   const stateEvents = useMemo(() => {

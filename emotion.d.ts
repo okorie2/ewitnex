@@ -10,10 +10,13 @@ interface CustomTheme {
     tertiary: string;
     border: string;
     border2: string;
+    border3: string;
+    border4: string;
   };
   background: {
     primary: string;
     secondary: string;
+    secondary2: string;
     tertiary: string;
     lightGreen: string;
   };

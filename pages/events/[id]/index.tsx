@@ -3,14 +3,12 @@
 import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
-import Image from "next/image";
 import React from "react";
-import { theme } from "styles/theme";
-import EventDetails from "fragments/eventDetails/details";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
 import EventTab from "./[tab]";
+import { theme } from "styles/theme";
 
 const SingleEvent = () => {
   const router = useRouter();
@@ -18,7 +16,7 @@ const SingleEvent = () => {
   const activeTab = router.query?.tab || ("Details" as string | undefined);
 
   return (
-    <div>
+    <div css={{ fontFamily: "'Poppins', sans-serif" }}>
       <Navbar />
       <div
         css={{
@@ -26,14 +24,14 @@ const SingleEvent = () => {
           width: "90%",
           marginInline: "auto",
           paddingBottom: "5rem",
-          boxShadow: " 0px 0px 10px #00000029",
+          boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
           position: "relative",
           borderRadius: "20px",
         }}
       >
         <ul
           css={{
-            boxShadow: " 0px 0px 10px #00000029",
+            boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
             borderRadius: "20px",
             padding: "1rem 2.5rem",
             display: "flex",
@@ -78,8 +76,10 @@ const TabNav: React.FC<{
         css={{
           padding: "0.38rem 0.75rem ",
           borderRadius: "1rem",
-          background: isActive ? "#00D9B7" : "#F2F7FB",
-          color: isActive ? theme.common.white : "#AEAEAE",
+          background: isActive
+            ? theme.background.lightGreen
+            : theme.background.secondary2,
+          color: isActive ? theme.common.white : theme.color.grey,
           cursor: "pointer",
         }}
       >

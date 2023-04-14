@@ -1,12 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
+import EventTicket from "@/components/tickets/eventTicket";
 import React from "react";
+import { H3 } from "styles/components/typography";
+import { screen, theme } from "styles/theme";
 
 const EventTickets = () => {
   return (
     <div
       css={{
-        boxShadow: " 0px 0px 10px #0000001A",
+        boxShadow: `0px 0px 10px ${theme.shadow.border4}`,
+        color: theme.common.black,
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
         width: "60%",
@@ -15,616 +19,80 @@ const EventTickets = () => {
         top: "3.5rem",
       }}
     >
-      <p
+      <H3
         css={{
-          fontSize: "1.25rem",
-          fontWeight: "600",
           marginBottom: "1.25rem",
+          [screen.desktopLg]: {
+            textAlign: "center",
+          },
         }}
       >
         Select a ticket to purchase
-      </p>
+      </H3>
       <div
         css={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
+          [screen.desktopLg]: {
+            gridTemplateColumns: "auto ",
+          },
           gap: "1.25rem",
         }}
       >
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            width: "374px",
-          }}
-        >
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderRight: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.25rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-              }}
-            >
-              DevFest Aba
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              <span
-                css={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Tec542445
-              </span>
-              Tech
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              25 NOV. 2021 10:00 AM
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-              }}
-            >
-              Holikins Hotel, 22 Faulks
-              <br /> Road, Aba, Abia
-            </p>
-          </div>
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderLeft: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.625rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Regular
-            </p>
-            <p
-              css={{
-                fontSize: "2.375rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              $500
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Make Payment
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            width: "374px",
-          }}
-        >
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderRight: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.25rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-              }}
-            >
-              DevFest Aba
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              <span
-                css={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Tec542445
-              </span>
-              Tech
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              25 NOV. 2021 10:00 AM
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-              }}
-            >
-              Holikins Hotel, 22 Faulks
-              <br /> Road, Aba, Abia
-            </p>
-          </div>
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderLeft: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.625rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              VIP
-            </p>
-            <p
-              css={{
-                fontSize: "2.375rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              $1500
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Make Payment
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            width: "374px",
-          }}
-        >
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderRight: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.25rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-              }}
-            >
-              DevFest Aba
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              <span
-                css={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Tec542445
-              </span>
-              Tech
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              25 NOV. 2021 10:00 AM
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-              }}
-            >
-              Holikins Hotel, 22 Faulks
-              <br /> Road, Aba, Abia
-            </p>
-          </div>
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderLeft: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.625rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              VVIP
-            </p>
-            <p
-              css={{
-                fontSize: "2.375rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              $2000
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Make Payment
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            width: "374px",
-          }}
-        >
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderRight: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.25rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-              }}
-            >
-              DevFest Aba
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              <span
-                css={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Tec542445
-              </span>
-              Tech
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              25 NOV. 2021 10:00 AM
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-              }}
-            >
-              Holikins Hotel, 22 Faulks
-              <br /> Road, Aba, Abia
-            </p>
-          </div>
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderLeft: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.625rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Exclusive
-            </p>
-            <p
-              css={{
-                fontSize: "2.375rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              $2000
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Make Payment
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            width: "374px",
-          }}
-        >
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderRight: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.25rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-              }}
-            >
-              DevFest Aba
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              <span
-                css={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Tec542445
-              </span>
-              Tech
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              25 NOV. 2021 10:00 AM
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-              }}
-            >
-              Holikins Hotel, 22 Faulks
-              <br /> Road, Aba, Abia
-            </p>
-          </div>
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderLeft: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.625rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              VVIP
-            </p>
-            <p
-              css={{
-                fontSize: "2.375rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              $2000
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Make Payment
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr",
-            width: "374px",
-          }}
-        >
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderRight: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.25rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-              }}
-            >
-              DevFest Aba
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              <span
-                css={{
-                  color: "#AEAEAE",
-                }}
-              >
-                Tec542445
-              </span>
-              Tech
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-              }}
-            >
-              25 NOV. 2021 10:00 AM
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-              }}
-            >
-              Holikins Hotel, 22 Faulks
-              <br /> Road, Aba, Abia
-            </p>
-          </div>
-          <div
-            css={{
-              border: "0.5px solid #707070",
-              borderRadius: "20px",
-              borderLeft: "none",
-              height: "140px",
-              padding: "1rem",
-            }}
-          >
-            <p
-              css={{
-                fontSize: "1.625rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Exclusive
-            </p>
-            <p
-              css={{
-                fontSize: "2.375rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              $2000
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                marginBottom: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Make Payment
-            </p>
-          </div>
-        </div>
+        <EventTicket
+          title="DevFest Aba"
+          id="Tec542445"
+          label="Tech"
+          date="25 NOV. 2021 10:00 AM"
+          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+          type="Regular"
+          price="$500"
+        />
+        <EventTicket
+          title="DevFest Aba"
+          id="Tec542445"
+          label="Tech"
+          date="25 NOV. 2021 10:00 AM"
+          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+          type="VIP"
+          price="$1500"
+        />
+        <EventTicket
+          title="DevFest Aba"
+          id="Tec542445"
+          label="Tech"
+          date="25 NOV. 2021 10:00 AM"
+          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+          type="VVIP"
+          price="$2000"
+        />
+        <EventTicket
+          title="DevFest Aba"
+          id="Tec542445"
+          label="Tech"
+          date="25 NOV. 2021 10:00 AM"
+          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+          type="Exclusive"
+          price="$2000"
+        />
+        <EventTicket
+          title="DevFest Aba"
+          id="Tec542445"
+          label="Tech"
+          date="25 NOV. 2021 10:00 AM"
+          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+          type="VVIP"
+          price="$2000"
+        />
+        <EventTicket
+          title="DevFest Aba"
+          id="Tec542445"
+          label="Tech"
+          date="25 NOV. 2021 10:00 AM"
+          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+          type="Exclusive"
+          price="$2000"
+        />
       </div>
     </div>
   );

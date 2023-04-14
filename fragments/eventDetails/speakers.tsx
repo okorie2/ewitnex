@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */ import React from "react";
+import { theme } from "styles/theme";
+import Image from "next/image";
 
 const EventSpeakers = () => {
   return (
     <div
       css={{
-        boxShadow: " 0px 0px 10px #0000001A",
+        boxShadow: `0px 0px 10px ${theme.shadow.border4}`,
+        color: theme.common.black,
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
         width: "60%",
@@ -13,6 +16,9 @@ const EventSpeakers = () => {
         top: "3.5rem",
         maxHeight: "60vh",
         overflowY: "scroll",
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
       }}
     >
       <div>
@@ -21,22 +27,20 @@ const EventSpeakers = () => {
             width: "185px",
             height: "185px",
             borderRadius: "50%",
+            position: "relative",
           }}
         >
-          <img
-            src="/assets/pngs/speaker_1.png"
-            alt=""
-            css={{
-              width: "100%",
-              height: "100%",
-              objectPosition: "center",
-              borderRadius: "50%",
-            }}
-          />
+          <Image src="/assets/pngs/speaker_2.png" alt="speaker-img" fill />
         </div>
         <div css={{ marginTop: "0.7rem" }}>
           <h4 css={{ fontSize: "1rem", fontWeight: "700" }}>John Bosko</h4>
-          <p css={{ fontSize: "0.875rem", marginTop: "0.3rem" }}>
+          <p
+            css={{
+              fontSize: "0.875rem",
+              marginTop: "0.3rem",
+              fontWeight: "500",
+            }}
+          >
             Software Engineer
           </p>
         </div>
@@ -67,7 +71,7 @@ const EventSpeakers = () => {
       </div>
       <ul
         css={{
-          borderTop: "1px solid #707070",
+          borderTop: `1px solid ${theme.shadow.tertiary}`,
           marginBlock: "1.5rem",
           opacity: "0.5",
         }}
@@ -78,22 +82,20 @@ const EventSpeakers = () => {
             width: "185px",
             height: "185px",
             borderRadius: "50%",
+            position: "relative",
           }}
         >
-          <img
-            src="/assets/pngs/speaker_1.png"
-            alt=""
-            css={{
-              width: "100%",
-              height: "100%",
-              objectPosition: "center",
-              borderRadius: "50%",
-            }}
-          />
+          <Image src="/assets/pngs/speaker_2.png" alt="speaker-img" fill />
         </div>
         <div css={{ marginTop: "0.7rem" }}>
           <h4 css={{ fontSize: "1rem", fontWeight: "700" }}>John Bosko</h4>
-          <p css={{ fontSize: "0.875rem", marginTop: "0.3rem" }}>
+          <p
+            css={{
+              fontSize: "0.875rem",
+              marginTop: "0.3rem",
+              fontWeight: "500",
+            }}
+          >
             Software Engineer
           </p>
         </div>

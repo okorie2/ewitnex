@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
+import RSVPCard from "@/components/cards/RSVPCard";
 import React from "react";
+import { H3 } from "styles/components/typography";
+import { screen } from "styles/theme";
 
 const RSVP = () => {
   return (
@@ -15,358 +18,62 @@ const RSVP = () => {
         top: "3.5rem",
       }}
     >
-      <p
+      <H3
         css={{
-          fontSize: "1.25rem",
-          fontWeight: "600",
           marginBottom: "1.25rem",
+          [screen.desktopLg]: {
+            textAlign: "center",
+          },
         }}
       >
         20 Attendees
-      </p>
+      </H3>
       <div
         css={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
+          [screen.desktopLg]: {
+            gridTemplateColumns: "auto ",
+          },
           gap: "1.25rem",
         }}
       >
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "1.5rem",
-            alignItems: "center",
-            width: "318px",
-            border: "1px solid  #E4E4E4",
-            borderRadius: "20px",
-            padding: "1.25rem",
-          }}
-        >
-          <div>
-            <img
-              src="/assets/pngs/speaker_1.png"
-              alt=""
-              css={{
-                width: "91px",
-                height: "91px",
-                objectPosition: "center",
-                borderRadius: "50%",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Franca Benibo
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Raiya
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Sept 20, 10: 20 AM
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "1.5rem",
-            alignItems: "center",
-            width: "318px",
-            border: "1px solid  #E4E4E4",
-            borderRadius: "20px",
-            padding: "1.25rem",
-          }}
-        >
-          <div>
-            <img
-              src="/assets/pngs/speaker_1.png"
-              alt=""
-              css={{
-                width: "91px",
-                height: "91px",
-                objectPosition: "center",
-                borderRadius: "50%",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Franca Benibo
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Raiya
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Sept 20, 10: 20 AM
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "1.5rem",
-            alignItems: "center",
-            width: "318px",
-            border: "1px solid  #E4E4E4",
-            borderRadius: "20px",
-            padding: "1.25rem",
-          }}
-        >
-          <div>
-            <img
-              src="/assets/pngs/speaker_1.png"
-              alt=""
-              css={{
-                width: "91px",
-                height: "91px",
-                objectPosition: "center",
-                borderRadius: "50%",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Franca Benibo
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Raiya
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Sept 20, 10: 20 AM
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "1.5rem",
-            alignItems: "center",
-            width: "318px",
-            border: "1px solid  #E4E4E4",
-            borderRadius: "20px",
-            padding: "1.25rem",
-          }}
-        >
-          <div>
-            <img
-              src="/assets/pngs/speaker_1.png"
-              alt=""
-              css={{
-                width: "91px",
-                height: "91px",
-                objectPosition: "center",
-                borderRadius: "50%",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Franca Benibo
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Raiya
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Sept 20, 10: 20 AM
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "1.5rem",
-            alignItems: "center",
-            width: "318px",
-            border: "1px solid  #E4E4E4",
-            borderRadius: "20px",
-            padding: "1.25rem",
-          }}
-        >
-          <div>
-            <img
-              src="/assets/pngs/speaker_1.png"
-              alt=""
-              css={{
-                width: "91px",
-                height: "91px",
-                objectPosition: "center",
-                borderRadius: "50%",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Franca Benibo
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Raiya
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Sept 20, 10: 20 AM
-            </p>
-          </div>
-        </div>
-        <div
-          css={{
-            display: "grid",
-            gridTemplateColumns: "1fr 2fr",
-            gap: "1.5rem",
-            alignItems: "center",
-            width: "318px",
-            border: "1px solid  #E4E4E4",
-            borderRadius: "20px",
-            padding: "1.25rem",
-          }}
-        >
-          <div>
-            <img
-              src="/assets/pngs/speaker_1.png"
-              alt=""
-              css={{
-                width: "91px",
-                height: "91px",
-                objectPosition: "center",
-                borderRadius: "50%",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "1rem",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Franca Benibo
-            </p>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Raiya
-            </p>
-            <p
-              css={{
-                fontSize: "0.75rem",
-                fontWeight: "500",
-                marginBottom: "0.5rem",
-                color: "#AEAEAE",
-              }}
-            >
-              Sept 20, 10: 20 AM
-            </p>
-          </div>
-        </div>
+        <RSVPCard
+          img="/assets/pngs/speaker_1.png"
+          name="Franca Benibo"
+          userName="Raiya"
+          date=" Sept 20, 10: 20 AM"
+        />
+        <RSVPCard
+          img="/assets/pngs/speaker_1.png"
+          name="Jama Blue"
+          userName="JBlue"
+          date=" Sept 20, 10: 20 AM"
+        />
+        <RSVPCard
+          img="/assets/pngs/speaker_1.png"
+          name="Grace Lover"
+          userName="Lover_G"
+          date=" Sept 20, 10: 20 AM"
+        />
+        <RSVPCard
+          img="/assets/pngs/speaker_1.png"
+          name="Jama Blue"
+          userName="JBlue"
+          date=" Sept 20, 10: 20 AM"
+        />
+        <RSVPCard
+          img="/assets/pngs/speaker_1.png"
+          name="Franca Benibo"
+          userName="Raiya"
+          date=" Sept 20, 10: 20 AM"
+        />
+        <RSVPCard
+          img="/assets/pngs/speaker_1.png"
+          name="Grace Lover"
+          userName="Lover_G"
+          date=" Sept 20, 10: 20 AM"
+        />
       </div>
     </div>
   );
