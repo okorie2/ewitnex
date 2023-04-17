@@ -25,6 +25,8 @@ const Speaker = (props: ISpeaker) => {
           alt=""
           css={{
             objectPosition: "center",
+            objectFit: "cover",
+            borderRadius: "10px",
           }}
           fill
         />

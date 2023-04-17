@@ -27,6 +27,7 @@ const EventTicket = (props: IEventTicket) => {
     >
       <div
         css={{
+          fontFamily: "'Nunito', sans-serif",
           border: `0.5px solid ${theme.shadow.tertiary}`,
           borderRadius: "20px",
           borderRight: "none",
@@ -37,7 +38,7 @@ const EventTicket = (props: IEventTicket) => {
         <p
           css={{
             fontSize: "1.25rem",
-            fontWeight: "600",
+            fontWeight: "800",
             marginBottom: "0.5rem",
           }}
         >
@@ -62,7 +63,7 @@ const EventTicket = (props: IEventTicket) => {
         <p
           css={{
             fontSize: "0.75rem",
-            fontWeight: "500",
+            fontWeight: "600",
           }}
         >
           {props.date}
@@ -70,7 +71,7 @@ const EventTicket = (props: IEventTicket) => {
         <p
           css={{
             fontSize: "0.875rem",
-            fontWeight: "500",
+            fontWeight: "600",
           }}
         >
           {props.location}
@@ -83,13 +84,15 @@ const EventTicket = (props: IEventTicket) => {
           borderLeft: "none",
           height: "140px",
           padding: "1rem",
+          fontFamily: "'Open Sans', sans-serif",
         }}
       >
         <p
           css={{
             fontSize: "1.625rem",
-            fontWeight: "600",
+            fontWeight: "bold",
             textAlign: "center",
+            marginBottom: "0.2rem",
           }}
         >
           {props.type}
@@ -97,8 +100,9 @@ const EventTicket = (props: IEventTicket) => {
         <p
           css={{
             fontSize: "2.375rem",
-            fontWeight: "700",
+            fontWeight: "500",
             textAlign: "center",
+            marginBottom: "0.2rem",
           }}
         >
           {props.price}
@@ -106,7 +110,7 @@ const EventTicket = (props: IEventTicket) => {
         <p
           css={{
             fontSize: "0.875rem",
-            fontWeight: "600",
+            fontWeight: "bold",
             textAlign: "center",
           }}
         >

@@ -32,6 +32,7 @@ export const theme: Theme = {
   },
   background: {
     primary: "#7C35AB",
+    white:"#FFFFFF",
     secondary: "#F5F5F5",
     secondary2:"#F2F7FB",
     tertiary: "#528FFE",
