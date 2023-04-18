@@ -6,6 +6,8 @@ declare module "@emotion/react" {
       primary: string;
       positive: string;
       negative: string;
+      tertiary: string;
+      grey:string;
     };
   }
 }
