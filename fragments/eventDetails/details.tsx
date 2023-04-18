@@ -578,12 +578,12 @@ const EventDetails = () => {
               role="Software Engineer"
             />
             <Speaker
-              img="/assets/pngs/speaker1.png"
+              img="/assets/pngs/speaker3.png"
               name="John Bosko"
               role="Software Engineer"
             />
             <Speaker
-              img="/assets/pngs/speaker1.png"
+              img="/assets/pngs/speaker4.png"
               name="John Bosko"
               role="Software Engineer"
             />

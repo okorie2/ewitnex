@@ -70,7 +70,7 @@ const EventSpeakers = () => {
           erat, sed diam voluptua. At vero eos et accusam et justo
         </p>
       </div>
-      <ul
+      <hr
         css={{
           borderTop: `1px solid ${theme.shadow.tertiary}`,
           marginBlock: "1.5rem",

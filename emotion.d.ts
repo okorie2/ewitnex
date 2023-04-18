@@ -19,7 +19,9 @@ interface CustomTheme {
     secondary: string;
     secondary2: string;
     tertiary: string;
+    tertiary2: string;
     lightGreen: string;
+    grey2: string;
   };
 }
 

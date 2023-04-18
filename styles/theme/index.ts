@@ -29,6 +29,8 @@ export const theme: Theme = {
     negative: "#F05E78",
     tertiary: "#707070",
     grey: "#AEAEAE",
+    grey2: "#E4E4E4",
+    lightGreen: "#00D9B7",
   },
   background: {
     primary: "#7C35AB",
@@ -37,5 +39,8 @@ export const theme: Theme = {
     secondary2:"#F2F7FB",
     tertiary: "#528FFE",
     lightGreen: "#00D9B7",
+    tertiary2: "#707070",
+    grey2: "#E4E4E4",
+
   },
 };
