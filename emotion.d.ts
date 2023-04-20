@@ -22,6 +22,7 @@ interface CustomTheme {
     tertiary2: string;
     lightGreen: string;
     grey2: string;
+    black: string;
   };
 }
 

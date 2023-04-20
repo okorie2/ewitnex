@@ -41,6 +41,8 @@ export const theme: Theme = {
     lightGreen: "#00D9B7",
     tertiary2: "#707070",
     grey2: "#E4E4E4",
+    black:"#00000029",
+
 
   },
 };
