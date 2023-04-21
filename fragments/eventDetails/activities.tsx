@@ -2,9 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ButtonFormFilled } from "styles/components/button";
 import { theme } from "styles/theme";
-import { height } from "@mui/system";
 
 const EventActivities = () => {
   return (
@@ -35,7 +33,6 @@ const EventActivities = () => {
         <p css={{ marginBlock: "1rem" }}>
           Check back later as this page feature is currently on development
         </p>
-        <ButtonFormFilled>GO TO PROGRAMS</ButtonFormFilled>
       </div>
     </div>
   );
