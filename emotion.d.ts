@@ -15,10 +15,14 @@ interface CustomTheme {
   };
   background: {
     primary: string;
+    white:string;
     secondary: string;
     secondary2: string;
     tertiary: string;
+    tertiary2: string;
     lightGreen: string;
+    grey2: string;
+    black: string;
   };
 }
 

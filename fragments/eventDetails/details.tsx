@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import Speaker from "@/components/cards/speaker";
+import { height } from "@mui/system";
 import Image from "next/image";
 import React from "react";
 import { theme, screen } from "styles/theme";
@@ -138,7 +139,13 @@ const EventDetails = () => {
             Medical Crusade with Doctor West
           </h1>
           <div css={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <p css={{ color: theme.color.tertiary, fontSize: "1.125rem" }}>
+            <p
+              css={{
+                color: theme.color.tertiary,
+                fontSize: "1.125rem",
+                fontWeight: "600",
+              }}
+            >
               Heal12548
             </p>
             <Image src="/assets/svgs/copy.svg" alt="" width={24} height={24} />
@@ -163,39 +170,155 @@ const EventDetails = () => {
               >
                 <div
                   css={{
-                    padding: "1rem 0.5rem",
-                    border: `1px solid ${theme.shadow.tertiary}`,
-                    borderRadius: "10px",
+                    display: "grid",
+                    placeContent: "center",
+                    width: "86px",
+                    height: "60px",
+                    border: `1px solid ${theme.shadow.border}`,
+                    background: `linear-gradient(60deg, ${theme.background.primary},${theme.background.white})`,
+                    borderRadius: "5px",
                   }}
                 >
-                  <span>24</span> Days
+                  <div
+                    css={{
+                      display: "flex",
+                      placeContent: "center",
+                      width: "82px",
+                      height: "55.61px",
+                      border: `1px solid ${theme.shadow.tertiary}`,
+                      borderRadius: "5px",
+                      backgroundColor: theme.background.white,
+                    }}
+                  >
+                    <p
+                      css={{
+                        fontSize: "0.75rem",
+                        fontWeight: "bold",
+                        alignItems: "center",
+                        display: "flex",
+                        gap: "0.3rem",
+                      }}
+                    >
+                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+                        24
+                      </span>
+                      Days
+                    </p>
+                  </div>
                 </div>
                 <div
                   css={{
-                    padding: "1rem 0.5rem",
-                    border: `1px solid ${theme.shadow.tertiary}`,
-                    borderRadius: "10px",
+                    display: "grid",
+                    placeContent: "center",
+                    width: "86px",
+                    height: "60px",
+                    border: `1px solid ${theme.shadow.border}`,
+                    background: `linear-gradient(120deg, ${theme.background.primary},${theme.background.white},${theme.background.white})`,
+                    borderRadius: "5px",
                   }}
                 >
-                  <span>7</span> Hours
+                  <div
+                    css={{
+                      display: "flex",
+                      placeContent: "center",
+                      width: "82px",
+                      height: "55.61px",
+                      border: `1px solid ${theme.shadow.tertiary}`,
+                      borderRadius: "5px",
+                      backgroundColor: theme.background.white,
+                    }}
+                  >
+                    <p
+                      css={{
+                        fontSize: "0.75rem",
+                        fontWeight: "bold",
+                        alignItems: "center",
+                        display: "flex",
+                        gap: "0.3rem",
+                      }}
+                    >
+                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+                        7
+                      </span>
+                      Hours
+                    </p>
+                  </div>
                 </div>
                 <div
                   css={{
-                    padding: "1rem 0.5rem",
-                    border: `1px solid ${theme.shadow.tertiary}`,
-                    borderRadius: "10px",
+                    display: "grid",
+                    placeContent: "center",
+                    width: "86px",
+                    height: "60px",
+                    border: `1px solid ${theme.shadow.border}`,
+                    background: `linear-gradient(90deg, ${theme.background.primary},${theme.background.white})`,
+                    borderRadius: "5px",
                   }}
                 >
-                  <span>54</span> Mins
+                  <div
+                    css={{
+                      display: "flex",
+                      placeContent: "center",
+                      width: "82px",
+                      height: "55.61px",
+                      border: `1px solid ${theme.shadow.tertiary}`,
+                      borderRadius: "5px",
+                      backgroundColor: theme.background.white,
+                    }}
+                  >
+                    <p
+                      css={{
+                        fontSize: "0.75rem",
+                        fontWeight: "bold",
+                        alignItems: "center",
+                        display: "flex",
+                        gap: "0.3rem",
+                      }}
+                    >
+                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+                        54
+                      </span>
+                      Mins
+                    </p>
+                  </div>
                 </div>
                 <div
                   css={{
-                    padding: "1rem 0.5rem",
-                    border: `1px solid ${theme.shadow.tertiary}`,
-                    borderRadius: "10px",
+                    display: "grid",
+                    placeContent: "center",
+                    width: "86px",
+                    height: "60px",
+                    border: `1px solid ${theme.shadow.border}`,
+                    background: `linear-gradient(60deg, ${theme.background.primary},${theme.background.white})`,
+                    borderRadius: "5px",
                   }}
                 >
-                  <span>20</span> Secs
+                  <div
+                    css={{
+                      display: "flex",
+                      placeContent: "center",
+                      width: "82px",
+                      height: "55.61px",
+                      border: `1px solid ${theme.shadow.tertiary}`,
+                      borderRadius: "5px",
+                      backgroundColor: theme.background.white,
+                    }}
+                  >
+                    <p
+                      css={{
+                        fontSize: "0.75rem",
+                        fontWeight: "bold",
+                        alignItems: "center",
+                        display: "flex",
+                        gap: "0.3rem",
+                      }}
+                    >
+                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+                        20
+                      </span>
+                      Secs
+                    </p>
+                  </div>
                 </div>
               </div>
               <div
@@ -388,33 +511,35 @@ const EventDetails = () => {
             <Image src="/assets/svgs/info.svg" alt="" width={24} height={24} />
             <p>About</p>
           </div>
-          <div css={{ marginTop: "1.25rem", lineHeight: "22px" }}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-            dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-            elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-            justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-            takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
-            sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-            At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-            kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-            aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-            duo
+          <div css={{ marginTop: "1.25rem" }}>
+            <p css={{ lineHeight: "22px" }}>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua. At vero eos et accusam et justo duo
+              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+              amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+              invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+              dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+              elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+              magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+              justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+              takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+              sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+              tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+              dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+              elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
+              magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+              justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+              takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+              sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+              tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo
+            </p>
           </div>
         </div>
         <div css={{ paddingInline: "2%" }}>
@@ -438,26 +563,27 @@ const EventDetails = () => {
             css={{
               marginBlock: "1.25rem",
               display: "flex",
+              flexWrap: "wrap",
               gap: "1.38rem",
             }}
           >
             <Speaker
-              img="/assets/pngs/card_2.png"
+              img="/assets/pngs/speaker1.png"
               name="John Bosko"
               role="Software Engineer"
             />
             <Speaker
-              img="/assets/pngs/card_2.png"
+              img="/assets/pngs/speaker2.png"
               name="John Bosko"
               role="Software Engineer"
             />
             <Speaker
-              img="/assets/pngs/card_2.png"
+              img="/assets/pngs/speaker3.png"
               name="John Bosko"
               role="Software Engineer"
             />
             <Speaker
-              img="/assets/pngs/card_2.png"
+              img="/assets/pngs/speaker4.png"
               name="John Bosko"
               role="Software Engineer"
             />

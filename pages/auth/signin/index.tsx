@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from "@emotion/react";
-import { Nunito, Poppins } from "@next/font/google";
+// import { Nunito, Poppins } from "@next/font/google";
 import Image from "next/image";
 import React from "react";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
@@ -10,12 +10,12 @@ import { SignInLeftcss } from "styles/pages/auth/SignInStyles";
 import { screen } from "styles/theme";
 import Form from "./form";
 
-const nunito = Nunito({
-  weight: ["400", "500", "600"],
-  style: "normal",
-  subsets: ["latin"],
-  preload: true,
-});
+// const nunito = Nunito({
+//   weight: ["400", "500", "600"],
+//   style: "normal",
+//   subsets: ["latin"],
+//   preload: true,
+// });
 export default function Signin() {
   const theme = useTheme();
   return (

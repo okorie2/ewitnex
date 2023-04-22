@@ -45,19 +45,19 @@ const RSVP = () => {
           date=" Sept 20, 10: 20 AM"
         />
         <RSVPCard
-          img="/assets/pngs/speaker_1.png"
+          img="/assets/pngs/speaker_4.png"
           name="Jama Blue"
           userName="JBlue"
           date=" Sept 20, 10: 20 AM"
         />
         <RSVPCard
-          img="/assets/pngs/speaker_1.png"
+          img="/assets/pngs/speaker_5.png"
           name="Grace Lover"
           userName="Lover_G"
           date=" Sept 20, 10: 20 AM"
         />
         <RSVPCard
-          img="/assets/pngs/speaker_1.png"
+          img="/assets/pngs/speaker_4.png"
           name="Jama Blue"
           userName="JBlue"
           date=" Sept 20, 10: 20 AM"
@@ -69,7 +69,7 @@ const RSVP = () => {
           date=" Sept 20, 10: 20 AM"
         />
         <RSVPCard
-          img="/assets/pngs/speaker_1.png"
+          img="/assets/pngs/speaker_5.png"
           name="Grace Lover"
           userName="Lover_G"
           date=" Sept 20, 10: 20 AM"

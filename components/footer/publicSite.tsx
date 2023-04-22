@@ -13,6 +13,8 @@ export default function PublicSiteFooter() {
       css={{
         fontFamily: "'Poppins', sans-serif",
         background: theme.common.white,
+        zIndex: "2",
+        position: "relative",
       }}
     >
       <div

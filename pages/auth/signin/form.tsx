@@ -36,7 +36,9 @@ export default function Form() {
             </p>
           </div>
           <div>
-            <ButtonFormFilled>SIGN IN</ButtonFormFilled>
+            <Link href="/dashboard">
+              <ButtonFormFilled>SIGN IN</ButtonFormFilled>
+            </Link>
           </div>
         </form>
 

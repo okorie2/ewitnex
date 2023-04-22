@@ -1,4 +1,5 @@
-/** @jsxImportSource @emotion/react */ import React from "react";
+/** @jsxImportSource @emotion/react */
+import React from "react";
 import { theme } from "styles/theme";
 import Image from "next/image";
 
@@ -69,7 +70,7 @@ const EventSpeakers = () => {
           erat, sed diam voluptua. At vero eos et accusam et justo
         </p>
       </div>
-      <ul
+      <hr
         css={{
           borderTop: `1px solid ${theme.shadow.tertiary}`,
           marginBlock: "1.5rem",
@@ -85,7 +86,7 @@ const EventSpeakers = () => {
             position: "relative",
           }}
         >
-          <Image src="/assets/pngs/speaker_2.png" alt="speaker-img" fill />
+          <Image src="/assets/pngs/speaker_3.png" alt="speaker-img" fill />
         </div>
         <div css={{ marginTop: "0.7rem" }}>
           <h4 css={{ fontSize: "1rem", fontWeight: "700" }}>John Bosko</h4>
