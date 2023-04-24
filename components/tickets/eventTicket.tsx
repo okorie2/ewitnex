@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { theme, screen } from "styles/theme";
-import EventTicketModal from "../modals/eventTicketModal";
+import EventTicketModal from "@/components/modals/eventTicketModal";
 
 interface IEventTicket {
   title: string;
