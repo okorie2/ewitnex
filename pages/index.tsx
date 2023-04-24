@@ -2,12 +2,10 @@
 import Head from "next/head";
 import { useTheme } from "@emotion/react";
 import Navbar from "components/header";
-import WhoWeAre from "fragments/paper/whoWeAre";
 import HomeSlide from "components/slides/homeSlide";
 import FindEventFragment from "fragments/findEvent/findEvent";
 import EventsAroundYouFragment from "fragments/eventsAroundYou";
 import Image from "next/image";
-import Tris from "public/assets/svgs/lines.svg";
 import Tri_L from "public/assets/svgs/line_l.svg";
 
 import Tri_R from "public/assets/svgs/line_r.svg";
@@ -22,7 +20,6 @@ import EventCreatingFragment from "fragments/eventCreating";
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import { Lines } from "@/components/lines";
-// import { IThemes } from "styles/theme";
 
 export default function Home() {
   const theme = useTheme();

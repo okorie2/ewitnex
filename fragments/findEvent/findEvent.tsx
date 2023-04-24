@@ -4,7 +4,6 @@ import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
 
 import React from "react";
-
 import { Button } from "styles/components/button";
 import { screen } from "styles/theme";
 import SearchSelect from "./searchSelect";

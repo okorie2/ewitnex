@@ -2,8 +2,8 @@
 
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { Button } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
@@ -36,7 +36,6 @@ export default function UploadDesignFragment() {
         <Button
           css={{
             width: "13rem",
-
             marginTop: "4%",
             [screen.desktop]: {
               width: "13rem",

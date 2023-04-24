@@ -2,8 +2,8 @@
 
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { screen } from "styles/theme";
 
 export default function PublicSiteFooter() {
@@ -107,7 +107,6 @@ export default function PublicSiteFooter() {
             }}
           >
             <p>Contact support</p>
-
             <p>Twitter</p>
             <p>Facebook</p>
             <p>LinkedIn</p>

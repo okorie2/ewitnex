@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
+import React from "react";
 import EventCard from "@/components/cards/eventCard";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
-import React from "react";
 import { screen } from "styles/theme";
 import Layout from "./layout";
 
@@ -141,7 +141,7 @@ export default function Index() {
               title="Ada weds Obi"
               id="Wed54254"
             />
-          </div>{" "}
+          </div>
           <div
             css={{
               width: "24vw",

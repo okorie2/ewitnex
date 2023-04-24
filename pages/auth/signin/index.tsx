@@ -43,7 +43,6 @@ export default function Signin() {
                   gap: "11px",
                   alignItems: "center",
                   textAlign: "left",
-
                   [screen.desktop]: {
                     gap: "2px",
                   },
@@ -119,7 +118,6 @@ export default function Signin() {
             <div
               css={{
                 fontFamily: "'Nunito', sans-serif",
-
                 marginBottom: "4.3rem",
               }}
             >

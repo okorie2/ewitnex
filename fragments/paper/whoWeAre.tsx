@@ -17,7 +17,6 @@ export default function WhoWeArePaper() {
         justifyContent: "space-between",
         fontFamily: "'Poppins', sans-serif",
         marginTop: "5rem",
-
         [screen.desktop]: {
           // marginTop: "7%",
           // height: "30vw",

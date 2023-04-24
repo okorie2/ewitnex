@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { theme } from "styles/theme";
-import Image from "next/image";
-import { Button } from "styles/components/button";
 import Link from "next/link";
 import EventMessage from "@/components/messages/eventMessage";
 

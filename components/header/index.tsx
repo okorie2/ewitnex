@@ -2,9 +2,7 @@
 
 import React from "react";
 import { useTheme } from "@emotion/react";
-import styled from "@emotion/styled";
 import Image from "next/image";
-
 import Link from "next/link";
 
 export default function Navbar() {
@@ -15,7 +13,6 @@ export default function Navbar() {
         backgroundColor: theme.common.white,
         display: "flex",
         justifyContent: "space-evenly",
-
         alignItems: "center",
         boxShadow: "#00000029 0px 0px 10px ",
         padding: "0% 1%",
@@ -50,7 +47,6 @@ export default function Navbar() {
         }}
       >
         <div css={{ marginTop: "3px" }}>
-          {" "}
           <Image
             src="/assets/svgs/search.svg"
             width={14.42}
@@ -91,15 +87,13 @@ export default function Navbar() {
         }}
       >
         <div>
-          {" "}
           <Link href="/"> Home</Link>
         </div>
         <div>
-          {" "}
           <Link href="/events">Events</Link>
         </div>
         <div>
-          <Link href="/about">About</Link>{" "}
+          <Link href="/about">About</Link>
         </div>
         <div>
           <Link href="/how-it-works">How It Works</Link>
@@ -115,7 +109,6 @@ export default function Navbar() {
         css={{
           borderRadius: "3.5rem",
           border: `1px solid ${theme.background.primary}`,
-          //   padding: "1px",
           height: "2.625rem",
           display: "flex",
           width: "8.063rem",

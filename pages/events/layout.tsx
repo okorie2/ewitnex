@@ -2,8 +2,8 @@
 
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React, { ReactNode } from "react";
+import Image from "next/image";
 import Filter from "public/assets/svgs/filter.svg";
 import Left from "public/assets/svgs/left_ar.svg";
 import Down from "public/assets/svgs/down_ar.svg";
@@ -46,7 +46,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           css={{
             backgroundColor: theme.common.white,
             boxShadow: "0px 0px 10px #00000029",
-
             height: "612px",
             width: "43vw",
           }}

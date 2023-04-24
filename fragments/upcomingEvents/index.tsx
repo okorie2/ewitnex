@@ -3,7 +3,6 @@
 import React from "react";
 
 import { H2 } from "styles/components/typography";
-import { BsArrowRight } from "react-icons/bs";
 import { useTheme } from "@emotion/react";
 import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";
@@ -48,7 +47,7 @@ export default function UpcomingEventsFragment() {
             }}
           >
             See All
-          </p>{" "}
+          </p>
           <span css={{ marginTop: "4px" }}>
             <Image
               src="/assets/svgs/right.svg"

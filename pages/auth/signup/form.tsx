@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
+import React from "react";
 import BasicTextField from "@/components/inputs/BasicTextField";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
 import { theme } from "styles/theme";
 
@@ -35,23 +35,22 @@ export default function Form() {
         <div css={{ width: "100%" }}>
           <ButtonFormOutline>
             <p css={{ marginTop: "4px" }}>
-              {" "}
               <Image
                 src="/assets/svgs/google.svg"
                 alt="appstore"
                 width={21}
                 height={21}
-              />{" "}
-            </p>{" "}
+              />
+            </p>
             <p>Get Started With Google</p>
           </ButtonFormOutline>
         </div>
         <div css={{ marginTop: "2rem" }}>
           <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
-            Already Have An Account?{" "}
+            Already Have An Account?
             <span css={{ fontWeight: 700, color: theme.background.primary }}>
               <Link href="/auth/signin">Sign In</Link>
-            </span>{" "}
+            </span>
           </p>
         </div>
       </div>

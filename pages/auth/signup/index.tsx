@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
-import { useTheme } from "@emotion/react";
-import { Nunito, Poppins } from "@next/font/google";
-import Image from "next/image";
 import React from "react";
-import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
+import { useTheme } from "@emotion/react";
+import Image from "next/image";
 import { H1 } from "styles/components/typography";
 import { SignInLeftcss } from "styles/pages/auth/SignInStyles";
 import { screen } from "styles/theme";
@@ -37,7 +35,6 @@ export default function Signup() {
                   gap: "11px",
                   alignItems: "center",
                   textAlign: "left",
-
                   [screen.desktop]: {
                     gap: "2px",
                   },

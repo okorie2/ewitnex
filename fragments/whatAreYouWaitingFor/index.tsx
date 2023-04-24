@@ -2,8 +2,8 @@
 
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { Button } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";

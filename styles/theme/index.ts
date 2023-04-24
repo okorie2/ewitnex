@@ -42,7 +42,5 @@ export const theme: Theme = {
     tertiary2: "#707070",
     grey2: "#E4E4E4",
     black:"#00000029",
-
-
   },
 };

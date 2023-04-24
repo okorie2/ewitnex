@@ -5,7 +5,6 @@ import DashboardLayout from "./layout";
 import Image from "next/image";
 import { ButtonFormFilled } from "styles/components/button";
 import { theme } from "styles/theme";
-import { height } from "@mui/system";
 import DashboardHeader from "@/components/header/dashboardHeader";
 
 const index = () => {

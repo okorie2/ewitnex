@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import RSVPCard from "@/components/cards/RSVPCard";
 import React from "react";
+import RSVPCard from "@/components/cards/RSVPCard";
 import { H3 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
