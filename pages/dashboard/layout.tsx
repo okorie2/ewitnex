@@ -39,7 +39,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         >
           <div>
             <div css={{ width: "60%", margin: "0 auto 2.5rem" }}>
-              <Logo />
+              <Logo image="/assets/pngs/logo.png" />
             </div>
             <ul
               css={{

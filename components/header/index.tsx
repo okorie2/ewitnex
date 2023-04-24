@@ -26,7 +26,7 @@ export default function Navbar() {
         zIndex: "2",
       }}
     >
-      <Logo />
+      <Logo image="/assets/pngs/logo.png" />
       <div
         css={{
           borderRadius: "66px",

@@ -4,14 +4,20 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Logo = () => {
+interface ILogo {
+  image: string;
+  width?: number;
+  height?: number;
+}
+
+const Logo = (props: ILogo) => {
   return (
     <div>
       <Link href="/">
         <Image
-          src="/assets/pngs/logo.png"
-          width={93}
-          height={43.13}
+          src={props.image}
+          width={props.width ? props.width : 93}
+          height={props.height ? props.height : 43.13}
           alt="logo"
           css={{ marginTop: "0.8rem" }}
         />

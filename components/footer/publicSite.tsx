@@ -27,7 +27,7 @@ export default function PublicSiteFooter() {
         }}
       >
         <div css={{ width: "40%" }}>
-          <Logo />
+          <Logo image="/assets/pngs/logo.png" width={125.13} height={58.12} />
           <p>
             Ewitnex - is a social user-friendly platform that provides tools for
             event planners to create, share, and manage every activity of their
