@@ -4,6 +4,7 @@ import React from "react";
 import { useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 export default function Navbar() {
   const theme = useTheme();
@@ -25,15 +26,7 @@ export default function Navbar() {
         zIndex: "2",
       }}
     >
-      <div>
-        <Image
-          src="/assets/pngs/logo.png"
-          width={93}
-          height={43.13}
-          alt="logo"
-          css={{ marginTop: "0.8rem" }}
-        />
-      </div>
+      <Logo />
       <div
         css={{
           borderRadius: "66px",

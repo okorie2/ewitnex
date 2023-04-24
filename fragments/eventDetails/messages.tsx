@@ -41,7 +41,7 @@ const EventMessages = () => {
           textColor={theme.common.black}
         />
         <EventMessage
-          image="/assets/pngs/profile1.png"
+          image="/assets/pngs/profilepic_2.png"
           background="transparent linear-gradient(180deg, #528ffe 0%, #7c35ab 100%) 0%
           0% no-repeat padding-box"
           userName="Blessed Onoriode"
@@ -50,7 +50,7 @@ const EventMessages = () => {
           textColor={theme.common.white}
         />
         <EventMessage
-          image="/assets/pngs/profile1.png"
+          image="/assets/pngs/profilepic_3.png"
           background={theme.background.secondary}
           userName="Franka Godbless"
           time="25m"
@@ -58,7 +58,7 @@ const EventMessages = () => {
           textColor={theme.common.black}
         />
         <EventMessage
-          image="/assets/pngs/profile1.png"
+          image="/assets/pngs/speaker_2.png"
           background={theme.background.secondary}
           userName="Jian Wilson"
           time="10m"
@@ -66,7 +66,7 @@ const EventMessages = () => {
           textColor={theme.common.black}
         />
         <EventMessage
-          image="/assets/pngs/profile1.png"
+          image="/assets/pngs/profilepic_2.png"
           background="transparent linear-gradient(180deg, #528ffe 0%, #7c35ab 100%) 0%
           0% no-repeat padding-box"
           userName="Blessed Onoriode"

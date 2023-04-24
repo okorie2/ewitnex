@@ -4,6 +4,7 @@ import React, { ReactNode, useState } from "react";
 import { useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const theme = useTheme();
@@ -37,14 +38,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           }}
         >
           <div>
-            <div css={{ width: "60%", marginInline: "auto" }}>
-              <Image
-                src="/assets/pngs/logo.png"
-                width={93}
-                height={43.13}
-                alt="logo"
-                css={{ marginBlock: "0.8rem 2.5rem" }}
-              />
+            <div css={{ width: "60%", margin: "0 auto 2.5rem" }}>
+              <Logo />
             </div>
             <ul
               css={{
