@@ -18,7 +18,7 @@ const AttenEventCTA = () => {
         background: theme.background.white,
         bottom: "0",
         right: "5%",
-        zIndex: "1",
+        zIndex: "3",
       }}
     >
       <div

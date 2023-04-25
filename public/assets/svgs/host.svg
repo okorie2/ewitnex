@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.246" height="17.246" viewBox="0 0 17.246 17.246">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#528ffe"/>
+      <stop offset="1" stop-color="#7c35ab"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_39101" data-name="Group 39101" transform="translate(-161 -705.831)">
+    <path id="Path_67113" data-name="Path 67113" d="M20.366,7.5H13.539a.539.539,0,0,0,0,1.078h6.827a.539.539,0,0,0,0-1.078Z" transform="translate(157.342 703.721)" fill="url(#linear-gradient)"/>
+    <path id="Path_67114" data-name="Path 67114" d="M20.366,10.5H13.539a.539.539,0,0,0,0,1.078h6.827a.539.539,0,0,0,0-1.078Z" transform="translate(157.342 702.876)" fill="url(#linear-gradient)"/>
+    <path id="Path_67115" data-name="Path 67115" d="M20.366,13.5H13.539a.539.539,0,0,0,0,1.078h6.827a.539.539,0,0,0,0-1.078Z" transform="translate(157.342 702.032)" fill="url(#linear-gradient)"/>
+    <path id="Path_67116" data-name="Path 67116" d="M20.366,16.5H13.539a.539.539,0,0,0,0,1.078h6.827a.539.539,0,1,0,0-1.078Z" transform="translate(157.342 701.188)" fill="url(#linear-gradient)"/>
+    <path id="Path_67117" data-name="Path 67117" d="M20.366,19.5H13.539a.539.539,0,0,0,0,1.078h6.827a.539.539,0,1,0,0-1.078Z" transform="translate(157.342 700.344)" fill="url(#linear-gradient)"/>
+    <path id="Path_67118" data-name="Path 67118" d="M1.258,12.889H6.647A1.259,1.259,0,0,0,7.9,11.632V8.758A1.259,1.259,0,0,0,6.647,7.5H1.258A1.259,1.259,0,0,0,0,8.758v2.874A1.259,1.259,0,0,0,1.258,12.889Z" transform="translate(161 703.721)" fill="url(#linear-gradient)"/>
+    <path id="Path_67119" data-name="Path 67119" d="M1.258,21.889H6.647A1.259,1.259,0,0,0,7.9,20.632V17.758A1.259,1.259,0,0,0,6.647,16.5H1.258A1.259,1.259,0,0,0,0,17.758v2.874A1.259,1.259,0,0,0,1.258,21.889Z" transform="translate(161 701.188)" fill="url(#linear-gradient)"/>
+    <path id="Path_67120" data-name="Path 67120" d="M20.366,22.5H13.539a.539.539,0,1,0,0,1.078h6.827a.539.539,0,0,0,0-1.078Z" transform="translate(157.342 699.5)" fill="url(#linear-gradient)"/>
+    <path id="Path_67121" data-name="Path 67121" d="M18.24,0H9.258A1.259,1.259,0,0,0,8,1.258v1.8A1.259,1.259,0,0,0,9.258,4.312H18.24A1.259,1.259,0,0,0,19.5,3.054v-1.8A1.259,1.259,0,0,0,18.24,0Z" transform="translate(158.749 705.831)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_383" data-name="Ellipse 383" cx="2.138" cy="2.138" r="2.138" transform="translate(161 705.831)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

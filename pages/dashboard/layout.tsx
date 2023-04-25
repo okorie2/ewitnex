@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     >
       <div
         css={{
-          paddingBlock: "1rem 2rem",
+          paddingBlock: "0 2rem",
           borderRight: `1px solid ${theme.shadow.border}`,
           fontSize: "1rem",
           fontWeight: "500",

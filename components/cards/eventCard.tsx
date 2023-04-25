@@ -34,9 +34,6 @@ export default function EventCard(props: IEventCard) {
           fontFamily: "'Poppins', sans-serif",
           marginBottom: "5%",
         }}
-        onClick={() => {
-          console.log("first");
-        }}
       >
         <div css={{ position: "relative", width: "100%", height: "171px" }}>
           <Image
