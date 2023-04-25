@@ -3,6 +3,7 @@
 import React from "react";
 import { theme } from "styles/theme";
 import Image from "next/image";
+import Link from "next/link";
 
 const DashboardHeader = () => {
   return (
@@ -52,23 +53,25 @@ const DashboardHeader = () => {
           }}
         />
       </div>
-      <div css={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-        <div
-          css={{
-            width: "45px",
-            height: "45px",
-            position: "relative",
-            border: `1px solid ${theme.background.primary}`,
-            borderRadius: "50%",
-            padding: "10px",
-          }}
-        >
-          <Image src="/assets/svgs/host.svg" alt="" width={20} height={20} />
+      <Link href="dashboard/hostEvent">
+        <div css={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+          <div
+            css={{
+              width: "45px",
+              height: "45px",
+              position: "relative",
+              border: `1px solid ${theme.background.primary}`,
+              borderRadius: "50%",
+              padding: "10px",
+            }}
+          >
+            <Image src="/assets/svgs/host.svg" alt="" width={20} height={20} />
+          </div>
+          <p css={{ color: theme.color.primary, fontWeight: "bold" }}>
+            Host Event
+          </p>
         </div>
-        <p css={{ color: theme.color.primary, fontWeight: "500" }}>
-          Host Event
-        </p>
-      </div>
+      </Link>
     </div>
   );
 };

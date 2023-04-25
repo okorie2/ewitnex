@@ -7,6 +7,7 @@ import { ButtonFormFilled } from "styles/components/button";
 import { theme } from "styles/theme";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
+import Link from "next/link";
 
 const index = () => {
   return (
@@ -48,7 +49,9 @@ const index = () => {
                 Check back later as this page feature is currently on
                 development
               </p>
-              <ButtonFormFilled>GO TO PROGRAMS</ButtonFormFilled>
+              <Link href="/dashboard/programs">
+                <ButtonFormFilled>GO TO PROGRAMS</ButtonFormFilled>
+              </Link>
             </div>
           </div>
         </div>
@@ -73,7 +76,7 @@ const index = () => {
                 css={{
                   fontSize: "1.25rem",
                   color: theme.color.tertiary,
-                  fontWeight: "500",
+                  fontWeight: "bold",
                 }}
               >
                 Suggested Events
@@ -82,7 +85,7 @@ const index = () => {
                 css={{
                   fontSize: "1.125rem",
                   color: theme.color.primary,
-                  fontWeight: "500",
+                  fontWeight: "bold",
                 }}
               >
                 See All
@@ -133,7 +136,7 @@ const index = () => {
                 css={{
                   fontSize: "1.25rem",
                   color: theme.color.tertiary,
-                  fontWeight: "500",
+                  fontWeight: "bold",
                 }}
               >
                 Online Events
@@ -142,7 +145,7 @@ const index = () => {
                 css={{
                   fontSize: "1.125rem",
                   color: theme.color.primary,
-                  fontWeight: "500",
+                  fontWeight: "bold",
                 }}
               >
                 See All

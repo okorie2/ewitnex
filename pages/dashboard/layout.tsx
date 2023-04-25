@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div
       css={{
-        fontFamily: "'Poppins', sans-serif",
+        fontFamily: "'Nunito', sans-serif",
         display: "grid",
         gridTemplateColumns: "15% 85%",
         minHeight: "100vh",
@@ -26,7 +26,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           paddingBlock: "0 2rem",
           borderRight: `1px solid ${theme.shadow.border}`,
           fontSize: "1rem",
-          fontWeight: "500",
+          fontWeight: "bold",
         }}
       >
         <div
@@ -70,7 +70,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{ display: "flex", gap: "0.5rem" }}
                 >
                   <Image
-                    src="/assets/svgs/user.svg"
+                    src="/assets/svgs/programs.svg"
                     alt=""
                     width={20}
                     height={20}
@@ -84,7 +84,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{ display: "flex", gap: "0.5rem" }}
                 >
                   <Image
-                    src="/assets/svgs/user.svg"
+                    src="/assets/svgs/notification.svg"
                     alt=""
                     width={20}
                     height={20}
@@ -217,7 +217,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   }}
                 >
                   <Image
-                    src="/assets/svgs/settings.svg"
+                    src="/assets/svgs/logout.svg"
                     alt=""
                     width={20}
                     height={20}
