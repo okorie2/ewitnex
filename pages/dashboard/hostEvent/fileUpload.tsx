@@ -70,6 +70,12 @@ const FileUpload = () => {
             "&::-webkit-scrollbar": {
               display: "none",
             },
+            [screen.lg]: {
+              width: "100%",
+            },
+            [screen.desktop]: {
+              width: "100%",
+            },
           }}
         >
           <div>

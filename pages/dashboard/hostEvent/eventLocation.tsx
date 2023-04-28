@@ -5,7 +5,6 @@ import HostEventLayout from "./layout";
 import { ButtonFormFilled } from "styles/components/button";
 import Link from "next/link";
 import { screen, theme } from "styles/theme";
-import Image from "next/image";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import HostEventTimeDate from "@/components/inputs/HostEventTimeDate";
 
@@ -33,6 +32,12 @@ const EventLocation = () => {
             <div
               css={{
                 width: "43%",
+                [screen.desktopLg]: {
+                  width: "50%",
+                },
+                [screen.desktop]: {
+                  width: "70%",
+                },
               }}
             >
               <h1 css={{ fontSize: "1.875rem" }}>Location, Date and Time</h1>
@@ -87,7 +92,13 @@ const EventLocation = () => {
             type="select"
             image="/assets/svgs/info2.svg"
           />
-          <div css={{ display: "flex", gap: "1.5rem", alignItems: "flex-end" }}>
+          <div
+            css={{
+              display: "flex",
+              gap: "1.5rem",
+              alignItems: "flex-end",
+            }}
+          >
             <HostEventTextField
               label="Address"
               placeholder="Search location"
@@ -139,6 +150,12 @@ const EventLocation = () => {
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: "2.5rem",
+              [screen.lg]: {
+                gridTemplateColumns: "1fr",
+              },
+              [screen.desktop]: {
+                gridTemplateColumns: "1fr",
+              },
             }}
           >
             <HostEventTimeDate label="Start At" placeholder="Start" />
