@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { theme } from "styles/theme";
-import Image from "next/image";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import { ButtonFormFilled } from "styles/components/button";
 import HostEventLayout from "./layout";
+import Link from "next/link";
 
 const HostEvent = () => {
   return (
@@ -15,40 +15,47 @@ const HostEvent = () => {
             height: "110px",
             borderBottom: `1px solid ${theme.shadow.border}`,
             display: "flex",
-            justifyContent: "space-between",
             alignItems: "center",
             paddingInline: "3.2rem",
           }}
         >
-          <div>
-            <h1 css={{ fontSize: "1.875rem" }}>Event Program Info</h1>
-            <p>Tell invitees the type of event you are hosting</p>
-          </div>
           <div
             css={{
               display: "flex",
-              alignItems: "center",
-              gap: "2rem",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              width: "100%",
             }}
           >
-            <p
+            <div>
+              <h1 css={{ fontSize: "1.875rem" }}>Event Program Info</h1>
+              <p>Tell invitees the type of event you are hosting</p>
+            </div>
+            <div
               css={{
-                color: theme.color.primary,
-                fontWeight: "bold",
-                cursor: "pointer",
+                display: "flex",
+                gap: "2rem",
               }}
             >
-              Preview
-            </p>
-            <p
-              css={{
-                color: theme.color.negative,
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              Cancel
-            </p>
+              <p
+                css={{
+                  color: theme.color.primary,
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                }}
+              >
+                Preview
+              </p>
+              <p
+                css={{
+                  color: theme.color.negative,
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                }}
+              >
+                Cancel
+              </p>
+            </div>
           </div>
         </div>
         <form
@@ -157,7 +164,9 @@ const HostEvent = () => {
             >
               SAVE TO DRAFT
             </button>
-            <ButtonFormFilled>SAVE & CONTINUE</ButtonFormFilled>
+            <Link href="/dashboard/hostEvent/fileUpload">
+              <ButtonFormFilled>SAVE & CONTINUE</ButtonFormFilled>
+            </Link>
           </div>
         </form>
       </div>

@@ -1,9 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { ReactNode } from "react";
-import { theme } from "styles/theme";
-import Image from "next/image";
-import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { ButtonFormFilled } from "styles/components/button";
+import { screen, theme } from "styles/theme";
 
 const HostEventLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -17,13 +14,55 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
     >
       <div
         css={{
-          paddingBlock: "0 2rem",
+          paddingBlock: "2.3rem",
           borderRight: `1px solid ${theme.shadow.border}`,
           fontSize: "1rem",
           fontWeight: "500",
         }}
       >
-        side bar
+        <div
+          css={{
+            height: "45%",
+            width: "fit-content",
+            marginInline: "auto",
+            display: "grid",
+            justifyContent: "space-between",
+          }}
+        >
+          <h3 css={{ fontSize: "1.125rem", fontWeight: "bold" }}>
+            Hosting Event
+          </h3>
+          <ul
+            css={{
+              display: "grid",
+              gap: "1rem",
+              listStyleType: "none",
+              color: theme.color.grey,
+              fontWeight: "300",
+            }}
+          >
+            <li>
+              <div></div>
+              Event Program Info
+            </li>
+            <li>
+              <div></div>
+              Files Upload
+            </li>
+            <li>
+              <div></div>
+              Location, Date and Time
+            </li>
+            <li>
+              <div></div>
+              Speakers
+            </li>
+            <li>
+              <div></div>
+              Tickets
+            </li>
+          </ul>
+        </div>
       </div>
       <div>{children}</div>
     </div>
