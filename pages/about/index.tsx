@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
+import React from "react";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
@@ -7,7 +8,6 @@ import { useTheme } from "@emotion/react";
 
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import Image from "next/image";
-import React from "react";
 import { H1, H2, H3 } from "styles/components/typography";
 
 export default function Index() {
@@ -18,16 +18,13 @@ export default function Index() {
 
       <div
         css={{
-          //   backgroundImage: "url(/assets/pngs/about.png)",
           backgroundImage: " url(/assets/pngs/about.png) ",
           height: "413px",
-          //   width: "100vw",
           display: "flex",
           backgroundSize: "cover",
           justifyContent: "space-between",
           alignItems: "center",
           fontFamily: "'Poppins', sans-serif",
-          // opacity: "90%",
           marginTop: "5rem",
           backdropFilter: "blur(5px) brightness(25%) contrast(100%)",
         }}
@@ -84,7 +81,6 @@ export default function Index() {
             gridTemplateColumns: "30% 30% 30%",
             gap: "4rem",
             alignItems: "center",
-            // marginTop: "3rem",
             padding: "3% 5%",
           }}
         >
@@ -122,7 +118,6 @@ export default function Index() {
             gridTemplateColumns: "30% 30% 30%",
             gap: "4rem",
             alignItems: "center",
-            // marginTop: "3rem",
             padding: "3% 5%",
           }}
         >

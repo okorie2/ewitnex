@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
+import React from "react";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
-import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";

@@ -4,11 +4,11 @@ import { useTheme } from "@emotion/react";
 // import { Nunito, Poppins } from "@next/font/google";
 import Image from "next/image";
 import React from "react";
-import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import { SignInLeftcss } from "styles/pages/auth/SignInStyles";
 import { screen } from "styles/theme";
 import Form from "./form";
+import Logo from "@/components/logo";
 
 // const nunito = Nunito({
 //   weight: ["400", "500", "600"],
@@ -24,14 +24,7 @@ export default function Signin() {
         <SignInLeftcss>
           <div className="top">
             <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
-            <div>
-              <Image
-                src="/assets/svgs/logo_yt.svg"
-                alt="logo"
-                width={93}
-                height={43.13}
-              />
-            </div>
+            <Logo image="/assets/svgs/logo_yt.svg" />
           </div>
 
           <div className="btm">
@@ -43,7 +36,6 @@ export default function Signin() {
                   gap: "11px",
                   alignItems: "center",
                   textAlign: "left",
-
                   [screen.desktop]: {
                     gap: "2px",
                   },
@@ -119,7 +111,6 @@ export default function Signin() {
             <div
               css={{
                 fontFamily: "'Nunito', sans-serif",
-
                 marginBottom: "4.3rem",
               }}
             >

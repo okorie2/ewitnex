@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import Speaker from "@/components/cards/speaker";
-import { height } from "@mui/system";
-import Image from "next/image";
 import React from "react";
+import Speaker from "@/components/cards/speaker";
 import { theme, screen } from "styles/theme";
+import Image from "next/image";
 
 const EventDetails = () => {
   return (

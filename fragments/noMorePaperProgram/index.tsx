@@ -2,8 +2,8 @@
 
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { H1 } from "styles/components/typography";
 
 export default function NoMorePaperProgramFragment() {
@@ -39,12 +39,7 @@ export default function NoMorePaperProgramFragment() {
         </p>
       </div>
       <div css={{ width: "35.5vw", height: "35.5vw", position: "relative" }}>
-        <Image
-          src="/assets/pngs/program.png"
-          alt="program"
-          fill
-          //   css={{ objectFit: "cover" }}
-        />
+        <Image src="/assets/pngs/program.png" alt="program" fill />
       </div>
     </div>
   );

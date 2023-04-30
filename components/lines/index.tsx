@@ -9,10 +9,7 @@ export const Lines = () => {
         css={{
           width: "100%",
           height: "27px",
-          // backgroundColor: "yellow",
           position: "relative",
-          // display: "flex",
-          // justifyContent: "space-between",
           marginBottom: "4%",
         }}
       >

@@ -1,12 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import Modal from "react-modal";
 import { theme, screen } from "styles/theme";
-import TicketTextField from "../inputs/TicketTextField";
-import styled from "@emotion/styled";
-import { ButtonFormFilled } from "styles/components/button";
-import EventTicketModal from "../modals/eventTicketModal";
+import EventTicketModal from "@/components/modals/eventTicketModal";
 
 interface IEventTicket {
   title: string;

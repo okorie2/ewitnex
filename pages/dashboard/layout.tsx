@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
+import React, { ReactNode, useState } from "react";
 import { useTheme } from "@emotion/react";
 import Image from "next/image";
-import React, { ReactNode, useState } from "react";
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const theme = useTheme();
@@ -14,7 +15,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div
       css={{
-        fontFamily: "'Poppins', sans-serif",
+        fontFamily: "'Nunito', sans-serif",
         display: "grid",
         gridTemplateColumns: "15% 85%",
         minHeight: "100vh",
@@ -22,10 +23,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     >
       <div
         css={{
-          paddingBlock: "1rem 2rem",
+          paddingBlock: "0 2rem",
           borderRight: `1px solid ${theme.shadow.border}`,
           fontSize: "1rem",
-          fontWeight: "500",
+          fontWeight: "bold",
         }}
       >
         <div
@@ -37,14 +38,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           }}
         >
           <div>
-            <div css={{ width: "60%", marginInline: "auto" }}>
-              <Image
-                src="/assets/pngs/logo.png"
-                width={93}
-                height={43.13}
-                alt="logo"
-                css={{ marginBlock: "0.8rem 2.5rem" }}
-              />
+            <div css={{ width: "60%", margin: "0 auto 2.5rem" }}>
+              <Logo image="/assets/pngs/logo.png" />
             </div>
             <ul
               css={{
@@ -75,7 +70,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{ display: "flex", gap: "0.5rem" }}
                 >
                   <Image
-                    src="/assets/svgs/user.svg"
+                    src="/assets/svgs/programs.svg"
                     alt=""
                     width={20}
                     height={20}
@@ -89,7 +84,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{ display: "flex", gap: "0.5rem" }}
                 >
                   <Image
-                    src="/assets/svgs/user.svg"
+                    src="/assets/svgs/notification.svg"
                     alt=""
                     width={20}
                     height={20}
@@ -222,7 +217,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   }}
                 >
                   <Image
-                    src="/assets/svgs/settings.svg"
+                    src="/assets/svgs/logout.svg"
                     alt=""
                     width={20}
                     height={20}

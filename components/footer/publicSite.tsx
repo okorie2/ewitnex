@@ -2,9 +2,10 @@
 
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { screen } from "styles/theme";
+import Logo from "@/components/logo";
 
 export default function PublicSiteFooter() {
   const theme = useTheme();
@@ -26,15 +27,7 @@ export default function PublicSiteFooter() {
         }}
       >
         <div css={{ width: "40%" }}>
-          <div>
-            {" "}
-            <Image
-              src="/assets/pngs/logo.png"
-              width={125.13}
-              height={58.12}
-              alt="logo"
-            />
-          </div>
+          <Logo image="/assets/pngs/logo.png" width={125.13} height={58.12} />
           <p>
             Ewitnex - is a social user-friendly platform that provides tools for
             event planners to create, share, and manage every activity of their
@@ -107,7 +100,6 @@ export default function PublicSiteFooter() {
             }}
           >
             <p>Contact support</p>
-
             <p>Twitter</p>
             <p>Facebook</p>
             <p>LinkedIn</p>

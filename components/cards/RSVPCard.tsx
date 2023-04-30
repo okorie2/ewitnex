@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import Image from "next/image";
-import { relative } from "path";
 import React from "react";
+import Image from "next/image";
 import { theme, screen } from "styles/theme";
 
 interface IRSVPCard {

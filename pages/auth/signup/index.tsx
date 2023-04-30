@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
-import { useTheme } from "@emotion/react";
-import { Nunito, Poppins } from "@next/font/google";
-import Image from "next/image";
 import React from "react";
-import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
+import { useTheme } from "@emotion/react";
+import Image from "next/image";
 import { H1 } from "styles/components/typography";
 import { SignInLeftcss } from "styles/pages/auth/SignInStyles";
 import { screen } from "styles/theme";
 import Form from "./form";
+import Logo from "@/components/logo";
 
 export default function Signup() {
   const theme = useTheme();
@@ -18,14 +17,7 @@ export default function Signup() {
         <SignInLeftcss>
           <div className="top">
             <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
-            <div>
-              <Image
-                src="/assets/svgs/logo_yt.svg"
-                alt="logo"
-                width={93}
-                height={43.13}
-              />
-            </div>
+            <Logo image="/assets/svgs/logo_yt.svg" />
           </div>
 
           <div className="btm">
@@ -37,7 +29,6 @@ export default function Signup() {
                   gap: "11px",
                   alignItems: "center",
                   textAlign: "left",
-
                   [screen.desktop]: {
                     gap: "2px",
                   },

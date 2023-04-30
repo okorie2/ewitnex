@@ -1,9 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-
 import { H2 } from "styles/components/typography";
-import { BsArrowRight } from "react-icons/bs";
 import { useTheme } from "@emotion/react";
 import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";

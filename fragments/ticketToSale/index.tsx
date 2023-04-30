@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { useTheme } from "@emotion/react";
 
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { H1 } from "styles/components/typography";
 
 export default function TicketToSaleFragment() {

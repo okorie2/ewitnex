@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import EventTicket from "@/components/tickets/eventTicket";
 import React from "react";
+import EventTicket from "@/components/tickets/eventTicket";
 import { H3 } from "styles/components/typography";
 import { screen, theme } from "styles/theme";
 
