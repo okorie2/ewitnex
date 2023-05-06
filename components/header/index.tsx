@@ -111,7 +111,7 @@ export default function Navbar() {
           color: theme.background.primary,
         }}
       >
-        <Link href="/auth/signup">Create Event</Link>
+        <Link href="/auth/signup">Get Started</Link>
       </div>
     </div>
   );
