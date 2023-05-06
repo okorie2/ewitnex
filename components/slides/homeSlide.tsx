@@ -15,3 +15,7 @@ export default function HomeSlide() {
     </Carousel>
   );
 }
+
+export const SignupSlides = () => {
+  return <></>;
+};
