@@ -3,6 +3,13 @@
 import { css, useTheme } from "@emotion/react";
 import React from "react";
 
+interface Props {
+  chipDetails: { name: string; selected: boolean }[];
+  setChipDetails: React.Dispatch<
+    React.SetStateAction<{ name: string; selected: boolean }[]>
+  >;
+}
+
 export const chipData = [
   { name: "music", selected: false },
   { name: "news", selected: false },
@@ -17,12 +24,6 @@ export const chipData = [
   { name: "tech", selected: false },
 ];
 
-interface Props {
-  chipDetails: { name: string; selected: boolean }[];
-  setChipDetails: React.Dispatch<
-    React.SetStateAction<{ name: string; selected: boolean }[]>
-  >;
-}
 export default function Chip(props: Props) {
   const theme = useTheme();
 
