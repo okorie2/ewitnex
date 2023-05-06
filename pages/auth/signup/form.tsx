@@ -11,8 +11,8 @@ import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
 import { theme } from "styles/theme";
 import { Box } from "@mui/material";
 
-import GenderType from "./components/selectGender";
-import Chip, { chipData } from "./components/chip";
+import GenderType from "@/components/signupComponents/selectGender";
+import Chip, { chipData } from "@/components/signupComponents/chip";
 import { useRouter } from "next/router";
 
 type ISignupFormLevels =
@@ -27,6 +27,7 @@ interface FormLevelProps {
   formLevel: ISignupFormLevels;
   setFormLevel: React.Dispatch<React.SetStateAction<ISignupFormLevels>>;
 }
+
 export default function Form() {
   const [formLevel, setFormLevel] =
     React.useState<ISignupFormLevels>("whoYouAre");
