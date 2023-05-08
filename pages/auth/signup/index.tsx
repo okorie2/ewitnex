@@ -93,25 +93,6 @@ export default function Signup() {
 
         <div css={{ width: "100%" }}>
           <div css={{ width: "45%", margin: "auto" }}>
-            <div css={{ margin: "3rem 0", cursor: "pointer" }}>
-              <Image
-                src="/assets/svgs/back.svg"
-                alt="back_arrow"
-                width={22}
-                height={15}
-              />
-            </div>
-            <div
-              css={{
-                fontFamily: "'Nunito', sans-serif",
-                fontSize: "1.5rem",
-                marginBottom: "4.3rem",
-                fontWeight: 600,
-              }}
-            >
-              <p>Lets Know</p>
-              <p>Who You Are</p>
-            </div>
             <Form />
           </div>
         </div>

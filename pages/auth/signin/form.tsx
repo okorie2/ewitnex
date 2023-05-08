@@ -1,22 +1,40 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
-import BasicTextField from "@/components/inputs/BasicTextField";
+import React, { useState } from "react";
+import BasicTextField, {
+  PasswordTextField,
+} from "@/components/inputs/BasicTextField";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
 import { theme } from "styles/theme";
 
 export default function Form() {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
   return (
     <>
       <div>
         <form>
           <div css={{ marginBottom: "2.4rem" }}>
-            <BasicTextField label="Email, Username Or Phone" type="text" />
+            <BasicTextField
+              label="Email, Username Or Phone"
+              value={values.email}
+              setValue={handleChange}
+            />
           </div>
           <div css={{ marginBottom: "1.2rem" }}>
-            <BasicTextField label="Password" type="password" />
+            <PasswordTextField
+              label="Password"
+              value={values.password}
+              setValue={handleChange}
+            />
           </div>
           <div
             css={{
