@@ -19,6 +19,7 @@ const customStyles = {
     top: "0",
     border: "none",
     backgroundColor: theme.background.black,
+    fontFamily: "'Nunito', sans-serif",
   },
 };
 

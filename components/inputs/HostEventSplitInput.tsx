@@ -5,7 +5,13 @@ import Image from "next/image";
 
 interface IHostEventTimeDate {
   label: string;
-  placeholder: string;
+  placeholder1: string;
+  placeholder2: string;
+  image1?: string;
+  image2?: string;
+  type?: string;
+  input2: boolean;
+  text2?: string;
 }
 const HostEventTimeDate = (props: IHostEventTimeDate) => {
   return (
@@ -44,18 +50,17 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
           }}
         >
           <input
-            type="text"
-            placeholder={`${props.placeholder} Date`}
+            type={`${props.type}? ${props.type} : "text"`}
+            placeholder={props.placeholder1}
             css={{
               border: "none",
             }}
           />
-          <Image
-            src="/assets/svgs/calender2.svg"
-            alt=""
-            width={11.74}
-            height={13.04}
-          />
+          <div>
+            {props.image1 && (
+              <Image src={props.image1} alt="" width={11.74} height={13.04} />
+            )}
+          </div>
         </div>
 
         <div
@@ -68,19 +73,30 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
             justifyContent: "space-between",
           }}
         >
-          <input
-            type="text"
-            placeholder={`${props.placeholder} Time`}
-            css={{
-              border: "none",
-            }}
-          />
-          <Image
-            src="/assets/svgs/time.svg"
-            alt=""
-            width={17.83}
-            height={17.83}
-          />
+          {props.input2 && (
+            <>
+              <input
+                type={`${props.type}? ${props.type} : "text"`}
+                placeholder={props.placeholder2}
+                css={{
+                  border: "none",
+                }}
+              />
+              {props.image2 && (
+                <Image src={props.image2} alt="" width={17.83} height={17.83} />
+              )}
+            </>
+          )}
+          {props.text2 && (
+            <>
+              <p css={{ fontWeight: "bold", color: theme.common.black }}>
+                {props.placeholder2}
+              </p>
+              <p css={{ fontWeight: "500", color: theme.common.black }}>
+                {props.text2}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

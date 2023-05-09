@@ -11,7 +11,11 @@ interface ISpeaker {
 
 const Speaker = (props: ISpeaker) => {
   return (
-    <div>
+    <div
+      css={{
+        fontFamily: "'Nunito', sans-serif",
+      }}
+    >
       <div
         css={{
           width: "177px",

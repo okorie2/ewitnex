@@ -45,7 +45,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               css={{
                 listStyleType: "none",
                 display: "grid",
-                gap: "1.5rem",
+                gap: "2rem",
                 width: "60%",
                 marginInline: "auto",
               }}
@@ -53,7 +53,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <li>
                 <Link
                   href="/dashboard"
-                  css={{ display: "flex", gap: "0.5rem" }}
+                  css={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
                 >
                   <Image
                     src="/assets/svgs/home.svg"
@@ -66,7 +66,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               </li>
               <li>
                 <Link
-                  href="/dashboard"
+                  href="/dashboard/programs"
                   css={{ display: "flex", gap: "0.5rem" }}
                 >
                   <Image
@@ -123,7 +123,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{
                     listStyleType: "none",
                     display: "grid",
-                    gap: "1.5rem",
+                    gap: "2rem",
                     marginBlock: "1.5rem",
                     width: "60%",
                     marginInline: "auto",

@@ -2,7 +2,6 @@
 
 import React from "react";
 import HostEventLayout from "./layout";
-import { ButtonFormFilled } from "styles/components/button";
 import Link from "next/link";
 import { screen, theme } from "styles/theme";
 import Image from "next/image";
@@ -47,7 +46,8 @@ const FileUpload = () => {
               >
                 Preview
               </p>
-              <p
+              <Link
+                href="/dashboard"
                 css={{
                   color: theme.color.negative,
                   fontWeight: "bold",
@@ -55,7 +55,7 @@ const FileUpload = () => {
                 }}
               >
                 Cancel
-              </p>
+              </Link>
             </div>
           </div>
         </div>
@@ -254,6 +254,7 @@ const FileUpload = () => {
                 css={{
                   fontSize: "1rem",
                   fontWeight: "bold",
+                  fontFamily: "'Nunito', sans-serif",
                   color: theme.color.primary,
                   border: `1px solid ${theme.color.primary}`,
                   height: "52px",
@@ -268,7 +269,23 @@ const FileUpload = () => {
               </button>
             </Link>
             <Link href="/dashboard/hostEvent/eventLocation">
-              <ButtonFormFilled>SAVE & CONTINUE</ButtonFormFilled>
+              <button
+                css={{
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  fontFamily: "'Nunito', sans-serif",
+                  color: theme.common.white,
+                  border: `1px solid ${theme.color.primary}`,
+                  height: "52px",
+                  marginBottom: "0.5rem",
+                  background: theme.color.primary,
+                  borderRadius: "26px",
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+              >
+                SAVE & CONTINUE
+              </button>
             </Link>
           </div>
         </div>
