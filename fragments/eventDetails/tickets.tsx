@@ -4,8 +4,11 @@ import React from "react";
 import EventTicket from "@/components/tickets/eventTicket";
 import { H3 } from "styles/components/typography";
 import { screen, theme } from "styles/theme";
+import { useRouter } from "next/router";
 
 const EventTickets = () => {
+  const router = useRouter();
+  const loggedIn = router.pathname === "/dashboard/programs/[id]";
   return (
     <div
       css={{
@@ -13,7 +16,7 @@ const EventTickets = () => {
         color: theme.common.black,
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
-        width: "60%",
+        width: `${loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
         top: "3.5rem",

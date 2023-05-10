@@ -5,7 +5,7 @@ import { useTheme } from "@emotion/react";
 import Image from "next/image";
 import Filter from "public/assets/svgs/filter.svg";
 import Down from "public/assets/svgs/down_ar.svg";
-import DashboardLayout from "./layout";
+import DashboardLayout from "../layout";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import EventCard from "@/components/cards/eventCard";
 import { screen } from "styles/theme";

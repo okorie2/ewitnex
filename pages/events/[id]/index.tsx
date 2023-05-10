@@ -43,6 +43,7 @@ const SingleEvent = () => {
             left: "20%",
             backgroundColor: theme.common.white,
             listStyleType: "none",
+            fontFamily: "'Open Sans', sans-serif",
           }}
         >
           {eventNav.map((navItem) => (
@@ -81,6 +82,8 @@ const TabNav: React.FC<{
             : theme.background.secondary2,
           color: isActive ? theme.common.white : theme.color.grey,
           cursor: "pointer",
+          fontSize: "0.875rem",
+          fontWeight: "500",
         }}
       >
         {tab}
