@@ -9,7 +9,7 @@ import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
 import Link from "next/link";
 
-const index = () => {
+const Feeds = () => {
   return (
     <DashboardLayout>
       <div
@@ -198,4 +198,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Feeds;

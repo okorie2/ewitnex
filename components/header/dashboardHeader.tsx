@@ -14,18 +14,20 @@ const DashboardHeader = () => {
         display: "grid",
         gridTemplateColumns: "2fr 1fr",
         alignItems: "center",
+        paddingInline: "1.5rem",
+        gap: "3.5rem",
       }}
     >
       <div
         css={{
           borderRadius: "66px",
           backgroundColor: theme.background.secondary,
-          width: "80%",
+          width: "100%",
           marginInline: "auto",
           height: "2.625rem",
           display: "flex",
           alignItems: "center",
-          paddingLeft: "17px",
+          paddingLeft: "1rem",
           gap: "2%",
         }}
       >

@@ -94,7 +94,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               </li>
               <li>
                 <Link
-                  href="/dashboard"
+                  href="/dashboard/profile"
                   css={{ display: "flex", gap: "0.5rem" }}
                 >
                   <Image
@@ -243,7 +243,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             }}
             onClick={handleToggle}
           >
-            <Image src="/assets/svgs/user.svg" alt="" width={20} height={20} />
+            <Image
+              src="/assets/svgs/hamburger.svg"
+              alt=""
+              width={20}
+              height={20}
+            />
             <p>More</p>
           </div>
         </div>
