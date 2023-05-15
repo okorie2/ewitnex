@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import Image from "next/image";
 import React, { ReactNode } from "react";
-import { screen, theme } from "styles/theme";
+import { theme } from "styles/theme";
 
 const HostEventLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -41,24 +42,49 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
               fontWeight: "300",
             }}
           >
-            <li>
-              <div></div>
+            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <Image
+                src="/assets/svgs/tick-circle-purple.svg"
+                alt=""
+                width={25}
+                height={25}
+              />
               Event Program Info
             </li>
-            <li>
-              <div></div>
+            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <Image
+                src="/assets/svgs/tick-circle-grey.svg"
+                alt=""
+                width={25}
+                height={25}
+              />
               Files Upload
             </li>
-            <li>
-              <div></div>
+            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <Image
+                src="/assets/svgs/tick-circle-grey.svg"
+                alt=""
+                width={25}
+                height={25}
+              />
               Location, Date and Time
             </li>
-            <li>
-              <div></div>
+            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <Image
+                src="/assets/svgs/tick-circle-grey.svg"
+                alt=""
+                width={25}
+                height={25}
+              />
               Speakers
             </li>
-            <li>
-              <div></div>
+            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <Image
+                src="/assets/svgs/tick-circle-grey.svg"
+                alt=""
+                width={25}
+                height={25}
+              />
               Tickets
             </li>
           </ul>

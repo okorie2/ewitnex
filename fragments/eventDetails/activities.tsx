@@ -3,16 +3,19 @@
 import React from "react";
 import Image from "next/image";
 import { theme } from "styles/theme";
+import { useRouter } from "next/router";
 
 const EventActivities = () => {
+  const router = useRouter();
+  const loggedIn = router.pathname === "/dashboard/programs/[id]";
   return (
     <div
       css={{
-        boxShadow: `0px 0px 10px ${theme.shadow.border4}`,
+        // boxShadow: `0px 0px 10px ${theme.shadow.border4}`,
         color: theme.common.black,
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
-        width: "60%",
+        width: `${loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
         top: "3.5rem",

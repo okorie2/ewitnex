@@ -2,8 +2,11 @@
 import React from "react";
 import { theme } from "styles/theme";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const EventSpeakers = () => {
+  const router = useRouter();
+  const loggedIn = router.pathname === "/dashboard/programs/[id]";
   return (
     <div
       css={{
@@ -11,11 +14,11 @@ const EventSpeakers = () => {
         color: theme.common.black,
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
-        width: "60%",
+        width: `${loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
         top: "3.5rem",
-        maxHeight: "60vh",
+        height: `${loggedIn ? "70vh" : "60vh"}`,
         overflowY: "scroll",
         "&::-webkit-scrollbar": {
           display: "none",
@@ -60,14 +63,22 @@ const EventSpeakers = () => {
           sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
           dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
           et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-          amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-          invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-          kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-          amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-          diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-          erat, sed diam voluptua. At vero eos et accusam et justo
+          takimata sanctus est Lorem ipsum dolor sit amet.
+        </p>
+        <p
+          css={{
+            lineHeight: "21px",
+            fontSize: "0.875rem",
+          }}
+        >
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+          et justo
         </p>
       </div>
       <hr

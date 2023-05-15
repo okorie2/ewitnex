@@ -9,7 +9,7 @@ import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
 import Link from "next/link";
 
-const index = () => {
+const Feeds = () => {
   return (
     <DashboardLayout>
       <div
@@ -17,16 +17,22 @@ const index = () => {
           display: "grid",
           gridTemplateColumns: "2.7fr 1.3fr",
           height: "100%",
+          maxHeight: "100vh",
         }}
       >
-        <div css={{ borderRight: `1px solid ${theme.shadow.border}` }}>
+        <div
+          css={{
+            borderRight: `1px solid ${theme.shadow.border}`,
+            height: "100%",
+          }}
+        >
           <DashboardHeader />
           <div
             css={{
               color: theme.common.black,
               display: "grid",
               placeContent: "center",
-              height: "100%",
+              height: "calc(100% - 80px)",
             }}
           >
             <div
@@ -192,4 +198,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Feeds;

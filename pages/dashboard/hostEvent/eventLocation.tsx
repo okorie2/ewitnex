@@ -2,11 +2,11 @@
 
 import React from "react";
 import HostEventLayout from "./layout";
-import { ButtonFormFilled } from "styles/components/button";
 import Link from "next/link";
 import { screen, theme } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import HostEventTimeDate from "@/components/inputs/HostEventTimeDate";
+import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
+import Image from "next/image";
 
 const EventLocation = () => {
   return (
@@ -62,7 +62,8 @@ const EventLocation = () => {
               >
                 Preview
               </p>
-              <p
+              <Link
+                href="/dashboard"
                 css={{
                   color: theme.color.negative,
                   fontWeight: "bold",
@@ -70,7 +71,7 @@ const EventLocation = () => {
                 }}
               >
                 Cancel
-              </p>
+              </Link>
             </div>
           </div>
         </div>
@@ -158,8 +159,22 @@ const EventLocation = () => {
               },
             }}
           >
-            <HostEventTimeDate label="Start At" placeholder="Start" />
-            <HostEventTimeDate label="End At" placeholder="End" />
+            <HostEventSplitInput
+              label="Start At"
+              placeholder1="Start Date"
+              placeholder2="Start Time"
+              image1="/assets/svgs/calender2.svg"
+              image2="/assets/svgs/time.svg"
+              input2={true}
+            />
+            <HostEventSplitInput
+              label="End At"
+              placeholder1="End Date"
+              placeholder2="End Time"
+              image1="/assets/svgs/calender2.svg"
+              image2="/assets/svgs/time.svg"
+              input2={true}
+            />
           </div>
           <div css={{ display: "flex", alignItems: "center" }}>
             <input
@@ -191,7 +206,22 @@ const EventLocation = () => {
               background: theme.common.white,
             }}
           >
-            Enter location manually
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <Image
+                src="/assets/svgs/calendar-purple.svg"
+                alt=""
+                width={11}
+                height={13}
+              />
+              <p>Enter location manually</p>
+            </div>
           </button>
           <div
             css={{
@@ -208,6 +238,7 @@ const EventLocation = () => {
                 css={{
                   fontSize: "1rem",
                   fontWeight: "bold",
+                  fontFamily: "'Nunito', sans-serif",
                   color: theme.color.primary,
                   border: `1px solid ${theme.color.primary}`,
                   height: "52px",
@@ -222,7 +253,23 @@ const EventLocation = () => {
               </button>
             </Link>
             <Link href="/dashboard/hostEvent/speakers">
-              <ButtonFormFilled>SAVE & CONTINUE</ButtonFormFilled>
+              <button
+                css={{
+                  fontSize: "1rem",
+                  fontWeight: "bold",
+                  fontFamily: "'Nunito', sans-serif",
+                  color: theme.common.white,
+                  border: `1px solid ${theme.color.primary}`,
+                  height: "52px",
+                  marginBottom: "0.5rem",
+                  background: theme.color.primary,
+                  borderRadius: "26px",
+                  width: "100%",
+                  cursor: "pointer",
+                }}
+              >
+                SAVE & CONTINUE
+              </button>
             </Link>
           </div>
         </form>

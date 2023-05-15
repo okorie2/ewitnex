@@ -3,8 +3,13 @@ import React from "react";
 import { theme } from "styles/theme";
 import Link from "next/link";
 import EventMessage from "@/components/messages/eventMessage";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 const EventMessages = () => {
+  const router = useRouter();
+  const loggedIn = router.pathname === "/dashboard/programs/[id]";
+
   return (
     <div
       css={{
@@ -12,11 +17,11 @@ const EventMessages = () => {
         color: theme.common.black,
         borderRadius: "10px",
         padding: "1rem 0",
-        width: "60%",
+        width: `${loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
         top: "3.5rem",
-        height: "60vh",
+        height: `${loggedIn ? "70vh" : "60vh"}`,
       }}
     >
       <div
@@ -83,24 +88,68 @@ const EventMessages = () => {
         }}
       />
       <div css={{ paddingInline: "1.25rem" }}>
-        <button
-          type="button"
-          css={{
-            border: `1px solid ${theme.color.tertiary}`,
-            color: theme.common.white,
-            borderRadius: "56px",
-            padding: "0.75rem",
-            backgroundColor: theme.background.tertiary2,
-            width: "100%",
-            height: "48px",
-            fontSize: "0.875rem",
-          }}
-        >
-          <Link href="" css={{ color: theme.color.lightGreen }}>
-            Sign in
-          </Link>{" "}
-          to your account to join in the conversation
-        </button>
+        {loggedIn && (
+          <div
+            css={{
+              display: "flex",
+              gap: "1.25rem",
+              marginLeft: "auto",
+              width: "93%",
+            }}
+          >
+            <input
+              type="text"
+              css={{
+                border: `1px solid ${theme.background.grey2}`,
+                color: theme.common.black,
+                borderRadius: "56px",
+                padding: "0.75rem",
+                backgroundColor: theme.background.grey2,
+                height: "48px",
+                width: "100%",
+                fontSize: "0.875rem",
+              }}
+            />
+            <div
+              css={{
+                backgroundColor: theme.background.primary,
+                width: "3rem",
+                heigth: "3rem",
+                borderRadius: "50%",
+                display: "grid",
+                placeContent: "center",
+                cursor: "pointer",
+              }}
+            >
+              <Image
+                src="/assets/svgs/paper-plane.svg"
+                alt=""
+                width={22.83}
+                height={21.88}
+              />
+            </div>
+          </div>
+        )}
+        {!loggedIn && (
+          <button
+            type="button"
+            css={{
+              border: `1px solid ${theme.color.tertiary}`,
+              color: theme.common.white,
+              borderRadius: "56px",
+              padding: "0.75rem",
+              backgroundColor: theme.background.tertiary2,
+              width: "100%",
+              height: "48px",
+              fontSize: "0.875rem",
+            }}
+          >
+            <Link href="/auth/signin" css={{ color: theme.color.lightGreen }}>
+              Sign in
+            </Link>
+            <span> to your account to join in the conversation</span>
+          </button>
+        )}
       </div>
     </div>
   );

@@ -5,15 +5,18 @@ import RSVPCard from "@/components/cards/RSVPCard";
 import { H3 } from "styles/components/typography";
 import { screen, theme } from "styles/theme";
 import { ButtonFormFilled } from "styles/components/button";
+import { useRouter } from "next/router";
 
 const RSVP = () => {
+  const router = useRouter();
+  const loggedIn = router.pathname === "/dashboard/programs/[id]";
   return (
     <div
       css={{
         boxShadow: " 0px 0px 10px #0000001A",
         borderRadius: "10px",
         padding: "2rem 2.5rem",
-        width: "60%",
+        width: `${loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
         top: "3.5rem",

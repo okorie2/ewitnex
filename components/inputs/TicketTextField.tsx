@@ -35,7 +35,7 @@ const TicketTextField = (props: ITicketTextField) => {
           borderRadius: "10px",
           padding: "1.2rem 0.5rem 0.8rem",
           fontSize: "1rem",
-          fontWeight: "500",
+          fontWeight: "bold",
         }}
       />
     </div>

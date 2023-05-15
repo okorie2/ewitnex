@@ -54,7 +54,7 @@ const HostEventTextField = (props: IHostEventTextField) => {
             borderRadius: "10px",
             fontSize: "14px",
             fontFamily: "'Poppins', sans-serif",
-            color: theme.color.grey,
+            color: theme.common.black,
           }}
         >
           <option>{props.placeholder}</option>

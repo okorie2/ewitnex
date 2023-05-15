@@ -46,7 +46,8 @@ const HostEvent = () => {
               >
                 Preview
               </p>
-              <p
+              <Link
+                href="/dashboard"
                 css={{
                   color: theme.color.negative,
                   fontWeight: "bold",
@@ -54,7 +55,7 @@ const HostEvent = () => {
                 }}
               >
                 Cancel
-              </p>
+              </Link>
             </div>
           </div>
         </div>
