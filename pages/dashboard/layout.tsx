@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         css={{
           paddingBlock: "0 2rem",
           borderRight: `1px solid ${theme.shadow.border}`,
-          fontSize: "1rem",
+          fontSize: "1.125rem",
           fontWeight: "bold",
         }}
       >
@@ -131,7 +131,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 >
                   <li>
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/manager"
                       css={{ display: "flex", gap: "0.5rem" }}
                     >
                       <Image
@@ -145,7 +145,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </li>
                   <li>
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/tickets"
                       css={{ display: "flex", gap: "0.5rem" }}
                     >
                       <Image

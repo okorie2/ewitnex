@@ -2,6 +2,10 @@
 import React from "react";
 import { theme } from "styles/theme";
 import Image from "next/image";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+
+import TooltipComp from "../tooltip";
 
 interface IHostEventTextField {
   label: string;
@@ -26,6 +30,7 @@ const HostEventTextField = (props: IHostEventTextField) => {
           <Image src={props.image} alt="" width={14.02} height={14.02} />
         )}
       </label>
+
       {props.type === "text" && (
         <input
           type={props.type}

@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import { theme } from "styles/theme";
 
 const HostEventLayout = ({ children }: { children: ReactNode }) => {
+  const router = useRouter();
   return (
     <div
       css={{
@@ -38,55 +40,41 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
               display: "grid",
               gap: "1rem",
               listStyleType: "none",
-              color: theme.color.grey,
               fontWeight: "300",
             }}
           >
-            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <Image
-                src="/assets/svgs/tick-circle-purple.svg"
-                alt=""
-                width={25}
-                height={25}
-              />
-              Event Program Info
-            </li>
-            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <Image
-                src="/assets/svgs/tick-circle-grey.svg"
-                alt=""
-                width={25}
-                height={25}
-              />
-              Files Upload
-            </li>
-            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <Image
-                src="/assets/svgs/tick-circle-grey.svg"
-                alt=""
-                width={25}
-                height={25}
-              />
-              Location, Date and Time
-            </li>
-            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <Image
-                src="/assets/svgs/tick-circle-grey.svg"
-                alt=""
-                width={25}
-                height={25}
-              />
-              Speakers
-            </li>
-            <li css={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-              <Image
-                src="/assets/svgs/tick-circle-grey.svg"
-                alt=""
-                width={25}
-                height={25}
-              />
-              Tickets
-            </li>
+            {hostEventTabs.map((item) => (
+              <li
+                css={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.6rem",
+                  color:
+                    router.asPath === item.href
+                      ? theme.color.primary
+                      : theme.color.grey,
+                }}
+                key={item.name}
+              >
+                {router.asPath === item.href ? (
+                  <Image
+                    src="/assets/svgs/tick-circle-purple.svg"
+                    alt=""
+                    width={25}
+                    height={25}
+                  />
+                ) : (
+                  <Image
+                    src="/assets/svgs/tick-circle-grey.svg"
+                    alt=""
+                    width={25}
+                    height={25}
+                  />
+                )}
+
+                {item.name}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -96,3 +84,14 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
 };
 
 export default HostEventLayout;
+
+const hostEventTabs = [
+  { name: "Event Program Info", href: "/dashboard/hostEvent" },
+  { name: "Files Upload", href: "/dashboard/hostEvent/fileUpload" },
+  {
+    name: "Location, Date and Time",
+    href: "/dashboard/hostEvent/eventLocation",
+  },
+  { name: "Speakers", href: "/dashboard/hostEvent/speakers" },
+  { name: "Tickets", href: "/dashboard/hostEvent/tickets" },
+];

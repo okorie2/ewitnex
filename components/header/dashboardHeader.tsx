@@ -55,7 +55,7 @@ const DashboardHeader = () => {
           }}
         />
       </div>
-      <Link href="dashboard/hostEvent">
+      <Link href="/dashboard/hostEvent">
         <div css={{ display: "flex", gap: "1rem", alignItems: "center" }}>
           <div
             css={{
