@@ -7,30 +7,10 @@ import { theme } from "styles/theme";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import ProfileFollowing from "fragments/profile/following";
 import ProfileFollowers from "fragments/profile/followers";
-
-const inactiveButtonStyle = {
-  width: "50%",
-  height: "100%",
-  borderRadius: "66px",
-  border: "none",
-  backgroundColor: theme.background.secondary2,
-  color: theme.color.grey,
-  fontSize: "0.875rem",
-  fontWeight: "500",
-  cursor: "pointer",
-};
-
-const activeButtonStyle = {
-  width: "50%",
-  height: "100%",
-  borderRadius: "66px",
-  border: "none",
-  backgroundColor: theme.background.lightGreen,
-  color: theme.common.white,
-  fontSize: "0.875rem",
-  fontWeight: "500",
-  cursor: "pointer",
-};
+import {
+  activeButtonStyle,
+  inactiveButtonStyle,
+} from "styles/components/ButtonToggleStyles";
 
 const Profile = () => {
   const [showFollowing, setShowFollowing] = useState(false);

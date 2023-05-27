@@ -6,7 +6,6 @@ import Link from "next/link";
 import { screen, theme } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
-import Speaker from "@/components/cards/speaker";
 import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
 import HostEventModal from "@/components/modals/hostEventModal";
 
@@ -15,6 +14,7 @@ const HostEventTickets = () => {
   const handleModalClose = () => {
     setIsOpen(false);
   };
+
   return (
     <>
       <HostEventLayout>

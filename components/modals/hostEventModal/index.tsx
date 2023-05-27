@@ -120,7 +120,7 @@ const HostEventModal = (props: IHostEventModal) => {
             </div>
             <div
               css={{
-                width: "90%",
+                width: "95%",
                 margin: " 1rem auto",
                 display: "grid",
                 gap: "0.5rem",
@@ -144,7 +144,7 @@ const HostEventModal = (props: IHostEventModal) => {
               <div>
                 <h4
                   css={{
-                    width: "58%",
+                    width: "53%",
                     marginInline: "auto",
                   }}
                 >
@@ -158,19 +158,28 @@ const HostEventModal = (props: IHostEventModal) => {
                 <p css={{ fontSize: "0.875rem", fontWeight: "500" }}>
                   Invite Link
                 </p>
-                <p
+                <div
                   css={{
                     fontSize: "0.875rem",
                     backgroundColor: theme.background.secondary,
                     borderRadius: "5px",
                     width: "fit-content",
-                    marginInline: "auto",
-                    paddingInline: "0.5rem",
+                    paddingInline: "0.3rem",
                     marginTop: "0.2rem",
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto",
+                    alignItems: "center",
+                    gap: "0.5rem",
                   }}
                 >
-                  https:ewitnex.com/devfest-aba-id-tec542445
-                </p>
+                  <p>https:ewitnex.com/devfest-aba-id-tec542445</p>
+                  <Image
+                    src="/assets/svgs/copy2.svg"
+                    alt=""
+                    width={11.13}
+                    height={12.6}
+                  />
+                </div>
               </div>
               <div>
                 <p
@@ -181,7 +190,7 @@ const HostEventModal = (props: IHostEventModal) => {
                 >
                   Event ID
                 </p>
-                <p
+                <div
                   css={{
                     fontSize: "0.875rem",
                     backgroundColor: theme.background.secondary,
@@ -190,10 +199,20 @@ const HostEventModal = (props: IHostEventModal) => {
                     marginInline: "auto",
                     paddingInline: "0.5rem",
                     marginTop: "0.2rem",
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto",
+                    alignItems: "center",
+                    gap: "0.5rem",
                   }}
                 >
-                  tec542445
-                </p>
+                  <p>tec542445</p>
+                  <Image
+                    src="/assets/svgs/copy2.svg"
+                    alt=""
+                    width={11.13}
+                    height={12.6}
+                  />
+                </div>
               </div>
             </div>
             <div
@@ -227,7 +246,7 @@ const HostEventModal = (props: IHostEventModal) => {
             </div>
             <div css={{ marginTop: "2rem" }}>
               <Link
-                href=""
+                href={`/dashboard/programs/Heal12548`}
                 css={{
                   fontSize: "1.125rem",
                   color: theme.color.primary,
