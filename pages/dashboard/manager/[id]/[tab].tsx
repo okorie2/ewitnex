@@ -9,6 +9,9 @@ import EventSpeakers from "fragments/eventDetails/speakers";
 import EventTickets from "fragments/eventDetails/tickets";
 import { useRouter } from "next/router";
 import EventOverview from "fragments/manageEvents/overview";
+import TicketSales from "fragments/manageEvents/ticketSales";
+import Attendees from "fragments/manageEvents/attendees";
+
 
 const ManageEventTab = () => {
   const router = useRouter();
@@ -17,8 +20,8 @@ const ManageEventTab = () => {
 
   const stateEvents = useMemo(() => {
     if (activeTab === "Overview") return <EventOverview />;
-    else if (activeTab === "TicketSales") return <EventActivities />;
-    else if (activeTab === "Attendees") return <EventMessages />;
+    else if (activeTab === "TicketSales") return <TicketSales />;
+    else if (activeTab === "Attendees") return <Attendees />;
   }, [activeTab]);
 
   return (

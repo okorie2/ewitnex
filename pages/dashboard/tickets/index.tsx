@@ -6,6 +6,9 @@ import {
   activeButtonStyle,
   inactiveButtonStyle,
 } from "styles/components/ButtonToggleStyles";
+import TicketCard from "@/components/cards/ticketCard";
+import Ticket from "@/components/tickets/Ticket";
+import Image from "next/image";
 
 const Tickets = () => {
   const [showUpcoming, setShowUpcoming] = useState(true);
@@ -60,6 +63,7 @@ const Tickets = () => {
                 backgroundColor: theme.background.secondary2,
                 width: "100%",
                 marginInline: "auto",
+                marginBottom: "1rem",
                 height: "2.5rem",
                 display: "flex",
                 alignItems: "center",
@@ -85,7 +89,11 @@ const Tickets = () => {
                 Past Tickets
               </button>
             </div>
-            <div></div>
+            {activeTab === "past" ? (
+              <PreviousTicketTab />
+            ) : (
+              <UpcomingTicketTab />
+            )}
           </div>
         </div>
         <div
@@ -98,23 +106,27 @@ const Tickets = () => {
               height: "80px",
               borderBottom: `1px solid ${theme.shadow.border}`,
               display: "grid",
+              gridTemplateColumns:"1fr auto",
               alignItems: "center",
               paddingInline: "1.5rem",
+              paddingRight: "2.5rem",
               color: theme.common.black,
             }}
           >
             <h2>DevFest Aba</h2>
+            <Image  src={"/assets/svgs/ellipse.svg"} alt={""} width={20} height= {20}/>
           </div>
           <div
             css={{
               height: "calc(100vh - 80px)",
+              padding: "1.5rem",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
                 display: "none",
               },
             }}
           >
-            tickets
+            <Ticket />
           </div>
         </div>
       </div>
@@ -123,3 +135,50 @@ const Tickets = () => {
 };
 
 export default Tickets;
+
+const UpcomingTicketTab = () => {
+  return (
+    <div>
+      <TicketCard
+        image="/assets/pngs/devFestAba.png"
+        title="DevFest Aba"
+        time=" 10:00 AM"
+        day="Sat"
+        date="25"
+        month="NOV"
+        type="Tech"
+        address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
+        id="Tec542445"
+      />
+      <TicketCard
+        image="/assets/pngs/devFestAba.png"
+        title="DevFest Aba"
+        time=" 10:00 AM"
+        day="Sat"
+        date="25"
+        month="NOV"
+        type="Tech"
+        address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
+        id="Tec542445"
+      />
+    </div>
+  );
+};
+
+const PreviousTicketTab = () => {
+  return (
+    <div>
+      <TicketCard
+        image="/assets/pngs/devFestAba.png"
+        title="DevFest Aba"
+        time=" 10:00 AM"
+        day="Sat"
+        date="25"
+        month="NOV"
+        type="Tech"
+        address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
+        id="Tec542445"
+      />
+    </div>
+  );
+};
