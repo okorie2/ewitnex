@@ -6,9 +6,10 @@ import DashboardLayout from "../layout";
 import { theme } from "styles/theme";
 import SettingsCard from "@/components/cards/settingsCard";
 import SettingsTab from "./[tab]";
-import router from "next/router";
+import {useRouter} from "next/router";
 
 const Settings = () => {
+  const router = useRouter()
   const activeTab = router.query.tab || "personalnformation";
   
   return (
