@@ -28,7 +28,7 @@ const TicketCard = (props: IManageEvent) => {
     }else{
       setIsActive(false);
     }
-  },[props.active])
+  },[props.active, props.id])
 
   return (
       <div
