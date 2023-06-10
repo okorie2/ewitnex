@@ -31,7 +31,8 @@ export const theme: Theme = {
     grey: "#AEAEAE",
     grey2: "#E4E4E4",
     lightGreen: "#00D9B7",
-    blue:"#548AF9"
+    blue:"#548AF9",
+    tableBlack: "#393939"
   },
   background: {
     primary: "#7C35AB",

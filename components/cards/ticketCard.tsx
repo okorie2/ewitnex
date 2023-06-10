@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { theme } from "styles/theme";
 import Image from "next/image";
@@ -15,23 +15,37 @@ interface IManageEvent {
   type: string;
   address: string;
   id: string;
+  active: string
+  onClick: (id:string) => void;
 }
 
 const TicketCard = (props: IManageEvent) => {
+  const [isActive, setIsActive] = useState(false)
+
+  useEffect(() => {
+    if(props.id === props.active) {
+      setIsActive(true);
+    }else{
+      setIsActive(false);
+    }
+  },[props.active])
+
   return (
-    <Link href={`/dashboard/manager/${props.id}?tab=Overview`}>
       <div
         css={{
           width: "100%",
           height: "140px",
-          border: `1px solid ${theme.shadow.border2}`,
+          border: isActive ? `0.5px soild ${theme.color.lightGreen}` :`1px solid ${theme.shadow.border2}`,
           borderRadius: "20px",
           display: "grid",
           gridTemplateColumns: "1fr auto",
           alignItems: "center",
           gap: "1.5rem",
-          marginBlock: "1rem"
+          cursor: "pointer",
+          marginBlock: "1.2rem",
+          boxShadow: isActive ? `0px 1px 10px #0000002E;`: ``
         }}
+        onClick={() => props.onClick(props.id)}
       >
         <div css={{ display: "grid", gridTemplateColumns: "25% 75%" }}>
           <div
@@ -94,7 +108,6 @@ const TicketCard = (props: IManageEvent) => {
           />
         </div>
       </div>
-    </Link>
   );
 };
 

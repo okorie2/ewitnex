@@ -3,6 +3,7 @@
 import React from "react";
 import { theme, screen } from "styles/theme";
 import Image from "next/image";
+import OverviewChart from "@/components/charts/overviewChart";
 
 const EventOverview = () => {
   return (
@@ -282,7 +283,105 @@ const EventOverview = () => {
               marginBlock: "1rem",
             }}
           >
-            <Image src="/assets/pngs/chart.png" alt="" fill />
+            {/* <Image src="/assets/pngs/chart.png" alt="" fill /> */}
+            <div css = {{
+              // border: `1px solid ${theme.shadow.border2}`,
+              boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
+              padding: "1rem",
+            }}>
+              <div css={{ display: "flex", gap: "2%", marginBottom: "2rem" }}>
+                <div>
+                  <div
+                    css={{
+                      fontSize: "14px",
+                      color: theme.color.grey,
+                      fontWeight: "550",
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "1%",
+                    }}
+                  >
+                    <div
+                      css={{
+                        height: "5px",
+                        width: "25px",
+                        borderRadius: "15px",
+                        background: theme.color.lightGreen,
+                        marginRight: "0.5rem",
+                      }}
+                    ></div>
+                    <p>Sold</p>
+                  </div>
+                  <p css={{ fontWeight: "bold" }}>N254,000</p>
+                </div>
+                <div>
+                  <div
+                    css={{
+                      fontSize: "14px",
+                      color: theme.color.grey,
+                      fontWeight: "550",
+                      display: "flex",
+                      alignItems: "center",
+                      marginBottom: "1%",
+                    }}
+                  >
+                    <div
+                      css={{
+                        height: "5px",
+                        width: "25px",
+                        borderRadius: "15px",
+                        background: theme.color.negative,
+                        marginRight: "0.5rem",
+                      }}
+                    ></div>
+                    <p>Refunded</p>
+                  </div>
+                  <p css={{ fontWeight: "bold" }}>N54,000</p>
+                </div>
+                <div>
+                  <div
+                    css={{
+                      fontSize: "14px",
+                      color: theme.color.grey,
+                      fontWeight: "550",
+                    }}
+                  >
+                    Net Amount
+                  </div>
+                  <p css={{ fontWeight: "bold" }}>N200,000</p>
+                </div>
+              </div>
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateColumns: "80% 20%",
+                  paddingInline: "4%",
+                }}
+              >
+                <OverviewChart />
+                <div
+                  css={{
+                    padding: "10%",
+                    fontWeight: "600",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1%",
+                    color: theme.common.black,
+                  }}
+                >
+                  <p>VIP: 10/25</p>
+                  <p>Regular: 30/60</p>
+                  <p>Table of 5: 3/15</p>
+
+                  <div css={{ marginTop: "2rem" }}>
+                    <p css={{ color: theme.color.grey, fontSize: "13px" }}>
+                      Total Tickets Sold
+                    </p>
+                    <p css={{ fontWeight: "bold" }}>48/100</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
