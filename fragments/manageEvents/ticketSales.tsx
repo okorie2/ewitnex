@@ -42,12 +42,18 @@ const TicketSales = () => {
             />
           ))}
         </div>
+        <div css = {{
+          display: "flex",
+          width: "45%",
+          justifyContent: "space-between",
+          paddingRight: "2%"
+        }}>
         <div
           css={{
             borderRadius: "66px",
             backgroundColor: theme.background.secondary,
-            width: "45.2%",
-            height: "2.825rem",
+            width: "80%",
+            height: "2.575rem",
             display: "flex",
             alignItems: "center",
             paddingLeft: "17px",
@@ -72,11 +78,30 @@ const TicketSales = () => {
               border: "none",
               backgroundColor: theme.background.secondary,
               height: "85%",
-              fontSize: "1rem",
+              fontSize: "0.9rem",
               fontWeight: "400",
               color: theme.shadow.secondary,
             }}
           />
+        </div>
+        <div
+            css={{
+              borderRadius: "50%",
+              width: "12%",
+              backgroundColor: theme.background.secondary,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              opacity: 0.7,
+            }}
+          >
+            <Image
+              src={"/assets/svgs/filter.svg"}
+              alt={""}
+              width={18}
+              height={18}
+            />
+          </div>
         </div>
       </div>
       <TicketSalesTable />

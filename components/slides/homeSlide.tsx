@@ -5,12 +5,11 @@ import WhoWeArePaper from "fragments/paper/whoWeAre";
 
 export default function HomeSlide() {
   return (
-    <Carousel>
-      <div>
+    <Carousel showThumbs={false}>
+  
         <WhoWeArePaper />
-      </div>
+  
       <WhoWeArePaper />
-
       <WhoWeArePaper />
     </Carousel>
   );

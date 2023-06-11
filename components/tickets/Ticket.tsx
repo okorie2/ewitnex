@@ -1,16 +1,33 @@
 /** @jsxImportSource @emotion/react */
 
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { theme } from "styles/theme";
 
-const Ticket = () => {
+interface TicketProps {
+  qrcode: string;
+  name: string;
+  ticketType: string;
+  price: string;
+  event: string;
+  eventID: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  location: string;
+  ticketId: string;
+  eventHost: string
+  refundable: boolean;
+}
+
+const Ticket = (props:TicketProps) => {
   return (
     <div
       css={{
         display: "grid",
         gridTemplateColumns: "30% 40% 30%",
-        border: `2px solid ${theme.shadow.border3}`,
+        boxShadow:  `0px 0px 5px ${theme.shadow.border3}`,
         borderRadius: "40px",
       }}
     >
@@ -26,8 +43,8 @@ const Ticket = () => {
         <Image
           src={"/assets/svgs/qrcode.svg"}
           alt={""}
-          width={120}
-          height={120}
+          width={100}
+          height={100}
         />
         <p
           css={{
@@ -62,7 +79,7 @@ const Ticket = () => {
             fontWeight: "bold",
           }}
         >
-          Blessed Omoriode
+          {props.name}
         </p>
         <div
           css={{
@@ -74,30 +91,30 @@ const Ticket = () => {
         >
           <div>
             <p css={{ fontWeight: 500 }}>Ticket Type</p>
-            <p css={{ fontWeight: "bold" }}>VIP</p>
+            <p css={{ fontWeight: "bold" }}>{props.ticketType}</p>
           </div>
           <div>
             <p css={{ fontWeight: 500 }}>Amount</p>
-            <p css={{ fontWeight: "bold" }}>N 5500</p>
+            <p css={{ fontWeight: "bold" }}>N {props.price}</p>
           </div>
         </div>
         <div css={{ fontSize: "0.8rem", marginBlock: "0.5rem" }}>
           <p css={{ fontWeight: 500 }}>Event</p>
-          <p css={{ fontWeight: "bold" }}>DevFest Aba</p>
+          <p css={{ fontWeight: "bold" }}>{props.event}</p>
         </div>
         <div css={{ fontSize: "0.8rem" }}>
-          <p css={{ fontWeight: 500 }}>Event Date</p>
-          <p>Sat. 25 Nov, 2023</p>
-          <p>Starts at: 10:00 GMT</p>
-          <p>Ends at: 2:30 GMT</p>
+          <p css={{ fontWeight: 450 }}>Event Date</p>
+          <p>{props.date}</p>
+          <p>Starts at: {props.startTime} GMT</p>
+          <p>Ends at: {props.endTime} GMT</p>
         </div>
 
         <p
           css={{
-            fontSize: "0.85rem",
+            fontSize: "0.75rem",
             color: theme.color.primary,
             fontWeight: 500,
-            marginBlock: "0.4rem",
+            marginBlock: "0.2rem",
           }}
         >
           Add to calendar
@@ -105,13 +122,14 @@ const Ticket = () => {
 
         <div css={{ fontSize: "0.8rem", width: "70%" }}>
           <p css={{ fontWeight: 500 }}>Location</p>
-          <p>Holikins Hotel, 22 Faulks Road, Aba, Abia</p>
+          <p>{props.location}</p>
         </div>
         <p
           css={{
-            fontSize: "0.85rem",
+            fontSize: "0.75rem",
             color: theme.color.primary,
             fontWeight: 500,
+            marginBlock: "0.2rem",
           }}
         >
           See map
@@ -138,12 +156,13 @@ const Ticket = () => {
             fontSize:"1rem"
           }}
         >
-          #000123456
+          {props.ticketId}
         </p>
         </div>
+        <Link href = {`/dashboard/manager/${props.eventID}?tab=Overview`}>
         <p
           css={{
-            fontSize: "0.85rem",
+            fontSize: "0.75rem",
             color: theme.color.primary,
             marginBlock: "1rem",
             fontWeight: 500
@@ -151,6 +170,7 @@ const Ticket = () => {
         >
           Event Details
         </p>
+        </Link>
         <div>
         <p
           css={{
@@ -166,7 +186,7 @@ const Ticket = () => {
             fontSize:"0.9rem"
           }}
         >
-          MiLab
+          {props.eventHost}
         </p>
         </div>
         <div css = {{marginTop: "1rem"}}>
@@ -181,11 +201,11 @@ const Ticket = () => {
         <p
           css={{
             fontWeight: "bold",
-            fontSize:"1rem",
+            fontSize:"0.9rem",
             color: theme.color.primary,
           }}
         >
-          Refundable
+          {props.refundable ? "Refundable" : "Non-Refundable"}
         </p>
         </div>
       </div>

@@ -187,7 +187,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   </li>
                   <li>
                     <Link
-                      href="/dashboard"
+                      href="/dashboard/settings"
                       css={{ display: "flex", gap: "0.5rem" }}
                     >
                       <Image

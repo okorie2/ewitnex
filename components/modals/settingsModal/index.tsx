@@ -1,13 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useMemo } from "react";
 import Modal from "react-modal";
 import { theme, screen } from "styles/theme";
-import EventTicketForm from "@/components/modals/eventTicketModal/form";
+import Image from "next/image";
+import Link from "next/link";
+import NameModal from "./nameModal";
+import UserNameModal from "./userNameModal";
+import GenderModal from "./genderModal";
+import LocationModal from "./locationModal";
 
-interface IEventTicketModal {
+interface ISettingsModal {
   isOpen: boolean;
   onRequestClose: () => void;
+  activeModal: string;
 }
 
 const customStyles = {
@@ -23,7 +29,14 @@ const customStyles = {
   },
 };
 
-const EventTicketModal = (props: IEventTicketModal) => {
+const SettingsModal = (props: ISettingsModal) => {
+  const stateEvents = useMemo(() => {
+    if (props.activeModal === "fullName") return <NameModal />;
+    else if (props.activeModal === "userName") return <UserNameModal />;
+    else if (props.activeModal === "gender") return <GenderModal />;
+    else if (props.activeModal === "location") return <LocationModal />;
+
+  }, [props.activeModal]);
   return (
     <Modal
       isOpen={props.isOpen}
@@ -46,43 +59,36 @@ const EventTicketModal = (props: IEventTicketModal) => {
         <div
           css={{
             height: "100vh",
-            maxWidth: "37%",
+            maxWidth: "33.3%",
             background: theme.common.white,
             position: "absolute",
             right: "0",
             top: "0",
             padding: "2% 2% 0",
-            overflowY: "scroll",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                },
-            zIndex: "9",
             color: theme.common.black,
             [screen.desktopLg]: {
               width: "50%",
             },
           }}
         >
-          <div css={{ height: "10%" }}>
-            <h2 css={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-              Place Order
-            </h2>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "500",
-                color: theme.color.grey,
-                marginBlock: "0.5rem",
-              }}
-            >
-              Devfest Aba
-            </p>
+          <div
+            css={{
+              display: "grid",
+              gap: "1rem",
+              width: "100%",
+              height: "90%",
+              overflowY: "scroll",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+            }}
+          >
+            {stateEvents}
           </div>
-          <EventTicketForm />
         </div>
       </div>
     </Modal>
   );
 };
 
-export default EventTicketModal;
+export default SettingsModal;
