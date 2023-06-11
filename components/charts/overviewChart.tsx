@@ -4,10 +4,13 @@ import { theme } from 'styles/theme';
 
 const OverviewChart = () => {
     const options = {
-        grid: { top: 8, right: 8, bottom: 20, left: 60 },
+        grid: { top: 8, right: 8, bottom: 20, left: 60 , show: true},
         xAxis: {
           type: 'category',
           data: ['10 Jan', '11 Jan', '12 Jan', '13 Jan', '14 Jan', '15 Jan', '16 Jan'],
+          splitLine: {
+            show: true
+          }
         },
         yAxis: {
           type: 'value',
