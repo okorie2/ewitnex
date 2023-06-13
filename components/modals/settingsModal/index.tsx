@@ -17,7 +17,12 @@ interface ISettingsModal {
 }
 
 const customStyles = {
-  overlay: { backgroundColor: theme.background.black, zIndex: "3" },
+  overlay: {
+    backgroundColor: theme.background.black,
+    zIndex: "3",
+    width: "100%",
+    height: "100vh",
+  },
   content: {
     width: "100%",
     height: "100%",
@@ -29,21 +34,23 @@ const customStyles = {
   },
 };
 
+Modal.setAppElement('body');
+
 const SettingsModal = (props: ISettingsModal) => {
   const stateEvents = useMemo(() => {
     if (props.activeModal === "fullName") return <NameModal />;
     else if (props.activeModal === "userName") return <UserNameModal />;
     else if (props.activeModal === "gender") return <GenderModal />;
     else if (props.activeModal === "location") return <LocationModal />;
-
   }, [props.activeModal]);
   return (
     <Modal
       isOpen={props.isOpen}
-      onRequestClose={props.onRequestClose}
+      onRequestClose={(e) => {e.stopPropagation(); props.onRequestClose}}
       style={customStyles}
+      shouldCloseOnOverlayClick={true}
     >
-      <button
+      <div
         onClick={props.onRequestClose}
         css={{
           border: "none",
@@ -51,40 +58,41 @@ const SettingsModal = (props: ISettingsModal) => {
           color: theme.common.white,
           fontSize: "1.125rem",
           cursor: "pointer",
+          width: "67%",
+          height: "90vh"
         }}
       >
-        &#x2715; Close
-      </button>
-      <div>
+        {/* <p>&#x2715; Close</p>  */}
+      </div>
+
+      <div
+        css={{
+          height: "100vh",
+          maxWidth: "33.3%",
+          background: theme.common.white,
+          position: "absolute",
+          right: "0",
+          top: "0",
+          padding: "2% 2% 0",
+          color: theme.common.black,
+          [screen.desktopLg]: {
+            width: "50%",
+          },
+        }}
+      >
         <div
           css={{
-            height: "100vh",
-            maxWidth: "33.3%",
-            background: theme.common.white,
-            position: "absolute",
-            right: "0",
-            top: "0",
-            padding: "2% 2% 0",
-            color: theme.common.black,
-            [screen.desktopLg]: {
-              width: "50%",
+            display: "grid",
+            gap: "1rem",
+            width: "100%",
+            height: "90%",
+            overflowY: "scroll",
+            "&::-webkit-scrollbar": {
+              display: "none",
             },
           }}
         >
-          <div
-            css={{
-              display: "grid",
-              gap: "1rem",
-              width: "100%",
-              height: "90%",
-              overflowY: "scroll",
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-            }}
-          >
-            {stateEvents}
-          </div>
+          {stateEvents}
         </div>
       </div>
     </Modal>

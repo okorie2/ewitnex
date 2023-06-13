@@ -108,6 +108,7 @@ const Attendees = () => {
         </div>
       </div>
       <AttendeesTable />
+      <div css = {{height: "2rem"}}></div>
     </div>
   );
 };

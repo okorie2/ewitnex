@@ -45,7 +45,7 @@ const NameModal = () => {
               marginTop: "2rem",
             }}
           >
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} height = "52px">
               <p
                 css={{
                   fontSize: "16px",

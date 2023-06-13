@@ -118,7 +118,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "194px",
+              width: "22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
               borderRadius: "10px",
@@ -150,7 +150,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "194px",
+              width: "22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
               borderRadius: "10px",
@@ -181,7 +181,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "194px",
+              width: "22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
               borderRadius: "10px",
@@ -214,7 +214,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "194px",
+              width: "22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
               borderRadius: "10px",

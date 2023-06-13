@@ -201,7 +201,7 @@ const UpcomingTicketTab = ({
         onClick={setAsActiveCard}
       />
       <TicketCard
-        image="/assets/pngs/gdg.png"
+        image="/assets/pngs/fionaGabe.png"
         title="DevFest Abuja"
         time=" 10:00 AM"
         day="Sat"

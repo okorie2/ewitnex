@@ -105,6 +105,7 @@ const TicketSales = () => {
         </div>
       </div>
       <TicketSalesTable />
+      <div css = {{height: "2rem"}}></div>
     </div>
   );
 };
