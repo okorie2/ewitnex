@@ -279,7 +279,6 @@ const EventOverview = () => {
             css={{
               position: "relative",
               width: "100%",
-              height: "483px",
               marginBlock: "1rem",
             }}
           >
@@ -355,7 +354,6 @@ const EventOverview = () => {
                 css={{
                   display: "grid",
                   gridTemplateColumns: "80% 20%",
-                  paddingInline: "4%",
                 }}
               >
                 <OverviewChart />
