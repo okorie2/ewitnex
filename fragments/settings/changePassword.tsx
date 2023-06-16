@@ -3,7 +3,6 @@
 import { SettingsPasswordTextField } from "@/components/inputs/SettingsInput";
 import React, { useState } from "react";
 import { Button } from "styles/components/button";
-import { theme } from "styles/theme";
 
 const ChangePassword = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);

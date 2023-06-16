@@ -2,7 +2,6 @@
 
 import React from "react";
 import { ButtonFormFilled } from "styles/components/button";
-import { theme } from "styles/theme";
 
 const AttenEventCTA = () => {
   return (

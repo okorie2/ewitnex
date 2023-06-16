@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { css } from "@emotion/react";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
-import { theme } from "styles/theme";
 import { Box } from "@mui/material";
 
 import GenderType from "@/components/signupComponents/selectGender";

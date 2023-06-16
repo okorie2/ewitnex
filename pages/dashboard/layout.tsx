@@ -7,7 +7,6 @@ import Link from "next/link";
 import Logo from "@/components/logo";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  const theme = useTheme();
   const [showMore, setShowMore] = useState(false);
   const handleToggle = () => {
     setShowMore((prevState) => !prevState);

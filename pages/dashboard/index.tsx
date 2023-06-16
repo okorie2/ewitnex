@@ -4,7 +4,6 @@ import React from "react";
 import DashboardLayout from "./layout";
 import Image from "next/image";
 import { ButtonFormFilled } from "styles/components/button";
-import { theme } from "styles/theme";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
 import Link from "next/link";

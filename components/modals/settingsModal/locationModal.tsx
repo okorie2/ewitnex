@@ -3,7 +3,6 @@ import SettingsTextField from '@/components/inputs/SettingsInput'
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Button } from 'styles/components/button';
-import { theme } from 'styles/theme';
 
 const LocationModal = () => {
   const [location, setLocation] = useState(

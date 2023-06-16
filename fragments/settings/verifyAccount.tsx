@@ -3,7 +3,6 @@
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import React, { useState } from "react";
 import { Button } from "styles/components/button";
-import { theme } from "styles/theme";
 
 const VerifyAccount = () => {
   const [formDetails, setFormDetails] = useState({

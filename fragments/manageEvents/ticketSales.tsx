@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import { theme, screen } from "styles/theme";
+import {  screen } from "styles/theme";
 import Image from "next/image";
 import TicketSalesTable from "@/components/tables/ticketSales";
 

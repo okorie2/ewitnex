@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import Link from "next/link";
 import React from "react";
-import { theme } from "styles/theme";
 
 const SettingsCard = ({
   cardTitle,

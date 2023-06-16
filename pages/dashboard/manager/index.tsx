@@ -2,7 +2,6 @@
 import React from "react";
 
 import DashboardLayout from "pages/dashboard/layout";
-import { theme } from "styles/theme";
 import {
   activeButtonStyle,
   inactiveButtonStyle,

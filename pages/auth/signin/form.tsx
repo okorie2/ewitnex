@@ -7,7 +7,6 @@ import BasicTextField, {
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
-import { theme } from "styles/theme";
 
 export default function Form() {
   const [values, setValues] = useState({

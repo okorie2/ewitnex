@@ -9,7 +9,6 @@ import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
 export default function WhatAreYouWaitingForFragment() {
-  const theme = useTheme();
   return (
     <div
       css={{

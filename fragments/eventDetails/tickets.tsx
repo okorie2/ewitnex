@@ -3,7 +3,7 @@
 import React from "react";
 import EventTicket from "@/components/tickets/eventTicket";
 import { H3 } from "styles/components/typography";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 import { useRouter } from "next/router";
 
 const EventTickets = () => {

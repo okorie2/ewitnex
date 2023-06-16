@@ -1,4 +1,3 @@
-import { theme } from "styles/theme";
 
 export const inactiveButtonStyle = {
     width: "50%",

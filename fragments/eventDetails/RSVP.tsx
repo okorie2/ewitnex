@@ -3,7 +3,7 @@
 import React from "react";
 import RSVPCard from "@/components/cards/RSVPCard";
 import { H3 } from "styles/components/typography";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 import { ButtonFormFilled } from "styles/components/button";
 import { useRouter } from "next/router";
 

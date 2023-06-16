@@ -43,7 +43,7 @@ export const ButtonFormOutline = styled.button`
   height: 52px;
   width: 100%;
   background: transparent;
-  border: 1px solid ${(props) => props.theme.shadow.tertiary};
+  border: 1px solid ${(props) => "#707070"};
   border-radius: 26px;
   color: ${(props) => "#000"};
   display: flex;

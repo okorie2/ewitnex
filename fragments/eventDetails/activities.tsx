@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { theme } from "styles/theme";
 import { useRouter } from "next/router";
 
 const EventActivities = () => {

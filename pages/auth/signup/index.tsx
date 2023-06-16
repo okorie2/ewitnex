@@ -10,7 +10,6 @@ import Form from "./form";
 import Logo from "@/components/logo";
 
 export default function Signup() {
-  const theme = useTheme();
   return (
     <>
       <div css={{ display: "flex", justifyContent: "space-between" }}>

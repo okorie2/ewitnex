@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { theme } from "styles/theme";
 import Image from "next/image";
 import { useRouter } from "next/router";
 

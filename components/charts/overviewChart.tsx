@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactECharts from 'echarts-for-react';
-import { theme } from 'styles/theme';
 
 const OverviewChart = () => {
     const options = {

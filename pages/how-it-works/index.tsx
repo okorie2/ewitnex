@@ -12,7 +12,6 @@ import { Button } from "styles/components/button";
 import { H1, H3 } from "styles/components/typography";
 
 export default function Index() {
-  const theme = useTheme();
   return (
     <div css={{ fontFamily: "'Poppins', sans-serif" }}>
       <Navbar />

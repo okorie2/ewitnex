@@ -17,7 +17,6 @@ import Logo from "@/components/logo";
 //   preload: true,
 // });
 export default function Signin() {
-  const theme = useTheme();
   return (
     <>
       <div css={{ display: "flex", justifyContent: "space-between" }}>

@@ -3,7 +3,6 @@
 import SettingsCard from "@/components/cards/settingsCard";
 import React, { useState } from "react";
 import Image from "next/image";
-import { theme } from "styles/theme";
 import SettingsFormCard from "@/components/cards/setingsFormCard";
 import SettingsModal from "@/components/modals/settingsModal";
 

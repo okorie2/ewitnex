@@ -6,7 +6,6 @@ import Image from "next/image";
 import { H1 } from "styles/components/typography";
 
 export default function TicketToSaleFragment() {
-  const theme = useTheme();
   return (
     <div
       css={{

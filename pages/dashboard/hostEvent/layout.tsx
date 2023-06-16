@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
-import { theme } from "styles/theme";
 
 const HostEventLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();

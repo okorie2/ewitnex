@@ -8,7 +8,6 @@ import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
 export default function WhoWeArePaper() {
-  const theme = useTheme();
   return (
     <div
       css={{
