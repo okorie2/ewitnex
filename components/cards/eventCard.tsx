@@ -20,7 +20,7 @@ interface IEventCard {
 }
 
 export default function EventCard(props: IEventCard) {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   return (
     <Link href={`/events/${props.id}`}>
@@ -29,7 +29,7 @@ export default function EventCard(props: IEventCard) {
           height: "500px",
           width: props.width || "100%",
           borderRadius: "10px",
-          backgroundColor: theme.common.white,
+          backgroundColor: "#fff",
           boxShadow: "#00000029 0px 0px 10px",
           fontFamily: "'Poppins', sans-serif",
           marginBottom: "5%",
@@ -61,7 +61,7 @@ export default function EventCard(props: IEventCard) {
                 borderRadius: "10px",
                 fontWeight: 500,
                 textTransform: "capitalize",
-                backgroundColor: theme.common.white,
+                backgroundColor: "#fff",
                 opacity: "75%",
               }}
             >
@@ -73,7 +73,7 @@ export default function EventCard(props: IEventCard) {
               height: "41px",
               width: "41px",
               borderRadius: "50%",
-              backgroundColor: theme.common.white,
+              backgroundColor: "#fff",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -94,7 +94,7 @@ export default function EventCard(props: IEventCard) {
           <H3>{props.title}</H3>
           <p
             css={{
-              color: theme.shadow.secondary,
+              color: "#AEAEAE",
               fontSize: "0.875rem",
               fontWeight: 600,
               marginTop: "2%",
@@ -102,7 +102,7 @@ export default function EventCard(props: IEventCard) {
           >
             {props.id}
           </p>
-          <H4 color={theme.color.negative} css={{ marginTop: "1.2rem" }}>
+          <H4 color="#F05E78" css={{ marginTop: "1.2rem" }}>
             2{props.date}
           </H4>
           <H4 css={{ marginTop: "4%" }}> {props.location}</H4>
@@ -112,7 +112,7 @@ export default function EventCard(props: IEventCard) {
               gap: "4%",
               alignItems: "center",
               marginTop: "0.8rem",
-              color: theme.shadow.tertiary,
+              color: "#707070",
               fontWeight: 500,
               fontSize: "0.75rem",
             }}
@@ -140,7 +140,7 @@ export default function EventCard(props: IEventCard) {
           <p
             css={{
               marginTop: "1.5rem",
-              color: theme.shadow.tertiary,
+              color: "#707070",
               fontWeight: 500,
               fontSize: "0.75rem",
             }}
