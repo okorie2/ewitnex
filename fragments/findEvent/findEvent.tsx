@@ -16,7 +16,7 @@ export default function FindEventFragment() {
       css={{
         width: "93%",
         margin: "auto",
-        backgroundColor: theme.common.white,
+        backgroundColor: "#fff",
         boxShadow: "#00000029 0px 0px 10px",
         borderRadius: "56px",
         marginTop: "4%",

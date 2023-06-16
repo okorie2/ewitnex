@@ -18,7 +18,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
       <div
         css={{
           paddingBlock: "2.3rem",
-          borderRight: `1px solid ${theme.shadow.border}`,
+          borderRight: `1px solid ${"#E4E4E4"}`,
           fontSize: "1rem",
           fontWeight: "500",
         }}
@@ -51,8 +51,8 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
                   gap: "0.6rem",
                   color:
                     router.asPath === item.href
-                      ? theme.color.primary
-                      : theme.color.grey,
+                      ? "#7C35AB"
+                      : "#AEAEAE",
                 }}
                 key={item.name}
               >

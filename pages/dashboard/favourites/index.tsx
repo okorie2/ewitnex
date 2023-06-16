@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import DashboardLayout from "../layout";
 import { useState } from "react";
 import {
@@ -29,7 +29,7 @@ const Favourites = () => {
       <div css={{ maxHeight: "100vh", height: "100vh" }}>
         <div
           css={{
-            borderLeft: `1px solid ${theme.shadow.border}`,
+            borderLeft: `1px solid ${"#E4E4E4"}`,
             marginLeft: "1.5rem",
             height: "100%",
             maxHeight: "100vh",
@@ -38,11 +38,11 @@ const Favourites = () => {
           <div
             css={{
               height: "80px",
-              borderBottom: `1px solid ${theme.shadow.border}`,
+              borderBottom: `1px solid ${"#E4E4E4"}`,
               display: "grid",
               alignItems: "center",
               paddingInline: "1.5rem",
-              color: theme.common.black,
+              color: "#000",
             }}
           >
             <h2>Favourites</h2>
@@ -59,7 +59,7 @@ const Favourites = () => {
               <div
                 css={{
                   borderRadius: "16px",
-                  backgroundColor: theme.background.secondary2,
+                  backgroundColor: "#F2F7FB",
                   width: "30%",
                   marginBlock: "1rem",
                   height: "2.7rem",
@@ -118,6 +118,7 @@ const Favourites = () => {
                     label="Concert"
                     attendees="609"
                     date="3 DEC. 2022, 10:00 AM"
+                    favorite = {true}
                     id="Heal12548"
                     location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
                     organizer="Eko Atlantic"
@@ -131,6 +132,7 @@ const Favourites = () => {
                     label="Tech"
                     attendees="609"
                     id="Tec542445"
+                    favorite = {true}
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"
                     organizer="GDG Aba"
@@ -144,6 +146,7 @@ const Favourites = () => {
                     label="Tech"
                     attendees="609"
                     id="Tec542445"
+                    favorite = {true}
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"
                     organizer="GDG Aba"
@@ -220,7 +223,7 @@ export default Favourites;
 
 //   <div
 //   css={{
-//     borderLeft: `1px solid ${theme.shadow.border}`,
+//     borderLeft: `1px solid ${"#E4E4E4"}`,
 //     marginLeft: "1.5rem",
 //     height: "100%",
 //     maxHeight: "100vh",
@@ -229,11 +232,11 @@ export default Favourites;
 //   <div
 //     css={{
 //       height: "80px",
-//       borderBottom: `1px solid ${theme.shadow.border}`,
+//       borderBottom: `1px solid ${"#E4E4E4"}`,
 //       display: "grid",
 //       alignItems: "center",
 //       paddingInline: "1.5rem",
-//       color: theme.common.black,
+//       color: "#000",
 //     }}
 //   >
 //     <h2>Favourites</h2>
@@ -255,7 +258,7 @@ export default Favourites;
 //       <div
 //         css={{
 //           borderRadius: "16px",
-//           backgroundColor: theme.background.secondary2,
+//           backgroundColor: "#F2F7FB",
 //           width: "30%",
 //           marginBlock: "1rem",
 //           height: "2.7rem",

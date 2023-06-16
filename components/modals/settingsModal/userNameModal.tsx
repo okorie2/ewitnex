@@ -3,7 +3,6 @@ import SettingsTextField from "@/components/inputs/SettingsInput";
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "styles/components/button";
-import { theme } from "styles/theme";
 
 const UserNameModal = () => {
   const [userName, setUserName] = useState("");
@@ -100,9 +99,9 @@ const Suggestion = ({
     <div
       css={{
         padding: "5px",
-        border: `2px solid ${theme.common.black}`,
+        border: `2px solid ${"#000"}`,
         borderRadius: "16px",
-        color: theme.shadow.secondary,
+        color: "#AEAEAE",
         fontWeight: "bold",
         fontSize: "12px",
         minWidth: "80px",

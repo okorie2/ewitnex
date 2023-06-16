@@ -2,7 +2,6 @@
 import React from "react";
 import DashboardLayout from "pages/dashboard/layout";
 import Image from "next/image";
-import { theme } from "styles/theme";
 import ManageEventTab from "./[tab]";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,7 +14,7 @@ const ManageSingleEvent = () => {
     <DashboardLayout>
       <div
         css={{
-          borderLeft: `1px solid ${theme.shadow.border}`,
+          borderLeft: `1px solid ${"#E4E4E4"}`,
           marginLeft: "1.5rem",
           height: "100%",
         }}
@@ -23,11 +22,11 @@ const ManageSingleEvent = () => {
         <div
           css={{
             height: "80px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "grid",
             alignItems: "center",
             paddingInline: "1.5rem",
-            color: theme.common.black,
+            color: "#000",
           }}
         >
           <div css={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
@@ -51,7 +50,7 @@ const ManageSingleEvent = () => {
           >
             <div
               css={{
-                borderRight: `1px solid ${theme.shadow.border}`,
+                borderRight: `1px solid ${"#E4E4E4"}`,
               }}
             >
               <div>
@@ -98,10 +97,10 @@ const TabNav: React.FC<{
         fontWeight: "500",
         cursor: "pointer",
         width: "100%",
-        color: isActive ? theme.common.black : theme.color.grey,
+        color: isActive ? "#000" : "#AEAEAE",
         borderLeft: isActive
-          ? `2px solid ${theme.common.black}`
-          : `2px solid ${theme.common.white}`,
+          ? `2px solid ${"#000"}`
+          : `2px solid ${"#fff"}`,
       }}
       key={tab}
     >

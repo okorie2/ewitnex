@@ -7,13 +7,12 @@ import Image from "next/image";
 import { H1 } from "styles/components/typography";
 
 export default function WitnessEventFragment() {
-  const theme = useTheme();
   return (
     <div
       css={{
         display: "flex",
         justifyContent: "space-between",
-        background: theme.common.white,
+        background: "#fff",
         fontFamily: "'Poppins', sans-serif",
         padding: "10% 4%",
       }}
@@ -27,7 +26,7 @@ export default function WitnessEventFragment() {
         />
       </div>
       <div css={{ width: "50%" }}>
-        <H1 small color={theme.common.black}>
+        <H1 small color={"#000"}>
           Witness your attended event and builds conversation
         </H1>
         <p css={{ marginTop: "4%" }}>

@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           display: "flex",
           alignItems: "center",
           boxShadow: " 0px 0px 10px #00000029",
-          backgroundColor: theme.common.white,
+          backgroundColor: "#fff",
           justifyContent: "space-between",
           padding: "1% 2%",
           fontWeight: 500,
@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div css={{ display: "flex", marginTop: "8.3rem" }}>
         <div
           css={{
-            backgroundColor: theme.common.white,
+            backgroundColor: "#fff",
             boxShadow: "0px 0px 10px #00000029",
             height: "612px",
             width: "43vw",
@@ -58,7 +58,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               padding: "8% 0",
               paddingLeft: "2.2rem",
               paddingRight: "2rem",
-              borderBottom: `2px solid ${theme.shadow.border}`,
+              borderBottom: `2px solid ${"#E4E4E4"}`,
             }}
           >
             <Image src={Filter} alt="filter" />
@@ -131,7 +131,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <p css={{ fontSize: "16px" }}>
               <b>123456</b>
             </p>
-            <p css={{ color: theme.shadow.tertiary }}>events found</p>
+            <p css={{ color: "#707070" }}>events found</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { theme } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import { ButtonFormFilled } from "styles/components/button";
 import HostEventLayout from "./layout";
@@ -13,7 +12,7 @@ const HostEvent = () => {
         <div
           css={{
             height: "110px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
             paddingInline: "3.2rem",
@@ -39,7 +38,7 @@ const HostEvent = () => {
             >
               <p
                 css={{
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -49,7 +48,7 @@ const HostEvent = () => {
               <Link
                 href="/dashboard"
                 css={{
-                  color: theme.color.negative,
+                  color: "#F05E78",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -87,12 +86,12 @@ const HostEvent = () => {
               css={{
                 fontSize: "0.875rem",
                 fontWeight: "bold",
-                color: theme.color.primary,
-                border: `1px solid ${theme.color.primary}`,
+                color: "#7C35AB",
+                border: `1px solid ${"#7C35AB"}`,
                 width: "123px",
                 height: "38px",
                 marginBottom: "0.5rem",
-                background: theme.common.white,
+                background: "#fff",
               }}
             >
               Save Organizer
@@ -153,11 +152,11 @@ const HostEvent = () => {
               css={{
                 fontSize: "1rem",
                 fontWeight: "bold",
-                color: theme.color.primary,
-                border: `1px solid ${theme.color.primary}`,
+                color: "#7C35AB",
+                border: `1px solid ${"#7C35AB"}`,
                 height: "52px",
                 marginBottom: "0.5rem",
-                background: theme.common.white,
+                background: "#fff",
                 borderRadius: "26px",
                 width: "100%",
                 cursor: "pointer",

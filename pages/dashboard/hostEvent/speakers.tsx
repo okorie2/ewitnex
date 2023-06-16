@@ -3,7 +3,7 @@
 import React from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
 import Speaker from "@/components/cards/speaker";
@@ -15,7 +15,7 @@ const Speakers = () => {
         <div
           css={{
             height: "150px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
             paddingInline: "3.2rem",
@@ -55,7 +55,7 @@ const Speakers = () => {
             >
               <p
                 css={{
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -65,7 +65,7 @@ const Speakers = () => {
               <Link
                 href="/dashboard"
                 css={{
-                  color: theme.color.negative,
+                  color: "#F05E78",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -93,7 +93,7 @@ const Speakers = () => {
               padding: " 1.5rem 2.5rem",
               display: "grid",
               gap: "1.5rem",
-              borderRight: `1px solid ${theme.shadow.border}`,
+              borderRight: `1px solid ${"#E4E4E4"}`,
               height: "100%",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
@@ -101,11 +101,11 @@ const Speakers = () => {
               },
               [screen.lg]: {
                 overflowY: "initial",
-                borderBottom: `1px solid ${theme.shadow.border}`,
+                borderBottom: `1px solid ${"#E4E4E4"}`,
               },
               [screen.desktop]: {
                 overflowY: "initial",
-                borderBottom: `1px solid ${theme.shadow.border}`,
+                borderBottom: `1px solid ${"#E4E4E4"}`,
               },
             }}
           >
@@ -141,7 +141,7 @@ const Speakers = () => {
                 css={{
                   width: "155px",
                   height: "200px",
-                  border: `1px dashed ${theme.shadow.border2}`,
+                  border: `1px dashed ${"#C0C0C0"}`,
                   borderRadius: "10px",
                   display: "flex",
                   alignItems: "center",
@@ -152,7 +152,7 @@ const Speakers = () => {
               >
                 <div
                   css={{
-                    color: theme.color.grey,
+                    color: "#AEAEAE",
                     fontSize: "0.75rem",
                     width: "80%",
                   }}
@@ -175,11 +175,11 @@ const Speakers = () => {
               css={{
                 fontSize: "1rem",
                 fontWeight: "bold",
-                color: theme.color.primary,
-                border: `1px solid ${theme.color.primary}`,
+                color: "#7C35AB",
+                border: `1px solid ${"#7C35AB"}`,
                 height: "52px",
                 marginBottom: "0.5rem",
-                background: theme.common.white,
+                background: "#fff",
                 borderRadius: "26px",
                 width: "45%",
                 cursor: "pointer",
@@ -279,11 +279,11 @@ const Speakers = () => {
                     fontSize: "1rem",
                     fontWeight: "bold",
                     fontFamily: "'Nunito', sans-serif",
-                    color: theme.color.primary,
-                    border: `1px solid ${theme.color.primary}`,
+                    color: "#7C35AB",
+                    border: `1px solid ${"#7C35AB"}`,
                     height: "43px",
                     marginBlock: "0.5rem",
-                    background: theme.common.white,
+                    background: "#fff",
                     borderRadius: "26px",
                     width: "52%",
                     cursor: "pointer",
@@ -314,11 +314,11 @@ const Speakers = () => {
                     fontSize: "1rem",
                     fontWeight: "bold",
                     fontFamily: "'Nunito', sans-serif",
-                    color: theme.color.primary,
-                    border: `1px solid ${theme.color.primary}`,
+                    color: "#7C35AB",
+                    border: `1px solid ${"#7C35AB"}`,
                     height: "52px",
                     marginBottom: "0.5rem",
-                    background: theme.common.white,
+                    background: "#fff",
                     borderRadius: "26px",
                     width: "100%",
                     cursor: "pointer",
@@ -333,11 +333,11 @@ const Speakers = () => {
                     fontSize: "1rem",
                     fontWeight: "bold",
                     fontFamily: "'Nunito', sans-serif",
-                    color: theme.common.white,
-                    border: `1px solid ${theme.color.primary}`,
+                    color: "#fff",
+                    border: `1px solid ${"#7C35AB"}`,
                     height: "52px",
                     marginBottom: "0.5rem",
-                    background: theme.color.primary,
+                    background: "#7C35AB",
                     borderRadius: "26px",
                     width: "100%",
                     cursor: "pointer",

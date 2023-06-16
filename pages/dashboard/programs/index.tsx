@@ -166,8 +166,8 @@ const DashboardPrograms = () => {
         </div>
         <div
           css={{
-            backgroundColor: theme.common.white,
-            borderLeft: `1px solid ${theme.shadow.border}`,
+            backgroundColor: "#fff",
+            borderLeft: `1px solid ${"#E4E4E4"}`,
             maxWidth: "258px",
           }}
         >
@@ -179,7 +179,7 @@ const DashboardPrograms = () => {
               gap: "1.5rem",
               height: "80px",
               paddingInline: "2rem",
-              borderBottom: `1px solid ${theme.shadow.border}`,
+              borderBottom: `1px solid ${"#E4E4E4"}`,
             }}
           >
             <Image src={Filter} alt="filter" />

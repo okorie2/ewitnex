@@ -10,8 +10,8 @@ const EventSpeakers = () => {
   return (
     <div
       css={{
-        boxShadow: `0px 0px 10px ${theme.shadow.border4}`,
-        color: theme.common.black,
+        boxShadow: `0px 0px 10px ${"#0000001A"}`,
+        color: "#000",
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
         width: `${loggedIn ? "70%" : "60%"}`,
@@ -83,7 +83,7 @@ const EventSpeakers = () => {
       </div>
       <hr
         css={{
-          borderTop: `1px solid ${theme.shadow.tertiary}`,
+          borderTop: `1px solid ${"#707070"}`,
           marginBlock: "1.5rem",
           opacity: "0.5",
         }}

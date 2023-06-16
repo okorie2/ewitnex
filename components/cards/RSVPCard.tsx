@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 
 interface IRSVPCard {
   img: string;
@@ -20,7 +20,7 @@ const RSVPCard = (props: IRSVPCard) => {
         gap: "1.5rem",
         alignItems: "center",
         width: "318px",
-        border: `1px solid  ${theme.shadow.border}`,
+        border: `1px solid  ${"#E4E4E4"}`,
         borderRadius: "20px",
         padding: "1.25rem",
         position: "relative",
@@ -53,7 +53,7 @@ const RSVPCard = (props: IRSVPCard) => {
             fontSize: "0.875rem",
             fontWeight: "500",
             marginBottom: "0.5rem",
-            color: theme.color.grey,
+            color: "#AEAEAE",
           }}
         >
           {props.userName}
@@ -63,7 +63,7 @@ const RSVPCard = (props: IRSVPCard) => {
             fontSize: "0.75rem",
             fontWeight: "500",
             marginBottom: "0.5rem",
-            color: theme.color.grey,
+            color: "#AEAEAE",
           }}
         >
           {props.date}

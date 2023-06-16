@@ -15,12 +15,12 @@ export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
     border-radius: 8px;
-    border: 1px solid ${(props) => props.theme.color.grey2};
+    border: 1px solid  #E4E4E4;
     box-shadow: 0px 0px 5px #00000029;
-    color: ${(props) => props.theme.color.tableBlack};
+    color: ${(props) => "#393939"};
     position: relative;
     & thead {
-        border-bottom: 1px solid  ${(props) => props.theme.color.grey};
+        border-bottom: 1px solid  ${(props) => "#AEAEAE"};
     }
     & th,
     & td {
@@ -37,7 +37,7 @@ export const Table = styled.table`
         padding-block: 0.5rem;
     } */
     & tbody tr {
-        border-bottom: 0.5px solid ${(props) => props.theme.color.grey2};;
+        border-bottom: 0.5px solid #E4E4E4;
         & td {
             font-size: 11.5px;
         padding-block: 0.5rem;

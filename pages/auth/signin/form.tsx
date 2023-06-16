@@ -46,7 +46,7 @@ export default function Form() {
             <p
               css={{
                 fontWeight: 700,
-                color: theme.background.primary,
+                color: "#7C35AB",
                 fontFamily: "'Nunito', sans-serif",
               }}
             >
@@ -86,7 +86,7 @@ export default function Form() {
         <div css={{ marginTop: "2rem" }}>
           <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
             Don&apos; Have An Account?
-            <span css={{ fontWeight: 700, color: theme.background.primary }}>
+            <span css={{ fontWeight: 700, color: "#7C35AB" }}>
               <Link href="/auth/signup">Sign Up</Link>
             </span>
           </p>

@@ -21,7 +21,7 @@ const OverviewChart = () => {
           axisLabel: {
             margin: 16,
             padding: [0,3],
-            color: theme.color.grey,
+            color: "#AEAEAE",
             interval: 0
           },
           
@@ -29,7 +29,7 @@ const OverviewChart = () => {
         yAxis: {
           type: 'value',
           axisLabel: {
-            color: theme.color.grey,
+            color: "#AEAEAE",
             align: 'left',
             verticalAlign: 'top',
             margin: 50,
@@ -57,7 +57,7 @@ const OverviewChart = () => {
             data: [3200,4500, 3400, 9010, 8000, 8300, 7000, 5000,3000,],
             type: 'line',
             smooth: false,
-            color: theme.color.lightGreen,
+            color: "#00D9B7",
             showSymbol:false,
             markLine:{
               itemStyle: {
@@ -70,7 +70,7 @@ const OverviewChart = () => {
             data: [1500,5500, 4700, 1000, 2000, 5000, 4500,6200, 8000],
             type: 'line',
             smooth: false,
-            color: theme.color.negative,
+            color: "#F05E78",
             showSymbol:false
           },
         ],

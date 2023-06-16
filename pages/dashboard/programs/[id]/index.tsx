@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
 import EventTab from "./[tab]";
-import { theme } from "styles/theme";
 import DashboardLayout from "pages/dashboard/layout";
 import Image from "next/image";
 
@@ -24,7 +23,7 @@ const SingleEvent = () => {
         <div
           css={{
             height: "80px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "flex",
             gap: "4rem",
             alignItems: "center",
@@ -58,7 +57,7 @@ const SingleEvent = () => {
         >
           <ul
             css={{
-              boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
+              boxShadow: `0px 0px 10px ${"#00000029"}`,
               borderRadius: "20px",
               padding: "1rem 2.5rem",
               display: "flex",
@@ -68,7 +67,7 @@ const SingleEvent = () => {
               zIndex: "1",
               top: "-1.5rem",
               left: "20%",
-              backgroundColor: theme.common.white,
+              backgroundColor: "#fff",
               listStyleType: "none",
               fontFamily: "'Open Sans', sans-serif",
             }}
@@ -87,7 +86,7 @@ const SingleEvent = () => {
               width: "97%",
               marginInline: "auto",
               paddingBottom: "5rem",
-              boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
+              boxShadow: `0px 0px 10px ${"#00000029"}`,
               borderRadius: "20px",
               height: "calc(100vh - (80px + 3rem))",
               overflowY: "scroll",
@@ -119,9 +118,9 @@ const TabNav: React.FC<{
           padding: "0.38rem 0.75rem ",
           borderRadius: "1rem",
           background: isActive
-            ? theme.background.lightGreen
-            : theme.background.secondary2,
-          color: isActive ? theme.common.white : theme.color.grey,
+            ? "#00D9B7"
+            : "#F2F7FB",
+          color: isActive ? "#fff" : "#AEAEAE",
           cursor: "pointer",
           fontSize: "0.875rem",
           fontWeight: "500",

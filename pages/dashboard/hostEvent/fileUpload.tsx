@@ -3,7 +3,7 @@
 import React from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 import Image from "next/image";
 
 const FileUpload = () => {
@@ -13,7 +13,7 @@ const FileUpload = () => {
         <div
           css={{
             height: "110px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
             paddingInline: "3.2rem",
@@ -39,7 +39,7 @@ const FileUpload = () => {
             >
               <p
                 css={{
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -49,7 +49,7 @@ const FileUpload = () => {
               <Link
                 href="/dashboard"
                 css={{
-                  color: theme.color.negative,
+                  color: "#F05E78",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -108,7 +108,7 @@ const FileUpload = () => {
                 css={{
                   width: "376px",
                   height: "200px",
-                  border: `1px dashed ${theme.shadow.border2}`,
+                  border: `1px dashed ${"#C0C0C0"}`,
                   borderRadius: "10px",
                   display: "flex",
                   alignItems: "center",
@@ -118,7 +118,7 @@ const FileUpload = () => {
               >
                 <div
                   css={{
-                    color: theme.color.grey,
+                    color: "#AEAEAE",
                     fontSize: "0.75rem",
                     width: "80%",
                   }}
@@ -137,7 +137,7 @@ const FileUpload = () => {
               </div>
               <p
                 css={{
-                  color: theme.color.grey,
+                  color: "#AEAEAE",
                   fontSize: "1.125rem",
                   fontWeight: "bold",
                 }}
@@ -148,11 +148,11 @@ const FileUpload = () => {
                 css={{
                   width: "496px",
                   height: "200px",
-                  border: `1px solid ${theme.shadow.border2}`,
+                  border: `1px solid ${"#C0C0C0"}`,
                   borderRadius: "10px",
                   display: "grid",
                   gridTemplateColumns: "1fr auto",
-                  backgroundColor: theme.background.secondary2,
+                  backgroundColor: "#F2F7FB",
                 }}
               >
                 <div
@@ -169,7 +169,7 @@ const FileUpload = () => {
                     css={{
                       fontWeight: "500",
                       fontSize: "0.75rem",
-                      color: theme.color.tertiary,
+                      color: "#707070",
                     }}
                   >
                     Don&apos;t worry about who will design it for you, just drag
@@ -181,7 +181,7 @@ const FileUpload = () => {
                     width={238}
                     height={22}
                   />
-                  <p css={{ fontWeight: "bold", color: theme.color.blue }}>
+                  <p css={{ fontWeight: "bold", color: "#548AF9" }}>
                     Coming Soon...
                   </p>
                 </div>
@@ -209,7 +209,7 @@ const FileUpload = () => {
                 css={{
                   width: "376px",
                   height: "200px",
-                  border: `1px dashed ${theme.shadow.border2}`,
+                  border: `1px dashed ${"#C0C0C0"}`,
                   borderRadius: "10px",
                   display: "flex",
                   alignItems: "center",
@@ -220,7 +220,7 @@ const FileUpload = () => {
               >
                 <div
                   css={{
-                    color: theme.color.grey,
+                    color: "#AEAEAE",
                     fontSize: "0.75rem",
                     width: "80%",
                   }}
@@ -255,11 +255,11 @@ const FileUpload = () => {
                   fontSize: "1rem",
                   fontWeight: "bold",
                   fontFamily: "'Nunito', sans-serif",
-                  color: theme.color.primary,
-                  border: `1px solid ${theme.color.primary}`,
+                  color: "#7C35AB",
+                  border: `1px solid ${"#7C35AB"}`,
                   height: "52px",
                   marginBottom: "0.5rem",
-                  background: theme.common.white,
+                  background: "#fff",
                   borderRadius: "26px",
                   width: "100%",
                   cursor: "pointer",
@@ -274,11 +274,11 @@ const FileUpload = () => {
                   fontSize: "1rem",
                   fontWeight: "bold",
                   fontFamily: "'Nunito', sans-serif",
-                  color: theme.common.white,
-                  border: `1px solid ${theme.color.primary}`,
+                  color: "#fff",
+                  border: `1px solid ${"#7C35AB"}`,
                   height: "52px",
                   marginBottom: "0.5rem",
-                  background: theme.color.primary,
+                  background: "#7C35AB",
                   borderRadius: "26px",
                   width: "100%",
                   cursor: "pointer",

@@ -4,14 +4,12 @@ import React from "react";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
-import { useTheme } from "@emotion/react";
 
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import Image from "next/image";
 import { H1, H2, H3 } from "styles/components/typography";
 
 export default function Index() {
-  const theme = useTheme();
   return (
     <div css={{ fontFamily: "'Poppins', sans-serif" }}>
       <Navbar />
@@ -42,7 +40,7 @@ export default function Index() {
       <div css={{ textAlign: "center" }}>
         <H1
           small
-          color={theme.common.black}
+          color={"#000"}
           css={{ width: "60%", margin: "auto" }}
         >
           Revolutionizing events with our social user -friendly platform

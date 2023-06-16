@@ -36,14 +36,14 @@ const Tickets = () => {
       <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
         <div
           css={{
-            borderRight: `1px solid ${theme.shadow.border}`,
+            borderRight: `1px solid ${"#E4E4E4"}`,
             height: "100vh",
           }}
         >
           <div
             css={{
-              borderLeft: `1px solid ${theme.shadow.border}`,
-              boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
+              borderLeft: `1px solid ${"#E4E4E4"}`,
+              boxShadow: `0px 0px 5px ${"#00000029"}`,
               marginLeft: "1.2rem",
               height: "100%",
               maxHeight: "100vh",
@@ -52,11 +52,11 @@ const Tickets = () => {
             <div
               css={{
                 height: "80px",
-                borderBottom: `1px solid ${theme.shadow.border}`,
+                borderBottom: `1px solid ${"#E4E4E4"}`,
                 display: "grid",
                 alignItems: "center",
                 paddingInline: "1.5rem",
-                color: theme.common.black,
+                color: "#000",
               }}
             >
               <h2>Tickets</h2>
@@ -74,7 +74,7 @@ const Tickets = () => {
               <div
                 css={{
                   borderRadius: "16px",
-                  backgroundColor: theme.background.secondary2,
+                  backgroundColor: "#F2F7FB",
                   width: "100%",
                   marginInline: "auto",
                   marginBottom: "1rem",
@@ -127,13 +127,13 @@ const Tickets = () => {
           <div
             css={{
               height: "80px",
-              borderBottom: `1px solid ${theme.shadow.border}`,
+              borderBottom: `1px solid ${"#E4E4E4"}`,
               display: "grid",
               gridTemplateColumns: "1fr auto",
               alignItems: "center",
               paddingInline: "1.5rem",
               paddingRight: "2.5rem",
-              color: theme.common.black,
+              color: "#000",
             }}
           >
             <h2>DevFest Aba</h2>

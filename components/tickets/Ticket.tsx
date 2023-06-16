@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { theme } from "styles/theme";
 
 interface TicketProps {
   qrcode: string;
@@ -23,11 +22,12 @@ interface TicketProps {
 
 const Ticket = (props:TicketProps) => {
   return (
+    <>
     <div
       css={{
         display: "grid",
         gridTemplateColumns: "30% 40% 30%",
-        boxShadow:  `0px 0px 5px ${theme.shadow.border3}`,
+        boxShadow:  `0px 0px 5px #00000029`,
         borderRadius: "40px",
       }}
     >
@@ -48,7 +48,7 @@ const Ticket = (props:TicketProps) => {
         />
         <p
           css={{
-            border: `1px solid ${theme.color.grey}`,
+            border: `1px solid #AEAEAE`,
             fontSize: "0.6rem",
             padding: "2% 9%",
             color: "black",
@@ -61,7 +61,7 @@ const Ticket = (props:TicketProps) => {
         css={{
           display: "grid",
           gap: "5px",
-          borderInline: `2px dashed ${theme.color.grey2}`,
+          borderInline: `2px dashed #E4E4E4`,
           padding: "1rem",
           fontWeight: "bold",
         }}
@@ -112,7 +112,7 @@ const Ticket = (props:TicketProps) => {
         <p
           css={{
             fontSize: "0.75rem",
-            color: theme.color.primary,
+            color: "#7C35AB",
             fontWeight: 500,
             marginBlock: "0.2rem",
           }}
@@ -127,7 +127,7 @@ const Ticket = (props:TicketProps) => {
         <p
           css={{
             fontSize: "0.75rem",
-            color: theme.color.primary,
+            color: "#7C35AB",
             fontWeight: 500,
             marginBlock: "0.2rem",
           }}
@@ -163,7 +163,7 @@ const Ticket = (props:TicketProps) => {
         <p
           css={{
             fontSize: "0.75rem",
-            color: theme.color.primary,
+            color: "#7C35AB",
             marginBlock: "1rem",
             fontWeight: 500
           }}
@@ -202,7 +202,7 @@ const Ticket = (props:TicketProps) => {
           css={{
             fontWeight: "bold",
             fontSize:"0.9rem",
-            color: theme.color.primary,
+            color: "#7C35AB",
           }}
         >
           {props.refundable ? "Refundable" : "Non-Refundable"}
@@ -210,6 +210,7 @@ const Ticket = (props:TicketProps) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

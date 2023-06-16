@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 
-import { theme } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,7 +21,7 @@ const ManageEventCard = (props: IManageEvent) => {
         css={{
           width: "335px",
           height: "140px",
-          border: `1px solid ${theme.shadow.border2}`,
+          border: `1px solid ${"#C0C0C0"}`,
           borderRadius: "20px",
           display: "grid",
           gridTemplateColumns: "auto 1fr",
@@ -79,7 +78,7 @@ const ManageEventCard = (props: IManageEvent) => {
             css={{
               fontSize: "0.69rem",
               fontWeight: "500",
-              color: theme.color.grey,
+              color: "#AEAEAE",
             }}
           >
             {props.type}

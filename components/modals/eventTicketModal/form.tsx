@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import TicketTextField from "@/components/inputs/TicketTextField";
 import { ButtonFormFilled } from "styles/components/button";
 
@@ -133,7 +133,7 @@ const EventTicketForm = () => {
         <form css={{ display: "grid", gap: "1.5rem" }}>
           <div
             css={{
-              border: `1px solid ${theme.shadow.border}`,
+              border: `1px solid ${"#E4E4E4"}`,
               borderRadius: "10px",
               padding: "1.2rem 0.5rem 0.8rem",
               fontSize: "1rem",
@@ -156,7 +156,7 @@ const EventTicketForm = () => {
           </div>
           <div
             css={{
-              border: `1px solid ${theme.shadow.border}`,
+              border: `1px solid ${"#E4E4E4"}`,
               borderRadius: "10px",
               padding: "1.2rem 0.5rem 0.8rem",
               fontSize: "1rem",
@@ -203,7 +203,7 @@ const EventTicketForm = () => {
           </div>
           <div
             css={{
-              border: `1px solid ${theme.shadow.border}`,
+              border: `1px solid ${"#E4E4E4"}`,
               borderRadius: "10px",
               padding: "1.2rem 0.5rem 0.8rem",
               fontSize: "1rem",

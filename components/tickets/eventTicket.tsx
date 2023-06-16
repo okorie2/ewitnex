@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import EventTicketModal from "@/components/modals/eventTicketModal";
 
 interface IEventTicket {
@@ -36,7 +36,7 @@ const EventTicket = (props: IEventTicket) => {
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
-            border: `0.5px solid ${theme.shadow.tertiary}`,
+            border: `0.5px solid ${"#707070"}`,
             borderRadius: "20px",
             borderRight: "none",
             height: "140px",
@@ -60,7 +60,7 @@ const EventTicket = (props: IEventTicket) => {
           >
             <span
               css={{
-                color: theme.color.grey,
+                color: "#AEAEAE",
                 paddingRight: "5px",
               }}
             >

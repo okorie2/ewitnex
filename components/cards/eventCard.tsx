@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import { H3, H4 } from "styles/components/typography";
-import { useTheme } from "@emotion/react";
 import Link from "next/link";
 
 interface IEventCard {
@@ -20,7 +19,6 @@ interface IEventCard {
 }
 
 export default function EventCard(props: IEventCard) {
-  // const theme = useTheme();
 
   return (
     <Link href={`/events/${props.id}`}>

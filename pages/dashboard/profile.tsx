@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import DashboardLayout from "./layout";
 import Image from "next/image";
-import { theme } from "styles/theme";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import ProfileFollowing from "fragments/profile/following";
 import ProfileFollowers from "fragments/profile/followers";
@@ -40,14 +39,14 @@ const Profile = () => {
       >
         <div
           css={{
-            borderRight: `1px solid ${theme.shadow.border}`,
+            borderRight: `1px solid ${"#E4E4E4"}`,
             height: "100%",
           }}
         >
           <DashboardHeader />
           <div
             css={{
-              color: theme.common.black,
+              color: "#000",
               height: "calc(100% - 80px)",
               padding: "1.5rem",
             }}
@@ -98,7 +97,7 @@ const Profile = () => {
                   Blessed Onoriode
                 </p>
                 <div>
-                  <p css={{ color: theme.color.grey, fontWeight: "500" }}>
+                  <p css={{ color: "#AEAEAE", fontWeight: "500" }}>
                     <span css={{ fontSize: "1.125rem" }}>Blessed_one</span> -{" "}
                     <span css={{ fontSize: "0.875rem" }}>Delta, Nigeria</span>
                   </p>
@@ -134,7 +133,7 @@ const Profile = () => {
             <div
               css={{
                 borderRadius: "16px",
-                backgroundColor: theme.background.secondary2,
+                backgroundColor: "#F2F7FB",
                 width: "100%",
                 marginInline: "auto",
                 height: "2.5rem",
@@ -167,8 +166,8 @@ const Profile = () => {
             <div
               css={{
                 borderRadius: "10px",
-                border: `1.5px solid ${theme.shadow.secondary}`,
-                backgroundColor: theme.common.white,
+                border: `1.5px solid ${"#AEAEAE"}`,
+                backgroundColor: "#fff",
                 width: "100%",
                 marginInline: "auto",
                 height: "2.625rem",
@@ -194,11 +193,11 @@ const Profile = () => {
                   width: "100%",
                   outline: "none",
                   border: "none",
-                  backgroundColor: theme.common.white,
+                  backgroundColor: "#fff",
                   height: "95%",
                   fontSize: "1rem",
                   fontWeight: "400",
-                  color: theme.shadow.secondary,
+                  color: "#AEAEAE",
                 }}
               />
             </div>

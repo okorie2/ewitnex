@@ -2,7 +2,6 @@
 
 import React from "react";
 import SettingsCard from "./settingsCard";
-import { theme } from "styles/theme";
 import Image from "next/image";
 
 const SettingsFormCard = ({

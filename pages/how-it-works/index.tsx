@@ -40,7 +40,7 @@ export default function Index() {
           <p
             css={{
               fontSize: "1.25rem",
-              color: theme.common.white,
+              color: "#fff",
               width: "59%",
             }}
           >
@@ -49,7 +49,7 @@ export default function Index() {
             event platform, it really is that simple!
           </p>
           <div css={{ width: "12.7vw", marginTop: "3rem" }}>
-            <Button background={theme.background.lightGreen}>
+            <Button background={"#00D9B7"}>
               Get Started
             </Button>
           </div>
@@ -63,7 +63,7 @@ export default function Index() {
         css={{
           display: "flex",
           alignItems: "center",
-          color: theme.shadow.tertiary,
+          color: "#707070",
           font: "1.15rem",
           justifyContent: "center",
           gap: "16px",
@@ -75,7 +75,7 @@ export default function Index() {
       </div>
 
       <div css={{ marginTop: "3rem", paddingLeft: "4%" }}>
-        <H1 color={theme.common.black} small>
+        <H1 color={"#000"} small>
           As a host or event planner
         </H1>
         <div
@@ -163,7 +163,7 @@ export default function Index() {
         </div>
       </div>
       <div css={{ marginTop: "3rem", paddingLeft: "4%" }}>
-        <H1 color={theme.common.black} small>
+        <H1 color={"#000"} small>
           As an attendee or event lover
         </H1>
         <div

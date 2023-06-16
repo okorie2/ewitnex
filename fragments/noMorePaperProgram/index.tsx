@@ -18,12 +18,12 @@ export default function NoMorePaperProgramFragment() {
       }}
     >
       <div css={{ flexBasis: "50%" }}>
-        <H1 small color={theme.common.black}>
+        <H1 small color={"#000"}>
           No more use of paper programs
         </H1>
         <p
           css={{
-            color: theme.common.black,
+            color: "#000",
             fontSize: "1.125",
             marginTop: "4%",
           }}

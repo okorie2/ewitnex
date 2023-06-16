@@ -3,13 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import { H3, H4 } from "styles/components/typography";
-import { useTheme } from "@emotion/react";
 import Link from "next/link";
 
 interface IEventCard {
   img: string;
   label: string;
   title: string;
+  favorite?: boolean;
   id: string;
   date: string;
   location: string;
@@ -20,7 +20,6 @@ interface IEventCard {
 }
 
 export default function DashboardEventCard(props: IEventCard) {
-  // const theme = useTheme();
 
   return (
     <Link href={`/dashboard/programs/${props.id}`}>
@@ -82,12 +81,21 @@ export default function DashboardEventCard(props: IEventCard) {
               right: "3%",
             }}
           >
+            {props.favorite ?  
+              <Image
+              src="/assets/svgs/filled-love.svg"
+              alt="card_img"
+              width={20.98}
+              height={19.39}
+            />
+            :
             <Image
               src="/assets/svgs/love.svg"
               alt="card_img"
               width={20.98}
               height={19.39}
             />
+          }
           </div>
         </div>
         <div css={{ padding: "4% 6%" }}>

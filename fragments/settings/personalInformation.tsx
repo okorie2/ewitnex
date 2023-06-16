@@ -25,13 +25,13 @@ const PersonalInformation = () => {
       <div
         css={{
           height: "80px",
-          borderBottom: `1px solid ${theme.shadow.border}`,
+          borderBottom: `1px solid ${"#E4E4E4"}`,
           display: "grid",
           gridTemplateColumns: "1fr auto",
           alignItems: "center",
           paddingInline: "1.5rem",
           paddingRight: "2.5rem",
-          color: theme.common.black,
+          color: "#000",
         }}
       >
         <h2>Personal Information</h2>

@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import Modal from "react-modal";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
 import NameModal from "./nameModal";
@@ -18,7 +18,7 @@ interface ISettingsModal {
 
 const customStyles = {
   overlay: {
-    backgroundColor: theme.background.black,
+    backgroundColor: "#00000029",
     zIndex: "3",
     width: "100%",
     height: "100vh",
@@ -29,7 +29,7 @@ const customStyles = {
     left: "0",
     top: "0",
     border: "none",
-    backgroundColor: theme.background.black,
+    backgroundColor: "#00000029",
     fontFamily: "'Nunito', sans-serif",
   },
 };
@@ -55,7 +55,7 @@ const SettingsModal = (props: ISettingsModal) => {
         css={{
           border: "none",
           background: "none",
-          color: theme.common.white,
+          color: "#fff",
           fontSize: "1.125rem",
           cursor: "pointer",
           width: "67%",
@@ -69,12 +69,12 @@ const SettingsModal = (props: ISettingsModal) => {
         css={{
           height: "100vh",
           maxWidth: "33.3%",
-          background: theme.common.white,
+          background: "#fff",
           position: "absolute",
           right: "0",
           top: "0",
           padding: "2% 2% 0",
-          color: theme.common.black,
+          color: "#000",
           [screen.desktopLg]: {
             width: "50%",
           },

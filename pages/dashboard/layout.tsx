@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <div
         css={{
           paddingBlock: "0 2rem",
-          borderRight: `1px solid ${theme.shadow.border}`,
+          borderRight: `1px solid ${"#E4E4E4"}`,
           fontSize: "1.125rem",
           fontWeight: "bold",
         }}
@@ -116,7 +116,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <hr
                   css={{
                     border: "none",
-                    borderTop: `1px solid ${theme.shadow.border}`,
+                    borderTop: `1px solid ${"#E4E4E4"}`,
                   }}
                 />
                 <ul
@@ -203,7 +203,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <hr
                   css={{
                     border: "none",
-                    borderTop: `1px solid ${theme.shadow.border}`,
+                    borderTop: `1px solid ${"#E4E4E4"}`,
                   }}
                 />
                 <Link
@@ -227,7 +227,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <hr
                   css={{
                     border: "none",
-                    borderTop: `1px solid ${theme.shadow.border}`,
+                    borderTop: `1px solid ${"#E4E4E4"}`,
                   }}
                 />
               </div>

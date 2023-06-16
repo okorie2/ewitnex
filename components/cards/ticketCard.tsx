@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react";
 
-import { theme } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,7 +34,7 @@ const TicketCard = (props: IManageEvent) => {
         css={{
           width: "100%",
           height: "140px",
-          border: isActive ? `0.5px soild ${theme.color.lightGreen}` :`1px solid ${theme.shadow.border2}`,
+          border: isActive ? `0.5px soild ${"#00D9B7"}` :`1px solid ${"#C0C0C0"}`,
           borderRadius: "20px",
           display: "grid",
           gridTemplateColumns: "1fr auto",
@@ -43,7 +42,7 @@ const TicketCard = (props: IManageEvent) => {
           gap: "1.5rem",
           cursor: "pointer",
           marginBlock: "1.2rem",
-          boxShadow: isActive ? `0px 0px 4px ${theme.color.lightGreen};`: ``
+          boxShadow: isActive ? `0px 0px 4px ${"#00D9B7"};`: ``
         }}
         onClick={() => props.onClick(props.id)}
       >
@@ -69,7 +68,7 @@ const TicketCard = (props: IManageEvent) => {
               {props.title}
             </p>
             <div css = {{fontSize: "12px"}}>
-                <span css ={{ color: theme.color.grey, marginRight: "2%"}}>{props.id}</span>
+                <span css ={{ color: "#AEAEAE", marginRight: "2%"}}>{props.id}</span>
                 <span>{props.type}</span>
             </div>
             <div>
@@ -98,7 +97,7 @@ const TicketCard = (props: IManageEvent) => {
             position: "relative",
             marginTop: "-1%",
             paddingInline: "5px",
-            backgroundColor: theme.common.white,
+            backgroundColor: "#fff",
           }}
         >
           <Image

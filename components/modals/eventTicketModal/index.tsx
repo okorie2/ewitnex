@@ -2,7 +2,7 @@
 
 import React from "react";
 import Modal from "react-modal";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import EventTicketForm from "@/components/modals/eventTicketModal/form";
 
 interface IEventTicketModal {
@@ -11,14 +11,14 @@ interface IEventTicketModal {
 }
 
 const customStyles = {
-  overlay: { backgroundColor: theme.background.black, zIndex: "3" },
+  overlay: { backgroundColor: "#00000029", zIndex: "3" },
   content: {
     width: "100%",
     height: "100%",
     left: "0",
     top: "0",
     border: "none",
-    backgroundColor: theme.background.black,
+    backgroundColor: "#00000029",
     fontFamily: "'Nunito', sans-serif",
   },
 };
@@ -35,7 +35,7 @@ const EventTicketModal = (props: IEventTicketModal) => {
         css={{
           border: "none",
           background: "none",
-          color: theme.common.white,
+          color: "#fff",
           fontSize: "1.125rem",
           cursor: "pointer",
         }}
@@ -47,7 +47,7 @@ const EventTicketModal = (props: IEventTicketModal) => {
           css={{
             height: "100vh",
             maxWidth: "37%",
-            background: theme.common.white,
+            background: "#fff",
             position: "absolute",
             right: "0",
             top: "0",
@@ -57,7 +57,7 @@ const EventTicketModal = (props: IEventTicketModal) => {
                   display: "none",
                 },
             zIndex: "9",
-            color: theme.common.black,
+            color: "#000",
             [screen.desktopLg]: {
               width: "50%",
             },
@@ -71,7 +71,7 @@ const EventTicketModal = (props: IEventTicketModal) => {
               css={{
                 fontSize: "0.875rem",
                 fontWeight: "500",
-                color: theme.color.grey,
+                color: "#AEAEAE",
                 marginBlock: "0.5rem",
               }}
             >

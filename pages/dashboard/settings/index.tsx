@@ -22,8 +22,8 @@ const Settings = () => {
         >
           <div
             css={{
-              borderLeft: `1px solid ${theme.shadow.border}`,
-              boxShadow: `0px 0px 3px ${theme.shadow.border3}`,
+              borderLeft: `1px solid ${"#E4E4E4"}`,
+              boxShadow: `0px 0px 3px ${"#00000029"}`,
               marginLeft: "1.2rem",
               height: "100%",
               maxHeight: "100vh",
@@ -32,11 +32,11 @@ const Settings = () => {
             <div
               css={{
                 height: "80px",
-                borderBottom: `1px solid ${theme.shadow.border}`,
+                borderBottom: `1px solid ${"#E4E4E4"}`,
                 display: "grid",
                 alignItems: "center",
                 paddingInline: "1.5rem",
-                color: theme.common.black,
+                color: "#000",
               }}
             >
               <h2>Settings</h2>

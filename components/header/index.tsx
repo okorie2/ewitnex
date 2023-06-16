@@ -1,17 +1,15 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import { useTheme } from "@emotion/react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/components/logo";
 
 export default function Navbar() {
-  const theme = useTheme();
   return (
     <div
       css={{
-        backgroundColor: theme.common.white,
+        backgroundColor: "#fff",
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "center",
@@ -30,7 +28,7 @@ export default function Navbar() {
       <div
         css={{
           borderRadius: "66px",
-          backgroundColor: theme.background.secondary,
+          backgroundColor: "#F5F5F5",
           width: "33.2%",
           height: "2.625rem",
           display: "flex",
@@ -55,18 +53,18 @@ export default function Navbar() {
             width: "100%",
             outline: "none",
             border: "none",
-            backgroundColor: theme.background.secondary,
+            backgroundColor: "#F5F5F5",
             height: "95%",
             fontSize: "1rem",
             fontWeight: "400",
-            color: theme.shadow.secondary,
+            color: "#AEAEAE",
           }}
         />
       </div>
       <div
         css={{
           display: "flex",
-          color: theme.common.black,
+          color: "#000",
           fontSize: "1rem",
           width: "32%",
           fontWeight: 500,
@@ -74,7 +72,7 @@ export default function Navbar() {
           justifyContent: "space-evenly",
           ">div": {
             ":hover": {
-              color: theme.background.primary,
+              color: "#7C35AB",
             },
           },
         }}
@@ -95,20 +93,20 @@ export default function Navbar() {
       <div>
         <hr css={{ width: "1px", height: "36px" }} />
       </div>
-      <div css={{ color: theme.background.primary, fontWeight: "500" }}>
+      <div css={{ color: "#7C35AB", fontWeight: "500" }}>
         <Link href="/auth/signin">Log in</Link>
       </div>
       <div
         css={{
           borderRadius: "3.5rem",
-          border: `1px solid ${theme.background.primary}`,
+          border: `1px solid ${"#7C35AB"}`,
           height: "2.625rem",
           display: "flex",
           width: "8.063rem",
           alignItems: "center",
           justifyContent: "center",
           fontWeight: 500,
-          color: theme.background.primary,
+          color: "#7C35AB",
         }}
       >
         <Link href="/auth/signup">Get Started</Link>

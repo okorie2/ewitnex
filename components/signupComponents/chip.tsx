@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import React from "react";
 
 interface Props {
@@ -25,7 +25,6 @@ export const chipData = [
 ];
 
 export default function Chip(props: Props) {
-  const theme = useTheme();
 
   const handleSelectedChip = (name: string) => {
     const newChipDetails = props.chipDetails.map((chip) => {
@@ -47,14 +46,14 @@ export default function Chip(props: Props) {
           css={css`
             height: 31px;
             border: ${`2px solid ${
-              chip.selected ? "transparent" : theme.color.primary
+              chip.selected ? "transparent" : "#7C35AB"
             }`};
             border-radius: 16px;
             padding: 5px 15px;
             font-size: 14px;
             font-weight: 500;
-            color: ${chip.selected ? theme.common.white : theme.color.primary};
-            background: ${chip.selected ? theme.color.primary : "none"};
+            color: ${chip.selected ? "#fff" : "#7C35AB"};
+            background: ${chip.selected ? "#7C35AB" : "none"};
             cursor: pointer;
           `}
         >

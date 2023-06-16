@@ -13,13 +13,13 @@ export default function TicketToSaleFragment() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        background: theme.common.white,
+        background: "#fff",
         fontFamily: "'Poppins', sans-serif",
         padding: "0% 4%",
       }}
     >
       <div css={{ width: "50%" }}>
-        <H1 small color={theme.common.black}>
+        <H1 small color={"#000"}>
           Got a ticket to sale for the event? We got you covered
         </H1>
         <p css={{ marginTop: "4%" }}>

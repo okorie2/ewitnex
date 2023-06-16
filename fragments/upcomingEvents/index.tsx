@@ -26,7 +26,7 @@ export default function UpcomingEventsFragment() {
         </div>
         <div
           css={{
-            color: theme.background.primary,
+            color: "#7C35AB",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
