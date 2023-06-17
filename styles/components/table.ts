@@ -6,7 +6,6 @@ export const TableContainer = styled.div`
     overflow: auto;
     padding-left: 0.1rem;
     padding-right: 0.1rem;
-    padding-bottom : 0.2rem;
     border-radius: 8px;
     box-shadow: 0px 4px 3px -3px #00000029;
 `
