@@ -14,6 +14,11 @@ const Tickets = () => {
   const [showPast, setShowPast] = useState(false);
   const [activeTab, setActiveTab] = useState("upcoming");
   const [activeCard, setActiveCard] = useState("");
+  const [isMenuOpen , setIsMenuOpen] = useState(false)
+  
+  const handleMenuOpen = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   const handleShowUpcoming = () => {
     setShowUpcoming(true);
@@ -136,12 +141,45 @@ const Tickets = () => {
             }}
           >
             <h2>DevFest Aba</h2>
+            <div css={{ cursor: "pointer", position: "relative" }} onClick={handleMenuOpen}>
             <Image
               src={"/assets/svgs/ellipse.svg"}
               alt={""}
               width={20}
               height={20}
             />
+            { isMenuOpen &&
+                <div
+                css={{
+                  position: "absolute",
+                  background: "#fff",
+                  height: 155,
+                  width: 230,
+                  left: "-1000%",
+                  right: "0",
+                  zIndex: "2",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  border: "1px solid #C0C0C0",
+                }}
+                >
+                <div css={{ width: "80%", marginTop: "1.2rem" , ":hover": {fontWeight: "bold"}, display:"flex", gap: "10%"}}>
+                  <Image src={"/assets/svgs/share.svg"} alt={""} width={20} height={20}/>
+                  <p>Transfer Ticket</p>
+                </div>
+                <div css={{ width: "80%", marginTop: "1.2rem", ":hover": {fontWeight: "bold"}, display:"flex", gap: "10%"}}>
+                  <Image src={"/assets/svgs/mail.svg"} alt={""} width={20} height={20}/>
+                  <p>Contact Organizer</p>
+                </div>
+                <div css={{ width: "80%", marginTop: "1.2rem", ":hover": {fontWeight: "bold"}, display:"flex", gap: "10%"}}>
+                  <Image src={"/assets/svgs/report-flag.svg"} alt={""} width={20} height={20} />
+                  <p>Report Event</p>
+                </div>
+              </div>
+              }
+            </div>
           </div>
           <div
             css={{
