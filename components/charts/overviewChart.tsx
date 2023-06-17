@@ -55,7 +55,7 @@ const OverviewChart = () => {
           {
             data: [3200,4500, 3400, 9010, 8000, 8300, 7000, 5000,3000,],
             type: 'line',
-            smooth: false,
+            smooth: 0.15,
             color: "#00D9B7",
             showSymbol:false,
             markLine:{
@@ -68,7 +68,7 @@ const OverviewChart = () => {
           {
             data: [1500,5500, 4700, 1000, 2000, 5000, 4500,6200, 8000],
             type: 'line',
-            smooth: false,
+            smooth: 0.15,
             color: "#F05E78",
             showSymbol:false
           },
