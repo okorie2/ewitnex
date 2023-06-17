@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
 import EventTab from "./[tab]";
-import { theme } from "styles/theme";
 
 const SingleEvent = () => {
   const router = useRouter();
@@ -24,14 +23,14 @@ const SingleEvent = () => {
           width: "90%",
           marginInline: "auto",
           paddingBottom: "5rem",
-          boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
+          boxShadow: `0px 0px 10px ${"#00000029"}`,
           position: "relative",
           borderRadius: "20px",
         }}
       >
         <ul
           css={{
-            boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
+            boxShadow: `0px 0px 10px ${"#00000029"}`,
             borderRadius: "20px",
             padding: "1rem 2.5rem",
             display: "flex",
@@ -41,7 +40,7 @@ const SingleEvent = () => {
             zIndex: "1",
             top: "-1.5rem",
             left: "20%",
-            backgroundColor: theme.common.white,
+            backgroundColor: "#fff",
             listStyleType: "none",
             fontFamily: "'Open Sans', sans-serif",
           }}
@@ -78,9 +77,9 @@ const TabNav: React.FC<{
           padding: "0.38rem 0.75rem ",
           borderRadius: "1rem",
           background: isActive
-            ? theme.background.lightGreen
-            : theme.background.secondary2,
-          color: isActive ? theme.common.white : theme.color.grey,
+            ? "#00D9B7"
+            : "#F2F7FB",
+          color: isActive ? "#fff" : "#AEAEAE",
           cursor: "pointer",
           fontSize: "0.875rem",
           fontWeight: "500",

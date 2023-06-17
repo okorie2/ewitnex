@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { theme } from "styles/theme";
 
 interface IProfileCard {
   image: string;
@@ -18,8 +17,8 @@ const followButtonStyle = {
   border: "none",
   fontSize: "0.875rem",
   fontWeight: "bold",
-  color: theme.common.white,
-  backgroundColor: theme.color.primary,
+  color: "#fff",
+  backgroundColor: "#7C35AB",
   cursor: "pointer",
 };
 
@@ -27,11 +26,11 @@ const followingButtonStyle = {
   width: "5.8rem",
   height: "2.3rem",
   borderRadius: "25px",
-  border: `1px solid ${theme.color.primary}`,
+  border: `1px solid ${"#7C35AB"}`,
   fontSize: "0.875rem",
   fontWeight: "bold",
-  color: theme.color.primary,
-  backgroundColor: theme.common.white,
+  color: "#7C35AB",
+  backgroundColor: "#fff",
   cursor: "pointer",
 };
 
@@ -52,7 +51,7 @@ const ProfileCard = (props: IProfileCard) => {
             css={{
               fontSize: "0.75rem",
               fontWeight: "500",
-              color: theme.color.grey,
+              color: "#AEAEAE",
             }}
           >
             {props.userName}

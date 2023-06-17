@@ -17,7 +17,6 @@ import Logo from "@/components/logo";
 //   preload: true,
 // });
 export default function Signin() {
-  const theme = useTheme();
   return (
     <>
       <div css={{ display: "flex", justifyContent: "space-between" }}>
@@ -30,7 +29,7 @@ export default function Signin() {
           <div className="btm">
             <div>
               <H1
-                color={theme.common.black}
+                color={"#000"}
                 css={{
                   display: "flex",
                   gap: "11px",
@@ -44,7 +43,7 @@ export default function Signin() {
                 <span css={{ fontSize: "1rem" }}>your</span> SOCIAL PAPERLESS
               </H1>
               <H1
-                color={theme.common.black}
+                color={"#000"}
                 css={{
                   display: "flex",
                   gap: "8px",
@@ -61,7 +60,7 @@ export default function Signin() {
                 <span> EVENT </span> MANAGEMENT
               </H1>
               <H1
-                color={theme.common.black}
+                color={"#000"}
                 css={{
                   textAlign: "left",
                   marginLeft: "19.4rem",

@@ -3,7 +3,7 @@
 import React from "react";
 import RSVPCard from "@/components/cards/RSVPCard";
 import { H3 } from "styles/components/typography";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 import { ButtonFormFilled } from "styles/components/button";
 import { useRouter } from "next/router";
 
@@ -44,13 +44,13 @@ const RSVP = () => {
         >
           <div>
             <H3>405</H3>
-            <p css={{ color: theme.color.tertiary, fontWeight: "500" }}>
+            <p css={{ color: "#707070", fontWeight: "500" }}>
               persons will be attending
             </p>
           </div>
           <div>
             <H3>40</H3>
-            <p css={{ color: theme.color.tertiary, fontWeight: "500" }}>
+            <p css={{ color: "#707070", fontWeight: "500" }}>
               persons are from your location, Uyo
             </p>
           </div>

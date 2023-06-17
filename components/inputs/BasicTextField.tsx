@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -16,7 +16,6 @@ interface Props {
 }
 
 export default function BasicTextField({ label, name, ...rest }: Props) {
-  const theme = useTheme();
   const [labelDisplay, setLabelDisplay] = useState(false);
 
   useEffect(() => {
@@ -27,9 +26,9 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
     <div
       css={{
         position: "relative",
-        border: `1px solid ${theme.shadow.border2}`,
+        border: `1px solid ${"#C0C0C0"}`,
         borderRadius: "10px",
-        background: theme.common.white,
+        background: "#fff",
         height: "51.2px",
         display: "flex",
         justifyContent: "space-between",
@@ -42,7 +41,7 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
           position: "absolute",
           top: labelDisplay ? "-11px" : "25px",
           left: "2%",
-          background: theme.common.white,
+          background: "#fff",
           padding: "0 4%",
           fontSize: "14px",
           fontFamily: "'Nunito', sans-serif",
@@ -75,7 +74,6 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
 }
 
 export const PasswordTextField = ({ label, ...rest }: Props) => {
-  const theme = useTheme();
   const [labelDisplay, setLabelDisplay] = useState(false);
   const [value, setValue] = useState("");
   useEffect(() => {
@@ -85,9 +83,9 @@ export const PasswordTextField = ({ label, ...rest }: Props) => {
     <div
       css={{
         position: "relative",
-        border: `1px solid ${theme.shadow.border2}`,
+        border: `1px solid ${"#C0C0C0"}`,
         borderRadius: "10px",
-        background: theme.common.white,
+        background: "#fff",
         height: "51.2px",
         display: "flex",
         justifyContent: "space-between",
@@ -100,7 +98,7 @@ export const PasswordTextField = ({ label, ...rest }: Props) => {
           position: "absolute",
           top: labelDisplay ? "-11px" : "25px",
           left: "2%",
-          background: theme.common.white,
+          background: "#fff",
           padding: "0 4%",
           fontSize: "14px",
           fontFamily: "'Nunito', sans-serif",

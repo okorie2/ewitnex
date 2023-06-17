@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import { useTheme } from "@emotion/react";
 
 import React from "react";
 import Image from "next/image";
@@ -8,12 +7,11 @@ import { screen } from "styles/theme";
 import Logo from "@/components/logo";
 
 export default function PublicSiteFooter() {
-  const theme = useTheme();
   return (
     <div
       css={{
         fontFamily: "'Poppins', sans-serif",
-        background: theme.common.white,
+        background: "#fff",
         zIndex: "2",
         position: "relative",
       }}
@@ -95,7 +93,7 @@ export default function PublicSiteFooter() {
           <div
             css={{
               display: "flex",
-
+              fontWeight: "500",
               justifyContent: "space-between",
             }}
           >

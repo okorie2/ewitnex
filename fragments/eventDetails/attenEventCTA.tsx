@@ -2,7 +2,6 @@
 
 import React from "react";
 import { ButtonFormFilled } from "styles/components/button";
-import { theme } from "styles/theme";
 
 const AttenEventCTA = () => {
   return (
@@ -10,12 +9,12 @@ const AttenEventCTA = () => {
       css={{
         width: "325px",
         height: "92px",
-        boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
+        boxShadow: `0px 0px 10px ${"#00000029"}`,
         borderRadius: "40px 40px 0px 0px",
         display: "grid",
         placeContent: "center",
         position: "fixed",
-        background: theme.background.white,
+        background: "#FFFFFF",
         bottom: "0",
         right: "5%",
         zIndex: "3",
@@ -28,7 +27,7 @@ const AttenEventCTA = () => {
           gap: "1.2rem",
         }}
       >
-        <p css={{ color: theme.common.black, fontWeight: "bold" }}>
+        <p css={{ color: "#000", fontWeight: "bold" }}>
           $500 - $2K
         </p>
         <ButtonFormFilled css={{ width: "172px" }}>

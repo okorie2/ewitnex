@@ -2,7 +2,7 @@
 
 import React from "react";
 import Modal from "react-modal";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,14 +12,14 @@ interface IHostEventModal {
 }
 
 const customStyles = {
-  overlay: { backgroundColor: theme.background.black, zIndex: "3" },
+  overlay: { backgroundColor: "#00000029", zIndex: "3" },
   content: {
     width: "100%",
     height: "100%",
     left: "0",
     top: "0",
     border: "none",
-    backgroundColor: theme.background.black,
+    backgroundColor: "#00000029",
     fontFamily: "'Nunito', sans-serif",
   },
 };
@@ -36,7 +36,7 @@ const HostEventModal = (props: IHostEventModal) => {
         css={{
           border: "none",
           background: "none",
-          color: theme.common.white,
+          color: "#fff",
           fontSize: "1.125rem",
           cursor: "pointer",
         }}
@@ -48,12 +48,12 @@ const HostEventModal = (props: IHostEventModal) => {
           css={{
             height: "100vh",
             maxWidth: "25%",
-            background: theme.common.white,
+            background: "#fff",
             position: "absolute",
             right: "0",
             top: "0",
             padding: "2% 2% 0",
-            color: theme.common.black,
+            color: "#000",
             [screen.desktopLg]: {
               width: "50%",
             },
@@ -83,7 +83,7 @@ const HostEventModal = (props: IHostEventModal) => {
                 css={{
                   fontSize: "1.125rem",
                   fontWeight: "bold",
-                  color: theme.color.lightGreen,
+                  color: "#00D9B7",
                   marginTop: "0.5rem",
                 }}
               >
@@ -102,8 +102,8 @@ const HostEventModal = (props: IHostEventModal) => {
                 css={{
                   width: "38px",
                   height: "38px",
-                  backgroundColor: theme.background.lightGreen,
-                  color: theme.common.white,
+                  backgroundColor: "#00D9B7",
+                  color: "#fff",
                   borderRadius: "50%",
                   display: "grid",
                   alignContent: "center",
@@ -130,8 +130,8 @@ const HostEventModal = (props: IHostEventModal) => {
                 css={{
                   width: "38px",
                   height: "38px",
-                  backgroundColor: theme.background.lightGreen,
-                  color: theme.common.white,
+                  backgroundColor: "#00D9B7",
+                  color: "#fff",
                   borderRadius: "50%",
                   display: "grid",
                   alignContent: "center",
@@ -161,7 +161,7 @@ const HostEventModal = (props: IHostEventModal) => {
                 <div
                   css={{
                     fontSize: "0.875rem",
-                    backgroundColor: theme.background.secondary,
+                    backgroundColor: "#F5F5F5",
                     borderRadius: "5px",
                     width: "fit-content",
                     paddingInline: "0.3rem",
@@ -193,7 +193,7 @@ const HostEventModal = (props: IHostEventModal) => {
                 <div
                   css={{
                     fontSize: "0.875rem",
-                    backgroundColor: theme.background.secondary,
+                    backgroundColor: "#F5F5F5",
                     borderRadius: "5px",
                     width: "fit-content",
                     marginInline: "auto",
@@ -227,8 +227,8 @@ const HostEventModal = (props: IHostEventModal) => {
                 css={{
                   width: "38px",
                   height: "38px",
-                  backgroundColor: theme.background.lightGreen,
-                  color: theme.common.white,
+                  backgroundColor: "#00D9B7",
+                  color: "#fff",
                   borderRadius: "50%",
                   display: "grid",
                   alignContent: "center",
@@ -249,7 +249,7 @@ const HostEventModal = (props: IHostEventModal) => {
                 href={`/dashboard/programs/Heal12548`}
                 css={{
                   fontSize: "1.125rem",
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                 }}
               >
@@ -260,11 +260,11 @@ const HostEventModal = (props: IHostEventModal) => {
                   fontSize: "1rem",
                   fontWeight: "bold",
                   fontFamily: "'Nunito', sans-serif",
-                  color: theme.common.white,
-                  border: `1px solid ${theme.color.primary}`,
+                  color: "#fff",
+                  border: `1px solid ${"#7C35AB"}`,
                   height: "52px",
                   marginBlock: "1rem",
-                  background: theme.color.primary,
+                  background: "#7C35AB",
                   borderRadius: "26px",
                   width: "60%",
                   cursor: "pointer",

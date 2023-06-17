@@ -3,7 +3,6 @@
 import SettingsCard from "@/components/cards/settingsCard";
 import React, { useState } from "react";
 import Image from "next/image";
-import { theme } from "styles/theme";
 import SettingsFormCard from "@/components/cards/setingsFormCard";
 import SettingsModal from "@/components/modals/settingsModal";
 
@@ -25,13 +24,13 @@ const PersonalInformation = () => {
       <div
         css={{
           height: "80px",
-          borderBottom: `1px solid ${theme.shadow.border}`,
+          borderBottom: `1px solid ${"#E4E4E4"}`,
           display: "grid",
           gridTemplateColumns: "1fr auto",
           alignItems: "center",
           paddingInline: "1.5rem",
           paddingRight: "2.5rem",
-          color: theme.common.black,
+          color: "#000",
         }}
       >
         <h2>Personal Information</h2>

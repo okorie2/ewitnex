@@ -14,7 +14,7 @@ export default function EventCreatingFragment() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        background: theme.common.white,
+        background: "#fff",
         fontFamily: "'Poppins', sans-serif",
         padding: "3% 4%",
       }}
@@ -35,7 +35,7 @@ export default function EventCreatingFragment() {
         />
       </div>
       <div css={{ width: "50%", marginTop: "10%" }}>
-        <H1 small color={theme.common.black}>
+        <H1 small color={"#000"}>
           Event Creating, hosting and ticketing done right
         </H1>
         <p css={{ marginTop: "4%" }}>

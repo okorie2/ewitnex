@@ -8,11 +8,10 @@ import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
 export default function WhoWeArePaper() {
-  const theme = useTheme();
   return (
     <div
       css={{
-        backgroundImage: `linear-gradient(${theme.background.tertiary}, ${theme.background.primary})`,
+        backgroundImage: `linear-gradient(${"#528FFE"}, ${"#7C35AB"})`,
         display: "flex",
         justifyContent: "space-between",
         fontFamily: "'Poppins', sans-serif",

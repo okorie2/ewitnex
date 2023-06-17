@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react";
 
-import { theme } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,7 +34,7 @@ const TicketCard = (props: IManageEvent) => {
         css={{
           width: "100%",
           height: "140px",
-          border: isActive ? `0.5px soild ${theme.color.lightGreen}` :`1px solid ${theme.shadow.border2}`,
+          border: isActive ? `0.5px soild ${"#00D9B7"}` :`1px solid ${"#C0C0C0"}`,
           borderRadius: "20px",
           display: "grid",
           gridTemplateColumns: "1fr auto",
@@ -43,11 +42,11 @@ const TicketCard = (props: IManageEvent) => {
           gap: "1.5rem",
           cursor: "pointer",
           marginBlock: "1.2rem",
-          boxShadow: isActive ? `0px 1px 10px #0000002E;`: ``
+          boxShadow: isActive ? `0px 0px 4px ${"#00D9B7"};`: ``
         }}
         onClick={() => props.onClick(props.id)}
       >
-        <div css={{ display: "grid", gridTemplateColumns: "25% 75%" }}>
+        <div css={{ display: "grid", gridTemplateColumns: "25% 75%", height: "fit-content" }}>
           <div
             css={{
               display: "flex",
@@ -69,7 +68,7 @@ const TicketCard = (props: IManageEvent) => {
               {props.title}
             </p>
             <div css = {{fontSize: "12px"}}>
-                <span css ={{ color: theme.color.grey, marginRight: "2%"}}>{props.id}</span>
+                <span css ={{ color: "#AEAEAE", marginRight: "2%"}}>{props.id}</span>
                 <span>{props.type}</span>
             </div>
             <div>
@@ -92,10 +91,13 @@ const TicketCard = (props: IManageEvent) => {
         </div>
         <div
           css={{
-            width: "132px",
-            height: "140px",
+            width: "136px",
+            height: "141px",
             borderRadius: "20px",
             position: "relative",
+            marginTop: "-1%",
+            paddingInline: "5px",
+            backgroundColor: "#fff",
           }}
         >
           <Image
@@ -104,6 +106,7 @@ const TicketCard = (props: IManageEvent) => {
             fill
             css={{
               borderRadius: "20px",
+              marginRight: "-4%",
             }}
           />
         </div>

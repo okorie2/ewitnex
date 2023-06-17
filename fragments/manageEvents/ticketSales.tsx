@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import { theme, screen } from "styles/theme";
+import {  screen } from "styles/theme";
 import Image from "next/image";
 import TicketSalesTable from "@/components/tables/ticketSales";
 
@@ -23,11 +23,11 @@ const TicketSales = () => {
         <div
           css={{
             borderRadius: "24px",
-            backgroundColor: theme.background.secondary2,
+            backgroundColor: "#F2F7FB",
             display: "grid",
             fontSize: "14px",
             padding: "0.3rem",
-            color: theme.color.grey,
+            color: "#AEAEAE",
             gridTemplateColumns: "33% 33% 34%",
             width: "45%",
           }}
@@ -51,7 +51,7 @@ const TicketSales = () => {
         <div
           css={{
             borderRadius: "66px",
-            backgroundColor: theme.background.secondary,
+            backgroundColor: "#F5F5F5",
             width: "80%",
             height: "2.575rem",
             display: "flex",
@@ -76,11 +76,11 @@ const TicketSales = () => {
               width: "100%",
               outline: "none",
               border: "none",
-              backgroundColor: theme.background.secondary,
+              backgroundColor: "#F5F5F5",
               height: "85%",
               fontSize: "0.9rem",
               fontWeight: "400",
-              color: theme.shadow.secondary,
+              color: "#AEAEAE",
             }}
           />
         </div>
@@ -88,7 +88,7 @@ const TicketSales = () => {
             css={{
               borderRadius: "50%",
               width: "12%",
-              backgroundColor: theme.background.secondary,
+              backgroundColor: "#F5F5F5",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -105,6 +105,7 @@ const TicketSales = () => {
         </div>
       </div>
       <TicketSalesTable />
+      <div css = {{height: "2rem"}}></div>
     </div>
   );
 };
@@ -138,7 +139,7 @@ const TicketView: React.FC<{
         borderRadius: "18px",
         padding: "0.5rem",
         textAlign: "center",
-        backgroundColor: isActive ? theme.background.lightGreen : "",
+        backgroundColor: isActive ? "#00D9B7" : "",
         color: isActive ? "white" : "",
         cursor: "pointer",
       }}

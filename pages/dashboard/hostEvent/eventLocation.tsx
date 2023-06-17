@@ -3,7 +3,7 @@
 import React from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
-import { screen, theme } from "styles/theme";
+import { screen} from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
 import Image from "next/image";
@@ -15,7 +15,7 @@ const EventLocation = () => {
         <div
           css={{
             height: "150px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
             paddingInline: "3.2rem",
@@ -55,7 +55,7 @@ const EventLocation = () => {
             >
               <p
                 css={{
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -65,7 +65,7 @@ const EventLocation = () => {
               <Link
                 href="/dashboard"
                 css={{
-                  color: theme.color.negative,
+                  color: "#F05E78",
                   fontWeight: "bold",
                   cursor: "pointer",
                 }}
@@ -108,7 +108,7 @@ const EventLocation = () => {
             />
             <p
               css={{
-                color: theme.color.grey,
+                color: "#AEAEAE",
                 fontSize: "1.125rem",
                 fontWeight: "bold",
                 marginBottom: "1rem",
@@ -120,12 +120,12 @@ const EventLocation = () => {
               css={{
                 fontSize: "0.875rem",
                 fontWeight: "bold",
-                color: theme.color.primary,
-                border: `1px solid ${theme.color.primary}`,
+                color: "#7C35AB",
+                border: `1px solid ${"#7C35AB"}`,
                 width: "250px",
                 height: "38px",
                 marginBottom: "0.5rem",
-                background: theme.common.white,
+                background: "#fff",
               }}
             >
               Enter location manually
@@ -181,7 +181,7 @@ const EventLocation = () => {
               type="checkbox"
               name="undecided"
               value="date undecided"
-              css={{ border: `5px solid ${theme.background.primary}` }}
+              css={{ border: `5px solid ${"#7C35AB"}` }}
             />
             <label
               htmlFor="undecided"
@@ -198,12 +198,12 @@ const EventLocation = () => {
             css={{
               fontSize: "0.875rem",
               fontWeight: "bold",
-              color: theme.color.primary,
-              border: `1px solid ${theme.color.primary}`,
+              color: "#7C35AB",
+              border: `1px solid ${"#7C35AB"}`,
               width: "215px",
               height: "38px",
               marginBottom: "0.5rem",
-              background: theme.common.white,
+              background: "#fff",
             }}
           >
             <div
@@ -239,11 +239,11 @@ const EventLocation = () => {
                   fontSize: "1rem",
                   fontWeight: "bold",
                   fontFamily: "'Nunito', sans-serif",
-                  color: theme.color.primary,
-                  border: `1px solid ${theme.color.primary}`,
+                  color: "#7C35AB",
+                  border: `1px solid ${"#7C35AB"}`,
                   height: "52px",
                   marginBottom: "0.5rem",
-                  background: theme.common.white,
+                  background: "#fff",
                   borderRadius: "26px",
                   width: "100%",
                   cursor: "pointer",
@@ -258,11 +258,11 @@ const EventLocation = () => {
                   fontSize: "1rem",
                   fontWeight: "bold",
                   fontFamily: "'Nunito', sans-serif",
-                  color: theme.common.white,
-                  border: `1px solid ${theme.color.primary}`,
+                  color: "#fff",
+                  border: `1px solid ${"#7C35AB"}`,
                   height: "52px",
                   marginBottom: "0.5rem",
-                  background: theme.color.primary,
+                  background: "#7C35AB",
                   borderRadius: "26px",
                   width: "100%",
                   cursor: "pointer",

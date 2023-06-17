@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css, useTheme } from "@emotion/react";
+import { css } from "@emotion/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -17,7 +17,6 @@ interface Props {
 }
 
 export default function SettingsTextField({ label, name, ...rest }: Props) {
-  const theme = useTheme();
 
   return (
     <div css ={{display: "flex" , flexDirection: "column", marginBottom: "1rem"}}>
@@ -34,9 +33,9 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
     <div
       css={{
         position: "relative",
-        border: `1px solid ${theme.shadow.border2}`,
+        border: `1px solid ${"#C0C0C0"}`,
         borderRadius: "10px",
-        background: theme.common.white,
+        background: "#fff",
         height: "49px",
         display: "flex",
         justifyContent: "space-between",
@@ -53,7 +52,7 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
           height: "100%",
           borderRadius: "10px",
           paddingLeft: "5%",
-          color: theme.common.black
+          color: "#000"
         }}
         type={"text"}
         value={rest.value}
@@ -68,7 +67,6 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
 }
 
 export const SettingsPasswordTextField = ({ label,placeholder, ...rest }: Props) => {
-  const theme = useTheme();
   const [value, setValue] = useState("");
   return (
     <div css ={{display: "flex" , flexDirection: "column", marginBottom: "1rem"}}>
@@ -85,9 +83,9 @@ export const SettingsPasswordTextField = ({ label,placeholder, ...rest }: Props)
     <div
       css={{
         position: "relative",
-        border: `1px solid ${theme.shadow.border2}`,
+        border: `1px solid ${"#C0C0C0"}`,
         borderRadius: "7px",
-        background: theme.common.white,
+        background: "#fff",
         height: "50px",
         display: "flex",
         justifyContent: "space-between",
@@ -106,7 +104,7 @@ export const SettingsPasswordTextField = ({ label,placeholder, ...rest }: Props)
           borderRadius: "7px",
           paddingLeft: "3%",
           fontFamily: "'Nunito', sans-serif",
-          color: theme.color.grey,
+          color: "#AEAEAE",
           fontWeight: "bold",
         }}
         type={rest.visible ? "text" : "password"}

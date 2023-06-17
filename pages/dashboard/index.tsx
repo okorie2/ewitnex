@@ -4,7 +4,6 @@ import React from "react";
 import DashboardLayout from "./layout";
 import Image from "next/image";
 import { ButtonFormFilled } from "styles/components/button";
-import { theme } from "styles/theme";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
 import Link from "next/link";
@@ -22,14 +21,14 @@ const Feeds = () => {
       >
         <div
           css={{
-            borderRight: `1px solid ${theme.shadow.border}`,
+            borderRight: `1px solid ${"#E4E4E4"}`,
             height: "100%",
           }}
         >
           <DashboardHeader />
           <div
             css={{
-              color: theme.common.black,
+              color: "#000",
               display: "grid",
               placeContent: "center",
               height: "calc(100% - 80px)",
@@ -81,7 +80,7 @@ const Feeds = () => {
               <p
                 css={{
                   fontSize: "1.25rem",
-                  color: theme.color.tertiary,
+                  color: "#707070",
                   fontWeight: "bold",
                 }}
               >
@@ -90,7 +89,7 @@ const Feeds = () => {
               <p
                 css={{
                   fontSize: "1.125rem",
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                 }}
               >
@@ -141,7 +140,7 @@ const Feeds = () => {
               <p
                 css={{
                   fontSize: "1.25rem",
-                  color: theme.color.tertiary,
+                  color: "#707070",
                   fontWeight: "bold",
                 }}
               >
@@ -150,7 +149,7 @@ const Feeds = () => {
               <p
                 css={{
                   fontSize: "1.125rem",
-                  color: theme.color.primary,
+                  color: "#7C35AB",
                   fontWeight: "bold",
                 }}
               >

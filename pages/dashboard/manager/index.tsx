@@ -2,7 +2,6 @@
 import React from "react";
 
 import DashboardLayout from "pages/dashboard/layout";
-import { theme } from "styles/theme";
 import {
   activeButtonStyle,
   inactiveButtonStyle,
@@ -14,7 +13,7 @@ const Manager = () => {
     <DashboardLayout>
       <div
         css={{
-          borderLeft: `1px solid ${theme.shadow.border}`,
+          borderLeft: `1px solid ${"#E4E4E4"}`,
           marginLeft: "1.5rem",
           height: "100%",
         }}
@@ -22,11 +21,11 @@ const Manager = () => {
         <div
           css={{
             height: "80px",
-            borderBottom: `1px solid ${theme.shadow.border}`,
+            borderBottom: `1px solid ${"#E4E4E4"}`,
             display: "grid",
             alignItems: "center",
             paddingInline: "1.5rem",
-            color: theme.common.black,
+            color: "#000",
           }}
         >
           <h2>Manage Event</h2>
@@ -39,7 +38,7 @@ const Manager = () => {
           <div
             css={{
               borderRadius: "16px",
-              backgroundColor: theme.background.secondary2,
+              backgroundColor: "#F2F7FB",
               width: "376px",
               marginBlock: "1rem 1.5rem",
               height: "2.5rem",

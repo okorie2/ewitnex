@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { theme } from "styles/theme";
 import Image from "next/image";
 
 interface IEventMessage {
@@ -46,9 +45,9 @@ const EventMessage = (props: IEventMessage) => {
               width: "4px",
               height: "4px",
               backgroundColor: `${
-                props.textColor === theme.common.white
-                  ? theme.background.grey2
-                  : theme.background.tertiary2
+                props.textColor === "#fff"
+                  ? "#E4E4E4"
+                  : "#707070"
               }`,
               borderRadius: "50%",
             }}
@@ -57,9 +56,9 @@ const EventMessage = (props: IEventMessage) => {
             css={{
               fontSize: "0.75rem",
               color: `${
-                props.textColor === theme.common.white
-                  ? theme.color.grey2
-                  : theme.color.tertiary
+                props.textColor === "#fff"
+                  ? "#E4E4E4"
+                  : "#707070"
               }`,
             }}
           >

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import { theme, screen } from "styles/theme";
+import {  screen } from "styles/theme";
 import Image from "next/image";
 import AttendeesTable from "@/components/tables/attendees";
 
@@ -31,7 +31,7 @@ const Attendees = () => {
           <p>92</p>
           <p
             css={{
-              color: theme.color.grey,
+              color: "#AEAEAE",
               fontWeight: 600,
             }}
           >
@@ -42,7 +42,7 @@ const Attendees = () => {
           <div
             css={{
               borderRadius: "66px",
-              backgroundColor: theme.background.secondary,
+              backgroundColor: "#F5F5F5",
               width: "50%",
               height: "2.825rem",
               display: "flex",
@@ -67,11 +67,11 @@ const Attendees = () => {
                 width: "100%",
                 outline: "none",
                 border: "none",
-                backgroundColor: theme.background.secondary,
+                backgroundColor: "#F5F5F5",
                 height: "85%",
                 fontSize: "1rem",
                 fontWeight: "400",
-                color: theme.shadow.secondary,
+                color: "#AEAEAE",
               }}
             />
           </div>
@@ -79,7 +79,7 @@ const Attendees = () => {
             css={{
               borderRadius: "50%",
               width: "6.5%",
-              backgroundColor: theme.background.secondary,
+              backgroundColor: "#F5F5F5",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -94,7 +94,7 @@ const Attendees = () => {
             />
           </div>
           <div css = {{
-            backgroundColor: theme.background.primary,
+            backgroundColor: "#7C35AB",
             color: "white",
             width: "30%",
             padding: "0.75%",
@@ -108,6 +108,7 @@ const Attendees = () => {
         </div>
       </div>
       <AttendeesTable />
+      <div css = {{height: "2rem"}}></div>
     </div>
   );
 };

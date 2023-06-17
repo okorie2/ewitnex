@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { css } from "@emotion/react";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
-import { theme } from "styles/theme";
 import { Box } from "@mui/material";
 
 import GenderType from "@/components/signupComponents/selectGender";
@@ -158,7 +157,7 @@ const WhoYouAre = (props: FormLevelProps) => {
       <div css={{ marginTop: "2rem" }}>
         <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
           Already Have An Account?
-          <span css={{ fontWeight: 700, color: theme.background.primary }}>
+          <span css={{ fontWeight: 700, color: "#7C35AB" }}>
             <Link href="/auth/signin">Sign In</Link>
           </span>
         </p>
@@ -507,12 +506,12 @@ const Username = (props: FormLevelProps) => {
                   onClick={() => setValue(name)}
                   css={css`
                     height: 31px;
-                    border: 2px solid ${theme.common.black};
+                    border: 2px solid ${"#000"};
                     border-radius: 16px;
                     padding: 5px;
                     font-size: 14px;
                     font-weight: 500;
-                    color: ${theme.shadow.secondary};
+                    color: ${"#AEAEAE"};
                     cursor: pointer;
                   `}
                 >

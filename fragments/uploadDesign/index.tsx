@@ -9,7 +9,6 @@ import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 
 export default function UploadDesignFragment() {
-  const theme = useTheme();
   return (
     <div
       css={{
@@ -23,11 +22,11 @@ export default function UploadDesignFragment() {
         <Image src="/assets/pngs/circle_r.png" alt="circle_r" fill />
       </div>
       <div css={{ width: "42%" }}>
-        <H1 small color={theme.common.black}>
+        <H1 small color={"#000"}>
           Upload your design or create with a template
         </H1>
         <p
-          css={{ color: theme.common.black, fontSize: "1rem", marginTop: "3%" }}
+          css={{ color: "#000", fontSize: "1rem", marginTop: "3%" }}
         >
           Our easy to use templates help create beautiful and attractive
           programs for your events in seconds using a simple drag and drop

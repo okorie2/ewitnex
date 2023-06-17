@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { theme } from "styles/theme";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
@@ -39,11 +38,11 @@ const HostEventTextField = (props: IHostEventTextField) => {
             height: props.height ? props.height : "3.3rem",
             width: "100%",
             padding: "1rem",
-            border: `1px solid ${theme.shadow.secondary}`,
+            border: `1px solid ${"#AEAEAE"}`,
             borderRadius: "10px",
             fontSize: "14px",
             fontFamily: "'Poppins', sans-serif",
-            color: theme.color.grey,
+            color: "#AEAEAE",
           }}
         />
       )}
@@ -55,11 +54,11 @@ const HostEventTextField = (props: IHostEventTextField) => {
             height: props.height ? props.height : "3.3rem",
             width: "100%",
             padding: "0.5rem 1rem",
-            border: `1px solid ${theme.shadow.secondary}`,
+            border: `1px solid ${"#AEAEAE"}`,
             borderRadius: "10px",
             fontSize: "14px",
             fontFamily: "'Poppins', sans-serif",
-            color: theme.common.black,
+            color: "#000",
           }}
         >
           <option>{props.placeholder}</option>
@@ -73,11 +72,11 @@ const HostEventTextField = (props: IHostEventTextField) => {
             height: props.height ? props.height : "8.25rem",
             width: "100%",
             padding: "1rem ",
-            border: `1px solid ${theme.shadow.secondary}`,
+            border: `1px solid ${"#AEAEAE"}`,
             borderRadius: "10px",
             fontSize: "14px",
             fontFamily: "'Poppins', sans-serif",
-            color: theme.color.grey,
+            color: "#AEAEAE",
             resize: "none",
           }}
         />

@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import { H3, H4 } from "styles/components/typography";
-import { useTheme } from "@emotion/react";
 import Link from "next/link";
 
 interface IFeedsCard {
@@ -20,7 +19,6 @@ interface IFeedsCard {
 }
 
 const FeedsCard = (props: IFeedsCard) => {
-  const theme = useTheme();
 
   return (
     <Link href={`/events/${props.id}`}>
@@ -29,7 +27,7 @@ const FeedsCard = (props: IFeedsCard) => {
           height: "237px",
           width: "326px",
           borderRadius: "10px",
-          backgroundColor: theme.common.white,
+          backgroundColor: "#fff",
           boxShadow: "#00000029 0px 0px 5px",
           display: "grid",
           gridTemplateColumns: "1fr 4fr",
@@ -61,7 +59,7 @@ const FeedsCard = (props: IFeedsCard) => {
                 borderRadius: "5px",
                 fontWeight: 500,
                 textTransform: "capitalize",
-                backgroundColor: theme.common.white,
+                backgroundColor: "#fff",
                 opacity: "75%",
                 padding: "0.1rem 0.5rem",
               }}
@@ -85,7 +83,7 @@ const FeedsCard = (props: IFeedsCard) => {
               css={{
                 height: "41px",
                 width: "41px",
-                backgroundColor: theme.common.white,
+                backgroundColor: "#fff",
                 display: "flex",
                 justifyContent: "center",
               }}
@@ -100,14 +98,14 @@ const FeedsCard = (props: IFeedsCard) => {
           </div>
           <p
             css={{
-              color: theme.shadow.secondary,
+              color: "#AEAEAE",
               fontSize: "0.875rem",
               fontWeight: 600,
             }}
           >
             {props.id}
           </p>
-          <H4 color={theme.color.negative} css={{ marginTop: "0.5rem" }}>
+          <H4 color="#F05E78" css={{ marginTop: "0.5rem" }}>
             {props.date}
           </H4>
           <H4 css={{ width: "80%" }}> {props.location}</H4>
@@ -117,7 +115,7 @@ const FeedsCard = (props: IFeedsCard) => {
               gap: "1rem",
               alignItems: "center",
               marginTop: "0.5rem",
-              color: theme.shadow.tertiary,
+              color: "#707070",
               fontWeight: 500,
               fontSize: "0.75rem",
             }}
@@ -162,7 +160,7 @@ const FeedsCard = (props: IFeedsCard) => {
           <p
             css={{
               marginTop: "0.5rem",
-              color: theme.shadow.tertiary,
+              color: "#707070",
               fontWeight: 500,
               fontSize: "0.75rem",
             }}

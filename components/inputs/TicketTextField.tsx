@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { theme, screen } from "styles/theme";
+import {screen } from "styles/theme";
 
 interface ITicketTextField {
   label: string;
@@ -22,7 +22,7 @@ const TicketTextField = (props: ITicketTextField) => {
           top: "-10px",
           left: "15px",
           padding: "3px 5px",
-          backgroundColor: theme.background.white,
+          backgroundColor: "#FFFFFF",
         }}
       >
         {props.label}
@@ -31,7 +31,7 @@ const TicketTextField = (props: ITicketTextField) => {
         type={props.type ? props.type : "text"}
         value={props.value}
         css={{
-          border: `1px solid ${theme.shadow.border}`,
+          border: `1px solid ${"#E4E4E4"}`,
           borderRadius: "10px",
           padding: "1.2rem 0.5rem 0.8rem",
           fontSize: "1rem",

@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import { theme } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +9,7 @@ const DashboardHeader = () => {
     <div
       css={{
         height: "80px",
-        borderBottom: `1px solid ${theme.shadow.border}`,
+        borderBottom: `1px solid ${"#E4E4E4"}`,
         display: "grid",
         gridTemplateColumns: "2fr 1fr",
         alignItems: "center",
@@ -21,7 +20,7 @@ const DashboardHeader = () => {
       <div
         css={{
           borderRadius: "66px",
-          backgroundColor: theme.background.secondary,
+          backgroundColor: "#F5F5F5",
           width: "100%",
           marginInline: "auto",
           height: "2.625rem",
@@ -47,11 +46,11 @@ const DashboardHeader = () => {
             width: "100%",
             outline: "none",
             border: "none",
-            backgroundColor: theme.background.secondary,
+            backgroundColor: "#F5F5F5",
             height: "95%",
             fontSize: "1rem",
             fontWeight: "400",
-            color: theme.shadow.secondary,
+            color: "#AEAEAE",
           }}
         />
       </div>
@@ -62,14 +61,14 @@ const DashboardHeader = () => {
               width: "45px",
               height: "45px",
               position: "relative",
-              border: `1px solid ${theme.background.primary}`,
+              border: `1px solid ${"#7C35AB"}`,
               borderRadius: "50%",
               padding: "10px",
             }}
           >
             <Image src="/assets/svgs/host.svg" alt="" width={20} height={20} />
           </div>
-          <p css={{ color: theme.color.primary, fontWeight: "bold" }}>
+          <p css={{ color: "#7C35AB", fontWeight: "bold" }}>
             Host Event
           </p>
         </div>

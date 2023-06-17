@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
 import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
@@ -22,7 +22,7 @@ const HostEventTickets = () => {
           <div
             css={{
               height: "110px",
-              borderBottom: `1px solid ${theme.shadow.border}`,
+              borderBottom: `1px solid ${"#E4E4E4"}`,
               display: "flex",
               alignItems: "center",
               paddingInline: "3.2rem",
@@ -50,7 +50,7 @@ const HostEventTickets = () => {
               >
                 <p
                   css={{
-                    color: theme.color.primary,
+                    color: "#7C35AB",
                     fontWeight: "bold",
                     cursor: "pointer",
                   }}
@@ -60,7 +60,7 @@ const HostEventTickets = () => {
                 <Link
                   href="/dashboard"
                   css={{
-                    color: theme.color.negative,
+                    color: "#F05E78",
                     fontWeight: "bold",
                     cursor: "pointer",
                   }}
@@ -92,7 +92,7 @@ const HostEventTickets = () => {
                 padding: " 1.5rem 2.5rem",
                 display: "grid",
                 gap: "1.5rem",
-                borderRight: `1px solid ${theme.shadow.border}`,
+                borderRight: `1px solid ${"#E4E4E4"}`,
                 height: "100%",
                 overflowY: "scroll",
                 "&::-webkit-scrollbar": {
@@ -100,11 +100,11 @@ const HostEventTickets = () => {
                 },
                 [screen.lg]: {
                   overflowY: "initial",
-                  borderBottom: `1px solid ${theme.shadow.border}`,
+                  borderBottom: `1px solid ${"#E4E4E4"}`,
                 },
                 [screen.desktop]: {
                   overflowY: "initial",
-                  borderBottom: `1px solid ${theme.shadow.border}`,
+                  borderBottom: `1px solid ${"#E4E4E4"}`,
                 },
               }}
             >
@@ -166,11 +166,11 @@ const HostEventTickets = () => {
                 css={{
                   fontSize: "1rem",
                   fontWeight: "bold",
-                  color: theme.color.primary,
-                  border: `1px solid ${theme.color.primary}`,
+                  color: "#7C35AB",
+                  border: `1px solid ${"#7C35AB"}`,
                   height: "52px",
                   marginBottom: "0.5rem",
-                  background: theme.common.white,
+                  background: "#fff",
                   borderRadius: "26px",
                   width: "45%",
                   cursor: "pointer",
@@ -224,7 +224,7 @@ const HostEventTickets = () => {
                         VIP
                       </h3>
                       <p css={{ fontSize: "0.875rem" }}>N50,000</p>
-                      <p css={{ fontSize: "0.75rem", color: theme.color.grey }}>
+                      <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
                         45 Quantities
                       </p>
                     </div>
@@ -251,7 +251,7 @@ const HostEventTickets = () => {
                         VVIP
                       </h3>
                       <p css={{ fontSize: "0.875rem" }}>N100,000</p>
-                      <p css={{ fontSize: "0.75rem", color: theme.color.grey }}>
+                      <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
                         45 Quantities
                       </p>
                     </div>
@@ -278,7 +278,7 @@ const HostEventTickets = () => {
                         REGULAR
                       </h3>
                       <p css={{ fontSize: "0.875rem" }}>N10,000</p>
-                      <p css={{ fontSize: "0.75rem", color: theme.color.grey }}>
+                      <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
                         45 Quantities
                       </p>
                     </div>
@@ -305,7 +305,7 @@ const HostEventTickets = () => {
                     css={{
                       fontSize: "0.875rem",
                       fontWeight: "500",
-                      color: theme.color.grey,
+                      color: "#AEAEAE",
                     }}
                   >
                     Total ticket quantities
@@ -316,11 +316,11 @@ const HostEventTickets = () => {
                       fontSize: "1rem",
                       fontWeight: "bold",
                       fontFamily: "'Nunito', sans-serif",
-                      color: theme.color.primary,
-                      border: `1px solid ${theme.color.primary}`,
+                      color: "#7C35AB",
+                      border: `1px solid ${"#7C35AB"}`,
                       height: "43px",
                       marginBlock: "1rem",
-                      background: theme.common.white,
+                      background: "#fff",
                       borderRadius: "26px",
                       width: "65%",
                       cursor: "pointer",
@@ -351,11 +351,11 @@ const HostEventTickets = () => {
                       fontSize: "1rem",
                       fontWeight: "bold",
                       fontFamily: "'Nunito', sans-serif",
-                      color: theme.color.primary,
-                      border: `1px solid ${theme.color.primary}`,
+                      color: "#7C35AB",
+                      border: `1px solid ${"#7C35AB"}`,
                       height: "52px",
                       marginBottom: "0.5rem",
-                      background: theme.common.white,
+                      background: "#fff",
                       borderRadius: "26px",
                       width: "100%",
                       cursor: "pointer",
@@ -370,11 +370,11 @@ const HostEventTickets = () => {
                     fontSize: "1rem",
                     fontWeight: "bold",
                     fontFamily: "'Nunito', sans-serif",
-                    color: theme.common.white,
-                    border: `1px solid ${theme.color.primary}`,
+                    color: "#fff",
+                    border: `1px solid ${"#7C35AB"}`,
                     height: "52px",
                     marginBottom: "0.5rem",
-                    background: theme.color.primary,
+                    background: "#7C35AB",
                     borderRadius: "26px",
                     width: "100%",
                     cursor: "pointer",

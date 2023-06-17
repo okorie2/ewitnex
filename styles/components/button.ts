@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
 interface Props {
   background?: string;
+  height?:string
 }
 
 export const Button = styled.button<Props>`
   background-color: ${(props) =>
-    props.background ? props.background : props.theme.background.primary};
+    props.background ? props.background :"#7C35AB"};
   border-radius: 56px;
-  color: ${(props) => props.theme.common.white};
-  height: 64px;
+  color: #fff;
+  height: ${(props) => props.height ? props.height : "64px"};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,7 @@ export const ButtonFormFilled = styled.button`
     0% no-repeat padding-box;
   border-radius: 26px;
   border: none;
-  color: ${(props) => props.theme.common.white};
+  color: ${(props) => "#fff"};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,9 +43,9 @@ export const ButtonFormOutline = styled.button`
   height: 52px;
   width: 100%;
   background: transparent;
-  border: 1px solid ${(props) => props.theme.shadow.tertiary};
+  border: 1px solid ${(props) => "#707070"};
   border-radius: 26px;
-  color: ${(props) => props.theme.common.black};
+  color: ${(props) => "#000"};
   display: flex;
   justify-content: center;
   gap: 7px;

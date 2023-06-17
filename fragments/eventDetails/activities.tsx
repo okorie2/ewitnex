@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { theme } from "styles/theme";
 import { useRouter } from "next/router";
 
 const EventActivities = () => {
@@ -11,8 +10,8 @@ const EventActivities = () => {
   return (
     <div
       css={{
-        // boxShadow: `0px 0px 10px ${theme.shadow.border4}`,
-        color: theme.common.black,
+        // boxShadow: `0px 0px 10px ${"#0000001A"}`,
+        color: "#000",
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
         width: `${loggedIn ? "70%" : "60%"}`,

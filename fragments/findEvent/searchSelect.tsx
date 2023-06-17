@@ -2,7 +2,7 @@
 
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
-import { screen, theme } from "styles/theme";
+import { screen } from "styles/theme";
 
 interface SearchSelectProps {
   placeholder: string;
@@ -19,7 +19,7 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
         display: "flex",
         alignItems: "center",
         width: "max-content",
-        background: theme.common.white,
+        background: "#fff",
       }}
     >
       <input
@@ -27,10 +27,10 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
         placeholder={rest.placeholder}
         onChange={rest.onChange}
         css={{
-          backgroundColor: theme.common.white,
+          backgroundColor: "#fff",
           outline: "none",
           border: "none",
-          color: theme.shadow.secondary,
+          color: "#AEAEAE",
           fontSize: "1.5rem",
           fontWeight: "bold",
           width: rest.inputWidth,
@@ -48,7 +48,7 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
       </div>
       <div
         css={{
-          backgroundColor: theme.common.white,
+          backgroundColor: "#fff",
           width: "100%",
           height: "4rem",
           position: "absolute",

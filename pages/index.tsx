@@ -22,8 +22,6 @@ import PublicSiteFooter from "@/components/footer/publicSite";
 import { Lines } from "@/components/lines";
 
 export default function Home() {
-  const theme = useTheme();
-  console.log(theme, "theme");
   return (
     <>
       <Head>

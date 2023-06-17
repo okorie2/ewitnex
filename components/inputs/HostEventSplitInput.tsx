@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { theme } from "styles/theme";
 import Image from "next/image";
 
 interface IHostEventTimeDate {
@@ -30,11 +29,11 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
         css={{
           height: "3.3rem",
           width: "100%",
-          border: `1px solid ${theme.shadow.secondary}`,
+          border: `1px solid ${"#AEAEAE"}`,
           borderRadius: "10px",
           fontSize: "14px",
           fontFamily: "'Poppins', sans-serif",
-          color: theme.color.grey,
+          color: "#AEAEAE",
           display: "flex",
         }}
       >
@@ -43,7 +42,7 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
             width: "50%",
             padding: "1rem",
             border: "none",
-            borderRight: `1px solid ${theme.shadow.secondary}`,
+            borderRight: `1px solid ${"#AEAEAE"}`,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -89,10 +88,10 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
           )}
           {props.text2 && (
             <>
-              <p css={{ fontWeight: "bold", color: theme.common.black }}>
+              <p css={{ fontWeight: "bold", color: "#000" }}>
                 {props.placeholder2}
               </p>
-              <p css={{ fontWeight: "500", color: theme.common.black }}>
+              <p css={{ fontWeight: "500", color: "#000" }}>
                 {props.text2}
               </p>
             </>

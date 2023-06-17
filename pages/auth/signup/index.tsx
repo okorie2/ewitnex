@@ -10,7 +10,6 @@ import Form from "./form";
 import Logo from "@/components/logo";
 
 export default function Signup() {
-  const theme = useTheme();
   return (
     <>
       <div css={{ display: "flex", justifyContent: "space-between" }}>
@@ -23,7 +22,7 @@ export default function Signup() {
           <div className="btm">
             <div>
               <H1
-                color={theme.common.black}
+                color={"#000"}
                 css={{
                   display: "flex",
                   gap: "11px",
@@ -37,7 +36,7 @@ export default function Signup() {
                 <span css={{ fontSize: "1rem" }}>your</span> SOCIAL PAPERLESS
               </H1>
               <H1
-                color={theme.common.black}
+                color={"#000"}
                 css={{
                   display: "flex",
                   gap: "8px",
@@ -54,7 +53,7 @@ export default function Signup() {
                 <span> EVENT </span> MANAGEMENT
               </H1>
               <H1
-                color={theme.common.black}
+                color={"#000"}
                 css={{
                   textAlign: "left",
                   marginLeft: "19.4rem",

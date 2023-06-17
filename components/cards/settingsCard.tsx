@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import Link from "next/link";
 import React from "react";
-import { theme } from "styles/theme";
 
 const SettingsCard = ({
   cardTitle,
@@ -33,8 +32,8 @@ const SettingsCard = ({
             width: "100%",
             height: height || "60px",
             borderRadius: border || `20px`,
-            boxShadow:noShadow ? "" : `0px 0px 5px ${theme.shadow.border3}`,
-            border: noShadow ? `1px solid ${theme.color.grey}`: activeTab ? "1px solid #00D9B7" : "",
+            boxShadow:noShadow ? "" : `0px 0px 5px ${"#00000029"}`,
+            border: noShadow ? `1px solid ${"#AEAEAE"}`: activeTab ? "1px solid #00D9B7" : "",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",

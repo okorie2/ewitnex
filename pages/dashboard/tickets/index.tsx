@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
 import DashboardLayout from "../layout";
-import { theme } from "styles/theme";
 import {
   activeButtonStyle,
   inactiveButtonStyle,
@@ -15,6 +14,11 @@ const Tickets = () => {
   const [showPast, setShowPast] = useState(false);
   const [activeTab, setActiveTab] = useState("upcoming");
   const [activeCard, setActiveCard] = useState("");
+  const [isMenuOpen , setIsMenuOpen] = useState(false)
+  
+  const handleMenuOpen = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   const handleShowUpcoming = () => {
     setShowUpcoming(true);
@@ -36,14 +40,14 @@ const Tickets = () => {
       <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
         <div
           css={{
-            borderRight: `1px solid ${theme.shadow.border}`,
+            borderRight: `1px solid ${"#E4E4E4"}`,
             height: "100vh",
           }}
         >
           <div
             css={{
-              borderLeft: `1px solid ${theme.shadow.border}`,
-              boxShadow: `0px 0px 5px ${theme.shadow.border3}`,
+              borderLeft: `1px solid ${"#E4E4E4"}`,
+              boxShadow: `0px 0px 5px ${"#00000029"}`,
               marginLeft: "1.2rem",
               height: "100%",
               maxHeight: "100vh",
@@ -52,11 +56,11 @@ const Tickets = () => {
             <div
               css={{
                 height: "80px",
-                borderBottom: `1px solid ${theme.shadow.border}`,
+                borderBottom: `1px solid ${"#E4E4E4"}`,
                 display: "grid",
                 alignItems: "center",
                 paddingInline: "1.5rem",
-                color: theme.common.black,
+                color: "#000",
               }}
             >
               <h2>Tickets</h2>
@@ -74,7 +78,7 @@ const Tickets = () => {
               <div
                 css={{
                   borderRadius: "16px",
-                  backgroundColor: theme.background.secondary2,
+                  backgroundColor: "#F2F7FB",
                   width: "100%",
                   marginInline: "auto",
                   marginBottom: "1rem",
@@ -127,22 +131,55 @@ const Tickets = () => {
           <div
             css={{
               height: "80px",
-              borderBottom: `1px solid ${theme.shadow.border}`,
+              borderBottom: `1px solid ${"#E4E4E4"}`,
               display: "grid",
               gridTemplateColumns: "1fr auto",
               alignItems: "center",
               paddingInline: "1.5rem",
               paddingRight: "2.5rem",
-              color: theme.common.black,
+              color: "#000",
             }}
           >
             <h2>DevFest Aba</h2>
+            <div css={{ cursor: "pointer", position: "relative" }} onClick={handleMenuOpen}>
             <Image
               src={"/assets/svgs/ellipse.svg"}
               alt={""}
               width={20}
               height={20}
             />
+            { isMenuOpen &&
+                <div
+                css={{
+                  position: "absolute",
+                  background: "#fff",
+                  height: 155,
+                  width: 230,
+                  left: "-1000%",
+                  right: "0",
+                  zIndex: "2",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  border: "1px solid #C0C0C0",
+                }}
+                >
+                <div css={{ width: "80%", marginTop: "1.2rem" , ":hover": {fontWeight: "bold"}, display:"flex", gap: "10%"}}>
+                  <Image src={"/assets/svgs/share.svg"} alt={""} width={20} height={20}/>
+                  <p>Transfer Ticket</p>
+                </div>
+                <div css={{ width: "80%", marginTop: "1.2rem", ":hover": {fontWeight: "bold"}, display:"flex", gap: "10%"}}>
+                  <Image src={"/assets/svgs/mail.svg"} alt={""} width={20} height={20}/>
+                  <p>Contact Organizer</p>
+                </div>
+                <div css={{ width: "80%", marginTop: "1.2rem", ":hover": {fontWeight: "bold"}, display:"flex", gap: "10%"}}>
+                  <Image src={"/assets/svgs/report-flag.svg"} alt={""} width={20} height={20} />
+                  <p>Report Event</p>
+                </div>
+              </div>
+              }
+            </div>
           </div>
           <div
             css={{
@@ -201,7 +238,7 @@ const UpcomingTicketTab = ({
         onClick={setAsActiveCard}
       />
       <TicketCard
-        image="/assets/pngs/gdg.png"
+        image="/assets/pngs/fionaGabe.png"
         title="DevFest Abuja"
         time=" 10:00 AM"
         day="Sat"

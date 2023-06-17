@@ -2,7 +2,7 @@
 
 import React from "react";
 import Speaker from "@/components/cards/speaker";
-import { theme, screen } from "styles/theme";
+import { screen } from "styles/theme";
 import Image from "next/image";
 
 const EventDetails = () => {
@@ -28,7 +28,7 @@ const EventDetails = () => {
               borderRadius: "10px",
               fontWeight: 500,
               textTransform: "capitalize",
-              backgroundColor: theme.common.white,
+              backgroundColor: "#fff",
               opacity: "75%",
             }}
           >
@@ -43,7 +43,7 @@ const EventDetails = () => {
             height: "41px",
             width: "41px",
             borderRadius: "50%",
-            backgroundColor: theme.common.white,
+            backgroundColor: "#fff",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -73,8 +73,8 @@ const EventDetails = () => {
             width: "193px",
             height: "266px",
             borderRadius: "10px",
-            backgroundColor: theme.common.white,
-            boxShadow: `0px 0px 10px ${theme.shadow.border3}`,
+            backgroundColor: "#fff",
+            boxShadow: `0px 0px 10px ${"#00000029"}`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -97,7 +97,7 @@ const EventDetails = () => {
             height: "41px",
             width: "41px",
             borderRadius: "50%",
-            backgroundColor: theme.common.white,
+            backgroundColor: "#fff",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -140,7 +140,7 @@ const EventDetails = () => {
           <div css={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <p
               css={{
-                color: theme.color.tertiary,
+                color: "#707070",
                 fontSize: "1.125rem",
                 fontWeight: "600",
               }}
@@ -173,8 +173,8 @@ const EventDetails = () => {
                     placeContent: "center",
                     width: "86px",
                     height: "60px",
-                    border: `1px solid ${theme.shadow.border}`,
-                    background: `linear-gradient(60deg, ${theme.background.primary},${theme.background.white})`,
+                    border: `1px solid ${"#E4E4E4"}`,
+                    background: `linear-gradient(60deg, ${"#7C35AB"},${"#FFFFFF"})`,
                     borderRadius: "5px",
                   }}
                 >
@@ -184,9 +184,9 @@ const EventDetails = () => {
                       placeContent: "center",
                       width: "82px",
                       height: "55.61px",
-                      border: `1px solid ${theme.shadow.tertiary}`,
+                      border: `1px solid ${"#707070"}`,
                       borderRadius: "5px",
-                      backgroundColor: theme.background.white,
+                      backgroundColor: "#FFFFFF",
                     }}
                   >
                     <p
@@ -211,8 +211,8 @@ const EventDetails = () => {
                     placeContent: "center",
                     width: "86px",
                     height: "60px",
-                    border: `1px solid ${theme.shadow.border}`,
-                    background: `linear-gradient(120deg, ${theme.background.primary},${theme.background.white},${theme.background.white})`,
+                    border: `1px solid ${"#E4E4E4"}`,
+                    background: `linear-gradient(120deg, ${"#7C35AB"},${"#FFFFFF"},${"#FFFFFF"})`,
                     borderRadius: "5px",
                   }}
                 >
@@ -222,9 +222,9 @@ const EventDetails = () => {
                       placeContent: "center",
                       width: "82px",
                       height: "55.61px",
-                      border: `1px solid ${theme.shadow.tertiary}`,
+                      border: `1px solid ${"#707070"}`,
                       borderRadius: "5px",
-                      backgroundColor: theme.background.white,
+                      backgroundColor: "#FFFFFF",
                     }}
                   >
                     <p
@@ -249,8 +249,8 @@ const EventDetails = () => {
                     placeContent: "center",
                     width: "86px",
                     height: "60px",
-                    border: `1px solid ${theme.shadow.border}`,
-                    background: `linear-gradient(90deg, ${theme.background.primary},${theme.background.white})`,
+                    border: `1px solid ${"#E4E4E4"}`,
+                    background: `linear-gradient(90deg, ${"#7C35AB"},${"#FFFFFF"})`,
                     borderRadius: "5px",
                   }}
                 >
@@ -260,9 +260,9 @@ const EventDetails = () => {
                       placeContent: "center",
                       width: "82px",
                       height: "55.61px",
-                      border: `1px solid ${theme.shadow.tertiary}`,
+                      border: `1px solid ${"#707070"}`,
                       borderRadius: "5px",
-                      backgroundColor: theme.background.white,
+                      backgroundColor: "#FFFFFF",
                     }}
                   >
                     <p
@@ -287,8 +287,8 @@ const EventDetails = () => {
                     placeContent: "center",
                     width: "86px",
                     height: "60px",
-                    border: `1px solid ${theme.shadow.border}`,
-                    background: `linear-gradient(60deg, ${theme.background.primary},${theme.background.white})`,
+                    border: `1px solid ${"#E4E4E4"}`,
+                    background: `linear-gradient(60deg, ${"#7C35AB"},${"#FFFFFF"})`,
                     borderRadius: "5px",
                   }}
                 >
@@ -298,9 +298,9 @@ const EventDetails = () => {
                       placeContent: "center",
                       width: "82px",
                       height: "55.61px",
-                      border: `1px solid ${theme.shadow.tertiary}`,
+                      border: `1px solid ${"#707070"}`,
                       borderRadius: "5px",
-                      backgroundColor: theme.background.white,
+                      backgroundColor: "#FFFFFF",
                     }}
                   >
                     <p
@@ -340,11 +340,11 @@ const EventDetails = () => {
                     width={24}
                     height={24}
                   />
-                  <p css={{ color: theme.color.tertiary }}>Date and time</p>
+                  <p css={{ color: "#707070" }}>Date and time</p>
                 </div>
                 <p
                   css={{
-                    color: theme.color.negative,
+                    color: "#F05E78",
                     fontSize: "1.125rem",
                     fontWeight: "600",
                   }}
@@ -372,7 +372,7 @@ const EventDetails = () => {
                     width={24}
                     height={24}
                   />
-                  <p css={{ color: theme.color.tertiary }}>Location</p>
+                  <p css={{ color: "#707070" }}>Location</p>
                 </div>
                 <p
                   css={{
@@ -406,7 +406,7 @@ const EventDetails = () => {
                     width={25.5}
                     height={21.6}
                   />
-                  <p css={{ color: theme.color.tertiary }}>$500 - $2K</p>
+                  <p css={{ color: "#707070" }}>$500 - $2K</p>
                 </div>
                 <div
                   css={{
@@ -421,7 +421,7 @@ const EventDetails = () => {
                     width={24}
                     height={24}
                   />
-                  <p css={{ color: theme.color.tertiary }}>609 Attending</p>
+                  <p css={{ color: "#707070" }}>609 Attending</p>
                 </div>
               </div>
               <div
@@ -439,7 +439,7 @@ const EventDetails = () => {
                     marginBlock: "1rem",
                   }}
                 >
-                  <p css={{ color: theme.color.tertiary }}>Organized by</p>
+                  <p css={{ color: "#707070" }}>Organized by</p>
                   <p
                     css={{
                       fontSize: "1.125rem",
@@ -452,11 +452,11 @@ const EventDetails = () => {
                 <button
                   type="button"
                   css={{
-                    border: `1px solid ${theme.color.primary}`,
-                    color: theme.color.primary,
+                    border: `1px solid ${"#7C35AB"}`,
+                    color: "#7C35AB",
                     borderRadius: "56px",
                     padding: "0.75rem",
-                    backgroundColor: theme.common.white,
+                    backgroundColor: "#fff",
                     width: "129px",
                     height: "42px",
                   }}
@@ -484,7 +484,7 @@ const EventDetails = () => {
                     width={24}
                     height={24}
                   />
-                  <p css={{ color: theme.color.tertiary }}>Audience Type</p>
+                  <p css={{ color: "#707070" }}>Audience Type</p>
                 </div>
                 <p
                   css={{
@@ -504,7 +504,7 @@ const EventDetails = () => {
               display: "flex",
               gap: "0.5rem",
               alignItems: "center",
-              color: theme.color.tertiary,
+              color: "#707070",
             }}
           >
             <Image src="/assets/svgs/info.svg" alt="" width={24} height={24} />
@@ -548,7 +548,7 @@ const EventDetails = () => {
               display: "flex",
               gap: "0.5rem",
               alignItems: "center",
-              color: theme.color.tertiary,
+              color: "#707070",
             }}
           >
             <Image
