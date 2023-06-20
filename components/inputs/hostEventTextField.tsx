@@ -26,7 +26,9 @@ const HostEventTextField = (props: IHostEventTextField) => {
       >
         {props.label}
         {props.image && (
-          <Image src={props.image} alt="" width={14.02} height={14.02} />
+          <Tooltip title="info">
+            <Image src={props.image} alt="" width={14.02} height={14.02} />
+          </Tooltip>
         )}
       </label>
 
