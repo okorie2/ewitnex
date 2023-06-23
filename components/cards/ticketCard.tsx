@@ -108,6 +108,7 @@ const TicketCard = (props: IManageEvent) => {
           position: "relative",
           width: "100%",
           backgroundColor: "#fff",
+          marginBottom: "-1px",
         }}
       >
         <Image
@@ -117,7 +118,6 @@ const TicketCard = (props: IManageEvent) => {
           css={{
             borderRadius: "20px",
             objectFit: "cover",
-            marginTop: "-1px",
           }}
         />
       </div>

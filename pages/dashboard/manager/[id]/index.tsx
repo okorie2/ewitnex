@@ -43,12 +43,14 @@ const ManageSingleEvent = () => {
             }}
           >
             <div css={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+              <Link href = "/dashboard/manager">
               <Image
                 src="/assets/svgs/arrow-left.svg"
                 alt=""
                 width={22}
                 height={15}
               />
+              </Link>
               <h2>DevFest Aba</h2>
             </div>
             <div css={{ cursor: "pointer", position: "relative" }} onClick={handleMenuOpen}>

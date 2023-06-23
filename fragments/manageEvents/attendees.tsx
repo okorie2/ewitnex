@@ -1,12 +1,26 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import {  screen } from "styles/theme";
 import Image from "next/image";
 import AttendeesTable from "@/components/tables/attendees";
+import MessageAttendeesModal from "@/components/modals/messageAttendees.tsx";
 
 const Attendees = () => {
+  const [filterHovered, setFilterHovered] = useState(false);
+  const [filterClicked, setFilterClicked] = useState(false);
+  const [messageAttendeesModalOpen, setMessageAttendeesModalOpen] = useState(false)
+
+  const handleClick = () => {
+    setFilterClicked(!filterClicked);
+  };
+
+  const handleAttendeesModalOpen = () => {
+    setMessageAttendeesModalOpen(!messageAttendeesModalOpen);
+  }
   return (
+    <>
+    <MessageAttendeesModal isOpen={messageAttendeesModalOpen} onRequestClose={handleAttendeesModalOpen} />
     <div
       css={{
         paddingRight: "2rem",
@@ -28,10 +42,10 @@ const Attendees = () => {
             paddingLeft: "1%",
           }}
         >
-          <p>92</p>
+          <p css = {{fontSize: "16px"}}>92</p>
           <p
             css={{
-              color: "#AEAEAE",
+              color: "#707070",
               fontWeight: 600,
             }}
           >
@@ -78,20 +92,63 @@ const Attendees = () => {
           <div
             css={{
               borderRadius: "50%",
-              width: "6.5%",
+              width: "7.5%",
               backgroundColor: "#F5F5F5",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              opacity: 0.7,
+              position: "relative",
+              cursor: "pointer",
             }}
+            onMouseEnter={() => setFilterHovered(true)}
+            onMouseLeave={() => setFilterHovered(false)}
+            onClick={handleClick}
           >
             <Image
               src={"/assets/svgs/filter.svg"}
               alt={""}
-              width={20}
-              height={20}
+              width={18}
+              height={18}
             />
+            {filterHovered && (
+              <div
+                css={{
+                  background: "#F5F5F5",
+                  position: "absolute",
+                  bottom: "-1.5rem",
+                  left: "-0.5rem",
+                  zIndex: 3,
+                  padding: "1% 10%",
+                  borderRadius: "5px",
+                }}
+              >
+                <span css={{ fontSize: "12px" }}>Filter</span>
+              </div>
+            )}
+            {filterClicked && (
+              <div
+                css={{
+                  background: "#FFF",
+                  position: "absolute",
+                  top: "3rem",
+                  left: "-4.1rem",
+                  zIndex: 5,
+                  display: "grid",
+                  gap: "5px",
+                  padding: "20% 20%",
+                  borderRadius: "10px",
+                  width: "7rem",
+                  fontSize: "13px",
+                  fontWeight: "500",
+                   boxShadow: `0px 0px 5px ${"#00000029"}`,
+                }}
+              >
+                <p>Recent</p>
+                <p>An Hour Ago</p>
+                <p>Yesterday</p>
+                <p>Custom Time</p>
+              </div>
+            )}
           </div>
           <div css = {{
             backgroundColor: "#7C35AB",
@@ -101,8 +158,18 @@ const Attendees = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            fontSize:"13px"
-          }}>
+            fontSize:"13px",
+            gap: "7%",
+            cursor: "pointer",
+          }}
+          onClick={handleAttendeesModalOpen}
+          >
+            <Image 
+              src = '/assets/svgs/chatbox.svg'
+              alt=""
+              height = "20"
+              width = "20"
+            />
             Message Attendees
           </div>
         </div>
@@ -110,6 +177,7 @@ const Attendees = () => {
       <AttendeesTable />
       <div css = {{height: "2rem"}}></div>
     </div>
+    </>
   );
 };
 

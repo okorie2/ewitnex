@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Table, TableContainer } from "styles/components/table";
+import StyledCheckbox from "../inputs/StyledCheckbox";
 
 export interface TableData {
   ticketID: string;
@@ -16,13 +17,17 @@ export interface TableData {
 }
 
 const TicketSalesTable = () => {
+  const [checked, setChecked] = React.useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(!checked);
+  };
   return (
     <TableContainer>
       <Table>
         <thead>
           <tr>
-            <th css = {{display: "flex", width: "125px"}}>
-              <input type="checkbox" css ={{marginInline: "7%"}}/>
+            <th css={{ display: "flex", width: "6rem", alignItems: "center" }}>
+              <StyledCheckbox checked={checked} onChange={handleChange} />
               Ticket ID
             </th>
             <th>User</th>
@@ -37,143 +42,155 @@ const TicketSalesTable = () => {
         <tbody>
           {
             <>
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Refunded" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Refunded" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           <TableRow 
-              ticketID="#000123456" 
-              firstNames="Increase-Chris"
-              lastName="Alaede" 
-              email="increasechris124@gmail.com" 
-              date="20.24.22, 09:21 AM" 
-              ticketType="Table for 5" 
-              price="100,000" 
-              status="Attending" 
-              location="Abuja"
-           />
-           </>
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Refunded"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Refunded"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+              <TableRow
+                ticketID="#000123456"
+                firstNames="Increase-Chris"
+                lastName="Alaede"
+                email="increasechris124@gmail.com"
+                date="20.24.22, 09:21 AM"
+                ticketType="Table for 5"
+                price="100,000"
+                status="Attending"
+                location="Abuja"
+              />
+            </>
           }
-         
         </tbody>
       </Table>
     </TableContainer>
-  )
+  );
 };
 
 export default TicketSalesTable;
 
-const TableRow = (props:TableData) => {
+const TableRow = (props: TableData) => {
+  const [checked, setChecked] = React.useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(!checked);
+  };
   return (
-  <tr>
-  <td css = {{display: "flex"}}>
-      <input type="checkbox" css ={{marginInline: "6%"}}/>
-    {props.ticketID}
-  </td>
-  <td><p css = {{fontWeight: "bold", color: "black", marginTop: "1%" }}>{props.firstNames}</p> {props.lastName}</td>
-  <td>{props.email}</td>
-  <td>{props.date}</td>
-  <td>{props.ticketType}</td>
-  <td>N{props.price}</td>
-  <td style={{
-    color: props.status.startsWith("Att") ? "#3CD860" : "#FF3D3D"
-  }}>{props.status}</td>
-  <td>{props.location}</td>
-</tr>
-)
-}
+    <tr>
+      <td css={{ display: "flex", alignItems: "center" }}>
+        <StyledCheckbox checked={checked} onChange={handleChange} />
+        {props.ticketID}
+      </td>
+      <td>
+        <p css={{ fontWeight: "bold", color: "black", marginTop: "1%" }}>
+          {props.firstNames}
+        </p>{" "}
+        {props.lastName}
+      </td>
+      <td>{props.email}</td>
+      <td>{props.date}</td>
+      <td>{props.ticketType}</td>
+      <td>N{props.price}</td>
+      <td
+        style={{
+          color: props.status.startsWith("Att") ? "#3CD860" : "#FF3D3D",
+        }}
+      >
+        {props.status}
+      </td>
+      <td>{props.location}</td>
+    </tr>
+  );
+};

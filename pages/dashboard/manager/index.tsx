@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 import DashboardLayout from "pages/dashboard/layout";
 import {
@@ -7,8 +7,25 @@ import {
   inactiveButtonStyle,
 } from "styles/components/ButtonToggleStyles";
 import ManageEventCard from "@/components/cards/manageEventCard";
+import LiveEvents  from "fragments/manageEvents/liveEvents";
+import CompletedEvents from "fragments/manageEvents/completedEvents";
+import Drafts from "fragments/manageEvents/darfts";
+import CancelledEvents from "fragments/manageEvents/cancelledEvents";
 
 const Manager = () => {
+  const [activeTab, setActiveTab] = useState("live");
+
+  const tabToView = useMemo(() => {
+    if (activeTab === "live") {
+      return <LiveEvents />;
+    } else if (activeTab === "completed") {
+      return <CompletedEvents />;
+    } else if (activeTab === "drafts") {
+      return <Drafts />
+    } else if (activeTab === "cancelled") {
+      return <CancelledEvents />;
+    }
+  }, [activeTab]);
   return (
     <DashboardLayout>
       <div
@@ -48,79 +65,43 @@ const Manager = () => {
             }}
           >
             <button
-              // onClick={handleShowFollowers}
-              // css={
-              //   activeTab === "followers"
-              //     ? activeButtonStyle
-              //     : inactiveButtonStyle
-              // }
-              css={activeButtonStyle}
+              onClick={() => setActiveTab("live")}
+              css={
+                activeTab === "live" ? activeButtonStyle : inactiveButtonStyle
+              }
             >
               Live
             </button>
             <button
-              // onClick={handleShowFollowing}
-              // css={
-              //   activeTab === "following"
-              //     ? activeButtonStyle
-              //     : inactiveButtonStyle
-              // }
-              css={inactiveButtonStyle}
+              onClick={() => setActiveTab("completed")}
+              css={
+                activeTab === "completed"
+                  ? activeButtonStyle
+                  : inactiveButtonStyle
+              }
             >
               Completed
             </button>
             <button
-              // onClick={handleShowFollowing}
-              // css={
-              //   activeTab === "following"
-              //     ? activeButtonStyle
-              //     : inactiveButtonStyle
-              // }
-              css={inactiveButtonStyle}
+              onClick={() => setActiveTab("drafts")}
+              css={
+                activeTab === "drafts" ? activeButtonStyle : inactiveButtonStyle
+              }
             >
-              Draft
+              Drafts
             </button>
             <button
-              // onClick={handleShowFollowing}
-              // css={
-              //   activeTab === "following"
-              //     ? activeButtonStyle
-              //     : inactiveButtonStyle
-              // }
-              css={inactiveButtonStyle}
+              onClick={() => setActiveTab("cancelled")}
+              css={
+                activeTab === "cancelled"
+                  ? activeButtonStyle
+                  : inactiveButtonStyle
+              }
             >
               Canceled
             </button>
           </div>
-          <div css={{ display: "flex", gap: "1rem" }}>
-            <ManageEventCard
-              image="/assets/pngs/devFestAba.png"
-              title="DevFest Aba"
-              date="Sat, Nov. 25, 2022"
-              time=" 10:00 AM - 2:00 PM"
-              type="Conference"
-              attendees="0/500"
-              id="tec542445"
-            />
-            <ManageEventCard
-              image="/assets/pngs/fionaGabe.png"
-              title="FIona & Gabe"
-              date="Sat, Nov. 25, 2022"
-              time=" 10:00 AM - 2:00 PM"
-              type="Wedding"
-              attendees="0/500"
-              id="Wed542445"
-            />
-            <ManageEventCard
-              image="/assets/pngs/gdg.png"
-              title="DevFest Abuja"
-              date="Sat, Nov. 25, 2022"
-              time=" 10:00 AM - 2:00 PM"
-              type="Conference"
-              attendees="0/500"
-              id="tec542445"
-            />
-          </div>
+          {tabToView}
         </div>
       </div>
     </DashboardLayout>
@@ -128,3 +109,4 @@ const Manager = () => {
 };
 
 export default Manager;
+

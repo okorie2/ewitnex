@@ -1,13 +1,102 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { ReactNode, useState } from "react";
-import { useTheme } from "@emotion/react";
+import React, {
+  ReactNode,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Logo from "@/components/logo";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  const [showMore, setShowMore] = useState(false);
+  const router = useRouter();
+  let route = router.route;
+
+  const active = useMemo(() => {
+    if (route.includes("manager")) {
+      route = "/dashboard/manager";
+    }
+    switch (route) {
+      case "/dashboard":
+        {
+          return "feeds";
+        }
+        break;
+      case "/dashboard/programs":
+        {
+          return "programs";
+        }
+        break;
+      case "/dashboard/notifications":
+        {
+          return "notifications";
+        }
+        break;
+      case "/dashboard/profile":
+        {
+          return "profile";
+        }
+        break;
+      case "/dashboard/manager":
+        {
+          return "manager";
+        }
+        break;
+      case "/dashboard/tickets":
+        {
+          return "tickets";
+        }
+        break;
+      case "/dashboard/favourites":
+        {
+          return "favourites";
+        }
+        break;
+      case "/dashboard/wallet":
+        {
+          return "wallet";
+        }
+        break;
+      case "/dashboard/settings":
+        {
+          return "settings";
+        }
+        break;
+      default: {
+        return "feeds";
+      }
+    }
+  }, [route]);
+  const ISSERVER = typeof window === "undefined";
+  const [showMore, setShowMore] = useState(() => {
+    if (ISSERVER) return false;
+    if (sessionStorage.getItem("sidebarState") && sessionStorage) {
+      if (active === "feeds" || active === "programs" || active === "profile") {
+        sessionStorage.setItem("sidebarState", "false");
+        return false;
+      } else {
+        return sessionStorage.getItem("sidebarState") === "true";
+      }
+    } else {
+      if (active === "feeds" || active === "programs" || active === "profile") {
+        sessionStorage.setItem("sidebarState", "false");
+        return false;
+      } else {
+        sessionStorage.setItem("sidebarState", "true");
+        return true;
+      }
+    }
+  });
+
+
+  useEffect(() => {
+    sessionStorage.setItem("sidebarState", showMore.toString());
+  }, [showMore]);
+
   const handleToggle = () => {
     setShowMore((prevState) => !prevState);
   };
@@ -24,7 +113,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         css={{
           paddingBlock: "0 2rem",
           borderRight: `1px solid ${"#E4E4E4"}`,
-          fontSize: "1.125rem",
+          fontSize: "1rem",
           fontWeight: "bold",
         }}
       >
@@ -44,9 +133,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               css={{
                 listStyleType: "none",
                 display: "grid",
-                gap: "2rem",
+                gap: "2.5rem",
                 width: "60%",
                 marginInline: "auto",
+                fontSize: "1.125rem",
               }}
             >
               <li>
@@ -54,34 +144,29 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   href="/dashboard"
                   css={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
                 >
-                  <Image
-                    src="/assets/svgs/home.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                  <p>Feeds</p>
+                  {active === "feeds" ? (
+                    <Image
+                      src="/assets/svgs/home-active.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <Image
+                      src="/assets/svgs/home.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                  <p css={{ color: active === "feeds" ? "#7C35AB" : "#000"}}>
+                    Feeds
+                  </p>
                 </Link>
               </li>
+              <SidebarItem item={"programs"} activeItem={active} />
               <li>
-                <Link
-                  href="/dashboard/programs"
-                  css={{ display: "flex", gap: "0.5rem" }}
-                >
-                  <Image
-                    src="/assets/svgs/programs.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                  <p>Programs</p>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard"
-                  css={{ display: "flex", gap: "0.5rem" }}
-                >
+                <div css={{ display: "flex", gap: "0.5rem" }}>
                   <Image
                     src="/assets/svgs/notification.svg"
                     alt=""
@@ -89,22 +174,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     height={20}
                   />
                   <p>Notifications</p>
-                </Link>
+                </div>
               </li>
-              <li>
-                <Link
-                  href="/dashboard/profile"
-                  css={{ display: "flex", gap: "0.5rem" }}
-                >
-                  <Image
-                    src="/assets/svgs/user.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                  <p>Profile</p>
-                </Link>
-              </li>
+              <SidebarItem item={"profile"} activeItem={active} />
             </ul>
             {showMore && (
               <div
@@ -128,48 +200,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     marginInline: "auto",
                   }}
                 >
-                  <li>
-                    <Link
-                      href="/dashboard/manager"
-                      css={{ display: "flex", gap: "0.5rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/manager.svg"
-                        alt=""
-                        width={20}
-                        height={20}
-                      />
-                      <p>Manager</p>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/dashboard/tickets"
-                      css={{ display: "flex", gap: "0.5rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/ticket.svg"
-                        alt=""
-                        width={20}
-                        height={20}
-                      />
-                      <p>Tickets</p>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/dashboard/favourites"
-                      css={{ display: "flex", gap: "0.5rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/favourites.svg"
-                        alt=""
-                        width={20}
-                        height={20}
-                      />
-                      <p>Favourites</p>
-                    </Link>
-                  </li>
+                  <SidebarItem item={"manager"} activeItem={active} />
+                  <SidebarItem item={"tickets"} activeItem={active} />
+                  <SidebarItem item={"favourites"} activeItem={active} />
                   <li>
                     <Link
                       href="/dashboard"
@@ -184,20 +217,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                       <p>Wallet</p>
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      href="/dashboard/settings"
-                      css={{ display: "flex", gap: "0.5rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/settings.svg"
-                        alt=""
-                        width={20}
-                        height={20}
-                      />
-                      <p>Settings</p>
-                    </Link>
-                  </li>
+                  <SidebarItem item={"settings"} activeItem={active} />
                 </ul>
                 <hr
                   css={{
@@ -227,6 +247,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{
                     border: "none",
                     borderTop: `1px solid ${"#E4E4E4"}`,
+                    marginBottom: "0.5rem"
                   }}
                 />
               </div>
@@ -239,6 +260,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               width: "60%",
               marginInline: "auto",
               cursor: "pointer",
+              color: "#7C35AB;"
             }}
             onClick={handleToggle}
           >
@@ -248,7 +270,24 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               width={20}
               height={20}
             />
-            <p>More</p>
+            <p>{showMore ? "Less" : "More"}</p>
+            <div css = {{marginLeft: "1.5rem"}}>
+            {
+              showMore ?
+              <Image
+              src="/assets/svgs/elbow-down-purple.svg"
+              alt=""
+              width={12}
+              height={12}
+            />:
+            <Image
+              src="/assets/svgs/elbow-up-purple.svg"
+              alt=""
+              width={12}
+              height={12}
+            />
+            }
+            </div>
           </div>
         </div>
       </div>
@@ -262,3 +301,39 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+const SidebarItem = ({
+  item,
+  activeItem,
+}: {
+  item: string;
+  activeItem: string;
+}) => {
+  return (
+    <li>
+      <Link
+        href={`/dashboard/${item}`}
+        css={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
+      >
+        {activeItem === item ? (
+          <Image
+            src={`/assets/svgs/${item}-active.svg`}
+            alt=""
+            width={20}
+            height={20}
+          />
+        ) : (
+          <Image
+            src={`/assets/svgs/${item}.svg`}
+            alt=""
+            width={20}
+            height={20}
+          />
+        )}
+        <p css={{ color: activeItem === item ? "#7C35AB" : "#000" }}>
+          {item.charAt(0).toUpperCase() + item.slice(1)}
+        </p>
+      </Link>
+    </li>
+  );
+};

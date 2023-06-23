@@ -9,9 +9,13 @@ import TooltipComp from "../tooltip";
 interface IHostEventTextField {
   label: string;
   type: string;
+  name?:string;
+  value?: any;
   placeholder: string;
+  color?:string;
   height?: string;
   image?: string;
+  setValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const HostEventTextField = (props: IHostEventTextField) => {
   return (
@@ -70,6 +74,7 @@ const HostEventTextField = (props: IHostEventTextField) => {
         <textarea
           id={props.label.split("").join("_")}
           placeholder={props.placeholder}
+          name={props.name}
           css={{
             height: props.height ? props.height : "8.25rem",
             width: "100%",
@@ -78,7 +83,7 @@ const HostEventTextField = (props: IHostEventTextField) => {
             borderRadius: "10px",
             fontSize: "14px",
             fontFamily: "'Poppins', sans-serif",
-            color: "#AEAEAE",
+            color: props.color? props.color : "#AEAEAE",
             resize: "none",
           }}
         />

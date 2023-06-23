@@ -1,12 +1,18 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import {  screen } from "styles/theme";
+import { screen } from "styles/theme";
 import Image from "next/image";
 import TicketSalesTable from "@/components/tables/ticketSales";
 
 const TicketSales = () => {
   const [activeView, setActiveView] = useState("All");
+  const [filterHovered, setFilterHovered] = useState(false);
+  const [filterClicked, setFilterClicked] = useState(false);
+
+  const handleClick = () => {
+    setFilterClicked(!filterClicked);
+  };
   return (
     <div
       css={{
@@ -17,7 +23,7 @@ const TicketSales = () => {
         css={{
           padding: "1rem",
           display: "flex",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
         }}
       >
         <div
@@ -42,49 +48,50 @@ const TicketSales = () => {
             />
           ))}
         </div>
-        <div css = {{
-          display: "flex",
-          width: "45%",
-          justifyContent: "space-between",
-          paddingRight: "2%"
-        }}>
         <div
           css={{
-            borderRadius: "66px",
-            backgroundColor: "#F5F5F5",
-            width: "80%",
-            height: "2.575rem",
             display: "flex",
-            alignItems: "center",
-            paddingLeft: "17px",
-            gap: "2%",
+            width: "45%",
+            justifyContent: "space-between",
           }}
         >
-          <div css={{ marginTop: "3px" }}>
-            <Image
-              src="/assets/svgs/search.svg"
-              width={14.42}
-              height={14.41}
-              alt="logo"
-            />
-          </div>
-          <input
-            placeholder="Search"
-            type={"text"}
+          <div
             css={{
               borderRadius: "66px",
-              width: "100%",
-              outline: "none",
-              border: "none",
               backgroundColor: "#F5F5F5",
-              height: "85%",
-              fontSize: "0.9rem",
-              fontWeight: "400",
-              color: "#AEAEAE",
+              width: "80%",
+              height: "2.575rem",
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: "17px",
+              gap: "2%",
             }}
-          />
-        </div>
-        <div
+          >
+            <div css={{ marginTop: "3px" }}>
+              <Image
+                src="/assets/svgs/search.svg"
+                width={14.42}
+                height={14.41}
+                alt="logo"
+              />
+            </div>
+            <input
+              placeholder="Search"
+              type={"text"}
+              css={{
+                borderRadius: "66px",
+                width: "100%",
+                outline: "none",
+                border: "none",
+                backgroundColor: "#F5F5F5",
+                height: "85%",
+                fontSize: "0.9rem",
+                fontWeight: "400",
+                color: "#AEAEAE",
+              }}
+            />
+          </div>
+          <div
             css={{
               borderRadius: "50%",
               width: "12%",
@@ -92,8 +99,12 @@ const TicketSales = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              opacity: 0.7,
+              position: "relative",
+              cursor: "pointer",
             }}
+            onMouseEnter={() => setFilterHovered(true)}
+            onMouseLeave={() => setFilterHovered(false)}
+            onClick={handleClick}
           >
             <Image
               src={"/assets/svgs/filter.svg"}
@@ -101,11 +112,50 @@ const TicketSales = () => {
               width={18}
               height={18}
             />
+            {filterHovered && (
+              <div
+                css={{
+                  background: "#F5F5F5",
+                  position: "absolute",
+                  bottom: "-1.5rem",
+                  left: "-0.5rem",
+                  zIndex: 3,
+                  padding: "1% 10%",
+                  borderRadius: "5px",
+                }}
+              >
+                <span css={{ fontSize: "12px" }}>Filter</span>
+              </div>
+            )}
+            {filterClicked && (
+              <div
+                css={{
+                  background: "#FFF",
+                  position: "absolute",
+                  top: "3rem",
+                  left: "-4.1rem",
+                  zIndex: 5,
+                  display: "grid",
+                  gap: "5px",
+                  padding: "20% 20%",
+                  borderRadius: "10px",
+                  width: "7rem",
+                  fontSize: "13px",
+                  fontWeight: "500",
+                   boxShadow: `0px 0px 5px ${"#00000029"}`,
+                }}
+              >
+                <p>Recent</p>
+                <p>An Hour Ago</p>
+                <p>Yesterday</p>
+                <p>Custom Time</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
       <TicketSalesTable />
-      <div css = {{height: "2rem"}}></div>
+      <div css={{ height: "2rem" }}></div>
     </div>
   );
 };

@@ -5,14 +5,36 @@ import Image from "next/image";
 import DashboardLayout from "../layout";
 import SettingsCard from "@/components/cards/settingsCard";
 import SettingsTab from "./[tab]";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
+import DeleteModal from "@/components/modals/settingsModal/deleteModal";
+import ToggleSwitch from "@/components/toggleSwitch";
 
 const Settings = () => {
-  const router = useRouter()
+  const router = useRouter();
   const activeTab = router.query.tab || "personalnformation";
-  
+
+  const [notificationsActive, setNotificationsActive] = useState(false)
+  const [audienceNoticeActive, setAudienceNoticeActive] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const handleDeleteModalOpen = () => {
+    setDeleteModalOpen(!deleteModalOpen);
+  };
+
+  const handleNotificationsActive = () => {
+    setNotificationsActive(!notificationsActive);
+  };
+
+  const handleAudienceNoticeActive = () => {
+    setAudienceNoticeActive(!audienceNoticeActive);
+  };
+
   return (
     <DashboardLayout>
+      <DeleteModal
+        isOpen={deleteModalOpen}
+        onRequestClose={handleDeleteModalOpen}
+      />
       <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
         <div
           css={{
@@ -22,7 +44,6 @@ const Settings = () => {
           <div
             css={{
               borderLeft: `1px solid ${"#E4E4E4"}`,
-              boxShadow: `0px 0px 3px ${"#00000029"}`,
               marginLeft: "1.2rem",
               height: "100%",
               maxHeight: "100vh",
@@ -62,12 +83,35 @@ const Settings = () => {
                   height={25}
                 />
               </SettingsCard>
-              <SettingsCard cardTitle={"Notifications"}>
+              <div css={{ position: "relative" }}>
+                <SettingsCard cardTitle={"Notifications"}>
+                  <div></div>
+                </SettingsCard>
+                <div
+                  css={{
+                    position: "absolute",
+                    top: "30%",
+                    right: "5%",
+                  }}
+                >
+                  <ToggleSwitch isToggled={notificationsActive} onToggle={handleNotificationsActive} />
+                </div>
+              </div>
+              <div css={{ position: "relative" }}>
+                <SettingsCard cardTitle={"Audience Notice"}>
+                  <div></div>
+                </SettingsCard>
+                <div
+                  css={{
+                    position: "absolute",
+                    top: "30%",
+                    right: "5%",
+                  }}
+                >
+                  <ToggleSwitch isToggled={audienceNoticeActive} onToggle={handleAudienceNoticeActive} />
+                </div>
+              </div>
 
-              </SettingsCard>
-              <SettingsCard cardTitle={"Audience Notice"}>
-
-              </SettingsCard>
               <SettingsCard
                 cardTitle={"Change Password"}
                 link={"/dashboard/settings/?tab=changePassword"}
@@ -92,14 +136,16 @@ const Settings = () => {
                   height={25}
                 />
               </SettingsCard>
-              <SettingsCard cardTitle={"Delete Account"}>
-                <Image
-                  src="/assets/svgs/elbow-Right.svg"
-                  alt=""
-                  width={25}
-                  height={25}
-                />
-              </SettingsCard>
+              <div css={{ cursor: "pointer" }} onClick={handleDeleteModalOpen}>
+                <SettingsCard cardTitle={"Delete Account"}>
+                  <Image
+                    src="/assets/svgs/elbow-Right.svg"
+                    alt=""
+                    width={25}
+                    height={25}
+                  />
+                </SettingsCard>
+              </div>
             </div>
           </div>
         </div>

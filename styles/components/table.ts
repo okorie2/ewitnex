@@ -16,6 +16,7 @@ export const Table = styled.table`
     border-radius: 8px;
     border: 1px solid  #E4E4E4;
     box-shadow: 0px 0px 5px #00000029;
+    padding-inline-start: 0.3rem;
     color: ${(props) => "#393939"};
     position: relative;
     & thead {
@@ -23,8 +24,7 @@ export const Table = styled.table`
     }
     & th,
     & td {
-        padding: 0.3rem;
-        padding-block: 0.7rem;
+        padding-block: 0.6rem;
     }
     & th {
         text-align: left;
