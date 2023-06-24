@@ -13,8 +13,8 @@ const Settings = () => {
   const router = useRouter();
   const activeTab = router.query.tab || "personalnformation";
 
-  const [notificationsActive, setNotificationsActive] = useState(false)
-  const [audienceNoticeActive, setAudienceNoticeActive] = useState(false)
+  const [notificationsActive, setNotificationsActive] = useState(false);
+  const [audienceNoticeActive, setAudienceNoticeActive] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const handleDeleteModalOpen = () => {
@@ -44,6 +44,7 @@ const Settings = () => {
           <div
             css={{
               borderLeft: `1px solid ${"#E4E4E4"}`,
+              borderRight: `1px solid ${"#E4E4E4"}`,
               marginLeft: "1.2rem",
               height: "100%",
               maxHeight: "100vh",
@@ -94,7 +95,10 @@ const Settings = () => {
                     right: "5%",
                   }}
                 >
-                  <ToggleSwitch isToggled={notificationsActive} onToggle={handleNotificationsActive} />
+                  <ToggleSwitch
+                    isToggled={notificationsActive}
+                    onToggle={handleNotificationsActive}
+                  />
                 </div>
               </div>
               <div css={{ position: "relative" }}>
@@ -108,7 +112,10 @@ const Settings = () => {
                     right: "5%",
                   }}
                 >
-                  <ToggleSwitch isToggled={audienceNoticeActive} onToggle={handleAudienceNoticeActive} />
+                  <ToggleSwitch
+                    isToggled={audienceNoticeActive}
+                    onToggle={handleAudienceNoticeActive}
+                  />
                 </div>
               </div>
 

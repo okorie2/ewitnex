@@ -11,8 +11,12 @@ interface IHostEventTextField {
   type: string;
   name?:string;
   value?: any;
+  padding?:string
   placeholder: string;
   color?:string;
+  disabled?:boolean;
+  background?:string
+  border?:string
   height?: string;
   image?: string;
   setValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -75,13 +79,15 @@ const HostEventTextField = (props: IHostEventTextField) => {
           id={props.label.split("").join("_")}
           placeholder={props.placeholder}
           name={props.name}
+          disabled = {props.disabled}
           css={{
             height: props.height ? props.height : "8.25rem",
             width: "100%",
-            padding: "1rem ",
-            border: `1px solid ${"#AEAEAE"}`,
+            padding: props.padding ? props.padding : "1rem ",
+            border: props.border ? props.border :`1px solid ${"#AEAEAE"}`,
             borderRadius: "10px",
             fontSize: "14px",
+            background: props.background,
             fontFamily: "'Poppins', sans-serif",
             color: props.color? props.color : "#AEAEAE",
             resize: "none",

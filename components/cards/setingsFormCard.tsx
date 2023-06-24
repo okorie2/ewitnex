@@ -7,10 +7,12 @@ import Image from "next/image";
 const SettingsFormCard = ({
   label,
   cardTitle,
-  onClick
+  onClick,
+  cardTitleImg
 }: {
   label: string;
   cardTitle: string;
+  cardTitleImg ?: React.ReactNode;
   onClick?: () => void;
 }) => {
   return (
@@ -39,6 +41,7 @@ const SettingsFormCard = ({
       </div>
       <SettingsCard
         cardTitle={cardTitle}
+        cardTitleImg = {cardTitleImg}
         height={"51px"}
         noShadow={true}
         border="10px"

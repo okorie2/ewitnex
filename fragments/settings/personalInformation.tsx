@@ -47,7 +47,19 @@ const PersonalInformation = () => {
       >
         <SettingsFormCard label={"Full Name"} cardTitle={"Blessed Onoriode"} onClick={() => handleSettingsModalOpen("fullName")}/>
         <SettingsFormCard label = {"Username"} cardTitle={"Blessed_one"} onClick={() => handleSettingsModalOpen("userName")}/>
-        <SettingsFormCard label={"Phone Number"} cardTitle={"+234 9077728899"}  />
+        <SettingsFormCard 
+        label={"Phone Number"} 
+        cardTitleImg = {
+        <div css = {{display: "flex", alignItems: "center"}}>
+          <img 
+            src="https://flagsapi.com/NG/flat/64.png" 
+            alt={""} 
+            height={40} 
+            width = {40}        
+          />
+        </div>
+        } 
+        cardTitle={"+234 9077728899"}  />
         <SettingsFormCard label={"Email Address"} cardTitle={"blessedonoriode@gmail.com"}  />
         <SettingsFormCard label={"Gender"} cardTitle={"Prefer not to say"} onClick={() => handleSettingsModalOpen("gender")} />
         <SettingsFormCard label={"Location"} cardTitle={"Lagos,Lagos,Nigeria"} onClick={() => handleSettingsModalOpen("location")}  />
