@@ -22,6 +22,7 @@ const ManageEventTab = () => {
     else if (activeTab === "TicketSales") return <TicketSales />;
     else if (activeTab === "Attendees") return <Attendees />;
   }, [activeTab]);
+  
 
   return (
     <div

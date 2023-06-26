@@ -14,6 +14,7 @@ interface Props {
   placeholder: string;
   setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
+  type?:string
 }
 
 export default function SettingsTextField({ label, name, ...rest }: Props) {
@@ -54,7 +55,7 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
           paddingLeft: "5%",
           color: "#000"
         }}
-        type={"text"}
+        type={rest.type || "text"}
         value={rest.value}
         name={name}
         placeholder={rest.placeholder}

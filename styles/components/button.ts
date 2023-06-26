@@ -2,19 +2,23 @@ import styled from "@emotion/styled";
 interface Props {
   background?: string;
   height?:string
+  width?:string
+  color?:string
 }
 
 export const Button = styled.button<Props>`
   background-color: ${(props) =>
     props.background ? props.background :"#7C35AB"};
   border-radius: 56px;
-  color: #fff;
+  color: ${(props) => props.color ? props.color : "#fff"};
   height: ${(props) => props.height ? props.height : "64px"};
+  width: ${(props) => props.width ? props.width : "fit-content"};
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
+  font-family: Nunito, 'sans-serif';
   border: none;
   cursor: pointer;
   @media screen and (max-width: 1024px) {

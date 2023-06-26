@@ -32,7 +32,7 @@ const ManageEventCard = (props: IManageEvent) => {
         <div
           css={{
             width: "132px",
-            height: "140px",
+            height: "138px",
             borderRadius: "20px",
             position: "relative",
           }}

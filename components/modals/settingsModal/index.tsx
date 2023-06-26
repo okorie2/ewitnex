@@ -34,7 +34,7 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement('body');
+Modal.setAppElement("body");
 
 const SettingsModal = (props: ISettingsModal) => {
   const stateEvents = useMemo(() => {
@@ -46,7 +46,10 @@ const SettingsModal = (props: ISettingsModal) => {
   return (
     <Modal
       isOpen={props.isOpen}
-      onRequestClose={(e) => {e.stopPropagation(); props.onRequestClose}}
+      onRequestClose={(e) => {
+        e.stopPropagation();
+        props.onRequestClose;
+      }}
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
@@ -59,7 +62,7 @@ const SettingsModal = (props: ISettingsModal) => {
           fontSize: "1.125rem",
           cursor: "pointer",
           width: "67%",
-          height: "90vh"
+          height: "90vh",
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
