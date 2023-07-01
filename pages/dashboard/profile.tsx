@@ -99,6 +99,7 @@ const Profile = () => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
+                        gap: "5px",
                         height: "113px",
                         width: "113px",
                         borderRadius: "50%",
@@ -106,6 +107,12 @@ const Profile = () => {
                       onClick={handleImageClick}
                     > 
                       <input type = "file" css = {{display: "none"}} onChange={handleFileChange} ref = {inputRef}/>
+                      <Image 
+                        src = "/assets/svgs/profile-edit.svg"
+                        alt = ""
+                        width = {15}
+                        height = {15}
+                      />
                       <p>Edit</p>
                     </div>
                   )}

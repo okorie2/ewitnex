@@ -6,6 +6,13 @@ import Image from "next/image";
 import OverviewChart from "@/components/charts/overviewChart";
 
 const EventOverview = () => {
+  const handleCopy = async (textToCopy: string) => {
+    if ("clipboard" in navigator) {
+      await navigator.clipboard.writeText(textToCopy);
+    } else {
+      document.execCommand("copy", true, textToCopy);
+    }
+  };
   return (
     <div>
       <div css={{ width: "100%", height: "166px", position: "relative" }}>
@@ -66,12 +73,19 @@ const EventOverview = () => {
               }}
             >
               <p>https:ewitnex.com/devfest-aba-id-tec542445</p>
-              <Image
-                src="/assets/svgs/copy2.svg"
-                alt=""
-                width={11.13}
-                height={12.6}
-              />
+              <div
+                css={{ cursor: "pointer" }}
+                onClick={() =>
+                  handleCopy("https:ewitnex.com/devfest-aba-id-tec542445")
+                }
+              >
+                <Image
+                  src="/assets/svgs/copy2.svg"
+                  alt=""
+                  width={11.13}
+                  height={12.6}
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -99,12 +113,17 @@ const EventOverview = () => {
               }}
             >
               <p>tec542445</p>
-              <Image
-                src="/assets/svgs/copy2.svg"
-                alt=""
-                width={11.13}
-                height={12.6}
-              />
+              <div
+                css={{ cursor: "pointer" }}
+                onClick={() => handleCopy("tec542445")}
+              >
+                <Image
+                  src="/assets/svgs/copy2.svg"
+                  alt=""
+                  width={11.13}
+                  height={12.6}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -223,9 +242,7 @@ const EventOverview = () => {
             }}
           >
             <div css={{ padding: "1rem" }}>
-              <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
-                Event Views
-              </p>
+              <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>Event Views</p>
               <p
                 css={{
                   fontSize: "1rem",
@@ -251,9 +268,7 @@ const EventOverview = () => {
               }}
             >
               <div>
-                <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
-                  Attendees
-                </p>
+                <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>Attendees</p>
                 <p
                   css={{
                     fontSize: "1rem",
@@ -283,11 +298,13 @@ const EventOverview = () => {
             }}
           >
             {/* <Image src="/assets/pngs/chart.png" alt="" fill /> */}
-            <div css = {{
-              // border: `1px solid ${"#C0C0C0"}`,
-              boxShadow: `0px 0px 5px ${"#00000029"}`,
-              padding: "1rem",
-            }}>
+            <div
+              css={{
+                // border: `1px solid ${"#C0C0C0"}`,
+                boxShadow: `0px 0px 5px ${"#00000029"}`,
+                padding: "1rem",
+              }}
+            >
               <div css={{ display: "flex", gap: "2%", marginBottom: "2rem" }}>
                 <div>
                   <div

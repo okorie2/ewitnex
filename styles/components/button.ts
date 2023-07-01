@@ -27,8 +27,7 @@ export const Button = styled.button<Props>`
 `;
 export const ButtonFormFilled = styled.button`
   height: 52px;
-  background: transparent linear-gradient(180deg, #528ffe 0%, #7c35ab 100%) 0%
-    0% no-repeat padding-box;
+  background: #7c35ab;
   border-radius: 26px;
   border: none;
   color: ${(props) => "#fff"};

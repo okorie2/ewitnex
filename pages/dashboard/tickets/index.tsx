@@ -38,6 +38,19 @@ const Tickets = () => {
   return (
     <DashboardLayout>
       <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
+      {isMenuOpen && (
+          <div
+            css={{
+              height: "100vh",
+              width: "calc(100vw - 250px)",
+              right: 0,
+              zIndex: "1",
+              position: "absolute",
+              cursor: "pointer",
+            }}
+            onClick={handleMenuOpen}
+          ></div>
+        )}
         <div
           css={{
             borderRight: `1px solid ${"#E4E4E4"}`,
@@ -47,7 +60,6 @@ const Tickets = () => {
           <div
             css={{
               borderLeft: `0.5px solid ${"#E4E4E4"}`,
-              // boxShadow: `0px 0px 5px ${"#00000029"}`,
               marginLeft: "1.2rem",
               height: "100%",
               maxHeight: "100vh",
