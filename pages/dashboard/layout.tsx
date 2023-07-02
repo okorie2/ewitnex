@@ -20,6 +20,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     if (route.includes("manager")) {
       route = "/dashboard/manager";
     }
+    if (route.includes('programs')) {
+      route = "/dashboard/programs"
+    }
     switch (route) {
       case "/dashboard":
         {
