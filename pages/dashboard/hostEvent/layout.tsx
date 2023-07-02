@@ -40,7 +40,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
         setActiveStage(1);
       }
     }
-  }, []);
+  }, [activeRoute]);
 
   return (
     <div

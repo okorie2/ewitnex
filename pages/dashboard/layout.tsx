@@ -14,9 +14,9 @@ import Logo from "@/components/logo";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  let route = router.route;
 
   const active = useMemo(() => {
+    let route = router.route;
     if (route.includes("manager")) {
       route = "/dashboard/manager";
     }
@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         return "feeds";
       }
     }
-  }, [route]);
+  }, [router.route]);
   const ISSERVER = typeof window === "undefined";
   const [showMore, setShowMore] = useState(() => {
     if (ISSERVER) return false;

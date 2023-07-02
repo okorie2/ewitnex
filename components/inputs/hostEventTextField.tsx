@@ -76,7 +76,7 @@ const HostEventTextField = (props: IHostEventTextField) => {
             cursor:"pointer"
           }}
         >
-          {props.options?.map(option => <option>{option}</option>)}
+          {props.options?.map(option => <option key = {option}>{option}</option>)}
           
         </select>
         <div css = {{position: "absolute", right: "5%", top: "35%", zIndex: "-1"}}>

@@ -132,6 +132,7 @@ const HostEvent = () => {
             {organizersArray.map((organizer) => {
               return (
                 <div
+                  key = {organizer}
                   css={{
                     width: "250px",
                     position: "relative",
