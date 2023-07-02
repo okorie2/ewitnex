@@ -2,9 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
+import {Tooltip} from "@mui/material";
 
-import TooltipComp from "../tooltip";
 
 interface IHostEventTextField {
   label: string;
@@ -54,7 +53,6 @@ const HostEventTextField = (props: IHostEventTextField) => {
             borderRadius: "10px",
             fontSize: "14px",
             fontFamily: "'Poppins', sans-serif",
-            color: "#AEAEAE",
           }}
         />
       )}
@@ -74,7 +72,8 @@ const HostEventTextField = (props: IHostEventTextField) => {
             fontFamily: "'Poppins', sans-serif",
             color: "#000",
             appearance: "none",
-            opacity: 0.7
+            opacity: 0.7,
+            cursor:"pointer"
           }}
         >
           {props.options?.map(option => <option>{option}</option>)}

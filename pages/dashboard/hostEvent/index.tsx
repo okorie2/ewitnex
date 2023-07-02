@@ -310,7 +310,8 @@ const HostEvent = () => {
                     background: audienceState === "public" ? "#7C35AB21 ": "",
                     border: audienceState === "public" ? "1px solid #7C35AB": "1px solid #AEAEAE",
                     color: audienceState === "public" ? "#7C35AB" : "#AEAEAE",
-                    borderRadius: "10px"
+                    borderRadius: "10px",
+                    cursor:"pointer"
                   }}
                   onClick = {() => setAudienceState("public")}
                 >{
@@ -323,10 +324,10 @@ const HostEvent = () => {
                   />
                   :
                   <Image
-                    src="/assets/svgs/eye_open_purple.svg"
+                    src="/assets/svgs/eye_open.svg"
                     alt=""
-                    width={12}
-                    height={12}
+                    width={20}
+                    height={20}
                   />}
                   <p>Public</p>
                 </div>
@@ -341,13 +342,14 @@ const HostEvent = () => {
                     background: audienceState === "private" ? "#7C35AB21 ": "",
                     border: audienceState === "private" ? "1px solid #7C35AB": "1px solid #AEAEAE",
                     color: audienceState === "private" ? "#7C35AB" : "#AEAEAE",
-                    borderRadius: "10px"
+                    borderRadius: "10px",
+                    cursor:"pointer"
                   }}
                   onClick = {() => setAudienceState("private")}
                 >
                   { audienceState === "private" ?
                     <Image
-                    src="/assets/svgs/eye_close.svg"
+                    src="/assets/svgs/eye_close_purple.svg"
                     alt=""
                     width={20}
                     height={20}
@@ -355,8 +357,8 @@ const HostEvent = () => {
                     <Image
                     src="/assets/svgs/eye_close.svg"
                     alt=""
-                    width={12}
-                    height={12}
+                    width={20}
+                    height={20}
                   />}
                   <p>Private</p>
                 </div>

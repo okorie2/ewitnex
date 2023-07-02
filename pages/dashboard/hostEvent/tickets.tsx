@@ -8,9 +8,11 @@ import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
 import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
 import HostEventModal from "@/components/modals/hostEventModal";
+import { Tooltip } from "@mui/material";
 
 const HostEventTickets = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [ticketType, setTicketType] = useState("paid");
   const handleModalClose = () => {
     setIsOpen(false);
   };
@@ -25,7 +27,7 @@ const HostEventTickets = () => {
               borderBottom: `1px solid ${"#E4E4E4"}`,
               display: "flex",
               alignItems: "center",
-              paddingInline: "3.2rem",
+              paddingInline: "2.5rem",
             }}
           >
             <div
@@ -38,35 +40,35 @@ const HostEventTickets = () => {
             >
               <div>
                 <h1 css={{ fontSize: "1.875rem" }}>Ticket</h1>
-                <p>
-                  Will you be giving out tickets to attendees for this event?
-                </p>
+                <p>Enter ticket information for this event</p>
               </div>
-              <div
-                css={{
-                  display: "flex",
-                  gap: "2rem",
-                }}
-              >
-                <p
+              <div>
+                <div
                   css={{
-                    color: "#7C35AB",
-                    fontWeight: "bold",
-                    cursor: "pointer",
+                    display: "flex",
+                    gap: "2rem",
                   }}
                 >
-                  Preview
-                </p>
-                <Link
-                  href="/dashboard"
-                  css={{
-                    color: "#F05E78",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                  }}
-                >
-                  Cancel
-                </Link>
+                  <p
+                    css={{
+                      color: "#7C35AB",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Preview
+                  </p>
+                  <Link
+                    href="/dashboard"
+                    css={{
+                      color: "#F05E78",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Cancel
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -108,67 +110,182 @@ const HostEventTickets = () => {
                 },
               }}
             >
+              <div
+                css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <p
+                  css={{
+                    fontWeight: "bold",
+                    display: "flex",
+                    gap: "0.3rem",
+                    alignItems: "center",
+                  }}
+                >
+                  Choose Ticket Type
+                </p>
+              </div>
+              <div css={{ display: "flex", gap: "1rem", marginTop: "-3%" }}>
+                <div
+                  css={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "0.75rem",
+                    width: "110px",
+                    height: "50px",
+                    background: ticketType === "paid" ? "#7C35AB21 " : "",
+                    border:
+                      ticketType === "paid"
+                        ? "1px solid #7C35AB"
+                        : "1px solid #AEAEAE",
+                    color: ticketType === "paid" ? "#7C35AB" : "#AEAEAE",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setTicketType("paid")}
+                >
+                  <p>Paid</p>
+                </div>
+                <div
+                  css={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "0.75rem",
+                    width: "110px",
+                    height: "50px",
+                    background: ticketType === "free" ? "#7C35AB21 " : "",
+                    border:
+                      ticketType === "free"
+                        ? "1px solid #7C35AB"
+                        : "1px solid #AEAEAE",
+                    color: ticketType === "free" ? "#7C35AB" : "#AEAEAE",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setTicketType("free")}
+                >
+                  <p>Free</p>
+                </div>
+                <div
+                  css={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "0.75rem",
+                    width: "110px",
+                    height: "50px",
+                    background: ticketType === "donation" ? "#7C35AB21 " : "",
+                    border:
+                      ticketType === "donation"
+                        ? "1px solid #7C35AB"
+                        : "1px solid #AEAEAE",
+                    color: ticketType === "donation" ? "#7C35AB" : "#AEAEAE",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setTicketType("donation")}
+                >
+                  <p>Donation</p>
+                </div>
+              </div>
+              <div css={{ marginTop: "-4.5%" }}>
+                <HostEventTextField
+                  label=""
+                  placeholder="Name ticket e.g VIP"
+                  type="text"
+                />
+              </div>
+              <div
+                css={{
+                  width: "100%",
+                  border: "0.124rem solid #AEAEAE",
+                  borderRadius: "10px",
+                  fontSize: "14px",
+                  fontFamily: "'Poppins', sans-serif",
+                  marginTop: "-3%",
+                  display: "flex"
+                }}
+              >
+                <div
+                  css={{
+                    borderRight: "0.124rem solid #AEAEAE",
+                    width: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <input
+                    type="text"
+                    placeholder="Price (NGN)"
+                    css={{
+                      height: "3.3rem",
+                      width: "90%",
+                      padding: "1rem",
+                      border: `none`,
+                      borderRadius: "10px",
+                      fontSize: "14px",
+                      fontFamily: "'Poppins', sans-serif",
+                    }}
+                  />
+                </div>
+                <div
+                  css={{
+                    width: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding:"1rem",
+                    fontWeight: "500"
+                  }}
+                >
+                  <p>Fee (NGN)</p>
+                  <p>N6,300</p>
+                </div>
+              </div>
+              <p css={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
+                You will be charged N300 + 3% ticket service fee and 3% payment
+                processing fee of the price inputed per ticket sold to attendees
+              </p>
               <HostEventTextField
-                label="Will you be giving out tickets to attendees for this event?"
-                placeholder="Yes, attendees should purchase ticket"
-                type="select"
+                label=""
+                placeholder="Enter ticket quantity"
+                type="text"
               />
               <HostEventTextField
                 label="Who want to handle the fee?"
                 placeholder="Pass fees to attendees"
                 type="select"
+                options={[
+                  "I want to pass the fees to the attendees",
+                  "I want to absorb the fees"
+                ]}
               />
               <div>
                 <HostEventTextField
                   label="Can attendees ask for a refund?"
                   placeholder="Yes, ticket is refundable"
                   type="select"
+                  options={[
+                    "Yes, ticket is refundable",
+                    "No, ticket is non-refundable"
+                  ]}
                 />
                 <p css={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>
-                  A refund will lead to you getting your payment 2 to 3 days to
+                  A refund will lead to you getting your payment 3 to 5 working days to
                   your wallet after your events have ended.
                 </p>
-                <p css={{ fontSize: "0.875rem" }}>
-                  A non refund, you will get your cash automatically to your
-                  wallet
-                </p>
               </div>
-              <div>
-                <HostEventTextField
-                  label="Choose Ticket Type"
-                  placeholder="Paid Ticket"
-                  type="select"
-                />
-                <HostEventTextField
-                  label=""
-                  placeholder="Name ticket e.g VIP"
-                  type="text"
-                />
-                <HostEventSplitInput
-                  label=""
-                  placeholder1="Price(NGN)"
-                  placeholder2="Fee (NGN)"
-                  text2="6,300"
-                  input2={false}
-                />
-                <p css={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>
-                  You will be charged N300 + 3% ticket service fee and 3%
-                  payment processing fee of the price inputed per ticket sold to
-                  attendees
-                </p>
-              </div>
-              <HostEventTextField
-                label=""
-                placeholder="Enter ticket quantity"
-                type="text"
-              />
+
+             
               <button
                 css={{
                   fontSize: "1rem",
                   fontWeight: "bold",
                   color: "#7C35AB",
                   border: `1px solid ${"#7C35AB"}`,
-                  height: "52px",
+                  height: "45px",
                   marginBottom: "0.5rem",
                   background: "#fff",
                   borderRadius: "26px",
@@ -326,7 +443,7 @@ const HostEventTickets = () => {
                       cursor: "pointer",
                     }}
                   >
-                    + Add Another Speaker
+                    + Add Another Ticket
                   </button>
                 </div>
               </div>

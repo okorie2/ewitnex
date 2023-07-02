@@ -42,7 +42,6 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  console.log(activeStage);
   return (
     <div
       css={{
@@ -137,7 +136,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
                   <div
                     css={{
                       borderLeft: "1px solid #AEAEAE",
-                      height: "1.5rem",
+                      height: "1.6rem",
                       marginLeft: "0.8rem",
                     }}
                   ></div>

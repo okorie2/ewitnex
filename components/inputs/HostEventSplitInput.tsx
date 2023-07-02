@@ -1,18 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import Image from "next/image";
+import dayjs, { Dayjs } from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
 interface IHostEventTimeDate {
   label: string;
   placeholder1: string;
   placeholder2: string;
-  image1?: string;
-  image2?: string;
-  type?: string;
   input2: boolean;
-  text2?: string;
 }
 const HostEventTimeDate = (props: IHostEventTimeDate) => {
+  const [value, setValue] = React.useState<Dayjs | null>();
+  const [timeValue, setTimeValue] = React.useState<Dayjs | null>();
   return (
     <div css={{ display: "grid", gap: "0.5rem", width: "100%" }}>
       <label
@@ -29,7 +33,7 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
         css={{
           height: "3.3rem",
           width: "100%",
-          border: `1px solid ${"#AEAEAE"}`,
+          border: "1px solid #AEAEAE",
           borderRadius: "10px",
           fontSize: "14px",
           fontFamily: "'Poppins', sans-serif",
@@ -40,32 +44,50 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
         <div
           css={{
             width: "50%",
-            padding: "1rem",
             border: "none",
-            borderRight: `1px solid ${"#AEAEAE"}`,
+            borderRight: "1px solid #AEAEAE",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <input
-            type={`${props.type}? ${props.type} : "text"`}
-            placeholder={props.placeholder1}
-            css={{
-              border: "none",
-            }}
-          />
-          <div>
-            {props.image1 && (
-              <Image src={props.image1} alt="" width={11.74} height={13.04} />
-            )}
-          </div>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer
+              components={[
+                "DatePicker",
+                "MobileDatePicker",
+                "DesktopDatePicker",
+                "StaticDatePicker",
+              ]}
+            >
+              <DatePicker
+                views={['year', 'month', 'day']}
+                format="DD/MM/YYYY"
+                value={value}
+                slotProps={{
+                  textField: {placeholder:props.placeholder1}
+                }}
+                onChange={(newValue) => setValue(newValue)}
+                sx={{
+                  width: "100%",
+                  fieldset : {
+                    border: "none",
+                    width: "100%"
+                  },
+                  input : {
+                    fontFamily: "Nunito, sans-serif",
+                  },
+                  "MuiStack-root css-i7y1zb-MuiStack-root": {
+                    width: "100%"
+                  }
+                }}
+              />
+            </DemoContainer>
+          </LocalizationProvider>
         </div>
-
         <div
           css={{
             width: "50%",
-            padding: "1rem",
             border: "none",
             display: "flex",
             alignItems: "center",
@@ -73,28 +95,30 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
           }}
         >
           {props.input2 && (
-            <>
-              <input
-                type={`${props.type}? ${props.type} : "text"`}
-                placeholder={props.placeholder2}
-                css={{
-                  border: "none",
-                }}
-              />
-              {props.image2 && (
-                <Image src={props.image2} alt="" width={17.83} height={17.83} />
-              )}
-            </>
-          )}
-          {props.text2 && (
-            <>
-              <p css={{ fontWeight: "bold", color: "#000" }}>
-                {props.placeholder2}
-              </p>
-              <p css={{ fontWeight: "500", color: "#000" }}>
-                {props.text2}
-              </p>
-            </>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["TimePicker", "TimePicker"]}>
+                <TimePicker
+                  value={timeValue}
+                  onChange={(newValue) => setTimeValue(newValue)}
+                  slotProps={{
+                    textField: {placeholder:props.placeholder2}
+                  }}
+                  sx={{
+                    width: "100%",
+                    fieldset : {
+                      border: "none",
+                      width: "100%",
+                    },
+                    input : {
+                      fontFamily: "Nunito, sans-serif",
+                    },
+                    "&MuiStack-root css-i7y1zb-MuiStack-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
           )}
         </div>
       </div>

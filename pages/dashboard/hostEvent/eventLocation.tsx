@@ -1,14 +1,18 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
-import { screen} from "styles/theme";
+import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
 import Image from "next/image";
+import { Tooltip } from "@mui/material";
+import StyledCheckbox from "@/components/inputs/StyledCheckbox";
 
 const EventLocation = () => {
+  const [locationType, setLocationType] = useState("venue");
+  const [undecided, setUndecided] = useState(false);
   return (
     <HostEventLayout>
       <div>
@@ -87,25 +91,138 @@ const EventLocation = () => {
             },
           }}
         >
-          <HostEventTextField
-            label="Location"
-            placeholder="Venue"
-            type="select"
-            image="/assets/svgs/info2.svg"
-          />
+          <div css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <p
+              css={{
+                fontWeight: "bold",
+                display: "flex",
+                gap: "0.3rem",
+                alignItems: "center",
+              }}
+            >
+              Location
+            </p>
+            <Tooltip title="Spread awareness about your event among attendees and ensure they are well informed about the designated venue">
+              <Image
+                src={"/assets/svgs/info2.svg"}
+                alt=""
+                width={14.02}
+                height={14.02}
+              />
+            </Tooltip>
+          </div>
+          <div css={{ display: "flex", gap: "1rem", marginTop: "-1%" }}>
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.75rem",
+                width: "110px",
+                height: "50px",
+                background: locationType === "venue" ? "#7C35AB21 " : "",
+                border:
+                  locationType === "venue"
+                    ? "1px solid #7C35AB"
+                    : "1px solid #AEAEAE",
+                color: locationType === "venue" ? "#7C35AB" : "#AEAEAE",
+                borderRadius: "8px",
+                cursor: "pointer",
+              }}
+              onClick={() => setLocationType("venue")}
+            >
+              <p>Venue</p>
+            </div>
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.75rem",
+                width: "110px",
+                height: "50px",
+                background: locationType === "online" ? "#7C35AB21 " : "",
+                border:
+                  locationType === "online"
+                    ? "1px solid #7C35AB"
+                    : "1px solid #AEAEAE",
+                color: locationType === "online" ? "#7C35AB" : "#AEAEAE",
+                borderRadius: "8px",
+                cursor: "pointer",
+              }}
+              onClick={() => setLocationType("online")}
+            >
+              <p>Online</p>
+            </div>
+          </div>
+          <div
+            css={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+          >
+            <p
+              css={{
+                fontWeight: "bold",
+                display: "flex",
+                gap: "0.3rem",
+                alignItems: "center",
+              }}
+            >
+              Address
+            </p>
+            <Tooltip title="Spread for the event address/venue. You can also enter an address manually">
+              <Image
+                src={"/assets/svgs/info2.svg"}
+                alt=""
+                width={14.02}
+                height={14.02}
+              />
+            </Tooltip>
+          </div>
           <div
             css={{
               display: "flex",
               gap: "1.5rem",
               alignItems: "flex-end",
+              marginTop: "-1.5%",
             }}
           >
-            <HostEventTextField
-              label="Address"
-              placeholder="Search location"
-              type="text"
-              image="/assets/svgs/info2.svg"
-            />
+            <div
+              css={{
+                borderRadius: "10px",
+                width: "100%",
+                height: "3.3rem",
+                display: "flex",
+                alignItems: "center",
+                border: `1px solid ${"#AEAEAE"}`,
+                paddingLeft: "17px",
+                gap: "2%",
+              }}
+            >
+              <div css={{ marginTop: "3px" }}>
+                <Image
+                  src="/assets/svgs/search.svg"
+                  width={14.42}
+                  height={14.41}
+                  alt="logo"
+                />
+              </div>
+              <input
+                placeholder="Search for the address or venue"
+                type={"text"}
+                css={{
+                  height: "3.2rem",
+                  width: "100%",
+                  padding: "1rem",
+                  borderRadius: "10px",
+                  border: "none",
+                  fontSize: "14px",
+                  fontFamily: "'Poppins', sans-serif",
+                }}
+              />
+            </div>
             <p
               css={{
                 color: "#AEAEAE",
@@ -136,21 +253,6 @@ const EventLocation = () => {
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: "2.5rem",
-            }}
-          >
-            <HostEventTextField
-              label="Venue Type"
-              placeholder=""
-              type="select"
-              image="/assets/svgs/info2.svg"
-            />
-            <div></div>
-          </div>
-          <div
-            css={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "2.5rem",
               [screen.lg]: {
                 gridTemplateColumns: "1fr",
               },
@@ -159,29 +261,27 @@ const EventLocation = () => {
               },
             }}
           >
-            <HostEventSplitInput
-              label="Start At"
-              placeholder1="Start Date"
-              placeholder2="Start Time"
-              image1="/assets/svgs/calender2.svg"
-              image2="/assets/svgs/time.svg"
-              input2={true}
-            />
-            <HostEventSplitInput
-              label="End At"
-              placeholder1="End Date"
-              placeholder2="End Time"
-              image1="/assets/svgs/calender2.svg"
-              image2="/assets/svgs/time.svg"
-              input2={true}
-            />
+            {undecided === false && (
+              <>
+                <HostEventSplitInput
+                  label="Start At"
+                  placeholder1="Start Date"
+                  placeholder2="Start time"
+                  input2={true}
+                />
+                <HostEventSplitInput
+                  label="End At"
+                  placeholder1="End Date"
+                  placeholder2="End time"
+                  input2={true}
+                />
+              </>
+            )}
           </div>
           <div css={{ display: "flex", alignItems: "center" }}>
-            <input
-              type="checkbox"
-              name="undecided"
-              value="date undecided"
-              css={{ border: `5px solid ${"#7C35AB"}` }}
+            <StyledCheckbox
+              checked={undecided}
+              onChange={() => setUndecided(!undecided)}
             />
             <label
               htmlFor="undecided"
@@ -194,35 +294,6 @@ const EventLocation = () => {
               Time & Date - To be decided
             </label>
           </div>
-          <button
-            css={{
-              fontSize: "0.875rem",
-              fontWeight: "bold",
-              color: "#7C35AB",
-              border: `1px solid ${"#7C35AB"}`,
-              width: "215px",
-              height: "38px",
-              marginBottom: "0.5rem",
-              background: "#fff",
-            }}
-          >
-            <div
-              css={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <Image
-                src="/assets/svgs/calendar-purple.svg"
-                alt=""
-                width={11}
-                height={13}
-              />
-              <p>Enter location manually</p>
-            </div>
-          </button>
           <div
             css={{
               width: "80%",

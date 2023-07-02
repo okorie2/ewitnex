@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useRef } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
@@ -9,6 +9,22 @@ import Image from "next/image";
 import Speaker from "@/components/cards/speaker";
 
 const Speakers = () => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleImageClick = () => {
+    if(inputRef.current != null ) {
+      inputRef.current.click()
+    }
+  }
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileObj = event.target.files && event.target.files[0]
+    if( !fileObj) {
+      return
+    }
+
+    event.target.files = null
+  }
   return (
     <HostEventLayout>
       <div>
@@ -40,10 +56,10 @@ const Speakers = () => {
                 },
               }}
             >
-              <h1 css={{ fontSize: "1.875rem" }}>Speakers</h1>
+              <h1 css={{ fontSize: "1.875rem" }}>Performers</h1>
               <p>
                 If your event is going to have speakers, select Yes and fill in
-                speaker(s) details otherwise leave it at &quot;No&quot; and
+                performer(s) details otherwise leave it at &quot;No&quot; and
                 continue
               </p>
             </div>
@@ -110,22 +126,41 @@ const Speakers = () => {
             }}
           >
             <HostEventTextField
-              label="Does this event have speakers and will like to be shown in the program?"
+              label="Does this event have performers and will like to be shown in the program?"
               placeholder="Yes"
               type="select"
+              options={[
+                "Yes", "No"
+              ]}
             />
             <HostEventTextField
-              label="Name of Speaker"
+              label="Name of performer"
               placeholder="Enter full name"
               type="text"
             />
             <HostEventTextField
-              label="Speakers Title"
+              label="Performer Title"
               placeholder="Software Engineer at Ewitnex"
               type="text"
             />
             <HostEventTextField
-              label="About Speaker"
+              label="Performing Role"
+              placeholder="Select event"
+              type="select"
+              options={[
+                "Select a role",
+                "Host",
+                "Speaker",
+                "Artiste",
+                "Preacher",
+                "Anchor",
+                "Celebrant",
+                "Commedian",
+                "Others",
+              ]}
+            />
+            <HostEventTextField
+              label="About Performer"
               placeholder="Tell attendees more about this speaker"
               type="textarea"
             />
@@ -135,7 +170,7 @@ const Speakers = () => {
                   fontWeight: "bold",
                 }}
               >
-                Speaker&apos;s Image(Optional)
+                Performer&apos;s Image(Optional)
               </p>
               <div
                 css={{
@@ -155,8 +190,12 @@ const Speakers = () => {
                     color: "#AEAEAE",
                     fontSize: "0.75rem",
                     width: "80%",
+                    cursor: "pointer"
                   }}
+                  onClick={handleImageClick}
+
                 >
+                  <input type = "file" css = {{display: "none"}} onChange={handleFileChange} ref = {inputRef}/>
                   <Image
                     src="/assets/svgs/image.svg"
                     alt=""
@@ -185,7 +224,7 @@ const Speakers = () => {
                 cursor: "pointer",
               }}
             >
-              Add Speaker
+              Add Performer
             </button>
           </form>
           <div
