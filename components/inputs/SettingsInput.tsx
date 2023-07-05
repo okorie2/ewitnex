@@ -14,6 +14,7 @@ interface Props {
   placeholder: string;
   setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
+  handleKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   type?:string
 }
 
@@ -53,13 +54,19 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
           height: "100%",
           borderRadius: "10px",
           paddingLeft: "5%",
-          color: "#000"
+          color: "#000",
+          fontFamily: "'Poppins', sans-serif",
         }}
         type={rest.type || "text"}
         value={rest.value}
         name={name}
         placeholder={rest.placeholder}
         onChange={(e) => rest.setValue(e)}
+        onKeyDown={(e) => {
+          if(rest.handleKeyDown){
+            rest.handleKeyDown(e);
+          }
+        }}
       />
       {rest.withIcon && <>{rest.iconComponent}</>}
     </div>

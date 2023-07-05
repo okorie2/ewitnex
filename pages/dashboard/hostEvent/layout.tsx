@@ -1,10 +1,47 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 
 const HostEventLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const [activeStage, setActiveStage] = useState(1);
+  const activeRoute = router.asPath;
+
+  useEffect(() => {
+    switch (activeRoute) {
+      case "/dashboard/hostEvent":
+        {
+          setActiveStage(1);
+        }
+        break;
+      case "/dashboard/hostEvent/fileUpload":
+        {
+          setActiveStage(2);
+        }
+        break;
+      case "/dashboard/hostEvent/eventLocation":
+        {
+          setActiveStage(3);
+        }
+        break;
+      case "/dashboard/hostEvent/speakers":
+        {
+          setActiveStage(4);
+        }
+        break;
+      case "/dashboard/hostEvent/tickets":
+        {
+          setActiveStage(5);
+        }
+        break;
+      default: {
+        setActiveStage(1);
+      }
+    }
+  }, [activeRoute]);
+
   return (
     <div
       css={{
@@ -37,7 +74,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
           <ul
             css={{
               display: "grid",
-              gap: "1rem",
+              marginTop: "2.5rem",
               listStyleType: "none",
               fontWeight: "300",
             }}
@@ -45,33 +82,65 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
             {hostEventTabs.map((item) => (
               <li
                 css={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.6rem",
-                  color:
-                    router.asPath === item.href
-                      ? "#7C35AB"
-                      : "#AEAEAE",
+                  color: activeStage >= item.stage ? "#7C35AB" : "#AEAEAE",
+                  position: "relative",
                 }}
                 key={item.name}
               >
-                {router.asPath === item.href ? (
-                  <Image
-                    src="/assets/svgs/tick-circle-purple.svg"
-                    alt=""
-                    width={25}
-                    height={25}
-                  />
-                ) : (
-                  <Image
-                    src="/assets/svgs/tick-circle-grey.svg"
-                    alt=""
-                    width={25}
-                    height={25}
-                  />
+                {activeStage >= item.stage && (
+                  <div
+                    css={{
+                      position: "absolute",
+                      height: "inherit",
+                      width: "inherit",
+                    }}
+                  ></div>
                 )}
+                <Link
+                  href={item.href || ""}
+                  css={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.6rem",
+                    pointerEvents: activeStage >= item.stage ? "auto" : "none",
+                  }}
+                >
+                  {activeStage >= item.stage ? (
+                    activeStage === item.stage ? (
+                      <Image
+                        src="/assets/svgs/tick-circle-purple.svg"
+                        alt=""
+                        width={25}
+                        height={25}
+                      />
+                    ) : (
+                      <Image
+                        src="/assets/svgs/tick-circle-filled.svg"
+                        alt=""
+                        width={25}
+                        height={25}
+                      />
+                    )
+                  ) : (
+                    <Image
+                      src="/assets/svgs/tick-circle-grey.svg"
+                      alt=""
+                      width={25}
+                      height={25}
+                    />
+                  )}
 
-                {item.name}
+                  {item.name}
+                </Link>
+                {item.stage !== 5 && (
+                  <div
+                    css={{
+                      borderLeft: "1px solid #AEAEAE",
+                      height: "1.6rem",
+                      marginLeft: "0.8rem",
+                    }}
+                  ></div>
+                )}
               </li>
             ))}
           </ul>
@@ -85,12 +154,13 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
 export default HostEventLayout;
 
 const hostEventTabs = [
-  { name: "Event Program Info", href: "/dashboard/hostEvent" },
-  { name: "Files Upload", href: "/dashboard/hostEvent/fileUpload" },
+  { name: "Event Program Info", href: "/dashboard/hostEvent", stage: 1 },
+  { name: "Files Upload", href: "/dashboard/hostEvent/fileUpload", stage: 2 },
   {
     name: "Location, Date and Time",
     href: "/dashboard/hostEvent/eventLocation",
+    stage: 3,
   },
-  { name: "Speakers", href: "/dashboard/hostEvent/speakers" },
-  { name: "Tickets", href: "/dashboard/hostEvent/tickets" },
+  { name: "Speakers", href: "/dashboard/hostEvent/speakers", stage: 4 },
+  { name: "Tickets", href: "/dashboard/hostEvent/tickets", stage: 5 },
 ];

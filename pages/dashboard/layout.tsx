@@ -14,11 +14,14 @@ import Logo from "@/components/logo";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  let route = router.route;
 
   const active = useMemo(() => {
+    let route = router.route;
     if (route.includes("manager")) {
       route = "/dashboard/manager";
+    }
+    if (route.includes('programs')) {
+      route = "/dashboard/programs"
     }
     switch (route) {
       case "/dashboard":
@@ -70,28 +73,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         return "feeds";
       }
     }
-  }, [route]);
+  }, [router.route]);
   const ISSERVER = typeof window === "undefined";
   const [showMore, setShowMore] = useState(() => {
     if (ISSERVER) return false;
     if (sessionStorage.getItem("sidebarState") && sessionStorage) {
-      if (active === "feeds" || active === "programs" || active === "profile") {
-        sessionStorage.setItem("sidebarState", "false");
-        return false;
-      } else {
-        return sessionStorage.getItem("sidebarState") === "true";
-      }
+      return sessionStorage.getItem("sidebarState") === "true";
     } else {
-      if (active === "feeds" || active === "programs" || active === "profile") {
-        sessionStorage.setItem("sidebarState", "false");
-        return false;
-      } else {
-        sessionStorage.setItem("sidebarState", "true");
-        return true;
-      }
+      sessionStorage.setItem("sidebarState", "true");
+      return true;
     }
   });
-
 
   useEffect(() => {
     sessionStorage.setItem("sidebarState", showMore.toString());
@@ -159,7 +151,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                       height={20}
                     />
                   )}
-                  <p css={{ color: active === "feeds" ? "#7C35AB" : "#000"}}>
+                  <p css={{ color: active === "feeds" ? "#7C35AB" : "#000" }}>
                     Feeds
                   </p>
                 </Link>
@@ -247,7 +239,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   css={{
                     border: "none",
                     borderTop: `1px solid ${"#E4E4E4"}`,
-                    marginBottom: "0.5rem"
+                    marginBottom: "0.5rem",
                   }}
                 />
               </div>
@@ -260,7 +252,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               width: "60%",
               marginInline: "auto",
               cursor: "pointer",
-              color: "#7C35AB;"
+              color: "#7C35AB;",
             }}
             onClick={handleToggle}
           >
@@ -271,22 +263,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               height={20}
             />
             <p>{showMore ? "Less" : "More"}</p>
-            <div css = {{marginLeft: "1.5rem"}}>
-            {
-              showMore ?
-              <Image
-              src="/assets/svgs/elbow-down-purple.svg"
-              alt=""
-              width={12}
-              height={12}
-            />:
-            <Image
-              src="/assets/svgs/elbow-up-purple.svg"
-              alt=""
-              width={12}
-              height={12}
-            />
-            }
+            <div css={{ marginLeft: "1.5rem" }}>
+              {showMore ? (
+                <Image
+                  src="/assets/svgs/elbow-down-purple.svg"
+                  alt=""
+                  width={12}
+                  height={12}
+                />
+              ) : (
+                <Image
+                  src="/assets/svgs/elbow-up-purple.svg"
+                  alt=""
+                  width={12}
+                  height={12}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -337,3 +329,20 @@ const SidebarItem = ({
     </li>
   );
 };
+
+// if (sessionStorage.getItem("sidebarState") && sessionStorage) {
+//   if (active === "feeds" || active === "programs" || active === "profile") {
+//     sessionStorage.setItem("sidebarState", "false");
+//     return false;
+//   } else {
+//     return sessionStorage.getItem("sidebarState") === "true";
+//   }
+// } else {
+//   if (active === "feeds" || active === "programs" || active === "profile") {
+//     sessionStorage.setItem("sidebarState", "false");
+//     return false;
+//   } else {
+//     sessionStorage.setItem("sidebarState", "true");
+//     return true;
+//   }
+// }

@@ -5,6 +5,7 @@ import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import { Tooltip } from "@mui/material";
 
 const FileUpload = () => {
   return (
@@ -81,12 +82,14 @@ const FileUpload = () => {
           <div>
             <h4 css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               Upload your event program
-              <Image
-                src="/assets/svgs/info2.svg"
-                alt=""
-                width={14.02}
-                height={14.02}
-              />
+              <Tooltip  title="If you have a customize program that has already been designed, upload it as a PDF file. Your attendees will be able to view it on the event page">
+                <Image
+                  src="/assets/svgs/info2.svg"
+                  alt=""
+                  width={14.02}
+                  height={14.02}
+                />
+              </Tooltip>
             </h4>
             <div
               css={{
@@ -197,12 +200,14 @@ const FileUpload = () => {
           <div>
             <h4 css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               Upload program cover photo
-              <Image
-                src="/assets/svgs/info2.svg"
-                alt=""
-                width={14.02}
-                height={14.02}
-              />
+              <Tooltip  title="This is like the profile picture for your event. This makes youe event stand out easily from other events and attendees can easily identify the event on the events page">
+                <Image
+                  src="/assets/svgs/info2.svg"
+                  alt=""
+                  width={14.02}
+                  height={14.02}
+                />
+              </Tooltip>
             </h4>
             <div>
               <div

@@ -87,15 +87,14 @@ const TicketSales = () => {
                 height: "85%",
                 fontSize: "0.9rem",
                 fontWeight: "400",
-                color: "#AEAEAE",
               }}
             />
           </div>
           <div
             css={{
               borderRadius: "50%",
-              width: "12%",
-              backgroundColor: "#F5F5F5",
+              width: "46px",
+              backgroundColor: "#F2F7FB",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
