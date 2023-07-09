@@ -130,7 +130,7 @@ const Speakers = () => {
               placeholder="Yes"
               type="select"
               options={[
-                "Yes", "No"
+                {value:"Yes", label:"Yes"}, {value:"No", label: "No"}
               ]}
             />
             <HostEventTextField
@@ -145,18 +145,17 @@ const Speakers = () => {
             />
             <HostEventTextField
               label="Performing Role"
-              placeholder="Select event"
+              placeholder="Select a role"
               type="select"
               options={[
-                "Select a role",
-                "Host",
-                "Speaker",
-                "Artiste",
-                "Preacher",
-                "Anchor",
-                "Celebrant",
-                "Commedian",
-                "Others",
+                {value:"Host", label:"Host"}, 
+                {value:"Speaker", label:"Speaker"},
+                {value:"Artiste", label:"Artiste"},
+                {value:"Preacher", label: "Preacher"},
+                {value:"Anchor", label: "Anchor"},
+                {value:"Celebrant", label: "Celebrant"},
+                {value:"Comedian", label: "Comedian"},
+                {value:"Others", label: "Others"},
               ]}
             />
             <HostEventTextField

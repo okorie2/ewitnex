@@ -155,99 +155,134 @@ const EventLocation = () => {
               <p>Online</p>
             </div>
           </div>
-          <div
-            css={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-            }}
-          >
-            <p
-              css={{
-                fontWeight: "bold",
-                display: "flex",
-                gap: "0.3rem",
-                alignItems: "center",
-              }}
-            >
-              Address
-            </p>
-            <Tooltip title="Spread for the event address/venue. You can also enter an address manually">
-              <Image
-                src={"/assets/svgs/info2.svg"}
-                alt=""
-                width={14.02}
-                height={14.02}
-              />
-            </Tooltip>
-          </div>
-          <div
-            css={{
-              display: "flex",
-              gap: "1.5rem",
-              alignItems: "flex-end",
-              marginTop: "-1.5%",
-            }}
-          >
+
+          {locationType === "online" ? (
             <div
               css={{
-                borderRadius: "10px",
-                width: "100%",
-                height: "3.3rem",
-                display: "flex",
-                alignItems: "center",
-                border: `1px solid ${"#AEAEAE"}`,
-                paddingLeft: "17px",
-                gap: "2%",
+                display: "grid",
+                gap: "1.5rem",
+                gridTemplateColumns: "30% 68%",
               }}
             >
-              <div css={{ marginTop: "3px" }}>
-                <Image
-                  src="/assets/svgs/search.svg"
-                  width={14.42}
-                  height={14.41}
-                  alt="logo"
-                />
-              </div>
-              <input
-                placeholder="Search for the address or venue"
-                type={"text"}
-                css={{
-                  height: "3.2rem",
-                  width: "100%",
-                  padding: "1rem",
-                  borderRadius: "10px",
-                  border: "none",
-                  fontSize: "14px",
-                  fontFamily: "'Poppins', sans-serif",
-                }}
+              <HostEventTextField
+                label="Online Medium"
+                placeholder="none"
+                image={"/assets/svgs/info2.svg"}
+                tooltip="Select from the dropdown the online medium the event will use to take place and paste medium link"
+                type="select"
+                options={[
+                  {value: "none", label: "Select an online medium"},
+                  {label:"Ewitnex", value: "Ewitnex"},
+                  {label:"Zoom", value: "Zoom"},
+                  {label:"Google Meet", value: "Google Meet"},
+                  {label:"Microsoft Teams", value: "Microsoft Teams"},
+                ]}
               />
+              <div css = {{alignSelf: "self-end", marginTop: "-2%"}}>
+              <HostEventTextField
+                placeholder="Paste medium links to live streams"
+                type="text"
+              />
+              </div>
+             
             </div>
-            <p
-              css={{
-                color: "#AEAEAE",
-                fontSize: "1.125rem",
-                fontWeight: "bold",
-                marginBottom: "1rem",
-              }}
-            >
-              or
-            </p>
-            <button
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "bold",
-                color: "#7C35AB",
-                border: `1px solid ${"#7C35AB"}`,
-                width: "250px",
-                height: "38px",
-                marginBottom: "0.5rem",
-                background: "#fff",
-              }}
-            >
-              Enter location manually
-            </button>
-          </div>
+          ) : (
+            <>
+              <div
+                css={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <p
+                  css={{
+                    fontWeight: "bold",
+                    display: "flex",
+                    gap: "0.3rem",
+                    alignItems: "center",
+                  }}
+                >
+                  Address
+                </p>
+                <Tooltip title="Spread for the event address/venue. You can also enter an address manually">
+                  <Image
+                    src={"/assets/svgs/info2.svg"}
+                    alt=""
+                    width={14.02}
+                    height={14.02}
+                  />
+                </Tooltip>
+              </div>
+              <div
+                css={{
+                  display: "flex",
+                  gap: "1.5rem",
+                  alignItems: "flex-end",
+                  marginTop: "-1.5%",
+                }}
+              >
+                <div
+                  css={{
+                    borderRadius: "10px",
+                    width: "100%",
+                    height: "3.3rem",
+                    display: "flex",
+                    alignItems: "center",
+                    border: `1px solid ${"#AEAEAE"}`,
+                    paddingLeft: "17px",
+                    gap: "2%",
+                  }}
+                >
+                  <div css={{ marginTop: "3px" }}>
+                    <Image
+                      src="/assets/svgs/search.svg"
+                      width={14.42}
+                      height={14.41}
+                      alt="logo"
+                    />
+                  </div>
+                  <input
+                    placeholder="Search for the address or venue"
+                    type={"text"}
+                    css={{
+                      height: "3.2rem",
+                      width: "100%",
+                      padding: "1rem",
+                      borderRadius: "10px",
+                      border: "none",
+                      fontSize: "14px",
+                      fontFamily: "'Poppins', sans-serif",
+                    }}
+                  />
+                </div>
+                <p
+                  css={{
+                    color: "#AEAEAE",
+                    fontSize: "1.125rem",
+                    fontWeight: "bold",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  or
+                </p>
+                <button
+                  css={{
+                    fontSize: "0.875rem",
+                    fontWeight: "bold",
+                    color: "#7C35AB",
+                    border: `1px solid ${"#7C35AB"}`,
+                    width: "250px",
+                    height: "38px",
+                    marginBottom: "0.5rem",
+                    background: "#fff",
+                  }}
+                >
+                  Enter location manually
+                </button>
+              </div>
+            </>
+          )}
           <div
             css={{
               display: "grid",

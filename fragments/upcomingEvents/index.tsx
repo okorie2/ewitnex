@@ -44,18 +44,12 @@ export default function UpcomingEventsFragment() {
           <p
             css={{
               fontSize: "1.125rem",
+              fontWeight: "600"
             }}
           >
             See All
           </p>
-          <span css={{ marginTop: "4px" }}>
-            <Image
-              src="/assets/svgs/right.svg"
-              alt="right"
-              width={50}
-              height={24}
-            />
-          </span>
+          
         </div>
       </div>
       <div

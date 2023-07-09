@@ -30,13 +30,13 @@ export default function EventsAroundYouFragment() {
             justifyContent: "center",
             alignItems: "center",
             gap: "5%",
-            width: "9%",
+            width: "10%",
             cursor: "pointer",
             [screen.desktop]: {
-              width: "14%",
+              width: "15%",
             },
             [screen.lg]: {
-              width: "13%",
+              width: "14%",
             },
           }}
         >

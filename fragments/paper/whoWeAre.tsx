@@ -11,7 +11,7 @@ export default function WhoWeArePaper() {
   return (
     <div
       css={{
-        backgroundImage: `linear-gradient(${"#528FFE"}, ${"#7C35AB"})`,
+        background: "#7c35ab33",
         display: "flex",
         justifyContent: "space-between",
         fontFamily: "'Poppins', sans-serif",
@@ -45,6 +45,7 @@ export default function WhoWeArePaper() {
             css={{
               display: "flex",
               gap: "11px",
+              color: "#7C35AB",
               alignItems: "center",
               textAlign: "left",
               [screen.desktop]: {
@@ -52,12 +53,13 @@ export default function WhoWeArePaper() {
               },
             }}
           >
-            <span css={{ fontSize: "1rem" }}>your</span> SOCIAL PAPERLESS
+            <span css={{ fontSize: "1rem", color: "#F05E78" }}>your</span> SOCIAL PAPERLESS
           </H1>
           <H1
             css={{
               display: "flex",
               gap: "8px",
+              color: "#7C35AB",
               alignItems: "center",
               textAlign: "left",
               [screen.desktop]: {
@@ -74,6 +76,7 @@ export default function WhoWeArePaper() {
             css={{
               textAlign: "left",
               marginLeft: "19.4rem",
+              color: "#F05E78",
               fontSize: "1.25rem",
               [screen.desktop]: {
                 marginLeft: "10rem",

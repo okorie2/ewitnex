@@ -2,10 +2,11 @@ import styled from "@emotion/styled";
 
 interface Props {
   small?: boolean;
+  size?: string
 }
 
 export const H1 = styled.h1<Props>`
-  font-size: 2.5rem;
+  font-size: ${(props) => (props.size ? props.size : "2.5rem" )};
   font-weight: 700;
   font-family: ${"'Poppins', sans-serif"};
   text-transform: ${(props) => (props.small ? "none" : "uppercase")};

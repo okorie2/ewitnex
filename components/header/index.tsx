@@ -1,11 +1,44 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Logo from "@/components/logo";
 
 export default function Navbar() {
+  const router = useRouter();
+  const active = useMemo(() => {
+    let route = router.route;
+    if (route.includes("events")) {
+      route = "/events";
+    }
+    switch (route) {
+      case "/":
+        {
+          return "home";
+        }
+        break;
+      case "/events":
+        {
+          return "events";
+        }
+        break;
+      case "/about":
+        {
+          return "about";
+        }
+        break;
+      case "/how-it-works":
+        {
+          return "how";
+        }
+        break;
+      default: {
+        return "home";
+      }
+    }
+  }, [router.route]);
   return (
     <div
       css={{
@@ -46,7 +79,7 @@ export default function Navbar() {
           />
         </div>
         <input
-          placeholder="Search Events"
+          placeholder="Search event name , ID"
           type={"text"}
           css={{
             borderRadius: "66px",
@@ -72,22 +105,40 @@ export default function Navbar() {
           justifyContent: "space-evenly",
           ">div": {
             ":hover": {
-              color: "#7C35AB",
+              color: "#AEAEAE",
             },
           },
         }}
       >
         <div>
-          <Link href="/"> Home</Link>
+          <Link href="/" css={{ color: active === "home" ? "#7C35AB" : "" }}>
+            {" "}
+            Home
+          </Link>
         </div>
         <div>
-          <Link href="/events">Events</Link>
+          <Link
+            href="/events"
+            css={{ color: active === "events" ? "#7C35AB" : "" }}
+          >
+            Events
+          </Link>
         </div>
         <div>
-          <Link href="/about">About</Link>
+          <Link
+            href="/about"
+            css={{ color: active === "about" ? "#7C35AB" : "" }}
+          >
+            About
+          </Link>
         </div>
         <div>
-          <Link href="/how-it-works">How It Works</Link>
+          <Link
+            href="/how-it-works"
+            css={{ color: active === "how" ? "#7C35AB" : "" }}
+          >
+            How It Works
+          </Link>
         </div>
       </div>
       <div>
