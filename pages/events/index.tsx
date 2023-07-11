@@ -84,9 +84,9 @@ export default function Index() {
           </div>
           <div
             css={{
-              width: "24vw",
+              width: "32%",
               [screen.desktop]: {
-                width: "24vw",
+                width: "32%",
               },
             }}
           >
@@ -104,9 +104,9 @@ export default function Index() {
           </div>
           <div
             css={{
-              width: "24vw",
+              width: "32%",
               [screen.desktop]: {
-                width: "24vw",
+                width: "32%",
               },
             }}
           >
@@ -124,9 +124,9 @@ export default function Index() {
           </div>
           <div
             css={{
-              width: "24vw",
+              width: "32%",
               [screen.desktop]: {
-                width: "24vw",
+                width: "32%",
               },
             }}
           >
@@ -144,9 +144,9 @@ export default function Index() {
           </div>
           <div
             css={{
-              width: "24vw",
+              width: "32%",
               [screen.desktop]: {
-                width: "24vw",
+                width: "32%",
               },
             }}
           >
@@ -164,9 +164,9 @@ export default function Index() {
           </div>
           <div
             css={{
-              width: "24vw",
+              width: "32%",
               [screen.desktop]: {
-                width: "24vw",
+                width: "32%",
               },
             }}
           >
@@ -184,9 +184,9 @@ export default function Index() {
           </div>
           <div
             css={{
-              width: "24vw",
+              width: "32%",
               [screen.desktop]: {
-                width: "24vw",
+                width: "32%",
               },
             }}
           >

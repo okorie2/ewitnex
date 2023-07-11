@@ -79,7 +79,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           external = {true}
           setOpen={handleFilterSectionOpen}
         />
-        <div css={{ padding: "2% 1%" }}>{children}</div>
+        <div css={{ padding: "2% 1%", maxHeight: "calc(100vh - 120px)", overflowY: "auto", "&::-webkit-scrollbar": {
+            display: "none",
+          }, }}>{children}</div>
         <div css={{ padding: "20% 0.5%" }}>
           <div css={{ display: "flex", marginBottom: "0.8rem", alignItems: "center", gap:"5px"}}>
             <p>All Events</p>
