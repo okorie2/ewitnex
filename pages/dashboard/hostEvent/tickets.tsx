@@ -255,21 +255,21 @@ const HostEventTickets = () => {
               />
               <HostEventTextField
                 label="Who want to handle the fee?"
-                placeholder="Pass fees to attendees"
+                placeholder="pass"
                 type="select"
                 options={[
-                  "I want to pass the fees to the attendees",
-                  "I want to absorb the fees"
+                  {value: "pass", label:"I want to pass the fees to the attendees"},
+                  {value:"absorb" ,label:"I want to absorb the fees"}
                 ]}
               />
               <div>
                 <HostEventTextField
                   label="Can attendees ask for a refund?"
-                  placeholder="Yes, ticket is refundable"
+                  placeholder="refundable"
                   type="select"
                   options={[
-                    "Yes, ticket is refundable",
-                    "No, ticket is non-refundable"
+                    {value: "refundable" , label:"Yes, ticket is refundable"},
+                    {value: "non-refundable" , label:"No, ticket is non-refundable"}
                   ]}
                 />
                 <p css={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>

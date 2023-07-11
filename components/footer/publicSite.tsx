@@ -24,9 +24,9 @@ export default function PublicSiteFooter() {
           padding: "0% 4%",
         }}
       >
-        <div css={{ width: "40%" }}>
+        <div css={{ width: "35%", marginTop: "-2%" }}>
           <Logo image="/assets/pngs/logo.png" width={125.13} height={58.12} />
-          <p>
+          <p css = {{marginTop: "5%"}}>
             Ewitnex - is a social user-friendly platform that provides tools for
             event planners to create, share, and manage every activity of their
             events from scheduling, Inviting, paperless program, attendees, and
@@ -35,7 +35,7 @@ export default function PublicSiteFooter() {
           </p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "7%" }}>Use Ewitnex</p>
+          <p css={{ fontWeight: "bold", marginBottom: "28%" }}>Use Ewitnex</p>
           <p css={{ fontWeight: "500" }}>How it works</p>
           <p css={{ fontWeight: "500" }}>Pricing</p>
           <p css={{ fontWeight: "500" }}>Content standards</p>
@@ -43,7 +43,7 @@ export default function PublicSiteFooter() {
           <p css={{ fontWeight: "500" }}>FAQs</p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "7%" }}>Plan Events</p>
+          <p css={{ fontWeight: "bold", marginBottom: "14%" }}>Plan Events</p>
           <p css={{ fontWeight: "500" }}>Sell Tickets Online</p>
           <p css={{ fontWeight: "500" }}>Software </p>{" "}
           <p css={{ fontWeight: "500" }}>Online RSVP</p>{" "}
@@ -56,7 +56,7 @@ export default function PublicSiteFooter() {
           <p css={{ fontWeight: "500" }}>Party Planning</p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "7%" }}>Find Events</p>
+          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Find Events</p>
           <p css={{ fontWeight: "500" }}>All Events</p>
           <p css={{ fontWeight: "500" }}>Virtual Events</p>
           <p css={{ fontWeight: "500" }}>Online Webinars</p>

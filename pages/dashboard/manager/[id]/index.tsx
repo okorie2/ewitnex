@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const ManageSingleEvent = () => {
+  const [activeMenuBar, setActiveMenuBar] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -103,18 +104,28 @@ const ManageSingleEvent = () => {
                       alignItems: "center",
                       padding: "12px 16px",
                       borderRadius: "8px 8px 0 0",
-                      ":hover": { 
+                      ":hover": {
                         color: "#7C35AB",
-                        background: "#F5F5F5" 
                       },
                     }}
+                    onMouseEnter={() => setActiveMenuBar("event")}
+                    onMouseLeave={() => setActiveMenuBar("")}
                   >
-                    <Image
-                      src={"/assets/svgs/brochure.svg"}
-                      alt={""}
-                      width={20}
-                      height={20}
-                    />
+                    {activeMenuBar === "event" ? (
+                      <Image
+                        src={"/assets/svgs/brochure-purple.svg"}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      />
+                    ) : (
+                      <Image
+                        src={"/assets/svgs/brochure.svg"}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      />
+                    )}
                     <p>Event Page</p>
                   </div>
                   <div
@@ -124,18 +135,28 @@ const ManageSingleEvent = () => {
                       width: "100%",
                       alignItems: "center",
                       padding: "12px 16px",
-                      ":hover": { 
+                      ":hover": {
                         color: "#7C35AB",
-                        background: "#F5F5F5" 
                       },
                     }}
+                    onMouseEnter={() => setActiveMenuBar("edit")}
+                    onMouseLeave={() => setActiveMenuBar("")}
                   >
-                    <Image
-                      src={"/assets/svgs/pencil_.svg"}
-                      alt={""}
-                      width={20}
-                      height={20}
-                    />
+                    {activeMenuBar === "edit" ? (
+                      <Image
+                        src={"/assets/svgs/pencil_purple.svg"}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      />
+                    ) : (
+                      <Image
+                        src={"/assets/svgs/pencil_.svg"}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      />
+                    )}
                     <p>Edit Event</p>
                   </div>
                   <div
@@ -146,18 +167,28 @@ const ManageSingleEvent = () => {
                       alignItems: "center",
                       padding: "12px 16px",
                       borderRadius: "0 0 8px 8px",
-                      ":hover": { 
+                      ":hover": {
                         color: "#7C35AB",
-                        background: "#F5F5F5" 
                       },
                     }}
+                    onMouseEnter={() => setActiveMenuBar("cancel")}
+                    onMouseLeave={() => setActiveMenuBar("")}
                   >
-                    <Image
-                      src={"/assets/svgs/trash-light.svg"}
-                      alt={""}
-                      width={20}
-                      height={20}
-                    />
+                    {activeMenuBar === "cancel" ? (
+                      <Image
+                        src={"/assets/svgs/trash-light-purple.svg"}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      />
+                    ) : (
+                      <Image
+                        src={"/assets/svgs/trash-light.svg"}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      />
+                    )}
                     <p>Cancel Event</p>
                   </div>
                 </div>

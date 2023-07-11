@@ -7,6 +7,7 @@ interface ISpeaker {
   img: string;
   name: string;
   role: string;
+  title: string;
 }
 
 const Speaker = (props: ISpeaker) => {
@@ -37,7 +38,21 @@ const Speaker = (props: ISpeaker) => {
       </div>
       <div css={{ marginTop: "0.7rem" }}>
         <h4 css={{ fontSize: "1rem" }}>{props.name}</h4>
-        <p css={{ fontSize: "0.75rem" }}>{props.role}</p>
+        <div
+          css={{ display: "flex", fontSize: "0.75rem", alignItems: "center" }}
+        >
+          <p>{props.title}</p>
+          <div
+            css={{
+              background: "#000",
+              height: "0.3rem",
+              width: "0.3rem",
+              borderRadius: "50%",
+              marginInline: "0.4rem",
+            }}
+          ></div>
+          <p>{props.role}</p>
+        </div>
       </div>
     </div>
   );

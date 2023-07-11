@@ -570,22 +570,26 @@ const EventDetails = () => {
             <Speaker
               img="/assets/pngs/speaker1.png"
               name="John Bosko"
-              role="Software Engineer"
+              title="Software Engineer"
+              role = "Speaker"
             />
             <Speaker
               img="/assets/pngs/speaker2.png"
               name="John Bosko"
-              role="Software Engineer"
+              title="Software Engineer"
+              role = "Speaker"
             />
             <Speaker
               img="/assets/pngs/speaker3.png"
               name="John Bosko"
-              role="Software Engineer"
+              title="Software Engineer"
+              role = "Speaker"
             />
             <Speaker
               img="/assets/pngs/speaker4.png"
               name="John Bosko"
-              role="Software Engineer"
+              title="Software Engineer"
+              role = "Speaker"
             />
           </div>
         </div>

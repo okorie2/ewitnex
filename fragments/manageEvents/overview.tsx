@@ -1,19 +1,37 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import { screen } from "styles/theme";
 import Image from "next/image";
 import OverviewChart from "@/components/charts/overviewChart";
+import CopySnackBar from "@/components/snackbars/copied";
+import Link from "next/link";
 
 const EventOverview = () => {
-  const handleCopy = async (textToCopy: string) => {
+  const [copySnackBarOpen, setCopySnackBarOpen] = useState(false);
+  const handleCopyClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setCopySnackBarOpen(false)
+  };
+  const [message, setMessage] = useState("")
+
+  const handleCopy = async (textToCopy: string, alert:string) => {
     if ("clipboard" in navigator) {
       await navigator.clipboard.writeText(textToCopy);
     } else {
       document.execCommand("copy", true, textToCopy);
     }
+    setCopySnackBarOpen(true)
+    setMessage(alert)
   };
   return (
+    <>
+    <CopySnackBar open={copySnackBarOpen} message={message} handleClose = {handleCopyClose}/>
     <div>
       <div css={{ width: "100%", height: "166px", position: "relative" }}>
         <Image
@@ -76,7 +94,7 @@ const EventOverview = () => {
               <div
                 css={{ cursor: "pointer" }}
                 onClick={() =>
-                  handleCopy("https:ewitnex.com/devfest-aba-id-tec542445")
+                  handleCopy("https:ewitnex.com/devfest-aba-id-tec542445", "Invite Link Copied!")
                 }
               >
                 <Image
@@ -115,7 +133,7 @@ const EventOverview = () => {
               <p>tec542445</p>
               <div
                 css={{ cursor: "pointer" }}
-                onClick={() => handleCopy("tec542445")}
+                onClick={() => handleCopy("tec542445", "Event ID Copied!")}
               >
                 <Image
                   src="/assets/svgs/copy2.svg"
@@ -279,12 +297,14 @@ const EventOverview = () => {
                   120
                 </p>
               </div>
+              <Link href = "http://localhost:3000/dashboard/manager/tec542445?tab=Attendees">
               <Image
                 src="/assets/svgs/arrow-Right.svg"
                 alt=""
                 width={17.51}
                 height={9.84}
               />
+              </Link>
             </div>
           </div>
         </div>
@@ -401,6 +421,7 @@ const EventOverview = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

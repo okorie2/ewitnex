@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import { screen } from "styles/theme";
 import Image from "next/image";
 import TicketSalesTable from "@/components/tables/ticketSales";
 
@@ -144,10 +143,10 @@ const TicketSales = () => {
                    boxShadow: `0px 0px 5px ${"#00000029"}`,
                 }}
               >
-                <p>Recent</p>
-                <p>An Hour Ago</p>
-                <p>Yesterday</p>
-                <p>Custom Time</p>
+                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>Recent</p>
+                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>An Hour Ago</p>
+                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>Yesterday</p>
+                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>Custom Time</p>
               </div>
             )}
           </div>

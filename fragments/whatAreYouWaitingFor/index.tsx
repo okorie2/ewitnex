@@ -22,9 +22,12 @@ export default function WhatAreYouWaitingForFragment() {
       <div css={{ position: "relative", width: "12.9vw", height: "27.2vw" }}>
         <Image src="/assets/pngs/circle_r.png" alt="circle_r" fill />
       </div>
-      <div css={{ width: "42%" }}>
-        <H1 small color={"#000"}>
-          What are you waiting for? Sign up, create event, find event, get
+      <div css={{ width: "55%" }}>
+        <H1 small color={"#000"} size = {"1.8rem"}>
+          What are you waiting for? 
+        </H1>
+        <H1 small color={"#000"} size = {"1.8rem"}>
+          Sign up, create event, find event, get
           attendees and get involve
         </H1>
         <p
@@ -44,7 +47,7 @@ export default function WhatAreYouWaitingForFragment() {
             },
           }}
         >
-          Create Event
+          Get Started
         </Button>
       </div>
       <div css={{ display: "flex" }}>

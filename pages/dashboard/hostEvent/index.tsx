@@ -237,35 +237,37 @@ const HostEvent = () => {
           >
             <HostEventTextField
               label="Event Type"
-              placeholder="Select event"
+              placeholder="none"
               type="select"
               image="/assets/svgs/info2.svg"
               tooltip="Select the type of event from this list. This helps ticket buyers find your event."
               options={[
-                "Social",
-                "Cultural",
-                "Educational",
-                "Fundraising",
-                "Business",
-                "Sports",
-                "Political",
-                "Religious",
-                "Movie",
-                "Theatre",
+                {value: "none", label: "Select event"},
+                {value:"Social", label:"Social"},
+                {value: "Cultural", label:"Cultural"},
+                {value:"Educational", label:"Educational"},
+                {value:"Fundraising", label:"Fundraising"},
+                {value:"Business", label:"Business"},
+                {value:"Sports", label:"Sports"},
+                {value:"Political", label:"Political"},
+                {value:"Religious", label:"Religion"},
+                {value:"Movie", label:"Movie"},
+                {value:"Theatre", label:"Theatre"},
               ]}
             />
             <HostEventTextField
               label="Category"
-              placeholder="Wedding"
+              placeholder="none"
               type="select"
               image="/assets/svgs/info2.svg"
               tooltip="Select an event category from this list. This helps ticket buyers find your event."
               options={[
-                "Wedding",
-                "Tech",
-                "Sports and Fitness",
-                "Conference",
-                "Music",
+                {value: "none", label: "Select category"},
+                {value:"Wedding", label:"Wedding"},
+                {value:"Tech",label:"Tech" },
+                {value:"Sports and Fitness", label:"Sports and Fitness"},
+                {value:"Conference", label:"Conference"},
+                {value:"Music", label:"Music"},
               ]}
             />
           </div>

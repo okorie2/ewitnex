@@ -130,7 +130,7 @@ const Speakers = () => {
               placeholder="Yes"
               type="select"
               options={[
-                "Yes", "No"
+                {value:"Yes", label:"Yes"}, {value:"No", label: "No"}
               ]}
             />
             <HostEventTextField
@@ -145,18 +145,17 @@ const Speakers = () => {
             />
             <HostEventTextField
               label="Performing Role"
-              placeholder="Select event"
+              placeholder="Select a role"
               type="select"
               options={[
-                "Select a role",
-                "Host",
-                "Speaker",
-                "Artiste",
-                "Preacher",
-                "Anchor",
-                "Celebrant",
-                "Commedian",
-                "Others",
+                {value:"Host", label:"Host"}, 
+                {value:"Speaker", label:"Speaker"},
+                {value:"Artiste", label:"Artiste"},
+                {value:"Preacher", label: "Preacher"},
+                {value:"Anchor", label: "Anchor"},
+                {value:"Celebrant", label: "Celebrant"},
+                {value:"Comedian", label: "Comedian"},
+                {value:"Others", label: "Others"},
               ]}
             />
             <HostEventTextField
@@ -264,7 +263,8 @@ const Speakers = () => {
                 <div>
                   <Speaker
                     name="John Bosko"
-                    role="Software Engineer"
+                    title="Software Engineer"
+                    role = "Speaker"
                     img="/assets/pngs/speaker5.png"
                   />
                   <div
@@ -287,7 +287,8 @@ const Speakers = () => {
                 <div>
                   <Speaker
                     name="Jordan Mike"
-                    role="Product Designer"
+                    title="Product Designer"
+                    role = "Artiste"
                     img="/assets/pngs/speaker6.png"
                   />
                   <div
@@ -310,8 +311,8 @@ const Speakers = () => {
               </div>
               <div>
                 <p css={{ fontSize: "0.875rem" }}>
-                  If this event has multiple speakers, click on the button below
-                  to add another speaker
+                  If this event has multiple performers, click on the button below
+                  to add another performer
                 </p>
                 <button
                   css={{
@@ -328,7 +329,7 @@ const Speakers = () => {
                     cursor: "pointer",
                   }}
                 >
-                  + Add Another Speaker
+                  + Add Another Performer
                 </button>
               </div>
             </div>

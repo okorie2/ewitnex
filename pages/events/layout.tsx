@@ -2,16 +2,38 @@
 
 import { useTheme } from "@emotion/react";
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import Image from "next/image";
-import Filter from "public/assets/svgs/filter.svg";
-import Left from "public/assets/svgs/left_ar.svg";
-import Down from "public/assets/svgs/down_ar.svg";
+import Right from "public/assets/svgs/right_ar.svg";
+import { Tab } from "pages/dashboard/programs";
+import EventFilter from "fragments/eventFilter";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const theme = useTheme();
+  const [active, setActive] = useState("All");
+  const [filterSectionOpen, setFilterSectionOpen] = useState(true);
+
+  const handleActive = (tab: string) => {
+    setActive(tab);
+  };
+
+  const handleFilterSectionOpen = () => {
+    setFilterSectionOpen(!filterSectionOpen);
+  };
+  const categories = [
+    "All",
+    "Music",
+    "Technology",
+    "Health",
+    "Weddings",
+    "Conference",
+    "Sports/Fitness",
+    "Community",
+    "Government",
+    "Holidays",
+    "Hangouts",
+  ];
   return (
-    <div css={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div css={{ fontFamily: "'Poppins', sans-serif" , maxWidth: "100vw"}}>
       <div
         css={{
           display: "flex",
@@ -23,109 +45,47 @@ export default function Layout({ children }: { children: ReactNode }) {
           fontWeight: 500,
           position: "fixed",
           top: "5rem",
+          height: "60px",
           left: 0,
           right: 0,
           zIndex: 1,
+          overflowX: "auto",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
         }}
       >
-        <div>All</div>
-        <div>Technology</div>
-        <div>Music</div>
-        <div>Conference</div>
-        <div>health</div>
-        <div>Music</div>
-        <div>Weddings</div>
-        <div>Community</div>
-        <div>Government</div>
-        <div>Holidays</div>
-        <div>Sports & Fitness</div>
-        <div>More</div>
+        {categories.map((category) => (
+          <Tab
+            key={category}
+            tab={category}
+            weight={"500"}
+            active={active}
+            onClick={handleActive}
+          />
+        ))}
       </div>
-      <div css={{ display: "flex", marginTop: "8.3rem" }}>
-        <div
-          css={{
-            backgroundColor: "#fff",
-            boxShadow: "0px 0px 10px #00000029",
-            height: "612px",
-            width: "43vw",
-          }}
-        >
-          <div
-            css={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "8% 0",
-              paddingLeft: "2.2rem",
-              paddingRight: "2rem",
-              borderBottom: `2px solid ${"#E4E4E4"}`,
-            }}
-          >
-            <Image src={Filter} alt="filter" />
-            <p css={{ fontSize: "1.125" }}>
-              <b>Filters</b>
-            </p>
-            <Image src={Left} alt="left" />
-          </div>
-          <div
-            css={{
-              padding: "8% 0",
-              paddingLeft: "2.2rem",
-              paddingRight: "2rem",
-              justifyContent: "space-between",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <p>Location</p>
-            <Image src={Down} alt="down" />
-          </div>
-          <div
-            css={{
-              padding: "8% 0",
-              paddingLeft: "2.2rem",
-              paddingRight: "2rem",
-              justifyContent: "space-between",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <p>Date</p>
-            <Image src={Down} alt="down" />
-          </div>
-          <div
-            css={{
-              padding: "8% 0",
-              paddingLeft: "2.2rem",
-              paddingRight: "2rem",
-              justifyContent: "space-between",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <p>Event Type</p>
-            <Image src={Down} alt="down" />
-          </div>{" "}
-          <div
-            css={{
-              padding: "8% 0",
-              paddingLeft: "2.2rem",
-              paddingRight: "2rem",
-              justifyContent: "space-between",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <p>Price</p>
-            <Image src={Down} alt="down" />
-          </div>
-        </div>
-
-        <div css={{ padding: "1% 1%" }}>{children}</div>
-        <div css={{ width: "20vw", padding: "1% 0.5%" }}>
-          <div css={{ display: "flex", marginBottom: "0.8rem" }}>
+      <div
+        css={{
+          display: "grid",
+          gridTemplateColumns: filterSectionOpen ? " 258px 1fr 10vw" : " 75px 1fr 10vw",
+          height: "100%",
+          maxHeight: "100vh",
+          marginTop: "8.7rem",
+        }}
+      >
+        <EventFilter
+          open={filterSectionOpen}
+          external = {true}
+          setOpen={handleFilterSectionOpen}
+        />
+        <div css={{ padding: "2% 1%", maxHeight: "calc(100vh - 120px)", overflowY: "auto", "&::-webkit-scrollbar": {
+            display: "none",
+          }, }}>{children}</div>
+        <div css={{ padding: "20% 0.5%" }}>
+          <div css={{ display: "flex", marginBottom: "0.8rem", alignItems: "center", gap:"5px"}}>
             <p>All Events</p>
-            <Image src={Down} alt="down" />
+            <Image src={Right} alt="right" />
           </div>
           <div>
             <p css={{ fontSize: "16px" }}>
