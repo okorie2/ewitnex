@@ -86,7 +86,7 @@ export default function FindEventFragment() {
         value = {searchData.location}
         handleSelect = {handleSelectValue}
         name = "location"
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => setSearchData({...searchData, location: e.target.value})}
         inputWidth={desktop ? "17vw" : "15vw"}
         paddingInline="0"
         height="24rem"
@@ -116,7 +116,7 @@ export default function FindEventFragment() {
         name = "eventType"
         value = {searchData.eventType}
         handleSelect = {handleSelectValue}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => setSearchData({...searchData, eventType: e.target.value})}
         inputWidth={desktop ? "9vw" : "10vw"}
         height="20rem"
         width="140%"
@@ -162,7 +162,7 @@ export default function FindEventFragment() {
         name = "category"
         value = {searchData.category}
         handleSelect = {handleSelectValue}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => setSearchData({...searchData, category: e.target.value})}
         inputWidth={desktop ? "11vw" : "9vw"}
         height="20rem"
         width="140%"

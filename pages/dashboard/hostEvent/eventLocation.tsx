@@ -226,7 +226,7 @@ const EventLocation = () => {
                   css={{
                     borderRadius: "10px",
                     width: "100%",
-                    height: "3.3rem",
+                    height: "3.4rem",
                     display: "flex",
                     alignItems: "center",
                     border: `1px solid ${"#AEAEAE"}`,

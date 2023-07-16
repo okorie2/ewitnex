@@ -59,6 +59,9 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
                 "DesktopDatePicker",
                 "StaticDatePicker",
               ]}
+              sx={{
+                width: "100%",
+              }}
             >
               <DatePicker
                 views={['year', 'month', 'day']}
@@ -69,7 +72,6 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
                 }}
                 onChange={(newValue) => setValue(newValue)}
                 sx={{
-                  width: "100%",
                   fieldset : {
                     border: "none",
                     width: "100%"
@@ -77,9 +79,6 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
                   input : {
                     fontFamily: "Nunito, sans-serif",
                   },
-                  "MuiStack-root css-i7y1zb-MuiStack-root": {
-                    width: "100%"
-                  }
                 }}
               />
             </DemoContainer>
@@ -96,7 +95,9 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
         >
           {props.input2 && (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DemoContainer components={["TimePicker", "TimePicker"]}>
+              <DemoContainer components={["TimePicker", "TimePicker"]} sx={{
+                width: "100%",
+              }}>
                 <TimePicker
                   value={timeValue}
                   onChange={(newValue) => setTimeValue(newValue)}

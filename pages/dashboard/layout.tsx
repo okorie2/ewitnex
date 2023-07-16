@@ -85,7 +85,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     }
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     sessionStorage.setItem("sidebarState", showMore.toString());
   }, [showMore]);
 

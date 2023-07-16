@@ -40,6 +40,7 @@ export default function Index() {
               priceRange="$500-$2K"
               title="Connack Foundation African Music Award Of The Year"
               img="/assets/pngs/card_img.png"
+              favourite = {false}
             />
           </div>
           <div
@@ -60,6 +61,7 @@ export default function Index() {
               priceRange="$500-$2K"
               title="Medical Crusade with Doctor West"
               img="/assets/pngs/card_2.png"
+              favourite = {false}
             />
           </div>
           <div
@@ -80,6 +82,8 @@ export default function Index() {
               priceRange="Free"
               title="Ada weds Obi"
               id="Wed54254"
+              favourite = {false}
+
             />
           </div>
           <div
@@ -100,6 +104,8 @@ export default function Index() {
               priceRange="$500-$2K"
               title="Connack Foundation African Music Award Of The Year"
               img="/assets/pngs/card_img.png"
+              favourite = {false}
+
             />
           </div>
           <div
@@ -120,6 +126,8 @@ export default function Index() {
               priceRange="$500-$2K"
               title="Medical Crusade with Doctor West"
               img="/assets/pngs/card_2.png"
+              favourite = {false}
+
             />
           </div>
           <div
@@ -140,6 +148,8 @@ export default function Index() {
               priceRange="Free"
               title="Ada weds Obi"
               id="Wed54254"
+              favourite = {false}
+
             />
           </div>
           <div
@@ -160,6 +170,8 @@ export default function Index() {
               priceRange="$500-$2K"
               title="Connack Foundation African Music Award Of The Year"
               img="/assets/pngs/card_img.png"
+              favourite = {false}
+
             />
           </div>
           <div
@@ -180,6 +192,8 @@ export default function Index() {
               priceRange="$500-$2K"
               title="Medical Crusade with Doctor West"
               img="/assets/pngs/card_2.png"
+              favourite = {false}
+
             />
           </div>
           <div
@@ -200,6 +214,8 @@ export default function Index() {
               priceRange="Free"
               title="Ada weds Obi"
               id="Wed54254"
+              favourite = {false}
+
             />
           </div>
         </div>

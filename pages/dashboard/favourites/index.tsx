@@ -118,7 +118,7 @@ const Favourites = () => {
                     label="Concert"
                     attendees="609"
                     date="3 DEC. 2022, 10:00 AM"
-                    favorite = {true}
+                    favourite = {true}
                     id="Heal12548"
                     location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
                     organizer="Eko Atlantic"
@@ -132,7 +132,7 @@ const Favourites = () => {
                     label="Tech"
                     attendees="609"
                     id="Tec542445"
-                    favorite = {true}
+                    favourite = {true}
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"
                     organizer="GDG Aba"
@@ -146,7 +146,7 @@ const Favourites = () => {
                     label="Tech"
                     attendees="609"
                     id="Tec542445"
-                    favorite = {true}
+                    favourite = {true}
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"
                     organizer="GDG Aba"
@@ -160,6 +160,8 @@ const Favourites = () => {
                     label="Tech"
                     attendees="609"
                     id="Tec542445"
+                    favourite = {true}
+
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"
                     organizer="GDG Aba"
@@ -173,6 +175,8 @@ const Favourites = () => {
                     label="Tech"
                     attendees="609"
                     id="Tec542445"
+                    favourite = {true}
+
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"
                     organizer="GDG Aba"
@@ -185,6 +189,8 @@ const Favourites = () => {
                   <DashboardEventCard
                     label="Tech"
                     attendees="609"
+                    favourite = {true}
+
                     id="Tec542445"
                     date="3 DEC. 2022, 10:00 AM"
                     location="IG Hub, 22 Faulks Road, Aba, Abia"

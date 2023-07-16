@@ -532,7 +532,7 @@ const Username = (props: FormLevelProps) => {
 const Interests = (props: FormLevelProps) => {
   const router = useRouter();
   const handleSubmit = () => {
-    router.push("/dashboard");
+    router.push("/dashboard/programs");
   };
 
   const [chipDetails, setChiDetails] = useState(chipData);

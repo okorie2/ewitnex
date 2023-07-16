@@ -10,10 +10,17 @@ import Speaker from "@/components/cards/speaker";
 
 const Speakers = () => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const newSpeakerRef = useRef<HTMLInputElement>(null)
 
   const handleImageClick = () => {
     if(inputRef.current != null ) {
       inputRef.current.click()
+    }
+  }
+
+  const handleNewSpeakerClick = () => {
+    if(newSpeakerRef.current != null) {
+      newSpeakerRef.current.focus()
     }
   }
 
@@ -137,6 +144,7 @@ const Speakers = () => {
               label="Name of performer"
               placeholder="Enter full name"
               type="text"
+              ref = {newSpeakerRef}
             />
             <HostEventTextField
               label="Performer Title"
@@ -145,7 +153,7 @@ const Speakers = () => {
             />
             <HostEventTextField
               label="Performing Role"
-              placeholder="Select a role"
+              placeholder="Host"
               type="select"
               options={[
                 {value:"Host", label:"Host"}, 
@@ -182,6 +190,9 @@ const Speakers = () => {
                   justifyContent: "center",
                   textAlign: "center",
                   marginTop: "0.5rem",
+                  ":hover": {
+                    border: `1px dashed ${"#7C35AB"}`,
+                  }
                 }}
               >
                 <div
@@ -328,6 +339,7 @@ const Speakers = () => {
                     width: "52%",
                     cursor: "pointer",
                   }}
+                  onClick = {handleNewSpeakerClick}
                 >
                   + Add Another Performer
                 </button>
