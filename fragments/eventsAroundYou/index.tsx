@@ -75,6 +75,7 @@ export default function EventsAroundYouFragment() {
         >
           <EventCard
             label="Music"
+            favourite = {false}
             attendees="609"
             id="Tec542445"
             date="25 NOV. 2021, 10:00 AM"
@@ -95,6 +96,8 @@ export default function EventsAroundYouFragment() {
         >
           <EventCard
             label="Concert"
+            favourite = {false}
+
             attendees="609"
             date="3 DEC. 2022, 10:00 AM"
             id="Heal12548"
@@ -120,6 +123,8 @@ export default function EventsAroundYouFragment() {
             label="Wedding"
             location="The Dom, 22 Faulks Road, Aba, Abia"
             organizer="Ada and Obi"
+            favourite = {false}
+
             priceRange="Free"
             title="Ada weds Obi"
             id="Wed54254"
@@ -137,6 +142,8 @@ export default function EventsAroundYouFragment() {
             attendees="609"
             date="3 DEC. 2022, 10:00 AM"
             id="Tec542445"
+            favourite = {false}
+
             img="/assets/pngs/card_4.png"
             label="Tech"
             location="IG Hub, 22 Faulks Road, Aba, Abia"

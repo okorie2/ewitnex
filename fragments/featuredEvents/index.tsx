@@ -72,6 +72,8 @@ export default function FeaturedEventsFragment() {
             attendees="609"
             id="Tec542445"
             date="25 NOV. 2021, 10:00 AM"
+            favourite = {false}
+
             location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
             organizer="Connack Foundarion"
             priceRange="$500-$2K"
@@ -92,6 +94,8 @@ export default function FeaturedEventsFragment() {
             attendees="609"
             date="3 DEC. 2022, 10:00 AM"
             id="Heal12548"
+            favourite = {false}
+
             location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
             organizer="Eko Atlantic"
             priceRange="$500-$2K"
@@ -112,6 +116,8 @@ export default function FeaturedEventsFragment() {
             date="25 NOV. 2021, 10:00 AM"
             img="/assets/pngs/card_3.png"
             label="Wedding"
+            favourite = {false}
+
             location="The Dom, 22 Faulks Road, Aba, Abia"
             organizer="Ada and Obi"
             priceRange="Free"
@@ -131,6 +137,8 @@ export default function FeaturedEventsFragment() {
             attendees="609"
             date="3 DEC. 2022, 10:00 AM"
             id="Tec542445"
+            favourite = {false}
+
             img="/assets/pngs/card_4.png"
             label="Tech"
             location="IG Hub, 22 Faulks Road, Aba, Abia"

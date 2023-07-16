@@ -70,6 +70,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             label="Music"
+            favourite = {false}
             attendees="609"
             id="Tec542445"
             date="25 NOV. 2021, 10:00 AM"
@@ -90,6 +91,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             label="Concert"
+            favourite = {false}
             attendees="609"
             date="3 DEC. 2022, 10:00 AM"
             id="Heal12548"
@@ -110,6 +112,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             attendees="609"
+            favourite = {false}
             date="25 NOV. 2021, 10:00 AM"
             img="/assets/pngs/card_3.png"
             label="Wedding"
@@ -130,6 +133,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             attendees="609"
+            favourite = {false}
             date="3 DEC. 2022, 10:00 AM"
             id="Tec542445"
             img="/assets/pngs/card_4.png"

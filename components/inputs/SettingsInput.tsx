@@ -22,23 +22,21 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
   const ref = useRef(null)
   const[divFocus, setDivFocus] = useState(false)
 
-  const active = () => {
+const active = () => {
     if(typeof window !== "undefined"){
     return document.activeElement
   }
 }
 
-  useEffect(() => {
-    console.log(active())
-    console.log( ref.current)
+const activeElement = active()
 
-    console.log(active() === ref.current)
-    if(active() === ref.current){
+  useEffect(() => {
+    if(activeElement === ref.current){
       setDivFocus(true)
     }else {
       setDivFocus(false)
     }
-  },[active(), ref.current])
+  },[activeElement])
 
   // const handleClick = () => {
   //   if(ref.current !== null){

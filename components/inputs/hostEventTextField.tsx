@@ -147,5 +147,5 @@ const HostEventTextField = React.forwardRef(
     );
   }
 );
-
+HostEventTextField.displayName = "HostEventTextField"
 export default HostEventTextField;
