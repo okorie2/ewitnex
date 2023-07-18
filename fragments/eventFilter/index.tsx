@@ -1,12 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
+import Slider from "@mui/material/Slider";
 import Filter from "public/assets/svgs/filter.svg";
 import Down from "public/assets/svgs/down_ar.svg";
 import Left from "public/assets/svgs/left_ar.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select, { StylesConfig } from "react-select";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import RoundCheckbox from "@/components/inputs/RoundCheckbox";
+
+function valuetext(value: number) {
+  return `${value * 10000}`;
+}
 
 const EventFilter = ({
   open,
@@ -19,9 +24,11 @@ const EventFilter = ({
 }) => {
   const [selectedDateRange, setSelectedDateRange] = useState("");
   const [selectedEvent, setSelectedEvent] = useState("All");
+  const [priceValue, setPriceValue] = useState<number[]>([0, 20]);
+  const [actualPriceRange, setActualPriceRange] = useState(priceValue);
   const [showMoreDate, setShowMoreDate] = useState(false);
   const [showMoreEvents, setShowMoreEvents] = useState(false);
-  const [costType, setCostType] = useState("")
+  const [costType, setCostType] = useState("");
   const [focusedFilter, setFocusedFilter] = useState("");
   const theoptions = [
     { value: "any", label: "--" },
@@ -63,10 +70,17 @@ const EventFilter = ({
     { value: "Zamfara", label: "Zamfara" },
     { value: "Abuja", label: "Abuja" },
   ];
-  const selectStyle : StylesConfig = {
-    container : (styles, state) => ({...styles, borderColor: state.isFocused? "#7C35AB" : ""}),
-    control : (styles, state) => ({...styles, borderColor: state.isFocused? "#7C35AB" : "#707070", ":hover": {border: "0.12rem solid #7C35AB"}})
-  }
+  const selectStyle: StylesConfig = {
+    container: (styles, state) => ({
+      ...styles,
+      borderColor: state.isFocused ? "#7C35AB" : "",
+    }),
+    control: (styles, state) => ({
+      ...styles,
+      borderColor: state.isFocused ? "#7C35AB" : "#707070",
+      ":hover": { border: "0.12rem solid #7C35AB" },
+    }),
+  };
   const events = [
     "All",
     "Social",
@@ -88,6 +102,14 @@ const EventFilter = ({
     "Outdoor",
   ];
 
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setPriceValue(newValue as number[]);
+  };
+
+  useEffect(() => {
+    setActualPriceRange([priceValue[0] * 1000, priceValue[1] * 1000]);
+  }, [priceValue]);
+
   return (
     <>
       {open ? (
@@ -97,11 +119,11 @@ const EventFilter = ({
             borderLeft: `1px solid ${"#E4E4E4"}`,
             borderRight: `1px solid ${"#E4E4E4"}`,
             maxWidth: "258px",
-            overflowY:"scroll",
+            overflowY: "scroll",
             "&::-webkit-scrollbar": {
               display: "none",
             },
-            maxHeight: "inherit"
+            maxHeight: "inherit",
           }}
         >
           <div
@@ -174,7 +196,10 @@ const EventFilter = ({
                 <Image src={Down} alt="down" />
               </div>
             ) : (
-              <div onClick={() => setFocusedFilter("location")} css = {{cursor:"pointer"}}>
+              <div
+                onClick={() => setFocusedFilter("location")}
+                css={{ cursor: "pointer" }}
+              >
                 <Image src={Down} alt="down" />
               </div>
             )}
@@ -189,7 +214,7 @@ const EventFilter = ({
                 isSearchable={true}
                 name="location"
                 options={theoptions}
-                styles = {selectStyle}
+                styles={selectStyle}
               />
             </div>
           )}
@@ -231,7 +256,10 @@ const EventFilter = ({
                 <Image src={Down} alt="down" />
               </div>
             ) : (
-              <div onClick={() => setFocusedFilter("date")} css = {{cursor:"pointer"}}>
+              <div
+                onClick={() => setFocusedFilter("date")}
+                css={{ cursor: "pointer" }}
+              >
                 <Image src={Down} alt="down" />
               </div>
             )}
@@ -301,7 +329,7 @@ const EventFilter = ({
                   justifyContent: "space-between",
                   color: "#7C35AB",
                   fontWeight: "bold",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => setShowMoreDate(!showMoreDate)}
               >
@@ -360,12 +388,15 @@ const EventFilter = ({
                 <Image src={Down} alt="down" />
               </div>
             ) : (
-              <div onClick={() => setFocusedFilter("price")} css = {{cursor:"pointer"}}>
+              <div
+                onClick={() => setFocusedFilter("price")}
+                css={{ cursor: "pointer" }}
+              >
                 <Image src={Down} alt="down" />
               </div>
             )}
           </div>
-          {focusedFilter === "price" && 
+          {focusedFilter === "price" && (
             <div css={{ paddingInline: "2rem", marginTop: "-5%" }}>
               <CheckSelect
                 value={"free"}
@@ -380,10 +411,88 @@ const EventFilter = ({
                 handleClick={() => setCostType("paid")}
               />
               {costType === "paid" && (
-                <div>Insert Range here</div>
+                <div>
+                  <Slider
+                    getAriaLabel={() => "Price range"}
+                    value={priceValue}
+                    onChange={handleChange}
+                    valueLabelDisplay="off"
+                    getAriaValueText={valuetext}
+                    color="secondary"
+                    sx={{
+                      "& .MuiSlider-thumb": {
+                        height: 24,
+                        width: 24,
+                        backgroundColor: "#fff",
+                        border: "1px solid #AEAEAE",
+                        boxShadow:
+                          "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)",
+                        "&:focus, &:hover, &.Mui-active": {
+                          boxShadow:
+                            "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)",
+                          // Reset on touch devices, it doesn't add specificity
+                          "@media (hover: none)": {
+                            boxShadow:
+                              "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)",
+                          },
+                        },
+                      },
+                    }}
+                  />
+                  <div
+                    css={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginLeft: "-5%",
+                    }}
+                  >
+                    <div
+                      css={{
+                        border: "1px solid #707070",
+                        borderRadius: "4px",
+                        height: "60px",
+                        padding: "3% 4%",
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      <p>Minimum</p>
+                      <p
+                        css={{
+                          fontSize: "0.7rem",
+                          fontWeight: "bold",
+                          marginTop: "10%",
+                        }}
+                      >
+                        N<span>{actualPriceRange[0]}</span>
+                      </p>
+                    </div>
+
+                    <div
+                      css={{
+                        border: "1px solid #707070",
+                        borderRadius: "4px",
+                        height: "60px",
+                        padding: "3% 4%",
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      <p>Maximum</p>
+                      <p
+                        css={{
+                          fontSize: "0.7rem",
+                          fontWeight: "bold",
+                          marginTop: "10%",
+                        }}
+                      >
+                        N<span>{actualPriceRange[1]}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
-          }
+          )}
           <div
             css={{
               padding: "8% 2rem",
@@ -422,7 +531,10 @@ const EventFilter = ({
                 <Image src={Down} alt="down" />
               </div>
             ) : (
-              <div onClick={() => setFocusedFilter("eventType")} css = {{cursor:"pointer"}}>
+              <div
+                onClick={() => setFocusedFilter("eventType")}
+                css={{ cursor: "pointer" }}
+              >
                 <Image src={Down} alt="down" />
               </div>
             )}
@@ -457,7 +569,7 @@ const EventFilter = ({
                   color: "#7C35AB",
                   fontWeight: "bold",
                   marginBottom: "1rem",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => setShowMoreEvents(!showMoreEvents)}
               >
@@ -525,7 +637,12 @@ const CheckSelect = ({
 }) => {
   return (
     <div
-      css={{ display: "flex", gap: "1rem", marginBlock: "0.5rem" , cursor:"pointer"}}
+      css={{
+        display: "flex",
+        gap: "1rem",
+        marginBlock: "0.5rem",
+        cursor: "pointer",
+      }}
       onClick={handleClick}
     >
       <RoundCheckbox checked={selected === value} />
