@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 
 type ISignupFormLevels =
   | "whoYouAre"
+  | "email"
   | "password"
   | "gender"
   | "location"
@@ -37,7 +38,8 @@ export default function Form() {
     switch (formLevel) {
       case "whoYouAre":
         return <WhoYouAre formLevel={formLevel} setFormLevel={setFormLevel} />;
-
+      case "email":
+        return <Email formLevel={formLevel} setFormLevel={setFormLevel} />;
       case "password":
         return <Password formLevel={formLevel} setFormLevel={setFormLevel} />;
       case "gender":
@@ -59,13 +61,11 @@ export default function Form() {
 
 const WhoYouAre = (props: FormLevelProps) => {
   const handleNext = () => {
-    props.setFormLevel("password");
+    props.setFormLevel("email");
   };
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
-    email: "",
-    phoneNumber: "",
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -74,14 +74,31 @@ const WhoYouAre = (props: FormLevelProps) => {
 
   return (
     <div>
-      <div css={{ margin: "3rem 0", cursor: "pointer" }}>
-        <Image
-          src="/assets/svgs/back.svg"
-          alt="back_arrow"
-          width={22}
-          height={15}
-        />
-      </div>
+      <Link href="/">
+        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+          <button
+            type="button"
+            css={{
+              fontFamily: "'Nunito', sans-serif",
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              background: "none",
+              display: "flex",
+              gap: "0.7rem",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              src="/assets/svgs/back.svg"
+              alt="back_arrow"
+              width={22}
+              height={15}
+            />
+            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+          </button>
+        </div>
+      </Link>
       <div
         css={{
           fontFamily: "'Nunito', sans-serif",
@@ -107,23 +124,6 @@ const WhoYouAre = (props: FormLevelProps) => {
             label="Last Name"
             value={formValues.lastName}
             name="lastName"
-            setValue={handleChange}
-          />
-        </div>
-        <div css={{ marginBottom: "2.4rem" }}>
-          <BasicTextField
-            label="Email Address"
-            value={formValues.email}
-            name="email"
-            setValue={handleChange}
-          />
-        </div>
-
-        <div css={{ marginBottom: "2.4rem" }}>
-          <BasicTextField
-            label="Phone Number"
-            value={formValues.phoneNumber}
-            name="phoneNumber"
             setValue={handleChange}
           />
         </div>
@@ -166,11 +166,70 @@ const WhoYouAre = (props: FormLevelProps) => {
   );
 };
 
+const Email = (props: FormLevelProps) => {
+  const [email, setEmail] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const handleNext = () => {
+    props.setFormLevel("password");
+  };
+
+  return (
+    <div>
+      <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+        <button
+          type="button"
+          onClick={() => props.setFormLevel("whoYouAre")}
+          css={{
+            fontFamily: "'Nunito', sans-serif",
+            cursor: "pointer",
+            border: "none",
+            outline: "none",
+            background: "none",
+            display: "flex",
+            gap: "0.7rem",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            src="/assets/svgs/back.svg"
+            alt="back_arrow"
+            width={22}
+            height={15}
+          />
+          <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+        </button>
+      </div>
+      <div
+        css={{
+          fontFamily: "'Nunito', sans-serif",
+          fontSize: "1.5rem",
+          marginBottom: "3.3rem",
+          fontWeight: 600,
+        }}
+      >
+        <p>What`&apos;`s Your Email Address?</p>
+      </div>
+      <div css={{ marginBottom: "2.4rem" }}>
+        <BasicTextField
+          label="Email Address"
+          value={email}
+          name="email"
+          setValue={handleChange}
+        />
+      </div>
+      <ButtonFormFilled onClick={handleNext}>CONTINUE</ButtonFormFilled>
+    </div>
+  );
+};
+
 const Password = (props: FormLevelProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const [formDetails, setFormDetails] = useState({
+    phoneNumber: "",
     password: "",
     confirmPassword: "",
   });
@@ -185,24 +244,30 @@ const Password = (props: FormLevelProps) => {
   return (
     <>
       <div>
-        <button
-          type="button"
-          onClick={() => props.setFormLevel("whoYouAre")}
-          css={{
-            margin: "3rem 0",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            background: "none",
-          }}
-        >
-          <Image
-            src="/assets/svgs/back.svg"
-            alt="back_arrow"
-            width={22}
-            height={15}
-          />
-        </button>
+        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+          <button
+            type="button"
+            onClick={() => props.setFormLevel("email")}
+            css={{
+              fontFamily: "'Nunito', sans-serif",
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              background: "none",
+              display: "flex",
+              gap: "0.7rem",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              src="/assets/svgs/back.svg"
+              alt="back_arrow"
+              width={22}
+              height={15}
+            />
+            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+          </button>
+        </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
@@ -213,18 +278,29 @@ const Password = (props: FormLevelProps) => {
             },
           }}
         >
-          <p>Sign Up</p>
+          <p css={{ fontWeight: "500" }}>Sign Up</p>
           <p
             css={css`
               font-size: 16px;
             `}
           >
             {" "}
-            Using <b>blessedonoriode@gmail.com</b> To Sign Up
+            Using <b css={{ fontWeight: "700" }}>
+              blessedonoriode@gmail.com
+            </b>{" "}
+            To Sign Up
           </p>
         </div>
 
         <form>
+          <div css={{ marginBottom: "2.4rem" }}>
+            <BasicTextField
+              label="Phone Number"
+              value={formDetails.phoneNumber}
+              name="phoneNumber"
+              setValue={handleChange}
+            />
+          </div>
           <PasswordTextField
             label="Password"
             visible={passwordVisible}
@@ -263,24 +339,30 @@ const Gender = (props: FormLevelProps) => {
   return (
     <>
       <div>
-        <button
-          type="button"
-          onClick={() => props.setFormLevel("password")}
-          css={{
-            margin: "3rem 0",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            background: "none",
-          }}
-        >
-          <Image
-            src="/assets/svgs/back.svg"
-            alt="back_arrow"
-            width={22}
-            height={15}
-          />
-        </button>
+        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+          <button
+            type="button"
+            onClick={() => props.setFormLevel("password")}
+            css={{
+              fontFamily: "'Nunito', sans-serif",
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              background: "none",
+              display: "flex",
+              gap: "0.7rem",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              src="/assets/svgs/back.svg"
+              alt="back_arrow"
+              width={22}
+              height={15}
+            />
+            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+          </button>
+        </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
@@ -364,7 +446,7 @@ const Location = (props: FormLevelProps) => {
             fontFamily: "'Nunito', sans-serif",
             fontSize: "1.5rem",
             marginBottom: "4.3rem",
-            fontWeight: "500",
+            fontWeight: "600",
             p: {
               marginBottom: "1.3rem",
             },
@@ -374,7 +456,7 @@ const Location = (props: FormLevelProps) => {
           <p
             css={css`
               font-size: 16px;
-              font-weight: normal;
+              font-weight: "normal";
             `}
           >
             {" "}
@@ -406,24 +488,30 @@ const Username = (props: FormLevelProps) => {
   return (
     <>
       <div>
-        <button
-          type="button"
-          onClick={() => props.setFormLevel("location")}
-          css={{
-            margin: "3rem 0",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            background: "none",
-          }}
-        >
-          <Image
-            src="/assets/svgs/back.svg"
-            alt="back_arrow"
-            width={22}
-            height={15}
-          />
-        </button>
+        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+          <button
+            type="button"
+            onClick={() => props.setFormLevel("location")}
+            css={{
+              fontFamily: "'Nunito', sans-serif",
+              cursor: "pointer",
+              border: "none",
+              outline: "none",
+              background: "none",
+              display: "flex",
+              gap: "0.7rem",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              src="/assets/svgs/back.svg"
+              alt="back_arrow"
+              width={22}
+              height={15}
+            />
+            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+          </button>
+        </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
@@ -508,7 +596,7 @@ const Username = (props: FormLevelProps) => {
                     height: 31px;
                     border: 2px solid ${"#000"};
                     border-radius: 16px;
-                    padding: 5px;
+                    padding: 5px 15px;
                     font-size: 14px;
                     font-weight: 500;
                     color: ${"#AEAEAE"};
@@ -532,30 +620,36 @@ const Username = (props: FormLevelProps) => {
 const Interests = (props: FormLevelProps) => {
   const router = useRouter();
   const handleSubmit = () => {
-    router.push("/dashboard");
+    router.push("/dashboard/programs");
   };
 
   const [chipDetails, setChiDetails] = useState(chipData);
   return (
     <div>
-      <button
-        type="button"
-        onClick={() => props.setFormLevel("username")}
-        css={{
-          margin: "3rem 0",
-          cursor: "pointer",
-          border: "none",
-          outline: "none",
-          background: "none",
-        }}
-      >
-        <Image
-          src="/assets/svgs/back.svg"
-          alt="back_arrow"
-          width={22}
-          height={15}
-        />
-      </button>
+      <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+        <button
+          type="button"
+          onClick={() => props.setFormLevel("username")}
+          css={{
+            fontFamily: "'Nunito', sans-serif",
+            cursor: "pointer",
+            border: "none",
+            outline: "none",
+            background: "none",
+            display: "flex",
+            gap: "0.7rem",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            src="/assets/svgs/back.svg"
+            alt="back_arrow"
+            width={22}
+            height={15}
+          />
+          <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+        </button>
+      </div>
 
       <div
         css={{

@@ -53,7 +53,7 @@ export default function Form() {
             </p>
           </div>
           <div>
-            <Link href="/dashboard">
+            <Link href="/dashboard/programs">
               <ButtonFormFilled>SIGN IN</ButtonFormFilled>
             </Link>
           </div>

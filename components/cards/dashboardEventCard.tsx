@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { H3, H4 } from "styles/components/typography";
 import Link from "next/link";
@@ -9,7 +9,7 @@ interface IEventCard {
   img: string;
   label: string;
   title: string;
-  favorite?: boolean;
+  favourite?: boolean;
   id: string;
   date: string;
   location: string;
@@ -20,84 +20,85 @@ interface IEventCard {
 }
 
 export default function DashboardEventCard(props: IEventCard) {
-
+  const [_favourite, setFavourite] = useState(props.favourite);
   return (
-    <Link href={`/dashboard/programs/${props.id}`}>
-      <div
-        css={{
-          height: "500px",
-          width: props.width || "100%",
-          borderRadius: "10px",
-          backgroundColor: "#fff",
-          boxShadow: "#00000029 0px 0px 10px",
-          fontFamily: "'Poppins', sans-serif",
-          marginBottom: "5%",
-        }}
-      >
-        <div css={{ position: "relative", width: "100%", height: "171px" }}>
-          <Image
-            src={props.img}
-            alt="card_img"
-            css={{ borderRadius: "10px", objectFit: "cover" }}
-            fill
-          />
+    <div
+      css={{
+        height: "500px",
+        width: props.width || "100%",
+        borderRadius: "10px",
+        backgroundColor: "#fff",
+        boxShadow: "#00000029 0px 0px 10px",
+        fontFamily: "'Poppins', sans-serif",
+        marginBottom: "5%",
+      }}
+    >
+      <div css={{ position: "relative", width: "100%", height: "171px" }}>
+        <Image
+          src={props.img}
+          alt="card_img"
+          css={{ borderRadius: "10px", objectFit: "cover" }}
+          fill
+        />
+        <div
+          css={{
+            position: "absolute",
+            top: "3%",
+            right: "2%",
+          }}
+        >
           <div
             css={{
-              position: "absolute",
-              top: "3%",
-              right: "2%",
-            }}
-          >
-            <div
-              css={{
-                width: "93px",
-                height: "2.13rem",
-                backdropFilter: "brightness(50%) ",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "16px",
-                borderRadius: "10px",
-                fontWeight: 500,
-                textTransform: "capitalize",
-                backgroundColor: "#fff",
-                opacity: "75%",
-              }}
-            >
-              {props.label}
-            </div>
-          </div>
-          <div
-            css={{
-              height: "41px",
-              width: "41px",
-              borderRadius: "50%",
-              backgroundColor: "#fff",
+              width: "93px",
+              height: "2.13rem",
+              backdropFilter: "brightness(50%) ",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              position: "absolute",
-              bottom: "-9%",
-              right: "3%",
+              fontSize: "16px",
+              borderRadius: "10px",
+              fontWeight: 500,
+              textTransform: "capitalize",
+              backgroundColor: "#fff",
+              opacity: "75%",
             }}
           >
-            {props.favorite ?  
-              <Image
+            {props.label}
+          </div>
+        </div>
+        <div
+          css={{
+            height: "41px",
+            width: "41px",
+            borderRadius: "50%",
+            backgroundColor: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            bottom: "-9%",
+            right: "3%",
+          }}
+          onClick={() => setFavourite(!_favourite)}
+        >
+          {_favourite ? (
+            <Image
               src="/assets/svgs/filled-love.svg"
               alt="card_img"
               width={20.98}
               height={19.39}
             />
-            :
+          ) : (
             <Image
               src="/assets/svgs/love.svg"
               alt="card_img"
               width={20.98}
               height={19.39}
             />
-          }
-          </div>
+          )}
         </div>
+      </div>
+      <Link href={`/dashboard/programs/${props.id}`}>
         <div css={{ padding: "4% 6%" }}>
           <H3>{props.title}</H3>
           <p
@@ -157,7 +158,7 @@ export default function DashboardEventCard(props: IEventCard) {
           </p>
           <H4>{props.organizer}</H4>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

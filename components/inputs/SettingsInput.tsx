@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface Props {
   label: string;
@@ -19,7 +19,30 @@ interface Props {
 }
 
 export default function SettingsTextField({ label, name, ...rest }: Props) {
+  const ref = useRef(null)
+  const[divFocus, setDivFocus] = useState(false)
 
+const active = () => {
+    if(typeof window !== "undefined"){
+    return document.activeElement
+  }
+}
+
+const activeElement = active()
+
+  useEffect(() => {
+    if(activeElement === ref.current){
+      setDivFocus(true)
+    }else {
+      setDivFocus(false)
+    }
+  },[activeElement])
+
+  // const handleClick = () => {
+  //   if(ref.current !== null){
+  //     ref.current.focus()
+  //   }
+  // }
   return (
     <div css ={{display: "flex" , flexDirection: "column", marginBottom: "1rem"}}>
         <label
@@ -33,9 +56,10 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
         {label}
       </label>
     <div
+      tabIndex={0}
       css={{
         position: "relative",
-        border: `1px solid ${"#C0C0C0"}`,
+        border: divFocus ? `2px solid ${"#7C35AB"}` : `1px solid ${"#C0C0C0"}`,
         borderRadius: "10px",
         background: "#fff",
         height: "49px",
@@ -43,7 +67,11 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
         justifyContent: "space-between",
         alignItems: "center",
         paddingRight: "13px",
+        ":hover" : {
+          border: `2px solid ${"#7C35AB"}`,
+        },
       }}
+
     >
       <input
         css={{
@@ -57,6 +85,8 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
           color: "#000",
           fontFamily: "'Poppins', sans-serif",
         }}
+        ref = {ref}
+        onClick={() => setDivFocus(true)}
         type={rest.type || "text"}
         value={rest.value}
         name={name}

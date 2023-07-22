@@ -2,6 +2,7 @@
 
 
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { screen } from "styles/theme";
 import Logo from "@/components/logo";
@@ -36,7 +37,7 @@ export default function PublicSiteFooter() {
         </div>
         <div>
           <p css={{ fontWeight: "bold", marginBottom: "28%" }}>Use Ewitnex</p>
-          <p css={{ fontWeight: "500" }}>How it works</p>
+          <Link href = "/how-it-works"><p css={{ fontWeight: "500", ":hover":{color: "#7C35AB"} }}>How it works</p></Link>
           <p css={{ fontWeight: "500" }}>Pricing</p>
           <p css={{ fontWeight: "500" }}>Content standards</p>
           <p css={{ fontWeight: "500" }}>COVID-19 Resources</p>
@@ -57,7 +58,7 @@ export default function PublicSiteFooter() {
         </div>
         <div>
           <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Find Events</p>
-          <p css={{ fontWeight: "500" }}>All Events</p>
+          <Link href = "/events"><p css={{ fontWeight: "500", ":hover": {color: "#7C35AB"} }}>All Events</p></Link>
           <p css={{ fontWeight: "500" }}>Virtual Events</p>
           <p css={{ fontWeight: "500" }}>Online Webinars</p>
           <p css={{ fontWeight: "500" }}>Online Classes</p>

@@ -77,6 +77,20 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           boxShadow:
             "0 1px 17px 0 rgb(40 44 53 / 10%), 0 2px 4px 0 rgb(40 44 53 / 10%)",
           overflowY: "auto",
+          "&::-webkit-scrollbar": {
+            width: "8px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#F5f5f5",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#AEAEAE",
+            borderRadius: "10px",
+            height:"5px",
+            ":hover": {
+              background: ` ${"#707070"}`,
+            },
+          },
         }}
       >
         {rest.placeholder === "Search events in" && 
