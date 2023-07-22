@@ -113,8 +113,8 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
                     input : {
                       fontFamily: "Nunito, sans-serif",
                     },
-                    "&MuiStack-root css-i7y1zb-MuiStack-root": {
-                      width: "100%"
+                    "& .MuiPopper-root-MuiPickersPopper-root":{
+                      background: "black",
                     }
                   }}
                 />

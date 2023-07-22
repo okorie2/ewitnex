@@ -8,9 +8,14 @@ import { useEffect, useState } from "react";
 import Select, { StylesConfig } from "react-select";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import RoundCheckbox from "@/components/inputs/RoundCheckbox";
+import dayjs, { Dayjs } from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
 function valuetext(value: number) {
-  return `${value * 10000}`;
+  return `${value * 1000}`;
 }
 
 const EventFilter = ({
@@ -24,7 +29,7 @@ const EventFilter = ({
 }) => {
   const [selectedDateRange, setSelectedDateRange] = useState("");
   const [selectedEvent, setSelectedEvent] = useState("All");
-  const [priceValue, setPriceValue] = useState<number[]>([0, 20]);
+  const [priceValue, setPriceValue] = useState<number[]>([0, 100]);
   const [actualPriceRange, setActualPriceRange] = useState(priceValue);
   const [showMoreDate, setShowMoreDate] = useState(false);
   const [showMoreEvents, setShowMoreEvents] = useState(false);
@@ -80,6 +85,27 @@ const EventFilter = ({
       borderColor: state.isFocused ? "#7C35AB" : "#707070",
       ":hover": { border: "0.12rem solid #7C35AB" },
     }),
+    menuList:(styles) => ({
+      ...styles,
+      "&::-webkit-scrollbar": {
+        width: "8px",
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#F5f5f5",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "#AEAEAE",
+        borderRadius: "10px",
+        height:"5px",
+        ":hover": {
+          background: ` ${"#707070"}`,
+        },
+      },
+    }),
+    option : (styles, state) => ({
+      ...styles,
+      background: state.isSelected ? "#7C35AB" : ""
+    })
   };
   const events = [
     "All",
@@ -291,7 +317,22 @@ const EventFilter = ({
                 handleClick={() => setSelectedDateRange("custom")}
               />
               {selectedDateRange === "custom" && (
-                <div>Insert calendar here</div>
+                <div css = {{width: "110%", marginLeft: "-5%", marginBottom: "5%"}}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={["DatePicker"]} >
+                      <DatePicker
+                        defaultValue={dayjs("2022-04-17")}
+                        sx={{
+                          "& .MuiStack-root": {
+                            "& .MuiTextField-root": {
+                              minWidth: "160px",
+                            }
+                          },
+                        }}
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                </div>
               )}
               {showMoreDate && (
                 <>

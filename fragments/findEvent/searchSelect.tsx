@@ -88,7 +88,7 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
             borderRadius: "10px",
             height:"5px",
             ":hover": {
-              background: ` ${"#7C35AB"}`,
+              background: ` ${"#707070"}`,
             },
           },
         }}
