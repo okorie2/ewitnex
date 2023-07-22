@@ -209,7 +209,7 @@ const Email = (props: FormLevelProps) => {
           fontWeight: 600,
         }}
       >
-        <p>What's Your Email Address?</p>
+        <p>What`&apos;`s Your Email Address?</p>
       </div>
       <div css={{ marginBottom: "2.4rem" }}>
         <BasicTextField
