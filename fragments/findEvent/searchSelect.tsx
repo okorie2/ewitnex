@@ -78,7 +78,7 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
             "0 1px 17px 0 rgb(40 44 53 / 10%), 0 2px 4px 0 rgb(40 44 53 / 10%)",
           overflowY: "auto",
           "&::-webkit-scrollbar": {
-            width: "8px",
+            width: "10px",
           },
           "&::-webkit-scrollbar-track": {
             background: "#F5f5f5",
