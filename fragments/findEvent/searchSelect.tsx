@@ -85,7 +85,7 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           },
           "&::-webkit-scrollbar-thumb": {
             background: "#AEAEAE",
-            borderRadius: "10px",
+            borderRadius: "8px",
             height:"5px",
             ":hover": {
               background: ` ${"#707070"}`,
