@@ -139,10 +139,10 @@ const HostEventTextField = React.forwardRef(
               color: props.color ? props.color : "#AEAEAE",
               resize: "none",
               ":hover": {
-                border: `2px solid ${"#7C35AB"}`,
+                border: props.disabled ? "" : `2px solid ${"#7C35AB"}`,
               },
               ":focus": {
-                border: `2px solid ${"#7C35AB"}`,
+                border: props.disabled ? "" : `2px solid ${"#7C35AB"}`,
                 outline: "none",
               },
             }}
