@@ -313,6 +313,7 @@ const SidebarItem = ({
             alt=""
             width={20}
             height={20}
+            priority
           />
         ) : (
           <Image
