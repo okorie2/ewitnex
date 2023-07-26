@@ -89,6 +89,7 @@ export default function Navbar() {
             backgroundColor: "#F5F5F5",
             height: "95%",
             fontSize: "1rem",
+            fontFamily: '"Nunito", sans-serif',
             fontWeight: "400",
             color: "#AEAEAE",
           }}
@@ -144,7 +145,7 @@ export default function Navbar() {
       <div>
         <hr css={{ width: "1px", height: "36px" }} />
       </div>
-      <div css={{ color: "#7C35AB", fontWeight: "500" }}>
+      <div css={{ color: "#7C35AB", fontWeight: "600" }}>
         <Link href="/auth/signin">Log in</Link>
       </div>
       <div
@@ -157,11 +158,13 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "center",
           fontWeight: 500,
-          color: "#7C35AB",
+          backgroundColor: "#7C35AB",
+          color: "#FFF"
         }}
       >
-        <Link href="/auth/signup">Get Started</Link>
+        <Link href="/auth/signup">Create Event</Link>
       </div>
+      
     </div>
   );
 }

@@ -20,6 +20,7 @@ import EventCreatingFragment from "fragments/eventCreating";
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import { Lines } from "@/components/lines";
+import HomeHero from "fragments/homeHero";
 
 export default function Home() {
   return (
@@ -31,7 +32,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <HomeSlide />
+      {/* <HomeSlide /> */}
+      <HomeHero />
       <FindEventFragment />
       <EventsAroundYouFragment />
       <div css={{ overflowX: "hidden" }}>
