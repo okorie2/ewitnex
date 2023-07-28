@@ -21,6 +21,15 @@ import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import { Lines } from "@/components/lines";
 import HomeHero from "fragments/homeHero";
+import WhyUseEwitnexFragment from "fragments/whyUseEwitnex";
+import DontSpectateFragment from "fragments/doNotSpectate";
+import SimplifyTicketFragment from "fragments/simplifyTicket";
+import DiscoverVenueFragment from "fragments/discoverVenue";
+import FindVendorsFragment from "fragments/findVendors";
+import AsAnAttendeeFragment from "fragments/asAnAttendee";
+import SaveTreesFragment from "fragments/saveTrees";
+import AsAnOrganizerFragment from "fragments/asAnOrganizer";
+import JoinRevolutionFragment from "fragments/joinTheRevolution";
 
 export default function Home() {
   return (
@@ -36,27 +45,17 @@ export default function Home() {
       <HomeHero />
       <FindEventFragment />
       <EventsAroundYouFragment />
-      <div css={{ overflowX: "hidden" }}>
-        <Image src={Tri_L} alt="line" />
-      </div>
+     <WhyUseEwitnexFragment />
       <UpcomingEventsFragment />
-      <div
-        css={{
-          overflowX: "hidden",
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Image src={Tri_R} alt="line_r" />
-      </div>
+     <DontSpectateFragment />
       <FeaturedEventsFragment />
-      <Lines />
-      <NoMorePaperProgramFragment />
-      <UploadDesignFragment />
-      <WitnessEventFragment />
-      <TicketToSaleFragment />
-      <EventCreatingFragment />
-      <WhatAreYouWaitingForFragment />
+      <SimplifyTicketFragment />
+      <DiscoverVenueFragment />
+      <FindVendorsFragment />
+      <AsAnAttendeeFragment />
+      <SaveTreesFragment />
+      <AsAnOrganizerFragment />
+      <JoinRevolutionFragment />
       <Lines />
       <PublicSiteFooter />
     </>

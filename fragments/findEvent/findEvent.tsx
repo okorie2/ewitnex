@@ -13,25 +13,29 @@ export default function FindEventFragment() {
     eventType: "",
     category:"",
   })
+  const [active, setActive] = useState("")
+  const handleActive = (dropdown: string) => {
+    console.log("dropdown", dropdown)
+    setActive(dropdown)
+  }
   const handleSelectValue = (name: string , value: string) => {
-    console.log("clicked")
     setSearchData({...searchData, [name]: value})
-    console.log(searchData)
   }
   return (
     <div
       css={{
-        width: "93%",
-        margin: "auto",
+        width: "63%",
         backgroundColor: "#fff",
+        marginLeft: "2.5rem",
         boxShadow: "#00000029 0px 0px 10px",
         borderRadius: "56px",
-        marginTop: "2%",
+        marginTop: "4%",
         fontFamily: "'Poppins', sans-serif",
-        height: "6.2rem",
-        display: "flex",
+        height: "4.3rem",
+        display: "grid",
+        gridTemplateColumns: "23% 20% 20% 20% 22%",
         alignItems: "center",
-        padding: "0 3rem",
+        padding: "0 2rem",
         justifyContent: "space-between",
         [screen.desktop]: {
           gap: "3%",
@@ -87,10 +91,12 @@ export default function FindEventFragment() {
         handleSelect = {handleSelectValue}
         name = "location"
         onChange={(e) => setSearchData({...searchData, location: e.target.value})}
-        inputWidth={desktop ? "17vw" : "15vw"}
+        inputWidth={desktop ? "12vw" : "10vw"}
         paddingInline="0"
         height="24rem"
-        width= "120%"
+        active = {active}
+        handleActive = {handleActive}
+        containerSize = "100%"
       />
       <SearchSelect
         menuList={[
@@ -117,9 +123,11 @@ export default function FindEventFragment() {
         value = {searchData.eventType}
         handleSelect = {handleSelectValue}
         onChange={(e) => setSearchData({...searchData, eventType: e.target.value})}
-        inputWidth={desktop ? "9vw" : "10vw"}
+        inputWidth={"65%"}
+        handleActive = {handleActive}
         height="20rem"
-        width="140%"
+        active = {active}
+        containerSize="90%"
       />
       <SearchSelect
         menuList={[
@@ -135,8 +143,10 @@ export default function FindEventFragment() {
         value= ""
         handleSelect = {() => {}}
         onChange={(e) => console.log(e.target.value)}
-        inputWidth={desktop ? "10vw" : "11vw"}
-        width="140%"
+        inputWidth={desktop ? "7vw" : "8vw"}
+        containerSize="80%"
+        active = {active}
+        handleActive = {handleActive}
       />
       <SearchSelect
         menuList={[
@@ -163,15 +173,19 @@ export default function FindEventFragment() {
         value = {searchData.category}
         handleSelect = {handleSelectValue}
         onChange={(e) => setSearchData({...searchData, category: e.target.value})}
-        inputWidth={desktop ? "11vw" : "9vw"}
+        inputWidth={desktop ? "8vw" : "7vw"}
         height="20rem"
-        width="140%"
+        containerSize="80%"
+        active = {active}
+        handleActive = {handleActive}
       />
 
       <Button
         css={{
-          width: "13rem",
-          [screen.desktop]: { width: "12rem" },
+          width: "90%",
+          height: "43px",
+          fontSize: "1.1rem",
+          [screen.desktop]: { width: "7rem" },
           [screen.lg]: {},
         }}
       >

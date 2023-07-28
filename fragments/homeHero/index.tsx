@@ -9,7 +9,6 @@ const HomeHero = () => {
   return (
     <div
       css={{
-        width: "100vw",
         height: "420px",
         backgroundColor: "#7C35AB33",
         paddingInline: "3%",
@@ -76,13 +75,13 @@ const HomeHero = () => {
       </div>
       <div css = {{display: "grid", gridTemplateColumns: "1fr 1fr 1fr"}}>
         <div css ={{textAlign: "right"}}>
-            <Image  src = "/assets/pngs/heroimg1.png" alt = "wedding event" height= {276} width = {177} style = {{borderRadius: "20px", marginTop: "8rem", marginRight: "-10%"}}/>
+            <Image  src = "/assets/pngs/heroimg1.png" alt = "wedding event" height= {276} width = {177} style = {{borderRadius: "20px", marginTop: "8rem", marginRight: "-14%"}}/>
         </div>
-        <div css ={{textAlign: "right"}}>
+        <div css ={{textAlign: "right", marginRight: "-10%"}}>
         <Image  src = "/assets/pngs/heroimg2.png" alt = "lagos carnival" height= {236} width = {177} quality = {100} style = {{borderRadius: "20px", marginTop: "3.5rem", objectFit: "cover"}}/>
         <Image  src = "/assets/pngs/heroimg3.png" alt = "event hall" height= {175} width = {177} quality = {100} style = {{borderRadius: "20px", marginTop: "0.3rem", objectFit: "cover"}}/>
         </div>
-        <div css ={{textAlign: "center"}}>
+        <div css ={{textAlign: "right"}}>
         <Image  src = "/assets/pngs/heroimg4.png" alt = "lagos carnival" height= {256} width = {177} quality = {100} style = {{borderRadius: "20px", marginTop: "1.5rem", objectFit: "cover"}}/>
         <Image  src = "/assets/pngs/heroimg5.png" alt = "lagos carnival" height= {256} width = {177} quality = {100} style = {{borderRadius: "20px", marginTop: "0.33rem", objectFit: "cover"}}/>
         </div>
