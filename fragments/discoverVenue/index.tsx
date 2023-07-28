@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React from "react";
 import { H1 } from "styles/components/typography";
 import Image from "next/image";
-import { Box } from "@mui/material";
-import { Button } from "styles/components/button";
+
 import LandingPageSearchInput from "@/components/inputs/landingPageSearchInput";
 
 const DiscoverVenueFragment = () => {

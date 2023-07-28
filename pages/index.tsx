@@ -1,23 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import Head from "next/head";
-import { useTheme } from "@emotion/react";
+
 import Navbar from "components/header";
-import HomeSlide from "components/slides/homeSlide";
+
 import FindEventFragment from "fragments/findEvent/findEvent";
 import EventsAroundYouFragment from "fragments/eventsAroundYou";
-import Image from "next/image";
-import Tri_L from "public/assets/svgs/line_l.svg";
-
-import Tri_R from "public/assets/svgs/line_r.svg";
 
 import UpcomingEventsFragment from "fragments/upcomingEvents";
 import FeaturedEventsFragment from "fragments/featuredEvents";
-import NoMorePaperProgramFragment from "fragments/noMorePaperProgram";
-import UploadDesignFragment from "fragments/uploadDesign";
-import WitnessEventFragment from "fragments/witnessEvent";
-import TicketToSaleFragment from "fragments/ticketToSale";
-import EventCreatingFragment from "fragments/eventCreating";
-import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
+
 import PublicSiteFooter from "@/components/footer/publicSite";
 import { Lines } from "@/components/lines";
 import HomeHero from "fragments/homeHero";
@@ -45,9 +36,9 @@ export default function Home() {
       <HomeHero />
       <FindEventFragment />
       <EventsAroundYouFragment />
-     <WhyUseEwitnexFragment />
+      <WhyUseEwitnexFragment />
       <UpcomingEventsFragment />
-     <DontSpectateFragment />
+      <DontSpectateFragment />
       <FeaturedEventsFragment />
       <SimplifyTicketFragment />
       <DiscoverVenueFragment />
