@@ -1,9 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
 
-const LandingPageSearchInput = ({placeholder}:{
-    placeholder:string
-}) => {
+const LandingPageSearchInput = ({ placeholder }: { placeholder: string }) => {
   return (
     <div
       css={{
@@ -16,20 +14,21 @@ const LandingPageSearchInput = ({placeholder}:{
         gridTemplateColumns: "55% 45%",
       }}
     >
-      <input 
-       type = "text"
-       placeholder = {placeholder}
-       style = {{
-        height: "80%",
-        marginBlock: "auto",
-        fontFamily: '"Poppins", sans-serif',
-        color: "#707070",
-        fontSize: "16px",
-        border: "none",
-        outline: "none",
-       }}
+      <input
+        type="text"
+        placeholder={placeholder}
+        style={{
+          height: "80%",
+          marginBlock: "auto",
+          fontFamily: '"Poppins", sans-serif',
+          color: "#707070",
+          fontSize: "16px",
+          border: "none",
+          outline: "none",
+        }}
       />
-      <div
+      <button
+        type="button"
         css={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -40,7 +39,10 @@ const LandingPageSearchInput = ({placeholder}:{
           borderRadius: "56px",
           marginBlock: "auto",
           marginLeft: "7%",
-          paddingInline: "3%"
+          paddingInline: "3%",
+          border: "none",
+          outline: "none",
+          cursor: "pointer",
         }}
       >
         <Image
@@ -49,8 +51,17 @@ const LandingPageSearchInput = ({placeholder}:{
           width={30}
           height={30}
         />
-        <p css = {{fontSize: "1.4rem", fontWeight: "600", letterSpacing: "0.32px", color: "#FFF"}}>Search</p>
-      </div>
+        <p
+          css={{
+            fontSize: "1.4rem",
+            fontWeight: "600",
+            letterSpacing: "0.32px",
+            color: "#FFF",
+          }}
+        >
+          Search
+        </p>
+      </button>
     </div>
   );
 };
