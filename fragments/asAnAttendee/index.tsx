@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import Link from "next/link";
 
 const AsAnAttendeeFragment = () => {
     const optionList = ["Wedding","Birthday", "Sports","Political", "Political","Cultural", "Trade", "Musical" ]
@@ -48,6 +49,7 @@ const Option = ({name}:{
 }) => {
     const [seeAllHover, setSeeAllHover] = useState(false);
     return (
+      <Link href= "/events" style = {{width: "12rem"}}>
         <div
           css={{
             color: "#7C35AB",
@@ -87,5 +89,6 @@ const Option = ({name}:{
             />
           )}
         </div>
+        </Link>
     )
 }

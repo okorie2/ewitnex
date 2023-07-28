@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { Tooltip } from "@mui/material";
 import Image from "next/image";
 
 const LandingPageSearchInput = ({ placeholder }: { placeholder: string }) => {
@@ -27,41 +28,43 @@ const LandingPageSearchInput = ({ placeholder }: { placeholder: string }) => {
           outline: "none",
         }}
       />
-      <button
-        type="button"
-        css={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          height: "90%",
-          width: "90%",
-          background: "#7c35ab",
-          borderRadius: "56px",
-          marginBlock: "auto",
-          marginLeft: "7%",
-          paddingInline: "3%",
-          border: "none",
-          outline: "none",
-          cursor: "pointer",
-        }}
-      >
-        <Image
-          src="/assets/svgs/big-search.svg"
-          alt=""
-          width={30}
-          height={30}
-        />
-        <p
+      <Tooltip title="Coming Soon" style={{ opacity: 0.8 }}>
+        <button
+          type="button"
           css={{
-            fontSize: "1.4rem",
-            fontWeight: "600",
-            letterSpacing: "0.32px",
-            color: "#FFF",
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            height: "90%",
+            width: "90%",
+            background: "#7c35ab",
+            borderRadius: "56px",
+            marginBlock: "auto",
+            marginLeft: "7%",
+            paddingInline: "3%",
+            border: "none",
+            outline: "none",
+            cursor: "pointer",
           }}
         >
-          Search
-        </p>
-      </button>
+          <Image
+            src="/assets/svgs/big-search.svg"
+            alt=""
+            width={30}
+            height={30}
+          />
+          <p
+            css={{
+              fontSize: "1.4rem",
+              fontWeight: "600",
+              letterSpacing: "0.32px",
+              color: "#FFF",
+            }}
+          >
+            Search
+          </p>
+        </button>
+      </Tooltip>
     </div>
   );
 };

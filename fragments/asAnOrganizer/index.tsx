@@ -5,8 +5,10 @@ import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 import Image from "next/image";
 import { Button } from "styles/components/button";
+import {useRouter} from 'next/router'
 
 const AsAnOrganizerFragment = () => {
+  const router = useRouter()
   const optionList = [
     "Wedding",
     "Birthday",
@@ -44,7 +46,7 @@ const AsAnOrganizerFragment = () => {
         </p>
       </div>
       <div css={{ marginTop: "2rem" }}>
-        <Button width = {"14rem"}>
+        <Button width = {"14rem"} onClick={() => router.push("/auth/signup")}>
             Get Started
         </Button>
       </div>

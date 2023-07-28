@@ -5,6 +5,7 @@ import { H2 } from "styles/components/typography";
 import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";
 import { screen } from "styles/theme";
+import Link from "next/link";
 
 export default function FeaturedEventsFragment() {
   const [seeAllHover, setSeeAllHover] = useState(false);
@@ -161,7 +162,9 @@ export default function FeaturedEventsFragment() {
           onMouseEnter={() => setSeeAllHover(true)}
           onMouseLeave={() => setSeeAllHover(false)}
         >
-          <p>See all events</p>
+          <Link href="/events">
+            <p>See all events</p>
+          </Link>
           {seeAllHover ? (
             <Image
               src={"/assets/svgs/elbow-right-white.svg"}

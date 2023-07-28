@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import { H1 } from "styles/components/typography";
 import Image from "next/image";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { Button } from "styles/components/button";
+import Link from "next/link";
 
 const DontSpectateFragment = () => {
   return (
@@ -44,7 +45,9 @@ const DontSpectateFragment = () => {
           collaborations that go beyond the event itself.
         </p>
         <Box height={"3rem"} />
-        <Button width={"50%"}>Find your next event</Button>
+        <Tooltip title = "Coming Soon" style = {{opacity:0.8}}>
+          <Button width={"50%"}>Find your next event</Button>
+        </Tooltip>
       </div>
       <div css={{ position: "relative" }}>
         <div
