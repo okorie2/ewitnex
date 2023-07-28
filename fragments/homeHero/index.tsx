@@ -3,6 +3,7 @@
 import { Button } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import Image from "next/image";
+import Link from "next/link";
 import { screen } from "styles/theme";
 
 const HomeHero = () => {
@@ -63,6 +64,7 @@ const HomeHero = () => {
           future, where <br /> technology meets community, and events become
           unforgettable
         </p>
+        <Link href = "/auth/signup" style = {{width: "13rem"}}>
         <Button
         css={{
           width: "13rem",
@@ -72,6 +74,7 @@ const HomeHero = () => {
       >
         Get Started
       </Button>
+      </Link>
       </div>
       <div css = {{display: "grid", gridTemplateColumns: "1fr 1fr 1fr"}}>
         <div css ={{textAlign: "right"}}>
