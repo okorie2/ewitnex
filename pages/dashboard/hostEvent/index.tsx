@@ -7,25 +7,49 @@ import HostEventLayout from "./layout";
 import Link from "next/link";
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import { Tooltip } from "@mui/material";
+import { nanoid } from "nanoid";
 
 const HostEvent = () => {
   const [organizerInputOpen, setOrganizerInputOpen] = useState(false);
   const [data, setdata] = useState("");
-  const [audienceState, setAudienceState] = useState("public")
-  const [organizersArray, setOrganizersArray] = useState(["Blessed_one"]);
+  const [audienceState, setAudienceState] = useState("public");
+  const [organizersArray, setOrganizersArray] = useState([
+    { user_id: nanoid(), user_name: "Blessed_one" },
+  ]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setOrganizersArray([...organizersArray, data]);
-      setdata("");
-      setOrganizerInputOpen(false);
+      if (data.length > 4) {
+        setOrganizersArray([
+          ...organizersArray,
+          { user_id: nanoid(), user_name: data },
+        ]);
+        setdata("");
+        setOrganizerInputOpen(false);
+      }
+    }
+  };
+
+  const handleAddOrganizer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (organizerInputOpen) {
+      if (data.length > 4) {
+        setOrganizersArray([
+          ...organizersArray,
+          { user_id: nanoid(), user_name: data },
+        ]);
+        setdata("");
+        setOrganizerInputOpen(false);
+      }
+    } else {
+      setOrganizerInputOpen(true);
     }
   };
 
   const handleDeleteOrganizer = (id: string) => {
     const organizersArrayCopy = organizersArray;
     const filtered = organizersArrayCopy.filter(
-      (organizer) => organizer !== id
+      (organizer) => organizer.user_id !== id
     );
     setOrganizersArray(filtered);
   };
@@ -132,7 +156,7 @@ const HostEvent = () => {
             {organizersArray.map((organizer) => {
               return (
                 <div
-                  key = {organizer}
+                  key={organizer.user_id}
                   css={{
                     width: "250px",
                     position: "relative",
@@ -146,7 +170,7 @@ const HostEvent = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  {organizer}
+                  {organizer.user_name}
                   <div
                     css={{
                       position: "absolute",
@@ -159,7 +183,7 @@ const HostEvent = () => {
                       display: "flex",
                       justifyContent: "center",
                     }}
-                    onClick={() => handleDeleteOrganizer(organizer)}
+                    onClick={() => handleDeleteOrganizer(organizer.user_id)}
                   >
                     <Image
                       src={"/assets/svgs/trash-red.svg"}
@@ -219,13 +243,11 @@ const HostEvent = () => {
                 height: "38px",
                 marginBottom: "0.4rem",
                 background: "#fff",
+                cursor: "pointer",
               }}
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                setOrganizerInputOpen(true);
-              }}
+              onClick={handleAddOrganizer}
             >
-              Add another organizer
+              {organizerInputOpen ? "Add organizer" : "Add another organizer"}
             </button>
           </div>
           <div
@@ -242,17 +264,17 @@ const HostEvent = () => {
               image="/assets/svgs/info2.svg"
               tooltip="Select the type of event from this list. This helps ticket buyers find your event."
               options={[
-                {value: "none", label: "Select event"},
-                {value:"Social", label:"Social"},
-                {value: "Cultural", label:"Cultural"},
-                {value:"Educational", label:"Educational"},
-                {value:"Fundraising", label:"Fundraising"},
-                {value:"Business", label:"Business"},
-                {value:"Sports", label:"Sports"},
-                {value:"Political", label:"Political"},
-                {value:"Religious", label:"Religion"},
-                {value:"Movie", label:"Movie"},
-                {value:"Theatre", label:"Theatre"},
+                { value: "none", label: "Select event" },
+                { value: "Social", label: "Social" },
+                { value: "Cultural", label: "Cultural" },
+                { value: "Educational", label: "Educational" },
+                { value: "Fundraising", label: "Fundraising" },
+                { value: "Business", label: "Business" },
+                { value: "Sports", label: "Sports" },
+                { value: "Political", label: "Political" },
+                { value: "Religious", label: "Religion" },
+                { value: "Movie", label: "Movie" },
+                { value: "Theatre", label: "Theatre" },
               ]}
             />
             <HostEventTextField
@@ -262,12 +284,12 @@ const HostEvent = () => {
               image="/assets/svgs/info2.svg"
               tooltip="Select an event category from this list. This helps ticket buyers find your event."
               options={[
-                {value: "none", label: "Select category"},
-                {value:"Wedding", label:"Wedding"},
-                {value:"Tech",label:"Tech" },
-                {value:"Sports and Fitness", label:"Sports and Fitness"},
-                {value:"Conference", label:"Conference"},
-                {value:"Music", label:"Music"},
+                { value: "none", label: "Select category" },
+                { value: "Wedding", label: "Wedding" },
+                { value: "Tech", label: "Tech" },
+                { value: "Sports and Fitness", label: "Sports and Fitness" },
+                { value: "Conference", label: "Conference" },
+                { value: "Music", label: "Music" },
               ]}
             />
           </div>
@@ -301,7 +323,9 @@ const HostEvent = () => {
                   />
                 </Tooltip>
               </div>
-              <div css = {{display: "flex", gap: "1rem", marginBlock:"0.5rem"}}>
+              <div
+                css={{ display: "flex", gap: "1rem", marginBlock: "0.5rem" }}
+              >
                 <div
                   css={{
                     display: "flex",
@@ -310,28 +334,32 @@ const HostEvent = () => {
                     gap: "0.75rem",
                     width: "110px",
                     height: "50px",
-                    background: audienceState === "public" ? "#7C35AB21 ": "",
-                    border: audienceState === "public" ? "1px solid #7C35AB": "1px solid #AEAEAE",
+                    background: audienceState === "public" ? "#7C35AB21 " : "",
+                    border:
+                      audienceState === "public"
+                        ? "1px solid #7C35AB"
+                        : "1px solid #AEAEAE",
                     color: audienceState === "public" ? "#7C35AB" : "#AEAEAE",
                     borderRadius: "10px",
-                    cursor:"pointer"
+                    cursor: "pointer",
                   }}
-                  onClick = {() => setAudienceState("public")}
-                >{
-                  audienceState === "public" ? 
-                  <Image
-                    src="/assets/svgs/eye_open_purple.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                  :
-                  <Image
-                    src="/assets/svgs/eye_open.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />}
+                  onClick={() => setAudienceState("public")}
+                >
+                  {audienceState === "public" ? (
+                    <Image
+                      src="/assets/svgs/eye_open_purple.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <Image
+                      src="/assets/svgs/eye_open.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  )}
                   <p>Public</p>
                 </div>
                 <div
@@ -342,27 +370,32 @@ const HostEvent = () => {
                     gap: "0.75rem",
                     width: "110px",
                     height: "50px",
-                    background: audienceState === "private" ? "#7C35AB21 ": "",
-                    border: audienceState === "private" ? "1px solid #7C35AB": "1px solid #AEAEAE",
+                    background: audienceState === "private" ? "#7C35AB21 " : "",
+                    border:
+                      audienceState === "private"
+                        ? "1px solid #7C35AB"
+                        : "1px solid #AEAEAE",
                     color: audienceState === "private" ? "#7C35AB" : "#AEAEAE",
                     borderRadius: "10px",
-                    cursor:"pointer"
+                    cursor: "pointer",
                   }}
-                  onClick = {() => setAudienceState("private")}
+                  onClick={() => setAudienceState("private")}
                 >
-                  { audienceState === "private" ?
+                  {audienceState === "private" ? (
                     <Image
-                    src="/assets/svgs/eye_close_purple.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />:
+                      src="/assets/svgs/eye_close_purple.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
                     <Image
-                    src="/assets/svgs/eye_close.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />}
+                      src="/assets/svgs/eye_close.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  )}
                   <p>Private</p>
                 </div>
               </div>

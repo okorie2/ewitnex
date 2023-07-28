@@ -25,7 +25,7 @@ export default function PublicSiteFooter() {
           padding: "0% 4%",
         }}
       >
-        <div css={{ width: "35%", marginTop: "-2%" }}>
+        <div css={{ width: "25%", marginTop: "-2%" }}>
           <Logo image="/assets/pngs/logo.png" width={125.13} height={58.12} />
           <p css = {{marginTop: "5%"}}>
             Ewitnex - is a social user-friendly platform that provides tools for
@@ -36,7 +36,7 @@ export default function PublicSiteFooter() {
           </p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "28%" }}>Use Ewitnex</p>
+          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Use Ewitnex</p>
           <Link href = "/how-it-works"><p css={{ fontWeight: "500", ":hover":{color: "#7C35AB"} }}>How it works</p></Link>
           <p css={{ fontWeight: "500" }}>Pricing</p>
           <p css={{ fontWeight: "500" }}>Content standards</p>
@@ -44,67 +44,49 @@ export default function PublicSiteFooter() {
           <p css={{ fontWeight: "500" }}>FAQs</p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "14%" }}>Plan Events</p>
-          <p css={{ fontWeight: "500" }}>Sell Tickets Online</p>
-          <p css={{ fontWeight: "500" }}>Software </p>{" "}
-          <p css={{ fontWeight: "500" }}>Online RSVP</p>{" "}
-          <p css={{ fontWeight: "500" }}>Virtual Events</p>{" "}
-          <p css={{ fontWeight: "500" }}>Platform Event</p>{" "}
-          <p css={{ fontWeight: "500" }}> Planning Event</p>{" "}
-          <p css={{ fontWeight: "500" }}> Payment System</p>{" "}
-          <p css={{ fontWeight: "500" }}>Nonprofits & Fundraisers Events</p>
-          <p css={{ fontWeight: "500" }}>Event Marketing </p>
-          <p css={{ fontWeight: "500" }}>Party Planning</p>
+          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Find Events</p>
+          <p css={{ fontWeight: "500" }}>Virtual Events</p>
+          <p css={{ fontWeight: "500" }}>Online Events</p>
+          <p css={{ fontWeight: "500" }}>Content Standards</p>
+          <p css={{ fontWeight: "500" }}>Online Classes</p>
+          <p css={{ fontWeight: "500" }}>Online Events</p>
+          <p css={{ fontWeight: "500" }}>Birthday Events</p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Find Events</p>
-          <Link href = "/events"><p css={{ fontWeight: "500", ":hover": {color: "#7C35AB"} }}>All Events</p></Link>
-          <p css={{ fontWeight: "500" }}>Virtual Events</p>
-          <p css={{ fontWeight: "500" }}>Online Webinars</p>
-          <p css={{ fontWeight: "500" }}>Online Classes</p>
-          <p css={{ fontWeight: "500" }}>Online Yoga</p>
-          <p css={{ fontWeight: "500" }}>Virtual Runs</p>
-          <p css={{ fontWeight: "500" }}>Online Zumba Classes</p>
-          <p css={{ fontWeight: "500" }}>Virtual Conferences</p>
-          <p css={{ fontWeight: "500" }}>Online Seminars</p>
-          <p css={{ fontWeight: "500" }}>Online Speed Dating</p>
+          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Connect with Ewitnex</p>
+          <p css={{ fontWeight: "500" }}>Contact Support</p>
+          <div css = {{display:"flex", gap:"1rem", marginTop:"1rem", alignItems:"center"}}>
+            <Image 
+              src = {"/assets/svgs/facebook.svg"}
+              alt = {"facebook"}
+              height = {20}
+              width = {20}
+            />
+            <Image 
+              src = {"/assets/svgs/twitter.svg"}
+              alt = {"twitter"}
+              height = {20}
+              width = {20}
+            />
+            <Image 
+              src = {"/assets/svgs/instagram.svg"}
+              alt = {"instagram"}
+              height = {20}
+              width = {20}
+            />
+          </div>
         </div>
       </div>
       <div
         css={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "center",
           marginTop: "5%",
           border: "1px solid #E0e0e0",
-          padding: "0 3% ",
-          paddingBottom: "1%",
+          padding: "0.5% 3% ",
+          paddingBottom: "1.5%",
         }}
       >
-        <div
-          css={{
-            width: "51%",
-            [screen.desktop]: {
-              width: "62%",
-            },
-          }}
-        >
-          <p css={{ fontWeight: "bold", textAlign: "center", padding: "3% 0" }}>
-            Connect with Ewitnex
-          </p>
-          <div
-            css={{
-              display: "flex",
-              fontWeight: "500",
-              justifyContent: "space-between",
-            }}
-          >
-            <p>Contact support</p>
-            <p>Twitter</p>
-            <p>Facebook</p>
-            <p>LinkedIn</p>
-            <p>Instagram</p>
-          </div>
-        </div>
 
         <div
           css={{
@@ -151,7 +133,7 @@ export default function PublicSiteFooter() {
           borderBottom: "1px solid #E0e0e0",
         }}
       >
-        © 2022 Ewitnex
+        © 2023 Ewitnex
       </div>
     </div>
   );

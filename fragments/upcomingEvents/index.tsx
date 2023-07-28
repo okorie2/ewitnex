@@ -1,55 +1,40 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 
 import { H2 } from "styles/components/typography";
-import { useTheme } from "@emotion/react";
 import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";
 import { screen } from "styles/theme";
+import Link from "next/link";
 
 export default function UpcomingEventsFragment() {
-  const theme = useTheme();
+  const [seeAllHover, setSeeAllHover] = useState(false);
+  const [scrollRightHover, setScrollRightHover] = useState(false);
   return (
-    <div css={{ padding: "2% 4%" }}>
+    <div css={{ padding: "2% 4%", marginTop: "3rem" }}>
       <div
         css={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
           marginBottom: " 2%",
           fontFamily: "'Poppins', sans-serif",
         }}
       >
         <div>
-          <H2>Upcoming Events</H2>
+          <H2 small>Upcoming Events</H2>
         </div>
         <div
           css={{
-            color: "#7C35AB",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "5%",
-            width: "9%",
-            cursor: "pointer",
-            [screen.desktop]: {
-              width: "14%",
-            },
-            [screen.lg]: {
-              width: "13%",
-            },
+            width: "73%",
+            letterSpacing: "0.32px",
+            fontSize: "0.95rem",
+            marginTop: "1rem",
           }}
         >
-          <p
-            css={{
-              fontSize: "1.125rem",
-              fontWeight: "600"
-            }}
-          >
-            See All
+          <p>
+            Explore a diverse range of upcoming gatherings, conferences,
+            festivals, and more, and be the first to secure your spot in these
+            highly anticipated occasions.
           </p>
-          
         </div>
       </div>
       <div
@@ -70,7 +55,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             label="Music"
-            favourite = {false}
+            favourite={false}
             attendees="609"
             id="Tec542445"
             date="25 NOV. 2021, 10:00 AM"
@@ -91,7 +76,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             label="Concert"
-            favourite = {false}
+            favourite={false}
             attendees="609"
             date="3 DEC. 2022, 10:00 AM"
             id="Heal12548"
@@ -112,7 +97,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             attendees="609"
-            favourite = {false}
+            favourite={false}
             date="25 NOV. 2021, 10:00 AM"
             img="/assets/pngs/card_3.png"
             label="Wedding"
@@ -133,7 +118,7 @@ export default function UpcomingEventsFragment() {
         >
           <EventCard
             attendees="609"
-            favourite = {false}
+            favourite={false}
             date="3 DEC. 2022, 10:00 AM"
             id="Tec542445"
             img="/assets/pngs/card_4.png"
@@ -143,6 +128,115 @@ export default function UpcomingEventsFragment() {
             priceRange="$500-$2K"
             title="Google Developers Festival Aba"
           />
+        </div>
+      </div>
+      <div
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "1rem",
+        }}
+      >
+        <div
+          css={{
+            color: "#7C35AB",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-around",
+            fontFamily: '"Poppins", sans-serif',
+            width: "12%",
+            height: "46px",
+            fontSize: "0.85rem",
+            fontWeight: "550",
+            cursor: "pointer",
+            border: "1px solid #7C35AB",
+            ":hover": {
+              color: "#FFF",
+              background: "#7C35AB",
+            },
+            [screen.desktop]: {
+              width: "17%",
+            },
+            [screen.lg]: {
+              width: "16%",
+            },
+          }}
+          onMouseEnter={() => setSeeAllHover(true)}
+          onMouseLeave={() => setSeeAllHover(false)}
+        >
+          <Link href="/events">
+            <p>See all events</p>
+          </Link>
+          {seeAllHover ? (
+            <Image
+              src={"/assets/svgs/elbow-right-white.svg"}
+              alt="right"
+              width={20}
+              height={24}
+            />
+          ) : (
+            <Image
+              src={"/assets/svgs/elbow-right-purple.svg"}
+              alt="right"
+              width={20}
+              height={24}
+            />
+          )}
+        </div>
+        <div css={{ display: "flex", gap: "1rem" }}>
+          <div
+            css={{
+              width: "46px",
+              height: "46px",
+              borderRadius: "50%",
+              border: "1px solid #AEAEAE",
+              transform: "rotate(180deg)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              opacity: 0.3,
+            }}
+          >
+            <Image
+              src="/assets/svgs/elbow-right-light.svg"
+              alt=""
+              width={12}
+              height={12}
+            />
+          </div>
+          <div
+            css={{
+              width: "46px",
+              height: "46px",
+              borderRadius: "50%",
+              border: "1px solid #AEAEAE",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              ":hover": {
+                background: "#7C35AB",
+              },
+            }}
+            onMouseEnter={() => setScrollRightHover(true)}
+            onMouseLeave={() => setScrollRightHover(false)}
+          >
+            {scrollRightHover ? (
+              <Image
+                src="/assets/svgs/elbow-right-white.svg"
+                alt=""
+                width={20}
+                height={20}
+              />
+            ) : (
+              <Image
+                src="/assets/svgs/elbow-right-light.svg"
+                alt=""
+                width={12}
+                height={12}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

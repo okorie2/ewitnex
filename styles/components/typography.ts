@@ -19,9 +19,10 @@ export const H1 = styled.h1<Props>`
   }
 `;
 
-export const H2 = styled.h2`
+export const H2 = styled.h2<Props>`
   font-size: 1.5rem;
   color: ${(props) => (props.color ? props.color : "#000")};
+  text-transform: ${(props) => (props.small ? "none" : "uppercase")};
   font-weight: bold;
   font-family: ${"'Poppins', sans-serif"};
 `;

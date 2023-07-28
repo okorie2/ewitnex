@@ -4,6 +4,7 @@ interface Props {
   height?:string
   width?:string
   color?:string
+  fontSize?:string
 }
 
 export const Button = styled.button<Props>`
@@ -16,7 +17,7 @@ export const Button = styled.button<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: ${(props) => props.fontSize ? props.fontSize : "1.5rem"};
   font-weight: bold;
   font-family: Nunito, 'sans-serif';
   border: none;

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { screen } from "styles/theme";
+import Down from "public/assets/svgs/down_ar.svg";
 import Image from 'next/image'
 
 interface SearchSelectProps {
@@ -16,7 +17,10 @@ interface SearchSelectProps {
   value:string;
   width?: string;
   zIndex?: number;
+  containerSize: string
   paddingInline?:string
+  active?:string
+  handleActive: (name: string) => void
 }
 
 export default function SearchSelect({ ...rest }: SearchSelectProps) {
@@ -26,8 +30,9 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
       css={{
         position: "relative",
         display: "flex",
+        gap: "3%",
         alignItems: "center",
-        width: "max-content",
+        width: rest.containerSize,
         background: "#fff",
       }}
     >
@@ -41,26 +46,38 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           outline: "none",
           border: "none",
           color: "#AEAEAE",
-          fontSize: "1.3rem",
+          fontSize: "0.95rem",
           fontWeight: "bold",
           width: rest.inputWidth,
           fontFamily: "'Poppins', sans-serif",
           [screen.desktop]: {
-            fontSize: "1.3rem",
+            fontSize: "1rem",
           },
           [screen.lg]: {
-            fontSize: "1.3rem",
+            fontSize: "1rem",
           },
         }}
       />
       <div
         css={{ marginTop: "7px", cursor: "pointer" }}
-        onClick={() => setDropdownVisible(!dropdownVisible)}
       >
-        {dropdownVisible ? (
-          <FaChevronUp fontSize={24} fontWeight={700} />
+        {rest.name === rest.active ? (
+          <div
+          css={{
+            transform: "rotate(180deg)",
+            marginTop: "-50%",
+          }}
+        onClick={() => rest.handleActive("")}
+
+        >
+          <Image src={Down} alt="down" />
+        </div>
         ) : (
-          <FaChevronDown fontSize={24} fontWeight={700} />
+          <div 
+          onClick={() => rest.handleActive(rest.name)}
+        >
+          <Image src={Down} alt="down" />
+          </div>
         )}
       </div>
       <div
@@ -72,20 +89,20 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           position: "absolute",
           top: "2.5rem",
           zIndex: rest.zIndex ? rest.zIndex : 1,
-          display: dropdownVisible ? "block" : "none",
+          display: rest.name === rest.active ? "block" : "none",
           borderRadius: "8px",
           boxShadow:
             "0 1px 17px 0 rgb(40 44 53 / 10%), 0 2px 4px 0 rgb(40 44 53 / 10%)",
           overflowY: "auto",
           "&::-webkit-scrollbar": {
-            width: "8px",
+            width: "10px",
           },
           "&::-webkit-scrollbar-track": {
             background: "#F5f5f5",
           },
           "&::-webkit-scrollbar-thumb": {
             background: "#AEAEAE",
-            borderRadius: "10px",
+            borderRadius: "8px",
             height:"5px",
             ":hover": {
               background: ` ${"#707070"}`,

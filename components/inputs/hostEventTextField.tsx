@@ -80,7 +80,6 @@ const HostEventTextField = React.forwardRef(
                 opacity: 0.7,
                 borderRadius: "10px",
                 border: `none`,
-                "& .MuiInputBase-root": {
                   ":hover": {
                     fieldset: {
                       "&.MuiOutlinedInput-notchedOutline": {
@@ -88,7 +87,6 @@ const HostEventTextField = React.forwardRef(
                       },
                     },
                   },
-                },
                 fieldset: {
                   "&.MuiOutlinedInput-notchedOutline": {
                     border: "1px solid #AEAEAE",
@@ -99,6 +97,13 @@ const HostEventTextField = React.forwardRef(
                   border: `2px solid ${"#7C35AB"}`,
                   borderRadius: "10px",
                   outline: "none",
+                  ":hover": {
+                    fieldset: {
+                      "&.MuiOutlinedInput-notchedOutline": {
+                        border: "none",
+                      },
+                    },
+                  },
                   fieldset: {
                     border: "none",
                   },
@@ -134,10 +139,10 @@ const HostEventTextField = React.forwardRef(
               color: props.color ? props.color : "#AEAEAE",
               resize: "none",
               ":hover": {
-                border: `2px solid ${"#7C35AB"}`,
+                border: props.disabled ? "" : `2px solid ${"#7C35AB"}`,
               },
               ":focus": {
-                border: `2px solid ${"#7C35AB"}`,
+                border: props.disabled ? "" : `2px solid ${"#7C35AB"}`,
                 outline: "none",
               },
             }}
