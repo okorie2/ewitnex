@@ -33,6 +33,30 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href="/favicon-32x32.png"
+          type="image/png"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          href="/favicon-16x16.png"
+          type="image/png"
+          sizes="16x16"
+        />
+        <link
+          rel="icon"
+          href="/android-chrome-192x192.png"
+          type="image/png"
+          sizes="192x192"
+        />
+        <link
+          rel="icon"
+          href="/android-chrome-512x512.png"
+          type="image/png"
+          sizes="512x512"
+        />
       </Head>
       <Navbar />
       {/* <HomeSlide /> */}
