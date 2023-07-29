@@ -27,7 +27,10 @@ export default function Home() {
     <>
       <Head>
         <title>Ewitnex</title>
-        <meta name="description" content="Ewitnex" />
+        <meta
+          name="description"
+          content="Discover local happenings, concerts, weddings, workshops hangouts, and more, all in one place, ensuring you never miss out on the vibrant experiences in your vicinity."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
