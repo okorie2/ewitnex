@@ -7,11 +7,13 @@ import React, { useEffect, useState, useRef } from "react";
 interface Props {
   label: string;
   visible?: boolean;
+  color?:string;
   setVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   withIcon?: boolean;
   iconComponent?: React.ReactNode;
   value: string;
   placeholder: string;
+  disabled?: boolean;
   setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   handleKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -68,7 +70,7 @@ const activeElement = active()
         alignItems: "center",
         paddingRight: "13px",
         ":hover" : {
-          border: `2px solid ${"#7C35AB"}`,
+          border: rest.disabled ? `1px solid ${"#C0C0C0"}` :  `2px solid ${"#7C35AB"}`,
         },
       }}
 
@@ -90,6 +92,7 @@ const activeElement = active()
         type={rest.type || "text"}
         value={rest.value}
         name={name}
+        disabled = {rest.disabled}
         placeholder={rest.placeholder}
         onChange={(e) => rest.setValue(e)}
         onKeyDown={(e) => {
@@ -142,7 +145,7 @@ export const SettingsPasswordTextField = ({ label,placeholder, ...rest }: Props)
           borderRadius: "7px",
           paddingLeft: "3%",
           fontFamily: "'Nunito', sans-serif",
-          color: "#AEAEAE",
+          color: rest.color ? rest.color : "#AEAEAE",
           fontWeight: "bold",
         }}
         type={rest.visible ? "text" : "password"}

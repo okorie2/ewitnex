@@ -665,15 +665,19 @@ const EventFilter = ({
 
 export default EventFilter;
 
-const CheckSelect = ({
+export const CheckSelect = ({
   value,
   label,
   selected,
+  labelColor,
+  border,
   handleClick,
 }: {
   value: string;
   label: string;
   selected: string;
+  border ?:string
+  labelColor ?: string;
   handleClick: () => void;
 }) => {
   return (
@@ -682,12 +686,13 @@ const CheckSelect = ({
         display: "flex",
         gap: "1rem",
         marginBlock: "0.5rem",
+        alignItems:"center",
         cursor: "pointer",
       }}
       onClick={handleClick}
     >
-      <RoundCheckbox checked={selected === value} />
-      <p css={{ fontWeight: "500", color: "#707070" }}>{label}</p>
+      <RoundCheckbox checked={selected === value} border={border ? border : "#707070"}/>
+      <p css={{ fontWeight: "500", color: labelColor ? labelColor : "#707070" }}>{label}</p>
     </div>
   );
 };

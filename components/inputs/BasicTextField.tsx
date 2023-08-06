@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
+import { TextField, styled } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface Props {
   label: string;
   visible?: boolean;
+  type?:string
   setVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   withIcon?: boolean;
   iconComponent?: React.ReactNode;
@@ -62,7 +64,7 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
           borderRadius: "10px",
           paddingLeft: "3%",
         }}
-        type={"text"}
+        type={rest.type ? rest.type : "text"}
         value={rest.value}
         name={name}
         placeholder={labelDisplay ? "" : label}
@@ -72,6 +74,26 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
     </div>
   );
 }
+
+export const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#7c35ab',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#B2BAC2',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#E0E3E7',
+    },
+    '&:hover fieldset': {
+      borderColor: '#7c35ab',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#7c35ab',
+    },
+  },
+});
 
 export const PasswordTextField = ({ label, ...rest }: Props) => {
   const [labelDisplay, setLabelDisplay] = useState(false);

@@ -77,7 +77,7 @@ const HostEventTextField = React.forwardRef(
               sx={{
                 width: "100%",
                 appearance: "none",
-                opacity: 0.7,
+                opacity: 0.9,
                 borderRadius: "10px",
                 border: `none`,
                   ":hover": {
