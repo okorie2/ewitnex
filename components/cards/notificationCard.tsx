@@ -57,7 +57,7 @@ const NotificationCard = (props: INotificationCard) => {
             <p css={{ fontSize: "0.5rem" }}>{props.time}</p>
           </>
         ) : (
-          props.uploaded.split(" ").map((item) => <p>{item}</p>)
+          props.uploaded.split(" ").map((item) => <p key = {item}>{item}</p>)
         )}
       </div>
       <div
