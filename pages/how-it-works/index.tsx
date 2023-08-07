@@ -7,6 +7,7 @@ import { useTheme } from "@emotion/react";
 
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { Button } from "styles/components/button";
 import { H1, H3 } from "styles/components/typography";
@@ -48,9 +49,11 @@ export default function Index() {
             event platform, it really is that simple!
           </p>
           <div css={{ width: "12.7vw", marginTop: "3rem" }}>
-            <Button background={"#00D9B7"}>
+            <Link href = "/onboarding">
+            <Button background={"#00D9B7"} width="12.5rem">
               Get Started
             </Button>
+            </Link>
           </div>
         </div>
         <div css={{ width: "17.5vw", height: "428px", position: "relative" }}>

@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 
 interface Props {
   small?: boolean;
-  size?: string
+  size?: string;
+  space?:string
 }
 
 export const H1 = styled.h1<Props>`
@@ -25,6 +26,7 @@ export const H2 = styled.h2<Props>`
   text-transform: ${(props) => (props.small ? "none" : "uppercase")};
   font-weight: bold;
   font-family: ${"'Poppins', sans-serif"};
+  letter-spacing: ${(props) => (props.space ? props.space : "")};
 `;
 
 export const H3 = styled.h3`

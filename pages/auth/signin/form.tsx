@@ -82,7 +82,7 @@ export default function Form() {
             <p>Continue With Google</p>
           </ButtonFormOutline>
         </div>
-        <div css={{ marginTop: "2rem" }}>
+        <div css={{ marginTop: "2rem", marginBottom:"1rem" }}>
           <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
             Don&apos; Have An Account?
             <span css={{ fontWeight: 700, color: "#7C35AB" }}>

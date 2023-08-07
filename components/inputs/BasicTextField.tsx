@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 interface Props {
   label: string;
   visible?: boolean;
+  weight?:string;
   type?:string
   setVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   withIcon?: boolean;
@@ -63,6 +64,9 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
           height: "100%",
           borderRadius: "10px",
           paddingLeft: "3%",
+          fontFamily:'"Nunito", sans-serif',
+          fontSize:"1rem",
+          fontWeight: rest.weight ? rest.weight : ""
         }}
         type={rest.type ? rest.type : "text"}
         value={rest.value}
@@ -137,6 +141,7 @@ export const PasswordTextField = ({ label, ...rest }: Props) => {
           outline: "none",
           background: "inherit",
           width: "100%",
+          fontFamily: "'Nunito', sans-serif",
           height: "100%",
           borderRadius: "10px",
           paddingLeft: "3%",

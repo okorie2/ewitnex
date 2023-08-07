@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 interface Props {
   background?: string;
   height?:string
+  border?:string
   width?:string
   color?:string
   fontSize?:string
@@ -20,7 +21,7 @@ export const Button = styled.button<Props>`
   font-size: ${(props) => props.fontSize ? props.fontSize : "1.5rem"};
   font-weight: bold;
   font-family: Nunito, 'sans-serif';
-  border: none;
+  border:${(props) => props.border ? props.border : "none"};
   cursor: pointer;
   @media screen and (max-width: 1024px) {
     font-size: 1.3rem;
@@ -43,11 +44,11 @@ export const ButtonFormFilled = styled.button`
   font-family: "Nunito", sans-serif;
 `;
 
-export const ButtonFormOutline = styled.button`
+export const ButtonFormOutline = styled.button<Props>`
   height: 52px;
-  width: 100%;
+  width: ${(props) => props.width ? props.width : "100%"};
   background: transparent;
-  border: 1px solid ${(props) => "#707070"};
+  border:  ${(props) => props.border ? props.border : "1px solid #707070"};
   border-radius: 26px;
   color: ${(props) => "#000"};
   display: flex;

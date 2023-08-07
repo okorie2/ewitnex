@@ -12,11 +12,17 @@ import Logo from "@/components/logo";
 export default function Signup() {
   return (
     <>
-      <div css={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        css={{
+          display: "flex",
+          justifyContent: "space-between",
+          height: "100vh",
+        }}
+      >
         <SignInLeftcss>
           <div className="top">
             <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
-            <Logo image="/assets/svgs/logo_yt.svg" />
+            <Logo image="/assets/pngs/logo_yt.png" />
           </div>
 
           <div className="btm">
@@ -90,7 +96,16 @@ export default function Signup() {
           </div>
         </SignInLeftcss>
 
-        <div css={{ width: "100%" }}>
+        <div
+          css={{
+            width: "100%",
+            maxHeight: "100vh",
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
           <div css={{ width: "45%", margin: "auto" }}>
             <Form />
           </div>
