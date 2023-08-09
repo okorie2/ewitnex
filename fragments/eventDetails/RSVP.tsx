@@ -36,10 +36,7 @@ const RSVP = () => {
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: "2.5rem",
-            [screen.desktopLg]: {
-              gridTemplateColumns: "1fr",
-              gap: "1rem",
-            },
+            
           }}
         >
           <div>
@@ -68,7 +65,7 @@ const RSVP = () => {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           [screen.desktopLg]: {
-            gridTemplateColumns: "auto ",
+            gridTemplateColumns: "1fr 1fr",
           },
           gap: "1.25rem",
           marginTop: "3rem",

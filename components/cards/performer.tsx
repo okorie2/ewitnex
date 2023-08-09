@@ -3,14 +3,14 @@
 import React from "react";
 import Image from "next/image";
 
-interface ISpeaker {
+interface IPerformer {
   img: string;
   name: string;
   role: string;
   title: string;
 }
 
-const Speaker = (props: ISpeaker) => {
+const Performer = (props: IPerformer) => {
   return (
     <div
       css={{
@@ -58,4 +58,4 @@ const Speaker = (props: ISpeaker) => {
   );
 };
 
-export default Speaker;
+export default Performer;

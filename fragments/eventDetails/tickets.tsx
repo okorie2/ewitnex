@@ -36,10 +36,7 @@ const EventTickets = () => {
         css={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          [screen.desktopLg]: {
-            gridTemplateColumns: "auto ",
-          },
-          gap: "1.25rem",
+          gap: "1rem",
         }}
       >
         <EventTicket

@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import Speaker from "@/components/cards/speaker";
+import Performer from "@/components/cards/performer";
 import { screen } from "styles/theme";
 import Image from "next/image";
 
 const EventDetails = () => {
+  const [favorite, setFavourite] = React.useState(false)
   return (
     <div>
       <div css={{ width: "100%", height: "394px", position: "relative" }}>
@@ -104,10 +105,12 @@ const EventDetails = () => {
             position: "absolute",
             bottom: "-5%",
             right: "2%",
+            cursor:"pointer"
           }}
+          onClick = {() => setFavourite(!favorite)}
         >
           <Image
-            src="/assets/svgs/love.svg"
+            src= {`/assets/svgs/${favorite ? "filled-" : ""}love.svg`}
             alt="card_img"
             width={20.98}
             height={19.39}
@@ -117,10 +120,10 @@ const EventDetails = () => {
       <div>
         <div
           css={{
-            width: "82%",
+            width: "87%",
             marginLeft: "auto",
             [screen.desktopLg]: {
-              width: "70%",
+              width: "78%",
             },
             [screen.desktop]: {
               width: "96%",
@@ -153,10 +156,9 @@ const EventDetails = () => {
             css={{
               marginTop: "2.5rem",
               display: "grid",
-              gridTemplateColumns: "1.3fr 0.7fr",
+              gridTemplateColumns: "auto ",
               [screen.desktopLg]: {
-                gridTemplateColumns: "auto ",
-                gap: "2rem",
+                gridTemplateColumns: "1.2fr 0.8fr",
               },
             }}
           >
@@ -457,11 +459,13 @@ const EventDetails = () => {
                     borderRadius: "56px",
                     padding: "0.75rem",
                     backgroundColor: "#fff",
-                    width: "129px",
+                    width: "145px",
                     height: "42px",
+                    fontFamily:'"Nunito", sans-serif',
+                    fontWeight:"500"
                   }}
                 >
-                  Follow organizer
+                  Follow Organizer
                 </button>
               </div>
               <div
@@ -557,7 +561,7 @@ const EventDetails = () => {
               width={24}
               height={24}
             />
-            <p>Speakers</p>
+            <p>Performers</p>
           </div>
           <div
             css={{
@@ -567,25 +571,25 @@ const EventDetails = () => {
               gap: "1.38rem",
             }}
           >
-            <Speaker
+            <Performer
               img="/assets/pngs/speaker1.png"
               name="John Bosko"
               title="Software Engineer"
-              role = "Speaker"
+              role = "Performer"
             />
-            <Speaker
+            <Performer
               img="/assets/pngs/speaker2.png"
               name="John Bosko"
               title="Software Engineer"
-              role = "Speaker"
+              role = "Performer"
             />
-            <Speaker
+            <Performer
               img="/assets/pngs/speaker3.png"
               name="John Bosko"
               title="Software Engineer"
               role = "Speaker"
             />
-            <Speaker
+            <Performer
               img="/assets/pngs/speaker4.png"
               name="John Bosko"
               title="Software Engineer"

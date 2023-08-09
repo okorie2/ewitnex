@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
+import Link from "next/link";
 import React from "react";
 import { ButtonFormFilled } from "styles/components/button";
 
-const AttenEventCTA = () => {
+const AttenEventCTA = ({link}:{link:string}) => {
   return (
     <div
       css={{
@@ -30,9 +31,11 @@ const AttenEventCTA = () => {
         <p css={{ color: "#000", fontWeight: "bold" }}>
           $500 - $2K
         </p>
+        <Link href = {link}>
         <ButtonFormFilled css={{ width: "172px" }}>
           ATTEND EVENT
         </ButtonFormFilled>
+        </Link>
       </div>
     </div>
   );

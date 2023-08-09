@@ -17,16 +17,16 @@ const EventTab = () => {
   const stateEvents = useMemo(() => {
     if (activeTab === "Details") return <EventDetails />;
     else if (activeTab === "Activities") return <EventActivities />;
-    else if (activeTab === "Messages") return <EventMessages />;
+    else if (activeTab === "Conversations") return <EventMessages />;
     else if (activeTab === "Tickets") return <EventTickets />;
-    else if (activeTab === "Speakers") return <EventSpeakers />;
+    else if (activeTab === "Performers") return <EventSpeakers />;
     else if (activeTab === "RSVPs") return <RSVP />;
   }, [activeTab]);
 
   return (
     <div css={{ position: "relative" }}>
       <div>{stateEvents}</div>
-      <AttenEventCTA />
+      <AttenEventCTA link={`/events/Tec542445?tab=Tickets`} />
     </div>
   );
 };

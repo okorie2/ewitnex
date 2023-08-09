@@ -46,8 +46,7 @@ const EventMessages = () => {
         />
         <EventMessage
           image="/assets/pngs/profilepic_2.png"
-          background="transparent linear-gradient(180deg, #528ffe 0%, #7c35ab 100%) 0%
-          0% no-repeat padding-box"
+          background="#548AF9"
           userName="Blessed Onoriode"
           time="25m"
           text="This event is making sense, you people should keep it up!"
@@ -71,8 +70,7 @@ const EventMessages = () => {
         />
         <EventMessage
           image="/assets/pngs/profilepic_2.png"
-          background="transparent linear-gradient(180deg, #528ffe 0%, #7c35ab 100%) 0%
-          0% no-repeat padding-box"
+          background="#548AF9"
           userName="Blessed Onoriode"
           time="Now"
           text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit"
@@ -107,6 +105,7 @@ const EventMessages = () => {
                 height: "48px",
                 width: "100%",
                 fontSize: "0.875rem",
+                fontFamily:"'Nunito', sans-serif"
               }}
             />
             <div
