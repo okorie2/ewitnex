@@ -206,7 +206,7 @@ const Tickets = () => {
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { fontWeight: "bold" },
+                        ":hover": { color:"#7c35ab" },
                         display: "flex",
                         gap: "10%",
                       }}
@@ -223,7 +223,7 @@ const Tickets = () => {
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { fontWeight: "bold" },
+                        ":hover": { color: "#7c35ab" },
                         display: "flex",
                         gap: "10%",
                       }}
@@ -241,7 +241,7 @@ const Tickets = () => {
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { fontWeight: "bold" },
+                        ":hover": { color:"#7c35ab" },
                         display: "flex",
                         gap: "10%",
                       }}

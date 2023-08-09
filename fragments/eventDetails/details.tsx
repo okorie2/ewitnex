@@ -1,14 +1,47 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import Performer from "@/components/cards/performer";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import ContactOrganizerModal from "@/components/modals/programModal/contactOrganizerModal";
+import ReportEventModal from "@/components/modals/programModal/reportEventModal";
 
 const EventDetails = () => {
-  const [favorite, setFavourite] = React.useState(false)
+  const [favorite, setFavourite] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
+    useState(false);
+  const [reportEventModalOpen, setReportEventModalOpen] = useState(false);
+  const handleMenuOpen = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <div>
+      {isMenuOpen && (
+        <div
+          css={{
+            height: "100vh",
+            width: "calc(100vw - 250px)",
+            right: 0,
+            zIndex: "1",
+            position: "absolute",
+            cursor: "pointer",
+          }}
+          onClick={handleMenuOpen}
+        ></div>
+      )}
+      <ContactOrganizerModal
+        isOpen={contactOrganizerModalOpen}
+        onRequestClose={() =>
+          setContactOrganizerModalOpen(!contactOrganizerModalOpen)
+        }
+      />
+      <ReportEventModal
+        isOpen={reportEventModalOpen}
+        onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
+        eventID={"activeCard"}
+      />
       <div css={{ width: "100%", height: "394px", position: "relative" }}>
         <div
           css={{
@@ -41,6 +74,13 @@ const EventDetails = () => {
             position: "absolute",
             top: "3%",
             right: "2%",
+           
+            // opacity: "85%",
+          }}
+          onClick={handleMenuOpen}
+        >
+          <div css = {{
+            opacity:"85%",
             height: "41px",
             width: "41px",
             borderRadius: "50%",
@@ -48,15 +88,88 @@ const EventDetails = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            opacity: "85%",
-          }}
-        >
+            cursor:"pointer",
+          }}>
           <Image
             src="/assets/svgs/ellipse.svg"
             alt="card_img"
             width={20.98}
             height={19.39}
           />
+          </div>
+          {isMenuOpen && (
+            <div
+              css={{
+                position: "absolute",
+                background: "#fff",
+                height: 155,
+                width: 240,
+                left: "-525%",
+                top:"2.2rem",
+                right: "0",
+                zIndex: "2",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                borderRadius: "8px",
+                border: "1px solid #C0C0C0",
+              }}
+            >
+              <div
+                css={{
+                  width: "80%",
+                  marginTop: "1.2rem",
+                  ":hover": { color: "#7c35ab" },
+                  display: "flex",
+                  gap: "10%",
+                }}
+              >
+                <Image
+                  src={"/assets/svgs/share.svg"}
+                  alt={""}
+                  width={20}
+                  height={20}
+                />
+                <p>Share Ticket</p>
+              </div>
+              <div
+                css={{
+                  width: "80%",
+                  marginTop: "1.2rem",
+                  ":hover": { color: "#7c35ab" },
+                  display: "flex",
+                  gap: "10%",
+                }}
+                onClick={() => setContactOrganizerModalOpen(true)}
+              >
+                <Image
+                  src={"/assets/svgs/mail.svg"}
+                  alt={""}
+                  width={20}
+                  height={20}
+                />
+                <p>Contact Organizer</p>
+              </div>
+              <div
+                css={{
+                  width: "80%",
+                  marginTop: "1.2rem",
+                  ":hover": { color: "#7c35ab" },
+                  display: "flex",
+                  gap: "10%",
+                }}
+                onClick={() => setReportEventModalOpen(!reportEventModalOpen)}
+              >
+                <Image
+                  src={"/assets/svgs/report-flag.svg"}
+                  alt={""}
+                  width={20}
+                  height={20}
+                />
+                <p>Report Event</p>
+              </div>
+            </div>
+          )}
         </div>
         <Image
           src="/assets/pngs/card_2.png"
@@ -105,12 +218,12 @@ const EventDetails = () => {
             position: "absolute",
             bottom: "-5%",
             right: "2%",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
-          onClick = {() => setFavourite(!favorite)}
+          onClick={() => setFavourite(!favorite)}
         >
           <Image
-            src= {`/assets/svgs/${favorite ? "filled-" : ""}love.svg`}
+            src={`/assets/svgs/${favorite ? "filled-" : ""}love.svg`}
             alt="card_img"
             width={20.98}
             height={19.39}
@@ -461,8 +574,8 @@ const EventDetails = () => {
                     backgroundColor: "#fff",
                     width: "145px",
                     height: "42px",
-                    fontFamily:'"Nunito", sans-serif',
-                    fontWeight:"500"
+                    fontFamily: '"Nunito", sans-serif',
+                    fontWeight: "500",
                   }}
                 >
                   Follow Organizer
@@ -575,25 +688,25 @@ const EventDetails = () => {
               img="/assets/pngs/speaker1.png"
               name="John Bosko"
               title="Software Engineer"
-              role = "Performer"
+              role="Performer"
             />
             <Performer
               img="/assets/pngs/speaker2.png"
               name="John Bosko"
               title="Software Engineer"
-              role = "Performer"
+              role="Performer"
             />
             <Performer
               img="/assets/pngs/speaker3.png"
               name="John Bosko"
               title="Software Engineer"
-              role = "Speaker"
+              role="Speaker"
             />
             <Performer
               img="/assets/pngs/speaker4.png"
               name="John Bosko"
               title="Software Engineer"
-              role = "Speaker"
+              role="Speaker"
             />
           </div>
         </div>

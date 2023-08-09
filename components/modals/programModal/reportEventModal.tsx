@@ -49,7 +49,6 @@ const ReportEventModal = (props: IReportEventModal) => {
     reason: "",
     message: "",
   });
-  console.log(data);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
