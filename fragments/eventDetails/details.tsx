@@ -40,7 +40,7 @@ const EventDetails = () => {
       <ReportEventModal
         isOpen={reportEventModalOpen}
         onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
-        eventID={"activeCard"}
+        eventID={"Heal12548"}
       />
       <div css={{ width: "100%", height: "394px", position: "relative" }}>
         <div
@@ -122,6 +122,7 @@ const EventDetails = () => {
                   ":hover": { color: "#7c35ab" },
                   display: "flex",
                   gap: "10%",
+                  cursor:"pointer"
                 }}
               >
                 <Image
@@ -139,6 +140,7 @@ const EventDetails = () => {
                   ":hover": { color: "#7c35ab" },
                   display: "flex",
                   gap: "10%",
+                  cursor:"pointer"
                 }}
                 onClick={() => setContactOrganizerModalOpen(true)}
               >
@@ -157,6 +159,7 @@ const EventDetails = () => {
                   ":hover": { color: "#7c35ab" },
                   display: "flex",
                   gap: "10%",
+                  cursor:"pointer"
                 }}
                 onClick={() => setReportEventModalOpen(!reportEventModalOpen)}
               >
@@ -233,7 +236,8 @@ const EventDetails = () => {
       <div>
         <div
           css={{
-            width: "87%",
+            minWidth: "77%",
+            width:"82%",
             marginLeft: "auto",
             [screen.desktopLg]: {
               width: "78%",

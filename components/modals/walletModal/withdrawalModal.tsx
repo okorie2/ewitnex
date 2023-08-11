@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
@@ -41,7 +41,7 @@ Modal.setAppElement("body");
 
 const WithdrawalModal = (props: IWithdrawalModal) => {
   const [success, setSuccess] = useState(false);
-  const [withdrawalType, setWithdrawalType] = useState("full");
+  const [withdrawalType, setWithdrawalType] = useState("partial");
   const [data, setData] = useState({
     amount: "",
   });
@@ -52,6 +52,11 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
   const handleNext = () => {
     setSuccess(true);
   };
+  useEffect(() => {
+    if(withdrawalType === "full"){
+      setData({...data, amount: "17892.50"})
+    }
+  },[withdrawalType])
   return (
     <Modal
       isOpen={props.isOpen}
@@ -80,15 +85,16 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
       <div
         css={{
           height: "100vh",
-          maxWidth: "33.3%",
+          width: "33.3%",
           background: "#fff",
           position: "absolute",
           right: "0",
           top: "0",
           padding: "3% 2% 0",
+          paddingRight:"0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "50%",
+            width: "33.3%",
           },
           display: "grid",
           gridTemplateRows: "10% 90%",
@@ -221,26 +227,28 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
                   }}
                 >
                   <CheckSelect
-                    value={"full"}
-                    label={"Full Withdrawal"}
-                    labelColor="#000"
-                    selected={withdrawalType}
-                    handleClick={() => setWithdrawalType("full")}
-                  />
-                  <CheckSelect
                     value={"partial"}
                     labelColor="#000"
                     label={"Partial Withdrawal"}
                     selected={withdrawalType}
                     handleClick={() => setWithdrawalType("partial")}
                   />
+                  <CheckSelect
+                    value={"full"}
+                    label={"Full Withdrawal"}
+                    labelColor="#000"
+                    selected={withdrawalType}
+                    handleClick={() => setWithdrawalType("full")}
+                  />
                 </div>
                 <SettingsTextField
                   label={"How much do you want to withdraw?"}
                   name="amount"
-                  value={data.amount}
+                  value={data.amount.toLocaleString()}
                   placeholder={"Enter Amount"}
+                  type = "number"
                   setValue={handleChange}
+                  disabled = {withdrawalType === "full"}
                 />
                 <p css={{ marginTop: "-2%" }}>
                   Total amount in wallet:
@@ -317,13 +325,12 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
                     </div>
                   </div>
                 </div>
-                <div css={{ marginBlock: "1.5rem" }}>
-                  <Button onClick={handleNext} height="52px">
+                <div css={{ marginBlock: "1.5rem" , display:"flex", justifyContent:"center",}}>
+                  <Button onClick={handleNext} height="52px" width="100%">
                     <p
                       css={{
                         fontSize: "16px",
                         fontFamily: '"Nunito", sans-serif',
-                        paddingInline: "9rem",
                       }}
                     >
                       WITHDRAW

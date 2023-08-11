@@ -23,7 +23,7 @@ export const SignInLeftcss = styled.div`
   }
   .btm {
     padding-block: 2%;
-    height: calc(100vh - 28vw);
+    height: calc(100vh - 27vw);
     padding-left: 4%;
     display: flex;
     flex-direction: column;

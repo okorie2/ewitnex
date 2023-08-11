@@ -58,12 +58,13 @@ const EventTicketModal = (props: IEventTicketModal) => {
         <div
           css={{
             height: "100vh",
-            maxWidth: "37%",
+            width: "33.3%",
             background: "#fff",
             position: "absolute",
             right: "0",
             top: "0",
             padding: "2% 2% 0",
+            paddingRight:"0",
             overflowY: "scroll",
             "&::-webkit-scrollbar": {
               display: "none",
@@ -71,7 +72,7 @@ const EventTicketModal = (props: IEventTicketModal) => {
             zIndex: "9",
             color: "#000",
             [screen.desktopLg]: {
-              width: "50%",
+              width: "33.3%",
             },
           }}
         >
@@ -99,7 +100,7 @@ const Success = ({closeModal, setStage}:{
         placeItems: "center",
         justifyContent: "space-between",
         width: "100%",
-        padding:"2rem"
+        padding:"2rem",
       }}
     >
       <Image
@@ -186,7 +187,9 @@ const Summary = ({ setStage }: { setStage: () => void }) => {
           }}
         >
           <SummaryFragment />
+          <div css = {{width:"95%"}}>
           <ButtonFormFilled onClick={setStage}>CONFIRM</ButtonFormFilled>
+          </div>
         </div>
       </div>
     </>

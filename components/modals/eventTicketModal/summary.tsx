@@ -9,7 +9,7 @@ const Summary = () => {
     const grandTotal = subTotal + VAT
   return (
     <div css = {{
-        width:"100%",
+        width:"95%",
         marginTop:"1.5rem"
     }}>
         <div css = {{display:"grid", gridTemplateColumns:"1fr 1fr", marginBottom:"0.8rem"}}>

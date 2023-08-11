@@ -23,6 +23,9 @@ export const Button = styled.button<Props>`
   font-family: Nunito, 'sans-serif';
   border:${(props) => props.border ? props.border : "none"};
   cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  };
   @media screen and (max-width: 1024px) {
     font-size: 1.3rem;
   }
@@ -40,7 +43,9 @@ export const ButtonFormFilled = styled.button`
   font-weight: bold;
   width: 100%;
   cursor: pointer;
-
+  &:hover {
+    opacity: 0.9;
+  };
   font-family: "Nunito", sans-serif;
 `;
 
@@ -58,6 +63,8 @@ export const ButtonFormOutline = styled.button<Props>`
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-
+  &:hover {
+    opacity: 0.9;
+  };
   font-family: "Open Sans", sans-serif;
 `;

@@ -139,23 +139,9 @@ const Notifications = ({
               height: "calc(100vh - 80px)",
               paddingLeft: "2.5rem",
               paddingTop: "1rem",
-              // "&::-webkit-scrollbar": {
-              //   display: "none",
-              // },
+             
               "&::-webkit-scrollbar": {
-                width: "8px",
-              },
-              "&::-webkit-scrollbar-track": {
-                background: "#F5f5f5",
-                paddingTop: "5px",
-              },
-              "&::-webkit-scrollbar-thumb": {
-                background: "#AEAEAE",
-                borderRadius: "8px",
-                height: "1px",
-                ":hover": {
-                  background: ` ${"#707070"}`,
-                },
+                  visibility:"hidden",
               },
             }}
           >

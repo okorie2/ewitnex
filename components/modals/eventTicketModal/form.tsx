@@ -158,7 +158,7 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
         >
           Payment Method
         </h3>
-        <form css={{ display: "grid", gap: "1.5rem" }}>
+        <form css={{ display: "grid", gap: "1.5rem",  }}>
           <div
             css={{
               border: `1px solid ${"#E4E4E4"}`,
@@ -323,7 +323,10 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           <BasicTextField label="Username(Optional)" value=""  name = "" setValue={handleChange} weight = "bold"/>
         </form>
       </div>
-      <ButtonFormFilled css={{ marginTop: "2rem" }} onClick={setShowSummary}>CHECK OUT</ButtonFormFilled>
+      <div css= {{width:"95%"}}>
+
+      <ButtonFormFilled css={{ marginTop: "2rem"}}  onClick={setShowSummary}>CHECK OUT</ButtonFormFilled>
+      </div>
     </form>
   );
 };

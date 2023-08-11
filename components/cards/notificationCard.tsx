@@ -62,12 +62,12 @@ const NotificationCard = (props: INotificationCard) => {
       </div>
       <div
         css={{
-          width: "87.5%",
+          width: "95%",
           border: "1px solid #E4E4E4",
           borderRadius: "10px",
           display: "grid",
           gridTemplateColumns: "25% 75%",
-          paddingBottom: "1.5rem",
+          paddingBottom: "1.8rem",
           position: "relative",
         }}
       >

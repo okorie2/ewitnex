@@ -90,15 +90,16 @@ const ReportEventModal = (props: IReportEventModal) => {
       <div
         css={{
           height: "100vh",
-          maxWidth: "33.3%",
+          width: "33.3%",
           background: "#fff",
           position: "absolute",
           right: "0",
           top: "0",
           padding: "3% 2% 0",
+          paddingRight:"0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "50%",
+            width: "33.3%",
           },
           display: "grid",
           gridTemplateRows: "10% 90%",
@@ -242,18 +243,16 @@ const ReportEventModal = (props: IReportEventModal) => {
                 />
                 <div
                   css={{
-                    width: "95%",
                     display: "flex",
                     justifyContent: "center",
                     marginBlock: "2.5rem",
                   }}
                 >
-                  <Button onClick={handleNext} height="52px">
+                  <Button onClick={handleNext} height="52px" width="100%">
                     <p
                       css={{
                         fontSize: "16px",
                         fontFamily: '"Nunito", sans-serif',
-                        paddingInline: "9rem",
                       }}
                     >
                       SUBMIT

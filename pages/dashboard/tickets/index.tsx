@@ -36,7 +36,7 @@ const Tickets = () => {
   const handleActiveCard = (id: string) => {
     setActiveCard(id);
   };
-  console.log(activeCard)
+  console.log(activeCard);
   const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
     useState(false);
   const [reportEventModalOpen, setReportEventModalOpen] = useState(false);
@@ -52,7 +52,7 @@ const Tickets = () => {
       <ReportEventModal
         isOpen={reportEventModalOpen}
         onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
-        eventID = {activeCard}
+        eventID={activeCard}
       />
       <DashboardLayout>
         <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
@@ -206,7 +206,15 @@ const Tickets = () => {
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { color:"#7c35ab" },
+                        svg: {
+                          path: {
+                            stroke: "#7c35ab",
+                          },
+                        },
+                        ":hover": {
+                          color: "#7c35ab",
+                          
+                        },
                         display: "flex",
                         gap: "10%",
                       }}
@@ -241,11 +249,13 @@ const Tickets = () => {
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { color:"#7c35ab" },
+                        ":hover": { color: "#7c35ab" },
                         display: "flex",
                         gap: "10%",
                       }}
-                      onClick={() => setReportEventModalOpen(!reportEventModalOpen)}
+                      onClick={() =>
+                        setReportEventModalOpen(!reportEventModalOpen)
+                      }
                     >
                       <Image
                         src={"/assets/svgs/report-flag.svg"}
