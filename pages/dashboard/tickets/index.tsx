@@ -16,6 +16,7 @@ const Tickets = () => {
   const [showPast, setShowPast] = useState(false);
   const [activeTab, setActiveTab] = useState("upcoming");
   const [activeCard, setActiveCard] = useState("");
+  const [activeMenuBar, setActiveMenuBar] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuOpen = () => {
@@ -201,68 +202,99 @@ const Tickets = () => {
                       borderRadius: "8px",
                       border: "1px solid #C0C0C0",
                     }}
+                    
                   >
                     <div
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        svg: {
-                          path: {
-                            stroke: "#7c35ab",
-                          },
-                        },
                         ":hover": {
                           color: "#7c35ab",
-                          
+                          fontWeight: "500",
                         },
                         display: "flex",
                         gap: "10%",
                       }}
+                      onMouseEnter={() => setActiveMenuBar("share")}
+                    onMouseLeave={() => setActiveMenuBar("")}
                     >
-                      <Image
-                        src={"/assets/svgs/share.svg"}
-                        alt={""}
-                        width={20}
-                        height={20}
-                      />
+                      {activeMenuBar === "share" ? (
+                        <Image
+                          src={"/assets/svgs/share-purple.svg"}
+                          alt={""}
+                          width={20}
+                          height={20}
+                          priority
+                        />
+                      ) : (
+                        <Image
+                          src={"/assets/svgs/share.svg"}
+                          alt={""}
+                          width={20}
+                          height={20}
+                        />
+                      )}
                       <p>Transfer Ticket</p>
                     </div>
                     <div
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { color: "#7c35ab" },
+                        ":hover": { color: "#7c35ab", fontWeight: "500" },
                         display: "flex",
                         gap: "10%",
                       }}
                       onClick={() => setContactOrganizerModalOpen(true)}
+                      onMouseEnter={() => setActiveMenuBar("contact")}
+                      onMouseLeave={() => setActiveMenuBar("")}
                     >
-                      <Image
-                        src={"/assets/svgs/mail.svg"}
-                        alt={""}
-                        width={20}
-                        height={20}
-                      />
+                      {activeMenuBar === "contact" ? (
+                        <Image
+                          src={"/assets/svgs/mail-purple.svg"}
+                          alt={""}
+                          width={20}
+                          height={20}
+                        />
+                      ) : (
+                        <Image
+                          src={"/assets/svgs/mail.svg"}
+                          alt={""}
+                          width={20}
+                          height={20}
+                        />
+                      )}
                       <p>Contact Organizer</p>
                     </div>
                     <div
                       css={{
                         width: "80%",
                         marginTop: "1.2rem",
-                        ":hover": { color: "#7c35ab" },
+                        ":hover": { color: "#7c35ab", fontWeight: "500" },
                         display: "flex",
                         gap: "10%",
                       }}
                       onClick={() =>
                         setReportEventModalOpen(!reportEventModalOpen)
                       }
+                      onMouseEnter={() => setActiveMenuBar("report")}
+                      onMouseLeave={() => setActiveMenuBar("")}
                     >
-                      <Image
-                        src={"/assets/svgs/report-flag.svg"}
-                        alt={""}
-                        width={20}
-                        height={20}
-                      />
+                      {activeMenuBar === "report" ? (
+                        <Image
+                          src={"/assets/svgs/report-flag-purple.svg"}
+                          alt={""}
+                          width={20}
+                          height={20}
+                          priority
+                        />
+                      ) : (
+                        <Image
+                          src={"/assets/svgs/report-flag.svg"}
+                          alt={""}
+                          width={20}
+                          height={20}
+                        />
+                      )}
                       <p>Report Event</p>
                     </div>
                   </div>
