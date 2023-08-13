@@ -162,7 +162,7 @@ export default function Navbar() {
           color: "#FFF"
         }}
       >
-        <Link href="/auth/signup">Create Event</Link>
+        <Link href="/onboarding">Create Event</Link>
       </div>
       
     </div>

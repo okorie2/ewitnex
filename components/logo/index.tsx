@@ -20,6 +20,7 @@ const Logo = (props: ILogo) => {
           height={props.height ? props.height : 43.13}
           alt="logo"
           css={{ marginTop: "0.8rem" }}
+          priority
         />
       </Link>
     </div>

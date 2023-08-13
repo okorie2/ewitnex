@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const SignInLeftcss = styled.div`
-  border: 4px solid ${(props) =>"#7C35AB"};
-  height: 100vh;
+  border: 3px solid ${(props) =>"#7C35AB"};
+  max-height: 100vh;
   button {
     background: none;
     border: none;
@@ -14,8 +14,7 @@ export const SignInLeftcss = styled.div`
     width: 47.5vw;
     flex-basis: 50%;
     height: 27vw;
-    background: transparent linear-gradient(180deg, #528ffe 0%, #7c35ab 100%) 0%
-      0% no-repeat padding-box;
+    background:  #7c35ab;
     div {
       position: absolute;
       top: 2%;
@@ -23,9 +22,12 @@ export const SignInLeftcss = styled.div`
     }
   }
   .btm {
-    flex-basis: 50%;
-    padding-top: 6.5rem;
+    padding-block: 2%;
+    height: calc(100vh - 27vw);
     padding-left: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     /* [screen.desktop]: {
                 paddingTop: "3rem",
               

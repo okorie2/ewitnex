@@ -25,11 +25,11 @@ const EventTicket = (props: IEventTicket) => {
         onClick={() => setIsOpen(true)}
         css={{
           display: "grid",
-          gridTemplateColumns: "1.8fr 1.2fr",
+          gridTemplateColumns: "60% 40%",
           [screen.desktopLg]: {
             marginInline: "auto",
           },
-          width: "374px",
+          width: "inherit",
           cursor: "pointer",
         }}
       >
@@ -40,14 +40,16 @@ const EventTicket = (props: IEventTicket) => {
             borderRadius: "20px",
             borderRight: "none",
             height: "140px",
-            padding: "1rem",
+            padding: "0.9rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
           }}
         >
           <p
             css={{
               fontSize: "1.25rem",
               fontWeight: "800",
-              marginBottom: "0.5rem",
             }}
           >
             {props.title}
@@ -68,22 +70,24 @@ const EventTicket = (props: IEventTicket) => {
             </span>
             {props.label}
           </p>
-          <p
-            css={{
-              fontSize: "0.75rem",
-              fontWeight: "600",
-            }}
-          >
-            {props.date}
-          </p>
-          <p
-            css={{
-              fontSize: "0.875rem",
-              fontWeight: "600",
-            }}
-          >
-            {props.location}
-          </p>
+          <div>
+            <p
+              css={{
+                fontSize: "0.75rem",
+                fontWeight: "600",
+              }}
+            >
+              {props.date}
+            </p>
+            <p
+              css={{
+                fontSize: "0.875rem",
+                fontWeight: "600",
+              }}
+            >
+              {props.location}
+            </p>
+          </div>
         </div>
         <div
           css={{
@@ -91,7 +95,7 @@ const EventTicket = (props: IEventTicket) => {
             borderRadius: "20px",
             borderLeft: "none",
             height: "140px",
-            padding: "1rem",
+            padding: "0.6rem",
             fontFamily: "'Open Sans', sans-serif",
           }}
         >

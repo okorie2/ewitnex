@@ -23,7 +23,7 @@ export default function Signin() {
         <SignInLeftcss>
           <div className="top">
             <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
-            <Logo image="/assets/svgs/logo_yt.svg" />
+            <Logo image="/assets/pngs/logo_yt.png" />
           </div>
 
           <div className="btm">
@@ -97,7 +97,16 @@ export default function Signin() {
           </div>
         </SignInLeftcss>
 
-        <div css={{ width: "100%" }}>
+        <div
+          css={{
+            width: "100%",
+            maxHeight: "100vh",
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
           <div css={{ width: "45%", margin: "auto" }}>
             <div css={{ margin: "3rem 0", cursor: "pointer" }}>
               <Image

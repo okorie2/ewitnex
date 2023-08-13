@@ -27,7 +27,7 @@ export default function Index() {
           backdropFilter: "blur(5px) brightness(25%) contrast(100%)",
         }}
       >
-        <H1 css={{ width: "45%", paddingLeft: "4%" }} small>
+        <H1 css={{ width: "60%", paddingLeft: "4%" }} small>
           We&lsquo;re modifying events <br /> making it more social, paperless
           and to be witness able by all
         </H1>
@@ -78,7 +78,6 @@ export default function Index() {
             display: "grid",
             gridTemplateColumns: "30% 30% 30%",
             gap: "4rem",
-            alignItems: "center",
             padding: "3% 5%",
           }}
         >
@@ -115,7 +114,6 @@ export default function Index() {
             display: "grid",
             gridTemplateColumns: "30% 30% 30%",
             gap: "4rem",
-            alignItems: "center",
             padding: "3% 5%",
           }}
         >
@@ -149,7 +147,6 @@ export default function Index() {
             display: "grid",
             gridTemplateColumns: "30% 30% 30%",
             gap: "4rem",
-            alignItems: "center",
             marginBottom: "5rem",
             padding: "3% 5%",
           }}

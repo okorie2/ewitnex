@@ -55,9 +55,13 @@ export default function Chip(props: Props) {
             color: ${chip.selected ? "#fff" : "#7C35AB"};
             background: ${chip.selected ? "#7C35AB" : "none"};
             cursor: pointer;
+            font-family:"Open Sans";
+            display:flex;
+            justify-content:center;
+            align-items:center;
           `}
         >
-          {chip.name}
+         <p>{chip.name}</p>
         </button>
       ))}
     </>

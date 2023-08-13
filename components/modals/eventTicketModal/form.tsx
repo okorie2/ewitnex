@@ -1,91 +1,113 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import { screen } from "styles/theme";
 import TicketTextField from "@/components/inputs/TicketTextField";
 import { ButtonFormFilled } from "styles/components/button";
+import HostEventTextField from "@/components/inputs/hostEventTextField";
+import BasicTextField from "@/components/inputs/BasicTextField";
 
-const EventTicketForm = () => {
+const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
+  const[formDetails, setFormDetails] = useState({
+    firstName:"",
+    lastName:"",
+    emailAddress:"",
+    confirmEmailAddress:""
+  })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormDetails({ ...formDetails, [name]: value });
+  };
   return (
     <form
       css={{
         width: "100%",
         height: "90%",
-        overflowY: "scroll",
+        overflowY: "auto",
         "&::-webkit-scrollbar": {
-          display: "none",
+          width: "8px",
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#F5f5f5",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "#AEAEAE",
+          borderRadius: "8px",
+          height: "1px",
+          ":hover": {
+            background: ` ${"#707070"}`,
+          },
         },
         display: "grid",
         paddingBottom: "2rem",
       }}
     >
-      <div css={{ fontWeight: "bold", marginBottom: "2rem" }}>
-        <h3 css={{ fontSize: "1.25rem", marginBottom: "1.125rem" }}>
-          Ticket Information
-        </h3>
-        <p
-          css={{
-            fontSize: "0.875rem",
-          }}
-        >
-          Ticket For
-        </p>
-        <p
-          css={{
-            marginBlock: "0.6rem 1.8rem",
-          }}
-        >
-          DevFest Aba
-        </p>
-        <div
-          css={{
-            display: "grid",
-            gap: "2rem",
-          }}
-        >
-          <div
+      <div
+        css={{
+          fontWeight: "bold",
+          marginBottom: "2rem",
+          width: "90%",
+          display: "grid",
+          gap: "1.5rem",
+        }}
+      >
+        <div>
+          <h3 css={{ fontSize: "1.25rem", marginBottom: "1.125rem" }}>
+            Ticket Information
+          </h3>
+          <p
             css={{
-              display: "flex",
-              justifyContent: "space-between",
+              marginBottom: "0.75rem",
+              fontSize: "1rem",
             }}
           >
-            <div>
-              <p
-                css={{
-                  fontSize: "0.875rem",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Type
-              </p>
-              <p>Regular</p>
-            </div>
-            <div>
-              <p
-                css={{
-                  fontSize: "0.875rem",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Quantity
-              </p>
-              <p>2</p>
-            </div>
-          </div>
-          <div>
-            <p
-              css={{
-                fontSize: "0.875rem",
-                marginBottom: "0.75rem",
-              }}
-            >
-              Amount
-            </p>
-            <p>$1,000</p>
-          </div>
+            Ticket For
+          </p>
+          <p>DevFest Aba</p>
+        </div>
+        <div>
+          <p
+            css={{
+              fontSize: "0.875rem",
+              marginBottom: "0.75rem",
+            }}
+          >
+            Type
+          </p>
+          <p>Regular</p>
+        </div>
+        <div css={{ width: "47.5%" }}>
+          <p
+            css={{
+              fontSize: "0.875rem",
+              marginBottom: "0.75rem",
+            }}
+          >
+            Quantity
+          </p>
+          <HostEventTextField
+            type={"select"}
+            placeholder={""}
+            options={[
+              { value: "1", label: "1" },
+              { value: "2", label: "2" },
+              { value: "3", label: "3" },
+            ]}
+          />
+        </div>
+        <div>
+          <p
+            css={{
+              fontSize: "0.875rem",
+              marginBottom: "0.75rem",
+            }}
+          >
+            Amount
+          </p>
+          <p>$1,000</p>
         </div>
       </div>
-      <div css={{ marginBottom: "2rem" }}>
+      <div css={{ marginBottom: "2rem" , width:"95%"}}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -102,25 +124,31 @@ const EventTicketForm = () => {
               gridTemplateColumns: "1fr 1fr",
               gap: "1.5rem",
               [screen.desktopLg]: {
-                gridTemplateColumns: "1fr",
-                gap: "2rem",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "1.5rem",
               },
             }}
           >
-            <TicketTextField label="First Name" value="Blessed" />
-            <TicketTextField label="Last Name" value="Onoriode" />
+            <BasicTextField label="First Name" name = "firstName" value={formDetails.firstName} setValue={handleChange} weight="bold" />
+            <BasicTextField label="Last Name" name = "lastName" value={formDetails.lastName} setValue={handleChange}  weight="bold"/>
           </div>
-          <TicketTextField
+          <BasicTextField
             label="Email Address"
-            value="blessingonoriode@gmail.com"
+            value={formDetails.emailAddress}
+            name="emailAddress"
+            setValue={handleChange}
+            weight = "bold"
           />
-          <TicketTextField
-            label="Confirm Email"
-            value="blessingonoriode@gmail.com"
+          <BasicTextField
+             label="Confirm Email Address"
+             value={formDetails.confirmEmailAddress}
+             name="confirmEmailAddress"
+             setValue={handleChange}
+             weight = "bold"
           />
         </form>
       </div>
-      <div css={{ marginBottom: "2rem" }}>
+      <div css={{ marginBottom: "2rem" , width:"95%"}}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -130,7 +158,7 @@ const EventTicketForm = () => {
         >
           Payment Method
         </h3>
-        <form css={{ display: "grid", gap: "1.5rem" }}>
+        <form css={{ display: "grid", gap: "1.5rem",  }}>
           <div
             css={{
               border: `1px solid ${"#E4E4E4"}`,
@@ -225,7 +253,7 @@ const EventTicketForm = () => {
           </div>
         </form>
       </div>
-      <div css={{ marginBottom: "2rem" }}>
+      <div css={{ marginBottom: "2rem", width:"95%" }}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -247,17 +275,20 @@ const EventTicketForm = () => {
               },
             }}
           >
-            <TicketTextField label="First Name" value="Blessed" />
-            <TicketTextField label="Last Name" value="Onoriode" />
+            <BasicTextField label="First Name"  value="Blessed" name = "" setValue={handleChange} weight = "bold"/>
+            <BasicTextField label="Last Name" value="Onoriode" name = "" setValue={handleChange} weight = "bold"/>
           </div>
-          <TicketTextField
+          <BasicTextField
             label="Email Address"
             value="blessingonoriode@gmail.com"
+            name = "" 
+            setValue={handleChange}
+            weight = "bold"
           />
-          <TicketTextField label="Username(Optional)" value="Blessed_1" />
+          <BasicTextField label="Username(Optional)" value="Blessed_1"  name = "" setValue={handleChange} weight = "bold"/>
         </form>
       </div>
-      <div css={{ marginBottom: "2rem" }}>
+      <div css={{ marginBottom: "2rem" , width:"95%"}}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -279,14 +310,23 @@ const EventTicketForm = () => {
               },
             }}
           >
-            <TicketTextField label="First Name" value="" />
-            <TicketTextField label="Last Name" value="" />
+             <BasicTextField label="First Name"  value="" name = "" setValue={handleChange} weight = "bold"/>
+            <BasicTextField label="Last Name" value="" name = "" setValue={handleChange} weight = "bold"/>
           </div>
-          <TicketTextField label="Email Address" value="" />
-          <TicketTextField label="Username(Optional)" value="" />
+          <BasicTextField
+            label="Email Address"
+            value=""
+            name = "" 
+            setValue={handleChange}
+            weight = "bold"
+          />
+          <BasicTextField label="Username(Optional)" value=""  name = "" setValue={handleChange} weight = "bold"/>
         </form>
       </div>
-      <ButtonFormFilled css={{ marginTop: "2rem" }}>CHECK OUT</ButtonFormFilled>
+      <div css= {{width:"95%"}}>
+
+      <ButtonFormFilled css={{ marginTop: "2rem"}}  onClick={setShowSummary}>CHECK OUT</ButtonFormFilled>
+      </div>
     </form>
   );
 };

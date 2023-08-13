@@ -6,7 +6,7 @@ import Link from "next/link";
 import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
-import Speaker from "@/components/cards/speaker";
+import Speaker from "@/components/cards/performer";
 
 const Speakers = () => {
   const inputRef = useRef<HTMLInputElement>(null)

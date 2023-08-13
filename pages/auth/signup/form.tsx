@@ -117,10 +117,12 @@ const WhoYouAre = (props: FormLevelProps) => {
             value={formValues.firstName}
             setValue={handleChange}
             name="firstName"
+            weight="bold"
           />
         </div>
         <div css={{ marginBottom: "2.4rem" }}>
           <BasicTextField
+            weight="bold"
             label="Last Name"
             value={formValues.lastName}
             name="lastName"
@@ -154,11 +156,11 @@ const WhoYouAre = (props: FormLevelProps) => {
           <p>Get Started With Google</p>
         </ButtonFormOutline>
       </div>
-      <div css={{ marginTop: "2rem" }}>
+      <div css={{ marginTop: "2rem", marginBottom: "1rem" }}>
         <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
           Already Have An Account?
-          <span css={{ fontWeight: 700, color: "#7C35AB" }}>
-            <Link href="/auth/signin">Sign In</Link>
+          <span css={{ fontWeight: 700, color: "#f05e78" }}>
+            <Link href="/auth/signin"> Sign In</Link>
           </span>
         </p>
       </div>
@@ -209,12 +211,13 @@ const Email = (props: FormLevelProps) => {
           fontWeight: 600,
         }}
       >
-        <p>What`&apos;`s Your Email Address?</p>
+        <p>What&apos;s Your Email Address?</p>
       </div>
       <div css={{ marginBottom: "2.4rem" }}>
         <BasicTextField
           label="Email Address"
           value={email}
+          weight="bold"
           name="email"
           setValue={handleChange}
         />
@@ -468,6 +471,7 @@ const Location = (props: FormLevelProps) => {
           <BasicTextField
             label="Search City"
             value={value}
+            weight="bold"
             setValue={(e) => setValue(e.target.value)}
           />
           <Box height={35} />
@@ -539,6 +543,7 @@ const Username = (props: FormLevelProps) => {
           <BasicTextField
             label="Username"
             value={value}
+            weight = "bold"
             withIcon
             setValue={(e) => setValue(e.target.value)}
             iconComponent={
@@ -669,7 +674,7 @@ const Interests = (props: FormLevelProps) => {
           display: flex;
           gap: 10px;
           margin-top: 19px;
-          width: 100%;
+          width: 110%;
           flex-wrap: wrap;
         `}
       >

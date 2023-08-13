@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import { SettingsPasswordTextField } from "@/components/inputs/SettingsInput";
+import SuccessModal from "@/components/modals/settingsModal/successModal";
 import React, { useState } from "react";
 import { Button } from "styles/components/button";
 
 const ChangePassword = () => {
+  const [success, setSuccess] = useState(false)
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
   const [formDetails, setFormDetails] = useState({
     password: "",
     confirmPassword: "",
@@ -16,13 +17,16 @@ const ChangePassword = () => {
     const { name, value } = e.target;
     setFormDetails({ ...formDetails, [name]: value });
   };
-  const handleNext = () => {};
+  const handleNext = () => {
+    setSuccess(true)
+  };
   return (
     <div
       css={{
         height: "100vh",
       }}
     >
+      <SuccessModal isOpen={success} onRequestClose={() => setSuccess(false)} action={"passwordReset"} />
       <div
         css={{
           height: "80px",
@@ -76,11 +80,12 @@ const ChangePassword = () => {
               value={formDetails.confirmPassword}
               placeholder="Enter New Password"
             />
+          </form>
             <div
               css={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "4rem",
+                marginTop: "2rem",
               }}
             >
               <Button onClick={handleNext} height = "52px">
@@ -95,7 +100,6 @@ const ChangePassword = () => {
                 </p>
               </Button>
             </div>
-          </form>
         </div>
       </div>
     </div>

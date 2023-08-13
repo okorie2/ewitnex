@@ -33,7 +33,11 @@ export default function GenderType(props: Props) {
             : "transparent"};
         `}
       >
-        <p>{props.gender}</p>
+        <p css = {{
+          fontWeight: "bold",
+          fontFamily:'"Nunito", sans-serif',
+          fontSize:"1rem"
+        }}>{props.gender}</p>
         {props.selectedType === props.gender && (
           <div>
             <Image

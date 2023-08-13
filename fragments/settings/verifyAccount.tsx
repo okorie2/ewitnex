@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import SettingsTextField from "@/components/inputs/SettingsInput";
+import SuccessModal from "@/components/modals/settingsModal/successModal";
 import React, { useState } from "react";
 import { Button } from "styles/components/button";
 
 const VerifyAccount = () => {
+  const [success, setSuccess] = useState(false)
   const [formDetails, setFormDetails] = useState({
     OTP: "",
   });
@@ -12,13 +14,16 @@ const VerifyAccount = () => {
     const { name, value } = e.target;
     setFormDetails({ ...formDetails, [name]: value });
   };
-  const handleNext = () => {};
+  const handleNext = () => {
+    setSuccess(true)
+  };
   return (
     <div
       css={{
         height: "100vh",
       }}
     >
+      <SuccessModal isOpen={success} onRequestClose={() => setSuccess(false)} action={"accountVerification"} />
       <div
         css={{
           height: "80px",
