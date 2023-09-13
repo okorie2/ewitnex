@@ -1,25 +1,31 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { H1 } from "styles/components/typography";
 
 const WhyUseEwitnexFragment = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div
       css={{
         color: "#FFF",
         background: "#7C35AB",
-        padding: "3% 4%",
+        padding: isTablet ? "3rem 4%" :"3% 4%",
         fontFamily: '"Poppins", sans-serif',
+        marginTop: isTablet ? "3rem" : "",
+        width: isTablet ? "95%" : "",
+        marginInline: isTablet ? "auto" : "",
+        borderRadius: isTablet ? "20px" : "",
       }}
     >
       <Image src="/assets/pngs/logo_yt.png" alt="" height={30} width={70} />
       <div css={{ marginBlock: "0.5rem" }}>
-        <H1 small>Why You Should Use Ewitnex</H1>
+        <H1 small size={ isTablet ? "2rem" : ""}>Why You Should Use Ewitnex</H1>
       </div>
       <div>
         <p
           css={{
-            width: "73%",
+            width: isTablet ? "100%":"73%",
             letterSpacing: "0.32px",
             fontSize: "0.95rem",
             marginTop: "1rem",
@@ -28,17 +34,19 @@ const WhyUseEwitnexFragment = () => {
         >
           By choosing Ewitnex, you gain access to a powerful event management
           solution that streamlines processes, reduces environmental impact, and
-          creates memorable experiences.
+          creates memorable experiences. Join the growing community of event organizers who trust Ewitnex to make their events seamless, efficient, and socially impactful.
         </p>
       </div>
       <div
         css={{
-          display: "grid",
+          display: isTablet ? "flex": "grid",
+          flexDirection:"column",
           gridTemplateColumns: "55% 45%",
           marginTop: "3rem",
         }}
       >
         <SectionFragment
+          pWidth={isTablet ? "100%" : "80%"}
           img={"/assets/svgs/stars.svg"}
           title={"Seamless Event Management"}
           desc={
@@ -56,12 +64,14 @@ const WhyUseEwitnexFragment = () => {
       </div>
       <div
         css={{
-          display: "grid",
+          display: isTablet ? "flex": "grid",
+          flexDirection:"column",
           gridTemplateColumns: "55% 45%",
         }}
       >
         <SectionFragment
           img={"/assets/svgs/bullseye.svg"}
+          pWidth={isTablet ? "100%" : "80%"}
           title={"Comprehensive Venue Search"}
           desc={
             "Finding the perfect venue for your event can be time-consuming and overwhelming. Ewitnex's comprehensive venue search tool simplifies the process. Save valuable time and energy by accessing a curated selection of venues that meet your specific requirements, all in one place."
@@ -93,6 +103,8 @@ const SectionFragment = ({
   desc: string;
   pWidth?: string;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
+
   return (
     <div css={{ marginBottom: "3rem" }}>
       <div
@@ -111,7 +123,7 @@ const SectionFragment = ({
       <p
         css={{
           color: "#00d9b7",
-          fontSize: "1.1rem",
+          fontSize: isTablet ? "1rem" : "1.1rem",
           fontWeight: "600",
           marginTop: "1rem",
         }}
@@ -122,7 +134,7 @@ const SectionFragment = ({
         css={{
           width: pWidth ? pWidth : "80%",
           letterSpacing: "0.28px",
-          fontSize: "0.9rem",
+          fontSize:  isTablet ? "0.85rem" : "0.9rem",
           marginTop: "1rem",
           lineHeight: "1.5rem",
           fontWeight: "300",

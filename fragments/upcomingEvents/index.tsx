@@ -5,12 +5,14 @@ import React, { useState } from "react";
 import { H2 } from "styles/components/typography";
 import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";
-import { screen } from "styles/theme";
 import Link from "next/link";
+import { useMediaQuery } from "@mui/material";
+import { screen } from "styles/theme";
 
 export default function UpcomingEventsFragment() {
   const [seeAllHover, setSeeAllHover] = useState(false);
   const [scrollRightHover, setScrollRightHover] = useState(false);
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div css={{ padding: "2% 4%", marginTop: "3rem" }}>
       <div
@@ -24,9 +26,9 @@ export default function UpcomingEventsFragment() {
         </div>
         <div
           css={{
-            width: "73%",
+            width: isTablet ? "100%" : "73%",
             letterSpacing: "0.32px",
-            fontSize: "0.95rem",
+            fontSize: isTablet ? "0.89rem" : "0.95rem",
             marginTop: "1rem",
           }}
         >
@@ -40,16 +42,19 @@ export default function UpcomingEventsFragment() {
       <div
         css={{
           display: "flex",
-          gap: "3px",
+          gap: isTablet ? "1rem":"0.125rem",
           justifyContent: "space-between",
-          flexWrap: "wrap",
+          flexWrap: isTablet ? "nowrap": "wrap",
+          marginTop: isTablet ? "1.5rem" : "",
+          overflowX:'auto',
+          paddingInline:"2px"
         }}
       >
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -63,14 +68,15 @@ export default function UpcomingEventsFragment() {
             organizer="Connack Foundarion"
             priceRange="$500-$2K"
             title="Connack Foundation African Music Award Of The Year"
+            width= {isTablet ? "90vw" : "100%"}
             img="/assets/pngs/card_img.png"
           />
         </div>
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -84,14 +90,15 @@ export default function UpcomingEventsFragment() {
             organizer="Eko Atlantic"
             priceRange="$500-$2K"
             title="Medical Crusade with Doctor West"
+            width= {isTablet ? "90vw" : "100%"}
             img="/assets/pngs/card_2.png"
           />
         </div>
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -105,14 +112,15 @@ export default function UpcomingEventsFragment() {
             organizer="Ada and Obi"
             priceRange="Free"
             title="Ada weds Obi"
+            width= {isTablet ? "90vw" : "100%"}
             id="Wed54254"
           />
         </div>
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -126,6 +134,7 @@ export default function UpcomingEventsFragment() {
             location="IG Hub, 22 Faulks Road, Aba, Abia"
             organizer="GDG Aba"
             priceRange="$500-$2K"
+            width= {isTablet ? "90vw" : "100%"}
             title="Google Developers Festival Aba"
           />
         </div>
@@ -155,7 +164,7 @@ export default function UpcomingEventsFragment() {
               background: "#7C35AB",
             },
             [screen.desktop]: {
-              width: "17%",
+              width: isTablet ? "40%" : "17%",
             },
             [screen.lg]: {
               width: "16%",
@@ -186,8 +195,8 @@ export default function UpcomingEventsFragment() {
         <div css={{ display: "flex", gap: "1rem" }}>
           <div
             css={{
-              width: "46px",
-              height: "46px",
+              width: isTablet ? "40px" : "46px",
+              height: isTablet ? "40px" : "46px",
               borderRadius: "50%",
               border: "1px solid #AEAEAE",
               transform: "rotate(180deg)",
@@ -206,8 +215,8 @@ export default function UpcomingEventsFragment() {
           </div>
           <div
             css={{
-              width: "46px",
-              height: "46px",
+              width: isTablet ? "40px" : "46px",
+              height: isTablet ? "40px" : "46px",
               borderRadius: "50%",
               border: "1px solid #AEAEAE",
               display: "flex",

@@ -1,12 +1,23 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState , useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 import Logo from "@/components/logo";
+import { screen } from "styles/theme";
+import MobileNav from "fragments/homeHero/mobileNav";
 
 export default function Navbar() {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  useEffect (() => {
+    const html = document.querySelector('html')
+    if (html) { 
+      html.style.overflow = isMobileNavOpen ? "hidden" : "auto"
+    }
+  }, [isMobileNavOpen])
   const router = useRouter();
   const active = useMemo(() => {
     let route = router.route;
@@ -40,6 +51,7 @@ export default function Navbar() {
     }
   }, [router.route]);
   return (
+    <>
     <div
       css={{
         backgroundColor: "#fff",
@@ -55,6 +67,11 @@ export default function Navbar() {
         right: "0",
         top: "0",
         zIndex: "2",
+        [screen.tablet] : {
+          width: "100vw",
+          padding:"0 2%",
+          justifyContent:"space-between",
+        }
       }}
     >
       <Logo image="/assets/pngs/logo.png" />
@@ -68,6 +85,9 @@ export default function Navbar() {
           alignItems: "center",
           paddingLeft: "17px",
           gap: "2%",
+          [screen.tablet] : {
+           display : "none"
+          }
         }}
       >
         <div css={{ marginTop: "3px" }}>
@@ -109,6 +129,9 @@ export default function Navbar() {
               color: "#AEAEAE",
             },
           },
+          [screen.tablet] : {
+            display : "none"
+           }
         }}
       >
         <div>
@@ -142,10 +165,25 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      <div>
+      <div
+        css={{
+          [screen.tablet] : {
+            display : "none"
+           },
+        }}
+      >
         <hr css={{ width: "1px", height: "36px" }} />
       </div>
-      <div css={{ color: "#7C35AB", fontWeight: "600" }}>
+      <div
+        css={{
+          color: "#7C35AB",
+          fontWeight: "600",
+          display: "flex",
+          [screen.tablet] : {
+            display : "none"
+           }
+        }}
+      >
         <Link href="/auth/signin">Log in</Link>
       </div>
       <div
@@ -159,12 +197,45 @@ export default function Navbar() {
           justifyContent: "center",
           fontWeight: 500,
           backgroundColor: "#7C35AB",
-          color: "#FFF"
+          color: "#FFF",
+          [screen.tablet] : {
+            display : "none"
+           }
         }}
       >
         <Link href="/onboarding">Create Event</Link>
       </div>
-      
+      {
+        isTablet && 
+        <div css = {{
+          display:"flex",
+          paddingRight:"0.5rem",
+          gap:"2rem",
+          alignItems:"center",
+          marginTop:"0.5rem"
+        }}>
+          <div>
+          <Image
+                src="/assets/svgs/search.svg"
+                width={20}
+                height={20}
+                alt="logo"
+              />
+          </div>
+          <div onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}>
+          <Image
+                src={isMobileNavOpen ? "/assets/svgs/hamburger.svg":"/assets/svgs/hamburger.svg"}
+                width={20}
+                height={20}
+                alt="logo"
+              />
+          </div>
+        </div>
+      }
     </div>
+    {
+        isMobileNavOpen && <MobileNav active = {active} shown={isMobileNavOpen} setClose={() => setIsMobileNavOpen(false)} />
+    }
+    </>
   );
 }

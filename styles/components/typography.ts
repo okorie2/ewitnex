@@ -16,7 +16,7 @@ export const H1 = styled.h1<Props>`
     font-size: 1.8rem;
   }
   @media screen and (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: ${(props) => (props.size ? props.size : "1.8rem" )};
   }
 `;
 
