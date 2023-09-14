@@ -4,7 +4,7 @@ import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
 import { useTheme } from "@emotion/react";
-
+import { useMediaQuery } from "@mui/material";
 import WhatAreYouWaitingForFragment from "fragments/whatAreYouWaitingFor";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +13,7 @@ import { Button } from "styles/components/button";
 import { H1, H3 } from "styles/components/typography";
 
 export default function Index() {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <div css={{ fontFamily: "'Poppins', sans-serif" }}>
       <Navbar />
@@ -20,28 +21,28 @@ export default function Index() {
       <div
         css={{
           //   backgroundImage: "url(/assets/pngs/about.png)",
-          backgroundImage: " url(/assets/pngs/how.png) ",
+          backgroundImage: isTablet ? " url(/assets/pngs/how-mobile.png) ":" url(/assets/pngs/how.png) ",
           height: "413px",
           //   width: "100vw",
           display: "flex",
           backgroundSize: "cover",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems:  isTablet ? "":"center",
           fontFamily: "'Poppins', sans-serif",
           // opacity: "90%",
           marginTop: "5rem",
-          backdropFilter: "blur(5px) brightness(25%) contrast(100%)",
+          backdropFilter: isTablet ? "":"blur(5px) brightness(25%) contrast(100%)",
         }}
       >
-        <div css={{ paddingLeft: "4%" }}>
-          <H1 css={{ width: "45%" }} small>
+        <div css={{ paddingInline: isTablet ? "5%" :"4%", marginTop:isTablet ? "3rem" : "" }}>
+          <H1 css={{ width: isTablet ? "100%" : "45%" , marginBottom: isTablet ? "0.5rem":""}} small>
             How Ewitnex Works
           </H1>
           <p
             css={{
-              fontSize: "1.25rem",
+              fontSize: isTablet ? "1rem":"1.25rem",
               color: "#fff",
-              width: "59%",
+              width:  isTablet ? "100%" :"59%",
             }}
           >
             Create your free account, get verified, explore, interact or create
@@ -69,10 +70,11 @@ export default function Index() {
           font: "1.15rem",
           justifyContent: "center",
           gap: "16px",
+          flexDirection:isTablet ? "column" : "row"
         }}
       >
         <p>As a host or event organizer</p>
-        <p css={{ width: "1px", height: "29px", background: "#e0e0e0" }}></p>
+        {!isTablet && <p css={{ width: "1px", height: "29px", background: "#e0e0e0" }}></p>}
         <p>As an attendee or event lover</p>
       </div>
 
@@ -82,11 +84,13 @@ export default function Index() {
         </H1>
         <div
           css={{
-            display: "grid",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: "4rem",
+            gap: isTablet ? "2.5rem" : "4rem",
             alignItems: "center",
             // marginTop: "3rem",
+            marginTop: isTablet ? "1rem" : "",
             padding: "2% 0%",
           }}
         >
@@ -118,10 +122,12 @@ export default function Index() {
         </div>
         <div
           css={{
-            display: "grid",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: "4rem",
+            gap: isTablet ? "2.5rem" : "4rem",
             alignItems: "center",
+            marginTop: isTablet ? "1rem" : "",
             // marginTop: "3rem",
             padding: "1% 0%",
           }}
@@ -170,10 +176,12 @@ export default function Index() {
         </H1>
         <div
           css={{
-            display: "grid",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: "4rem",
+            gap: isTablet ? "2.5rem" : "4rem",
             alignItems: "center",
+            marginTop: isTablet ? "1rem" : "",
             // marginTop: "3rem",
             padding: "2% 0%",
           }}
@@ -206,10 +214,12 @@ export default function Index() {
         </div>
         <div
           css={{
-            display: "grid",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: "4rem",
+            gap: isTablet ? "2.5rem" : "4rem",
             alignItems: "center",
+            marginTop: isTablet ? "1rem" : "",
             marginBottom: "4rem",
             padding: "1% 0%",
           }}

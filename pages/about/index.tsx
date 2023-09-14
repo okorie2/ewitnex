@@ -16,20 +16,31 @@ export default function Index() {
       <Navbar />
       <div
         css={{
-          backgroundImage: isTablet ? "url(/assets/pngs/about-mobile.png)":" url(/assets/pngs/about.png) ",
-          height: "413px",
+          backgroundImage: isTablet
+            ? "url(/assets/pngs/about-mobile.png)"
+            : " url(/assets/pngs/about.png) ",
+          height: isTablet ? "334px" : "413px",
           display: "flex",
           backgroundSize: "cover",
           justifyContent: "space-between",
-          alignItems: isTablet ? "":"center",
+          alignItems: isTablet ? "" : "center",
           fontFamily: "'Poppins', sans-serif",
           marginTop: "5rem",
           backdropFilter: "blur(5px) brightness(25%) contrast(100%)",
         }}
       >
-        <H1 css={{ width: isTablet ? "100%" : "60%", paddingLeft: isTablet ? "1.5%":"4%" , paddingRight: isTablet ? "1%" : "" , paddingTop:isTablet ? "2rem":""}} size={isTablet ? "1.6rem":""} small>
-          We&lsquo;re modifying events {!isTablet && <br />} making it more social, paperless
-          and to be witness able by all
+        <H1
+          css={{
+            width: isTablet ? "100%" : "60%",
+            paddingLeft: isTablet ? "1.5%" : "4%",
+            paddingRight: isTablet ? "1%" : "",
+            paddingTop: isTablet ? "2rem" : "",
+          }}
+          size={isTablet ? "1.6rem" : ""}
+          small
+        >
+          We&lsquo;re modifying events {!isTablet && <br />} making it more
+          social, paperless and to be witness able by all
         </H1>
         <div css={{ width: "17.5vw", height: "428px", position: "relative" }}>
           <Image src="/assets/pngs/circle_wl.png" alt="circle_l" fill />
@@ -41,12 +52,21 @@ export default function Index() {
         <H1
           small
           color={"#000"}
-          css={{ width: isTablet? "90%": "60%", margin: "auto" }}
-          size={isTablet ? "1.6rem":""}
+          css={{ width: isTablet ? "90%" : "60%", margin: "auto" }}
+          size={isTablet ? "1.6rem" : ""}
         >
-          Revolutionizing {isTablet ? "E":"e"}vents {isTablet ? "W":"w"}ith {isTablet ? "O":"o"}ur {isTablet ? "S":"s"}ocial {isTablet ? "U":"u"}ser -{isTablet ? "F":"f"}riendly {isTablet ? "P":"p"}latform
+          Revolutionizing {isTablet ? "E" : "e"}vents {isTablet ? "W" : "w"}ith{" "}
+          {isTablet ? "O" : "o"}ur {isTablet ? "S" : "s"}ocial{" "}
+          {isTablet ? "U" : "u"}ser -{isTablet ? "F" : "f"}riendly{" "}
+          {isTablet ? "P" : "p"}latform
         </H1>
-        <div css={{ width: isTablet? "90%": "80%", margin: "auto", fontSize: isTablet? "16px":"18px" }}>
+        <div
+          css={{
+            width: isTablet ? "90%" : "80%",
+            margin: "auto",
+            fontSize: isTablet ? "16px" : "18px",
+          }}
+        >
           <p css={{ margin: "2% 0" }}>
             Planning and hosting events often mean juggling responsibilities and
             worrying that something doesn&apos;t work and spoils everything.
@@ -73,14 +93,23 @@ export default function Index() {
         </div>
       </div>
       <div css={{ marginTop: "4rem" }}>
-        <H2 css={{ textAlign: isTablet ? "left":"center" , paddingLeft: isTablet ? "5%" : "" }} small = {isTablet}>What {isTablet ? "Y":"y"}ou {isTablet ? "G":"g"}et {isTablet ? "W":"w"}th Ewitnex </H2>
+        <H2
+          css={{
+            textAlign: isTablet ? "left" : "center",
+            paddingLeft: isTablet ? "5%" : "",
+          }}
+          small={isTablet}
+        >
+          What {isTablet ? "Y" : "y"}ou {isTablet ? "G" : "g"}et{" "}
+          {isTablet ? "W" : "w"}th Ewitnex{" "}
+        </H2>
         <div
           css={{
-            display: isTablet ? "flex":"grid",
-            flexDirection:"column",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: isTablet ? "2.5rem":"4rem",
-            marginTop:isTablet ? "1rem":"",
+            gap: isTablet ? "2.5rem" : "4rem",
+            marginTop: isTablet ? "1rem" : "",
             padding: "3% 5%",
           }}
         >
@@ -114,11 +143,11 @@ export default function Index() {
         </div>
         <div
           css={{
-            display: isTablet ? "flex":"grid",
-            flexDirection:"column",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: isTablet ? "2.5rem":"4rem",
-            marginTop:isTablet ? "1rem":"",
+            gap: isTablet ? "2.5rem" : "4rem",
+            marginTop: isTablet ? "1rem" : "",
             padding: "3% 5%",
           }}
         >
@@ -149,10 +178,10 @@ export default function Index() {
         </div>
         <div
           css={{
-            display: isTablet ? "flex":"grid",
-            flexDirection:"column",
+            display: isTablet ? "flex" : "grid",
+            flexDirection: "column",
             gridTemplateColumns: "30% 30% 30%",
-            gap: isTablet ? "2.5rem":"4rem",
+            gap: isTablet ? "2.5rem" : "4rem",
             marginBottom: "5rem",
             padding: "3% 5%",
           }}
