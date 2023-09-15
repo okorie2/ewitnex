@@ -27,7 +27,7 @@ export const Button = styled.button<Props>`
     opacity: 0.9;
   };
   @media screen and (max-width: 1024px) {
-    font-size: 1.3rem;
+    font-size: ${(props) => props.fontSize ? props.fontSize : "1.3rem"};
   }
 `;
 export const ButtonFormFilled = styled.button`

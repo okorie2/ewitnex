@@ -6,11 +6,13 @@ import { useTheme } from "@emotion/react";
 import DashboardLayout from "../layout";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import EventCard from "@/components/cards/eventCard";
+import { useMediaQuery } from "@mui/material";
 import { screen } from "styles/theme";
 import DashboardEventCard from "@/components/cards/dashboardEventCard";
 import EventFilter from "fragments/eventFilter";
 
 const DashboardPrograms = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [active, setActive] = useState("All");
   const [filterSectionOpen, setFilterSectionOpen] = useState(true);
 
@@ -228,6 +230,7 @@ export const Tab = ({
   weight?: string;
   onClick: (tab: string) => void;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <div
       css={{
@@ -236,7 +239,7 @@ export const Tab = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "0.5% 2%",
+        padding: isTablet ? "0.5% 1.5rem":"0.5% 2%",
         fontWeight: weight ? weight : "bold",
         cursor: "pointer",
       }}

@@ -6,9 +6,11 @@ import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
 import { screen } from "styles/theme";
+import { useMediaQuery } from "@mui/material";
 import Layout from "./layout";
 
 export default function Index() {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <div>
       <Navbar />
@@ -26,7 +28,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -47,7 +50,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -68,7 +72,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -90,7 +95,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -112,7 +118,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -134,7 +141,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -156,7 +164,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -178,7 +187,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >
@@ -200,7 +210,8 @@ export default function Index() {
             css={{
               width: "32%",
               [screen.desktop]: {
-                width: "32%",
+                width: isTablet ? "95%":"32%",
+                marginInline:"auto"
               },
             }}
           >

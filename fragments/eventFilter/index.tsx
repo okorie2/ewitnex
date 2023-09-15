@@ -13,6 +13,8 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
+import { useMediaQuery } from "@mui/material";
+import { Button } from "styles/components/button";
 
 function valuetext(value: number) {
   return `${value * 1000}`;
@@ -27,6 +29,7 @@ const EventFilter = ({
   setOpen: () => void;
   external?: boolean;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [selectedDateRange, setSelectedDateRange] = useState("");
   const [selectedEvent, setSelectedEvent] = useState("All");
   const [priceValue, setPriceValue] = useState<number[]>([0, 100]);
@@ -144,12 +147,14 @@ const EventFilter = ({
             backgroundColor: "#fff",
             borderLeft: `1px solid ${"#E4E4E4"}`,
             borderRight: `1px solid ${"#E4E4E4"}`,
-            maxWidth: "258px",
+            maxWidth: isTablet ? "100vw" : "258px",
             overflowY: "scroll",
             "&::-webkit-scrollbar": {
               display: "none",
             },
-            maxHeight: "inherit",
+            maxHeight: isTablet ? "calc(100vh - 120px)":"inherit",
+            position:"relative",
+            paddingBottom:isTablet? "11rem":""
           }}
         >
           <div
@@ -633,6 +638,25 @@ const EventFilter = ({
               </div>
             </div>
           )}
+          {isTablet && <div css = {{
+            position:"fixed",
+            width:"100vw",
+            height:"6.5rem",
+            bottom:0,
+            left:0,
+            display:"flex",
+            justifyContent:"space-around",
+            alignItems:"center",
+            borderTop:"1px solid #00000029",
+            background:"#fff"
+          }}>
+            <Button background="#fff" border="1px solid #000" color="#000" height="52px" width="8rem" fontSize="1rem" onClick={setOpen}>
+              CANCEL
+            </Button>
+            <Button width="10rem" height="52px" fontSize="1rem" onClick={setOpen}>
+              APPLY FILTER
+            </Button>
+          </div>}
         </div>
       ) : (
         <div
