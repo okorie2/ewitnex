@@ -30,6 +30,7 @@ const MobileNav = ({
           fontFamily: '"Nunito", sans-serif',
           borderTop:"1px solid #AEAEAE",
           borderRadius:"0 0 20px 20px",
+          borderBottom:"!px solid #00000029"
         }}
       >
         <Link href="/onboarding" css={{WebkitTapHighlightColor:'transparent'}}>
@@ -165,7 +166,8 @@ const MobileNav = ({
             height: "40vh",
             background: "#000",
             marginTop: "60vh",
-            opacity:"0.8"
+            opacity:"0.8",
+            zIndex:99
           }}
           onClick={setClose}
         ></div>
