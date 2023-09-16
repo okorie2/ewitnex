@@ -3,14 +3,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { H2 } from "styles/components/typography";
+import { useMediaQuery } from "@mui/material";
 import { Button, ButtonFormOutline } from "styles/components/button";
 
 const Onboarding = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <div
       css={{
         width: "100vw",
-        height: "100vh",
+        height: isTablet ? "92.5vh" : "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -19,25 +21,25 @@ const Onboarding = () => {
     >
       <div
         css={{
-          height: "89.5vh",
-          width: "50vw",
+          height: isTablet ? "inherit":"89.5vh",
+          width: isTablet ? "100vw":"50vw",
           boxShadow: "0px 0px 10px #00000029",
           borderRadius: "20px",
-          display: "flex",
+          display: isTablet ? "block":"flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "2rem",
+          padding: isTablet ? "0 1rem":"2rem",
           justifyContent: "space-between",
         }}
       >
-        <div>
+        {!isTablet && <div>
           <Image
             src="/assets/pngs/logo.png"
             alt="logo"
             height={43.13}
             width={93}
           />
-        </div>
+        </div>}
         <div css={{ margin: "2rem 0", cursor: "pointer" }}>
           <Link
             href="/"
@@ -53,12 +55,12 @@ const Onboarding = () => {
               width={22}
               height={15}
             />
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+            {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
           </Link>
         </div>
-        <div css={{ width: "60%", margin: "0 auto", textAlign: "center" }}>
+        <div css={{ width: isTablet ? "100%":"60%", margin: "0 auto", textAlign: isTablet ? "left":"center" }}>
           <H2 space={"0.48px"} small>
-            Creating events bring people together
+            Creating events brings people together
           </H2>
           <div
             css={{
@@ -67,6 +69,7 @@ const Onboarding = () => {
               flexDirection: "column",
               gap: "1rem",
               marginTop: "2rem",
+              textAlign:"center"
             }}
           >
             <Link href="/auth/signin">
@@ -89,7 +92,8 @@ const Onboarding = () => {
             </Link>
           </div>
         </div>
-        <p css={{ marginBlock: "3%" }}>OR</p>
+        <div css = {{ display:"flex", flexDirection:"column", alignItems:"center",  marginBlock: "3%", gap:"1rem"}}>
+        <p css={{ }}>OR</p>
         <ButtonFormOutline width="fit-content" border="none">
           <p css={{ marginTop: "4px" }}>
             {" "}
@@ -102,6 +106,7 @@ const Onboarding = () => {
           </p>
           <p>Continue With Google</p>
         </ButtonFormOutline>
+        </div>
       </div>
     </div>
   );

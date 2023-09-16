@@ -7,9 +7,11 @@ import { H1 } from "styles/components/typography";
 import { SignInLeftcss } from "styles/pages/auth/SignInStyles";
 import { screen } from "styles/theme";
 import Form from "./form";
+import { useMediaQuery } from "@mui/material";
 import Logo from "@/components/logo";
 
 export default function Signup() {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <>
       <div
@@ -19,7 +21,7 @@ export default function Signup() {
           height: "100vh",
         }}
       >
-        <SignInLeftcss>
+        {!isTablet && <SignInLeftcss>
           <div className="top">
             <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
             <Logo image="/assets/pngs/logo_yt.png" />
@@ -94,7 +96,7 @@ export default function Signup() {
               </button>
             </div>
           </div>
-        </SignInLeftcss>
+        </SignInLeftcss>}
 
         <div
           css={{
@@ -106,7 +108,7 @@ export default function Signup() {
             },
           }}
         >
-          <div css={{ width: "45%", margin: "auto" }}>
+          <div css={{ width: isTablet ? "90%":"45%", margin: "auto" }}>
             <Form />
           </div>
         </div>

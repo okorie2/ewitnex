@@ -8,6 +8,7 @@ import { H1 } from "styles/components/typography";
 import { SignInLeftcss } from "styles/pages/auth/SignInStyles";
 import { screen } from "styles/theme";
 import Form from "./form";
+import { useMediaQuery } from "@mui/material";
 import Logo from "@/components/logo";
 
 // const nunito = Nunito({
@@ -17,10 +18,11 @@ import Logo from "@/components/logo";
 //   preload: true,
 // });
 export default function Signin() {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <>
       <div css={{ display: "flex", justifyContent: "space-between" }}>
-        <SignInLeftcss>
+        {!isTablet&&<SignInLeftcss>
           <div className="top">
             <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
             <Logo image="/assets/pngs/logo_yt.png" />
@@ -96,7 +98,7 @@ export default function Signin() {
             </div>
           </div>
         </SignInLeftcss>
-
+}
         <div
           css={{
             width: "100%",
@@ -107,8 +109,8 @@ export default function Signin() {
             },
           }}
         >
-          <div css={{ width: "45%", margin: "auto" }}>
-            <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+          <div css={{ width:isTablet?"90%": "45%", margin: "auto" }}>
+            <div css={{ margin: isTablet ?"1.5rem 0":"3rem 0", cursor: "pointer" }}>
               <Image
                 src="/assets/svgs/back.svg"
                 alt="back_arrow"
@@ -119,7 +121,7 @@ export default function Signin() {
             <div
               css={{
                 fontFamily: "'Nunito', sans-serif",
-                marginBottom: "4.3rem",
+                marginBottom: isTablet?"3rem":"4.3rem",
               }}
             >
               <p css={{ fontWeight: 600, fontSize: "1.5rem" }}>Welcome Back,</p>

@@ -2,6 +2,7 @@
 
 import { css } from "@emotion/react";
 import React from "react";
+import { useMediaQuery } from "@mui/material";
 
 interface Props {
   chipDetails: { name: string; selected: boolean }[];
@@ -25,7 +26,7 @@ export const chipData = [
 ];
 
 export default function Chip(props: Props) {
-
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const handleSelectedChip = (name: string) => {
     const newChipDetails = props.chipDetails.map((chip) => {
       if (chip.name === name) {
@@ -59,6 +60,7 @@ export default function Chip(props: Props) {
             display:flex;
             justify-content:center;
             align-items:center;
+            margin-block: ${isTablet ? "0.3rem":""}
           `}
         >
          <p>{chip.name}</p>
