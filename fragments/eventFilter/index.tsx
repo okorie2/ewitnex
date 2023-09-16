@@ -88,7 +88,7 @@ const EventFilter = ({
       borderColor: state.isFocused ? "#7C35AB" : "#707070",
       ":hover": { border: "0.12rem solid #7C35AB" },
     }),
-    menuList:(styles) => ({
+    menuList: (styles) => ({
       ...styles,
       "&::-webkit-scrollbar": {
         width: "8px",
@@ -99,16 +99,16 @@ const EventFilter = ({
       "&::-webkit-scrollbar-thumb": {
         background: "#AEAEAE",
         borderRadius: "10px",
-        height:"5px",
+        height: "5px",
         ":hover": {
           background: ` ${"#707070"}`,
         },
       },
     }),
-    option : (styles, state) => ({
+    option: (styles, state) => ({
       ...styles,
-      background: state.isSelected ? "#7C35AB" : ""
-    })
+      background: state.isSelected ? "#7C35AB" : "",
+    }),
   };
   const events = [
     "All",
@@ -152,16 +152,16 @@ const EventFilter = ({
             "&::-webkit-scrollbar": {
               display: "none",
             },
-            maxHeight: isTablet ? "calc(100vh - 120px)":"inherit",
-            position:"relative",
-            paddingBottom:isTablet? "11rem":""
+            maxHeight: isTablet ? "calc(100vh - 120px)" : "inherit",
+            position: "relative",
+            paddingBottom: isTablet ? "11rem" : "",
           }}
         >
           <div
             css={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: isTablet ? "left":"space-between",
               height: "80px",
               flexDirection: external ? "row-reverse" : "row",
               paddingInline: "1.5rem",
@@ -170,6 +170,7 @@ const EventFilter = ({
             }}
             onClick={setOpen}
           >
+            {!isTablet && <>
             {external ? (
               <Image src={Left} alt="left" />
             ) : (
@@ -180,6 +181,7 @@ const EventFilter = ({
                 height={15}
               />
             )}
+            </>}
             <div
               css={{
                 display: "flex",
@@ -189,7 +191,15 @@ const EventFilter = ({
               }}
             >
               <p css={{ fontSize: "1.125", fontWeight: "bold" }}>Filters</p>
-              <Image src={Filter} alt="filter" />
+              <div
+                css={{
+                  padding: "0rem",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {isTablet ? <Image src={"/assets/svgs/close.svg"} alt="close" width={45} height={45}/> : <Image src = {Filter} alt = "fill"/>}
+              </div>
             </div>
           </div>
           <div
@@ -322,16 +332,18 @@ const EventFilter = ({
                 handleClick={() => setSelectedDateRange("custom")}
               />
               {selectedDateRange === "custom" && (
-                <div css = {{width: "110%", marginLeft: "-5%", marginBottom: "5%"}}>
+                <div
+                  css={{ width: "110%", marginLeft: "-5%", marginBottom: "5%" }}
+                >
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={["DatePicker"]} >
+                    <DemoContainer components={["DatePicker"]}>
                       <DatePicker
                         defaultValue={dayjs("2022-04-17")}
                         sx={{
                           "& .MuiStack-root": {
                             "& .MuiTextField-root": {
                               minWidth: "160px",
-                            }
+                            },
                           },
                         }}
                       />
@@ -638,25 +650,42 @@ const EventFilter = ({
               </div>
             </div>
           )}
-          {isTablet && <div css = {{
-            position:"fixed",
-            width:"100vw",
-            height:"6.5rem",
-            bottom:0,
-            left:0,
-            display:"flex",
-            justifyContent:"space-around",
-            alignItems:"center",
-            borderTop:"1px solid #00000029",
-            background:"#fff"
-          }}>
-            <Button background="#fff" border="1px solid #000" color="#000" height="52px" width="8rem" fontSize="1rem" onClick={setOpen}>
-              CANCEL
-            </Button>
-            <Button width="10rem" height="52px" fontSize="1rem" onClick={setOpen}>
-              APPLY FILTER
-            </Button>
-          </div>}
+          {isTablet && (
+            <div
+              css={{
+                position: "fixed",
+                width: "100vw",
+                height: "6.5rem",
+                bottom: 0,
+                left: 0,
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                borderTop: "1px solid #00000029",
+                background: "#fff",
+              }}
+            >
+              <Button
+                background="#fff"
+                border="1px solid #000"
+                color="#000"
+                height="52px"
+                width="8rem"
+                fontSize="1rem"
+                onClick={setOpen}
+              >
+                CANCEL
+              </Button>
+              <Button
+                width="10rem"
+                height="52px"
+                fontSize="1rem"
+                onClick={setOpen}
+              >
+                APPLY FILTER
+              </Button>
+            </div>
+          )}
         </div>
       ) : (
         <div
@@ -675,11 +704,14 @@ const EventFilter = ({
               alignItems: "center",
               gap: "1rem",
               cursor: "pointer",
-              marginTop: "2rem",
+              marginTop: "1rem",
+              background: isTablet ? "#E4E4E4" : "",
+              padding: "0.75rem",
+              borderRadius: "8px",
             }}
             onClick={setOpen}
           >
-            <Image src={Filter} alt="filter" />
+            <Image src={Filter} alt="filter" priority/>
           </div>
         </div>
       )}
@@ -700,8 +732,8 @@ export const CheckSelect = ({
   value: string;
   label: string;
   selected: string;
-  border ?:string
-  labelColor ?: string;
+  border?: string;
+  labelColor?: string;
   handleClick: () => void;
 }) => {
   return (
@@ -710,13 +742,20 @@ export const CheckSelect = ({
         display: "flex",
         gap: "1rem",
         marginBlock: "0.5rem",
-        alignItems:"center",
+        alignItems: "center",
         cursor: "pointer",
       }}
       onClick={handleClick}
     >
-      <RoundCheckbox checked={selected === value} border={border ? border : "#707070"}/>
-      <p css={{ fontWeight: "500", color: labelColor ? labelColor : "#707070" }}>{label}</p>
+      <RoundCheckbox
+        checked={selected === value}
+        border={border ? border : "#707070"}
+      />
+      <p
+        css={{ fontWeight: "500", color: labelColor ? labelColor : "#707070" }}
+      >
+        {label}
+      </p>
     </div>
   );
 };

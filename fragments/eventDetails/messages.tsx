@@ -2,12 +2,14 @@
 import React from "react";
 import Link from "next/link";
 import EventMessage from "@/components/messages/eventMessage";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
 const EventMessages = () => {
   const router = useRouter();
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
+  const isTablet = useMediaQuery("(max-width: 900px)");
 
   return (
     <div
@@ -16,10 +18,10 @@ const EventMessages = () => {
         color: "#000",
         borderRadius: "10px",
         padding: "1rem 0",
-        width: `${loggedIn ? "70%" : "60%"}`,
+        width: `${isTablet ?"100vw":loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
-        top: "3.5rem",
+        top: isTablet ? "0":"3.5rem",
         height: `${loggedIn ? "70vh" : "60vh"}`,
       }}
     >
@@ -29,7 +31,7 @@ const EventMessages = () => {
           flexDirection: "column",
           gap: "1.8rem",
           paddingInline: "1.25rem",
-          height: "82%",
+          height: isTablet ? "100%":"82%",
           overflowY: "scroll",
           "&::-webkit-scrollbar": {
             display: "none",
@@ -79,7 +81,7 @@ const EventMessages = () => {
       </div>
       <hr
         css={{
-          borderTop: `1px solid ${"#707070"}`,
+          borderTop: isTablet ? "none":`1px solid ${"#707070"}`,
           marginBlock: "1rem",
           opacity: "0.5",
         }}

@@ -3,11 +3,14 @@
 import React, { useState } from "react";
 import Performer from "@/components/cards/performer";
 import { screen } from "styles/theme";
+import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import ContactOrganizerModal from "@/components/modals/programModal/contactOrganizerModal";
 import ReportEventModal from "@/components/modals/programModal/reportEventModal";
+import EventCountdown from "@/components/events/eventCountdown";
 
 const EventDetails = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [favorite, setFavourite] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
@@ -187,7 +190,7 @@ const EventDetails = () => {
         />
         <div
           css={{
-            width: "193px",
+            width: isTablet ? "40%":"193px",
             height: "266px",
             borderRadius: "10px",
             backgroundColor: "#fff",
@@ -215,7 +218,7 @@ const EventDetails = () => {
             width: "41px",
             borderRadius: "50%",
             backgroundColor: "#fff",
-            display: "flex",
+            display: isTablet ? "none":"flex",
             alignItems: "center",
             justifyContent: "center",
             position: "absolute",
@@ -239,6 +242,7 @@ const EventDetails = () => {
             minWidth: "77%",
             width:"82%",
             marginLeft: "auto",
+            position:"relative",
             [screen.desktopLg]: {
               width: "78%",
             },
@@ -251,8 +255,9 @@ const EventDetails = () => {
           <h1
             css={{
               marginBlock: "1rem 0.5rem",
-              fontSize: "2.5rem",
+              fontSize: isTablet? "1.8rem":"2.5rem",
               fontWeight: "700",
+              marginTop:isTablet ? "10rem" :""
             }}
           >
             Medical Crusade with Doctor West
@@ -275,170 +280,12 @@ const EventDetails = () => {
               display: "grid",
               gridTemplateColumns: "auto ",
               [screen.desktopLg]: {
-                gridTemplateColumns: "1.2fr 0.8fr",
+                gridTemplateColumns: isTablet ? "1fr":"1.2fr 0.8fr",
               },
             }}
           >
             <div>
-              <div
-                css={{
-                  display: "flex",
-                  gap: "1.5rem",
-                }}
-              >
-                <div
-                  css={{
-                    display: "grid",
-                    placeContent: "center",
-                    width: "86px",
-                    height: "60px",
-                    border: `1px solid ${"#E4E4E4"}`,
-                    background: `linear-gradient(60deg, ${"#7C35AB"},${"#FFFFFF"})`,
-                    borderRadius: "5px",
-                  }}
-                >
-                  <div
-                    css={{
-                      display: "flex",
-                      placeContent: "center",
-                      width: "82px",
-                      height: "55.61px",
-                      border: `1px solid ${"#707070"}`,
-                      borderRadius: "5px",
-                      backgroundColor: "#FFFFFF",
-                    }}
-                  >
-                    <p
-                      css={{
-                        fontSize: "0.75rem",
-                        fontWeight: "bold",
-                        alignItems: "center",
-                        display: "flex",
-                        gap: "0.3rem",
-                      }}
-                    >
-                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
-                        24
-                      </span>
-                      Days
-                    </p>
-                  </div>
-                </div>
-                <div
-                  css={{
-                    display: "grid",
-                    placeContent: "center",
-                    width: "86px",
-                    height: "60px",
-                    border: `1px solid ${"#E4E4E4"}`,
-                    background: `linear-gradient(120deg, ${"#7C35AB"},${"#FFFFFF"},${"#FFFFFF"})`,
-                    borderRadius: "5px",
-                  }}
-                >
-                  <div
-                    css={{
-                      display: "flex",
-                      placeContent: "center",
-                      width: "82px",
-                      height: "55.61px",
-                      border: `1px solid ${"#707070"}`,
-                      borderRadius: "5px",
-                      backgroundColor: "#FFFFFF",
-                    }}
-                  >
-                    <p
-                      css={{
-                        fontSize: "0.75rem",
-                        fontWeight: "bold",
-                        alignItems: "center",
-                        display: "flex",
-                        gap: "0.3rem",
-                      }}
-                    >
-                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
-                        7
-                      </span>
-                      Hours
-                    </p>
-                  </div>
-                </div>
-                <div
-                  css={{
-                    display: "grid",
-                    placeContent: "center",
-                    width: "86px",
-                    height: "60px",
-                    border: `1px solid ${"#E4E4E4"}`,
-                    background: `linear-gradient(90deg, ${"#7C35AB"},${"#FFFFFF"})`,
-                    borderRadius: "5px",
-                  }}
-                >
-                  <div
-                    css={{
-                      display: "flex",
-                      placeContent: "center",
-                      width: "82px",
-                      height: "55.61px",
-                      border: `1px solid ${"#707070"}`,
-                      borderRadius: "5px",
-                      backgroundColor: "#FFFFFF",
-                    }}
-                  >
-                    <p
-                      css={{
-                        fontSize: "0.75rem",
-                        fontWeight: "bold",
-                        alignItems: "center",
-                        display: "flex",
-                        gap: "0.3rem",
-                      }}
-                    >
-                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
-                        54
-                      </span>
-                      Mins
-                    </p>
-                  </div>
-                </div>
-                <div
-                  css={{
-                    display: "grid",
-                    placeContent: "center",
-                    width: "86px",
-                    height: "60px",
-                    border: `1px solid ${"#E4E4E4"}`,
-                    background: `linear-gradient(60deg, ${"#7C35AB"},${"#FFFFFF"})`,
-                    borderRadius: "5px",
-                  }}
-                >
-                  <div
-                    css={{
-                      display: "flex",
-                      placeContent: "center",
-                      width: "82px",
-                      height: "55.61px",
-                      border: `1px solid ${"#707070"}`,
-                      borderRadius: "5px",
-                      backgroundColor: "#FFFFFF",
-                    }}
-                  >
-                    <p
-                      css={{
-                        fontSize: "0.75rem",
-                        fontWeight: "bold",
-                        alignItems: "center",
-                        display: "flex",
-                        gap: "0.3rem",
-                      }}
-                    >
-                      <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
-                        20
-                      </span>
-                      Secs
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <EventCountdown />
               <div
                 css={{
                   display: "grid",
@@ -503,7 +350,7 @@ const EventDetails = () => {
                 </p>
               </div>
             </div>
-            <div css={{ marginRight: "2rem" }}>
+            <div css={{ marginRight: isTablet ? "1rem": "2rem" }}>
               <div
                 css={{
                   display: "grid",
@@ -619,7 +466,7 @@ const EventDetails = () => {
             </div>
           </div>
         </div>
-        <div css={{ paddingInline: "2%", marginBlock: "2.5rem" }}>
+        <div css={{ paddingInline:"2%", marginBlock: "2.5rem" }}>
           <div
             css={{
               display: "flex",
@@ -632,7 +479,7 @@ const EventDetails = () => {
             <p>About</p>
           </div>
           <div css={{ marginTop: "1.25rem" }}>
-            <p css={{ lineHeight: "22px", fontSize: "0.875rem" }}>
+            <p css={{ lineHeight: "22px", fontSize: isTablet ? "0.85rem":"0.875rem" }}>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -644,7 +491,7 @@ const EventDetails = () => {
               Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
               dolor sit amet.
             </p>
-            <p css={{ lineHeight: "22px", fontSize: "0.875rem" }}>
+            <p css={{ lineHeight: "22px", fontSize: isTablet ? "0.85rem":"0.875rem" }}>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -656,7 +503,7 @@ const EventDetails = () => {
               Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
               dolor sit amet.
             </p>
-            <p css={{ lineHeight: "22px", fontSize: "0.875rem" }}>
+            <p css={{ lineHeight: "22px", fontSize: isTablet ? "0.85rem":"0.875rem" }}>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo

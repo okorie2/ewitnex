@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 
 export const Lines = () => {
-  const isTablet = useMediaQuery("(max-width: 900px)" );
+  const isTablet = useMediaQuery("(max-width: 750px)" );
 
   return (
     <>

@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 
 const EventSpeakers = () => {
   const router = useRouter();
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
+  const isTablet = useMediaQuery("(max-width: 900px)");
+
   return (
     <div
       css={{
@@ -13,15 +16,21 @@ const EventSpeakers = () => {
         color: "#000",
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
-        width: `${loggedIn ? "70%" : "60%"}`,
+        width: `${isTablet ? "100vw":loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
-        top: "3.5rem",
+        top: isTablet ? "0":"3.5rem",
         height: `${loggedIn ? "70vh" : "60vh"}`,
+        marginBottom:isTablet ? "-5rem" : "",
         overflowY: "scroll",
         "&::-webkit-scrollbar": {
           display: "none",
         },
+        div: {
+          display:isTablet ? "flex" : "block",
+          flexDirection:"column",
+          alignItems:'center'
+        }
       }}
     >
       <div>

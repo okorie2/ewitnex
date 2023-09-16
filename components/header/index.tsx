@@ -56,7 +56,7 @@ export default function Navbar() {
       css={{
         backgroundColor: "#fff",
         display: "flex",
-        justifyContent: "space-evenly",
+        justifyContent: isTablet ? "space-between":"space-evenly",
         alignItems: "center",
         boxShadow: "#00000029 0px 0px 10px ",
         padding: "0% 1%",
@@ -70,7 +70,6 @@ export default function Navbar() {
         [screen.tablet] : {
           width: "100vw",
           padding:"0 2%",
-          justifyContent:"space-between",
         }
       }}
     >
@@ -81,13 +80,11 @@ export default function Navbar() {
           backgroundColor: "#F5F5F5",
           width: "33.2%",
           height: "2.625rem",
-          display: "flex",
+          display : isTablet ? "none":"flex",
           alignItems: "center",
           paddingLeft: "17px",
           gap: "2%",
-          [screen.tablet] : {
-           display : "none"
-          }
+          
         }}
       >
         <div css={{ marginTop: "3px" }}>
@@ -117,7 +114,7 @@ export default function Navbar() {
       </div>
       <div
         css={{
-          display: "flex",
+          display : isTablet ? "none":"flex",
           color: "#000",
           fontSize: "1rem",
           width: "32%",
@@ -129,9 +126,7 @@ export default function Navbar() {
               color: "#AEAEAE",
             },
           },
-          [screen.tablet] : {
-            display : "none"
-           }
+          
         }}
       >
         <div>
@@ -167,9 +162,7 @@ export default function Navbar() {
       </div>
       <div
         css={{
-          [screen.tablet] : {
-            display : "none"
-           },
+          display : isTablet ? "none":"flex",
         }}
       >
         <hr css={{ width: "1px", height: "36px" }} />
@@ -178,10 +171,7 @@ export default function Navbar() {
         css={{
           color: "#7C35AB",
           fontWeight: "600",
-          display: "flex",
-          [screen.tablet] : {
-            display : "none"
-           }
+          display : isTablet ? "none":"flex",
         }}
       >
         <Link href="/auth/signin">Log in</Link>
@@ -191,16 +181,13 @@ export default function Navbar() {
           borderRadius: "3.5rem",
           border: `1px solid ${"#7C35AB"}`,
           height: "2.625rem",
-          display: "flex",
+          display : isTablet ? "none":"flex",
           width: "8.063rem",
           alignItems: "center",
           justifyContent: "center",
           fontWeight: 500,
           backgroundColor: "#7C35AB",
           color: "#FFF",
-          [screen.tablet] : {
-            display : "none"
-           }
         }}
       >
         <Link href="/onboarding">Create Event</Link>
