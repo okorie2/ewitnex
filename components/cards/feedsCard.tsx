@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { H3, H4 } from "styles/components/typography";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 
 interface IFeedsCard {
@@ -19,13 +20,14 @@ interface IFeedsCard {
 }
 
 const FeedsCard = (props: IFeedsCard) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
 
   return (
     <Link href={`/events/${props.id}`}>
       <div
         css={{
-          height: "237px",
-          width: "326px",
+          height: isTablet ? "250px" : "237px",
+          width: isTablet ? "106.5%" : "326px",
           borderRadius: "10px",
           backgroundColor: "#fff",
           boxShadow: "#00000029 0px 0px 5px",
@@ -37,7 +39,13 @@ const FeedsCard = (props: IFeedsCard) => {
         }}
       >
         <div css={{ position: "absolute", left: "-65.5px", top: "-1rem" }}>
-          <div css={{ width: "131px", height: "139px", position: "relative" }}>
+          <div
+            css={{
+              width: isTablet ? "110px" : "131px",
+              height: "139px",
+              position: "relative",
+            }}
+          >
             <Image
               src={props.img}
               alt="card_img"
@@ -69,14 +77,22 @@ const FeedsCard = (props: IFeedsCard) => {
           </div>
         </div>
         <div></div>
-        <div css={{ padding: "4% 6%" }}>
+        <div
+          css={{
+            display: isTablet ? "flex" : "block",
+            flexDirection: "column",
+            padding: isTablet ? "4% 3%" : "4% 6%",
+            marginLeft: "-5%",
+            gap: isTablet ? "0.2rem" : "",
+          }}
+        >
           <div
             css={{
               display: "flex",
               alignItems: "center",
             }}
           >
-            <h4 css={{ width: "78%" }}>
+            <h4 css={{ width: isTablet ? "" : "78%" }}>
               {props.title.slice(0, 37)} {props.title.length > 37 && "..."}
             </h4>
             <div

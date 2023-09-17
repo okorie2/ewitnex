@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NotificationCard from "@/components/cards/notificationCard";
-import { SidebarItem } from "pages/dashboard/layout";
+import { SidebarItem } from "pages/dashboard/layout/layout";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 
 const Notifications = ({
@@ -13,25 +14,33 @@ const Notifications = ({
   shown: boolean;
   setClose: () => void;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [showMoreOptions, setShowMoreOptions] = useState(false);
+  useEffect (() => {
+    const html = document.querySelector('html')
+    if (html) { 
+      html.style.overflow = shown ? "hidden" : "auto"
+    }
+  }, [shown])
   return (
     <>
       <div
         css={{
           position: "absolute",
-          width: "40vw",
+          width: isTablet ? "100vw":"40vw",
           maxHeight: "100vh",
           borderRight: "1px solid #e4e4e4",
           marginLeft: shown ? "0" : "-100vw",
           background: "#fff",
-          zIndex: 101,
+          zIndex: 21,
           transition: "margin-left 1s",
           display: "grid",
-          gridTemplateColumns: "101px 1fr",
+          gridTemplateColumns: isTablet ? "1fr":"101px 1fr",
           fontFamily: '"Nunito", sans-serif',
+          top:isTablet ? "0":""
         }}
       >
-        <div
+        {!isTablet && <div
           css={{
             borderRight: "1px solid #e4e4e4",
             display: "flex",
@@ -114,30 +123,45 @@ const Notifications = ({
               height={20}
             />
           </div>
-        </div>
+        </div>}
         <div
           css={{
             display: "grid",
-            gridTemplateRows: "80px 1fr",
+            gridTemplateRows:"5rem 1fr",
           }}
         >
+          <div css = {{
+              borderBottom: "1px solid #E4E4E4",
+              display:"flex",
+              alignItems:"center",
+              justifyContent:"space-between"
+          }}>
           <p
             css={{
               fontSize: "24px",
               fontWeight: "bold",
-              borderBottom: "1px solid #E4E4E4",
-              paddingLeft: "2.5rem",
-              paddingTop: "1.5rem",
+              paddingLeft: isTablet?"1.25rem":"2.5rem",
+              paddingTop: isTablet ? "0.875rem":"1.5rem",
             }}
           >
             Notifications
           </p>
+          {isTablet && <div css = {{marginRight:"1.5rem", marginTop:"1.2rem"}}>
+            <Link href={"/dashboard/search"} >
+              <Image
+                src="/assets/svgs/search.svg"
+                width={20}
+                height={20}
+                alt="logo"
+              />
+            </Link></div>}
+          </div>
           <div
             css={{
               width: "100%",
               overflowY: "auto",
-              height: "calc(100vh - 80px)",
-              paddingLeft: "2.5rem",
+              height: isTablet ? "calc(100vh - 13rem)":"calc(100vh - 80px)",
+              paddingLeft: isTablet ? "1rem":"2.5rem",
               paddingTop: "1rem",
              
               "&::-webkit-scrollbar": {
@@ -145,6 +169,14 @@ const Notifications = ({
               },
             }}
           >
+            <NotificationCard
+              uploaded="Just Now"
+              type="message"
+              messageType="witness"
+              initiator="Daniel James"
+              eventname="A Night With The Hokins"
+              eventID="123456"
+            />
             <NotificationCard
               uploaded="Just Now"
               type="message"

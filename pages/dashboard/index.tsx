@@ -1,22 +1,25 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
-import DashboardLayout from "./layout";
+import DashboardLayout from "./layout/layout";
 import Image from "next/image";
 import { ButtonFormFilled } from "styles/components/button";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 
 const Feeds = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <DashboardLayout>
       <div
         css={{
           display: "grid",
-          gridTemplateColumns: "2.7fr 1.3fr",
-          height: "100%",
+          gridTemplateColumns: isTablet ? "1fr":"2.7fr 1.3fr",
+          height: isTablet ? "80vh" : "100%",
           maxHeight: "100vh",
+          marginTop: isTablet ? "5rem" : "",
         }}
       >
         <div
@@ -36,7 +39,7 @@ const Feeds = () => {
           >
             <div
               css={{
-                width: "65%",
+                width: isTablet ? "90%":"65%",
                 marginInline: "auto",
                 textAlign: "center",
               }}
@@ -50,7 +53,7 @@ const Feeds = () => {
               <p css={{ fontSize: "1.5rem", fontWeight: "bold" }}>
                 Coming Soon...
               </p>
-              <p css={{ marginBlock: "1rem" }}>
+              <p css={{ marginBlock: isTablet ? "1.5rem":"1rem" }}>
                 Check back later as this page feature is currently on
                 development
               </p>
@@ -60,138 +63,140 @@ const Feeds = () => {
             </div>
           </div>
         </div>
-        <div
-          css={{
-            padding: "1rem 1.5rem",
-            maxWidth: "500px",
-          }}
-        >
+        {!isTablet && (
           <div
             css={{
-              marginBlock: "0.5rem",
+              padding: "1rem 1.5rem",
+              maxWidth: "500px",
             }}
           >
             <div
               css={{
-                display: "flex",
-                justifyContent: "space-between",
+                marginBlock: "0.5rem",
               }}
             >
-              <p
+              <div
                 css={{
-                  fontSize: "1.25rem",
-                  color: "#707070",
-                  fontWeight: "bold",
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}
               >
-                Suggested Events
-              </p>
-              <p
+                <p
+                  css={{
+                    fontSize: "1.25rem",
+                    color: "#707070",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Suggested Events
+                </p>
+                <p
+                  css={{
+                    fontSize: "1.125rem",
+                    color: "#7C35AB",
+                    fontWeight: "bold",
+                  }}
+                >
+                  See All
+                </p>
+              </div>
+              <div
                 css={{
-                  fontSize: "1.125rem",
-                  color: "#7C35AB",
-                  fontWeight: "bold",
+                  display: "flex",
+                  gap: "1.5rem",
+                  overflowX: "scroll",
+                  "&::-webkit-scrollbar": {
+                    display: "none",
+                  },
+                  padding: "1rem 0.2rem 1rem 0",
                 }}
               >
-                See All
-              </p>
+                <FeedsCard
+                  label="Music"
+                  attendees="609"
+                  id="Tec542445"
+                  date="25 NOV. 2021, 10:00 AM"
+                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                  organizer="Connack Foundarion"
+                  priceRange="$500-$2K"
+                  title="Connack Foundation African Music Award Of The Year"
+                  img="/assets/pngs/card_img.png"
+                />
+                <FeedsCard
+                  label="Concert"
+                  attendees="609"
+                  date="3 DEC. 2022, 10:00 AM"
+                  id="Heal12548"
+                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                  organizer="Eko Atlantic"
+                  priceRange="$500-$2K"
+                  title="Medical Crusade with Doctor West"
+                  img="/assets/pngs/card_2.png"
+                />
+              </div>
             </div>
             <div
               css={{
-                display: "flex",
-                gap: "1.5rem",
-                overflowX: "scroll",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                },
-                padding: "1rem 0.2rem 1rem 0",
+                marginBlock: "0.5rem",
               }}
             >
-              <FeedsCard
-                label="Music"
-                attendees="609"
-                id="Tec542445"
-                date="25 NOV. 2021, 10:00 AM"
-                location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                organizer="Connack Foundarion"
-                priceRange="$500-$2K"
-                title="Connack Foundation African Music Award Of The Year"
-                img="/assets/pngs/card_img.png"
-              />
-              <FeedsCard
-                label="Concert"
-                attendees="609"
-                date="3 DEC. 2022, 10:00 AM"
-                id="Heal12548"
-                location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                organizer="Eko Atlantic"
-                priceRange="$500-$2K"
-                title="Medical Crusade with Doctor West"
-                img="/assets/pngs/card_2.png"
-              />
-            </div>
-          </div>
-          <div
-            css={{
-              marginBlock: "0.5rem",
-            }}
-          >
-            <div css={{ display: "flex", justifyContent: "space-between" }}>
-              <p
+              <div css={{ display: "flex", justifyContent: "space-between" }}>
+                <p
+                  css={{
+                    fontSize: "1.25rem",
+                    color: "#707070",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Online Events
+                </p>
+                <p
+                  css={{
+                    fontSize: "1.125rem",
+                    color: "#7C35AB",
+                    fontWeight: "bold",
+                  }}
+                >
+                  See All
+                </p>
+              </div>
+              <div
                 css={{
-                  fontSize: "1.25rem",
-                  color: "#707070",
-                  fontWeight: "bold",
+                  display: "flex",
+                  gap: "1.5rem",
+                  overflowX: "scroll",
+                  "&::-webkit-scrollbar": {
+                    display: "none",
+                  },
+                  padding: "1rem 0.2rem 1rem 0",
                 }}
               >
-                Online Events
-              </p>
-              <p
-                css={{
-                  fontSize: "1.125rem",
-                  color: "#7C35AB",
-                  fontWeight: "bold",
-                }}
-              >
-                See All
-              </p>
-            </div>
-            <div
-              css={{
-                display: "flex",
-                gap: "1.5rem",
-                overflowX: "scroll",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                },
-                padding: "1rem 0.2rem 1rem 0",
-              }}
-            >
-              <FeedsCard
-                label="Concert"
-                attendees="609"
-                date="3 DEC. 2022, 10:00 AM"
-                id="Heal12548"
-                location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                organizer="Eko Atlantic"
-                priceRange="$500-$2K"
-                title="Medical Crusade with Doctor West"
-                img="/assets/pngs/card_2.png"
-              />
-              <FeedsCard
-                label="Music"
-                attendees="609"
-                id="Tec542445"
-                date="25 NOV. 2021, 10:00 AM"
-                location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                organizer="Connack Foundarion"
-                priceRange="$500-$2K"
-                title="Connack Foundation African Music Award Of The Year"
-                img="/assets/pngs/card_img.png"
-              />
+                <FeedsCard
+                  label="Concert"
+                  attendees="609"
+                  date="3 DEC. 2022, 10:00 AM"
+                  id="Heal12548"
+                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                  organizer="Eko Atlantic"
+                  priceRange="$500-$2K"
+                  title="Medical Crusade with Doctor West"
+                  img="/assets/pngs/card_2.png"
+                />
+                <FeedsCard
+                  label="Music"
+                  attendees="609"
+                  id="Tec542445"
+                  date="25 NOV. 2021, 10:00 AM"
+                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                  organizer="Connack Foundarion"
+                  priceRange="$500-$2K"
+                  title="Connack Foundation African Music Award Of The Year"
+                  img="/assets/pngs/card_img.png"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </DashboardLayout>
   );

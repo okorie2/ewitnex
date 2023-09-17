@@ -161,7 +161,7 @@ const EventFilter = ({
             css={{
               display: "flex",
               alignItems: "center",
-              justifyContent: isTablet ? "left":"space-between",
+              justifyContent: isTablet ? "left" : "space-between",
               height: "80px",
               flexDirection: external ? "row-reverse" : "row",
               paddingInline: "1.5rem",
@@ -170,18 +170,20 @@ const EventFilter = ({
             }}
             onClick={setOpen}
           >
-            {!isTablet && <>
-            {external ? (
-              <Image src={Left} alt="left" />
-            ) : (
-              <Image
-                src="/assets/svgs/elbow-right-light.svg"
-                alt=""
-                width={15}
-                height={15}
-              />
+            {!isTablet && (
+              <>
+                {external ? (
+                  <Image src={Left} alt="left" />
+                ) : (
+                  <Image
+                    src="/assets/svgs/elbow-right-light.svg"
+                    alt=""
+                    width={15}
+                    height={15}
+                  />
+                )}
+              </>
             )}
-            </>}
             <div
               css={{
                 display: "flex",
@@ -198,7 +200,16 @@ const EventFilter = ({
                   alignItems: "center",
                 }}
               >
-                {isTablet ? <Image src={"/assets/svgs/close.svg"} alt="close" width={45} height={45}/> : <Image src = {Filter} alt = "fill"/>}
+                {isTablet ? (
+                  <Image
+                    src={"/assets/svgs/close.svg"}
+                    alt="close"
+                    width={45}
+                    height={45}
+                  />
+                ) : (
+                  <Image src={Filter} alt="fill" />
+                )}
               </div>
             </div>
           </div>
@@ -711,7 +722,7 @@ const EventFilter = ({
             }}
             onClick={setOpen}
           >
-            <Image src={Filter} alt="filter" priority/>
+            <Image src={Filter} alt="filter" priority />
           </div>
         </div>
       )}

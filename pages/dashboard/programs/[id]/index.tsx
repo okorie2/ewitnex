@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
 import EventTab from "./[tab]";
-import DashboardLayout from "pages/dashboard/layout";
+import DashboardLayout from "pages/dashboard/layout/layout";
 import Image from "next/image";
 
 const SingleEvent = () => {

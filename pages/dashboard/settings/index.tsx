@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import DashboardLayout from "../layout";
+import DashboardLayout from "../layout/layout";
 import SettingsCard from "@/components/cards/settingsCard";
 import SettingsTab from "./[tab]";
 import { useRouter } from "next/router";

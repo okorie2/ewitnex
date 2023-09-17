@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
-import DashboardLayout from "pages/dashboard/layout";
+import DashboardLayout from "pages/dashboard/layout/layout";
 import Image from "next/image";
 import ManageEventTab from "./[tab]";
 import Link from "next/link";

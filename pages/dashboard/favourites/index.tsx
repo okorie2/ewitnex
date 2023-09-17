@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { screen } from "styles/theme";
-import DashboardLayout from "../layout";
+import DashboardLayout from "../layout/layout";
 import { useState } from "react";
 import {
   activeButtonStyle,
