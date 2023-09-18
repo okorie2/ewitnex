@@ -23,11 +23,11 @@ const FeedsCard = (props: IFeedsCard) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
 
   return (
-    <Link href={`/events/${props.id}`}>
+    <Link href={`/dashboard/programs/${props.id}`}>
       <div
         css={{
-          height: isTablet ? "250px" : "237px",
-          width: isTablet ? "106.5%" : "326px",
+          height: isTablet ? "256px" : "237px",
+          width: isTablet ? "73vw" : "326px",
           borderRadius: "10px",
           backgroundColor: "#fff",
           boxShadow: "#00000029 0px 0px 5px",

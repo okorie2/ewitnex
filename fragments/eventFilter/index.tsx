@@ -147,7 +147,8 @@ const EventFilter = ({
             backgroundColor: "#fff",
             borderLeft: `1px solid ${"#E4E4E4"}`,
             borderRight: `1px solid ${"#E4E4E4"}`,
-            maxWidth: isTablet ? "100vw" : "258px",
+              fontFamily: "'Poppins', sans-serif",
+              maxWidth: isTablet ? "100vw" : "258px",
             overflowY: "scroll",
             "&::-webkit-scrollbar": {
               display: "none",
@@ -674,6 +675,7 @@ const EventFilter = ({
                 alignItems: "center",
                 borderTop: "1px solid #00000029",
                 background: "#fff",
+                zIndex:32
               }}
             >
               <Button

@@ -1,11 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Filter from "public/assets/svgs/filter.svg";
+import EventFilter from "fragments/eventFilter";
 
 const Search = () => {
+  const [filterOpen, setFilterOpen] = useState(false);
   const router = useRouter();
+  useEffect (() => {
+    const html = document.querySelector('html')
+    if (html) { 
+      html.style.overflow = filterOpen ? "hidden" : "auto"
+    }
+  }, [filterOpen])
   return (
     <div
       css={{
@@ -14,6 +22,12 @@ const Search = () => {
         fontFamily: '"Poppins", sans-serif',
       }}
     >
+      {filterOpen && (
+        <EventFilter
+          open={filterOpen}
+          setOpen={() => setFilterOpen(!filterOpen)}
+        />
+      )}
       <div
         css={{
           display: "flex",
@@ -28,8 +42,8 @@ const Search = () => {
           left: "0",
           right: "0",
           top: "0",
-          zIndex: "2",
           width: "100vw",
+          background:"#fff"
         }}
       >
         <div onClick={() => router.back()}>
@@ -40,7 +54,7 @@ const Search = () => {
             height={18}
           />
         </div>
-        <div>
+        <div onClick={() => setFilterOpen(!filterOpen)}>
           <Image src={Filter} alt="fill" />
         </div>
       </div>

@@ -6,12 +6,14 @@ import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
 import EventTab from "./[tab]";
 import DashboardLayout from "pages/dashboard/layout/layout";
+import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 
 const SingleEvent = () => {
   const router = useRouter();
   const { id } = router.query;
   const activeTab = router.query?.tab || ("Details" as string | undefined);
+  const isTablet = useMediaQuery("(max-width: 780px)");
 
   return (
     <DashboardLayout>
@@ -30,46 +32,67 @@ const SingleEvent = () => {
             paddingInline: "2%",
           }}
         >
-          <div css={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+          <div
+            css={{
+              display: "flex",
+              alignItems: "center",
+              gap: isTablet ? "1rem" : "0.7rem",
+            }}
+            onClick={() => router.back()}
+          >
             <Image
               src="/assets/svgs/arrow-left.svg"
               alt=""
               width={22}
               height={15}
             />
-            <h3 css={{ fontWeight: "bold" }}>
+            <h3 css={{ fontWeight: "bold", width: isTablet ? "80%" : "" }}>
               Medical Crusade with Doctor West
             </h3>
           </div>
-          <div css={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
-            <Image src="/assets/svgs/plus.svg" alt="" width={41} height={41} />
-            <p css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
-              witness this event
-            </p>
-          </div>
+          {!isTablet && (
+            <div css={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+              <Image
+                src="/assets/svgs/plus.svg"
+                alt=""
+                width={41}
+                height={41}
+              />
+              <p css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
+                witness this event
+              </p>
+            </div>
+          )}
         </div>
         <div
           css={{
             position: "relative",
-            marginTop: "3rem",
+            marginTop: isTablet ? "" : "3rem",
             fontFamily: "'Poppins', sans-serif",
+            width: isTablet ? "100vw" : "",
           }}
         >
           <ul
             css={{
               boxShadow: `0px 0px 10px ${"#00000029"}`,
-              borderRadius: "20px",
-              padding: "1rem 2.5rem",
+              borderRadius: isTablet ? "0" : "20px",
+              padding: isTablet ? "1.5rem 0.5rem" : "1rem 2.5rem",
               display: "flex",
               justifyContent: "space-between",
-              width: "60%",
-              position: "absolute",
+              width: isTablet ? "100vw" : "60%",
+              position: isTablet ? "relative" : "absolute",
               zIndex: "1",
-              top: "-1.5rem",
-              left: "20%",
+              top: isTablet ? "" : "-1.5rem",
+              left: isTablet ? "0" : "20%",
               backgroundColor: "#fff",
               listStyleType: "none",
               fontFamily: "'Open Sans', sans-serif",
+              overflowX: "auto",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+              gap: "0.125rem",
+              marginBottom: isTablet ? "0rem":""
             }}
           >
             {eventNav.map((navItem) => (
@@ -83,12 +106,12 @@ const SingleEvent = () => {
           </ul>
           <div
             css={{
-              width: "97%",
+              width: isTablet ? "100vw":"97%",
               marginInline: "auto",
               paddingBottom: "5rem",
               boxShadow: `0px 0px 10px ${"#00000029"}`,
-              borderRadius: "20px",
-              height: "calc(100vh - (80px + 3rem))",
+              borderRadius: isTablet ? "0":"20px",
+              height: "calc(100vh - (80px + 4rem))",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
                 display: "none",
@@ -117,9 +140,7 @@ const TabNav: React.FC<{
         css={{
           padding: "0.38rem 0.75rem ",
           borderRadius: "1rem",
-          background: isActive
-            ? "#00D9B7"
-            : "#F2F7FB",
+          background: isActive ? "#00D9B7" : "#F2F7FB",
           color: isActive ? "#fff" : "#AEAEAE",
           cursor: "pointer",
           fontSize: "0.875rem",

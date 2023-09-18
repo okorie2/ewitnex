@@ -190,8 +190,8 @@ const EventDetails = () => {
         />
         <div
           css={{
-            width: isTablet ? "40%":"193px",
-            height: "266px",
+            width: isTablet ? "44%":"193px",
+            height: isTablet ?"200px":"266px",
             borderRadius: "10px",
             backgroundColor: "#fff",
             boxShadow: `0px 0px 10px ${"#00000029"}`,
