@@ -4,21 +4,13 @@ import React, { useState } from "react";
 import { H1 } from "styles/components/typography";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { Button } from "styles/components/button";
 import {useRouter} from 'next/router'
 
 const AsAnOrganizerFragment = () => {
   const router = useRouter()
-  const optionList = [
-    "Wedding",
-    "Birthday",
-    "Sports",
-    "Political",
-    "Political",
-    "Cultural",
-    "Trade",
-    "Musical",
-  ];
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div
       css={{
@@ -28,16 +20,17 @@ const AsAnOrganizerFragment = () => {
         gap: "0.8rem",
         justifyContent: "space-around",
         alignItems: "center",
-        paddingBlock: "5rem",
+        paddingBlock: isTablet ? "6rem":"5rem",
+        paddingBottom: isTablet ? "3rem" : "",
         fontFamily: '"Poppins", sans-serif',
       }}
     >
       <p css={{ fontWeight: "600" }}>As An Organizer</p>
-      <H1 size={"2.4rem"} color={"#000"} small>
+      <H1 color={"#000"} small>
         Bring your vision to life with{" "}
         <span css={{ color: "#7c35ab" }}>Ewitnex</span>
       </H1>
-      <div css={{ width: "57%" }}>
+      <div css={{ width:  isTablet ? "95%": "57%", fontSize: isTablet ? "0.9rem":"" }}>
         <p>
           Ewitnex empowers you to effortlessly create and organize exceptional
           events, whether it's a conference, concert, workshop, or social

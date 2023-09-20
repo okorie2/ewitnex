@@ -5,9 +5,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { screen } from "styles/theme";
+import { useMediaQuery } from "@mui/material";
 import Logo from "@/components/logo";
 
 export default function PublicSiteFooter() {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div
       css={{
@@ -20,12 +22,13 @@ export default function PublicSiteFooter() {
       <div
         css={{
           display: "flex",
+          flexDirection: isTablet ? "column" : "row",
           gap: "3%",
           justifyContent: "space-between",
-          padding: "0% 4%",
+          padding: isTablet ? "0% 1.5rem":"0% 4%",
         }}
       >
-        <div css={{ width: "25%", marginTop: "-2%" }}>
+        <div css={{ width: isTablet ? "90%" : "25%", marginTop: "-2%", marginBottom: isTablet ? "2rem" : ""}}>
           <Logo image="/assets/pngs/logo.png" width={125.13} height={58.12} />
           <p css = {{marginTop: "5%"}}>
             Ewitnex - is a social user-friendly platform that provides tools for
@@ -36,7 +39,7 @@ export default function PublicSiteFooter() {
           </p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Use Ewitnex</p>
+          <p css={{ fontWeight: "bold", marginBottom: isTablet ? "1rem" :"20%" }}>Use Ewitnex</p>
           <Link href = "/how-it-works"><p css={{ fontWeight: "500", ":hover":{color: "#7C35AB"} }}>How it works</p></Link>
           <p css={{ fontWeight: "500" }}>Pricing</p>
           <p css={{ fontWeight: "500" }}>Content standards</p>
@@ -44,7 +47,7 @@ export default function PublicSiteFooter() {
           <p css={{ fontWeight: "500" }}>FAQs</p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Find Events</p>
+          <p css={{ fontWeight: "bold", marginBottom:  isTablet ? "1rem" :"20%", marginTop: isTablet ? "2rem" : "" }}>Find Events</p>
           <p css={{ fontWeight: "500" }}>Virtual Events</p>
           <p css={{ fontWeight: "500" }}>Online Events</p>
           <p css={{ fontWeight: "500" }}>Content Standards</p>
@@ -53,7 +56,7 @@ export default function PublicSiteFooter() {
           <p css={{ fontWeight: "500" }}>Birthday Events</p>
         </div>
         <div>
-          <p css={{ fontWeight: "bold", marginBottom: "20%" }}>Connect with Ewitnex</p>
+          <p css={{ fontWeight: "bold", marginBottom: isTablet ? "1rem" :"20%", marginTop: isTablet ? "2rem" : "" }}>Connect with Ewitnex</p>
           <p css={{ fontWeight: "500" }}>Contact Support</p>
           <div css = {{display:"flex", gap:"1rem", marginTop:"1rem", alignItems:"center"}}>
             <Image 
@@ -82,7 +85,7 @@ export default function PublicSiteFooter() {
           display: "flex",
           justifyContent: "center",
           marginTop: "5%",
-          border: "1px solid #E0e0e0",
+          border: isTablet ? "" :"1px solid #E0e0e0",
           padding: "0.5% 3% ",
           paddingBottom: "1.5%",
         }}
@@ -90,7 +93,9 @@ export default function PublicSiteFooter() {
 
         <div
           css={{
-            display: "flex",
+            display: isTablet ? "grid" :"flex",
+            gridTemplateColumns:"1fr 1fr",
+            width: isTablet ? "90vw":"",
             alignItems: "center",
             marginTop: "1.2rem",
             gap: "1.5rem",
@@ -103,8 +108,8 @@ export default function PublicSiteFooter() {
               outline: "none",
               cursor: "pointer",
               position: "relative",
-              width: "11vw",
-              height: "6.5vh",
+              width: isTablet ? "100%" :"11vw",
+              height: isTablet ? "7vh" :"6.5vh",
             }}
             type="button"
           >
@@ -117,8 +122,8 @@ export default function PublicSiteFooter() {
               outline: "none",
               cursor: "pointer",
               position: "relative",
-              width: "11vw",
-              height: "6.5vh",
+              width: isTablet ? "100%" :"11vw",
+              height: isTablet ? "7vh" : "6.5vh",
             }}
             type="button"
           >
@@ -131,6 +136,7 @@ export default function PublicSiteFooter() {
           padding: "1% 0",
           textAlign: "center",
           borderBottom: "1px solid #E0e0e0",
+          marginBlock:isTablet ? "0.5rem":""
         }}
       >
         © 2023 Ewitnex

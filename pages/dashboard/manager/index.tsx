@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useMemo, useState } from "react";
 
-import DashboardLayout from "pages/dashboard/layout";
+import DashboardLayout from "pages/dashboard/layout/layout";
 import {
   activeButtonStyle,
   inactiveButtonStyle,

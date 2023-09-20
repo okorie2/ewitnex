@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { Tooltip } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 
 const LandingPageSearchInput = ({ placeholder }: { placeholder: string }) => {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div
       css={{
         height: "64px",
         background: "#FFF",
-        width: "75%",
+        width: isTablet ? "100%" : "75%",
         borderRadius: "56px",
         paddingLeft: "5%",
         display: "grid",

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { screen } from "styles/theme";
 import Down from "public/assets/svgs/down_ar.svg";
+import { useMediaQuery } from "@mui/material";
 import Image from 'next/image'
 
 interface SearchSelectProps {
@@ -25,6 +26,8 @@ interface SearchSelectProps {
 
 export default function SearchSelect({ ...rest }: SearchSelectProps) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const isTablet = useMediaQuery("(max-width: 900px)" );
+
   return (
     <div
       css={{

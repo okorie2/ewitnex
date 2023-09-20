@@ -4,22 +4,32 @@ import { Button } from "styles/components/button";
 import { H1 } from "styles/components/typography";
 import Image from "next/image";
 import Link from "next/link";
+import { useMediaQuery } from "react-responsive";
 import { screen } from "styles/theme";
 
 const HomeHero = () => {
+  const isTablet = useMediaQuery({ query: "(max-width: 900px)" });
   return (
     <div
       css={{
-        height: "474px",
+        height: isTablet ? "585px" :"474px",
         backgroundColor: "#7C35AB33",
         width: "100%",
-        marginTop: "5rem",
+        marginTop: "4rem",
         display: "flex",
+        flexDirection: "row",
         fontFamily: '"Poppins", sans-serif',
         alignItems: "center",
         gridTemplateColumns: "1fr 1fr",
         justifyContent: "space-between",
-        padding: " 0 50px",
+        padding:" 0 50px",
+        [screen.tablet]: {
+          flexDirection:"column",
+          padding:"0 1.125rem",
+          width:"100vw",
+          overflowX:"clip",
+          marginBottom:"15rem"
+        },
       }}
     >
       <div
@@ -36,15 +46,24 @@ const HomeHero = () => {
               display: "flex",
               gap: "11px",
               color: "#7C35AB",
-              alignItems: "center",
+              alignItems:"center",
               textAlign: "left",
               [screen.desktop]: {
                 gap: "2px",
               },
+              [screen.tablet]: {
+                display:"block",
+               fontSize:"28px",
+              },
             }}
           >
             Socially
-            <span css={{ color: "#000" }}>Connected.</span> Paperless.
+            <span css={{ color: "#000" }}> Connected{isTablet ? ",": "."}</span>
+             <p css = {{
+              [screen.tablet]: {
+                fontSize:"28px",
+               },
+             }}>Paperless{isTablet ? ",": "."}</p>
           </H1>
           <H1
             small
@@ -57,31 +76,36 @@ const HomeHero = () => {
               [screen.desktop]: {
                 gap: "2px",
               },
+              [screen.tablet]: {
+               fontSize:"28px",
+              },
             }}
           >
-            Unforgettable Events
+            Unforgettable Events.
           </H1>
         </div>
         <p
           css={{
             letterSpacing: "0.32px",
-            fontSize: "15px",
+            fontSize: isTablet ? "15px" : "15px",
             marginTop: "1rem",
-            marginBottom: "2rem",
+            marginBottom: isTablet ? "0" : "2rem",
+            [screen.tablet] : {
+            }
           }}
         >
-          We believe that events should be socially connected, eco-friendly, and{" "}
-          <br /> truly memorable. Allowing you to seamlessly plan, organize, and
-          engage <br /> with your attendees. Discover the power of a paperless
-          future, where <br /> technology meets community, and events become
-          unforgettable
+          We believe that events should be socially connected, eco-friendly, and
+          {!isTablet && <br />} truly memorable. Allowing you to seamlessly plan, organize, and
+          engage  {!isTablet && <br />}  with your attendees. Discover the power of a paperless
+          future, where  {!isTablet && <br />}  technology meets community, and events become
+          unforgettable.
         </p>
         <Link href = "/auth/signup" style = {{width: "13rem"}}>
         <Button
           css={{
             width: "13rem",
             [screen.desktop]: { width: "12rem" },
-            [screen.lg]: {},
+            [screen.tablet]: {display:"none"},
           }}
         >
           Get Started
@@ -95,7 +119,7 @@ const HomeHero = () => {
           flexBasis: "35%",
         }}
       >
-        <div css={{ textAlign: "right", marginTop: "150px" }}>
+        <div css={{ textAlign: "right", marginTop: isTablet? "0" :"150px" }}>
           <Image
             src="/assets/pngs/heroimg1.png"
             alt="wedding event"
@@ -103,28 +127,30 @@ const HomeHero = () => {
             width={177}
             style={{
               borderRadius: "20px",
-              marginTop: "8rem",
+              marginTop: isTablet ? "5rem":"8rem",
               // marginRight: "-14%",
             }}
           />
         </div>
-        <div css={{ textAlign: "right", marginTop: "120px" }}>
+        <div css={{ textAlign: "right", marginTop: isTablet ?"0" : "120px" , [screen.tablet]: {
+          order:"-1"
+        }}}>
           <Image
             src="/assets/pngs/heroimg2.png"
             alt="lagos carnival"
-            height={236}
+            height={isTablet? 197 : 236}
             width={177}
             quality={100}
             style={{
               borderRadius: "20px",
-              marginTop: "3.5rem",
+              marginTop: isTablet? "1rem" : "3.5rem",
               objectFit: "cover",
             }}
           />
           <Image
             src="/assets/pngs/heroimg3.png"
             alt="event hall"
-            height={175}
+            height={isTablet? 203 : 175}
             width={177}
             quality={100}
             style={{
@@ -134,28 +160,30 @@ const HomeHero = () => {
             }}
           />
         </div>
-        <div css={{ textAlign: "right", marginTop: "90px" }}>
+        <div css={{ textAlign: "right", marginTop: isTablet ? "0" : "90px",  }}>
           <Image
             src="/assets/pngs/heroimg4.png"
             alt="lagos carnival"
-            height={256}
+            height={isTablet? 197 : 256}
             width={177}
             quality={100}
             style={{
               borderRadius: "20px",
-              marginTop: "1.5rem",
+              marginTop: isTablet ? "1rem" : "1.5rem",
               objectFit: "cover",
+              overflowX:"hidden"
             }}
           />
           <Image
             src="/assets/pngs/heroimg5.png"
             alt="lagos carnival"
-            height={256}
+            height={isTablet? 203 : 256}
             width={177}
             quality={100}
             style={{
               borderRadius: "20px",
-              marginTop: "0.33rem",
+              marginTop: isTablet ? "0.3rem" :  "0.33rem",
+              overflowX:"hidden",
               objectFit: "cover",
             }}
           />

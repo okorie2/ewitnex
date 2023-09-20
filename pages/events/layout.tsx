@@ -2,15 +2,17 @@
 
 import { useTheme } from "@emotion/react";
 
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import Right from "public/assets/svgs/right_ar.svg";
 import { Tab } from "pages/dashboard/programs";
 import EventFilter from "fragments/eventFilter";
+import { useMediaQuery } from "@mui/material";
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [active, setActive] = useState("All");
-  const [filterSectionOpen, setFilterSectionOpen] = useState(true);
+  const [filterSectionOpen, setFilterSectionOpen] = useState(!isTablet);
 
   const handleActive = (tab: string) => {
     setActive(tab);
@@ -19,6 +21,12 @@ export default function Layout({ children }: { children: ReactNode }) {
   const handleFilterSectionOpen = () => {
     setFilterSectionOpen(!filterSectionOpen);
   };
+  useEffect (() => {
+    const html = document.querySelector('html')
+    if (html) { 
+      html.style.overflow = filterSectionOpen ? "hidden" : "auto"
+    }
+  }, [filterSectionOpen])
   const categories = [
     "All",
     "Music",
@@ -68,7 +76,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div
         css={{
           display: "grid",
-          gridTemplateColumns: filterSectionOpen ? " 258px 1fr 10vw" : " 75px 1fr 10vw",
+          gridTemplateColumns: filterSectionOpen ? isTablet ? "100vw 1fr":" 258px 1fr 10vw" :isTablet ?"60px 1fr": " 75px 1fr 10vw",
           height: "100%",
           maxHeight: "100vh",
           marginTop: "8.7rem",
@@ -82,7 +90,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div css={{ padding: "2% 1%", maxHeight: "calc(100vh - 120px)", overflowY: "auto", "&::-webkit-scrollbar": {
             display: "none",
           }, }}>{children}</div>
-        <div css={{ padding: "20% 0.5%" }}>
+        <div css={{ padding: "20% 0.5%" , display:isTablet ? "none": "block"}}>
           <div css={{ display: "flex", marginBottom: "0.8rem", alignItems: "center", gap:"5px"}}>
             <p>All Events</p>
             <Image src={Right} alt="right" />

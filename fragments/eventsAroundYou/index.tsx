@@ -4,12 +4,14 @@ import React, { useState } from "react";
 import { H2 } from "styles/components/typography";
 import EventCard from "@/components/cards/eventCard";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { screen } from "styles/theme";
 import Link from "next/link";
 
 export default function EventsAroundYouFragment() {
   const [seeAllHover, setSeeAllHover] = useState(false);
   const [scrollRightHover, setScrollRightHover] = useState(false);
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div css={{ padding: "2% 4%", marginTop: "3rem" }}>
       <div
@@ -19,13 +21,13 @@ export default function EventsAroundYouFragment() {
         }}
       >
         <div>
-          <H2>Events Around You</H2>
+          <H2 small = {isTablet}>Events Around You</H2>
         </div>
         <div
           css={{
-            width: "73%",
+            width: isTablet ? "100%" : "73%",
             letterSpacing: "0.32px",
-            fontSize: "0.95rem",
+            fontSize: isTablet ? "0.89rem" : "0.95rem",
             marginTop: "1rem",
           }}
         >
@@ -39,16 +41,19 @@ export default function EventsAroundYouFragment() {
       <div
         css={{
           display: "flex",
-          gap: "3px",
+          gap: isTablet ? "1rem":"0.125rem",
           justifyContent: "space-between",
-          flexWrap: "wrap",
+          flexWrap: isTablet ? "nowrap": "wrap",
+          marginTop: isTablet ? "1.5rem" : "",
+          overflowX:'auto',
+          paddingInline:"2px"
         }}
       >
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -63,13 +68,14 @@ export default function EventsAroundYouFragment() {
             priceRange="$500-$2K"
             title="Connack Foundation African Music Award Of The Year"
             img="/assets/pngs/card_img.png"
+            width= {isTablet ? "90vw" : "100%"}
           />
         </div>
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -84,13 +90,15 @@ export default function EventsAroundYouFragment() {
             priceRange="$500-$2K"
             title="Medical Crusade with Doctor West"
             img="/assets/pngs/card_2.png"
+            width= {isTablet ? "90vw" : "100%"}
+
           />
         </div>
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -105,13 +113,15 @@ export default function EventsAroundYouFragment() {
             priceRange="Free"
             title="Ada weds Obi"
             id="Wed54254"
+            width= {isTablet ? "90vw" : "100%"}
+
           />
         </div>
         <div
           css={{
-            width: "24%",
+            width: isTablet ? "100%":"24%",
             [screen.desktop]: {
-              width: "32%",
+              width: isTablet ? "100%": "32%",
             },
           }}
         >
@@ -126,6 +136,8 @@ export default function EventsAroundYouFragment() {
             organizer="GDG Aba"
             priceRange="$500-$2K"
             title="Google Developers Festival Aba"
+            width= {isTablet ? "90vw" : "100%"}
+
           />
         </div>
       </div>
@@ -154,7 +166,7 @@ export default function EventsAroundYouFragment() {
               background: "#7C35AB",
             },
             [screen.desktop]: {
-              width: "17%",
+              width: isTablet ? "40%" : "17%",
             },
             [screen.lg]: {
               width: "16%",
@@ -180,11 +192,11 @@ export default function EventsAroundYouFragment() {
             />
           )}
         </div>
-        <div css={{ display: "flex", gap: "1rem" }}>
+        <div css={{ display: "flex", gap: "1rem", marginTop: isTablet ? "1%" : "" }}>
           <div
             css={{
-              width: "46px",
-              height: "46px",
+              width: isTablet ? "40px" : "46px",
+              height: isTablet ? "40px" : "46px",
               borderRadius: "50%",
               border: "1px solid #AEAEAE",
               transform: "rotate(180deg)",
@@ -203,8 +215,8 @@ export default function EventsAroundYouFragment() {
           </div>
           <div
             css={{
-              width: "46px",
-              height: "46px",
+              width: isTablet ? "40px" : "46px",
+              height: isTablet ? "40px" : "46px",
               borderRadius: "50%",
               border: "1px solid #AEAEAE",
               display: "flex",

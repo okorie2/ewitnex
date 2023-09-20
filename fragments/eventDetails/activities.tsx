@@ -2,9 +2,11 @@
 
 import React from "react";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 
 const EventActivities = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const router = useRouter();
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
   return (
@@ -14,7 +16,7 @@ const EventActivities = () => {
         color: "#000",
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
-        width: `${loggedIn ? "70%" : "60%"}`,
+        width: `${isTablet ? "90%":loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
         top: "3.5rem",
@@ -25,7 +27,7 @@ const EventActivities = () => {
     >
       <div
         css={{
-          width: "65%",
+          width: isTablet ?"100%":"65%",
           marginInline: "auto",
           textAlign: "center",
         }}

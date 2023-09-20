@@ -84,7 +84,7 @@ export default function Form() {
         </div>
         <div css={{ marginTop: "2rem", marginBottom:"1rem" }}>
           <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
-            Don&apos; Have An Account?
+            Don&apos;t Have An Account?{" "}
             <span css={{ fontWeight: 700, color: "#7C35AB" }}>
               <Link href="/auth/signup">Sign Up</Link>
             </span>

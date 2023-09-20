@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { H1 } from "styles/components/typography";
 
 const JoinRevolutionFragment = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div
       css={{
@@ -19,9 +21,9 @@ const JoinRevolutionFragment = () => {
       <div>
         <p
           css={{
-            width: "65%",
+            width: isTablet ? "100%" : "65%",
             letterSpacing: "0.32px",
-            fontSize: "0.95rem",
+            fontSize: isTablet ? "0.9rem" : "0.95rem",
             marginTop: "1rem",
           }}
         >
@@ -32,10 +34,12 @@ const JoinRevolutionFragment = () => {
       </div>
       <div
         css={{
-          display: "grid",
+          display: isTablet ? "flex" : "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
           gap: "0.8rem",
           marginTop: "2.5rem",
+          overflowX: "auto",
+          marginBottom:"0.5rem"
         }}
       >
         <Review 
@@ -71,15 +75,17 @@ const Review = ({review, reviewer, reviewerRole, reviewerImage}:{
     reviewerRole:string
     reviewerImage: string
 }) => {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
   return (
     <div
       css={{
+        minWidth: isTablet ? "90vw" : "",
         background: "#FFF",
         borderRadius: "20px",
         boxShadow: "0px 0px 10px #00000029",
         padding: "2% 5.4%",
-        height: "325px",
-        position:"relative"
+        height: isTablet ? "355px" : "325px",
+        position:"relative",
       }}
     >
       <div
@@ -122,7 +128,7 @@ const Review = ({review, reviewer, reviewerRole, reviewerImage}:{
             height = {61}
             width = {61}
         />
-        </div>: 
+        </div>
         <div css = {{display: "flex", flexDirection: "column", justifyContent: "center", gap:"2%"}}>
             <p css = {{fontWeight: "600", fontSize: "1.125rem"}}>{reviewer}</p>
             <p css =  {{fontSize: "0.875rem"}}>{reviewerRole}</p>

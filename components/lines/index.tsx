@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
+import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 
 export const Lines = () => {
+  const isTablet = useMediaQuery("(max-width: 750px)" );
+
   return (
     <>
       <div
@@ -14,7 +17,7 @@ export const Lines = () => {
         }}
       >
         <Image
-          src="/assets/pngs/lines.png"
+          src={isTablet ? "/assets/svgs/line-mobile.svg":"/assets/pngs/lines.png"}
           alt="line"
           css={{ objectFit: "cover" }}
           fill

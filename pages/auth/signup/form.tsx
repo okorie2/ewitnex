@@ -9,7 +9,7 @@ import Link from "next/link";
 import { css } from "@emotion/react";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
 import { Box } from "@mui/material";
-
+import { useMediaQuery } from "@mui/material";
 import GenderType from "@/components/signupComponents/selectGender";
 import Chip, { chipData } from "@/components/signupComponents/chip";
 import { useRouter } from "next/router";
@@ -60,6 +60,7 @@ export default function Form() {
 }
 
 const WhoYouAre = (props: FormLevelProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const handleNext = () => {
     props.setFormLevel("email");
   };
@@ -95,7 +96,7 @@ const WhoYouAre = (props: FormLevelProps) => {
               width={22}
               height={15}
             />
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+            {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
           </button>
         </div>
       </Link>
@@ -104,7 +105,7 @@ const WhoYouAre = (props: FormLevelProps) => {
           fontFamily: "'Nunito', sans-serif",
           fontSize: "1.5rem",
           marginBottom: "4.3rem",
-          fontWeight: 600,
+          fontWeight: isTablet ? 700 : 600,
         }}
       >
         <p>Lets Know</p>
@@ -159,7 +160,7 @@ const WhoYouAre = (props: FormLevelProps) => {
       <div css={{ marginTop: "2rem", marginBottom: "1rem" }}>
         <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
           Already Have An Account?
-          <span css={{ fontWeight: 700, color: "#f05e78" }}>
+          <span css={{ fontWeight: 700, color: isTablet ? "#7C35AB" :"#f05e78" }}>
             <Link href="/auth/signin"> Sign In</Link>
           </span>
         </p>
@@ -169,6 +170,7 @@ const WhoYouAre = (props: FormLevelProps) => {
 };
 
 const Email = (props: FormLevelProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [email, setEmail] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -200,7 +202,7 @@ const Email = (props: FormLevelProps) => {
             width={22}
             height={15}
           />
-          <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+          {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
         </button>
       </div>
       <div
@@ -230,7 +232,7 @@ const Email = (props: FormLevelProps) => {
 const Password = (props: FormLevelProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [formDetails, setFormDetails] = useState({
     phoneNumber: "",
     password: "",
@@ -268,14 +270,14 @@ const Password = (props: FormLevelProps) => {
               width={22}
               height={15}
             />
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+            {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
           </button>
         </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
             fontSize: "1.5rem",
-            marginBottom: "4.3rem",
+            marginBottom: isTablet ? "2rem":"4.3rem",
             p: {
               marginBottom: "1.3rem",
             },
@@ -331,6 +333,7 @@ const Password = (props: FormLevelProps) => {
 };
 
 const Gender = (props: FormLevelProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const [selectedType, setSelectedType] = useState<
     "Male" | "Female" | "Preferred not to say"
   >();
@@ -363,14 +366,14 @@ const Gender = (props: FormLevelProps) => {
               width={22}
               height={15}
             />
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+            {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
           </button>
         </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
             fontSize: "1.5rem",
-            marginBottom: "4.3rem",
+            marginBottom: isTablet ? "3rem":"4.3rem",
             fontWeight: "500",
             p: {
               marginBottom: "1.3rem",
@@ -418,6 +421,7 @@ const Gender = (props: FormLevelProps) => {
 };
 
 const Location = (props: FormLevelProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const handleNext = () => {
     props.setFormLevel("username");
   };
@@ -448,7 +452,7 @@ const Location = (props: FormLevelProps) => {
           css={{
             fontFamily: "'Nunito', sans-serif",
             fontSize: "1.5rem",
-            marginBottom: "4.3rem",
+            marginBottom: isTablet ? "2rem":"4.3rem",
             fontWeight: "600",
             p: {
               marginBottom: "1.3rem",
@@ -474,7 +478,7 @@ const Location = (props: FormLevelProps) => {
             weight="bold"
             setValue={(e) => setValue(e.target.value)}
           />
-          <Box height={35} />
+          <Box height={isTablet ? 60 : 35} />
 
           <ButtonFormFilled onClick={handleNext}>CONTINUE</ButtonFormFilled>
         </form>
@@ -484,6 +488,7 @@ const Location = (props: FormLevelProps) => {
 };
 
 const Username = (props: FormLevelProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const handleNext = () => {
     props.setFormLevel("interests");
   };
@@ -513,7 +518,7 @@ const Username = (props: FormLevelProps) => {
               width={22}
               height={15}
             />
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+            {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
           </button>
         </div>
         <div
@@ -590,6 +595,8 @@ const Username = (props: FormLevelProps) => {
               display: flex;
               gap: 10px;
               margin-top: 19px;
+              flex-wrap: wrap;
+              align-items: center;
             `}
           >
             {[" Blessed_1", "Bles_one", "B_one", "B_lone"].map(
@@ -623,6 +630,7 @@ const Username = (props: FormLevelProps) => {
 };
 
 const Interests = (props: FormLevelProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const router = useRouter();
   const handleSubmit = () => {
     router.push("/dashboard/programs");
@@ -652,7 +660,7 @@ const Interests = (props: FormLevelProps) => {
             width={22}
             height={15}
           />
-          <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+          {!isTablet && <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>}
         </button>
       </div>
 

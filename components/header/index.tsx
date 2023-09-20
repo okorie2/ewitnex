@@ -1,12 +1,23 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState , useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 import Logo from "@/components/logo";
+import { screen } from "styles/theme";
+import MobileNav from "fragments/homeHero/mobileNav";
 
 export default function Navbar() {
+  const isTablet = useMediaQuery("(max-width: 900px)" );
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  useEffect (() => {
+    const html = document.querySelector('html')
+    if (html) { 
+      html.style.overflow = isMobileNavOpen ? "hidden" : "auto"
+    }
+  }, [isMobileNavOpen])
   const router = useRouter();
   const active = useMemo(() => {
     let route = router.route;
@@ -40,11 +51,12 @@ export default function Navbar() {
     }
   }, [router.route]);
   return (
+    <>
     <div
       css={{
         backgroundColor: "#fff",
         display: "flex",
-        justifyContent: "space-evenly",
+        justifyContent: isTablet ? "space-between":"space-evenly",
         alignItems: "center",
         boxShadow: "#00000029 0px 0px 10px ",
         padding: "0% 1%",
@@ -55,6 +67,10 @@ export default function Navbar() {
         right: "0",
         top: "0",
         zIndex: "2",
+        [screen.tablet] : {
+          width: "100vw",
+          padding:"0 2%",
+        }
       }}
     >
       <Logo image="/assets/pngs/logo.png" />
@@ -64,10 +80,11 @@ export default function Navbar() {
           backgroundColor: "#F5F5F5",
           width: "33.2%",
           height: "2.625rem",
-          display: "flex",
+          display : isTablet ? "none":"flex",
           alignItems: "center",
           paddingLeft: "17px",
           gap: "2%",
+          
         }}
       >
         <div css={{ marginTop: "3px" }}>
@@ -97,7 +114,7 @@ export default function Navbar() {
       </div>
       <div
         css={{
-          display: "flex",
+          display : isTablet ? "none":"flex",
           color: "#000",
           fontSize: "1rem",
           width: "32%",
@@ -109,6 +126,7 @@ export default function Navbar() {
               color: "#AEAEAE",
             },
           },
+          
         }}
       >
         <div>
@@ -142,10 +160,20 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      <div>
+      <div
+        css={{
+          display : isTablet ? "none":"flex",
+        }}
+      >
         <hr css={{ width: "1px", height: "36px" }} />
       </div>
-      <div css={{ color: "#7C35AB", fontWeight: "600" }}>
+      <div
+        css={{
+          color: "#7C35AB",
+          fontWeight: "600",
+          display : isTablet ? "none":"flex",
+        }}
+      >
         <Link href="/auth/signin">Log in</Link>
       </div>
       <div
@@ -153,18 +181,48 @@ export default function Navbar() {
           borderRadius: "3.5rem",
           border: `1px solid ${"#7C35AB"}`,
           height: "2.625rem",
-          display: "flex",
+          display : isTablet ? "none":"flex",
           width: "8.063rem",
           alignItems: "center",
           justifyContent: "center",
           fontWeight: 500,
           backgroundColor: "#7C35AB",
-          color: "#FFF"
+          color: "#FFF",
         }}
       >
         <Link href="/onboarding">Create Event</Link>
       </div>
-      
+      {
+        isTablet && 
+        <div css = {{
+          display:"flex",
+          paddingRight:"0.5rem",
+          gap:"2rem",
+          alignItems:"center",
+          marginTop:"0.5rem"
+        }}>
+          <div>
+          <Image
+                src="/assets/svgs/search.svg"
+                width={20}
+                height={20}
+                alt="logo"
+              />
+          </div>
+          <div onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}>
+          <Image
+                src={isMobileNavOpen ? "/assets/svgs/hamburger.svg":"/assets/svgs/hamburger.svg"}
+                width={20}
+                height={20}
+                alt="logo"
+              />
+          </div>
+        </div>
+      }
     </div>
+    {
+        isMobileNavOpen && <MobileNav active = {active} shown={isMobileNavOpen} setClose={() => setIsMobileNavOpen(false)} />
+    }
+    </>
   );
 }

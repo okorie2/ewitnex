@@ -7,9 +7,11 @@ import { Lines } from "@/components/lines";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
+import { useMediaQuery } from "@mui/material";
 import EventTab from "./[tab]";
 
 const SingleEvent = () => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const router = useRouter();
   const { id } = router.query;
   const activeTab = router.query?.tab || ("Details" as string | undefined);
@@ -19,8 +21,8 @@ const SingleEvent = () => {
       <Navbar />
       <div
         css={{
-          marginBlock: "8.5rem 2rem",
-          width: "90%",
+          marginBlock: isTablet ? "5rem" : "8.5rem",
+          width: isTablet ? "100vw" : "90%",
           marginInline: "auto",
           paddingBottom: "5rem",
           boxShadow: `0px 0px 10px ${"#00000029"}`,
@@ -31,18 +33,23 @@ const SingleEvent = () => {
         <ul
           css={{
             boxShadow: `0px 0px 10px ${"#00000029"}`,
-            borderRadius: "20px",
-            padding: "1rem 2.5rem",
+            borderRadius: isTablet ? "" : "20px",
+            padding: isTablet ? "1.5rem 0.5rem" : "1rem 2.5rem",
             display: "flex",
             justifyContent: "space-between",
-            width: "60%",
-            position: "absolute",
+            width: isTablet ? "100vw" : "60%",
+            position: isTablet ? "relative" : "absolute",
             zIndex: "1",
-            top: "-1.5rem",
-            left: "20%",
+            top: isTablet ? "" : "-1.5rem",
+            left: isTablet ? "0%" : "20%",
             backgroundColor: "#fff",
             listStyleType: "none",
             fontFamily: "'Open Sans', sans-serif",
+            overflowX: "auto",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+            gap:"0.125rem"
           }}
         >
           {eventNav.map((navItem) => (
@@ -76,9 +83,7 @@ const TabNav: React.FC<{
         css={{
           padding: "0.38rem 0.75rem ",
           borderRadius: "1rem",
-          background: isActive
-            ? "#00D9B7"
-            : "#F2F7FB",
+          background: isActive ? "#00D9B7" : "#F2F7FB",
           color: isActive ? "#fff" : "#AEAEAE",
           cursor: "pointer",
           fontSize: "0.875rem",

@@ -5,26 +5,29 @@ import RSVPCard from "@/components/cards/RSVPCard";
 import { H3 } from "styles/components/typography";
 import { screen } from "styles/theme";
 import { ButtonFormFilled } from "styles/components/button";
+import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 
 const RSVP = () => {
   const router = useRouter();
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
   return (
     <div
       css={{
         boxShadow: " 0px 0px 10px #0000001A",
         borderRadius: "10px",
-        padding: "2rem 2.5rem",
-        width: `${loggedIn ? "70%" : "60%"}`,
+        padding: isTablet ? "2rem 0.5rem":"2rem 2.5rem",
+        width: `${isTablet ? "100vw":loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
-        top: "3.5rem",
+        marginBottom:isTablet ? "-5rem" : "",
+        top: isTablet ? "0":"3.5rem",
       }}
     >
       <div
         css={{
-          width: "80%",
+          width: isTablet ? "100%":"80%",
           marginInline: "auto",
           textAlign: "center",
           display: "grid",
@@ -34,7 +37,7 @@ const RSVP = () => {
         <div
           css={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: isTablet ?"1fr":"1fr 1fr",
             gap: "2.5rem",
             
           }}
@@ -52,7 +55,7 @@ const RSVP = () => {
             </p>
           </div>
         </div>
-        <ButtonFormFilled css={{ width: "172px", marginInline: "auto" }}>
+        <ButtonFormFilled css={{ width: "172px", marginInline: "auto", marginBlock:isTablet ?"1.5rem":"" }}>
           ATTEND EVENT
         </ButtonFormFilled>
         <p>
@@ -65,7 +68,7 @@ const RSVP = () => {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           [screen.desktopLg]: {
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: isTablet ? "1fr":"1fr 1fr",
           },
           gap: "1.25rem",
           marginTop: "3rem",

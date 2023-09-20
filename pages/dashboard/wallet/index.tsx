@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext, useState } from "react";
 import Image from "next/image";
-import DashboardLayout from "../layout";
+import DashboardLayout from "../layout/layout";
 import WalletTransactions from "fragments/wallet/walletTransactions";
 import WalletCard from "public/assets/svgs/ewitnex-wallet-card.svg";
 import PayoutAccount from "fragments/wallet/payoutAccount";

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { screen } from "styles/theme";
 import TicketTextField from "@/components/inputs/TicketTextField";
 import { ButtonFormFilled } from "styles/components/button";
+import { useMediaQuery } from "@mui/material";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import BasicTextField from "@/components/inputs/BasicTextField";
 
@@ -18,6 +19,8 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
     const { name, value } = e.target;
     setFormDetails({ ...formDetails, [name]: value });
   };
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <form
       css={{
@@ -26,6 +29,7 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
         overflowY: "auto",
         "&::-webkit-scrollbar": {
           width: "8px",
+          display:isTablet ? "none":"",
         },
         "&::-webkit-scrollbar-track": {
           background: "#F5f5f5",
@@ -39,14 +43,15 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           },
         },
         display: "grid",
-        paddingBottom: "2rem",
+        paddingBottom: isTablet ? "":"2rem",
       }}
     >
       <div
         css={{
           fontWeight: "bold",
-          marginBottom: "2rem",
+          marginBlock: "2rem",
           width: "90%",
+          marginInline:isTablet ? "auto":"",
           display: "grid",
           gap: "1.5rem",
         }}
@@ -107,7 +112,9 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           <p>$1,000</p>
         </div>
       </div>
-      <div css={{ marginBottom: "2rem" , width:"95%"}}>
+      <div css={{ marginBottom: "2rem" , width:"95%",  
+          marginInline:isTablet ? "auto":"",
+        }}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -148,7 +155,9 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           />
         </form>
       </div>
-      <div css={{ marginBottom: "2rem" , width:"95%"}}>
+      <div css={{ marginBottom: "2rem" , width:"95%", 
+          marginInline:isTablet ? "auto":"",
+        }}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -253,7 +262,9 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           </div>
         </form>
       </div>
-      <div css={{ marginBottom: "2rem", width:"95%" }}>
+      <div css={{ marginBottom: "2rem", width:"95%" , 
+          marginInline:isTablet ? "auto":"",
+        }}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -288,7 +299,9 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           <BasicTextField label="Username(Optional)" value="Blessed_1"  name = "" setValue={handleChange} weight = "bold"/>
         </form>
       </div>
-      <div css={{ marginBottom: "2rem" , width:"95%"}}>
+      <div css={{ marginBottom: "2rem" , width:"95%", 
+          marginInline:isTablet ? "auto":"",
+        }}>
         <h3
           css={{
             fontSize: "1.25rem",
@@ -323,7 +336,9 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
           <BasicTextField label="Username(Optional)" value=""  name = "" setValue={handleChange} weight = "bold"/>
         </form>
       </div>
-      <div css= {{width:"95%"}}>
+      <div css= {{width:"95%", 
+          marginInline:isTablet ? "auto":"",
+        }}>
 
       <ButtonFormFilled css={{ marginTop: "2rem"}}  onClick={setShowSummary}>CHECK OUT</ButtonFormFilled>
       </div>

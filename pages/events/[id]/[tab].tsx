@@ -8,10 +8,12 @@ import RSVP from "fragments/eventDetails/RSVP";
 import EventSpeakers from "fragments/eventDetails/speakers";
 import EventTickets from "fragments/eventDetails/tickets";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 import AttenEventCTA from "fragments/eventDetails/attenEventCTA";
 
 const EventTab = () => {
   const router = useRouter();
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const activeTab = router.query?.tab || ("Details" as string | undefined);
 
   const stateEvents = useMemo(() => {
@@ -26,7 +28,7 @@ const EventTab = () => {
   return (
     <div css={{ position: "relative" }}>
       <div>{stateEvents}</div>
-      <AttenEventCTA link={`/events/Tec542445?tab=Tickets`} />
+      {!(activeTab === "Tickets" || activeTab === "RSVPs") && <AttenEventCTA link={`/events/Tec542445?tab=Tickets`} />}
     </div>
   );
 };

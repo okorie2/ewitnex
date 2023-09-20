@@ -9,6 +9,7 @@ import { Button } from "styles/components/button";
 import { CheckSelect } from "fragments/eventFilter";
 import { CssTextField } from "@/components/inputs/BasicTextField";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
+import { useMediaQuery } from "@mui/material";
 import { Box } from "@mui/material";
 
 interface IContactOrganizerModal {
@@ -38,7 +39,7 @@ Modal.setAppElement("body");
 
 const ContactOrganizerModal = (props: IContactOrganizerModal) => {
   const [success, setSuccess] = useState(false);
-
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -68,7 +69,7 @@ const ContactOrganizerModal = (props: IContactOrganizerModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
+     {!isTablet &&  <div
         onClick={handleClose}
         css={{
           border: "none",
@@ -81,7 +82,7 @@ const ContactOrganizerModal = (props: IContactOrganizerModal) => {
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
-      </div>
+      </div>}
 
       <div
         css={{
@@ -95,10 +96,10 @@ const ContactOrganizerModal = (props: IContactOrganizerModal) => {
           paddingRight:"0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "33.3%",
+            width: isTablet ? "100vw" :"33.3%",
           },
           display: "grid",
-          gridTemplateRows: "10% 90%",
+          gridTemplateRows: isTablet ? "10vh 90vh":"10% 90%",
         }}
       >
         {success ? (
@@ -151,6 +152,41 @@ const ContactOrganizerModal = (props: IContactOrganizerModal) => {
             </div>
         ) : (
           <>
+          {isTablet && (
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                boxShadow: "#00000029 0px 0px 10px ",
+                padding: "0% 5%",
+                paddingTop: "1.125rem",
+                height: "9vh",
+                fontFamily: "'Poppins', sans-serif",
+                position: "fixed",
+                gap: "2rem",
+                left: "0",
+                right: "0",
+                top: "0",
+                width: "100vw",
+                zIndex: "5",
+                background: "#fff",
+              }}
+            >
+              <div onClick={handleClose}>
+                <Image
+                  src="/assets/svgs/back.svg"
+                  alt="back_arrow"
+                  width={25}
+                  height={18}
+                />
+              </div>
+              <div>
+                <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  Contact Organizer
+                </h2>
+              </div>
+            </div>
+          )}
             <p css={{ fontSize: "24px", fontWeight: "bold" }}>
               Contact Organizer
             </p>

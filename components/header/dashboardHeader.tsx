@@ -2,15 +2,17 @@
 
 import React from "react";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 
 const DashboardHeader = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <div
       css={{
         height: "80px",
         borderBottom: `1px solid ${"#E4E4E4"}`,
-        display: "grid",
+        display: isTablet ? "none":"grid",
         gridTemplateColumns: "2fr 1fr",
         alignItems: "center",
         paddingInline: "1.5rem",
