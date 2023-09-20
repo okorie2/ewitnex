@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Notification from "fragments/notifications";
 import Link from "next/link";
 import EventFilter from "fragments/eventFilter";
+import ProfileMobileModal from "@/components/modals/profileMobileModal";
 
 const MobileLayout = ({ children }: { children: React.ReactNode }) => {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -16,14 +17,17 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
     "/dashboard/notifications",
     "/dashboard/profile",
   ];
-  useEffect (() => {
-    const html = document.querySelector('html')
-    if (html) { 
-      html.style.overflow = filterOpen ? "hidden" : "auto"
+  useEffect(() => {
+    const html = document.querySelector("html");
+    if (html) {
+      html.style.overflow = filterOpen ? "hidden" : "auto";
     }
-  }, [filterOpen])
+  }, [filterOpen]);
   const [open, setOpen] = useState(false);
-  const showMobileDashboard = forMobileDashboard.includes(router.route);
+  const [profileMobileModalOpen, setProfileMobileModalOpen] = useState(false);
+  const showMobileDashboard = () => {
+    return forMobileDashboard.includes(router.route) && filterOpen === false;
+  };
   return (
     <>
       {filterOpen && (
@@ -33,6 +37,10 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
         />
       )}
       <Notification shown={open} setClose={() => setOpen(false)} />
+      <ProfileMobileModal
+        shown={profileMobileModalOpen}
+        setClose={() => setProfileMobileModalOpen(!profileMobileModalOpen)}
+      />
       <div
         css={{
           maxHeight: "100vh",
@@ -40,7 +48,7 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
           fontFamily: '"Poppins", sans-serif',
         }}
       >
-        {showMobileDashboard && open === false && (
+        {showMobileDashboard() && open === false && (
           <div
             css={{
               backgroundColor: "#fff",
@@ -93,7 +101,11 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
                 </div>
               )}
               {router.route.includes("profile") && (
-                <div>
+                <div
+                  onClick={() => {
+                    setProfileMobileModalOpen(!profileMobileModalOpen);
+                  }}
+                >
                   <Image
                     src={"/assets/svgs/hamburger.svg"}
                     width={20}
@@ -106,58 +118,101 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         )}
         {children}
-        {showMobileDashboard && (
-          <div
-            css={{
-              backgroundColor: "#fff",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              boxShadow: "#00000029 0px 0px 10px ",
-              height: "4.5rem",
-              fontFamily: "'Poppins', sans-serif",
-              position: "fixed",
-              left: "0",
-              right: "0",
-              bottom: "0",
-              zIndex: "31",
-              width: "100vw",
-              paddingInline: "5%",
-            }}
-          >
-            <Link href={"/dashboard"}>
-              <Image
-                src="/assets/svgs/home.svg"
-                alt=""
-                width={20}
-                height={20}
-              />
-            </Link>
-            <Link href="/dashboard/programs">
-              <Image
-                src={`/assets/svgs/programs.svg`}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </Link>
-            <div onClick={() => setOpen(!open)}>
-              <Image
-                src={`/assets/svgs/notification.svg`}
-                alt=""
-                width={20}
-                height={20}
-              />
+        {showMobileDashboard() && profileMobileModalOpen === false && (
+          <>
+            <div
+              css={{
+                backgroundColor: "#fff",
+                boxShadow: "#00000029 0px 0px 10px ",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                height: "4.5rem",
+                fontFamily: "'Poppins', sans-serif",
+                position: "fixed",
+                left: "0",
+                right: "0",
+                bottom: "0",
+                zIndex: "31",
+                width: "100vw",
+                paddingInline: "5%",
+              }}
+            >
+              <Link href={"/dashboard"}>
+                <Image
+                  src="/assets/svgs/home.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              </Link>
+              <Link href="/dashboard/programs">
+                <Image
+                  src={`/assets/svgs/programs.svg`}
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              </Link>
+              <div
+                css={{
+                  position: "absolute",
+                  height: "4rem",
+                  width: "5rem",
+                  background: "blue",
+                  left: "39%",
+                  top: "-1.8rem",
+                  backgroundColor: "#fff",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderTop: "0.5px solid #707070",
+                }}
+              >
+                <div
+                  css={{
+                    width: "2.5rem",
+                    height: "2.5rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "50%",
+                    border: "1px solid #7c35ab",
+                  }}
+                >
+                  <Link href="/dashboard/hostEvent" css = {{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}>
+                    <Image
+                      src="/assets/svgs/host.svg"
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                </div>
+              </div>
+              <div onClick={() => setOpen(!open)}>
+                <Image
+                  src={`/assets/svgs/notification.svg`}
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              </div>
+              <Link href="/dashboard/profile">
+                <Image
+                  src={`/assets/svgs/profile.svg`}
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              </Link>
             </div>
-            <Link href="/dashboard/profile">
-              <Image
-                src={`/assets/svgs/profile.svg`}
-                alt=""
-                width={20}
-                height={20}
-              />
-            </Link>
-          </div>
+          </>
         )}
       </div>
     </>

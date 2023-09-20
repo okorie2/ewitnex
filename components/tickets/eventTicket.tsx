@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { screen } from "styles/theme";
 import EventTicketModal from "@/components/modals/eventTicketModal";
+import { useMediaQuery } from "@mui/material";
+import {useRouter} from 'next/router';
 
 interface IEventTicket {
   title: string;
@@ -12,17 +14,23 @@ interface IEventTicket {
   location: string;
   type: string;
   price: string;
+  eventID:string
 }
 
 const EventTicket = (props: IEventTicket) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
   const handleModalClose = () => {
     setIsOpen(false);
   };
+  const handleClick = () => {
+      setIsOpen(!isOpen)
+  }
   return (
     <>
       <div
-        onClick={() => setIsOpen(true)}
+        onClick={handleClick}
         css={{
           display: "grid",
           gridTemplateColumns: "60% 40%",

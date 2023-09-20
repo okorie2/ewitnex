@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Performer from "@/components/cards/performer";
 import { screen } from "styles/theme";
 import { useMediaQuery } from "@mui/material";
@@ -8,19 +8,34 @@ import Image from "next/image";
 import ContactOrganizerModal from "@/components/modals/programModal/contactOrganizerModal";
 import ReportEventModal from "@/components/modals/programModal/reportEventModal";
 import EventCountdown from "@/components/events/eventCountdown";
+import {useRouter} from 'next/router'
+import MobileModal from "@/components/modals/programModal/mobileModal";
 
 const EventDetails = () => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const router = useRouter();
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [favorite, setFavourite] = React.useState(false);
+  const [mobileModalOpen, setMobileModalOpen] = useState(false)  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
     useState(false);
   const [reportEventModalOpen, setReportEventModalOpen] = useState(false);
   const handleMenuOpen = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if(isTablet){
+      setMobileModalOpen(!mobileModalOpen)
+    }else{
+      setIsMenuOpen(!isMenuOpen);
+    }
   };
+  useEffect (() => {
+    const html = document.querySelector('html')
+    if (html) { 
+      html.style.overflow = mobileModalOpen ? "hidden" : "auto"
+    }
+  }, [mobileModalOpen])
   return (
     <div>
+      <MobileModal shown={mobileModalOpen} setClose={() => setMobileModalOpen(!mobileModalOpen)} />
       {isMenuOpen && (
         <div
           css={{

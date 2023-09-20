@@ -163,9 +163,9 @@ const MobileNav = ({
           css={{
             position: "absolute",
             width: "100vw",
-            height: "40vh",
+            height: "42vh",
             background: "#000",
-            marginTop: "60vh",
+            marginTop: "58vh",
             opacity:"0.8",
             zIndex:99
           }}

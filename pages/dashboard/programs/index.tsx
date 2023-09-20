@@ -48,8 +48,8 @@ const DashboardPrograms = () => {
             : "1fr 75px",
           height: "100%",
           maxHeight: "100vh",
-          marginTop: isTablet ? "4rem" : "",
           fontFamily: "Poppins",
+          width: isTablet ? "100vw" : "",
         }}
       >
         <div>
@@ -59,7 +59,8 @@ const DashboardPrograms = () => {
               height: "60px",
               boxShadow: "0px 0px 5px #00000029;",
               paddingInline: "1.5rem",
-              width: isTablet ? "100vw" : "",
+          marginTop: isTablet ? "4.5rem" : "",
+          width: isTablet ? "100vw" : "",
               display: "flex",
               alignItems: "center",
               overflowX: "auto",

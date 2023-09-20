@@ -19,18 +19,18 @@ const EventTickets = () => {
         color: "#000",
         borderRadius: "10px",
         padding: "1.25rem 1.25rem 2rem",
-        width: `${isTablet ? "100vw":loggedIn ? "70%" : "60%"}`,
+        width: `${isTablet ? "100vw" : loggedIn ? "70%" : "60%"}`,
         marginInline: "auto",
         position: "relative",
-        top: isTablet ? "0":"3.5rem",
-        marginBottom:isTablet ? "-5rem" : ""
+        top: isTablet ? "0" : "3.5rem",
+        marginBottom: isTablet ? "-5rem" : "",
       }}
     >
       <H3
         css={{
           marginBottom: "1.25rem",
           [screen.desktopLg]: {
-            textAlign: isTablet ? "left":"center",
+            textAlign: isTablet ? "left" : "center",
           },
         }}
       >
@@ -38,65 +38,71 @@ const EventTickets = () => {
       </H3>
       <div
         css={{
-          display: isTablet ? "flex":"grid",
-          flexDirection:"column",
+          display: isTablet ? "flex" : "grid",
+          flexDirection: "column",
           gridTemplateColumns: "1fr 1fr",
           gap: "1rem",
         }}
       >
         <EventTicket
           title="DevFest Aba"
-          id="Tec542445"
+          eventID="Tec542445"
           label="Tech"
           date="25 NOV. 2021 10:00 AM"
           location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
           type="Regular"
           price="$500"
+          id={""}
         />
         <EventTicket
           title="DevFest Aba"
-          id="Tec542445"
+          eventID="Tec542445"
           label="Tech"
           date="25 NOV. 2021 10:00 AM"
           location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
           type="VIP"
           price="$1500"
+          id={""}
         />
         <EventTicket
           title="DevFest Aba"
-          id="Tec542445"
+          eventID="Tec542445"
           label="Tech"
           date="25 NOV. 2021 10:00 AM"
           location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
           type="VVIP"
           price="$2000"
+          id={""}
         />
         <EventTicket
           title="DevFest Aba"
-          id="Tec542445"
+          eventID="Tec542445"
           label="Tech"
           date="25 NOV. 2021 10:00 AM"
           location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
           type="Exclusive"
           price="$2500"
+          id={""}
         />
         <EventTicket
           title="DevFest Aba"
-          id="Tec542445"
+          eventID="Tec542445"
           label="Tech"
           date="25 NOV. 2021 10:00 AM"
           location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
           type="VVIP"
           price="$2000"
+          id={""}
         />
         <EventTicket
           title="DevFest Aba"
-          id="Tec542445"
+          eventID="Tec542445"
           label="Tech"
           date="25 NOV. 2021 10:00 AM"
           location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
           type="Exclusive"
           price="$2000"
+          id={""}
         />
       </div>
     </div>

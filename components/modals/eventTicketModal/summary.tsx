@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react'
+import { useMediaQuery } from "@mui/material";
+
 
 const Summary = () => {
     const price = 100000
@@ -7,10 +9,12 @@ const Summary = () => {
     const subTotal = price * quantity
     const VAT = 12300
     const grandTotal = subTotal + VAT
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <div css = {{
         width:"95%",
-        marginTop:"1.5rem"
+        marginTop:isTablet ? "":"1.5rem"
     }}>
         <div css = {{display:"grid", gridTemplateColumns:"1fr 1fr", marginBottom:"0.8rem"}}>
             <div>Ticket Price</div>

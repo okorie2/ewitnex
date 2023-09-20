@@ -7,6 +7,7 @@ import Image from "next/image";
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
+import { useMediaQuery } from "@mui/material";
 import { Box } from "@mui/material";
 
 interface IReportEventModal {
@@ -37,6 +38,7 @@ Modal.setAppElement("body");
 
 const ReportEventModal = (props: IReportEventModal) => {
   const [success, setSuccess] = useState(false);
+  const isTablet = useMediaQuery("(max-width: 780px)");
 
   useEffect(() => {
     setData({ ...data, eventID: props.eventID });
@@ -72,7 +74,7 @@ const ReportEventModal = (props: IReportEventModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
+      {!isTablet && <div
         onClick={handleClose}
         css={{
           border: "none",
@@ -85,7 +87,7 @@ const ReportEventModal = (props: IReportEventModal) => {
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
-      </div>
+      </div>}
 
       <div
         css={{
@@ -99,10 +101,10 @@ const ReportEventModal = (props: IReportEventModal) => {
           paddingRight:"0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "33.3%",
+            width:isTablet ? "100vw" : "33.3%",
           },
           display: "grid",
-          gridTemplateRows: "10% 90%",
+          gridTemplateRows:isTablet ? "10vh 90vh": "10% 90%",
         }}
       >
         {success ? (
@@ -171,6 +173,41 @@ const ReportEventModal = (props: IReportEventModal) => {
           </div>
         ) : (
           <>
+          {isTablet && (
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                boxShadow: "#00000029 0px 0px 10px ",
+                padding: "0% 5%",
+                paddingTop: "1.125rem",
+                height: "9vh",
+                fontFamily: "'Poppins', sans-serif",
+                position: "fixed",
+                gap: "1rem",
+                left: "0",
+                right: "0",
+                top: "0",
+                width: "100vw",
+                zIndex: "5",
+                background: "#fff",
+              }}
+            >
+              <div onClick={handleClose}>
+                <Image
+                  src="/assets/svgs/back.svg"
+                  alt="back_arrow"
+                  width={25}
+                  height={18}
+                />
+              </div>
+              <div css = {{marginTop:"-0.5rem"}}>
+                <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  Report
+                </h2>
+              </div>
+            </div>
+          )}
             <p css={{ fontSize: "24px", fontWeight: "bold" }}>Report</p>
             <div
               css={{

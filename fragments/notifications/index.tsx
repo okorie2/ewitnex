@@ -26,8 +26,9 @@ const Notifications = ({
     <>
       <div
         css={{
-          position: "absolute",
+          position: isTablet ? "fixed":"absolute",
           width: isTablet ? "100vw":"40vw",
+          height:isTablet ? "100vh" : "",
           maxHeight: "100vh",
           borderRight: "1px solid #e4e4e4",
           marginLeft: shown ? "0" : "-100vw",
@@ -160,10 +161,10 @@ const Notifications = ({
             css={{
               width: "100%",
               overflowY: "auto",
-              height: isTablet ? "calc(100vh - 13rem)":"calc(100vh - 80px)",
+              height: isTablet ? "calc(100vh - 9rem)":"calc(100vh - 80px)",
               paddingLeft: isTablet ? "1rem":"2.5rem",
               paddingTop: "1rem",
-             
+             paddingBottom:"5rem",
               "&::-webkit-scrollbar": {
                   visibility:"hidden",
               },
@@ -206,6 +207,13 @@ const Notifications = ({
               type={"message"}
               messageType={"eventReminder"}
               eventname="DevFest Aba"
+              eventID="123456"
+            />
+            <NotificationCard
+              uploaded={"2 hours ago"}
+              type={"message"}
+              messageType={"soldTarget"}
+              eventname="Pursue Peace"
               eventID="123456"
             />
             <NotificationCard
