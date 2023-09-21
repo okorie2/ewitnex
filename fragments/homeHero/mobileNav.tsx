@@ -17,7 +17,7 @@ const MobileNav = ({
     <>
       <div
         css={{
-          position: "absolute",
+          position: "fixed",
           width: "100vw",
           height: "60vh",
           marginTop: shown ? active === "home" ? "2vh" : "0vh" : "-100vh",
@@ -161,7 +161,7 @@ const MobileNav = ({
       {shown && (
         <div
           css={{
-            position: "absolute",
+            position: "fixed",
             width: "100vw",
             height: "42vh",
             background: "#000",

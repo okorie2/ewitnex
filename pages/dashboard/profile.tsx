@@ -1,29 +1,31 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { ChangeEvent, useState, useRef } from "react";
+import React, { ChangeEvent, useState, useRef, useEffect } from "react";
 import DashboardLayout from "./layout/layout";
 import Image from "next/image";
 import DashboardHeader from "@/components/header/dashboardHeader";
-import ProfileFollowing from "fragments/profile/following";
-import ProfileFollowers from "fragments/profile/followers";
-import {
-  activeButtonStyle,
-  inactiveButtonStyle,
-} from "styles/components/ButtonToggleStyles";
 import { useMediaQuery } from "@mui/material";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import { Button } from "styles/components/button";
+import FollowersModal from "@/components/modals/profileMobileModal/followersMobileModal";
+import FollowersFragment from "fragments/profile/followersFragment";
 
 const Profile = () => {
-  const [showFollowing, setShowFollowing] = useState(false);
-  const [showFollowers, setShowFollowers] = useState(true);
-  const [activeTab, setActiveTab] = useState("followers");
   const [editable, setEditable] = useState(false);
+  const [followersModalOpen, setFollowersModalOpen] = useState(false);
   const [bioData, setBioData] = useState("");
   const [saveHoverState, setSaveHoverState] = useState(false);
   const [imageHoverState, setImageHoverState] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const isTablet = useMediaQuery("(max-width: 780px)");
+  const [activeTab , setActiveTab] = useState<"followers"|"following">("followers")
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    if (html) {
+      html.style.overflow = followersModalOpen ? "hidden" : "auto";
+    }
+  }, [followersModalOpen]);
 
   const handleImageClick = () => {
     if (inputRef.current != null) {
@@ -40,22 +42,16 @@ const Profile = () => {
     event.target.files = null;
   };
 
-  const handleShowFollowers = () => {
-    setShowFollowers(true);
-    setShowFollowing(false);
-    setActiveTab("followers");
-  };
-  const handleShowFollowing = () => {
-    setShowFollowing(true);
-    setShowFollowers(false);
-    setActiveTab("following");
-    console.log(bioData);
-  };
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setBioData(event.currentTarget.value);
   };
   return (
     <DashboardLayout>
+      <FollowersModal
+        isOpen={followersModalOpen}
+        onRequestClose={() => setFollowersModalOpen(!followersModalOpen)}
+        activeTab={activeTab}
+      />
       <div
         css={{
           display: "grid",
@@ -70,15 +66,15 @@ const Profile = () => {
           css={{
             borderRight: `1px solid ${"#E4E4E4"}`,
             height: "100%",
-            width:isTablet ? "100vw" : "",
+            width: isTablet ? "100vw" : "",
           }}
         >
           <DashboardHeader />
           <div
             css={{
               color: "#000",
-              height: isTablet ? "85vh":"calc(100% - 80px)",
-          padding: "1.5rem",
+              height: isTablet ? "85vh" : "calc(100% - 80px)",
+              padding: "1.5rem",
             }}
           >
             <div css={{ display: "grid", gap: "1rem", marginBottom: "1rem" }}>
@@ -135,41 +131,50 @@ const Profile = () => {
                     </div>
                   )}
                 </div>
-                <div css = {{display:'grid', gap:"1rem"}}>
-                  <div css = {{display:"flex", gap:"2rem"}}>
-                    <div>
-                    <p
-                      css={{
-                        fontSize: "1.25rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      1000k
-                    </p>
-                    <p css={{ fontSize: "0.875rem", fontWeight: "bold" }}>
-                      Followers
-                    </p>
+                <div css={{ display: "grid", gap: "1rem" }}>
+                  <div
+                    css={{ display: "flex", gap: "2rem" }}
+                  >
+                    <div onClick={() => {
+                      setFollowersModalOpen(!followersModalOpen);
+                      setActiveTab("followers")
+                    }}>
+                      <p
+                        css={{
+                          fontSize: "1.25rem",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        1000k
+                      </p>
+                      <p css={{ fontSize: "0.875rem", fontWeight: "bold" }}>
+                        Followers
+                      </p>
                     </div>
-                    <div>
-
-                    <p
-                      css={{
-                        fontSize: "1.25rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      500k
-                    </p>
-                    <p css={{ fontSize: "0.875rem", fontWeight: "bold" }}>
-                      Following
-                    </p>
+                    <div onClick={() => {
+                      setFollowersModalOpen(!followersModalOpen);
+                      setActiveTab("following")
+                    }}>
+                      <p
+                        css={{
+                          fontSize: "1.25rem",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        500k
+                      </p>
+                      <p css={{ fontSize: "0.875rem", fontWeight: "bold" }}>
+                        Following
+                      </p>
                     </div>
                   </div>
-                  {isTablet && <div>
-                    <Button width="90%" height="40px" fontSize="1rem">
-                      Following
-                    </Button>
-                  </div>}
+                  {isTablet && (
+                    <div>
+                      <Button width="90%" height="40px" fontSize="1rem">
+                        Following
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
               <div>
@@ -183,8 +188,10 @@ const Profile = () => {
                 </p>
                 <div>
                   <p css={{ color: "#AEAEAE", fontWeight: "500" }}>
-                    <span css={{ fontSize: isTablet ?"1.05rem":"1.125rem" }}>Blessed_one</span> -{" "}
-                    <span css={{ fontSize: "0.875rem" }}>Delta, Nigeria</span>
+                    <span css={{ fontSize: isTablet ? "1.05rem" : "1.125rem" }}>
+                      Blessed_one
+                    </span>{" "}
+                    - <span css={{ fontSize: "0.875rem" }}>Delta, Nigeria</span>
                   </p>
                 </div>
               </div>
@@ -266,92 +273,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        {!isTablet && (
-          <div
-            css={{
-              padding: "1rem 1.5rem",
-              maxWidth: "500px",
-            }}
-          >
-            <div css={{ display: "grid", gap: "1.5rem" }}>
-              <div
-                css={{
-                  borderRadius: "16px",
-                  backgroundColor: "#F2F7FB",
-                  width: "100%",
-                  marginInline: "auto",
-                  height: "2.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "0.2rem",
-                }}
-              >
-                <button
-                  onClick={handleShowFollowers}
-                  css={
-                    activeTab === "followers"
-                      ? activeButtonStyle
-                      : inactiveButtonStyle
-                  }
-                >
-                  1000K Followers
-                </button>
-                <button
-                  onClick={handleShowFollowing}
-                  css={
-                    activeTab === "following"
-                      ? activeButtonStyle
-                      : inactiveButtonStyle
-                  }
-                >
-                  500K Following
-                </button>
-              </div>
-              <div
-                css={{
-                  borderRadius: "10px",
-                  border: `1.5px solid ${"#AEAEAE"}`,
-                  backgroundColor: "#fff",
-                  width: "100%",
-                  marginInline: "auto",
-                  height: "2.625rem",
-                  display: "flex",
-                  alignItems: "center",
-                  paddingLeft: "1rem",
-                  gap: "2%",
-                }}
-              >
-                <div css={{ marginTop: "3px" }}>
-                  <Image
-                    src="/assets/svgs/search.svg"
-                    width={14.42}
-                    height={14.41}
-                    alt="logo"
-                  />
-                </div>
-                <input
-                  placeholder="Search "
-                  type={"text"}
-                  css={{
-                    borderRadius: "66px",
-                    width: "100%",
-                    outline: "none",
-                    border: "none",
-                    backgroundColor: "#fff",
-                    height: "95%",
-                    fontSize: "1rem",
-                    fontWeight: "400",
-                    color: "#AEAEAE",
-                  }}
-                />
-              </div>
-              <div>
-                {showFollowers && <ProfileFollowers />}
-                {showFollowing && <ProfileFollowing />}
-              </div>
-            </div>
-          </div>
-        )}
+        {!isTablet && <FollowersFragment _activeTab = {activeTab}/>}
       </div>
     </DashboardLayout>
   );
