@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,8 +14,10 @@ interface IHostEventTimeDate {
   placeholder1: string;
   placeholder2: string;
   input2: boolean;
+  disabled ?: boolean
 }
 const HostEventTimeDate = (props: IHostEventTimeDate) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [value, setValue] = React.useState<Dayjs | null>();
   const [timeValue, setTimeValue] = React.useState<Dayjs | null>();
   return (
@@ -80,6 +83,7 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
                     fontFamily: "Nunito, sans-serif",
                   },
                 }}
+              disabled = {props.disabled}
               />
             </DemoContainer>
           </LocalizationProvider>
@@ -113,10 +117,11 @@ const HostEventTimeDate = (props: IHostEventTimeDate) => {
                     input : {
                       fontFamily: "Nunito, sans-serif",
                     },
-                    "& .MuiPopper-root-MuiPickersPopper-root":{
-                      background: "black",
+                    "&.MuiFormControl-root.MuiTextField-root":{
+                      minWidth: "100px",
                     }
                   }}
+                  disabled = {props.disabled}
                 />
               </DemoContainer>
             </LocalizationProvider>

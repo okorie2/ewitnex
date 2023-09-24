@@ -7,9 +7,11 @@ import HostEventLayout from "./layout";
 import Link from "next/link";
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import { Tooltip } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { nanoid } from "nanoid";
 
 const HostEvent = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [organizerInputOpen, setOrganizerInputOpen] = useState(false);
   const [data, setdata] = useState("");
   const [audienceState, setAudienceState] = useState("public");
@@ -56,14 +58,14 @@ const HostEvent = () => {
 
   return (
     <HostEventLayout>
-      <div>
+      <div css = {{width:isTablet ?"100vw":""}}>
         <div
           css={{
             height: "110px",
-            borderBottom: `1px solid ${"#E4E4E4"}`,
+            borderBottom: isTablet ? "":`1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
-            paddingInline: "3.2rem",
+            paddingInline: isTablet ? "1rem":"3.2rem",
           }}
         >
           <div
@@ -78,7 +80,7 @@ const HostEvent = () => {
               <h1 css={{ fontSize: "1.875rem" }}>Event Program Info</h1>
               <p>Tell invitees the type of event you are hosting</p>
             </div>
-            <div
+            {!isTablet && <div
               css={{
                 display: "flex",
                 gap: "2rem",
@@ -103,13 +105,13 @@ const HostEvent = () => {
               >
                 Cancel
               </Link>
-            </div>
+            </div>}
           </div>
         </div>
         <form
           css={{
-            maxHeight: "calc(100vh - 110px)",
-            padding: " 1.5rem 3.2rem",
+            maxHeight: isTablet ? "":"calc(100vh - 110px)",
+            padding: isTablet ? "1rem":" 1.5rem 3.2rem",
             display: "grid",
             gap: "1.5rem",
             overflowY: "scroll",
@@ -158,7 +160,7 @@ const HostEvent = () => {
                 <div
                   key={organizer.user_id}
                   css={{
-                    width: "250px",
+                    width: isTablet ? "90vw":"250px",
                     position: "relative",
                     height: "48px",
                     paddingLeft: "2%",
@@ -198,7 +200,7 @@ const HostEvent = () => {
             <div
               css={{
                 width: "250px",
-                maxWidth: "50%",
+                maxWidth: isTablet ? "90vw":"50%",
                 position: "relative",
                 display: organizerInputOpen ? "block" : "none",
                 marginBottom: "-0.4%",
@@ -247,13 +249,13 @@ const HostEvent = () => {
               }}
               onClick={handleAddOrganizer}
             >
-              {organizerInputOpen ? "Add organizer" : "Add another organizer"}
+              {organizerInputOpen ? "Add organizer" : organizersArray.length === 0 ? "Add organizer" : "Add another organizer"}
             </button>
           </div>
           <div
             css={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: isTablet ? "1fr":"1fr 1fr",
               gap: "2.5rem",
             }}
           >
@@ -409,7 +411,7 @@ const HostEvent = () => {
           />
           <div
             css={{
-              width: "80%",
+              width: isTablet ? "100%":"80%",
               marginLeft: "auto",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",

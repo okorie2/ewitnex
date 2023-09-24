@@ -2,12 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 import React, { ReactNode, useEffect, useState } from "react";
 
 const HostEventLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [activeStage, setActiveStage] = useState(1);
   const activeRoute = router.asPath;
+  const isTablet = useMediaQuery("(max-width: 780px)");
 
   useEffect(() => {
     switch (activeRoute) {
@@ -47,16 +49,89 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
       css={{
         fontFamily: "'Nunito', sans-serif",
         display: "grid",
-        gridTemplateColumns: "20% 80%",
+        gridTemplateColumns: isTablet ? "1fr" : "20% 80%",
         minHeight: "100vh",
       }}
     >
+      {isTablet && (
+        <div
+          css={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            boxShadow: "#00000029 0px 0px 10px ",
+            padding: "0% 3%",
+            paddingTop: "0.5rem",
+            height: "9vh",
+            fontFamily: "'Poppins', sans-serif",
+            position: "fixed",
+            left: "0",
+            right: "0",
+            top: "0",
+            width: "100vw",
+            zIndex: "5",
+            background: "#fff",
+          }}
+        >
+          <div css = {{display:"flex",  
+            gap: "0.5rem",
+          }}>
+            <div
+              onClick={() => router.back()}
+              css={{ display: "flex", alignItems: "center" }}
+            >
+              <Image
+                src="/assets/svgs/back.svg"
+                alt="back_arrow"
+                width={25}
+                height={18}
+              />
+            </div>
+            <div>
+              <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                Creating Event
+              </h2>
+            </div>
+          </div>
+          <div>
+            <div
+              css={{
+                display: "flex",
+                gap: "0.6rem",
+                fontSize:"0.9rem"
+              }}
+            >
+              <p
+                css={{
+                  color: "#7C35AB",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                }}
+              >
+                Preview
+              </p>
+              <Link
+                href="/dashboard"
+                css={{
+                  color: "#F05E78",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                }}
+              >
+                Cancel
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
       <div
         css={{
-          paddingBlock: "2.3rem",
-          borderRight: `1px solid ${"#E4E4E4"}`,
+          paddingBlock: isTablet ? "":"2.5rem",
+          paddingTop:isTablet ? "3rem":"",
+          borderRight: isTablet ? "":`1px solid ${"#E4E4E4"}`,
           fontSize: "1rem",
           fontWeight: "500",
+          width: isTablet ? "100vw":""
         }}
       >
         <div
@@ -68,13 +143,13 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
             justifyContent: "space-between",
           }}
         >
-          <h3 css={{ fontSize: "1.125rem", fontWeight: "bold" }}>
+          {!isTablet &&  <h3 css={{ fontSize: "1.125rem", fontWeight: "bold" }}>
             Hosting Event
-          </h3>
+          </h3>}
           <ul
             css={{
-              display: "grid",
-              marginTop: "2.5rem",
+              display: isTablet ? "flex" : "grid",
+              marginTop: isTablet ? "2.5rem":"2.5rem",
               listStyleType: "none",
               fontWeight: "300",
             }}
@@ -84,6 +159,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
                 css={{
                   color: activeStage >= item.stage ? "#7C35AB" : "#AEAEAE",
                   position: "relative",
+                  display: isTablet ? "flex" : "block",
                 }}
                 key={item.name}
               >
@@ -130,14 +206,23 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
                     />
                   )}
 
-                  {item.name}
+                  {!isTablet && item.name}
                 </Link>
-                {item.stage !== 5 && (
+                {!isTablet && item.stage !== 5 && (
                   <div
                     css={{
                       borderLeft: "1px solid #AEAEAE",
                       height: "1.6rem",
                       marginLeft: "0.8rem",
+                    }}
+                  ></div>
+                )}
+                {isTablet && item.stage !== 5 && (
+                  <div
+                    css={{
+                      borderTop: "1px solid #AEAEAE",
+                      width: "2.5rem",
+                      marginTop: "0.8rem",
                     }}
                   ></div>
                 )}

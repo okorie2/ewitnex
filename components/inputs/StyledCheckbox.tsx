@@ -4,16 +4,19 @@ import Checkbox from "@mui/material/Checkbox";
 const StyledCheckbox = ({
   checked,
   indeterminate,
+  disabled,
   onChange,
 }: {
   checked: boolean;
   indeterminate?: boolean;
+  disabled?:boolean
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <Checkbox
       checked={checked}
       indeterminate={indeterminate}
+      disabled = {disabled}
       onChange={onChange}
       size="small"
       sx={{
