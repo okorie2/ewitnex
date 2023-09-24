@@ -18,6 +18,7 @@ interface Props {
   name?: string;
   handleKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   type?:string
+  width ?:string
 }
 
 export default function SettingsTextField({ label, name, ...rest }: Props) {
@@ -65,6 +66,7 @@ const activeElement = active()
         borderRadius: "10px",
         background: "#fff",
         height: "49px",
+        width: rest.width ? rest.width : "",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",

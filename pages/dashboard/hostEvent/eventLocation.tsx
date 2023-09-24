@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
@@ -8,21 +8,27 @@ import HostEventTextField from "@/components/inputs/hostEventTextField";
 import HostEventSplitInput from "@/components/inputs/HostEventSplitInput";
 import Image from "next/image";
 import { Tooltip } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import StyledCheckbox from "@/components/inputs/StyledCheckbox";
 
 const EventLocation = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [locationType, setLocationType] = useState("venue");
   const [undecided, setUndecided] = useState(false);
+  const [endUndecided, setEndUndecided] = useState(false);
+  useEffect(() => {
+    setEndUndecided(undecided);
+  }, [undecided]);
   return (
     <HostEventLayout>
-      <div>
+      <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
           css={{
-            height: "150px",
-            borderBottom: `1px solid ${"#E4E4E4"}`,
+            height: isTablet ? "170px" : "150px",
+            borderBottom: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
-            paddingInline: "3.2rem",
+            paddingInline: isTablet ? "1rem" : "3.2rem",
           }}
         >
           <div
@@ -40,49 +46,53 @@ const EventLocation = () => {
                   width: "50%",
                 },
                 [screen.desktop]: {
-                  width: "70%",
+                  width: isTablet ? "100%" : "70%",
                 },
               }}
             >
-              <h1 css={{ fontSize: "1.875rem" }}>Location, Date and Time</h1>
-              <p>
+              <h1 css={{ fontSize: isTablet ? "1.6rem" : "1.875rem" }}>
+                Location, Date and Time
+              </h1>
+              <p css={{ fontSize: isTablet ? "0.875rem" : "" }}>
                 Tell us where your event will take place and create your date
                 and time for your event telling attendees when its going to
                 start and ends
               </p>
             </div>
-            <div
-              css={{
-                display: "flex",
-                gap: "2rem",
-              }}
-            >
-              <p
+            {!isTablet && (
+              <div
                 css={{
-                  color: "#7C35AB",
-                  fontWeight: "bold",
-                  cursor: "pointer",
+                  display: "flex",
+                  gap: "2rem",
                 }}
               >
-                Preview
-              </p>
-              <Link
-                href="/dashboard"
-                css={{
-                  color: "#F05E78",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                Cancel
-              </Link>
-            </div>
+                <p
+                  css={{
+                    color: "#7C35AB",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  Preview
+                </p>
+                <Link
+                  href="/dashboard"
+                  css={{
+                    color: "#F05E78",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <form
           css={{
-            maxHeight: "calc(100vh - 150px)",
-            padding: " 1.5rem 3.2rem",
+            maxHeight: isTablet ? "" : "calc(100vh - 150px)",
+            padding: isTablet ? "0rem 1rem" : " 1.5rem 3.2rem",
             display: "grid",
             gap: "1.5rem",
             overflowY: "scroll",
@@ -161,7 +171,7 @@ const EventLocation = () => {
               css={{
                 display: "grid",
                 gap: "1.5rem",
-                gridTemplateColumns: "30% 68%",
+                gridTemplateColumns: isTablet ? "1fr" : "30% 68%",
               }}
             >
               <HostEventTextField
@@ -171,20 +181,19 @@ const EventLocation = () => {
                 tooltip="Select from the dropdown the online medium the event will use to take place and paste medium link"
                 type="select"
                 options={[
-                  {value: "none", label: "Select an online medium"},
-                  {label:"Ewitnex", value: "Ewitnex"},
-                  {label:"Zoom", value: "Zoom"},
-                  {label:"Google Meet", value: "Google Meet"},
-                  {label:"Microsoft Teams", value: "Microsoft Teams"},
+                  { value: "none", label: "Select an online medium" },
+                  { label: "Ewitnex", value: "Ewitnex" },
+                  { label: "Zoom", value: "Zoom" },
+                  { label: "Google Meet", value: "Google Meet" },
+                  { label: "Microsoft Teams", value: "Microsoft Teams" },
                 ]}
               />
-              <div css = {{alignSelf: "self-end", marginTop: "-2%"}}>
-              <HostEventTextField
-                placeholder="Paste medium links to live streams"
-                type="text"
-              />
+              <div css={{ alignSelf: "self-end", marginTop: "-2%" }}>
+                <HostEventTextField
+                  placeholder="Paste medium links to live streams"
+                  type="text"
+                />
               </div>
-             
             </div>
           ) : (
             <>
@@ -216,7 +225,7 @@ const EventLocation = () => {
               </div>
               <div
                 css={{
-                  display: "flex",
+                  display: isTablet ? "grid" : "flex",
                   gap: "1.5rem",
                   alignItems: "flex-end",
                   marginTop: "-1.5%",
@@ -256,30 +265,34 @@ const EventLocation = () => {
                     }}
                   />
                 </div>
-                <p
-                  css={{
-                    color: "#AEAEAE",
-                    fontSize: "1.125rem",
-                    fontWeight: "bold",
-                    marginBottom: "1rem",
-                  }}
+                <div
+                  css={{ display: "flex", gap: "1rem", alignItems: "center" }}
                 >
-                  or
-                </p>
-                <button
-                  css={{
-                    fontSize: "0.875rem",
-                    fontWeight: "bold",
-                    color: "#7C35AB",
-                    border: `1px solid ${"#7C35AB"}`,
-                    width: "250px",
-                    height: "38px",
-                    marginBottom: "0.5rem",
-                    background: "#fff",
-                  }}
-                >
-                  Enter location manually
-                </button>
+                  <p
+                    css={{
+                      color: "#AEAEAE",
+                      fontSize: "1.125rem",
+                      fontWeight: "bold",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    or
+                  </p>
+                  <button
+                    css={{
+                      fontSize: "0.875rem",
+                      fontWeight: "bold",
+                      color: "#7C35AB",
+                      border: `1px solid ${"#7C35AB"}`,
+                      width: "250px",
+                      height: "38px",
+                      marginBottom: "0.5rem",
+                      background: "#fff",
+                    }}
+                  >
+                    Enter location manually
+                  </button>
+                </div>
               </div>
             </>
           )}
@@ -287,55 +300,76 @@ const EventLocation = () => {
             css={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "2.5rem",
+              gap: "2rem",
               [screen.lg]: {
                 gridTemplateColumns: "1fr",
               },
               [screen.desktop]: {
-                gridTemplateColumns: "1fr",
+                gridTemplateColumns: isTablet ? "1fr" : "1fr 1fr",
               },
             }}
           >
-            {undecided === false && (
-              <>
+            <>
+              <div css={{ display: "grid" }}>
                 <HostEventSplitInput
                   label="Start At"
                   placeholder1="Start Date"
                   placeholder2="Start time"
                   input2={true}
+                  disabled = {undecided}
                 />
+                <div css={{ display: "flex", alignItems: "center" }}>
+                  <StyledCheckbox
+                    checked={undecided}
+                    onChange={() => setUndecided(!undecided)}
+                  />
+                  <label
+                    htmlFor="undecided"
+                    css={{
+                      fontSize: "0.875rem",
+                      fontWeight: "600",
+                      marginLeft: "0.5rem",
+                    }}
+                  >
+                    Start Time & Date - To be decided
+                  </label>
+                </div>
+              </div>
+              <div>
                 <HostEventSplitInput
                   label="End At"
                   placeholder1="End Date"
                   placeholder2="End time"
                   input2={true}
+                  disabled = {endUndecided}
                 />
-              </>
-            )}
-          </div>
-          <div css={{ display: "flex", alignItems: "center" }}>
-            <StyledCheckbox
-              checked={undecided}
-              onChange={() => setUndecided(!undecided)}
-            />
-            <label
-              htmlFor="undecided"
-              css={{
-                fontSize: "0.875rem",
-                fontWeight: "600",
-                marginLeft: "0.5rem",
-              }}
-            >
-              Time & Date - To be decided
-            </label>
+                <div css={{ display: "flex", alignItems: "center" }}>
+                  <StyledCheckbox
+                    checked={endUndecided}
+                    disabled = {undecided}
+                    onChange={() => setEndUndecided(!endUndecided)}
+                  />
+                  <label
+                    htmlFor="undecided"
+                    css={{
+                      fontSize: "0.875rem",
+                      fontWeight: "600",
+                      marginLeft: "0.5rem",
+                    }}
+                  >
+                    End Time & Date - To be decided
+                  </label>
+                </div>
+              </div>
+            </>
           </div>
           <div
             css={{
-              width: "80%",
+              width: isTablet ? "100%" : "80%",
               marginLeft: "auto",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
+              gap: "0.6rem",
               marginTop: "1.5rem",
             }}
           >

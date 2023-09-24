@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
 import Link from "next/link";
+import { useMediaQuery } from "@mui/material";
 import CopySnackBar from "@/components/snackbars/copied";
 
 interface IHostEventModal {
@@ -13,18 +14,20 @@ interface IHostEventModal {
 }
 
 const customStyles = {
-  overlay: { zIndex: "3", backgroundColor: "#00000099" },
+  overlay: { zIndex: "6", backgroundColor: "#00000099" },
   content: {
     display: "flex",
     justifyContent: "center",
-    borderRadius:"1rem",
+    borderRadius: "1rem",
     alignItems: "center",
     border: "none",
     fontFamily: "'Nunito', sans-serif",
+    inset: "25px",
   },
 };
 
 const HostEventModal = (props: IHostEventModal) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [copySnackBarOpen, setCopySnackBarOpen] = useState(false);
   const handleCopyClose = (
     event?: React.SyntheticEvent | Event,
@@ -33,18 +36,18 @@ const HostEventModal = (props: IHostEventModal) => {
     if (reason === "clickaway") {
       return;
     }
-    setCopySnackBarOpen(false)
+    setCopySnackBarOpen(false);
   };
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
-  const handleCopy = async (textToCopy: string, alert:string) => {
+  const handleCopy = async (textToCopy: string, alert: string) => {
     if ("clipboard" in navigator) {
       await navigator.clipboard.writeText(textToCopy);
     } else {
       document.execCommand("copy", true, textToCopy);
     }
-    setCopySnackBarOpen(true)
-    setMessage(alert)
+    setCopySnackBarOpen(true);
+    setMessage(alert);
   };
   return (
     <Modal
@@ -52,7 +55,11 @@ const HostEventModal = (props: IHostEventModal) => {
       onRequestClose={props.onRequestClose}
       style={customStyles}
     >
-    <CopySnackBar open={copySnackBarOpen} message={message} handleClose = {handleCopyClose}/>
+      <CopySnackBar
+        open={copySnackBarOpen}
+        message={message}
+        handleClose={handleCopyClose}
+      />
       <div
         css={{
           height: "100%",
@@ -72,7 +79,11 @@ const HostEventModal = (props: IHostEventModal) => {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
+            justifyContent: isTablet ? "" : "space-around",
+            overflowY: "scroll",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
           }}
         >
           <div>
@@ -96,7 +107,8 @@ const HostEventModal = (props: IHostEventModal) => {
           <div
             css={{
               display: "grid",
-              gridTemplateColumns: "25% 50% 25%",
+              gridTemplateColumns: isTablet ? "1fr" : "25% 50% 25%",
+              gap: "2rem",
               justifyContent: "space-evenly",
               marginTop: "2rem",
             }}
@@ -172,16 +184,21 @@ const HostEventModal = (props: IHostEventModal) => {
                 }}
               >
                 <p>https:ewitnex.com/devfest-aba-id-tec542445</p>
-                <div 
-                  css = {{cursor: "pointer"}}
-                  onClick={() => handleCopy("https:ewitnex.com/devfest-aba-id-tec542445", "Invite Link copied")}
+                <div
+                  css={{ cursor: "pointer" }}
+                  onClick={() =>
+                    handleCopy(
+                      "https:ewitnex.com/devfest-aba-id-tec542445",
+                      "Invite Link copied"
+                    )
+                  }
                 >
-                <Image
-                  src="/assets/svgs/copy2.svg"
-                  alt=""
-                  width={11.13}
-                  height={12.6}
-                />
+                  <Image
+                    src="/assets/svgs/copy2.svg"
+                    alt=""
+                    width={11.13}
+                    height={12.6}
+                  />
                 </div>
               </div>
               <p
@@ -207,16 +224,16 @@ const HostEventModal = (props: IHostEventModal) => {
                 }}
               >
                 <p>tec542445</p>
-                <div 
-                  css = {{cursor: "pointer"}} 
+                <div
+                  css={{ cursor: "pointer" }}
                   onClick={() => handleCopy("tec542445", "Event ID copied")}
                 >
-                <Image
-                  src="/assets/svgs/copy2.svg"
-                  alt=""
-                  width={11.13}
-                  height={12.6}
-                />
+                  <Image
+                    src="/assets/svgs/copy2.svg"
+                    alt=""
+                    width={11.13}
+                    height={12.6}
+                  />
                 </div>
               </div>
             </div>
@@ -251,7 +268,7 @@ const HostEventModal = (props: IHostEventModal) => {
           </div>
           <div
             css={{
-              marginTop:"2rem",
+              marginTop: "2rem",
               display: "flex",
               flexDirection: "column",
             }}
@@ -267,24 +284,24 @@ const HostEventModal = (props: IHostEventModal) => {
               VIEW EVENT PAGE
             </Link>
             <Link href={`/dashboard/manager/tec542445?tab=Overview`}>
-            <button
-              css={{
-                fontSize: "0.9rem",
-                fontWeight: "bold",
-                fontFamily: "'Nunito', sans-serif",
-                color: "#fff",
-                border: `1px solid ${"#7C35AB"}`,
-                height: "45px",
-                marginBlock: "1rem",
-                background: "#7C35AB",
-                borderRadius: "26px",
-                width: "20%",
-                marginInline: "auto",
-                cursor: "pointer",
-              }}
-            >
-              MANAGE EVENT
-            </button>
+              <button
+                css={{
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                  fontFamily: "'Nunito', sans-serif",
+                  color: "#fff",
+                  border: `1px solid ${"#7C35AB"}`,
+                  height: "45px",
+                  marginBlock: "1rem",
+                  background: "#7C35AB",
+                  borderRadius: "26px",
+                  width: isTablet ? "70%" : "20%",
+                  marginInline: "auto",
+                  cursor: "pointer",
+                }}
+              >
+                MANAGE EVENT
+              </button>
             </Link>
           </div>
         </div>

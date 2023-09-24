@@ -54,6 +54,10 @@ const Performer = (props: IPerformer) => {
           <p>{props.role}</p>
         </div>
       </div>
+      <div css={{ display: "flex", gap: "1.8rem", marginTop: "0.5rem" }}>
+        <Image src="/assets/svgs/pencil.svg" alt="" width={21} height={21} />
+        <Image src="/assets/svgs/trash.svg" alt="" width={17.88} height={22} />
+      </div>
     </div>
   );
 };

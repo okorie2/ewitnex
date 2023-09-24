@@ -1,47 +1,43 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import Speaker from "@/components/cards/performer";
+import AddSpeakerForm from "fragments/hostEvent/addSpeakerForm";
+import AddSpeakerModal from "@/components/modals/hostEventModal/addSpeakerModal";
 
 const Speakers = () => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const newSpeakerRef = useRef<HTMLInputElement>(null)
-
-  const handleImageClick = () => {
-    if(inputRef.current != null ) {
-      inputRef.current.click()
-    }
-  }
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const newSpeakerRef = useRef<HTMLInputElement>(null);
+  const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false)
 
   const handleNewSpeakerClick = () => {
-    if(newSpeakerRef.current != null) {
-      newSpeakerRef.current.focus()
+    if(isTablet) {
+      setAddSpeakerModalOpen(!addSpeakerModalOpen)
+    }else{
+      if (newSpeakerRef.current != null) {
+        newSpeakerRef.current.focus();
+      }
     }
-  }
+  };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileObj = event.target.files && event.target.files[0]
-    if( !fileObj) {
-      return
-    }
-
-    event.target.files = null
-  }
+  
   return (
     <HostEventLayout>
-      <div>
+      <AddSpeakerModal isOpen={addSpeakerModalOpen} onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} />
+      <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
           css={{
-            height: "150px",
-            borderBottom: `1px solid ${"#E4E4E4"}`,
+            height: isTablet ? "170px" : "150px",
+            borderBottom: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
-            paddingInline: "3.2rem",
+            paddingInline: isTablet ? "1rem" : "3.2rem",
           }}
         >
           <div
@@ -59,43 +55,47 @@ const Speakers = () => {
                   width: "50%",
                 },
                 [screen.desktop]: {
-                  width: "70%",
+                  width: isTablet ? "100%" : "70%",
                 },
               }}
             >
-              <h1 css={{ fontSize: "1.875rem" }}>Performers</h1>
-              <p>
+              <h1 css={{ fontSize: isTablet ? "1.8rem" : "1.875rem" }}>
+                Performers
+              </h1>
+              <p css={{ fontSize: isTablet ? "1rem" : "" }}>
                 If your event is going to have speakers, select Yes and fill in
                 performer(s) details otherwise leave it at &quot;No&quot; and
                 continue
               </p>
             </div>
-            <div
-              css={{
-                display: "flex",
-                gap: "2rem",
-              }}
-            >
-              <p
+            {!isTablet && (
+              <div
                 css={{
-                  color: "#7C35AB",
-                  fontWeight: "bold",
-                  cursor: "pointer",
+                  display: "flex",
+                  gap: "2rem",
                 }}
               >
-                Preview
-              </p>
-              <Link
-                href="/dashboard"
-                css={{
-                  color: "#F05E78",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                Cancel
-              </Link>
-            </div>
+                <p
+                  css={{
+                    color: "#7C35AB",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  Preview
+                </p>
+                <Link
+                  href="/dashboard"
+                  css={{
+                    color: "#F05E78",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <div
@@ -113,10 +113,10 @@ const Speakers = () => {
         >
           <form
             css={{
-              padding: " 1.5rem 2.5rem",
+              padding: isTablet ? "0rem 1rem" : " 1.5rem 2.5rem",
               display: "grid",
               gap: "1.5rem",
-              borderRight: `1px solid ${"#E4E4E4"}`,
+              borderRight: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
               height: "100%",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
@@ -128,7 +128,7 @@ const Speakers = () => {
               },
               [screen.desktop]: {
                 overflowY: "initial",
-                borderBottom: `1px solid ${"#E4E4E4"}`,
+                borderBottom: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
               },
             }}
           >
@@ -137,109 +137,17 @@ const Speakers = () => {
               placeholder="Yes"
               type="select"
               options={[
-                {value:"Yes", label:"Yes"}, {value:"No", label: "No"}
+                { value: "Yes", label: "Yes" },
+                { value: "No", label: "No" },
               ]}
             />
-            <HostEventTextField
-              label="Name of performer"
-              placeholder="Enter full name"
-              type="text"
-              ref = {newSpeakerRef}
-            />
-            <HostEventTextField
-              label="Performer Title"
-              placeholder="Software Engineer at Ewitnex"
-              type="text"
-            />
-            <HostEventTextField
-              label="Performing Role"
-              placeholder="Host"
-              type="select"
-              options={[
-                {value:"Host", label:"Host"}, 
-                {value:"Speaker", label:"Speaker"},
-                {value:"Artiste", label:"Artiste"},
-                {value:"Preacher", label: "Preacher"},
-                {value:"Anchor", label: "Anchor"},
-                {value:"Celebrant", label: "Celebrant"},
-                {value:"Comedian", label: "Comedian"},
-                {value:"Others", label: "Others"},
-              ]}
-            />
-            <HostEventTextField
-              label="About Performer"
-              placeholder="Tell attendees more about this speaker"
-              type="textarea"
-            />
-            <div>
-              <p
-                css={{
-                  fontWeight: "bold",
-                }}
-              >
-                Performer&apos;s Image(Optional)
-              </p>
-              <div
-                css={{
-                  width: "155px",
-                  height: "200px",
-                  border: `1px dashed ${"#C0C0C0"}`,
-                  borderRadius: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  marginTop: "0.5rem",
-                  ":hover": {
-                    border: `1px dashed ${"#7C35AB"}`,
-                  }
-                }}
-              >
-                <div
-                  css={{
-                    color: "#AEAEAE",
-                    fontSize: "0.75rem",
-                    width: "80%",
-                    cursor: "pointer"
-                  }}
-                  onClick={handleImageClick}
-
-                >
-                  <input type = "file" css = {{display: "none"}} onChange={handleFileChange} ref = {inputRef}/>
-                  <Image
-                    src="/assets/svgs/image.svg"
-                    alt=""
-                    width={26.44}
-                    height={30.85}
-                  />
-                  <p>
-                    Tap or drag files to this area to upload PNG, JPG files
-                    format
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <button
-              css={{
-                fontSize: "1rem",
-                fontWeight: "bold",
-                color: "#7C35AB",
-                border: `1px solid ${"#7C35AB"}`,
-                height: "52px",
-                marginBottom: "0.5rem",
-                background: "#fff",
-                borderRadius: "26px",
-                width: "45%",
-                cursor: "pointer",
-              }}
-            >
-              Add Performer
-            </button>
+            {!isTablet && (
+             <AddSpeakerForm speakerRef={newSpeakerRef} />
+            )}
           </form>
           <div
             css={{
-              padding: " 1.5rem 2.5rem",
+              padding: isTablet ? "1rem":" 1.5rem 2.5rem",
               height: "100%",
               display: "grid",
               justifyContent: "space-between",
@@ -270,60 +178,30 @@ const Speakers = () => {
                 },
               }}
             >
-              <div css={{ display: "flex", gap: "1.5rem" }}>
+              <div css={{ display: "flex", gap: "1.5rem", flexWrap: isTablet ? "wrap":"nowrap" }}>
                 <div>
                   <Speaker
                     name="John Bosko"
                     title="Software Engineer"
-                    role = "Speaker"
+                    role="Speaker"
                     img="/assets/pngs/speaker5.png"
                   />
-                  <div
-                    css={{ display: "flex", gap: "1rem", marginTop: "0.5rem" }}
-                  >
-                    <Image
-                      src="/assets/svgs/pencil.svg"
-                      alt=""
-                      width={21}
-                      height={21}
-                    />
-                    <Image
-                      src="/assets/svgs/trash.svg"
-                      alt=""
-                      width={17.88}
-                      height={22}
-                    />
-                  </div>
+                  
                 </div>
                 <div>
                   <Speaker
                     name="Jordan Mike"
                     title="Product Designer"
-                    role = "Artiste"
+                    role="Artiste"
                     img="/assets/pngs/speaker6.png"
                   />
-                  <div
-                    css={{ display: "flex", gap: "1rem", marginTop: "0.5rem" }}
-                  >
-                    <Image
-                      src="/assets/svgs/pencil.svg"
-                      alt=""
-                      width={21}
-                      height={21}
-                    />
-                    <Image
-                      src="/assets/svgs/trash.svg"
-                      alt=""
-                      width={17.88}
-                      height={22}
-                    />
-                  </div>
+                  
                 </div>
               </div>
               <div>
                 <p css={{ fontSize: "0.875rem" }}>
-                  If this event has multiple performers, click on the button below
-                  to add another performer
+                  If this event has multiple performers, click on the button
+                  below to add another performer
                 </p>
                 <button
                   css={{
@@ -336,10 +214,10 @@ const Speakers = () => {
                     marginBlock: "0.5rem",
                     background: "#fff",
                     borderRadius: "26px",
-                    width: "52%",
+                    width: isTablet ? "80%":"52%",
                     cursor: "pointer",
                   }}
-                  onClick = {handleNewSpeakerClick}
+                  onClick={handleNewSpeakerClick}
                 >
                   + Add Another Performer
                 </button>
@@ -347,7 +225,7 @@ const Speakers = () => {
             </div>
             <div
               css={{
-                width: "80%",
+                width: isTablet ? "100%":"80%",
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "1rem",

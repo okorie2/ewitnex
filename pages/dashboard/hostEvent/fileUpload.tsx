@@ -5,19 +5,21 @@ import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { Tooltip } from "@mui/material";
 
 const FileUpload = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <HostEventLayout>
-      <div>
+      <div css = {{width:isTablet ?"100vw":""}}>
         <div
           css={{
             height: "110px",
-            borderBottom: `1px solid ${"#E4E4E4"}`,
+            borderBottom: isTablet ? "":`1px solid ${"#E4E4E4"}`,
             display: "flex",
             alignItems: "center",
-            paddingInline: "3.2rem",
+            paddingInline: isTablet ? "1rem":"3.2rem",
           }}
         >
           <div
@@ -32,7 +34,7 @@ const FileUpload = () => {
               <h1 css={{ fontSize: "1.875rem" }}>Files Upload</h1>
               <p>Upload event files</p>
             </div>
-            <div
+            {!isTablet && <div
               css={{
                 display: "flex",
                 gap: "2rem",
@@ -57,14 +59,14 @@ const FileUpload = () => {
               >
                 Cancel
               </Link>
-            </div>
+            </div>}
           </div>
         </div>
         <div
           css={{
-            maxHeight: "calc(100vh - 110px)",
+            maxHeight: isTablet ? "":"calc(100vh - 110px)",
             width: "fit-content",
-            padding: " 1.5rem 3.2rem",
+            padding: isTablet ? "1rem": " 1.5rem 3.2rem",
             display: "grid",
             gap: "1rem",
             overflowY: "scroll",
@@ -109,7 +111,7 @@ const FileUpload = () => {
             >
               <div
                 css={{
-                  width: "376px",
+                  width: isTablet ? "90vw":"376px",
                   height: "200px",
                   border: `1px dashed ${"#C0C0C0"}`,
                   borderRadius: "10px",
@@ -143,13 +145,15 @@ const FileUpload = () => {
                   color: "#AEAEAE",
                   fontSize: "1.125rem",
                   fontWeight: "bold",
+                  width:isTablet ? "fit-content":"",
+                  marginInline:"auto"
                 }}
               >
                 or
               </p>
               <div
                 css={{
-                  width: "496px",
+                  width: isTablet ? "90vw":"496px",
                   height: "200px",
                   border: `1px solid ${"#C0C0C0"}`,
                   borderRadius: "10px",
@@ -162,10 +166,10 @@ const FileUpload = () => {
                   css={{
                     padding: "0.8rem 2.5rem 0.8rem 1.2rem",
                     display: "grid",
-                    gap: "0.8rem",
+                    gap: isTablet ? "0.5rem":"0.8rem",
                   }}
                 >
-                  <p css={{ fontWeight: "bold" }}>
+                  <p css={{ fontWeight: "bold", fontSize:isTablet ? "0.8rem":"" }}>
                     Create your program using our well designed template
                   </p>
                   <p
@@ -181,8 +185,8 @@ const FileUpload = () => {
                   <Image
                     src="/assets/svgs/createTemplate.svg"
                     alt=""
-                    width={238}
-                    height={22}
+                    width={isTablet ? 159 :238}
+                    height={isTablet ? 15:22}
                   />
                   <p css={{ fontWeight: "bold", color: "#548AF9" }}>
                     Coming Soon...
@@ -191,7 +195,7 @@ const FileUpload = () => {
                 <Image
                   src="/assets/pngs/templatepic.png"
                   alt=""
-                  width={202}
+                  width={isTablet ? 100 : 202}
                   height={200}
                 />
               </div>
@@ -212,7 +216,7 @@ const FileUpload = () => {
             <div>
               <div
                 css={{
-                  width: "376px",
+                  width: isTablet ? "90vw" : "376px",
                   height: "200px",
                   border: `1px dashed ${"#C0C0C0"}`,
                   borderRadius: "10px",
@@ -246,7 +250,7 @@ const FileUpload = () => {
           </div>
           <div
             css={{
-              width: "80%",
+              width: isTablet ? "100%":"80%",
               marginLeft: "auto",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
