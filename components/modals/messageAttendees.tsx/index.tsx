@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
+import { useMediaQuery } from "@mui/material";
 import { TextField } from "@mui/material";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 
@@ -44,6 +45,10 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
     const { name, value } = e.target;
     setMessageDetails({ ...messageDetails, [name]: value });
   };
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const handleClose = () => {
+    props.onRequestClose()
+  }
   const handleNext = () => {};
   return (
     <Modal
@@ -55,7 +60,7 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
+      {!isTablet && <div
         onClick={props.onRequestClose}
         css={{
           border: "none",
@@ -68,12 +73,11 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
-      </div>
-
+      </div> }
       <div
         css={{
           height: "100vh",
-          maxWidth: "33.3%",
+          maxWidth:  isTablet ? "100vw" :"33.3%",
           background: "#fff",
           position: "absolute",
           right: "0",
@@ -81,7 +85,7 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
           padding: "3% 2% 0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "50%",
+            width: isTablet ? "100vw" :"50%",
           },
         }}
       >
@@ -95,6 +99,41 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
             },
           }}
         >
+          {isTablet && (
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                boxShadow: "#00000029 0px 0px 10px ",
+                padding: "0% 5%",
+                paddingTop: "1.125rem",
+                height: "9vh",
+                fontFamily: "'Poppins', sans-serif",
+                position: "fixed",
+                gap: "1.5rem",
+                left: "0",
+                right: "0",
+                top: "0",
+                width: "100vw",
+                zIndex: "5",
+                background: "#fff",
+              }}
+            >
+              <div onClick={handleClose} css = {{display:"flex"}}>
+                <Image
+                  src="/assets/svgs/back.svg"
+                  alt="back_arrow"
+                  width={25}
+                  height={18}
+                />
+              </div>
+              <div>
+                <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                Messaging Attendees
+                </h2>
+              </div>
+            </div>
+          )}
           <p css={{ fontSize: "24px", fontWeight: "bold" }}>
             Messaging Attendees
           </p>
@@ -103,7 +142,7 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
               display: "flex",
               flexDirection: "column",
               gap: "0.5rem",
-              marginTop: "2rem",
+              marginTop: isTablet ? "3rem":"2rem",
             }}
           >
             <SettingsTextField
@@ -118,7 +157,7 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
               type="textarea"
               name="message"
               color= "#000"
-              height="16rem"
+              height={isTablet ? "20rem": "16rem"}
               value={messageDetails.message}
               placeholder={"Start writing your message"}
               setValue={handleChange}

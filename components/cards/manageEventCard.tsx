@@ -2,6 +2,7 @@
 import React from "react";
 
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 
 interface IManageEvent {
@@ -15,11 +16,13 @@ interface IManageEvent {
 }
 
 const ManageEventCard = (props: IManageEvent) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <Link href={`/dashboard/manager/${props.id}?tab=Overview`}>
       <div
         css={{
-          width: "335px",
+          width: isTablet ? "91vw":"335px",
           height: "140px",
           border: `1px solid ${"#C0C0C0"}`,
           borderRadius: "20px",
