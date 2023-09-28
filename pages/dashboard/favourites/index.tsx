@@ -8,8 +8,13 @@ import {
   inactiveButtonStyle,
 } from "styles/components/ButtonToggleStyles";
 import DashboardEventCard from "@/components/cards/dashboardEventCard";
+import { useMediaQuery } from "@mui/material";
+import Link from "next/link";
+import Image from "next/image";
+import FeedsCard from "@/components/cards/feedsCard";
 
 const Favourites = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [showEvents, setShowEvents] = useState(true);
   const [showPosts, setShowPosts] = useState(false);
   const [activeTab, setActiveTab] = useState("events");
@@ -29,8 +34,8 @@ const Favourites = () => {
       <div css={{ maxHeight: "100vh", height: "100vh" }}>
         <div
           css={{
-            borderLeft: `1px solid ${"#E4E4E4"}`,
-            marginLeft: "1.5rem",
+            borderLeft: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
+            marginLeft: isTablet ? "" : "1.5rem",
             height: "100%",
             maxHeight: "100vh",
           }}
@@ -39,17 +44,30 @@ const Favourites = () => {
             css={{
               height: "80px",
               borderBottom: `1px solid ${"#E4E4E4"}`,
-              display: "grid",
+              display: isTablet ? "flex" : "grid",
               alignItems: "center",
               paddingInline: "1.5rem",
               color: "#000",
+              gap: isTablet ? "1rem" : "",
             }}
           >
+            {isTablet && (
+              <Link href="/dashboard/profile">
+                <div css={{ display: "flex" }}>
+                  <Image
+                    src="/assets/svgs/back.svg"
+                    alt="back_arrow"
+                    width={22}
+                    height={15}
+                  />
+                </div>
+              </Link>
+            )}
             <h2>Favourites</h2>
           </div>
           <div
             css={{
-              paddingInline: "1.5rem",
+              paddingInline: isTablet ? "0.8rem" : "1.5rem",
               maxHeight: "calc(100vh - 80px)",
               display: "grid",
               gridTemplateRows: "10% 90%",
@@ -60,7 +78,7 @@ const Favourites = () => {
                 css={{
                   borderRadius: "16px",
                   backgroundColor: "#F2F7FB",
-                  width: "30%",
+                  width: isTablet ? "100%" : "30%",
                   marginBlock: "1rem",
                   height: "2.7rem",
                   display: "flex",
@@ -102,104 +120,164 @@ const Favourites = () => {
                 css={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr 1fr",
-                  width: "85%",
+                  width: isTablet ? "100%" : "85%",
                   gap: "1rem",
-                  padding: "1.125rem",
+                  padding: isTablet ? "2rem 0 5rem 0" : "1.125rem",
                   [screen.lg]: {
                     gridTemplateColumns: "1fr 1fr",
                   },
                   [screen.desktop]: {
-                    gridTemplateColumns: "1fr 1fr",
+                    gridTemplateColumns: isTablet ? "1fr" : "1fr 1fr",
                   },
                 }}
               >
-                <div>
-                  <DashboardEventCard
-                    label="Concert"
-                    attendees="609"
-                    date="3 DEC. 2022, 10:00 AM"
-                    favourite = {true}
-                    id="Heal12548"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Eko Atlantic"
-                    priceRange="$500-$2K"
-                    title="Medical Crusade with Doctor West"
-                    img="/assets/pngs/card_2.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    favourite = {true}
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    favourite = {true}
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    favourite = {true}
-
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    favourite = {true}
-
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    favourite = {true}
-
-                    id="Tec542445"
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
+                {isTablet ? (
+                  <>
+                    <div>
+                      <FeedsCard
+                        label="Music"
+                        attendees="609"
+                        id="Tec542445"
+                        date="25 NOV. 2021, 10:00 AM"
+                        location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                        organizer="Connack Foundarion"
+                        priceRange="$500-$2K"
+                        title="Connack Foundation African Music Award Of The Year"
+                        img="/assets/pngs/card_img.png"
+                        favourite = {true}
+                      />
+                    </div>
+                    <div>
+                      <FeedsCard
+                        label="Concert"
+                        attendees="609"
+                        date="3 DEC. 2022, 10:00 AM"
+                        id="Heal12548"
+                        location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                        organizer="Eko Atlantic"
+                        priceRange="$500-$2K"
+                        title="Medical Crusade with Doctor West"
+                        img="/assets/pngs/card_2.png"
+                        favourite = {true}
+                      />
+                    </div>
+                    <div>
+                      <FeedsCard
+                        label="Music"
+                        attendees="609"
+                        id="Tec542445"
+                        date="25 NOV. 2021, 10:00 AM"
+                        location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                        organizer="Connack Foundarion"
+                        priceRange="$500-$2K"
+                        title="Connack Foundation African Music Award Of The Year"
+                        img="/assets/pngs/card_img.png"
+                        favourite = {true}
+                      />
+                    </div>
+                    <div>
+                      <FeedsCard
+                        label="Concert"
+                        attendees="609"
+                        date="3 DEC. 2022, 10:00 AM"
+                        id="Heal12548"
+                        location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                        organizer="Eko Atlantic"
+                        priceRange="$500-$2K"
+                        title="Medical Crusade with Doctor West"
+                        img="/assets/pngs/card_2.png"
+                        favourite = {true}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <DashboardEventCard
+                        label="Concert"
+                        attendees="609"
+                        date="3 DEC. 2022, 10:00 AM"
+                        favourite={true}
+                        id="Heal12548"
+                        location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
+                        organizer="Eko Atlantic"
+                        priceRange="$500-$2K"
+                        title="Medical Crusade with Doctor West"
+                        img="/assets/pngs/card_2.png"
+                      />
+                    </div>
+                    <div>
+                      <DashboardEventCard
+                        label="Tech"
+                        attendees="609"
+                        id="Tec542445"
+                        favourite={true}
+                        date="3 DEC. 2022, 10:00 AM"
+                        location="IG Hub, 22 Faulks Road, Aba, Abia"
+                        organizer="GDG Aba"
+                        priceRange="$500-$2K"
+                        title="Google Developers Festival Aba"
+                        img="/assets/pngs/card_4.png"
+                      />
+                    </div>
+                    <div>
+                      <DashboardEventCard
+                        label="Tech"
+                        attendees="609"
+                        id="Tec542445"
+                        favourite={true}
+                        date="3 DEC. 2022, 10:00 AM"
+                        location="IG Hub, 22 Faulks Road, Aba, Abia"
+                        organizer="GDG Aba"
+                        priceRange="$500-$2K"
+                        title="Google Developers Festival Aba"
+                        img="/assets/pngs/card_4.png"
+                      />
+                    </div>
+                    <div>
+                      <DashboardEventCard
+                        label="Tech"
+                        attendees="609"
+                        id="Tec542445"
+                        favourite={true}
+                        date="3 DEC. 2022, 10:00 AM"
+                        location="IG Hub, 22 Faulks Road, Aba, Abia"
+                        organizer="GDG Aba"
+                        priceRange="$500-$2K"
+                        title="Google Developers Festival Aba"
+                        img="/assets/pngs/card_4.png"
+                      />
+                    </div>
+                    <div>
+                      <DashboardEventCard
+                        label="Tech"
+                        attendees="609"
+                        id="Tec542445"
+                        favourite={true}
+                        date="3 DEC. 2022, 10:00 AM"
+                        location="IG Hub, 22 Faulks Road, Aba, Abia"
+                        organizer="GDG Aba"
+                        priceRange="$500-$2K"
+                        title="Google Developers Festival Aba"
+                        img="/assets/pngs/card_4.png"
+                      />
+                    </div>
+                    <div>
+                      <DashboardEventCard
+                        label="Tech"
+                        attendees="609"
+                        favourite={true}
+                        id="Tec542445"
+                        date="3 DEC. 2022, 10:00 AM"
+                        location="IG Hub, 22 Faulks Road, Aba, Abia"
+                        organizer="GDG Aba"
+                        priceRange="$500-$2K"
+                        title="Google Developers Festival Aba"
+                        img="/assets/pngs/card_4.png"
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

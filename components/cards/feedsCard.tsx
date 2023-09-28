@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { H3, H4 } from "styles/components/typography";
 import { useMediaQuery } from "@mui/material";
@@ -16,102 +16,117 @@ interface IFeedsCard {
   priceRange: string;
   attendees: string;
   organizer: string;
+  favourite?: boolean;
   width?: string;
 }
 
 const FeedsCard = (props: IFeedsCard) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
+  const [_favourite, setFavourite] = useState(props.favourite);
 
   return (
-    <Link href={`/dashboard/programs/${props.id}`}>
-      <div
-        css={{
-          height: isTablet ? "256px" : "237px",
-          width: isTablet ? "73vw" : "326px",
-          borderRadius: "10px",
-          backgroundColor: "#fff",
-          boxShadow: "#00000029 0px 0px 5px",
-          display: "grid",
-          gridTemplateColumns: "1fr 4fr",
-          marginLeft: "65.5px",
-          position: "relative",
-          marginTop: "0.5rem",
-        }}
-      >
-        <div css={{ position: "absolute", left: "-65.5px", top: "-1rem" }}>
-          <div
-            css={{
-              width: isTablet ? "110px" : "131px",
-              height: "139px",
-              position: "relative",
-            }}
-          >
-            <Image
-              src={props.img}
-              alt="card_img"
-              css={{ borderRadius: "10px", objectFit: "cover" }}
-              fill
-            />
-          </div>
-          <div
-            css={{
-              position: "absolute",
-              top: "5%",
-              right: "5%",
-            }}
-          >
-            <div
-              css={{
-                backdropFilter: "brightness(50%) ",
-                fontSize: "12px",
-                borderRadius: "5px",
-                fontWeight: 500,
-                textTransform: "capitalize",
-                backgroundColor: "#fff",
-                opacity: "75%",
-                padding: "0.1rem 0.5rem",
-              }}
-            >
-              {props.label}
-            </div>
-          </div>
-        </div>
-        <div></div>
+    <div
+      css={{
+        height: isTablet ? "256px" : "237px",
+        minWidth: isTablet ? "73vw" : "326px",
+        borderRadius: "10px",
+        backgroundColor: "#fff",
+        boxShadow: "#00000029 0px 0px 5px",
+        display: "grid",
+        gridTemplateColumns: "1fr 4fr",
+        marginLeft: "65.5px",
+        position: "relative",
+        marginTop: "0.5rem",
+      }}
+    >
+      <div css={{ position: "absolute", left: "-65.5px", top: "-1rem" }}>
         <div
           css={{
-            display: isTablet ? "flex" : "block",
-            flexDirection: "column",
-            padding: isTablet ? "4% 3%" : "4% 6%",
-            marginLeft: "-5%",
-            gap: isTablet ? "0.2rem" : "",
+            width: isTablet ? "110px" : "131px",
+            height: "139px",
+            position: "relative",
+          }}
+        >
+          <Image
+            src={props.img}
+            alt="card_img"
+            css={{ borderRadius: "10px", objectFit: "cover" }}
+            fill
+          />
+        </div>
+        <div
+          css={{
+            position: "absolute",
+            top: "5%",
+            right: "5%",
           }}
         >
           <div
             css={{
-              display: "flex",
-              alignItems: "center",
+              backdropFilter: "brightness(50%) ",
+              fontSize: "12px",
+              borderRadius: "5px",
+              fontWeight: 500,
+              textTransform: "capitalize",
+              backgroundColor: "#fff",
+              opacity: "75%",
+              padding: "0.1rem 0.5rem",
             }}
           >
+            {props.label}
+          </div>
+        </div>
+      </div>
+      <div></div>
+      <div
+        css={{
+          display: isTablet ? "flex" : "block",
+          flexDirection: "column",
+          padding: isTablet ? "4% 3%" : "4% 6%",
+          marginLeft:isTablet ? "-5%" : "-3%",
+          gap: isTablet ? "0.2rem" : "",
+        }}
+      >
+        <div
+          css={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Link href={`/dashboard/programs/${props.id}`}>
             <h4 css={{ width: isTablet ? "" : "78%" }}>
               {props.title.slice(0, 37)} {props.title.length > 37 && "..."}
             </h4>
-            <div
-              css={{
-                height: "41px",
-                width: "41px",
-                backgroundColor: "#fff",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
+          </Link>
+          <div
+            css={{
+              height: "41px",
+              width: "41px",
+              backgroundColor: "#fff",
+              display: "flex",
+              justifyContent: "center",
+              zIndex: "31",
+            }}
+            onClick={() => setFavourite(!_favourite)}
+          >
+            {_favourite ? (
+              <Image
+                src="/assets/svgs/filled-love.svg"
+                alt="card_img"
+                width={20.98}
+                height={19.39}
+              />
+            ) : (
               <Image
                 src="/assets/svgs/love.svg"
                 alt="card_img"
                 width={20.98}
                 height={19.39}
               />
-            </div>
+            )}
           </div>
+        </div>
+        <Link href={`/dashboard/programs/${props.id}`}>
           <p
             css={{
               color: "#AEAEAE",
@@ -184,9 +199,9 @@ const FeedsCard = (props: IFeedsCard) => {
             Organized by
           </p>
           <H4>{props.organizer}</H4>
-        </div>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 
