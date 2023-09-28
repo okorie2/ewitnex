@@ -395,7 +395,8 @@ const EventOverview = () => {
                 css={{
                   display: "grid",
                   gridTemplateColumns: isTablet ? "1fr":"80% 20%",
-                  overflowX:"auto"
+                  overflowX:"auto",
+                  "::-webkit-scrollbar": {display:"none"}
                 }}
               >
                 <div css = {{width: isTablet ? "100vh":""}}>

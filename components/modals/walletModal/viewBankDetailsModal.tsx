@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import { Button } from "styles/components/button";
 
 
@@ -33,7 +34,11 @@ const customStyles = {
 Modal.setAppElement("body");
 
 const ViewBankDetailsModal = (props: IViewBankDetailsModal) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const handleNext = () => {};
+  const handleClose = () => {
+    props.onRequestClose();
+  };
   return (
     <Modal
       isOpen={props.isOpen}
@@ -44,7 +49,7 @@ const ViewBankDetailsModal = (props: IViewBankDetailsModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
+      {!isTablet && <div
         onClick={props.onRequestClose}
         css={{
           border: "none",
@@ -57,26 +62,61 @@ const ViewBankDetailsModal = (props: IViewBankDetailsModal) => {
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
-      </div>
+      </div>}
 
       <div
         css={{
           height: "100vh",
-          width: "33.3%",
+          width: isTablet ? "100vw" :"33.3%",
           background: "#fff",
           position: "absolute",
           right: "0",
           top: "0",
-          padding: "3% 2% 0",
-          paddingRight:"0",
+          padding: isTablet ? "0 1rem" :"3% 2% 0",
+          paddingRight:isTablet ? "" :"0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "33.3%",
+            width: isTablet ? "100vw" :"33.3%",
           },
           display: "grid",
           gridTemplateRows: "10% 90%",
         }}
       >
+        {isTablet && (
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                boxShadow: "#00000029 0px 0px 10px ",
+                padding: "0% 5%",
+                paddingTop: "1.125rem",
+                height: "9vh",
+                fontFamily: "'Poppins', sans-serif",
+                position: "fixed",
+                gap: "1.5rem",
+                left: "0",
+                right: "0",
+                top: "0",
+                width: "100vw",
+                zIndex: "5",
+                background: "#fff",
+              }}
+            >
+              <div onClick={handleClose} css={{ display: "flex" }}>
+                <Image
+                  src="/assets/svgs/close-plain.svg"
+                  alt="back_arrow"
+                  width={25}
+                  height={28}
+                />
+              </div>
+              <div>
+                <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  Add Bank Account
+                </h2>
+              </div>
+            </div>
+          )}
         <div>
           <p css={{ fontSize: "24px", fontWeight: "bold" }}>
             Payout Account Details
@@ -90,6 +130,7 @@ const ViewBankDetailsModal = (props: IViewBankDetailsModal) => {
             //   display: "none",
             // },
             "&::-webkit-scrollbar": {
+              display: isTablet ? "none" : "",
               width: "8px",
             },
             "&::-webkit-scrollbar-track": {
@@ -107,7 +148,7 @@ const ViewBankDetailsModal = (props: IViewBankDetailsModal) => {
         >
           <div
             css={{
-              width: "95%",
+              width: isTablet ? "100%":"95%",
               display: "flex",
               flexDirection: "column",
               gap: "1.5rem",
@@ -217,7 +258,7 @@ const ViewBankDetailsModal = (props: IViewBankDetailsModal) => {
                 <p>NBNNGLASGCS</p>
               </div>
             </div>
-            <div css = {{marginBlock:"1.5rem"}}>
+            <div css = {{marginBlock:"1.5rem", paddingBottom:isTablet ? "3rem":""}}>
             <Button onClick={handleNext} height="52px" background="#F05E78" width="100%">
                   <p
                     css={{

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import SettingsTextField, {
@@ -8,7 +8,9 @@ import SettingsTextField, {
 } from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
+import { useMediaQuery } from "@mui/material";
 import { CheckSelect } from "fragments/eventFilter";
+import Image from "next/image";
 import StyledCheckbox from "@/components/inputs/StyledCheckbox";
 
 interface IAddBankModal {
@@ -40,7 +42,7 @@ const AddBankModal = (props: IAddBankModal) => {
   const [bankType, setBankType] = useState("personal");
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [confirmAccount, setConfirmAccount] = useState(false);
-  const [passwordVisible, setPassowrdVisible] = useState(false)
+  const [passwordVisible, setPassowrdVisible] = useState(false);
   const [bankDetails, setBankDetails] = useState({
     subject: "",
     name: "",
@@ -50,6 +52,10 @@ const AddBankModal = (props: IAddBankModal) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setBankDetails({ ...bankDetails, [name]: value });
+  };
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const handleClose = () => {
+    props.onRequestClose();
   };
   const handleNext = () => {};
   return (
@@ -62,34 +68,36 @@ const AddBankModal = (props: IAddBankModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
-        onClick={props.onRequestClose}
-        css={{
-          border: "none",
-          background: "none",
-          color: "#fff",
-          fontSize: "1.125rem",
-          cursor: "pointer",
-          width: "67%",
-          height: "90vh",
-        }}
-      >
-        {/* <p>&#x2715; Close</p>  */}
-      </div>
+      {!isTablet && (
+        <div
+          onClick={props.onRequestClose}
+          css={{
+            border: "none",
+            background: "none",
+            color: "#fff",
+            fontSize: "1.125rem",
+            cursor: "pointer",
+            width: "67%",
+            height: "90vh",
+          }}
+        >
+          {/* <p>&#x2715; Close</p>  */}
+        </div>
+      )}
 
       <div
         css={{
           height: "100vh",
-          width: "33.3%",
+          width: isTablet ? "100vw" : "33.3%",
           background: "#fff",
           position: "absolute",
           right: "0",
           top: "0",
-          padding: "3% 2% 0",
-          paddingRight:"0",
+          padding: isTablet ? "0 0.5rem" : "3% 2% 0",
+          paddingRight: isTablet ? "" : "0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "33.3%",
+            width: isTablet ? "100vw" : "33.3%",
           },
         }}
       >
@@ -98,10 +106,8 @@ const AddBankModal = (props: IAddBankModal) => {
             width: "100%",
             height: "95%",
             overflowY: "scroll",
-            // "&::-webkit-scrollbar": {
-            //   display: "none",
-            // },
             "&::-webkit-scrollbar": {
+              display: isTablet ? "none" : "",
               width: "8px",
             },
             "&::-webkit-scrollbar-track": {
@@ -117,8 +123,50 @@ const AddBankModal = (props: IAddBankModal) => {
             },
           }}
         >
-          <form>
-            <p css={{ fontSize: "24px", fontWeight: "bold" }}>
+          {isTablet && (
+            <div
+              css={{
+                display: "flex",
+                alignItems: "center",
+                boxShadow: "#00000029 0px 0px 10px ",
+                padding: "0% 5%",
+                paddingTop: "1.125rem",
+                height: "9vh",
+                fontFamily: "'Poppins', sans-serif",
+                position: "fixed",
+                gap: "1.5rem",
+                left: "0",
+                right: "0",
+                top: "0",
+                width: "100vw",
+                zIndex: "5",
+                background: "#fff",
+              }}
+            >
+              <div onClick={handleClose} css={{ display: "flex" }}>
+                <Image
+                  src="/assets/svgs/close-plain.svg"
+                  alt="back_arrow"
+                  width={25}
+                  height={28}
+                />
+              </div>
+              <div>
+                <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  Add Bank Account
+                </h2>
+              </div>
+            </div>
+          )}
+          <form css={{ paddingBlock: isTablet ? "5rem" : "" }}>
+            <p
+              css={{
+                fontSize: isTablet ? "20px" : "24px",
+                fontWeight: "bold",
+                borderBottom: isTablet ? "1px solid #AEAEAE" : "",
+                paddingBlock: isTablet ? "1rem" : "",
+              }}
+            >
               Enter Bank Details
             </p>
             <div
@@ -126,7 +174,7 @@ const AddBankModal = (props: IAddBankModal) => {
                 display: "flex",
                 flexDirection: "column",
                 gap: "0.5rem",
-                marginTop: "2rem",
+                marginTop: isTablet ? "1rem" : "2rem",
               }}
             >
               <label
@@ -139,7 +187,13 @@ const AddBankModal = (props: IAddBankModal) => {
               >
                 Bank Account Type
               </label>
-              <div css={{ display: "flex", gap: "2rem" }}>
+              <div
+                css={{
+                  display: "flex",
+                  gap: isTablet ? "0rem" : "2rem",
+                  flexDirection: isTablet ? "column" : "row",
+                }}
+              >
                 <CheckSelect
                   value={"personal"}
                   label={"Personal"}
@@ -155,7 +209,7 @@ const AddBankModal = (props: IAddBankModal) => {
                   handleClick={() => setBankType("business")}
                 />
               </div>
-              <div css={{ width: "95%" }}>
+              <div css={{ width: isTablet ? "100%":"95%" }}>
                 <HostEventTextField
                   label="Bank Country"
                   placeholder="NG"
@@ -166,7 +220,7 @@ const AddBankModal = (props: IAddBankModal) => {
                   ]}
                 />
               </div>
-              <div css={{ width: "95%", marginTop: "1rem" }}>
+              <div css={{ width: isTablet ? "100%":"95%", marginTop: "1rem" }}>
                 <HostEventTextField
                   label="Bank Account Currency"
                   placeholder="NGN"
@@ -190,7 +244,7 @@ const AddBankModal = (props: IAddBankModal) => {
                 css={{
                   borderTop: "1px solid #AEAEAE",
                   paddingTop: "1rem",
-                  width: "95%",
+                  width: isTablet ? "100%":"95%",
                   display: "flex",
                   flexDirection: "column",
                   gap: "1rem",
@@ -271,7 +325,7 @@ const AddBankModal = (props: IAddBankModal) => {
                 css={{
                   borderTop: "1px solid #AEAEAE",
                   paddingTop: "1rem",
-                  width: "95%",
+                  width: isTablet ? "100%":"95%",
                   display: "flex",
                   flexDirection: "column",
                   gap: "1rem",
@@ -282,7 +336,7 @@ const AddBankModal = (props: IAddBankModal) => {
                   value={bankDetails.password}
                   placeholder={"Enter Password"}
                   setValue={handleChange}
-                  visible = {passwordVisible}
+                  visible={passwordVisible}
                   setVisible={setPassowrdVisible}
                   color="#000"
                 />
@@ -292,7 +346,7 @@ const AddBankModal = (props: IAddBankModal) => {
                   display: "flex",
                   justifyContent: "center",
                   marginTop: "2rem",
-                  width:"95%"
+                  width: isTablet ? "100%":"95%",
                 }}
               >
                 <Button onClick={handleNext} height="52px" width="100%">
