@@ -6,12 +6,13 @@ import { screen } from "styles/theme";
 import Image from "next/image";
 import { Button } from "styles/components/button";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 import { TailSpin } from "react-loader-spinner";
 
 interface ISuccessModal {
   isOpen: boolean;
   onRequestClose: () => void;
-  action: "passwordReset" | "accountVerification";
+  action: "passwordReset" | "accountVerification" | "saveChange";
 }
 
 const customStyles = {
@@ -35,6 +36,7 @@ const customStyles = {
 Modal.setAppElement("body");
 
 const SuccessModal = (props: ISuccessModal) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleNext = () => {
@@ -43,7 +45,14 @@ const SuccessModal = (props: ISuccessModal) => {
       router.push("/auth/signin");
     }
     if (props.action === "accountVerification") {
-      props.onRequestClose();
+      if(isTablet){
+        router.push("/dashboard")
+      }else{
+        props.onRequestClose();
+      }
+    }
+    if(props.action==="saveChange"){
+      props.onRequestClose()
     }
   };
   const handleClick = () => {
@@ -61,7 +70,7 @@ const SuccessModal = (props: ISuccessModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
+      {!isTablet && <div
         onClick={handleClick}
         css={{
           border: "none",
@@ -74,21 +83,24 @@ const SuccessModal = (props: ISuccessModal) => {
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
-      </div>
+      </div>}
 
       <div
         css={{
-          height: "100vh",
-          width: "33.3%",
+          height: isTablet ? "60vh":"100vh",
+          width: isTablet ? "90vw":"33.3%",
           background: "#fff",
-          position: "absolute",
+          position: isTablet ? "relative":"absolute",
           right: "0",
           top: "0",
-          padding: "3% 2% 0",
-          paddingRight: "0",
+          padding: isTablet ? "0 0.5rem" : "3% 2% 0",
+          paddingRight: isTablet ? "" : "0",
+          borderRadius: isTablet ? "18px" : "",
           color: "#000",
           [screen.desktopLg]: {
-            width: "33.3%",
+            width: isTablet ? "90vw":"33.3%",
+            marginInline:isTablet ? "auto" :"",
+            marginTop:isTablet ? "30vw" :""
           },
           display: "grid",
         }}
@@ -97,11 +109,15 @@ const SuccessModal = (props: ISuccessModal) => {
           css={{
             width: "100%",
             overflowY: "scroll",
+            display:isTablet ? "flex":"",
+            alignItems:isTablet ? "center":"",
+            justifyContent: isTablet ? "center":"",
             // "&::-webkit-scrollbar": {
             //   display: "none",
             // },
             "&::-webkit-scrollbar": {
-              width: "8px",
+                  display: isTablet ? "none" : "",
+                  width: "8px",
             },
             "&::-webkit-scrollbar-track": {
               background: "#F5f5f5",
@@ -118,7 +134,7 @@ const SuccessModal = (props: ISuccessModal) => {
         >
           <div
             css={{
-              height: "80vh",
+              height: isTablet ? "":"80vh",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -145,7 +161,7 @@ const SuccessModal = (props: ISuccessModal) => {
             </p>
             <div
               css={{
-                width: "70%",
+                width: isTablet ? "":"70%",
                 textAlign: "center",
                 marginBlock: "1.5rem",
                 fontWeight: "550",
@@ -153,8 +169,8 @@ const SuccessModal = (props: ISuccessModal) => {
             >
               {props.action === "accountVerification" ? (
                 <p>Your account has been successfully verified</p>
-              ) : (
-                <p>Your password has been changed successfully</p>
+              ) :  (
+                <p>{props.action === "saveChange" ? "Your changes have been saved":"Your password has been changed successfully"}</p>
               )}
             </div>
             <div
@@ -185,7 +201,7 @@ const SuccessModal = (props: ISuccessModal) => {
                     fontFamily: '"Nunito", sans-serif',
                   }}
                 >
-                  {props.action === "accountVerification" ? "OKAY" : "SIGN IN"}
+                  {props.action === "accountVerification" || props.action === "saveChange" ? "OKAY" : "SIGN IN"}
                 </p>
                 {loading && (
                   <TailSpin

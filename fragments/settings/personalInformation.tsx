@@ -1,71 +1,128 @@
 /** @jsxImportSource @emotion/react */
 
 import SettingsCard from "@/components/cards/settingsCard";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import SettingsFormCard from "@/components/cards/setingsFormCard";
+import { useMediaQuery } from "@mui/material";
 import SettingsModal from "@/components/modals/settingsModal";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const PersonalInformation = () => {
-  const [activeModal , setActiveModal] = useState("")
-  const [settingsModalOpen, setSettingsModalOpen] = useState(false)
-  const handleSettingsModalOpen = (id:string) => {
-    setSettingsModalOpen(!settingsModalOpen)
-    setActiveModal(id)
-  }
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const [activeModal, setActiveModal] = useState("");
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const handleSettingsModalOpen = (id: string) => {
+    setSettingsModalOpen(!settingsModalOpen);
+    setActiveModal(id);
+  };
+  const router = useRouter()
+  useEffect(() => {
+    if (isTablet) {
+      const refuseBackButton = () => {
+        window.onpopstate = () => {
+          router.push(router.pathname);
+        };
+      };
+      if (settingsModalOpen) {
+        refuseBackButton();
+      } else {
+        window.onpopstate = () => {
+          router.push("/dashboard/settings");
+        };
+      }
+    }
+  }, [settingsModalOpen]);
   return (
     <>
-      <SettingsModal isOpen={settingsModalOpen} onRequestClose={() => handleSettingsModalOpen("")} activeModal={activeModal} />
-    <div
-      css={{
-        height: "100vh",
-      }}
-    >
+      <SettingsModal
+        isOpen={settingsModalOpen}
+        onRequestClose={() => handleSettingsModalOpen("")}
+        activeModal={activeModal}
+      />
       <div
         css={{
-          height: "80px",
-          borderBottom: `1px solid ${"#E4E4E4"}`,
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          alignItems: "center",
-          paddingInline: "1.5rem",
-          paddingRight: "2.5rem",
-          color: "#000",
+          height: "100vh",
         }}
       >
-        <h2>Personal Information</h2>
-      </div>
-      <div
-        css={{
-          height: "calc(100vh - 80px)",
-          padding: "1.5rem",
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
-        }}
-      >
-        <SettingsFormCard label={"Full Name"} cardTitle={"Blessed Onoriode"} onClick={() => handleSettingsModalOpen("fullName")}/>
-        <SettingsFormCard label = {"Username"} cardTitle={"Blessed_one"} onClick={() => handleSettingsModalOpen("userName")}/>
-        <SettingsFormCard 
-        label={"Phone Number"} 
-        cardTitleImg = {
-        <div css = {{display: "flex", alignItems: "center"}}>
-          <img 
-            src="https://flagsapi.com/NG/flat/64.png" 
-            alt={""} 
-            height={40} 
-            width = {40}        
+        <div
+          css={{
+            height: "80px",
+            borderBottom: `1px solid ${"#E4E4E4"}`,
+            display: isTablet ? "flex" : "grid",
+            gridTemplateColumns: "1fr auto",
+            alignItems: "center",
+            paddingInline: "1.5rem",
+            paddingRight: "2.5rem",
+            color: "#000",
+            gap: isTablet ? "1rem" : "",
+          }}
+        >
+          {isTablet && (
+            <Link href="/dashboard/settings">
+              <div css={{ display: "flex" }}>
+                <Image
+                  src="/assets/svgs/back.svg"
+                  alt="back_arrow"
+                  width={22}
+                  height={15}
+                />
+              </div>
+            </Link>
+          )}
+          <h2>Personal Information</h2>
+        </div>
+        <div
+          css={{
+            height: "calc(100vh - 80px)",
+            padding: "1.5rem",
+            overflowY: "scroll",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
+          <SettingsFormCard
+            label={"Full Name"}
+            cardTitle={"Blessed Onoriode"}
+            onClick={() => handleSettingsModalOpen("fullName")}
+          />
+          <SettingsFormCard
+            label={"Username"}
+            cardTitle={"Blessed_one"}
+            onClick={() => handleSettingsModalOpen("userName")}
+          />
+          <SettingsFormCard
+            label={"Phone Number"}
+            cardTitleImg={
+              <div css={{ display: "flex", alignItems: "center" }}>
+                <img
+                  src="https://flagsapi.com/NG/flat/64.png"
+                  alt={""}
+                  height={40}
+                  width={40}
+                />
+              </div>
+            }
+            cardTitle={"+234 9077728899"}
+          />
+          <SettingsFormCard
+            label={"Email Address"}
+            cardTitle={"blessedonoriode@gmail.com"}
+          />
+          <SettingsFormCard
+            label={"Gender"}
+            cardTitle={"Prefer not to say"}
+            onClick={() => handleSettingsModalOpen("gender")}
+          />
+          <SettingsFormCard
+            label={"Location"}
+            cardTitle={"Lagos,Lagos,Nigeria"}
+            onClick={() => handleSettingsModalOpen("location")}
           />
         </div>
-        } 
-        cardTitle={"+234 9077728899"}  />
-        <SettingsFormCard label={"Email Address"} cardTitle={"blessedonoriode@gmail.com"}  />
-        <SettingsFormCard label={"Gender"} cardTitle={"Prefer not to say"} onClick={() => handleSettingsModalOpen("gender")} />
-        <SettingsFormCard label={"Location"} cardTitle={"Lagos,Lagos,Nigeria"} onClick={() => handleSettingsModalOpen("location")}  />
       </div>
-      
-    </div>
     </>
   );
 };

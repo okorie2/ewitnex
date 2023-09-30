@@ -27,7 +27,7 @@ const ProfileMobileModal = ({
         css={{
           position: "absolute",
           width: "100vw",
-          height: "50vh",
+          height: "60vh",
           marginTop: shown ? "-9vh" : "-100vh",
           background: "#000",
           opacity: "0.55",
@@ -38,9 +38,10 @@ const ProfileMobileModal = ({
         <div
           css={{
             position: "absolute",
+            bottom:0,
             width: "100vw",
-            height: "20vh",
-            marginTop: "36vh",
+            height: "50vh",
+            marginTop: "35vh",
             background: "#fff",
             zIndex: 101,
             transition: "margin-top 1s",
@@ -59,7 +60,7 @@ const ProfileMobileModal = ({
               gap: "1rem",
               width: "85%",
               marginInline: "auto",
-              paddingBlock: "2.5%",
+              paddingBlock: "2rem 1rem",
             }}
           >
             <SidebarItem item={"manager"} activeItem={""} notification={true} />

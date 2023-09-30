@@ -2,11 +2,17 @@
 
 import { SettingsPasswordTextField } from "@/components/inputs/SettingsInput";
 import SuccessModal from "@/components/modals/settingsModal/successModal";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import { Button } from "styles/components/button";
+import Link from "next/link";
+import Image from "next/image";
+import {useRouter} from 'next/router'
 
 const ChangePassword = () => {
-  const [success, setSuccess] = useState(false)
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const [success, setSuccess] = useState(false);
+  const router = useRouter()
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [formDetails, setFormDetails] = useState({
@@ -18,27 +24,60 @@ const ChangePassword = () => {
     setFormDetails({ ...formDetails, [name]: value });
   };
   const handleNext = () => {
-    setSuccess(true)
+    setSuccess(true);
   };
+  useEffect(() => {
+    if (isTablet) {
+      const refuseBackButton = () => {
+        window.onpopstate = () => {
+          router.push(router.asPath);
+        };
+      };
+      if (success) {
+        refuseBackButton();
+      } else {
+        window.onpopstate = () => {
+          router.push("/dashboard/settings");
+        };
+      }
+    }
+  }, [success]);
   return (
     <div
       css={{
         height: "100vh",
       }}
     >
-      <SuccessModal isOpen={success} onRequestClose={() => setSuccess(false)} action={"passwordReset"} />
+      <SuccessModal
+        isOpen={success}
+        onRequestClose={() => setSuccess(false)}
+        action={"passwordReset"}
+      />
       <div
         css={{
           height: "80px",
           borderBottom: `1px solid ${"#E4E4E4"}`,
-          display: "grid",
+          display: isTablet ? "flex" : "grid",
           gridTemplateColumns: "1fr auto",
           alignItems: "center",
           paddingInline: "1.5rem",
           paddingRight: "2.5rem",
+          gap: isTablet ? "1rem" : "",
           color: "#000",
         }}
       >
+        {isTablet && (
+          <Link href="/dashboard/settings">
+            <div css={{ display: "flex" }}>
+              <Image
+                src="/assets/svgs/back.svg"
+                alt="back_arrow"
+                width={22}
+                height={15}
+              />
+            </div>
+          </Link>
+        )}
         <h2>Change Password</h2>
       </div>
       <div
@@ -51,7 +90,7 @@ const ChangePassword = () => {
           },
         }}
       >
-        <div css={{ width: "60%" }}>
+        <div css={{ width: isTablet ? "100%":"60%" }}>
           <form>
             <SettingsPasswordTextField
               label="Current Password"
@@ -81,25 +120,25 @@ const ChangePassword = () => {
               placeholder="Enter New Password"
             />
           </form>
-            <div
-              css={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "2rem",
-              }}
-            >
-              <Button onClick={handleNext} height = "52px">
-                <p
-                  css={{
-                    fontSize: "16px",
-                    fontFamily: '"Nunito", sans-serif',
-                    paddingInline: "6rem",
-                  }}
-                >
-                  CHANGE PASSWORD
-                </p>
-              </Button>
-            </div>
+          <div
+            css={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "2rem",
+            }}
+          >
+            <Button onClick={handleNext} height="52px" width="100%">
+              <p
+                css={{
+                  fontSize: "16px",
+                  fontFamily: '"Nunito", sans-serif',
+                  paddingInline: isTablet ? "2rem":"6rem",
+                }}
+              >
+                CHANGE PASSWORD
+              </p>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
