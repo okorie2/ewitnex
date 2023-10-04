@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import TicketSalesTable from "@/components/tables/ticketSales";
 
 const TicketSales = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [activeView, setActiveView] = useState("All");
   const [filterHovered, setFilterHovered] = useState(false);
   const [filterClicked, setFilterClicked] = useState(false);
@@ -15,13 +17,13 @@ const TicketSales = () => {
   return (
     <div
       css={{
-        paddingRight: "2rem",
+        paddingRight:isTablet ? "": "2rem",
       }}
     >
       <div
         css={{
           padding: "1rem",
-          display: "flex",
+          display: isTablet ? "":"flex",
           justifyContent: "space-between",
         }}
       >
@@ -34,7 +36,8 @@ const TicketSales = () => {
             padding: "0.3rem",
             color: "#AEAEAE",
             gridTemplateColumns: "33% 33% 34%",
-            width: "45%",
+            width: isTablet ? "100%":"45%",
+            marginBottom:isTablet ? "0.5rem":""
           }}
         >
           {ticketViewDetails.map((ticketView) => (
@@ -50,7 +53,7 @@ const TicketSales = () => {
         <div
           css={{
             display: "flex",
-            width: "45%",
+            width: isTablet ? "":"45%",
             justifyContent: "space-between",
           }}
         >

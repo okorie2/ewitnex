@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
+import { Box, useMediaQuery } from "@mui/material";
 import React from "react";
 
 const WalletTransactions = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <div
       css={{
-        
-        
         overflowY: "scroll",
         "&::-webkit-scrollbar": {
           display: "none",
         },
         borderBottom: "1px solid #AEAEAE",
         gap: "14px",
-        paddingBottom: "0.5rem",
-        height:"inherit"
+        paddingBottom: isTablet ? "1rem":"0.5rem",
+        height:isTablet ? "60vh":"inherit"
       }}
     >
         <Transaction
@@ -80,6 +80,7 @@ const WalletTransactions = () => {
           bank={"First Bank"}
           account={"1234567890"}
         />
+        <Box height = {10}/>
       </div>
   );
 };
@@ -103,6 +104,7 @@ const Transaction = ({
   bank: string;
   account: string;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <div
       css={{
@@ -135,6 +137,7 @@ const Transaction = ({
           flexDirection: "column",
           justifyContent: "space-between",
           paddingInline: "5%",
+          fontSize:isTablet ? "0.8rem":""
         }}
       >
         <p css={{ letterSpacing: "0.32px" }}>
@@ -153,7 +156,7 @@ const Transaction = ({
         <p
           css={{
             color: type === "credit" ? "#00D9B7" : "#F05E78",
-            fontSize: "0.8rem",
+            fontSize: isTablet ? "0.7rem":"0.8rem",
             letterSpacing: "0.28px",
             fontWeight: "bold",
           }}

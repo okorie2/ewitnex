@@ -8,11 +8,13 @@ import SettingsTab from "./[tab]";
 import { useRouter } from "next/router";
 import DeleteModal from "@/components/modals/settingsModal/deleteModal";
 import ToggleSwitch from "@/components/toggleSwitch";
+import { useMediaQuery } from "@mui/material";
+import Link from "next/link";
 
 const Settings = () => {
   const router = useRouter();
-  const activeTab = router.query.tab || "personalnformation";
-
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const activeTab =  router.query.tab || "personalnformation";
   const [notificationsActive, setNotificationsActive] = useState(false);
   const [audienceNoticeActive, setAudienceNoticeActive] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -35,7 +37,7 @@ const Settings = () => {
         isOpen={deleteModalOpen}
         onRequestClose={handleDeleteModalOpen}
       />
-      <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
+      <div css={{ display: "grid", gridTemplateColumns: isTablet ? "1fr":"40% 60%" }}>
         <div
           css={{
             height: "100vh",
@@ -43,9 +45,9 @@ const Settings = () => {
         >
           <div
             css={{
-              borderLeft: `1px solid ${"#E4E4E4"}`,
-              borderRight: `1px solid ${"#E4E4E4"}`,
-              marginLeft: "1.2rem",
+              borderLeft: isTablet ? "":`1px solid ${"#E4E4E4"}`,
+              borderRight: isTablet ? "":`1px solid ${"#E4E4E4"}`,
+              marginLeft: isTablet ? "":"1.2rem",
               height: "100%",
               maxHeight: "100vh",
             }}
@@ -54,12 +56,25 @@ const Settings = () => {
               css={{
                 height: "80px",
                 borderBottom: `1px solid ${"#E4E4E4"}`,
-                display: "grid",
+                display:isTablet ? "flex" : "grid",
                 alignItems: "center",
                 paddingInline: "1.5rem",
-                color: "#000",
+                  gap: isTablet ? "1rem" : "",
+                  color: "#000",
               }}
             >
+              {isTablet && (
+                  <Link href="/dashboard/profile">
+                    <div css={{ display: "flex" }}>
+                      <Image
+                        src="/assets/svgs/back.svg"
+                        alt="back_arrow"
+                        width={22}
+                        height={15}
+                      />
+                    </div>
+                  </Link>
+                )}
               <h2>Settings</h2>
             </div>
             <div
@@ -69,12 +84,12 @@ const Settings = () => {
                 "&::-webkit-scrollbar": {
                   display: "none",
                 },
-                padding: "1.5rem",
+                padding: isTablet ? "1rem":"1.5rem",
               }}
             >
               <SettingsCard
                 cardTitle={"Personal Information"}
-                link={"/dashboard/settings/?tab=personalInformation"}
+                link={isTablet ? "/dashboard/settings/mobile/?tab=personalInformation":"/dashboard/settings/?tab=personalInformation"}
                 activeTab={activeTab === "personalInformation"}
               >
                 <Image
@@ -121,7 +136,7 @@ const Settings = () => {
 
               <SettingsCard
                 cardTitle={"Change Password"}
-                link={"/dashboard/settings/?tab=changePassword"}
+                link={isTablet ? "/dashboard/settings/mobile/?tab=changePassword":"/dashboard/settings/?tab=changePassword"}
                 activeTab={activeTab === "changePassword"}
               >
                 <Image
@@ -133,7 +148,7 @@ const Settings = () => {
               </SettingsCard>
               <SettingsCard
                 cardTitle={"Account Verification"}
-                link={"/dashboard/settings/?tab=verifyAccount"}
+                link={isTablet ? "/dashboard/settings/mobile/?tab=verifyAccount":"/dashboard/settings/?tab=verifyAccount"}
                 activeTab={activeTab === "verifyAccount"}
               >
                 <Image
@@ -156,7 +171,7 @@ const Settings = () => {
             </div>
           </div>
         </div>
-        <SettingsTab />
+        {!isTablet && <SettingsTab />}
       </div>
     </DashboardLayout>
   );

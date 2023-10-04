@@ -8,6 +8,7 @@ import SettingsTextField, {
   SettingsPasswordTextField,
 } from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
+import { useMediaQuery } from "@mui/material";
 import { CheckSelect } from "fragments/eventFilter";
 import BasicTextField, {
   CssTextField,
@@ -40,6 +41,7 @@ const customStyles = {
 Modal.setAppElement("body");
 
 const WithdrawalModal = (props: IWithdrawalModal) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [success, setSuccess] = useState(false);
   const [withdrawalType, setWithdrawalType] = useState("partial");
   const [data, setData] = useState({
@@ -49,14 +51,17 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
+  const handleClose = () => {
+    props.onRequestClose();
+  };
   const handleNext = () => {
     setSuccess(true);
   };
   useEffect(() => {
-    if(withdrawalType === "full"){
-      setData({...data, amount: "17892.50"})
+    if (withdrawalType === "full") {
+      setData({ ...data, amount: "17892.50" });
     }
-  },[withdrawalType])
+  }, [withdrawalType]);
   return (
     <Modal
       isOpen={props.isOpen}
@@ -67,46 +72,50 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
-        onClick={props.onRequestClose}
-        css={{
-          border: "none",
-          background: "none",
-          color: "#fff",
-          fontSize: "1.125rem",
-          cursor: "pointer",
-          width: "67%",
-          height: "90vh",
-        }}
-      >
-        {/* <p>&#x2715; Close</p>  */}
-      </div>
+      {!isTablet && (
+        <div
+          onClick={props.onRequestClose}
+          css={{
+            border: "none",
+            background: "none",
+            color: "#fff",
+            fontSize: "1.125rem",
+            cursor: "pointer",
+            width: "67%",
+            height: "90vh",
+          }}
+        >
+          {/* <p>&#x2715; Close</p>  */}
+        </div>
+      )}
 
       <div
         css={{
-          height: "100vh",
-          width: "33.3%",
+          height: isTablet ? (success ? "90vh" : "100vh") : "100vh",
+          width: isTablet ? (success ? "85%" : "100vw") : "33.3%",
           background: "#fff",
-          position: "absolute",
+          position: isTablet ? (success ? "relative" : "absolute") : "absolute",
           right: "0",
           top: "0",
-          padding: "3% 2% 0",
-          paddingRight:"0",
+          padding: isTablet ? "0 0.5rem" : "3% 2% 0",
+          paddingRight: isTablet ? "" : "0",
+          borderRadius: isTablet ? "18px" : "",
           color: "#000",
           [screen.desktopLg]: {
-            width: "33.3%",
+            width: isTablet ? (success ? "90vw" : "100vw") : "33.3%",
           },
           display: "grid",
-          gridTemplateRows: "10% 90%",
+          gridTemplateRows: success ? "1fr" : "10% 90%",
         }}
       >
         {success ? (
           <div
             css={{
-              display: "grid",
+              display: isTablet ? "block" : "grid",
+              textAlign: isTablet ? "center" : "left",
               placeItems: "center",
-              justifyContent:"space-between",
-              width: "95%",
+              justifyContent: "space-between",
+              width: isTablet ? "85%" : "95%",
             }}
           >
             <Image
@@ -114,6 +123,7 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
               src={"/assets/svgs/success.svg"}
               height={107.14}
               width={106.72}
+              style={{ marginTop: isTablet ? "2rem" : "" }}
             />
             <p
               css={{
@@ -129,55 +139,80 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
               <p css={{ fontSize: "1.5rem", fontWeight: "bold" }}>$10,892.50</p>
               <p css={{ fontSize: "0.875rem" }}>Sent to payout account</p>
             </div>
-            <div css = {{borderTop:"1px solid #AEAEAE", width:"100%", marginTop:"1.5rem"}}>
-              <div css = {{
-                display:"grid",
-                gridTemplateColumns:"1fr 1fr",
-                marginTop:"1rem"
-              }}>
-                <p css = {{fontWeight:"bold"}}>Transaction Type:</p>
-                <p css = {{color:"#707070"}}>Withdrawal</p>
+            <div
+              css={{
+                borderTop: "1px solid #AEAEAE",
+                width: isTablet ? "90%" : "100%",
+                marginTop: "1.5rem",
+                textAlign: "left",
+                fontSize: isTablet ? "0.875rem" : "",
+                marginInline: isTablet ? "auto" : "",
+              }}
+            >
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  marginTop: "1rem",
+                }}
+              >
+                <p css={{ fontWeight: "bold" }}>Transaction Type:</p>
+                <p css={{ color: "#707070" }}>Withdrawal</p>
               </div>
-              <div css = {{
-                display:"grid",
-                gridTemplateColumns:"1fr 1fr",
-                marginTop:"1rem"
-              }}>
-                <p css = {{fontWeight:"bold"}}>Transaction ID:</p>
-                <p css = {{color:"#707070"}}>EWX000123</p>
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  marginTop: "1rem",
+                }}
+              >
+                <p css={{ fontWeight: "bold" }}>Transaction ID:</p>
+                <p css={{ color: "#707070" }}>EWX000123</p>
+              </div>
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  marginTop: "1rem",
+                }}
+              >
+                <p css={{ fontWeight: "bold" }}>Account Name:</p>
+                <p css={{ color: "#707070" }}>Jack Sparrow</p>
+              </div>
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  marginTop: "1rem",
+                }}
+              >
+                <p css={{ fontWeight: "bold" }}>Account Number:</p>
+                <p css={{ color: "#707070" }}>1234567890</p>
+              </div>
+              <div
+                css={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  marginTop: "1rem",
+                }}
+              >
+                <p css={{ fontWeight: "bold" }}>Date:</p>
+                <p css={{ color: "#707070" }}>20.24.22, 09:21 AM</p>
+              </div>
             </div>
-            <div css = {{
-                display:"grid",
-                gridTemplateColumns:"1fr 1fr",
-                marginTop:"1rem"
-              }}>
-                <p css = {{fontWeight:"bold"}}>Account Name:</p>
-                <p css = {{color:"#707070"}}>Jack Sparrow</p>
-            </div>
-            <div css = {{
-                display:"grid",
-                gridTemplateColumns:"1fr 1fr",
-                marginTop:"1rem"
-              }}>
-                <p css = {{fontWeight:"bold"}}>Account Number:</p>
-                <p css = {{color:"#707070"}}>1234567890</p>
-            </div>
-            <div css = {{
-                display:"grid",
-                gridTemplateColumns:"1fr 1fr",
-                marginTop:"1rem"
-              }}>
-                <p css = {{fontWeight:"bold"}}>Date:</p>
-                <p css = {{color:"#707070"}}>20.24.22, 09:21 AM</p>
-            </div>
-            </div>
-            <div css={{ marginBlock: "2.5rem" }}>
+            <div
+              css={{
+                marginBlock: isTablet ? "3.5rem" : "2.5rem",
+                width: isTablet ? "100%" : "",
+              }}
+            >
               <Button
                 onClick={() => {
                   props.onRequestClose();
                   setSuccess(false);
                 }}
                 height="52px"
+                width={"100%"}
               >
                 <p
                   css={{
@@ -202,6 +237,7 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
                 //   display: "none",
                 // },
                 "&::-webkit-scrollbar": {
+                  display: isTablet ? "none" : "",
                   width: "8px",
                 },
                 "&::-webkit-scrollbar-track": {
@@ -217,7 +253,42 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
                 },
               }}
             >
-              <form css={{ width: "95%" }}>
+              {isTablet && (
+                <div
+                  css={{
+                    display: "flex",
+                    alignItems: "center",
+                    boxShadow: "#00000029 0px 0px 10px ",
+                    padding: "0% 5%",
+                    paddingTop: "1.125rem",
+                    height: "9vh",
+                    fontFamily: "'Poppins', sans-serif",
+                    position: "fixed",
+                    gap: "1.5rem",
+                    left: "0",
+                    right: "0",
+                    top: "0",
+                    width: "100vw",
+                    zIndex: "5",
+                    background: "#fff",
+                  }}
+                >
+                  <div onClick={handleClose} css={{ display: "flex" }}>
+                    <Image
+                      src="/assets/svgs/close-plain.svg"
+                      alt="back_arrow"
+                      width={25}
+                      height={28}
+                    />
+                  </div>
+                  <div>
+                    <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                      Withdrawal
+                    </h2>
+                  </div>
+                </div>
+              )}
+              <form css={{ width: isTablet ? "100%" : "95%" }}>
                 <div
                   css={{
                     marginBlock: "0.8rem",
@@ -246,9 +317,9 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
                   name="amount"
                   value={data.amount.toLocaleString()}
                   placeholder={"Enter Amount"}
-                  type = "number"
+                  type="number"
                   setValue={handleChange}
-                  disabled = {withdrawalType === "full"}
+                  disabled={withdrawalType === "full"}
                 />
                 <p css={{ marginTop: "-2%" }}>
                   Total amount in wallet:
@@ -325,7 +396,13 @@ const WithdrawalModal = (props: IWithdrawalModal) => {
                     </div>
                   </div>
                 </div>
-                <div css={{ marginBlock: "1.5rem" , display:"flex", justifyContent:"center",}}>
+                <div
+                  css={{
+                    marginBlock: "1.5rem",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <Button onClick={handleNext} height="52px" width="100%">
                     <p
                       css={{

@@ -5,6 +5,7 @@ import Image from "next/image";
 import ManageEventTab from "./[tab]";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 
 const ManageSingleEvent = () => {
   const [activeMenuBar, setActiveMenuBar] = useState("");
@@ -15,14 +16,16 @@ const ManageSingleEvent = () => {
   const router = useRouter();
   const { id } = router.query;
   const activeTab = router.query?.tab || ("overview" as string | undefined);
+  const isTablet = useMediaQuery("(max-width: 780px)");
 
   return (
     <DashboardLayout>
       <div
         css={{
-          borderLeft: `1px solid ${"#E4E4E4"}`,
-          marginLeft: "1.5rem",
+          borderLeft: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
+          marginLeft: isTablet ? "" : "1.5rem",
           height: "100%",
+          width: isTablet ? "100vw" : "",
         }}
       >
         {isMenuOpen && (
@@ -200,7 +203,7 @@ const ManageSingleEvent = () => {
           <div
             css={{
               fontFamily: "'Nunito', sans-serif",
-              display: "grid",
+              display: isTablet ? "":"grid",
               gridTemplateColumns: "15% 85%",
               minHeight: "calc(100vh - 80px)",
             }}
@@ -215,6 +218,7 @@ const ManageSingleEvent = () => {
                   css={{
                     listStyleType: "none",
                     width: "100%",
+                    display:isTablet ? "flex":"",
                   }}
                 >
                   {manageEventTabs.map((item) => (
@@ -247,15 +251,18 @@ const TabNav: React.FC<{
   tab: string;
   id: string | undefined;
 }> = ({ isActive, tab, id }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <li
       css={{
-        fontSize: "1.125rem",
-        fontWeight: "500",
+        fontSize: isTablet ? "1rem":"1.125rem",
+        fontWeight: isActive ? isTablet ? "600":"500":"500",
         cursor: "pointer",
         width: "100%",
         color: isActive ? "#000" : "#AEAEAE",
-        borderLeft: isActive ? `2px solid ${"#000"}` : `2px solid ${"#fff"}`,
+        borderLeft: isTablet ? "":isActive ? `2px solid ${"#000"}` : `2px solid ${"#fff"}`,
+        borderBottom: isTablet ? isActive ? `3px solid ${"#000"}` : `3px solid ${"#AEAEAE"}`: "",
       }}
       key={tab}
     >
@@ -264,7 +271,8 @@ const TabNav: React.FC<{
         css={{
           display: "inline-block",
           width: "100%",
-          padding: "0.7rem 1.5rem",
+          padding: isTablet ? "1rem 0rem":"0.7rem 1.5rem",
+          textAlign: isTablet ? "center":"left"
         }}
       >
         {tab}

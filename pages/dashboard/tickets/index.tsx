@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "../layout/layout";
 import {
   activeButtonStyle,
@@ -8,16 +8,24 @@ import {
 import TicketCard from "@/components/cards/ticketCard";
 import Ticket from "@/components/tickets/Ticket";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import ContactOrganizerModal from "@/components/modals/programModal/contactOrganizerModal";
 import ReportEventModal from "@/components/modals/programModal/reportEventModal";
+import Link from "next/link";
+import TicketDetailsFragment from "fragments/tickets/ticketDetailsFragment";
+import TicketDetailsModal from "@/components/modals/tickets/ticketDetails";
+import { useRouter } from "next/router";
 
 const Tickets = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [showUpcoming, setShowUpcoming] = useState(true);
   const [showPast, setShowPast] = useState(false);
   const [activeTab, setActiveTab] = useState("upcoming");
-  const [activeCard, setActiveCard] = useState("");
+  const [activeCardID, setActiveCardID] = useState("");
   const [activeMenuBar, setActiveMenuBar] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [ticketDetailsOpen, setTicketDetailsOpen] = useState(false);
+  const router = useRouter();
 
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,14 +42,31 @@ const Tickets = () => {
     setActiveTab("past");
   };
 
-  const handleActiveCard = (id: string) => {
-    setActiveCard(id);
+  const handleActiveCardID = (id: string) => {
+    setActiveCardID(id);
+    setTicketDetailsOpen(!ticketDetailsOpen);
   };
-  console.log(activeCard);
+  console.log(activeCardID);
   const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
     useState(false);
   const [reportEventModalOpen, setReportEventModalOpen] = useState(false);
 
+  useEffect(() => {
+    if (isTablet) {
+      const refuseBackButton = () => {
+        window.onpopstate = () => {
+          router.push(router.pathname);
+        };
+      };
+      if (ticketDetailsOpen) {
+        refuseBackButton();
+      } else {
+        window.onpopstate = () => {
+          router.push("/dashboard/profile");
+        };
+      }
+    }
+  }, [ticketDetailsOpen]);
   return (
     <>
       <ContactOrganizerModal
@@ -53,10 +78,20 @@ const Tickets = () => {
       <ReportEventModal
         isOpen={reportEventModalOpen}
         onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
-        eventID={activeCard}
+        eventID={activeCardID}
+      />
+      <TicketDetailsModal
+        isOpen={ticketDetailsOpen}
+        onRequestClose={() => setTicketDetailsOpen(!ticketDetailsOpen)}
+        selectedEvent={activeCardID}
       />
       <DashboardLayout>
-        <div css={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
+        <div
+          css={{
+            display: "grid",
+            gridTemplateColumns: isTablet ? "1fr" : "40% 60%",
+          }}
+        >
           {isMenuOpen && (
             <div
               css={{
@@ -72,14 +107,14 @@ const Tickets = () => {
           )}
           <div
             css={{
-              borderRight: `1px solid ${"#E4E4E4"}`,
+              borderRight: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
               height: "100vh",
             }}
           >
             <div
               css={{
-                borderLeft: `0.5px solid ${"#E4E4E4"}`,
-                marginLeft: "1.2rem",
+                borderLeft: isTablet ? "" : `0.5px solid ${"#E4E4E4"}`,
+                marginLeft: isTablet ? "" : "1.2rem",
                 height: "100%",
                 maxHeight: "100vh",
               }}
@@ -88,12 +123,25 @@ const Tickets = () => {
                 css={{
                   height: "80px",
                   borderBottom: `1px solid ${"#E4E4E4"}`,
-                  display: "grid",
+                  display: isTablet ? "flex" : "grid",
                   alignItems: "center",
                   paddingInline: "1.5rem",
                   color: "#000",
+                  gap: isTablet ? "1rem" : "",
                 }}
               >
+                {isTablet && (
+                  <Link href="/dashboard/profile">
+                    <div css={{ display: "flex" }}>
+                      <Image
+                        src="/assets/svgs/back.svg"
+                        alt="back_arrow"
+                        width={22}
+                        height={15}
+                      />
+                    </div>
+                  </Link>
+                )}
                 <h2>Tickets</h2>
               </div>
               <div
@@ -103,7 +151,7 @@ const Tickets = () => {
                   "&::-webkit-scrollbar": {
                     display: "none",
                   },
-                  padding: "1.5rem",
+                  padding: isTablet ? "1rem" : "1.5rem",
                   // paddingRight: "1.5rem",
 
                   // background: "pink",
@@ -146,188 +194,164 @@ const Tickets = () => {
 
                 {activeTab === "past" ? (
                   <PreviousTicketTab
-                    activeCard={activeCard}
-                    setAsActiveCard={handleActiveCard}
+                    activeCardID={activeCardID}
+                    setAsActiveCardID={handleActiveCardID}
                   />
                 ) : (
                   <UpcomingTicketTab
-                    activeCard={activeCard}
-                    setAsActiveCard={handleActiveCard}
+                    activeCardID={activeCardID}
+                    setAsActiveCardID={handleActiveCardID}
                   />
                 )}
               </div>
             </div>
           </div>
-          <div
-            css={{
-              height: "100vh",
-            }}
-          >
+          {!isTablet && (
             <div
               css={{
-                height: "80px",
-                borderBottom: `1px solid ${"#E4E4E4"}`,
-                display: "grid",
-                gridTemplateColumns: "1fr auto",
-                alignItems: "center",
-                paddingInline: "1.5rem",
-                paddingRight: "2.5rem",
-                color: "#000",
+                height: "100vh",
               }}
             >
-              <h2>DevFest Aba</h2>
               <div
-                css={{ cursor: "pointer", position: "relative" }}
-                onClick={handleMenuOpen}
+                css={{
+                  height: "80px",
+                  borderBottom: `1px solid ${"#E4E4E4"}`,
+                  display: "grid",
+                  gridTemplateColumns: "1fr auto",
+                  alignItems: "center",
+                  paddingInline: "1.5rem",
+                  paddingRight: "2.5rem",
+                  color: "#000",
+                }}
               >
-                <Image
-                  src={"/assets/svgs/ellipse.svg"}
-                  alt={""}
-                  width={20}
-                  height={20}
-                />
-                {isMenuOpen && (
-                  <div
-                    css={{
-                      position: "absolute",
-                      background: "#fff",
-                      height: 155,
-                      width: 230,
-                      left: "-1000%",
-                      right: "0",
-                      zIndex: "2",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      border: "1px solid #C0C0C0",
-                    }}
-                    
-                  >
+                <h2>DevFest Aba</h2>
+                <div
+                  css={{ cursor: "pointer", position: "relative" }}
+                  onClick={handleMenuOpen}
+                >
+                  <Image
+                    src={"/assets/svgs/ellipse.svg"}
+                    alt={""}
+                    width={20}
+                    height={20}
+                  />
+                  {isMenuOpen && (
                     <div
                       css={{
-                        width: "80%",
-                        marginTop: "1.2rem",
-                        ":hover": {
-                          color: "#7c35ab",
-                          fontWeight: "500",
-                        },
+                        position: "absolute",
+                        background: "#fff",
+                        height: 155,
+                        width: 230,
+                        left: "-1000%",
+                        right: "0",
+                        zIndex: "2",
                         display: "flex",
-                        gap: "10%",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        borderRadius: "8px",
+                        border: "1px solid #C0C0C0",
                       }}
-                      onMouseEnter={() => setActiveMenuBar("share")}
-                    onMouseLeave={() => setActiveMenuBar("")}
                     >
-                      {activeMenuBar === "share" ? (
-                        <Image
-                          src={"/assets/svgs/share-purple.svg"}
-                          alt={""}
-                          width={20}
-                          height={20}
-                          priority
-                        />
-                      ) : (
-                        <Image
-                          src={"/assets/svgs/share.svg"}
-                          alt={""}
-                          width={20}
-                          height={20}
-                        />
-                      )}
-                      <p>Transfer Ticket</p>
+                      <div
+                        css={{
+                          width: "80%",
+                          marginTop: "1.2rem",
+                          ":hover": {
+                            color: "#7c35ab",
+                            fontWeight: "500",
+                          },
+                          display: "flex",
+                          gap: "10%",
+                        }}
+                        onMouseEnter={() => setActiveMenuBar("share")}
+                        onMouseLeave={() => setActiveMenuBar("")}
+                      >
+                        {activeMenuBar === "share" ? (
+                          <Image
+                            src={"/assets/svgs/share-purple.svg"}
+                            alt={""}
+                            width={20}
+                            height={20}
+                            priority
+                          />
+                        ) : (
+                          <Image
+                            src={"/assets/svgs/share.svg"}
+                            alt={""}
+                            width={20}
+                            height={20}
+                          />
+                        )}
+                        <p>Transfer Ticket</p>
+                      </div>
+                      <div
+                        css={{
+                          width: "80%",
+                          marginTop: "1.2rem",
+                          ":hover": { color: "#7c35ab", fontWeight: "500" },
+                          display: "flex",
+                          gap: "10%",
+                        }}
+                        onClick={() => setContactOrganizerModalOpen(true)}
+                        onMouseEnter={() => setActiveMenuBar("contact")}
+                        onMouseLeave={() => setActiveMenuBar("")}
+                      >
+                        {activeMenuBar === "contact" ? (
+                          <Image
+                            src={"/assets/svgs/mail-purple.svg"}
+                            alt={""}
+                            width={20}
+                            height={20}
+                          />
+                        ) : (
+                          <Image
+                            src={"/assets/svgs/mail.svg"}
+                            alt={""}
+                            width={20}
+                            height={20}
+                          />
+                        )}
+                        <p>Contact Organizer</p>
+                      </div>
+                      <div
+                        css={{
+                          width: "80%",
+                          marginTop: "1.2rem",
+                          ":hover": { color: "#7c35ab", fontWeight: "500" },
+                          display: "flex",
+                          gap: "10%",
+                        }}
+                        onClick={() =>
+                          setReportEventModalOpen(!reportEventModalOpen)
+                        }
+                        onMouseEnter={() => setActiveMenuBar("report")}
+                        onMouseLeave={() => setActiveMenuBar("")}
+                      >
+                        {activeMenuBar === "report" ? (
+                          <Image
+                            src={"/assets/svgs/report-flag-purple.svg"}
+                            alt={""}
+                            width={20}
+                            height={20}
+                            priority
+                          />
+                        ) : (
+                          <Image
+                            src={"/assets/svgs/report-flag.svg"}
+                            alt={""}
+                            width={20}
+                            height={20}
+                          />
+                        )}
+                        <p>Report Event</p>
+                      </div>
                     </div>
-                    <div
-                      css={{
-                        width: "80%",
-                        marginTop: "1.2rem",
-                        ":hover": { color: "#7c35ab", fontWeight: "500" },
-                        display: "flex",
-                        gap: "10%",
-                      }}
-                      onClick={() => setContactOrganizerModalOpen(true)}
-                      onMouseEnter={() => setActiveMenuBar("contact")}
-                      onMouseLeave={() => setActiveMenuBar("")}
-                    >
-                      {activeMenuBar === "contact" ? (
-                        <Image
-                          src={"/assets/svgs/mail-purple.svg"}
-                          alt={""}
-                          width={20}
-                          height={20}
-                        />
-                      ) : (
-                        <Image
-                          src={"/assets/svgs/mail.svg"}
-                          alt={""}
-                          width={20}
-                          height={20}
-                        />
-                      )}
-                      <p>Contact Organizer</p>
-                    </div>
-                    <div
-                      css={{
-                        width: "80%",
-                        marginTop: "1.2rem",
-                        ":hover": { color: "#7c35ab", fontWeight: "500" },
-                        display: "flex",
-                        gap: "10%",
-                      }}
-                      onClick={() =>
-                        setReportEventModalOpen(!reportEventModalOpen)
-                      }
-                      onMouseEnter={() => setActiveMenuBar("report")}
-                      onMouseLeave={() => setActiveMenuBar("")}
-                    >
-                      {activeMenuBar === "report" ? (
-                        <Image
-                          src={"/assets/svgs/report-flag-purple.svg"}
-                          alt={""}
-                          width={20}
-                          height={20}
-                          priority
-                        />
-                      ) : (
-                        <Image
-                          src={"/assets/svgs/report-flag.svg"}
-                          alt={""}
-                          width={20}
-                          height={20}
-                        />
-                      )}
-                      <p>Report Event</p>
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
+              <TicketDetailsFragment selectedEvent={activeCardID} />
             </div>
-            <div
-              css={{
-                height: "calc(100vh - 80px)",
-                padding: "1.5rem",
-                overflowY: "scroll",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                },
-              }}
-            >
-              <Ticket
-                qrcode="/assets/svgs/qrcode.svg"
-                name="Blessed Omoriode"
-                ticketType="VIP"
-                price="5,500"
-                event="DevFest Aba"
-                date="Sat. 25 Nov, 2023"
-                startTime="10:00AM"
-                endTime="2:30PM"
-                location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                ticketId="#000123456"
-                eventHost="MiLab"
-                eventID={activeCard}
-                refundable={true}
-              />
-            </div>
-          </div>
+          )}
         </div>
       </DashboardLayout>
     </>
@@ -337,14 +361,15 @@ const Tickets = () => {
 export default Tickets;
 
 const UpcomingTicketTab = ({
-  activeCard,
-  setAsActiveCard,
+  activeCardID,
+  setAsActiveCardID,
 }: {
-  activeCard: string;
-  setAsActiveCard: (id: string) => void;
+  activeCardID: string;
+  setAsActiveCardID: (id: string) => void;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
-    <div>
+    <div css={{ paddingBottom: isTablet ? "5rem" : "" }}>
       <TicketCard
         image="/assets/pngs/devFestAba.png"
         title="DevFest Aba"
@@ -355,8 +380,8 @@ const UpcomingTicketTab = ({
         type="Tech"
         address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
         id="Tec542445"
-        active={activeCard}
-        onClick={setAsActiveCard}
+        active={activeCardID}
+        onClick={setAsActiveCardID}
       />
       <br />
       <TicketCard
@@ -369,8 +394,8 @@ const UpcomingTicketTab = ({
         type="Conference"
         address="Sheraton Hotel, Phase 1, Wuse, Abuja"
         id="Tec542446"
-        active={activeCard}
-        onClick={setAsActiveCard}
+        active={activeCardID}
+        onClick={setAsActiveCardID}
       />
       <br />
       <TicketCard
@@ -383,8 +408,8 @@ const UpcomingTicketTab = ({
         type="Tech"
         address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
         id="Tec542445"
-        active={activeCard}
-        onClick={setAsActiveCard}
+        active={activeCardID}
+        onClick={setAsActiveCardID}
       />
       <br />
       <TicketCard
@@ -397,19 +422,19 @@ const UpcomingTicketTab = ({
         type="Conference"
         address="Sheraton Hotel, Phase 1, Wuse, Abuja"
         id="Tec542446"
-        active={activeCard}
-        onClick={setAsActiveCard}
+        active={activeCardID}
+        onClick={setAsActiveCardID}
       />
     </div>
   );
 };
 
 const PreviousTicketTab = ({
-  activeCard,
-  setAsActiveCard,
+  activeCardID,
+  setAsActiveCardID,
 }: {
-  activeCard: string;
-  setAsActiveCard: (id: string) => void;
+  activeCardID: string;
+  setAsActiveCardID: (id: string) => void;
 }) => {
   return (
     <div>
@@ -423,8 +448,8 @@ const PreviousTicketTab = ({
         type="Tech"
         address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
         id="Tec542445"
-        active={activeCard}
-        onClick={setAsActiveCard}
+        active={activeCardID}
+        onClick={setAsActiveCardID}
       />
     </div>
   );

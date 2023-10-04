@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import {  screen } from "styles/theme";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import AttendeesTable from "@/components/tables/attendees";
 import MessageAttendeesModal from "@/components/modals/messageAttendees.tsx";
 
 const Attendees = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [filterHovered, setFilterHovered] = useState(false);
   const [filterClicked, setFilterClicked] = useState(false);
   const [messageAttendeesModalOpen, setMessageAttendeesModalOpen] = useState(false)
@@ -23,30 +25,33 @@ const Attendees = () => {
     <MessageAttendeesModal isOpen={messageAttendeesModalOpen} onRequestClose={handleAttendeesModalOpen} />
     <div
       css={{
-        paddingRight: "2rem",
+        paddingRight:isTablet ? "": "2rem",
       }}
     >
       <div
         css={{
-          padding: "1.2rem",
-          display: "grid",
+          padding:isTablet ? "0.5rem": "1.2rem",
+          display: isTablet ? "flex":"grid",
           gridTemplateColumns: "27% 73%",
+          flexDirection:"column-reverse"
         }}
       >
         <div
           css={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            flexDirection: isTablet ? "row":"column",
+            justifyContent: isTablet ? "left":"center",
             fontWeight: "bold",
             paddingLeft: "1%",
+            gap:isTablet ? "0.2rem":"",
+            marginBlock:isTablet ? "0.5rem":""
           }}
         >
           <p css = {{fontSize: "16px"}}>92</p>
           <p
             css={{
               color: "#707070",
-              fontWeight: 600,
+              fontWeight: isTablet ? 700 : 600,
             }}
           >
             Attending
@@ -57,7 +62,7 @@ const Attendees = () => {
             css={{
               borderRadius: "66px",
               backgroundColor: "#F5F5F5",
-              width: "50%",
+              width: isTablet ? "65%":"50%",
               height: "2.825rem",
               display: "flex",
               alignItems: "center",
@@ -152,7 +157,7 @@ const Attendees = () => {
           <div css = {{
             backgroundColor: "#7C35AB",
             color: "white",
-            width: "30%",
+            width: isTablet ? "46px":"30%",
             padding: "0.75%",
             display: "flex",
             justifyContent: "center",
@@ -160,6 +165,7 @@ const Attendees = () => {
             fontSize:"13px",
             gap: "7%",
             cursor: "pointer",
+            borderRadius: isTablet ? "50%":""
           }}
           onClick={handleAttendeesModalOpen}
           >
@@ -169,7 +175,7 @@ const Attendees = () => {
               height = "20"
               width = "20"
             />
-            Message Attendees
+            {!isTablet && <p>Message Attendees</p>}
           </div>
         </div>
       </div>

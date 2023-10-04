@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import NameModal from "./nameModal";
 import UserNameModal from "./userNameModal";
 import GenderModal from "./genderModal";
 import LocationModal from "./locationModal";
+import SuccessModal from "./successModal";
 
 interface ISettingsModal {
   isOpen: boolean;
@@ -37,13 +39,20 @@ const customStyles = {
 Modal.setAppElement("body");
 
 const SettingsModal = (props: ISettingsModal) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
+  const [success, setSuccess] = useState(false);
   const stateEvents = useMemo(() => {
-    if (props.activeModal === "fullName") return <NameModal />;
-    else if (props.activeModal === "userName") return <UserNameModal />;
-    else if (props.activeModal === "gender") return <GenderModal />;
-    else if (props.activeModal === "location") return <LocationModal />;
+    if (props.activeModal === "fullName") return <NameModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
+    else if (props.activeModal === "userName") return <UserNameModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
+    else if (props.activeModal === "gender") return <GenderModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
+    else if (props.activeModal === "location") return <LocationModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
   }, [props.activeModal]);
   return (
+    <>
+    {success ? <>
+      <SuccessModal isOpen={success} onRequestClose={() => setSuccess(false)} action={"saveChange"} />
+    </>
+    :
     <Modal
       isOpen={props.isOpen}
       onRequestClose={(e) => {
@@ -53,7 +62,7 @@ const SettingsModal = (props: ISettingsModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      <div
+      {!isTablet && <div
         onClick={props.onRequestClose}
         css={{
           border: "none",
@@ -66,20 +75,20 @@ const SettingsModal = (props: ISettingsModal) => {
         }}
       >
         {/* <p>&#x2715; Close</p>  */}
-      </div>
+      </div>}
 
       <div
         css={{
           height: "100vh",
-          maxWidth: "33.3%",
+          maxWidth: isTablet ? "100vw" :"33.3%",
           background: "#fff",
           position: "absolute",
           right: "0",
           top: "0",
-          padding: "2% 2% 0",
+          padding: isTablet ? "":"2% 2% 0",
           color: "#000",
           [screen.desktopLg]: {
-            width: "50%",
+            width: isTablet ? "100vw" :"50%",
           },
         }}
       >
@@ -98,7 +107,8 @@ const SettingsModal = (props: ISettingsModal) => {
           {stateEvents}
         </div>
       </div>
-    </Modal>
+    </Modal>}
+    </>
   );
 };
 

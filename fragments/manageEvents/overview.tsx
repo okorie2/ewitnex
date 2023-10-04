@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import { screen } from "styles/theme";
 import Image from "next/image";
 import OverviewChart from "@/components/charts/overviewChart";
@@ -8,6 +9,7 @@ import CopySnackBar from "@/components/snackbars/copied";
 import Link from "next/link";
 
 const EventOverview = () => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   const [copySnackBarOpen, setCopySnackBarOpen] = useState(false);
   const handleCopyClose = (
     event?: React.SyntheticEvent | Event,
@@ -38,8 +40,8 @@ const EventOverview = () => {
           src="/assets/pngs/devFestAba2.png"
           alt="header-img"
           css={{
-            borderRadius: " 0 0 10px 10px",
-            objectFit: "cover",
+            borderRadius: isTablet ? "0px":" 0 0 10px 10px",
+            objectFit: isTablet ? "fill":"cover",
             objectPosition: "center",
             zIndex: "-1",
           }}
@@ -53,7 +55,7 @@ const EventOverview = () => {
             backgroundColor: "#000",
             opacity: "50%",
             color: "#fff",
-            borderRadius: " 0 0 10px 10px",
+            borderRadius:isTablet ? "0px": " 0 0 10px 10px",
           }}
         ></div>
         <div
@@ -72,8 +74,8 @@ const EventOverview = () => {
           <p css={{ fontSize: "0.75rem" }}> 10:00 AM - 2:00 PM</p>
         </div>
       </div>
-      <div css={{ padding: "1.5rem" }}>
-        <div css={{ display: "flex", gap: "2.5rem" }}>
+      <div css={{ padding: isTablet ? "1rem":"1.5rem" }}>
+        <div css={{ display: isTablet ? "grid" : "flex", gap: isTablet ? "1.5rem":"2.5rem" }}>
           <div>
             <p css={{ fontSize: "0.875rem", fontWeight: "500" }}>Invite Link</p>
             <div
@@ -121,9 +123,9 @@ const EventOverview = () => {
                 backgroundColor: "#F5F5F5",
                 borderRadius: "5px",
                 width: "fit-content",
-                marginInline: "auto",
+                marginInline: isTablet ? "":"auto",
                 paddingInline: "0.5rem",
-                marginTop: "0.2rem",
+                marginTop: isTablet ? "0.3rem":"0.2rem",
                 display: "grid",
                 gridTemplateColumns: "1fr auto",
                 alignItems: "center",
@@ -147,15 +149,17 @@ const EventOverview = () => {
         </div>
         <div
           css={{
-            display: "flex",
+            display: isTablet ? "grid":"flex",
             justifyContent: "space-between",
             marginBlock: "2rem",
+            gridTemplateColumns:"1fr 1fr",
+            gap:isTablet ? "1rem":""
           }}
         >
           <div
             css={{
               border: "none",
-              width: "22%",
+              width: isTablet ? "100%":"22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${"#00000029"}`,
               borderRadius: "10px",
@@ -187,7 +191,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "22%",
+              width: isTablet ? "100%":"22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${"#00000029"}`,
               borderRadius: "10px",
@@ -218,7 +222,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "22%",
+              width: isTablet ? "100%":"22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${"#00000029"}`,
               borderRadius: "10px",
@@ -251,7 +255,7 @@ const EventOverview = () => {
           <div
             css={{
               border: "none",
-              width: "22%",
+              width: isTablet ? "100%":"22%",
               height: "174px",
               boxShadow: `0px 0px 5px ${"#00000029"}`,
               borderRadius: "10px",
@@ -325,7 +329,7 @@ const EventOverview = () => {
                 padding: "1rem",
               }}
             >
-              <div css={{ display: "flex", gap: "2%", marginBottom: "2rem" }}>
+              <div css={{ display: "flex", gap: "2%", marginBottom: "2rem", justifyContent:isTablet ? "space-between":"" }}>
                 <div>
                   <div
                     css={{
@@ -390,25 +394,30 @@ const EventOverview = () => {
               <div
                 css={{
                   display: "grid",
-                  gridTemplateColumns: "80% 20%",
+                  gridTemplateColumns: isTablet ? "1fr":"80% 20%",
+                  overflowX:"auto",
+                  "::-webkit-scrollbar": {display:"none"}
                 }}
               >
+                <div css = {{width: isTablet ? "100vh":""}}>
                 <OverviewChart />
+                </div>
                 <div
                   css={{
-                    padding: "10%",
+                    padding: isTablet ? "5%":"10%",
                     fontWeight: "600",
                     display: "flex",
-                    flexDirection: "column",
-                    gap: "1%",
+                    flexDirection: isTablet ? "row":"column",
+                    gap: isTablet ? "2rem":"1%",
                     color: "#000",
                   }}
                 >
+                  <div css = {{display:"grid", gap:"0.5rem"}}>
                   <p>VIP: 10/25</p>
                   <p>Regular: 30/60</p>
                   <p>Table of 5: 3/15</p>
-
-                  <div css={{ marginTop: "2rem" }}>
+                  </div>
+                  <div css={{ marginTop: isTablet ? "":"2rem" }}>
                     <p css={{ color: "#AEAEAE", fontSize: "13px" }}>
                       Total Tickets Sold
                     </p>

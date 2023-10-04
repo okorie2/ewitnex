@@ -2,6 +2,7 @@
 
 import React from "react";
 import SettingsCard from "./settingsCard";
+import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 
 const SettingsFormCard = ({
@@ -15,10 +16,11 @@ const SettingsFormCard = ({
   cardTitleImg ?: React.ReactNode;
   onClick?: () => void;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <div
       css={{
-        width: "60%",
+        width: isTablet ? "100%":"60%",
         position: "relative",
         marginTop: "0.4rem",
         marginBottom: "1.9rem",

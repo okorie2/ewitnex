@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
@@ -10,10 +10,12 @@ import { Button } from "styles/components/button";
 import { useMediaQuery } from "@mui/material";
 import { TextField } from "@mui/material";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
+import TicketDetailsFragment from "fragments/tickets/ticketDetailsFragment";
 
-interface IMessageAttendeesModal {
+interface ITicketDetailsModal {
   isOpen: boolean;
   onRequestClose: () => void;
+  selectedEvent:string
 }
 
 const customStyles = {
@@ -36,7 +38,7 @@ const customStyles = {
 
 Modal.setAppElement("body");
 
-const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
+const TicketDetailsModal = (props: ITicketDetailsModal) => {
   const [messageDetails, setMessageDetails] = useState({
     subject: "",
     message: "",
@@ -49,6 +51,7 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
   const handleClose = () => {
     props.onRequestClose()
   }
+  
   const handleNext = () => {};
   return (
     <Modal
@@ -129,63 +132,16 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
               </div>
               <div>
                 <h2 css={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                Messaging Attendees
+                Ticket Details
                 </h2>
               </div>
             </div>
           )}
-          <p css={{ fontSize: "24px", fontWeight: "bold" }}>
-            Messaging Attendees
-          </p>
-          <div
-            css={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              marginTop: isTablet ? "3rem":"2rem",
-            }}
-          >
-            <SettingsTextField
-              label={"Subject"}
-              name="subject"
-              value={messageDetails.subject}
-              placeholder={"Enter Subject"}
-              setValue={handleChange}
-            />
-            <HostEventTextField
-              label={"Message"}
-              type="textarea"
-              name="message"
-              color= "#000"
-              height={isTablet ? "20rem": "16rem"}
-              value={messageDetails.message}
-              placeholder={"Start writing your message"}
-              setValue={handleChange}
-            />
-            <div
-              css={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "2rem",
-              }}
-            >
-              <Button onClick={handleNext} height="52px">
-                <p
-                  css={{
-                    fontSize: "16px",
-                    fontFamily: '"Nunito", sans-serif',
-                    paddingInline: "7rem",
-                  }}
-                >
-                  SAVE CHANGES
-                </p>
-              </Button>
-            </div>
-          </div>
+              <TicketDetailsFragment selectedEvent={props.selectedEvent}/>
         </div>
       </div>
     </Modal>
   );
 };
 
-export default MessageAttendeesModal;
+export default TicketDetailsModal;

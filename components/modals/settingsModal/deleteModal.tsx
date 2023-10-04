@@ -3,6 +3,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { Button } from "styles/components/button";
+import { useMediaQuery } from "@mui/material";
 
 interface IDeleteModal {
   isOpen: boolean;
@@ -28,6 +29,8 @@ const customStyles = {
 };
 
 const DeleteModal = (props: IDeleteModal) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <Modal
       isOpen={props.isOpen}
@@ -58,14 +61,15 @@ const DeleteModal = (props: IDeleteModal) => {
             display: "flex",
             flexDirection: "column",
             textAlign: "center",
-            padding: "2rem",
+            justifyContent : isTablet ? "center":"",
+            padding: isTablet ? "1rem":"2rem",
             boxShadow: "0px 1px 10px #00000029",
             borderRadius: "20px",
           }}
         >
           <p
             css={{
-              fontSize: "24px",
+              fontSize: isTablet ? "18px":"24px",
               fontWeight: "bold",
               marginBottom: "1.5rem",
             }}
@@ -79,8 +83,8 @@ const DeleteModal = (props: IDeleteModal) => {
           <div
             css={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "5%",
+              gridTemplateColumns: isTablet ? "40% 58%":"1fr 1fr",
+              gap: isTablet ? "3%":"5%",
               marginTop: "3rem",
             }}
           >
