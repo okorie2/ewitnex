@@ -23,7 +23,7 @@ export default function Signup() {
       >
         {!isTablet && <SignInLeftcss>
           <div className="top">
-            <Image src={"/assets/svgs/phones.svg"} alt="phones" fill />
+            <Image src={"/assets/svgs/phones.svg"} alt="phones" fill priority/>
             <Logo image="/assets/pngs/logo_yt.png" />
           </div>
 

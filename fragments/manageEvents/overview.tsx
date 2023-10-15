@@ -11,6 +11,7 @@ import Link from "next/link";
 const EventOverview = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [copySnackBarOpen, setCopySnackBarOpen] = useState(false);
+  const [message, setMessage] = useState("")
   const handleCopyClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -20,7 +21,6 @@ const EventOverview = () => {
     }
     setCopySnackBarOpen(false)
   };
-  const [message, setMessage] = useState("")
 
   const handleCopy = async (textToCopy: string, alert:string) => {
     if ("clipboard" in navigator) {

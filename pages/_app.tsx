@@ -2,10 +2,13 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "@emotion/react";
 import Head from "next/head";
+import { Provider } from "react-redux";
+import { store } from "redux/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+    <Provider store={store}>
       <Head>
         <title>Ewitnex</title>
         <meta
@@ -47,6 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Component {...pageProps} />
+      </Provider>
     </>
   );
 }
