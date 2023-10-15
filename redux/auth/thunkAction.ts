@@ -20,7 +20,6 @@ export const signUp = createAsyncThunk('auth/signup', async (data: IFormData, th
         return response.data.data;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
-            console.log(error.response);
             const message = error.response.data as { error: string };
             console.log(message.error, "error message")
             localStorage.setItem('error', message.error )
@@ -48,7 +47,7 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
         if (axios.isAxiosError(error) && error.response) {
             console.log(error.response);
             const message = error.response.data as {error:string};
-            console.log(message.error)
+            localStorage.setItem('error', message.error)
             return thunkAPI.rejectWithValue(error.message);
         } else {
             return thunkAPI.rejectWithValue(String(error));

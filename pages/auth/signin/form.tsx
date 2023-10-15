@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import BasicTextField, {
   PasswordTextField,
 } from "@/components/inputs/BasicTextField";
@@ -11,6 +11,8 @@ import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { signIn } from "redux/auth/thunkAction";
 import { useRouter } from "next/router";
 import { TailSpin } from "react-loader-spinner";
+import ErrorSnackBar from "@/components/snackbars/error";
+import SuccessSnackBar from "@/components/snackbars/success";
 
 export type ISignInFormData = {
   identifier: string;
@@ -21,6 +23,12 @@ export default function Form() {
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ signIn }) => signIn);
   const router = useRouter();
+  const [errorSnackBarOpen, setErrorSnackBarOpen] = useState(false);
+  const [successSnackBarOpen, setSuccessSnackBarOpen] = useState(false);
+  const [message, setMessage] = useState("")
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [identifierError, setIdentifierError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
 
   const [values, setValues] = useState<ISignInFormData>({
     identifier: "",
@@ -38,10 +46,40 @@ export default function Form() {
     }
   }
 
+  useEffect(() => {
+    if(loading === "failed"){
+      if(localStorage.getItem('error') && localStorage){
+        const error = localStorage.getItem('error') || ""
+        if(error.includes("mail") || error.includes("phone")){
+          setIdentifierError(error)
+        }else{
+          setPasswordError(error)
+        }
+          setMessage(error)
+          setErrorSnackBarOpen(true)
+        localStorage.setItem('error', "")
+      }
+    }
+    if(loading === "successful"){
+      setMessage("SignIn successful")
+      setSuccessSnackBarOpen(true)
+    }
+  },[loading])
+  
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setErrorSnackBarOpen(false)
+    setSuccessSnackBarOpen(false)
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-    console.log(values);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -57,6 +95,8 @@ export default function Form() {
 
   return (
     <>
+    <ErrorSnackBar open={errorSnackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
+    <SuccessSnackBar open={successSnackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
       <div>
         <form onSubmit={handleSubmit}>
           <div css={{ marginBottom: "2.4rem" }}>
@@ -65,15 +105,18 @@ export default function Form() {
               value={modifyIdentifier(values.identifier)}
               name={"identifier"}
               setValue={handleChange}
+              error = {identifierError ? identifierError : ""}
               required
             />
           </div>
           <div css={{ marginBottom: "1.2rem" }}>
             <PasswordTextField
               label="Password"
-              value={values.password}
+              value={values.password}visible={passwordVisible}
+              setVisible={setPasswordVisible}
               name={"password"}
               setValue={handleChange}
+              error={passwordError ? passwordError : ""}
               required
             />
           </div>

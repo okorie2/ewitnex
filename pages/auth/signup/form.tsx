@@ -18,6 +18,7 @@ import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { signUp } from "redux/auth/thunkAction";
 import { TailSpin } from "react-loader-spinner";
 import ErrorSnackBar from "@/components/snackbars/error";
+import SuccessSnackBar from "@/components/snackbars/success";
 
 
 type ISignupFormLevels =
@@ -979,6 +980,8 @@ const Interests = (props: FormLevelProps) => {
   const router = useRouter();
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ signUp }) => signUp);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [message, setMessage] = useState("")
 
   useEffect(() => {
     if(loading === "failed"){
@@ -992,8 +995,22 @@ const Interests = (props: FormLevelProps) => {
         }
       }
     }
+    if(loading === "successful"){
+      setMessage("Signup successful")
+        setSnackBarOpen(true)
+    }
   },[loading])
 
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackBarOpen(false)
+  };
+  
   const handleSubmit = () => {
     props.setFormData({
       ...props.formData,
@@ -1008,6 +1025,7 @@ const Interests = (props: FormLevelProps) => {
   const [chipDetails, setChiDetails] = useState(chipData);
   return (
     <div>
+    <SuccessSnackBar open={snackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
       <div css={{ margin: "3rem 0", cursor: "pointer" }}>
         <button
           type="button"
