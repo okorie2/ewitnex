@@ -1,38 +1,123 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import BasicTextField, {
   PasswordTextField,
 } from "@/components/inputs/BasicTextField";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { signIn } from "redux/auth/thunkAction";
+import { useRouter } from "next/router";
+import { TailSpin } from "react-loader-spinner";
+import ErrorSnackBar from "@/components/snackbars/error";
+import SuccessSnackBar from "@/components/snackbars/success";
+
+export type ISignInFormData = {
+  identifier: string;
+  password: string;
+};
 
 export default function Form() {
-  const [values, setValues] = useState({
-    email: "",
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ signIn }) => signIn);
+  const router = useRouter();
+  const [errorSnackBarOpen, setErrorSnackBarOpen] = useState(false);
+  const [successSnackBarOpen, setSuccessSnackBarOpen] = useState(false);
+  const [message, setMessage] = useState("")
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [identifierError, setIdentifierError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+
+  const [values, setValues] = useState<ISignInFormData>({
+    identifier: "",
     password: "",
   });
+
+  const modifyIdentifier = (str:string) => {
+    if(str.split("")[0] === "0" && str.length>0){
+      let tempArr
+      tempArr = str.split("")
+      tempArr.shift()
+      return `234${tempArr.join()}`
+    }else{
+      return str
+    }
+  }
+
+  useEffect(() => {
+    if(loading === "failed"){
+      if(localStorage.getItem('error') && localStorage){
+        const error = localStorage.getItem('error') || ""
+        if(error.includes("mail") || error.includes("phone")){
+          setIdentifierError(error)
+        }else{
+          setPasswordError(error)
+        }
+          setMessage(error)
+          setErrorSnackBarOpen(true)
+        localStorage.setItem('error', "")
+      }
+    }
+    if(loading === "successful"){
+      setMessage("SignIn successful")
+      setSuccessSnackBarOpen(true)
+    }
+  },[loading])
+  
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setErrorSnackBarOpen(false)
+    setSuccessSnackBarOpen(false)
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(signIn(values)).then((res) => {
+      console.log(res, "resss");
+
+      if (res.meta.requestStatus === "fulfilled") {
+        router.push("/dashboard/programs");
+      }
+    });
+  };
+
   return (
     <>
+    <ErrorSnackBar open={errorSnackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
+    <SuccessSnackBar open={successSnackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div css={{ marginBottom: "2.4rem" }}>
             <BasicTextField
               label="Email, Username Or Phone"
-              value={values.email}
+              value={modifyIdentifier(values.identifier)}
+              name={"identifier"}
               setValue={handleChange}
+              error = {identifierError ? identifierError : ""}
+              required
             />
           </div>
           <div css={{ marginBottom: "1.2rem" }}>
             <PasswordTextField
               label="Password"
-              value={values.password}
+              value={values.password}visible={passwordVisible}
+              setVisible={setPasswordVisible}
+              name={"password"}
               setValue={handleChange}
+              error={passwordError ? passwordError : ""}
+              required
             />
           </div>
           <div
@@ -53,9 +138,19 @@ export default function Form() {
             </p>
           </div>
           <div>
-            <Link href="/dashboard/programs">
-              <ButtonFormFilled>SIGN IN</ButtonFormFilled>
-            </Link>
+            <ButtonFormFilled>
+              {loading === "loading" ? (
+                <TailSpin
+                  height={20}
+                  width={20}
+                  color="#FFF"
+                  ariaLabel="loading"
+                  radius={"2"}
+                />
+              ) : (
+                "SIGN IN"
+              )}
+            </ButtonFormFilled>
           </div>
         </form>
 
@@ -82,7 +177,7 @@ export default function Form() {
             <p>Continue With Google</p>
           </ButtonFormOutline>
         </div>
-        <div css={{ marginTop: "2rem", marginBottom:"1rem" }}>
+        <div css={{ marginTop: "2rem", marginBottom: "1rem" }}>
           <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
             Don&apos;t Have An Account?{" "}
             <span css={{ fontWeight: 700, color: "#7C35AB" }}>

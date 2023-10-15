@@ -3,8 +3,11 @@
 import { css } from "@emotion/react";
 import React from "react";
 import { useMediaQuery } from "@mui/material";
+import { setDefaultResultOrder } from "dns";
 
 interface Props {
+  arr: string[];
+  setArr: React.Dispatch<React.SetStateAction<string[]>>;
   chipDetails: { name: string; selected: boolean }[];
   setChipDetails: React.Dispatch<
     React.SetStateAction<{ name: string; selected: boolean }[]>
@@ -21,8 +24,9 @@ export const chipData = [
   { name: "business", selected: false },
   { name: "vacations", selected: false },
   { name: "sports", selected: false },
-  { name: "christianity", selected: false },
-  { name: "tech", selected: false },
+  { name: "religiion", selected: false },
+  { name: "concert", selected: false },
+  { name: "symposiums", selected: false },
 ];
 
 export default function Chip(props: Props) {
@@ -34,8 +38,15 @@ export default function Chip(props: Props) {
       }
       return chip;
     });
+    let tempArr:string[] = []
+    props.chipDetails.map((chip) => {
+        if(chip.selected === true){
+        tempArr.push(chip.name)
+    }
+    })
 
     props.setChipDetails(newChipDetails);
+    props.setArr(tempArr)
   };
   return (
     <>
