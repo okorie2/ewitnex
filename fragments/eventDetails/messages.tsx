@@ -145,7 +145,7 @@ const EventMessages = () => {
             }}
           >
             <Link href="/auth/signin" css={{ color: "#00D9B7" }}>
-              Sign in
+              Log in
             </Link>
             <span> to your account to join in the conversation</span>
           </button>

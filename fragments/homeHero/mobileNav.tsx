@@ -69,7 +69,7 @@ const MobileNav = ({
               color: "#7C35AB",
             }}
           >
-            Sign In
+            Log In
           </div>
         </Link>
         <Link href="/"  css={{ color: active === "home" ? "#7C35AB" : "" }}>

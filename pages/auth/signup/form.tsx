@@ -20,10 +20,8 @@ import { TailSpin } from "react-loader-spinner";
 import ErrorSnackBar from "@/components/snackbars/error";
 import SuccessSnackBar from "@/components/snackbars/success";
 
-
 type ISignupFormLevels =
   | "whoYouAre"
-  | "email"
   | "password"
   | "gender"
   | "location"
@@ -39,12 +37,14 @@ export type IFormData = {
   gender: string;
   city: string;
   username: string;
-  interests: string[];
+  eventType: string[];
 };
 
-export type ILocation = [{
-  matching_full_name:string
-}]
+export type ILocation = [
+  {
+    matching_full_name: string;
+  }
+];
 
 interface FormLevelProps {
   formLevel: ISignupFormLevels;
@@ -66,24 +66,14 @@ export default function Form() {
     gender: "",
     city: "",
     username: "",
-    interests: [""],
+    eventType: [""],
   });
-
 
   const displayFormLevel = (formLevel: ISignupFormLevels) => {
     switch (formLevel) {
       case "whoYouAre":
         return (
           <WhoYouAre
-            formLevel={formLevel}
-            setFormLevel={setFormLevel}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        );
-      case "email":
-        return (
-          <Email
             formLevel={formLevel}
             setFormLevel={setFormLevel}
             formData={formData}
@@ -191,7 +181,7 @@ const WhoYouAre = (props: FormLevelProps) => {
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.setFormLevel("email");
+    props.setFormLevel("password");
     props.setFormData({
       ...props.formData,
       firstName: formValues.firstName,
@@ -296,121 +286,10 @@ const WhoYouAre = (props: FormLevelProps) => {
           <span
             css={{ fontWeight: 700, color: isTablet ? "#7C35AB" : "#f05e78" }}
           >
-            <Link href="/auth/signin"> Sign In</Link>
+            <Link href="/auth/signin"> Log In</Link>
           </span>
         </p>
       </div>
-    </div>
-  );
-};
-
-const Email = (props: FormLevelProps) => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
-  const [email, setEmail] = useState(props.formData.email || "");
-  const [valid, setValid] = useState(true);
-  const { loading } = useAppSelector(({ signUp }) => signUp);
-  const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("")
-
-  useEffect(() => {
-    if(loading === "failed"){
-      if(localStorage.getItem('error') && localStorage){
-        const error = localStorage.getItem('error') || ""
-        if(error.includes('mail')){
-          setMessage(error)
-          setSnackBarOpen(true)
-        }
-        localStorage.setItem('error', "")
-      }
-    }
-  },[loading])
-
-  const handleSnackbarClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSnackBarOpen(false)
-  };
-
-  const validateEmail = (email: string) => {
-    const emailPattern =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-z]{2,4}$/;
-    return emailPattern.test(email);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setValid(validateEmail(email));
-    setMessage("");
-  };
-
-  const handleNext = (event:FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (valid) {
-      props.setFormLevel("password");
-      props.setFormData({
-        ...props.formData,
-        email: email,
-      });
-    }
-  };
-
-  return (
-    <div>
-    <ErrorSnackBar open={snackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
-      <div css={{ margin: "3rem 0", cursor: "pointer" }}>
-        <button
-          type="button"
-          onClick={() => props.setFormLevel("whoYouAre")}
-          css={{
-            fontFamily: "'Nunito', sans-serif",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            background: "none",
-            display: "flex",
-            gap: "0.7rem",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            src="/assets/svgs/back.svg"
-            alt="back_arrow"
-            width={22}
-            height={15}
-          />
-          {!isTablet && (
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
-          )}
-        </button>
-      </div>
-      <div
-        css={{
-          fontFamily: "'Nunito', sans-serif",
-          fontSize: "1.5rem",
-          marginBottom: "3.3rem",
-          fontWeight: 600,
-        }}
-      >
-        <p>What&apos;s Your Email Address?</p>
-      </div>
-      <form onSubmit = {handleNext}>
-      <div css={{ marginBottom: "2.4rem" }}>
-        <BasicTextField
-          label="Email Address"
-          value={email}
-          weight="bold"
-          name="email"
-          setValue={handleChange}
-          error={valid ? message ? "Email already exists":"" : "Provide a valid email"}
-          required
-        />
-      </div>
-      <ButtonFormFilled>CONTINUE</ButtonFormFilled>
-      </form>
     </div>
   );
 };
@@ -422,22 +301,23 @@ const Password = (props: FormLevelProps) => {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const isTablet = useMediaQuery("(max-width: 900px)");
   const [valid, setValid] = useState(true);
+  const [emailValid, setEmailValid] = useState(true);
   const { loading } = useAppSelector(({ signUp }) => signUp);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if(loading === "failed"){
-      if(localStorage.getItem('error') && localStorage){
-        const error = localStorage.getItem('error') || ""
-        if(error.includes('Phone')){
-          setMessage(error)
-          setSnackBarOpen(true)
+    if (loading === "failed") {
+      if (localStorage.getItem("error") && localStorage) {
+        const error = localStorage.getItem("error") || "";
+        if (error.includes("Phone")) {
+          setMessage(error);
+          setSnackBarOpen(true);
         }
-        localStorage.setItem('error', "")
+        localStorage.setItem("error", "");
       }
     }
-  },[loading])
+  }, [loading]);
 
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
@@ -446,16 +326,24 @@ const Password = (props: FormLevelProps) => {
     if (reason === "clickaway") {
       return;
     }
-    setSnackBarOpen(false)
+    setSnackBarOpen(false);
   };
 
   const [formDetails, setFormDetails] = useState({
+    email: "",
     phoneNumber: props.formData.phoneNumber || "",
     password: "",
     confirmPassword: "",
   });
+
+  const validateEmail = (email: string) => {
+    const emailPattern =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
   const validatePhoneNumber = (phoneNumber: string) => {
-    const phoneNumberPattern = /^\d{13}$/;
+    const phoneNumberPattern = /^\d{11,}$/;
     return phoneNumberPattern.test(phoneNumber);
   };
 
@@ -487,8 +375,9 @@ const Password = (props: FormLevelProps) => {
   }, [formDetails.password]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage("")
+    setMessage("");
     const { name, value } = e.target;
+    setEmailValid(validateEmail(formDetails.email));
     setFormDetails({ ...formDetails, [name]: value });
   };
 
@@ -498,6 +387,7 @@ const Password = (props: FormLevelProps) => {
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    localStorage.removeItem("error");
     setValid(validatePhoneNumber(formDetails.phoneNumber));
     setPasswordMatch(
       validatePasswordMatch(formDetails.password, formDetails.confirmPassword)
@@ -506,6 +396,7 @@ const Password = (props: FormLevelProps) => {
       props.setFormLevel("gender");
       props.setFormData({
         ...props.formData,
+        email: formDetails.email,
         phoneNumber: formDetails.phoneNumber,
         password: formDetails.password,
       });
@@ -514,12 +405,16 @@ const Password = (props: FormLevelProps) => {
 
   return (
     <>
-    <ErrorSnackBar open={snackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
+      <ErrorSnackBar
+        open={snackBarOpen}
+        message={message}
+        handleClose={handleSnackbarClose}
+      />
       <div>
         <div css={{ margin: "3rem 0", cursor: "pointer" }}>
           <button
             type="button"
-            onClick={() => props.setFormLevel("email")}
+            onClick={() => props.setFormLevel("whoYouAre")}
             css={{
               fontFamily: "'Nunito', sans-serif",
               cursor: "pointer",
@@ -546,26 +441,35 @@ const Password = (props: FormLevelProps) => {
           css={{
             fontFamily: "'Nunito', sans-serif",
             fontSize: "1.5rem",
-            marginBottom: isTablet ? "2rem" : "4.3rem",
+            marginBottom: isTablet ? "2rem" : "3rem",
             p: {
               marginBottom: "1.3rem",
             },
           }}
         >
           <p css={{ fontWeight: "500" }}>Sign Up</p>
-          <p
-            css={css`
-              font-size: 16px;
-            `}
-          >
-            {" "}
-            Using <b css={{ fontWeight: "700" }}>{props.formData.email}</b> To
-            Sign Up
-          </p>
+      
         </div>
 
         <form onSubmit={(e) => handleNext(e)}>
           <div css={{ marginBottom: "2.4rem" }}>
+            <div css = {{marginBottom:"2rem"}}>
+            <BasicTextField
+              label="Email Address"
+              value={formDetails.email}
+              weight="bold"
+              name="email"
+              setValue={handleChange}
+              error={
+                emailValid
+                  ? message
+                    ? "Email already exists"
+                    : ""
+                  : "Provide a valid email"
+              }
+              required
+            />
+            </div>
             <PhoneTextField
               label="Phone Number"
               value={formDetails.phoneNumber}
@@ -573,7 +477,11 @@ const Password = (props: FormLevelProps) => {
               setValue={handleChange}
               setPhoneValue={handlePhoneChange}
               error={
-                message ? "Phone number already in use by another user" : valid? "": "Please enter a valid phone number using the format +(234) XXX XXX XXX X"
+                message
+                  ? "Phone number already in use by another user"
+                  : valid
+                  ? ""
+                  : "Please enter a valid phone number using the format +(234) XXX XXX XXX X"
               }
               required
             />
@@ -981,25 +889,21 @@ const Interests = (props: FormLevelProps) => {
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ signUp }) => signUp);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if(loading === "failed"){
-      if(localStorage.getItem('error') && localStorage){
-        const error = localStorage.getItem('error') || ""
-        if(error === "Email already exists"){
-          props.setFormLevel("email")
+    if (loading === "failed") {
+      if (localStorage.getItem("error") && localStorage) {
+        const error = localStorage.getItem("error") || "";
+        if (error === "Email already exists") {
+          props.setFormLevel("password");
         }
-        if (error === "Phone number is already in use by another user"){
-          props.setFormLevel('password')
+        if (error === "Phone number is already in use by another user") {
+          props.setFormLevel("password");
         }
       }
     }
-    if(loading === "successful"){
-      setMessage("Signup successful")
-        setSnackBarOpen(true)
-    }
-  },[loading])
+  }, [loading]);
 
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
@@ -1008,16 +912,20 @@ const Interests = (props: FormLevelProps) => {
     if (reason === "clickaway") {
       return;
     }
-    setSnackBarOpen(false)
+    setSnackBarOpen(false);
   };
-  
+
   const handleSubmit = () => {
     props.setFormData({
       ...props.formData,
-      interests: selectedInterests,
+      eventType: selectedInterests,
     });
     dispatch(signUp(props.formData)).then((res) => {
-      res.meta.requestStatus == "fulfilled" ? router.push("/auth/signin") : "";
+      if (res.meta.requestStatus == "fulfilled") {
+        router.push("/auth/signin");
+        setMessage("Signup successful");
+        setSnackBarOpen(true);
+      }
     });
     // router.push("/dashboard/programs");
   };
@@ -1025,7 +933,11 @@ const Interests = (props: FormLevelProps) => {
   const [chipDetails, setChiDetails] = useState(chipData);
   return (
     <div>
-    <SuccessSnackBar open={snackBarOpen} message={message} handleClose = {handleSnackbarClose}/>
+      <SuccessSnackBar
+        open={snackBarOpen}
+        message={message}
+        handleClose={handleSnackbarClose}
+      />
       <div css={{ margin: "3rem 0", cursor: "pointer" }}>
         <button
           type="button"

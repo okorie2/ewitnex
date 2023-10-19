@@ -14,6 +14,7 @@ import { TailSpin } from "react-loader-spinner";
 import ErrorSnackBar from "@/components/snackbars/error";
 import SuccessSnackBar from "@/components/snackbars/success";
 
+
 export type ISignInFormData = {
   identifier: string;
   password: string;
@@ -60,10 +61,6 @@ export default function Form() {
         localStorage.setItem('error', "")
       }
     }
-    if(loading === "successful"){
-      setMessage("SignIn successful")
-      setSuccessSnackBarOpen(true)
-    }
   },[loading])
   
   const handleSnackbarClose = (
@@ -88,9 +85,11 @@ export default function Form() {
       console.log(res, "resss");
 
       if (res.meta.requestStatus === "fulfilled") {
+        setMessage("SignIn successful")
+        setSuccessSnackBarOpen(true)
         router.push("/dashboard/programs");
       }
-    });
+    })
   };
 
   return (
@@ -148,7 +147,7 @@ export default function Form() {
                   radius={"2"}
                 />
               ) : (
-                "SIGN IN"
+                "LOG IN"
               )}
             </ButtonFormFilled>
           </div>

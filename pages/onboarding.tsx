@@ -74,7 +74,7 @@ const Onboarding = () => {
           >
             <Link href="/auth/signin">
               <Button fontSize="1rem" width="100%" height="52px">
-                SIGN IN TO CREATE AN EVENT
+                LOG IN TO CREATE AN EVENT
               </Button>
             </Link>
             <p css={{ letterSpacing: "0.32px" }}>DONT HAVE AN ACCOUNT?</p>

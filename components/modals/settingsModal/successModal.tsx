@@ -201,7 +201,7 @@ const SuccessModal = (props: ISuccessModal) => {
                     fontFamily: '"Nunito", sans-serif',
                   }}
                 >
-                  {props.action === "accountVerification" || props.action === "saveChange" ? "OKAY" : "SIGN IN"}
+                  {props.action === "accountVerification" || props.action === "saveChange" ? "OKAY" : "LOG IN"}
                 </p>
                 {loading && (
                   <TailSpin

@@ -119,7 +119,7 @@ export default function Index() {
               Booking ticket on ewitnex is very easy and fast! It takes less
               than 2mins to register and you&apos;ll have your ticket sent to
               your account ticket manager and email. No problem if you
-              don&apos;t want to sign in to purchase ticket, ticket will always
+              don&apos;t want to log in to purchase ticket, ticket will always
               be sent to your email.
             </p>
           </div>

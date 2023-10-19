@@ -1,13 +1,28 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { StyledToggle } from "styles/components/toggleSwitch";
 
 const ToggleSwitch = ({isToggled, onToggle}: {
   isToggled: boolean
   onToggle: () => void
 }) => {
-  
+  const dispatch = useAppThunkDispatch();
+  // const { user } = useAppSelector(({ user }) => user);
+  // useEffect(() => {
+  //   if(isToggled){
+  //     const getUserData = async () => {
+  //       await dispatch(loadUser('')).then((res) => {
+  //         if(res.meta.requestStatus === "fulfilled"){
+  //           console.log("done", user)
+  //         }
+  //       })
+  //     }
+  //     getUserData()
+  //   }
+  // },[isToggled])
+
   return (
     <div>
       <StyledToggle checked = {isToggled}>
