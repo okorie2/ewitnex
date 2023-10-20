@@ -77,6 +77,7 @@ export default function Form() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+    setMessage("")
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

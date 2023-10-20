@@ -5,10 +5,10 @@ import Image from "next/image";
 import React from "react";
 
 interface Props {
-  gender: "Male" | "Female" | "Preferred not to say";
-  selectedType: "Male" | "Female" | "Preferred not to say" | undefined;
+  gender: "Male" | "Female" | "Preferred Not To Say";
+  selectedType: "Male" | "Female" | "Preferred Not To Say" | undefined;
   setSelectedType: React.Dispatch<
-    React.SetStateAction<"Male" | "Female" | "Preferred not to say" | undefined>
+    React.SetStateAction<"Male" | "Female" | "Preferred Not To Say" | undefined>
   >;
 }
 export default function GenderType(props: Props) {

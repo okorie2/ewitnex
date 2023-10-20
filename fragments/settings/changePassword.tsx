@@ -25,13 +25,13 @@ const ChangePassword = () => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [passwordValid, setPasswordValid] = useState(true);
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const { loading } = useAppSelector(({ updatePassword }) => updatePassword);
   const [message, setMessage] = useState("");
   const [formDetails, setFormDetails] = useState<IUpdatePassword>({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
+  const { loading } = useAppSelector(({ updatePassword }) => updatePassword);
   const dispatch = useAppThunkDispatch();
   const validatePassword = (password: string) => {
     const passwordPattern =

@@ -1,33 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserById } from './thunkAction';
-import { IUserDetails } from 'types/user';
+import { deleteUserById } from '../settings/thunkAction';
 
 interface IState {
     loading: 'failed' | 'loading' | 'successful' | 'idle';
-    fetchedUser: IUserDetails
 }
 const initialState: IState = {
     loading: 'idle',
-    fetchedUser:  <IUserDetails>{}
 };
-const GetUserSlice = createSlice({
+const DeleteUserSlice = createSlice({
     name: 'getUserById',
     initialState,
     reducers: {},
     extraReducers(builder) {
-        builder.addCase(getUserById.pending, (state) => {
+        builder.addCase(deleteUserById.pending, (state) => {
             return { ...state, loading: 'loading' };
         });
 
-        builder.addCase(getUserById.fulfilled, (state, action) => {
+        builder.addCase(deleteUserById.fulfilled, (state, action) => {
             return { ...state, loading: 'successful', fetchedUser: action.payload };
             // Add user to the state array
         });
-        builder.addCase(getUserById.rejected, (state) => {
+        builder.addCase(deleteUserById.rejected, (state) => {
             return { ...state, loading: 'failed' };
 
         });
     },
 });
 
-export const GetUserReducer = GetUserSlice.reducer;
+export const DeleteUserReducer = DeleteUserSlice.reducer;

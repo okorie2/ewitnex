@@ -202,7 +202,7 @@ const Profile = () => {
                     <span css={{ fontSize: isTablet ? "1.05rem" : "1.125rem" }}>
                       {user?.username}
                     </span>{" "}
-                    - <span css={{ fontSize: "0.875rem" }}>{user?.city.city}</span>
+                    - <span css={{ fontSize: "0.875rem" }}>{user?.city ? user.city.city : ""}</span>
                   </p>
                 </div>
               </div>

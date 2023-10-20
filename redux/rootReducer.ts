@@ -5,6 +5,7 @@ import { LogoutReducer } from './auth/logoutSlice';
 import { UserReducer } from './user/userSlice';
 import { GetUserReducer } from './user/getUserByIdSlice';
 import { UpdatePasswordReducer } from './settings/updatePasswordSlice';
+import { DeleteUserReducer } from './settings/deleteUserByIdSlice';
 
 
 export const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
     logout: LogoutReducer,
     user: UserReducer,
     getUserById: GetUserReducer,
+    deleteUserById: DeleteUserReducer,
     updatePassword: UpdatePasswordReducer,
 })
 

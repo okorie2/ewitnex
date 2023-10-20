@@ -36,8 +36,8 @@ export type IFormData = {
   password: string;
   gender: string;
   city: string;
-  username: string;
-  eventType: string[];
+  providedUsername: string;
+  interests: string[];
 };
 
 export type ILocation = [
@@ -65,8 +65,8 @@ export default function Form() {
     password: "",
     gender: "",
     city: "",
-    username: "",
-    eventType: [""],
+    providedUsername: "",
+    interests: [""],
   });
 
   const displayFormLevel = (formLevel: ISignupFormLevels) => {
@@ -138,6 +138,7 @@ export default function Form() {
     }
   };
 
+  console.log(formData)
   return <>{displayFormLevel(formLevel)}</>;
 }
 
@@ -330,7 +331,7 @@ const Password = (props: FormLevelProps) => {
   };
 
   const [formDetails, setFormDetails] = useState({
-    email: "",
+    email: props.formData.email || "",
     phoneNumber: props.formData.phoneNumber || "",
     password: "",
     confirmPassword: "",
@@ -523,7 +524,7 @@ const Password = (props: FormLevelProps) => {
 const Gender = (props: FormLevelProps) => {
   const isTablet = useMediaQuery("(max-width: 900px)");
   const [selectedType, setSelectedType] = useState<
-    "Male" | "Female" | "Preferred not to say"
+    "Male" | "Female" | "Preferred Not To Say"
   >();
   const handleNext = () => {
     if (selectedType) {
@@ -602,7 +603,7 @@ const Gender = (props: FormLevelProps) => {
 
           <GenderType
             selectedType={selectedType}
-            gender="Preferred not to say"
+            gender="Preferred Not To Say"
             setSelectedType={setSelectedType}
           />
           <Box height={35} />
@@ -740,10 +741,10 @@ const Username = (props: FormLevelProps) => {
     props.setFormLevel("interests");
     props.setFormData({
       ...props.formData,
-      username: value,
+      providedUsername: value,
     });
   };
-  const [value, setValue] = useState(props.formData.username || "");
+  const [value, setValue] = useState(props.formData.providedUsername || "");
 
   return (
     <>
@@ -918,7 +919,7 @@ const Interests = (props: FormLevelProps) => {
   const handleSubmit = () => {
     props.setFormData({
       ...props.formData,
-      eventType: selectedInterests,
+      interests: selectedInterests,
     });
     dispatch(signUp(props.formData)).then((res) => {
       if (res.meta.requestStatus == "fulfilled") {
