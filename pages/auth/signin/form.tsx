@@ -127,7 +127,8 @@ export default function Form() {
               marginBottom: "3rem",
             }}
           >
-            <p
+            <Link
+              href = "/auth/forgotPassword"
               css={{
                 fontWeight: 700,
                 color: "#7C35AB",
@@ -135,7 +136,7 @@ export default function Form() {
               }}
             >
               Forgot Password?
-            </p>
+            </Link>
           </div>
           <div>
             <ButtonFormFilled>
