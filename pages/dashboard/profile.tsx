@@ -44,7 +44,7 @@ const Profile = () => {
     event.target.files = null;
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setBioData(event.currentTarget.value);
   };
 

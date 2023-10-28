@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { TailSpin } from "react-loader-spinner";
 import ErrorSnackBar from "@/components/snackbars/error";
 import SuccessSnackBar from "@/components/snackbars/success";
+import { NextResponse } from 'next/server';
 
 
 export type ISignInFormData = {
@@ -86,6 +87,12 @@ export default function Form() {
       console.log(res, "resss");
 
       if (res.meta.requestStatus === "fulfilled") {
+        // const nextRes = NextResponse.next()
+        // nextRes.cookies.set({
+        //     name: 'loggedIn',
+        //     value: 'true',
+        //     httpOnly: true
+        // })
         setMessage("SignIn successful")
         setSuccessSnackBarOpen(true)
         router.push("/dashboard/programs");

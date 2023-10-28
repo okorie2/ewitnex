@@ -39,7 +39,6 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
         const signInData: ISignInRes = response.data;
         localStorage.setItem('token', signInData.token);
         localStorage.setItem('user', JSON.stringify(signInData.user));
-
         return response.data.data;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {

@@ -2,7 +2,7 @@
 import React, { Ref } from "react";
 import Image from "next/image";
 import Button from "@mui/material/Button";
-import { TextField, MenuItem, Tooltip } from "@mui/material";
+import { TextField, MenuItem, Tooltip, SelectChangeEvent } from "@mui/material";
 
 interface IHostEventTextField {
   label?: string;
@@ -19,7 +19,8 @@ interface IHostEventTextField {
   height?: string;
   image?: string;
   options?: { value: string; label: string }[];
-  setValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setValue: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void | ((e:SelectChangeEvent) => void)
+  required?:boolean
 }
 const HostEventTextField = React.forwardRef(
   (props: IHostEventTextField, ref: Ref<HTMLInputElement>) => {
@@ -45,7 +46,11 @@ const HostEventTextField = React.forwardRef(
           <input
             type={props.type}
             placeholder={props.placeholder}
+            value={props.value}
+            name={props.name}
+            onChange={(e) => props.setValue(e)}
             ref={ref}
+            required = {props.required}
             css={{
               height: props.height ? props.height : "3.3rem",
               width: "100%",
@@ -74,6 +79,10 @@ const HostEventTextField = React.forwardRef(
               id="select"
               select
               defaultValue={props.placeholder}
+              value={props.value}
+              name={props.name}
+              required = {props.required}
+              onChange={props.setValue}
               sx={{
                 width: "100%",
                 appearance: "none",
@@ -126,6 +135,8 @@ const HostEventTextField = React.forwardRef(
             id={props.label ? props.label.split("").join("_") : ""}
             placeholder={props.placeholder}
             name={props.name}
+            value={props.value}
+            onChange={(e) => props.setValue(e)}
             disabled={props.disabled}
             css={{
               height: props.height ? props.height : "8.25rem",

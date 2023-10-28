@@ -1,24 +1,61 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import { ButtonFormFilled } from "styles/components/button";
 import Image from "next/image";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import SettingsTextField from "@/components/inputs/SettingsInput";
-import { Tooltip } from "@mui/material";
+import { SelectChangeEvent, Tooltip } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { nanoid } from "nanoid";
+import { ICreateEvent } from "types/event";
+import { IUserDetails } from "types/user";
+import { useRouter } from "next/router";
+import { createEvent } from "redux/event/thunkAction";
+import { TailSpin } from "react-loader-spinner";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
 
 const HostEvent = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [organizerInputOpen, setOrganizerInputOpen] = useState(false);
   const [data, setdata] = useState("");
   const [audienceState, setAudienceState] = useState("public");
+  const {createEventData} = useAppSelector(({event}) => event)
+  const [user,setUser] = useState<IUserDetails>()
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
   const [organizersArray, setOrganizersArray] = useState([
-    { user_id: nanoid(), user_name: "Blessed_one" },
+    { user_id: "", user_name: "" },
   ]);
 
+  const [formData, setFormData] = useState<ICreateEvent>({
+    eventTitle: "",
+    organizedBy: user?._id || "",
+    interests:"",
+    category:"",
+    isPublic: audienceState === 'public' ? true : false,
+    description:""
+  })
+
+
+  useEffect(() => {
+    setFormData({...formData,...createEventData, organizedBy: user?._id || ""})
+    setOrganizersArray([{user_id: user?._id || "", user_name: user?.username || "" }])
+  },[user, createEventData])
+
+  useEffect(() => {
+    setFormData({...formData, isPublic: audienceState === 'public' ? true : false,
+    })
+  },[audienceState])
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (data.length > 4) {
@@ -55,6 +92,24 @@ const HostEvent = () => {
     );
     setOrganizersArray(filtered);
   };
+  
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ event }) => event);
+  const router = useRouter()
+
+  const handleNext = (event:FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    localStorage.removeItem("error");
+    // if(createEventData) {
+    //   router.push("/dashboard/hostEvent/fileUpload")
+    // }else {
+      dispatch(createEvent(formData)).then((res) => {
+        if (res.meta.requestStatus == "fulfilled") {
+          router.push("/dashboard/hostEvent/fileUpload");
+        }
+      });
+    }
+  // }
 
   return (
     <HostEventLayout>
@@ -119,11 +174,15 @@ const HostEvent = () => {
               display: "none",
             },
           }}
+          onSubmit = {handleNext}
         >
           <HostEventTextField
             label="Event Title"
             placeholder="Name of event"
-            type="text"
+            type="text" 
+            name = "eventTitle"
+            value = {formData.eventTitle}
+            setValue={handleChange}          
           />
           <div css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <p
@@ -185,7 +244,7 @@ const HostEvent = () => {
                       display: "flex",
                       justifyContent: "center",
                     }}
-                    onClick={() => handleDeleteOrganizer(organizer.user_id)}
+                    onClick={() => handleDeleteOrganizer(organizer.user_id || "")}
                   >
                     <Image
                       src={"/assets/svgs/trash-red.svg"}
@@ -263,6 +322,8 @@ const HostEvent = () => {
               label="Event Type"
               placeholder="none"
               type="select"
+              name = "interests"
+              value = {formData.interests}
               image="/assets/svgs/info2.svg"
               tooltip="Select the type of event from this list. This helps ticket buyers find your event."
               options={[
@@ -277,12 +338,15 @@ const HostEvent = () => {
                 { value: "Religious", label: "Religion" },
                 { value: "Movie", label: "Movie" },
                 { value: "Theatre", label: "Theatre" },
-              ]}
-            />
+              ]}             
+              setValue={handleChange}          
+              />
             <HostEventTextField
               label="Category"
               placeholder="none"
               type="select"
+              name = "category"
+            value ={formData.category}
               image="/assets/svgs/info2.svg"
               tooltip="Select an event category from this list. This helps ticket buyers find your event."
               options={[
@@ -292,8 +356,9 @@ const HostEvent = () => {
                 { value: "Sports and Fitness", label: "Sports and Fitness" },
                 { value: "Conference", label: "Conference" },
                 { value: "Music", label: "Music" },
-              ]}
-            />
+              ]} 
+              setValue={handleChange}          
+                          />
           </div>
           <div
             css={{
@@ -407,7 +472,11 @@ const HostEvent = () => {
           <HostEventTextField
             label="About your event"
             placeholder="Description"
-            type="textarea"
+            type="textarea" 
+            name ="description"
+            value ={formData.description}
+            setValue={handleChange}  
+            color = "#000"   
           />
           <div
             css={{
@@ -435,9 +504,17 @@ const HostEvent = () => {
             >
               SAVE TO DRAFT
             </button>
-            <Link href="/dashboard/hostEvent/fileUpload">
-              <ButtonFormFilled>SAVE & CONTINUE</ButtonFormFilled>
-            </Link>
+            <ButtonFormFilled>{loading === "loading" ? (
+          <TailSpin
+            height={15}
+            width={15}
+            color="#FFF"
+            ariaLabel="loading"
+            radius={"2"}
+          />
+        ) : (
+          "SAVE AND CONTINUE"
+        )}</ButtonFormFilled>
           </div>
         </form>
       </div>

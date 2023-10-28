@@ -2,13 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
+import { IPerformer } from "types/event";
 
-interface IPerformer {
-  img: string;
-  name: string;
-  role: string;
-  title: string;
-}
+
 
 const Performer = (props: IPerformer) => {
   return (

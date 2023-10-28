@@ -6,7 +6,7 @@ import Link from "next/link";
 import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import Speaker from "@/components/cards/performer";
 import AddSpeakerForm from "fragments/hostEvent/addSpeakerForm";
 import AddSpeakerModal from "@/components/modals/hostEventModal/addSpeakerModal";
@@ -14,22 +14,38 @@ import AddSpeakerModal from "@/components/modals/hostEventModal/addSpeakerModal"
 const Speakers = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const newSpeakerRef = useRef<HTMLInputElement>(null);
-  const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false)
+  const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
+  const [willBePerformers, setWillBePerformers] = useState("Yes");
+  const [performers, setPerformers] = useState([])
 
   const handleNewSpeakerClick = () => {
-    if(isTablet) {
-      setAddSpeakerModalOpen(!addSpeakerModalOpen)
-    }else{
-      if (newSpeakerRef.current != null) {
-        newSpeakerRef.current.focus();
+    if (willBePerformers) {
+      if (isTablet) {
+        setAddSpeakerModalOpen(!addSpeakerModalOpen);
+      } else {
+        if (newSpeakerRef.current != null) {
+          newSpeakerRef.current.focus();
+        }
       }
     }
   };
 
-  
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent
+  ) => {
+    setWillBePerformers(e.target.value);
+    // const { name, value } = e.target;
+    // setFormData({ ...formData, [name]: value });
+  };
+
   return (
     <HostEventLayout>
-      <AddSpeakerModal isOpen={addSpeakerModalOpen} onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} />
+      <AddSpeakerModal
+        isOpen={addSpeakerModalOpen}
+        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)}
+      />
       <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
           css={{
@@ -111,7 +127,7 @@ const Speakers = () => {
             },
           }}
         >
-          <form
+          <div
             css={{
               padding: isTablet ? "0rem 1rem" : " 1.5rem 2.5rem",
               display: "grid",
@@ -140,14 +156,16 @@ const Speakers = () => {
                 { value: "Yes", label: "Yes" },
                 { value: "No", label: "No" },
               ]}
+              setValue={handleChange}
+              value={willBePerformers}
             />
-            {!isTablet && (
-             <AddSpeakerForm speakerRef={newSpeakerRef} />
+            {!isTablet && willBePerformers === "Yes" && (
+              <AddSpeakerForm speakerRef={newSpeakerRef}  />
             )}
-          </form>
+          </div>
           <div
             css={{
-              padding: isTablet ? "1rem":" 1.5rem 2.5rem",
+              padding: isTablet ? "1rem" : " 1.5rem 2.5rem",
               height: "100%",
               display: "grid",
               justifyContent: "space-between",
@@ -178,7 +196,13 @@ const Speakers = () => {
                 },
               }}
             >
-              <div css={{ display: "flex", gap: "1.5rem", flexWrap: isTablet ? "wrap":"nowrap" }}>
+              <div
+                css={{
+                  display: "flex",
+                  gap: "1.5rem",
+                  flexWrap: isTablet ? "wrap" : "nowrap",
+                }}
+              >
                 <div>
                   <Speaker
                     name="John Bosko"
@@ -186,7 +210,6 @@ const Speakers = () => {
                     role="Speaker"
                     img="/assets/pngs/speaker5.png"
                   />
-                  
                 </div>
                 <div>
                   <Speaker
@@ -195,7 +218,6 @@ const Speakers = () => {
                     role="Artiste"
                     img="/assets/pngs/speaker6.png"
                   />
-                  
                 </div>
               </div>
               <div>
@@ -214,7 +236,7 @@ const Speakers = () => {
                     marginBlock: "0.5rem",
                     background: "#fff",
                     borderRadius: "26px",
-                    width: isTablet ? "80%":"52%",
+                    width: isTablet ? "80%" : "52%",
                     cursor: "pointer",
                   }}
                   onClick={handleNewSpeakerClick}
@@ -225,7 +247,7 @@ const Speakers = () => {
             </div>
             <div
               css={{
-                width: isTablet ? "100%":"80%",
+                width: isTablet ? "100%" : "80%",
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "1rem",

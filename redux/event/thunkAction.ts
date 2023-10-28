@@ -1,0 +1,114 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { config } from "../../config/api";
+import { useAxios } from "utitlities/hooks/useAxios";
+import { ICreateEvent, ReqPerformer, ReqEventFiles, ReqEventLocation } from "types/event";
+
+export const createEvent = createAsyncThunk(
+  "event/createEvent",
+  async (data: ICreateEvent, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/create`,
+        method: "post",
+        data: data,
+      });
+
+      localStorage.setItem(
+        "currenteventID",
+        response.data.data._id
+      );
+      console.log(response.data.data);
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        localStorage.setItem("error", message.error);
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+export const fileUpload = createAsyncThunk(
+  "event/fileUpload",
+  async (data: ReqEventFiles, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventID}/update-cover-program`,
+        headers: {
+          'Content-Type': "multipart/form-data",
+        },
+        method: "post",
+        data: data.formData,
+      });
+
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        localStorage.setItem("error", message.error);
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+
+export const eventLocation = createAsyncThunk(
+  "event/eventLocation",
+  async (data: ReqEventLocation, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventID}/event-location`,
+        method: "post",
+        data: data.location,
+      });
+      console.log(response.data.data)
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        localStorage.setItem("error", message.error);
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+export const addPerformer = createAsyncThunk(
+  "event/addPerformer",
+  async (data: ReqPerformer, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventID}/event-performer`,
+        headers: {
+          'Content-Type': "multipart/form-data",
+        },
+        method: "post",
+        data: data.formData,
+      });
+
+      console.log("done")
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        localStorage.setItem("error", message.error);
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
