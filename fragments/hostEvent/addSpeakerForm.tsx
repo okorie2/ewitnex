@@ -13,7 +13,7 @@ import { TailSpin } from "react-loader-spinner";
 const AddSpeakerForm = ({
   speakerRef,
 }: {
-  speakerRef: RefObject<HTMLInputElement>;
+  speakerRef : RefObject<HTMLInputElement>;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [newSpeakerRef, setNewSpeakerRef] = useState(speakerRef);

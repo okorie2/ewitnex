@@ -9,7 +9,7 @@ import { Button } from "styles/components/button";
 import { CheckSelect } from "fragments/eventFilter";
 import { CssTextField } from "@/components/inputs/BasicTextField";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/material";
 
 interface IContactOrganizerModal {
@@ -46,7 +46,9 @@ const ContactOrganizerModal = (props: IContactOrganizerModal) => {
     reason: "",
     message: "",
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: 
+    | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    | SelectChangeEvent) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
@@ -232,6 +234,7 @@ const ContactOrganizerModal = (props: IContactOrganizerModal) => {
                   type={"select"}
                   placeholder={"Regarding your event"}
                   label="Reason"
+                  setValue = {handleChange}
                   value={data.reason}
                   options={[
                     {

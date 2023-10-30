@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box,  SelectChangeEvent, useMediaQuery } from "@mui/material";
 import { screen } from "styles/theme";
 import Image from "next/image";
-import { RefObject, useRef, useState } from "react";
+import {  ChangeEvent, RefObject, useRef, useState } from "react";
 
 const AddTicketForm = () => {
   const [ticketType, setTicketType] = useState("paid");
@@ -109,8 +109,10 @@ const AddTicketForm = () => {
         <HostEventTextField
           label=""
           placeholder="Name ticket e.g VIP"
-          type="text"
-        />
+          type="text" 
+          setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+            throw new Error("Function not implemented.");
+          } }        />
       </div>
       <div
         css={{
@@ -167,8 +169,9 @@ const AddTicketForm = () => {
       <HostEventTextField
         label=""
         placeholder="Enter ticket quantity"
-        type="text"
-      />
+        type="text" setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+          throw new Error("Function not implemented.");
+        } }      />
       <HostEventTextField
         label="Who want to handle the fee?"
         placeholder="pass"
@@ -176,8 +179,9 @@ const AddTicketForm = () => {
         options={[
           { value: "pass", label: "I want to pass the fees to the attendees" },
           { value: "absorb", label: "I want to absorb the fees" },
-        ]}
-      />
+        ]} setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+          throw new Error("Function not implemented.");
+        } }      />
       <div>
         <HostEventTextField
           label="Can attendees ask for a refund?"
@@ -186,8 +190,9 @@ const AddTicketForm = () => {
           options={[
             { value: "refundable", label: "Yes, ticket is refundable" },
             { value: "non-refundable", label: "No, ticket is non-refundable" },
-          ]}
-        />
+          ]} setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+            throw new Error("Function not implemented.");
+          } }        />
         <p css={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>
           A refund will lead to you getting your payment 3 to 5 working days to
           your wallet after your events have ended.

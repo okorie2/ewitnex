@@ -185,7 +185,6 @@ const Validation = (props: FormLevelProps) => {
 
   useEffect(() => {
     setValues(pin.join());
-    console.log(values);
   }, [pin]);
 
   useEffect(() => {
@@ -248,7 +247,7 @@ const Validation = (props: FormLevelProps) => {
               pin={pin}
               pinLength={PIN_LENGTH}
             />
-            <p>Didn't receive an Email? <b>Resend</b></p>
+            <p>Didnt receive an Email? <b>Resend</b></p>
           </div>
           <div>
             <ButtonFormFilled>

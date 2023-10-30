@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import { TextField } from "@mui/material";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 
@@ -41,7 +41,9 @@ const MessageAttendeesModal = (props: IMessageAttendeesModal) => {
     subject: "",
     message: "",
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = ( e:
+    | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    | SelectChangeEvent) => {
     const { name, value } = e.target;
     setMessageDetails({ ...messageDetails, [name]: value });
   };

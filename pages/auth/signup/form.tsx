@@ -891,16 +891,16 @@ const Interests = (props: FormLevelProps) => {
   const { loading } = useAppSelector(({ signUp }) => signUp);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [message, setMessage] = useState("");
-
+  const {setFormLevel} = props
   useEffect(() => {
     if (loading === "failed") {
       if (localStorage.getItem("error") && localStorage) {
         const error = localStorage.getItem("error") || "";
         if (error === "Email already exists") {
-          props.setFormLevel("password");
+          setFormLevel("password");
         }
         if (error === "Phone number is already in use by another user") {
-          props.setFormLevel("password");
+          setFormLevel("password");
         }
       }
     }

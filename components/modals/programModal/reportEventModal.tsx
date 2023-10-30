@@ -7,7 +7,7 @@ import Image from "next/image";
 import SettingsTextField from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/material";
 
 interface IReportEventModal {
@@ -51,7 +51,9 @@ const ReportEventModal = (props: IReportEventModal) => {
     reason: "",
     message: "",
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e:
+    | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    | SelectChangeEvent) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
@@ -260,6 +262,7 @@ const ReportEventModal = (props: IReportEventModal) => {
                   placeholder={"Regarding event"}
                   label="Reason"
                   value={data.reason}
+                  setValue = {handleChange}
                   options={[
                     {
                       label: "Regarding event",

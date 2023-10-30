@@ -54,7 +54,7 @@ const PinInputGrid: React.FC<PinInputGridProps> = ({pinLength, pin, onPinChanged
             <input
                 id="pin"
                 key={index}
-                autocomplete="off"
+                autoComplete="off"
                 css = {{
                     width:"35px",
                     height:"40px",

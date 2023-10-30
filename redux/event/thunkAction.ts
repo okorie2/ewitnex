@@ -98,7 +98,6 @@ export const addPerformer = createAsyncThunk(
         data: data.formData,
       });
 
-      console.log("done")
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

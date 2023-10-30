@@ -32,7 +32,7 @@ const Wallet = () => {
         };
       }
     }
-  }, [fundWalletModalOpen, withdrawalModalOpen]);
+  }, [fundWalletModalOpen, withdrawalModalOpen, isTablet, router]);
   return (
     <>
       <DashboardLayout>

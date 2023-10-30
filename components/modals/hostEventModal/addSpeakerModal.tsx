@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { RefObject, useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
@@ -16,6 +16,7 @@ import AddSpeakerForm from "fragments/hostEvent/addSpeakerForm";
 interface IAddSpeakerModal {
   isOpen: boolean;
   onRequestClose: () => void;
+  speakerRef : RefObject<HTMLInputElement>
 }
 
 const customStyles = {
@@ -143,7 +144,7 @@ const AddSpeakerModal = (props: IAddSpeakerModal) => {
 
               }}
             >
-              <AddSpeakerForm />
+              <AddSpeakerForm speakerRef={props.speakerRef} />
             </div>
       </div>
     </Modal>

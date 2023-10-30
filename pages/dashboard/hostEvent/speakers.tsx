@@ -44,7 +44,7 @@ const Speakers = () => {
     <HostEventLayout>
       <AddSpeakerModal
         isOpen={addSpeakerModalOpen}
-        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)}
+        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} speakerRef={newSpeakerRef}
       />
       <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
