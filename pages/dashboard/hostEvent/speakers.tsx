@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
@@ -10,13 +10,21 @@ import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import Speaker from "@/components/cards/performer";
 import AddSpeakerForm from "fragments/hostEvent/addSpeakerForm";
 import AddSpeakerModal from "@/components/modals/hostEventModal/addSpeakerModal";
+import { getEventById } from "redux/event/thunkAction";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
 
 const Speakers = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const newSpeakerRef = useRef<HTMLInputElement>(null);
   const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
   const [willBePerformers, setWillBePerformers] = useState("Yes");
-  const [performers, setPerformers] = useState([])
+  const [getPerformers, setGetPerformers] = useState(true)
+  const [performers , setPerformers] = useState({
+    nameOfPerformer: "",
+    performerTitle:"",
+    performerRole:"",
+    performerImage:""
+  })
 
   const handleNewSpeakerClick = () => {
     if (willBePerformers) {
@@ -30,14 +38,32 @@ const Speakers = () => {
     }
   };
 
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ getEvent }) => getEvent);
+  const [eventID,setEventID] = useState("")
+  useEffect(() => {
+      setEventID(localStorage.getItem("currenteventID") || "");
+  },[])
+
+  useEffect(() => {
+    const getPerformers = () => {
+      dispatch(getEventById(eventID)).then((res) => {
+        if (res.meta.requestStatus == "fulfilled") {
+          const data = JSON.parse(sessionStorage.getItem("performers") || "{}")
+          let performers = data?.data?.performer
+          setPerformers(performers)
+        }
+      });
+    }
+    getPerformers()
+  },[getPerformers])
+
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
       | SelectChangeEvent
   ) => {
     setWillBePerformers(e.target.value);
-    // const { name, value } = e.target;
-    // setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -45,6 +71,7 @@ const Speakers = () => {
       <AddSpeakerModal
         isOpen={addSpeakerModalOpen}
         onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} speakerRef={newSpeakerRef}
+        setGetPerformers = {setGetPerformers}
       />
       <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
@@ -160,7 +187,7 @@ const Speakers = () => {
               value={willBePerformers}
             />
             {!isTablet && willBePerformers === "Yes" && (
-              <AddSpeakerForm speakerRef={newSpeakerRef}  />
+              <AddSpeakerForm speakerRef={newSpeakerRef} setGetPerformers = {setGetPerformers} />
             )}
           </div>
           <div
@@ -203,6 +230,15 @@ const Speakers = () => {
                   flexWrap: isTablet ? "wrap" : "nowrap",
                 }}
               >
+               
+                <div>
+                  <Speaker
+                    name={performers.nameOfPerformer}
+                    title={performers.performerTitle}
+                    role={performers.performerRole}
+                    img={performers.performerImage}
+                  />
+                </div>
                 <div>
                   <Speaker
                     name="John Bosko"

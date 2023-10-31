@@ -68,7 +68,7 @@ const FileUpload = () => {
     // }else{
     dispatch(fileUpload({eventID, formData})).then((res) => {
       if (res.meta.requestStatus == "fulfilled") {
-        
+        router.push("/dashboard/hostEvent/eventLocation")
       }
     });
   };

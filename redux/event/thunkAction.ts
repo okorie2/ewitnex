@@ -111,3 +111,25 @@ export const addPerformer = createAsyncThunk(
     }
   }
 );
+
+export const getEventById = createAsyncThunk('event/gePerformerById', async (data: string, thunkAPI) => {
+  try {
+      const response = await useAxios({
+          url: `${config.API_BASE_URL}/events/details/${data}`,
+          method: 'get',
+      });
+
+      const performers = response.data;
+      sessionStorage.setItem("performers", JSON.stringify(performers))
+      console.log(performers)
+      return response.data.data
+  } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+          const message = error.response.data as { error: string };
+          console.log(message.error, "error message")
+          return thunkAPI.rejectWithValue(error.message);
+      } else {
+          return thunkAPI.rejectWithValue(String(error));
+      }
+  }
+});

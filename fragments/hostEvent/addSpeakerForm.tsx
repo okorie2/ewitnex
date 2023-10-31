@@ -12,8 +12,10 @@ import { TailSpin } from "react-loader-spinner";
 
 const AddSpeakerForm = ({
   speakerRef,
+  setGetPerformers,
 }: {
   speakerRef : RefObject<HTMLInputElement>;
+  setGetPerformers: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [newSpeakerRef, setNewSpeakerRef] = useState(speakerRef);
@@ -61,7 +63,6 @@ const AddSpeakerForm = ({
     event.preventDefault()
     dispatch(addPerformer({eventID, formData})).then((res) => {
       if (res.meta.requestStatus == "fulfilled") {
-        console.log("speaker added")
         setFormData({
           performer: {
           isPerformer: false,
@@ -72,6 +73,7 @@ const AddSpeakerForm = ({
         },
         performerImage: undefined
         })
+        setGetPerformers((prevState:boolean) => !prevState)
         if (newSpeakerRef.current != null) {
           newSpeakerRef.current.focus();
         }

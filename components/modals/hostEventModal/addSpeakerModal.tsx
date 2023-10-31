@@ -17,6 +17,7 @@ interface IAddSpeakerModal {
   isOpen: boolean;
   onRequestClose: () => void;
   speakerRef : RefObject<HTMLInputElement>
+  setGetPerformers : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const customStyles = {
@@ -144,7 +145,7 @@ const AddSpeakerModal = (props: IAddSpeakerModal) => {
 
               }}
             >
-              <AddSpeakerForm speakerRef={props.speakerRef} />
+              <AddSpeakerForm speakerRef={props.speakerRef} setGetPerformers = {props.setGetPerformers}/>
             </div>
       </div>
     </Modal>
