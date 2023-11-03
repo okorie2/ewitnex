@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { screen } from "styles/theme";
 import TicketTextField from "@/components/inputs/TicketTextField";
 import { ButtonFormFilled } from "styles/components/button";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import BasicTextField from "@/components/inputs/BasicTextField";
 
@@ -97,8 +97,9 @@ const EventTicketForm = ({setShowSummary}:{setShowSummary:() => void}) => {
               { value: "1", label: "1" },
               { value: "2", label: "2" },
               { value: "3", label: "3" },
-            ]}
-          />
+            ]} setValue={function (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+              throw new Error("Function not implemented.");
+            } }          />
         </div>
         <div>
           <p

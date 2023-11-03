@@ -4,6 +4,9 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SidebarItem } from "pages/dashboard/layout/layout";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { logout } from "redux/auth/thunkAction";
+import { useRouter } from "next/router";
 
 const ProfileMobileModal = ({
   shown,
@@ -13,6 +16,20 @@ const ProfileMobileModal = ({
   setClose: () => void;
 }) => {
   const [active, setActive] = useState("");
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ logout }) => logout);
+  const router = useRouter()
+  
+  const handleLogout = () => {
+    dispatch(logout("")).then((res) => {
+      if (res.meta.requestStatus === "fulfilled") {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        router.push("/");
+      }
+    });
+  };
+
   useEffect (() => {
     const html = document.querySelector('html')
     if (html) { 
@@ -83,8 +100,8 @@ const ProfileMobileModal = ({
               borderTop: `1px solid ${"#E4E4E4"}`,
             }}
           />
-          <Link
-            href="/dashboard"
+          <div
+            onClick = {handleLogout}
             css={{
               display: "flex",
               gap: "1.5rem",
@@ -102,7 +119,7 @@ const ProfileMobileModal = ({
               height={20}
             />
             <p>Log out</p>
-          </Link>
+          </div>
         </div>
       </>)}
     </>

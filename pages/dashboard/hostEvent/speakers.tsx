@@ -1,35 +1,78 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
 import Image from "next/image";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent, useMediaQuery } from "@mui/material";
 import Speaker from "@/components/cards/performer";
 import AddSpeakerForm from "fragments/hostEvent/addSpeakerForm";
 import AddSpeakerModal from "@/components/modals/hostEventModal/addSpeakerModal";
+import { getEventById } from "redux/event/thunkAction";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
 
 const Speakers = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const newSpeakerRef = useRef<HTMLInputElement>(null);
-  const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false)
+  const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
+  const [willBePerformers, setWillBePerformers] = useState("Yes");
+  const [getPerformers, setGetPerformers] = useState(true)
+  const [performers , setPerformers] = useState({
+    nameOfPerformer: "",
+    performerTitle:"",
+    performerRole:"",
+    performerImage:""
+  })
 
   const handleNewSpeakerClick = () => {
-    if(isTablet) {
-      setAddSpeakerModalOpen(!addSpeakerModalOpen)
-    }else{
-      if (newSpeakerRef.current != null) {
-        newSpeakerRef.current.focus();
+    if (willBePerformers) {
+      if (isTablet) {
+        setAddSpeakerModalOpen(!addSpeakerModalOpen);
+      } else {
+        if (newSpeakerRef.current != null) {
+          newSpeakerRef.current.focus();
+        }
       }
     }
   };
 
-  
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ getEvent }) => getEvent);
+  const [eventID,setEventID] = useState("")
+  useEffect(() => {
+      setEventID(localStorage.getItem("currenteventID") || "");
+  },[])
+
+  useEffect(() => {
+    const getPerformers = () => {
+      dispatch(getEventById(eventID)).then((res) => {
+        if (res.meta.requestStatus == "fulfilled") {
+          const data = JSON.parse(sessionStorage.getItem("performers") || "{}")
+          let performers = data?.data?.performer
+          setPerformers(performers)
+        }
+      });
+    }
+    getPerformers()
+  },[getPerformers])
+
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent
+  ) => {
+    setWillBePerformers(e.target.value);
+  };
+
   return (
     <HostEventLayout>
-      <AddSpeakerModal isOpen={addSpeakerModalOpen} onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} />
+      <AddSpeakerModal
+        isOpen={addSpeakerModalOpen}
+        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} speakerRef={newSpeakerRef}
+        setGetPerformers = {setGetPerformers}
+      />
       <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
           css={{
@@ -111,7 +154,7 @@ const Speakers = () => {
             },
           }}
         >
-          <form
+          <div
             css={{
               padding: isTablet ? "0rem 1rem" : " 1.5rem 2.5rem",
               display: "grid",
@@ -140,14 +183,16 @@ const Speakers = () => {
                 { value: "Yes", label: "Yes" },
                 { value: "No", label: "No" },
               ]}
+              setValue={handleChange}
+              value={willBePerformers}
             />
-            {!isTablet && (
-             <AddSpeakerForm speakerRef={newSpeakerRef} />
+            {!isTablet && willBePerformers === "Yes" && (
+              <AddSpeakerForm speakerRef={newSpeakerRef} setGetPerformers = {setGetPerformers} />
             )}
-          </form>
+          </div>
           <div
             css={{
-              padding: isTablet ? "1rem":" 1.5rem 2.5rem",
+              padding: isTablet ? "1rem" : " 1.5rem 2.5rem",
               height: "100%",
               display: "grid",
               justifyContent: "space-between",
@@ -178,7 +223,22 @@ const Speakers = () => {
                 },
               }}
             >
-              <div css={{ display: "flex", gap: "1.5rem", flexWrap: isTablet ? "wrap":"nowrap" }}>
+              <div
+                css={{
+                  display: "flex",
+                  gap: "1.5rem",
+                  flexWrap: isTablet ? "wrap" : "nowrap",
+                }}
+              >
+               
+                <div>
+                  <Speaker
+                    name={performers.nameOfPerformer}
+                    title={performers.performerTitle}
+                    role={performers.performerRole}
+                    img={performers.performerImage}
+                  />
+                </div>
                 <div>
                   <Speaker
                     name="John Bosko"
@@ -186,7 +246,6 @@ const Speakers = () => {
                     role="Speaker"
                     img="/assets/pngs/speaker5.png"
                   />
-                  
                 </div>
                 <div>
                   <Speaker
@@ -195,7 +254,6 @@ const Speakers = () => {
                     role="Artiste"
                     img="/assets/pngs/speaker6.png"
                   />
-                  
                 </div>
               </div>
               <div>
@@ -214,7 +272,7 @@ const Speakers = () => {
                     marginBlock: "0.5rem",
                     background: "#fff",
                     borderRadius: "26px",
-                    width: isTablet ? "80%":"52%",
+                    width: isTablet ? "80%" : "52%",
                     cursor: "pointer",
                   }}
                   onClick={handleNewSpeakerClick}
@@ -225,7 +283,7 @@ const Speakers = () => {
             </div>
             <div
               css={{
-                width: isTablet ? "100%":"80%",
+                width: isTablet ? "100%" : "80%",
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "1rem",

@@ -79,8 +79,8 @@ export default function BasicTextField({ label, name, ...rest }: Props) {
         type={rest.type ? rest.type : "text"}
         value={rest.value}
         name={name}
-        placeholder={labelDisplay ? "" : label}
         onChange={(e) => rest.setValue(e)}
+        placeholder={labelDisplay ? "" : label}
         id = {name}
         pattern={rest.pattern}
         required = {rest.required}

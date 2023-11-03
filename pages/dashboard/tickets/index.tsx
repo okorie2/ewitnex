@@ -66,7 +66,7 @@ const Tickets = () => {
         };
       }
     }
-  }, [ticketDetailsOpen]);
+  }, [ticketDetailsOpen, isTablet, router]);
   return (
     <>
       <ContactOrganizerModal

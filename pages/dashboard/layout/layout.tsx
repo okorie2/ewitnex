@@ -14,6 +14,8 @@ import Logo from "@/components/logo";
 import { useMediaQuery } from "@mui/material";
 import Notification from "fragments/notifications";
 import MobileLayout from "./mobile";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { logout } from "redux/auth/thunkAction";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -102,6 +104,21 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [feedsHovered, setFeedsHovered] = useState(false);
   const [notificationsHovered, setNotificationsHovered] = useState(false);
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ logout }) => logout);
+
+  const handleLogout = () => {
+    dispatch(logout("")).then((res) => {
+      console.log(res, "resss");
+
+      if (res.meta.requestStatus === "fulfilled") {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        router.push("/");
+      }
+    });
+  };
+
 
   return (
     <>
@@ -256,15 +273,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                             borderTop: `1px solid ${"#E4E4E4"}`,
                           }}
                         />
-                        <Link
-                          href="/dashboard"
+                        <div
+                          // href="/dashboard"
                           css={{
                             display: "flex",
                             gap: "0.5rem",
                             width: "60%",
                             marginInline: "auto",
                             paddingBlock: "1rem",
+                            cursor: "pointer",
                           }}
+                          onClick={handleLogout}
                         >
                           <Image
                             src="/assets/svgs/logout.svg"
@@ -273,7 +292,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                             height={20}
                           />
                           <p>Log out</p>
-                        </Link>
+                        </div>
                         <hr
                           css={{
                             border: "none",
@@ -324,7 +343,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               </div>
               <div
                 css={{
-                  minHeight: isTablet ?"":"100vh",
+                  minHeight: isTablet ? "" : "100vh",
                 }}
               >
                 {children}

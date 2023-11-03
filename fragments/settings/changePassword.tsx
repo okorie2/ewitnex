@@ -2,30 +2,91 @@
 
 import { SettingsPasswordTextField } from "@/components/inputs/SettingsInput";
 import SuccessModal from "@/components/modals/settingsModal/successModal";
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { Button } from "styles/components/button";
 import Link from "next/link";
 import Image from "next/image";
-import {useRouter} from 'next/router'
+import { useRouter } from "next/router";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { updatePassword } from "redux/settings/thunkAction";
+
+export type IUpdatePassword = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
 const ChangePassword = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [success, setSuccess] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [formDetails, setFormDetails] = useState({
-    password: "",
+  const [passwordValid, setPasswordValid] = useState(true);
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [message, setMessage] = useState("");
+  const [formDetails, setFormDetails] = useState<IUpdatePassword>({
+    oldPassword: "",
+    newPassword: "",
     confirmPassword: "",
   });
+  const { loading } = useAppSelector(({ updatePassword }) => updatePassword);
+  const dispatch = useAppThunkDispatch();
+  const validatePassword = (password: string) => {
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!.@#$%^&*_=+-]).{8,16}$/;
+    return passwordPattern.test(password);
+  };
+
+  const validatePasswordMatch = (str1: string, str2: string) => {
+    return str1 === str2;
+  };
+
+  useEffect(() => {
+    setPasswordMatch(
+      validatePasswordMatch(formDetails.newPassword, formDetails.confirmPassword)
+    );
+  }, [formDetails.confirmPassword]);
+
+  useEffect(() => {
+    if (formDetails.newPassword) {
+      setPasswordValid(validatePassword(formDetails.newPassword));
+    }
+  }, [formDetails.newPassword]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage("")
     const { name, value } = e.target;
     setFormDetails({ ...formDetails, [name]: value });
   };
-  const handleNext = () => {
-    setSuccess(true);
+
+  const handleNext = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    localStorage.removeItem("error");
+    setPasswordMatch(
+      validatePasswordMatch(formDetails.newPassword, formDetails.confirmPassword)
+    );
+    if (passwordValid && passwordMatch) {
+      dispatch(updatePassword(formDetails)).then((res) => {
+        if (res.meta.requestStatus === "fulfilled") {
+          setSuccess(true);
+          localStorage.removeItem('user')
+          localStorage.removeItem('token')
+        }
+      });
+    }
   };
+
+  useEffect(() => {
+    if (loading === "failed") {
+      if (localStorage.getItem("error") && localStorage) {
+        const error = localStorage.getItem("error") || "";
+        setMessage(error);
+      }
+    }
+  }, [loading]);
+
   useEffect(() => {
     if (isTablet) {
       const refuseBackButton = () => {
@@ -90,25 +151,30 @@ const ChangePassword = () => {
           },
         }}
       >
-        <div css={{ width: isTablet ? "100%":"60%" }}>
-          <form>
+        <div css={{ width: isTablet ? "100%" : "60%" }}>
+          <form onSubmit={handleNext}>
             <SettingsPasswordTextField
               label="Current Password"
               visible={passwordVisible}
               setVisible={setPasswordVisible}
               setValue={handleChange}
-              name="password"
-              value={formDetails.password}
+              name="oldPassword"
+              value={formDetails.oldPassword}
               placeholder="Enter current password"
+              error={message.includes("old") ? message : ""}
             />
             <SettingsPasswordTextField
               label="New Password"
               visible={confirmPasswordVisible}
               setVisible={setConfirmPasswordVisible}
               setValue={handleChange}
-              name="confirmPassword"
-              value={formDetails.confirmPassword}
+              name="newPassword"
+              value={formDetails.newPassword}
               placeholder="Enter New Password"
+              error = {
+                passwordValid
+                ? ""
+                : "Kindly ensure your password has at least one capital letter, small letter, numerical and special character. It must also be at least 8 letters long"}
             />
             <SettingsPasswordTextField
               label="Confirm New Password"
@@ -118,27 +184,28 @@ const ChangePassword = () => {
               name="confirmPassword"
               value={formDetails.confirmPassword}
               placeholder="Enter New Password"
+              error = {message.includes("match") ? "Passwords does not match": passwordMatch ? "" : "Passwords do not match!"}
             />
+            <div
+              css={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "2rem",
+              }}
+            >
+              <Button height="52px" width="100%">
+                <p
+                  css={{
+                    fontSize: "16px",
+                    fontFamily: '"Nunito", sans-serif',
+                    paddingInline: isTablet ? "2rem" : "6rem",
+                  }}
+                >
+                  CHANGE PASSWORD
+                </p>
+              </Button>
+            </div>
           </form>
-          <div
-            css={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "2rem",
-            }}
-          >
-            <Button onClick={handleNext} height="52px" width="100%">
-              <p
-                css={{
-                  fontSize: "16px",
-                  fontFamily: '"Nunito", sans-serif',
-                  paddingInline: isTablet ? "2rem":"6rem",
-                }}
-              >
-                CHANGE PASSWORD
-              </p>
-            </Button>
-          </div>
         </div>
       </div>
     </div>

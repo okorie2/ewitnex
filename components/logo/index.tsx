@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,9 +11,16 @@ interface ILogo {
 }
 
 const Logo = (props: ILogo) => {
+  const [loggedIn, setLoggedIn] = useState(false)
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token){
+      setLoggedIn(true)
+    }
+  },[])
   return (
     <div>
-      <Link href="/">
+      <Link href={loggedIn ? "/dashboard/programs":"/"}>
         <Image
           src={props.image}
           width={props.width ? props.width : 93}

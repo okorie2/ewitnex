@@ -9,6 +9,8 @@ import HostEventTextField from "@/components/inputs/hostEventTextField";
 import { Button } from "styles/components/button";
 import FollowersModal from "@/components/modals/profileMobileModal/followersMobileModal";
 import FollowersFragment from "fragments/profile/followersFragment";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { IUserDetails } from "types/user";
 
 const Profile = () => {
   const [editable, setEditable] = useState(false);
@@ -42,9 +44,18 @@ const Profile = () => {
     event.target.files = null;
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setBioData(event.currentTarget.value);
   };
+
+  const [user,setUser] = useState<IUserDetails>()
+  
+  useEffect(() => {
+   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
+
+  
+
   return (
     <DashboardLayout>
       <FollowersModal
@@ -184,14 +195,14 @@ const Profile = () => {
                     fontWeight: "bold",
                   }}
                 >
-                  Blessed Onoriode
+                  {`${user?.firstName} ${user?.lastName}`}
                 </p>
                 <div>
                   <p css={{ color: "#AEAEAE", fontWeight: "500" }}>
                     <span css={{ fontSize: isTablet ? "1.05rem" : "1.125rem" }}>
-                      Blessed_one
+                      {user?.username}
                     </span>{" "}
-                    - <span css={{ fontSize: "0.875rem" }}>Delta, Nigeria</span>
+                    - <span css={{ fontSize: "0.875rem" }}>{user?.city ? user.city.city : ""}</span>
                   </p>
                 </div>
               </div>

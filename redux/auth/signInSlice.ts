@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { signIn} from "./thunkAction";
 interface IState {
   loading: "failed" | "loading" | "successful" | "idle";
+  loggedIn:boolean
 }
 const initialState: IState = {
   loading: "idle",
+  loggedIn: false
 };
 const signInSlice = createSlice({
   name: "signin",
@@ -16,7 +18,7 @@ const signInSlice = createSlice({
     });
 
     builder.addCase(signIn.fulfilled, (state) => {
-      return { ...state, loading: "successful" };
+      return { ...state, loading: "successful", loggedIn:true };
       // Add user to the state array
     });
     builder.addCase(signIn.rejected, (state) => {

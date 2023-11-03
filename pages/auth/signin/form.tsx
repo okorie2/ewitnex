@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import { TailSpin } from "react-loader-spinner";
 import ErrorSnackBar from "@/components/snackbars/error";
 import SuccessSnackBar from "@/components/snackbars/success";
+import { NextResponse } from 'next/server';
+
 
 export type ISignInFormData = {
   identifier: string;
@@ -60,10 +62,6 @@ export default function Form() {
         localStorage.setItem('error', "")
       }
     }
-    if(loading === "successful"){
-      setMessage("SignIn successful")
-      setSuccessSnackBarOpen(true)
-    }
   },[loading])
   
   const handleSnackbarClose = (
@@ -80,6 +78,7 @@ export default function Form() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+    setMessage("")
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -88,9 +87,17 @@ export default function Form() {
       console.log(res, "resss");
 
       if (res.meta.requestStatus === "fulfilled") {
+        // const nextRes = NextResponse.next()
+        // nextRes.cookies.set({
+        //     name: 'loggedIn',
+        //     value: 'true',
+        //     httpOnly: true
+        // })
+        setMessage("SignIn successful")
+        setSuccessSnackBarOpen(true)
         router.push("/dashboard/programs");
       }
-    });
+    })
   };
 
   return (
@@ -127,7 +134,8 @@ export default function Form() {
               marginBottom: "3rem",
             }}
           >
-            <p
+            <Link
+              href = "/auth/forgotPassword"
               css={{
                 fontWeight: 700,
                 color: "#7C35AB",
@@ -135,7 +143,7 @@ export default function Form() {
               }}
             >
               Forgot Password?
-            </p>
+            </Link>
           </div>
           <div>
             <ButtonFormFilled>
@@ -148,7 +156,7 @@ export default function Form() {
                   radius={"2"}
                 />
               ) : (
-                "SIGN IN"
+                "LOG IN"
               )}
             </ButtonFormFilled>
           </div>

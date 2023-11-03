@@ -8,7 +8,7 @@ import SettingsTextField, {
 } from "@/components/inputs/SettingsInput";
 import { Button } from "styles/components/button";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { useMediaQuery } from "@mui/material";
+import { SelectChangeEvent,  useMediaQuery } from "@mui/material";
 import { CheckSelect } from "fragments/eventFilter";
 import Image from "next/image";
 import StyledCheckbox from "@/components/inputs/StyledCheckbox";
@@ -217,8 +217,9 @@ const AddBankModal = (props: IAddBankModal) => {
                   options={[
                     { value: "NG", label: "Nigeria" },
                     { value: "US", label: "United States of America" },
-                  ]}
-                />
+                  ]} setValue={function (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+                    throw new Error("Function not implemented.");
+                  } }                />
               </div>
               <div css={{ width: isTablet ? "100%":"95%", marginTop: "1rem" }}>
                 <HostEventTextField
@@ -228,8 +229,9 @@ const AddBankModal = (props: IAddBankModal) => {
                   options={[
                     { value: "NGN", label: "NGN" },
                     { value: "USD", label: "USD" },
-                  ]}
-                />
+                  ]} setValue={function (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+                    throw new Error("Function not implemented.");
+                  } }                />
               </div>
               <p
                 css={{
@@ -258,8 +260,9 @@ const AddBankModal = (props: IAddBankModal) => {
                     { value: "nil", label: "--" },
                     { value: "Access Bank", label: "Access Bank" },
                     { value: "UBA", label: "UBA" },
-                  ]}
-                />
+                  ]} setValue={function (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
+                    throw new Error("Function not implemented.");
+                  } }                />
                 <SettingsTextField
                   label={"Account Number"}
                   name="subject"

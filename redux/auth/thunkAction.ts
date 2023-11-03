@@ -16,7 +16,6 @@ export const signUp = createAsyncThunk('auth/signup', async (data: IFormData, th
 
         const signUpData: ISignUpRes = response.data;
         localStorage.setItem('user', JSON.stringify(signUpData.data.user));
-
         return response.data.data;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -37,11 +36,9 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
             method: 'post',
             data: data,
         });
-
         const signInData: ISignInRes = response.data;
         localStorage.setItem('token', signInData.token);
         localStorage.setItem('user', JSON.stringify(signInData.user));
-
         return response.data.data;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -54,3 +51,24 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
         }
     }
 });
+
+export const logout = createAsyncThunk('auth/logout', async (data:string, thunkAPI) => {
+    try{
+        const response = await useAxios({
+            url: `${config.API_BASE_URL}/users/logout`,
+            method: 'get',
+        });
+
+        return response.data.message;
+
+    }catch(error){
+        if (axios.isAxiosError(error) && error.response) {
+            console.log(error.response);
+            const message = error.response.data as {error:string};
+            console.log('error', message.error)
+            return thunkAPI.rejectWithValue(error.message);
+        } else {
+            return thunkAPI.rejectWithValue(String(error));
+        }
+    }
+})

@@ -19,7 +19,7 @@ const SuccessSnackBar = ({open, message, handleClose}:{
   
   return (
     <>
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} anchorOrigin ={{vertical:"top", horizontal:"right"}}>
+      <Snackbar open={open} autoHideDuration={1000} onClose={handleClose} anchorOrigin ={{vertical:"top", horizontal:"right"}}>
         <Alert onClose={handleClose}  sx={{ width: "100%" }}>
           {message}
         </Alert>

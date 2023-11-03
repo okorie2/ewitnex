@@ -10,7 +10,7 @@ import { useMediaQuery } from "@mui/material";
 
 const GenderModal = ({ closeModal, setSuccess }: { closeModal: () => void, setSuccess: () => void }) => {
   const [selectedType, setSelectedType] = useState<
-    "Male" | "Female" | "Preferred not to say"
+    "Male" | "Female" | "Preferred Not To Say"
   >();
 
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -68,7 +68,7 @@ const GenderModal = ({ closeModal, setSuccess }: { closeModal: () => void, setSu
 
         <GenderType
           selectedType={selectedType}
-          gender="Preferred not to say"
+          gender="Preferred Not To Say"
           setSelectedType={setSelectedType}
         />
         <div
