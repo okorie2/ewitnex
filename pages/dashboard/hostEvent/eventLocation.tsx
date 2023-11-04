@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect, FormEvent } from "react";
+import React, { useState, useEffect, FormEvent, useRef } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
@@ -15,12 +15,14 @@ import { useRouter } from "next/router";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { eventLocation } from "redux/event/thunkAction";
 import { IEventLocation } from "types/event";
+import { TailSpin } from "react-loader-spinner";
 
 const EventLocation = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [locationType, setLocationType] = useState("live");
   const [undecided, setUndecided] = useState(false);
   const [endUndecided, setEndUndecided] = useState(false);
+  const [isManualInputFocused, setIsManualInputFocused] = useState(false);
   useEffect(() => {
     setEndUndecided(undecided);
   }, [undecided]);
@@ -36,7 +38,6 @@ const EventLocation = () => {
 
   const [manualLocation, setManualLocation] = useState(false);
 
-  console.log(formData);
   const [liveLocation, setLiveLocation] = useState({
     searchLocation: "",
     enterLocation: "",
@@ -68,6 +69,41 @@ const EventLocation = () => {
     });
   }, [locationType, _startDate, _endDate]);
 
+  const [eventLocationData, setEventLocationData] = useState<IEventLocation>();
+  useEffect(() => {
+    setEventLocationData(
+      JSON.parse(localStorage.getItem("eventLocationData") || "{}")
+    );
+  }, []);
+
+  useEffect(() => {
+    console.log(eventLocationData);
+    setFormData({
+      ...formData,
+      type: eventLocationData?.type || formData.type,
+      startDate: eventLocationData?.startDate || formData.startDate,
+      endDate: eventLocationData?.endDate || formData.endDate,
+    });
+    if (eventLocationData && eventLocationData?.startDate === "") {
+      setUndecided(true);
+    }
+    if (eventLocationData && eventLocationData?.endDate === "") {
+      setEndUndecided(true);
+    }
+    setLiveLocation({
+      ...liveLocation,
+      searchLocation:
+        eventLocationData?.searchLocation || liveLocation.searchLocation,
+      enterLocation:
+        eventLocationData?.enterLocation || liveLocation.enterLocation,
+    });
+    setOnlineLocation({
+      ...onlineLocation,
+      selectHost: eventLocationData?.selectHost || onlineLocation.selectHost,
+      hostUrl: eventLocationData?.hostUrl || onlineLocation.hostUrl,
+    });
+  }, [eventLocationData]);
+
   const handleLiveLocationChange = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -85,9 +121,22 @@ const EventLocation = () => {
     setOnlineLocation({ ...onlineLocation, [name]: value });
   };
 
+  useEffect(() => {
+    setFormData({ ...formData, ...liveLocation, ...onlineLocation });
+  }, [liveLocation, onlineLocation]);
+
+  useEffect(() => {
+    if (undecided) {
+      setFormData({ ...formData, endDate: "", startDate: "" });
+    }
+    if (endUndecided) {
+      setFormData({ ...formData, endDate: "" });
+    }
+  }, [endUndecided, undecided]);
+
   const router = useRouter();
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ event }) => event);
+  const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
   const [eventID, setEventID] = useState("");
   useEffect(() => {
     setEventID(localStorage.getItem("currenteventID") || "");
@@ -95,27 +144,13 @@ const EventLocation = () => {
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (formData.type === "live") {
-      setFormData({ ...formData, ...liveLocation });
-    } else {
-      setFormData({ ...formData, ...onlineLocation });
-    }
-    if (endUndecided) {
-      setFormData({ ...formData, endDate: "" });
-    }
-    if (undecided) {
-      setFormData({ ...formData, startDate: "", endDate: "" });
-    }
-    
+    localStorage.setItem("eventLocationData", JSON.stringify(formData));
     const location = {
-      location : formData
-    }
-
-    console.log("finalform", location);
+      location: formData,
+    };
 
     dispatch(eventLocation({ eventID, location })).then((res) => {
       if (res.meta.requestStatus == "fulfilled") {
-        console.log("done");
         router.push("/dashboard/hostEvent/speakers");
       }
     });
@@ -361,41 +396,32 @@ const EventLocation = () => {
                       alt="logo"
                     />
                   </div>
-                  {manualLocation ? (
-                    <input
-                      placeholder="Enter the address or venue"
-                      type={"text"}
-                      name="enterLocation"
-                      value={liveLocation.enterLocation}
-                      onChange={handleLiveLocationChange}
-                      css={{
-                        height: "3.2rem",
-                        width: "100%",
-                        padding: "1rem",
-                        borderRadius: "10px",
-                        border: "none",
-                        fontSize: "14px",
-                        fontFamily: "'Poppins', sans-serif",
-                      }}
-                    />
-                  ) : (
-                    <input
-                      placeholder="Search for the address or venue"
-                      type={"text"}
-                      name="searchLocation"
-                      value={liveLocation.searchLocation}
-                      onChange={handleLiveLocationChange}
-                      css={{
-                        height: "3.2rem",
-                        width: "100%",
-                        padding: "1rem",
-                        borderRadius: "10px",
-                        border: "none",
-                        fontSize: "14px",
-                        fontFamily: "'Poppins', sans-serif",
-                      }}
-                    />
-                  )}
+                  <input
+                    placeholder={
+                      manualLocation
+                        ? "Enter the address or venue"
+                        : "Search for the address or venue"
+                    }
+                    type={"text"}
+                    name={manualLocation ? "enterLocation" : "searchLocation"}
+                    value={
+                      manualLocation
+                        ? liveLocation.enterLocation
+                        : liveLocation.searchLocation
+                    }
+                    onFocus={() => setIsManualInputFocused(true)}
+                    // onBlur = {() => }
+                    onChange={handleLiveLocationChange}
+                    css={{
+                      height: "3.2rem",
+                      width: "100%",
+                      padding: "1rem",
+                      borderRadius: "10px",
+                      border: "none",
+                      fontSize: "14px",
+                      fontFamily: "'Poppins', sans-serif",
+                    }}
+                  />
                 </div>
                 <div
                   css={{ display: "flex", gap: "1rem", alignItems: "center" }}
@@ -410,7 +436,7 @@ const EventLocation = () => {
                   >
                     or
                   </p>
-                  <button
+                  <div
                     css={{
                       fontSize: "0.875rem",
                       fontWeight: "bold",
@@ -420,54 +446,64 @@ const EventLocation = () => {
                       height: "38px",
                       marginBottom: "0.5rem",
                       background: "#fff",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
                     }}
                     onClick={() => setManualLocation(!manualLocation)}
                   >
                     {manualLocation
                       ? "Search Location"
                       : "Enter location manually"}
-                  </button>
+                  </div>
                 </div>
               </div>
-              {cities && liveLocation.searchLocation.length > 0 && (
-                <div
-                  css={{
-                    height: "fit-content",
-                    maxHeight: "8rem",
-                    width: "100%",
-                    border: "1px solid #AEAEAE",
-                    paddingInline: "0",
-                    paddingBlock: "0.2rem",
-                    overflowY: "auto",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  {cities.map((city, idx) => (
-                    <p
-                      key={idx}
-                      css={{
-                        fontFamily: "'Nunito', sans-serif",
-                        padding: "0.5rem",
-                        paddingLeft: "0.5rem",
-                        fontSize: "1rem",
-                        cursor: "pointer",
-                        ":hover": {
-                          background: "#7c35ab",
-                          color: "#FFF",
-                        },
-                      }}
-                      onClick={() =>
-                        setLiveLocation({
-                          ...liveLocation,
-                          searchLocation: city?.matching_full_name,
-                        })
-                      }
-                    >
-                      {city?.matching_full_name}
-                    </p>
-                  ))}
-                </div>
-              )}
+              {cities?.length !== undefined &&
+                cities?.length > 0 &&
+                liveLocation.searchLocation.length > 0 &&
+                isManualInputFocused &&
+                !manualLocation && (
+                  <div
+                    css={{
+                      height: "fit-content",
+                      maxHeight: "8rem",
+                      width: "100%",
+                      border: "1px solid #AEAEAE",
+                      paddingInline: "0",
+                      paddingBlock: "0.2rem",
+                      overflowY: "auto",
+                      marginBottom: "2rem",
+                    }}
+                  >
+                    {cities.map((city, idx) => (
+                      <p
+                        key={idx}
+                        css={{
+                          fontFamily: "'Nunito', sans-serif",
+                          padding: "0.5rem",
+                          paddingLeft: "0.5rem",
+                          fontSize: "1rem",
+                          cursor: "pointer",
+                          ":hover": {
+                            background: "#7c35ab",
+                            color: "#FFF",
+                          },
+                        }}
+                        onClick={() => {
+                          console.log("set");
+                          setIsManualInputFocused(false);
+                          setLiveLocation({
+                            ...liveLocation,
+                            searchLocation: city?.matching_full_name,
+                          });
+                        }}
+                      >
+                        {city?.matching_full_name}
+                      </p>
+                    ))}
+                  </div>
+                )}
             </>
           )}
           <div
@@ -581,9 +617,22 @@ const EventLocation = () => {
                 borderRadius: "26px",
                 width: "100%",
                 cursor: "pointer",
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center"
               }}
             >
-              SAVE & CONTINUE
+              {loading === "loading" ? (
+                <TailSpin
+                  height={15}
+                  width={15}
+                  color="#FFF"
+                  ariaLabel="loading"
+                  radius={"2"}
+                />
+              ) : (
+                "SAVE AND CONTINUE"
+              )}
             </button>
           </div>
         </form>

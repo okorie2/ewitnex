@@ -19,7 +19,7 @@ const CompletedEvents = () => {
         },
       }}
     >
-      <ManageEventCard
+      {/* <ManageEventCard
         image="/assets/pngs/devFestAba.png"
         title="DevFest Aba"
         date="Sat, Nov. 25, 2022"
@@ -27,7 +27,7 @@ const CompletedEvents = () => {
         type="Conference"
         attendees="0/500"
         id="tec542445"
-      />
+      /> */}
     </div>
   );
 };

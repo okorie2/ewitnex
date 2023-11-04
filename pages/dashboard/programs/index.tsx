@@ -194,7 +194,7 @@ const DashboardPrograms = () => {
                     padding: "1rem 0.2rem 1rem 0",
                   }}
                 >
-                  <FeedsCard
+                  {/* <FeedsCard
                     label="Concert"
                     attendees="609"
                     date="3 DEC. 2022, 10:00 AM"
@@ -204,18 +204,8 @@ const DashboardPrograms = () => {
                     priceRange="$500-$2K"
                     title="Medical Crusade with Doctor West"
                     img="/assets/pngs/card_2.png"
-                  />
-                  <FeedsCard
-                    label="Music"
-                    attendees="609"
-                    id="Tec542445"
-                    date="25 NOV. 2021, 10:00 AM"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Connack Foundarion"
-                    priceRange="$500-$2K"
-                    title="Connack Foundation African Music Award Of The Year"
-                    img="/assets/pngs/card_img.png"
-                  />
+                  /> */}
+                  
                 </div>
               </div>
             </div>
@@ -241,7 +231,7 @@ const DashboardPrograms = () => {
           >
             {!isTablet ? (
               <>
-                <div>
+                {/* <div>
                   <DashboardEventCard
                     label="Concert"
                     attendees="609"
@@ -253,115 +243,12 @@ const DashboardPrograms = () => {
                     title="Medical Crusade with Doctor West"
                     img="/assets/pngs/card_2.png"
                   />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    attendees="609"
-                    date="25 NOV. 2021, 10:00 AM"
-                    img="/assets/pngs/card_3.png"
-                    label="Wedding"
-                    location="The Dom, 22 Faulks Road, Aba, Abia"
-                    organizer="Ada and Obi"
-                    priceRange="Free"
-                    title="Ada weds Obi"
-                    id="Wed54254"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Concert"
-                    attendees="609"
-                    date="3 DEC. 2022, 10:00 AM"
-                    id="Heal12548"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Eko Atlantic"
-                    priceRange="$500-$2K"
-                    title="Medical Crusade with Doctor West"
-                    img="/assets/pngs/card_2.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    attendees="609"
-                    date="25 NOV. 2021, 10:00 AM"
-                    img="/assets/pngs/card_3.png"
-                    label="Wedding"
-                    location="The Dom, 22 Faulks Road, Aba, Abia"
-                    organizer="Ada and Obi"
-                    priceRange="Free"
-                    title="Ada weds Obi"
-                    id="Wed54254"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Concert"
-                    attendees="609"
-                    date="3 DEC. 2022, 10:00 AM"
-                    id="Heal12548"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Eko Atlantic"
-                    priceRange="$500-$2K"
-                    title="Medical Crusade with Doctor West"
-                    img="/assets/pngs/card_2.png"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    attendees="609"
-                    date="25 NOV. 2021, 10:00 AM"
-                    img="/assets/pngs/card_3.png"
-                    label="Wedding"
-                    location="The Dom, 22 Faulks Road, Aba, Abia"
-                    organizer="Ada and Obi"
-                    priceRange="Free"
-                    title="Ada weds Obi"
-                    id="Wed54254"
-                  />
-                </div>
-                <div>
-                  <DashboardEventCard
-                    label="Tech"
-                    attendees="609"
-                    id="Tec542445"
-                    date="3 DEC. 2022, 10:00 AM"
-                    location="IG Hub, 22 Faulks Road, Aba, Abia"
-                    organizer="GDG Aba"
-                    priceRange="$500-$2K"
-                    title="Google Developers Festival Aba"
-                    img="/assets/pngs/card_4.png"
-                  />
-                </div>
+                </div> */}
+                
               </>
             ) : (
               <>
-                <div>
+                {/* <div>
                   <FeedsCard
                     label="Music"
                     attendees="609"
@@ -373,46 +260,8 @@ const DashboardPrograms = () => {
                     title="Connack Foundation African Music Award Of The Year"
                     img="/assets/pngs/card_img.png"
                   />
-                </div>
-                <div>
-                  <FeedsCard
-                    label="Concert"
-                    attendees="609"
-                    date="3 DEC. 2022, 10:00 AM"
-                    id="Heal12548"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Eko Atlantic"
-                    priceRange="$500-$2K"
-                    title="Medical Crusade with Doctor West"
-                    img="/assets/pngs/card_2.png"
-                  />
-                </div>
-                <div>
-                  <FeedsCard
-                    label="Music"
-                    attendees="609"
-                    id="Tec542445"
-                    date="25 NOV. 2021, 10:00 AM"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Connack Foundarion"
-                    priceRange="$500-$2K"
-                    title="Connack Foundation African Music Award Of The Year"
-                    img="/assets/pngs/card_img.png"
-                  />
-                </div>
-                <div>
-                  <FeedsCard
-                    label="Concert"
-                    attendees="609"
-                    date="3 DEC. 2022, 10:00 AM"
-                    id="Heal12548"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Eko Atlantic"
-                    priceRange="$500-$2K"
-                    title="Medical Crusade with Doctor West"
-                    img="/assets/pngs/card_2.png"
-                  />
-                </div>
+                </div> */}
+                
                 <Box height={48}/>
               </>
             )}

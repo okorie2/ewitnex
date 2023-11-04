@@ -20,7 +20,7 @@ const ProfileFollowing = () => {
         paddingBottom:isTablet ? "5rem" : ""
       }}
     >
-      <ProfileCard
+      {/* <ProfileCard
         image="/assets/pngs/followers11.png"
         name="Mark Franlyn"
         userName="markintoch"
@@ -31,55 +31,8 @@ const ProfileFollowing = () => {
         name="Mark Franlyn"
         userName="markintoch"
         status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
-      <ProfileCard
-        image="/assets/pngs/followers11.png"
-        name="Mark Franlyn"
-        userName="markintoch"
-        status="Following"
-      />
+      /> */}
+      
     </div>
   );
 };

@@ -23,10 +23,10 @@ export const chipData = [
   { name: "anniversaries", selected: false },
   { name: "business", selected: false },
   { name: "vacations", selected: false },
-  { name: "sports", selected: false },
-  { name: "religiion", selected: false },
-  { name: "concert", selected: false },
-  { name: "symposiums", selected: false },
+  { name: "sport", selected: false },
+  { name: "christainity", selected: false },
+  { name: "Sports and Fitness", selected: false },
+  { name: "Conferenece", selected: false },
 ];
 
 export default function Chip(props: Props) {

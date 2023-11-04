@@ -44,7 +44,9 @@ const Tickets = () => {
 
   const handleActiveCardID = (id: string) => {
     setActiveCardID(id);
-    setTicketDetailsOpen(!ticketDetailsOpen);
+    if(isTablet){
+      setTicketDetailsOpen(!ticketDetailsOpen);
+    }
   };
   console.log(activeCardID);
   const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
@@ -224,7 +226,9 @@ const Tickets = () => {
                   color: "#000",
                 }}
               >
-                <h2>DevFest Aba</h2>
+                <h2>
+                  {/* DevFest Aba */}
+                  </h2>
                 <div
                   css={{ cursor: "pointer", position: "relative" }}
                   onClick={handleMenuOpen}
@@ -370,7 +374,7 @@ const UpcomingTicketTab = ({
   const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <div css={{ paddingBottom: isTablet ? "5rem" : "" }}>
-      <TicketCard
+      {/* <TicketCard
         image="/assets/pngs/devFestAba.png"
         title="DevFest Aba"
         time=" 10:00 AM"
@@ -382,49 +386,9 @@ const UpcomingTicketTab = ({
         id="Tec542445"
         active={activeCardID}
         onClick={setAsActiveCardID}
-      />
+      /> */}
       <br />
-      <TicketCard
-        image="/assets/pngs/fionaGabe.png"
-        title="DevFest Abuja"
-        time=" 10:00 AM"
-        day="Sat"
-        date="25"
-        month="NOV"
-        type="Conference"
-        address="Sheraton Hotel, Phase 1, Wuse, Abuja"
-        id="Tec542446"
-        active={activeCardID}
-        onClick={setAsActiveCardID}
-      />
-      <br />
-      <TicketCard
-        image="/assets/pngs/devFestAba.png"
-        title="DevFest Aba"
-        time=" 10:00 AM"
-        day="Sat"
-        date="25"
-        month="NOV"
-        type="Tech"
-        address="Holkins Hotel, 22 Faulks Road, Aba, Abia"
-        id="Tec542445"
-        active={activeCardID}
-        onClick={setAsActiveCardID}
-      />
-      <br />
-      <TicketCard
-        image="/assets/pngs/fionaGabe.png"
-        title="DevFest Abuja"
-        time=" 10:00 AM"
-        day="Sat"
-        date="25"
-        month="NOV"
-        type="Conference"
-        address="Sheraton Hotel, Phase 1, Wuse, Abuja"
-        id="Tec542446"
-        active={activeCardID}
-        onClick={setAsActiveCardID}
-      />
+      
     </div>
   );
 };
@@ -438,7 +402,7 @@ const PreviousTicketTab = ({
 }) => {
   return (
     <div>
-      <TicketCard
+      {/* <TicketCard
         image="/assets/pngs/devFestAba.png"
         title="DevFest Aba"
         time=" 10:00 AM"
@@ -450,7 +414,7 @@ const PreviousTicketTab = ({
         id="Tec542445"
         active={activeCardID}
         onClick={setAsActiveCardID}
-      />
+      /> */}
     </div>
   );
 };

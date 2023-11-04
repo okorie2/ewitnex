@@ -16,7 +16,7 @@ const CancelledEvents = () => {
         display: "none",
       },}}>
         
-        <ManageEventCard
+        {/* <ManageEventCard
           image="/assets/pngs/gdg.png"
           title="DevFest Abuja"
           date="Sat, Nov. 25, 2022"
@@ -24,7 +24,7 @@ const CancelledEvents = () => {
           type="Conference"
           attendees="0/500"
           id="tec542445"
-        />
+        /> */}
       </div>
     );
   };

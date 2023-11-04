@@ -23,7 +23,7 @@ const TicketDetailsFragment = ({
         },
       }}
     >
-      <Ticket
+      {/* <Ticket
         qrcode="/assets/svgs/qrcode.svg"
         name="Blessed Omoriode"
         ticketType="VIP"
@@ -38,23 +38,8 @@ const TicketDetailsFragment = ({
         eventID={selectedEvent}
         refundable={true}
         ticketNumber={1}
-      />
-      <Ticket
-        qrcode="/assets/svgs/qrcode.svg"
-        name="Blessed Omoriode"
-        ticketType="VIP"
-        price="5,500"
-        event="DevFest Aba"
-        date="Sat. 25 Nov, 2023"
-        startTime="10:00AM"
-        endTime="2:30PM"
-        location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-        ticketId="#000123456"
-        eventHost="MiLab"
-        eventID={selectedEvent}
-        refundable={true}
-        ticketNumber={2}
-      />
+      /> */}
+      
     </div>
   );
 };

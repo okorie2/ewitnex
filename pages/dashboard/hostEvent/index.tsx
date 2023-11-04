@@ -21,7 +21,7 @@ const HostEvent = () => {
   const [organizerInputOpen, setOrganizerInputOpen] = useState(false);
   const [data, setdata] = useState("");
   const [audienceState, setAudienceState] = useState("public");
-  const {createEventData} = useAppSelector(({event}) => event)
+  const {createEventData} = useAppSelector(({hostEvent}) => hostEvent)
   const [user,setUser] = useState<IUserDetails>()
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "{}"));
@@ -94,7 +94,7 @@ const HostEvent = () => {
   };
   
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ event }) => event);
+  const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
   const router = useRouter()
 
   const handleNext = (event:FormEvent<HTMLFormElement>) => {
@@ -105,6 +105,7 @@ const HostEvent = () => {
     // }else {
       dispatch(createEvent(formData)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
+          localStorage.setItem("createEventData",JSON.stringify(formData))
           router.push("/dashboard/hostEvent/fileUpload");
         }
       });

@@ -15,9 +15,10 @@ import { TailSpin } from "react-loader-spinner";
 
 const FileUpload = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
-  const { createEventData, fileUploadData } = useAppSelector(
-    ({ event }) => event
+  const { fileUploadData } = useAppSelector(
+    ({ hostEvent }) => hostEvent
   );
+  console.log(fileUploadData)
   const addPDFRef = useRef<HTMLInputElement>(null);
   const addCoverImageRef = useRef<HTMLInputElement>(null);
 
@@ -25,6 +26,10 @@ const FileUpload = () => {
     coverImage: undefined,
     filePDF: undefined,
   });
+
+  useEffect(() => {
+    setFormData({...formData, ...fileUploadData})
+  },[fileUploadData])
 
   const handleAddPDFClick = () => {
     if (addPDFRef.current != null) {
@@ -56,7 +61,7 @@ const FileUpload = () => {
 
   const router = useRouter();
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ event }) => event);
+  const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
   const [eventID,setEventID] = useState("")
   useEffect(() => {
       setEventID(localStorage.getItem("currenteventID") || "");

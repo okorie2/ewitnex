@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useRouter } from "next/router";
 
 export const useAxios = async (
   request: AxiosRequestConfig

@@ -223,7 +223,7 @@ const Profile = () => {
                         display: "flex",
                         alignItems: "center",
                         gap: "0.5rem",
-                        width: "8rem",
+                        width: "9rem",
                       }}
                       onMouseEnter={() => setSaveHoverState(true)}
                       onMouseLeave={() => setSaveHoverState(false)}

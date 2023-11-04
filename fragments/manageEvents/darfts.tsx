@@ -17,7 +17,7 @@ const Drafts = () => {
         display: "none",
       }, }}>
         
-        <ManageEventCard
+        {/* <ManageEventCard
           image="/assets/pngs/fionaGabe.png"
           title="FIona & Gabe"
           date="Sat, Nov. 25, 2022"
@@ -25,7 +25,7 @@ const Drafts = () => {
           type="Wedding"
           attendees="0/500"
           id="Wed542445"
-        />
+        /> */}
         
       </div>
     );

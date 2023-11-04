@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import SettingsTextField from "@/components/inputs/SettingsInput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "styles/components/button";
 import Image from "next/image";
 import { useMediaQuery } from "@mui/material";
+import { IUserDetails } from "types/user";
 
 const UserNameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSuccess: () => void}) => {
   const [userName, setUserName] = useState("");
@@ -15,7 +16,10 @@ const UserNameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSucces
     setSuccess()
   };
   const isTablet = useMediaQuery("(max-width: 780px)");
-
+  const [user,setUser] = useState<IUserDetails>()
+  useEffect(() => {
+   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
   return (
     <div css={{ width: "100%", padding: isTablet ? "":"1rem" }}>
       <div css = {{
@@ -51,7 +55,7 @@ const UserNameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSucces
           label={"Username"}
           name="userName"
           value={userName}
-          placeholder={"Blessed_one"}
+          placeholder={user?.username || ""}
           setValue={handleChange}
           withIcon={true}
           iconComponent={

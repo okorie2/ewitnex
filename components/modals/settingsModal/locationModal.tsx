@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import SettingsTextField from "@/components/inputs/SettingsInput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useMediaQuery } from "@mui/material";
 import { Button } from "styles/components/button";
+import { IUserDetails } from "types/user";
 
 const LocationModal = ({ closeModal, setSuccess }: { closeModal: () => void, setSuccess: () => void }) => {
   const [location, setLocation] = useState("");
@@ -15,6 +16,11 @@ const LocationModal = ({ closeModal, setSuccess }: { closeModal: () => void, set
   const handleNext = () => {
     setSuccess()
   };
+
+  const [user,setUser] = useState<IUserDetails>()
+  useEffect(() => {
+   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
   return (
     <div css={{ width: "100%", padding: isTablet ? "" : "1rem" }}>
       <div
@@ -54,7 +60,7 @@ const LocationModal = ({ closeModal, setSuccess }: { closeModal: () => void, set
           label={"Search City"}
           name="Location"
           value={location}
-          placeholder={"Lagos,Lagos,Nigeria"}
+          placeholder={user?.city.city || ""}
           setValue={handleChange}
         />
         <div

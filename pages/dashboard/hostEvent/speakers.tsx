@@ -18,13 +18,13 @@ const Speakers = () => {
   const newSpeakerRef = useRef<HTMLInputElement>(null);
   const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
   const [willBePerformers, setWillBePerformers] = useState("Yes");
-  const [getPerformers, setGetPerformers] = useState(true)
-  const [performers , setPerformers] = useState({
+  const [getPerformers, setGetPerformers] = useState(true);
+  const [performers, setPerformers] = useState({
     nameOfPerformer: "",
-    performerTitle:"",
-    performerRole:"",
-    performerImage:""
-  })
+    performerTitle: "",
+    performerRole: "",
+    performerImage: "",
+  });
 
   const handleNewSpeakerClick = () => {
     if (willBePerformers) {
@@ -39,24 +39,24 @@ const Speakers = () => {
   };
 
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ getEvent }) => getEvent);
-  const [eventID,setEventID] = useState("")
+  const { loading } = useAppSelector(({ event }) => event);
+  const [eventID, setEventID] = useState("");
   useEffect(() => {
-      setEventID(localStorage.getItem("currenteventID") || "");
-  },[])
+    setEventID(localStorage.getItem("currenteventID") || "");
+  }, []);
 
   useEffect(() => {
     const getPerformers = () => {
       dispatch(getEventById(eventID)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
-          const data = JSON.parse(sessionStorage.getItem("performers") || "{}")
-          let performers = data?.data?.performer
-          setPerformers(performers)
+          const data = JSON.parse(sessionStorage.getItem("performers") || "{}");
+          let performers = data?.data?.performer;
+          setPerformers(performers);
         }
       });
-    }
-    getPerformers()
-  },[getPerformers])
+    };
+    getPerformers();
+  }, [getPerformers]);
 
   const handleChange = (
     e:
@@ -64,14 +64,18 @@ const Speakers = () => {
       | SelectChangeEvent
   ) => {
     setWillBePerformers(e.target.value);
+    if(isTablet){
+      setAddSpeakerModalOpen(!addSpeakerModalOpen)
+    }
   };
 
   return (
     <HostEventLayout>
       <AddSpeakerModal
         isOpen={addSpeakerModalOpen}
-        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} speakerRef={newSpeakerRef}
-        setGetPerformers = {setGetPerformers}
+        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)}
+        speakerRef={newSpeakerRef}
+        setGetPerformers={setGetPerformers}
       />
       <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
@@ -187,7 +191,10 @@ const Speakers = () => {
               value={willBePerformers}
             />
             {!isTablet && willBePerformers === "Yes" && (
-              <AddSpeakerForm speakerRef={newSpeakerRef} setGetPerformers = {setGetPerformers} />
+              <AddSpeakerForm
+                speakerRef={newSpeakerRef}
+                setGetPerformers={setGetPerformers}
+              />
             )}
           </div>
           <div
@@ -230,7 +237,6 @@ const Speakers = () => {
                   flexWrap: isTablet ? "wrap" : "nowrap",
                 }}
               >
-               
                 <div>
                   <Speaker
                     name={performers.nameOfPerformer}
