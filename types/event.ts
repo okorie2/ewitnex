@@ -42,17 +42,16 @@ export interface IPerformer {
 }
 
 export interface IReqPerformer {
-    performer :{
-        isPerformer: boolean,
+    newPerformers :[{
     nameOfPerformer: string,
     performerTitle: string,
     performerRole: string,
     aboutPerformer: string
-    };
+    }];
     performerImage: File | undefined
 }
 
 export interface ReqPerformer {
     eventID:string
-    formData: IReqPerformer
+    form: FormData
 }

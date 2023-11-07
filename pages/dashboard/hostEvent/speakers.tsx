@@ -19,12 +19,14 @@ const Speakers = () => {
   const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
   const [willBePerformers, setWillBePerformers] = useState("Yes");
   const [getPerformers, setGetPerformers] = useState(true);
-  const [performers, setPerformers] = useState({
-    nameOfPerformer: "",
-    performerTitle: "",
-    performerRole: "",
-    performerImage: "",
-  });
+  const [performers, setPerformers] = useState<
+    {
+      nameOfPerformer: string;
+      performerTitle: string;
+      performerRole: string;
+      performerImage: string;
+    }[]
+  >();
 
   const handleNewSpeakerClick = () => {
     if (willBePerformers) {
@@ -50,7 +52,7 @@ const Speakers = () => {
       dispatch(getEventById(eventID)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
           const data = JSON.parse(sessionStorage.getItem("performers") || "{}");
-          let performers = data?.data?.performer;
+          let performers = data;
           setPerformers(performers);
         }
       });
@@ -64,8 +66,8 @@ const Speakers = () => {
       | SelectChangeEvent
   ) => {
     setWillBePerformers(e.target.value);
-    if(isTablet){
-      setAddSpeakerModalOpen(!addSpeakerModalOpen)
+    if (isTablet) {
+      setAddSpeakerModalOpen(!addSpeakerModalOpen);
     }
   };
 
@@ -237,30 +239,19 @@ const Speakers = () => {
                   flexWrap: isTablet ? "wrap" : "nowrap",
                 }}
               >
-                <div>
-                  <Speaker
-                    name={performers.nameOfPerformer}
-                    title={performers.performerTitle}
-                    role={performers.performerRole}
-                    img={performers.performerImage}
-                  />
-                </div>
-                <div>
-                  <Speaker
-                    name="John Bosko"
-                    title="Software Engineer"
-                    role="Speaker"
-                    img="/assets/pngs/speaker5.png"
-                  />
-                </div>
-                <div>
-                  <Speaker
-                    name="Jordan Mike"
-                    title="Product Designer"
-                    role="Artiste"
-                    img="/assets/pngs/speaker6.png"
-                  />
-                </div>
+                {performers?.map((performer) => {
+                  return (
+                    <div>
+                      <Speaker
+                        name={performer.nameOfPerformer}
+                        title={performer.performerTitle}
+                        role={performer.performerRole}
+                        img={performer.performerImage}
+                      />
+                    </div>
+                  );
+                })}
+                {performers && performers.length<1 && <p> No performers have been added to this event </p>}
               </div>
               <div>
                 <p css={{ fontSize: "0.875rem" }}>

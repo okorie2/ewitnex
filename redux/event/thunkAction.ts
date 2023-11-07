@@ -95,7 +95,7 @@ export const addPerformer = createAsyncThunk(
           'Content-Type': "multipart/form-data",
         },
         method: "post",
-        data: data.formData,
+        data: data.form,
       });
 
       return response.data.data;
@@ -112,14 +112,14 @@ export const addPerformer = createAsyncThunk(
   }
 );
 
-export const getEventById = createAsyncThunk('event/gePerformerById', async (data: string, thunkAPI) => {
+export const getEventById = createAsyncThunk('event/getPerformerById', async (data: string, thunkAPI) => {
   try {
       const response = await useAxios({
           url: `${config.API_BASE_URL}/events/details/${data}`,
           method: 'get',
       });
 
-      const performers = response.data;
+      const performers = response.data.data.performers;
       sessionStorage.setItem("performers", JSON.stringify(performers))
       console.log(performers)
       return response.data.data
