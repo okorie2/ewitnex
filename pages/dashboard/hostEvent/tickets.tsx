@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import HostEventLayout from "./layout";
 import Link from "next/link";
 import { screen } from "styles/theme";
@@ -9,27 +9,101 @@ import HostEventModal from "@/components/modals/hostEventModal";
 import { useMediaQuery } from "@mui/material";
 import AddTicketForm from "fragments/hostEvent/addTicketForm";
 import AddTicketModal from "@/components/modals/hostEventModal/addTicketModal";
+import { getEventById } from "redux/event/thunkAction";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import Ticket from "@/components/cards/hostEventTicket";
 
 const HostEventTickets = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [isOpen, setIsOpen] = useState(false);
-  const [addTicketModalOpen, setAddTicketModalOpen] = useState(false)
+  const [addTicketModalOpen, setAddTicketModalOpen] = useState(false);
   const handleModalClose = () => {
     setIsOpen(false);
   };
+  const newTicketRef = useRef<HTMLInputElement>(null);
+  const [getTickets, setGetTickets] = useState(true);
+  const [tickets, setTickets] = useState<
+    {
+      ticketType: string;
+      ticketName: string;
+      ticketPrice: number;
+      ticketQty: number;
+      ticketHandle: string;
+      ticketRefund: string;
+      _id: string;
+    }[]
+  >();
 
+  const handleNewTicketClick = () => {
+    if (isTablet) {
+      setAddTicketModalOpen(!addTicketModalOpen);
+    } else {
+      if (newTicketRef.current != null) {
+        newTicketRef.current.focus();
+      }
+    }
+  };
+
+  const [totalTickets, setTotalTickets] = useState(0);
+  useEffect(() => {
+    const calcTotalTickets = () => {
+      if (tickets && tickets?.length > 0) {
+        let total = 0;
+        tickets.forEach((ticket) => {
+          total += ticket.ticketQty;
+        });
+        setTotalTickets(total);
+      } else {
+        setTotalTickets(0);
+      }
+    };
+    calcTotalTickets();
+  }, [tickets]);
+
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ event }) => event);
+  const [eventID, setEventID] = useState("");
+  useEffect(() => {
+    setEventID(localStorage.getItem("currenteventID") || "");
+    setTickets(JSON.parse(sessionStorage.getItem("tickets") || "{}"));
+  }, []);
+  useEffect(() => {
+    const getTickets = () => {
+      dispatch(getEventById(eventID)).then((res) => {
+        if (res.meta.requestStatus == "fulfilled") {
+          const data = JSON.parse(sessionStorage.getItem("tickets") || "{}");
+          let tickets = data;
+          setTickets(tickets);
+        }
+      });
+    };
+    getTickets();
+  }, [getTickets]);
+
+  const handleNext = () => {
+    localStorage.removeItem("createEventData");
+    localStorage.removeItem("eventLocationData");
+    sessionStorage.removeItem("performers");
+    sessionStorage.removeItem("tickets");
+    setIsOpen(true);
+  };
   return (
     <>
-    <AddTicketModal isOpen={addTicketModalOpen} onRequestClose={() => setAddTicketModalOpen(!addTicketModalOpen)} />
+      <AddTicketModal
+        isOpen={addTicketModalOpen}
+        onRequestClose={() => setAddTicketModalOpen(!addTicketModalOpen)}
+        ticketRef={newTicketRef}
+        setGetTickets={setGetTickets}
+      />
       <HostEventLayout>
         <div css={{ width: isTablet ? "100vw" : "" }}>
           <div
             css={{
-              height: isTablet ? "" :"110px",
-              borderBottom: isTablet ? "" :`1px solid ${"#E4E4E4"}`,
+              height: isTablet ? "" : "110px",
+              borderBottom: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
               display: "flex",
               alignItems: "center",
-              paddingInline:isTablet ? "1rem" : "2.5rem",
+              paddingInline: isTablet ? "1rem" : "2.5rem",
             }}
           >
             <div
@@ -44,7 +118,8 @@ const HostEventTickets = () => {
                 <h1 css={{ fontSize: "1.875rem" }}>Ticket</h1>
                 <p>Enter ticket information for this event</p>
               </div>
-               {!isTablet && <div
+              {!isTablet && (
+                <div
                   css={{
                     display: "flex",
                     gap: "2rem",
@@ -69,14 +144,15 @@ const HostEventTickets = () => {
                   >
                     Cancel
                   </Link>
-                </div>}
+                </div>
+              )}
             </div>
           </div>
           <div
             css={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              height: isTablet ? "72vh":"calc(100vh - 150px)",
+              height: isTablet ? "72vh" : "calc(100vh - 150px)",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
                 display: "none",
@@ -89,10 +165,15 @@ const HostEventTickets = () => {
               },
             }}
           >
-            {!isTablet && <AddTicketForm /> }
+            {!isTablet && (
+              <AddTicketForm
+                ticketRef={newTicketRef}
+                setGetTickets={setGetTickets}
+              />
+            )}
             <div
               css={{
-                padding: isTablet ? "1rem":" 1.5rem 2.5rem",
+                padding: isTablet ? "1rem" : " 1.5rem 2.5rem",
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
@@ -129,87 +210,20 @@ const HostEventTickets = () => {
                     gap: "2rem",
                   }}
                 >
-                  <div>
-                    <div>
-                      <h3 css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
-                        VIP
-                      </h3>
-                      <p css={{ fontSize: "0.875rem" }}>N50,000</p>
-                      <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
-                        45 Quantities
-                      </p>
-                    </div>
-                    <div
-                      css={{ display: "flex", gap: "1rem", marginTop: "1rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/pencil.svg"
-                        alt=""
-                        width={21}
-                        height={21}
+                  {tickets && tickets.length > 0 ? (
+                    tickets?.map((ticket) => (
+                      <Ticket
+                        key={ticket._id}
+                        ticketName={ticket.ticketName}
+                        ticketPrice={ticket.ticketPrice}
+                        ticketQty={ticket.ticketQty}
+                        ticketRefund={""}
+                        id={ticket._id}
                       />
-                      <Image
-                        src="/assets/svgs/trash.svg"
-                        alt=""
-                        width={17.88}
-                        height={22}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <h3 css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
-                        VVIP
-                      </h3>
-                      <p css={{ fontSize: "0.875rem" }}>N100,000</p>
-                      <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
-                        45 Quantities
-                      </p>
-                    </div>
-                    <div
-                      css={{ display: "flex", gap: "1rem", marginTop: "1rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/pencil.svg"
-                        alt=""
-                        width={21}
-                        height={21}
-                      />
-                      <Image
-                        src="/assets/svgs/trash.svg"
-                        alt=""
-                        width={17.88}
-                        height={22}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <h3 css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
-                        REGULAR
-                      </h3>
-                      <p css={{ fontSize: "0.875rem" }}>N10,000</p>
-                      <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
-                        45 Quantities
-                      </p>
-                    </div>
-                    <div
-                      css={{ display: "flex", gap: "1rem", marginTop: "1rem" }}
-                    >
-                      <Image
-                        src="/assets/svgs/pencil.svg"
-                        alt=""
-                        width={21}
-                        height={21}
-                      />
-                      <Image
-                        src="/assets/svgs/trash.svg"
-                        alt=""
-                        width={17.88}
-                        height={22}
-                      />
-                    </div>
-                  </div>
+                    ))
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <div css={{ textAlign: "center" }}>
                   <p
@@ -221,7 +235,9 @@ const HostEventTickets = () => {
                   >
                     Total ticket quantities
                   </p>
-                  <p css={{ fontSize: "0.875rem", fontWeight: "500" }}>100</p>
+                  <p css={{ fontSize: "0.875rem", fontWeight: "500" }}>
+                    {totalTickets}
+                  </p>
                   <button
                     css={{
                       fontSize: "1rem",
@@ -236,9 +252,11 @@ const HostEventTickets = () => {
                       width: "65%",
                       cursor: "pointer",
                     }}
-                    onClick = {() => setAddTicketModalOpen(!addTicketModalOpen)}
+                    onClick={handleNewTicketClick}
                   >
-                    + Add Another Ticket
+                    {tickets && tickets.length < 1
+                      ? "Add Ticket"
+                      : " + Add Another Ticket"}
                   </button>
                 </div>
               </div>
@@ -246,7 +264,7 @@ const HostEventTickets = () => {
                 css={{
                   width: "100%",
                   display: "grid",
-                  gridTemplateColumns: isTablet ? "1fr":"1fr 1fr",
+                  gridTemplateColumns: isTablet ? "1fr" : "1fr 1fr",
                   gap: "1rem",
                   marginBlock: "auto 1rem",
                   [screen.lg]: {
@@ -277,7 +295,7 @@ const HostEventTickets = () => {
                   </button>
                 </Link>
                 <button
-                  onClick={() => setIsOpen(true)}
+                  onClick={handleNext}
                   css={{
                     fontSize: "1rem",
                     fontWeight: "bold",

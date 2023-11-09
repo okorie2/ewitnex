@@ -2,7 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { config } from "../../config/api";
 import { useAxios } from "utitlities/hooks/useAxios";
-import { ICreateEvent, ReqPerformer, ReqEventFiles, ReqEventLocation } from "types/event";
+import {
+  ICreateEvent,
+  ReqPerformer,
+  ReqEventFiles,
+  ReqEventLocation,
+  ReqTicket,
+} from "types/event";
 
 export const createEvent = createAsyncThunk(
   "event/createEvent",
@@ -14,10 +20,8 @@ export const createEvent = createAsyncThunk(
         data: data,
       });
 
-      localStorage.setItem(
-        "currenteventID",
-        response.data.data._id
-      );
+      localStorage.setItem("currenteventID", response.data.data._id);
+      localStorage.setItem("currenteventCode", response.data.data.eventCode);
       console.log(response.data.data);
       return response.data.data;
     } catch (error) {
@@ -40,7 +44,7 @@ export const fileUpload = createAsyncThunk(
       const response = await useAxios({
         url: `${config.API_BASE_URL}/events/${data.eventID}/update-cover-program`,
         headers: {
-          'Content-Type': "multipart/form-data",
+          "Content-Type": "multipart/form-data",
         },
         method: "post",
         data: data.formData,
@@ -60,7 +64,6 @@ export const fileUpload = createAsyncThunk(
   }
 );
 
-
 export const eventLocation = createAsyncThunk(
   "event/eventLocation",
   async (data: ReqEventLocation, thunkAPI) => {
@@ -70,7 +73,7 @@ export const eventLocation = createAsyncThunk(
         method: "post",
         data: data.location,
       });
-      console.log(response.data.data)
+      console.log(response.data.data);
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -92,7 +95,7 @@ export const addPerformer = createAsyncThunk(
       const response = await useAxios({
         url: `${config.API_BASE_URL}/events/${data.eventID}/event-performer`,
         headers: {
-          'Content-Type': "multipart/form-data",
+          "Content-Type": "multipart/form-data",
         },
         method: "post",
         data: data.form,
@@ -112,43 +115,77 @@ export const addPerformer = createAsyncThunk(
   }
 );
 
-export const getEventById = createAsyncThunk('event/getPerformerById', async (data: string, thunkAPI) => {
-  try {
+export const addTicket = createAsyncThunk(
+  "event/addTicket",
+  async (data: ReqTicket, thunkAPI) => {
+    try {
       const response = await useAxios({
-          url: `${config.API_BASE_URL}/events/details/${data}`,
-          method: 'get',
+        url: `${config.API_BASE_URL}/events/${data.eventID}/event-ticket`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "post",
+        data: data.formData,
+      });
+
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        localStorage.setItem("error", message.error);
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+export const getEventById = createAsyncThunk(
+  "event/getPerformerById",
+  async (data: string, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/details/${data}`,
+        method: "get",
       });
 
       const performers = response.data.data.performers;
-      sessionStorage.setItem("performers", JSON.stringify(performers))
-      console.log(performers)
-      return response.data.data
-  } catch (error) {
+      const tickets = response.data.data.tickets;
+      sessionStorage.setItem("performers", JSON.stringify(performers));
+      sessionStorage.setItem("tickets", JSON.stringify(tickets));
+      return response.data.data;
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-          const message = error.response.data as { error: string };
-          console.log(message.error, "error message")
-          return thunkAPI.rejectWithValue(error.message);
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        return thunkAPI.rejectWithValue(error.message);
       } else {
-          return thunkAPI.rejectWithValue(String(error));
+        return thunkAPI.rejectWithValue(String(error));
       }
+    }
   }
-});
+);
 
-export const deleteEventById = createAsyncThunk('event/deleteEventById', async (data: string, thunkAPI) => {
-  try {
+export const deleteEventById = createAsyncThunk(
+  "event/deleteEventById",
+  async (data: string, thunkAPI) => {
+    try {
       const response = await useAxios({
-          url: `${config.API_BASE_URL}/event/delete-event/${data}`,
-          method: 'delete',
+        url: `${config.API_BASE_URL}/event/delete-event/${data}`,
+        method: "delete",
       });
-      console.log(response.data.message)
-      return response.data
-  } catch (error) {
+      console.log(response.data.message);
+      return response.data;
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-          const message = error.response.data as { error: string };
-          console.log(message.error, "error message")
-          return thunkAPI.rejectWithValue(error.message);
+        const message = error.response.data as { error: string };
+        console.log(message.error, "error message");
+        return thunkAPI.rejectWithValue(error.message);
       } else {
-          return thunkAPI.rejectWithValue(String(error));
+        return thunkAPI.rejectWithValue(String(error));
       }
+    }
   }
-});
+);

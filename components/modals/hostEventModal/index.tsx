@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
@@ -49,6 +49,15 @@ const HostEventModal = (props: IHostEventModal) => {
     setCopySnackBarOpen(true);
     setMessage(alert);
   };
+
+  const [eventCode, setEventCode] = useState("");
+  useEffect(() => {
+    setEventCode(localStorage.getItem("currenteventCode") || "");
+  }, []);
+  const [eventID, setEventID] = useState("");
+  useEffect(() => {
+    setEventID(localStorage.getItem("currenteventID") || "");
+  }, []);
   return (
     <Modal
       isOpen={props.isOpen}
@@ -183,12 +192,12 @@ const HostEventModal = (props: IHostEventModal) => {
                   gap: "0.5rem",
                 }}
               >
-                <p>https:ewitnex.com/devfest-aba-id-tec542445</p>
+                <p>{`https:ewitnex.com/${eventID.split("").slice(0, 8).join("")}`}</p>
                 <div
                   css={{ cursor: "pointer" }}
                   onClick={() =>
                     handleCopy(
-                      "https:ewitnex.com/devfest-aba-id-tec542445",
+                      `https:ewitnex.com/${eventCode}`,
                       "Invite Link copied"
                     )
                   }
@@ -223,10 +232,10 @@ const HostEventModal = (props: IHostEventModal) => {
                   gap: "0.5rem",
                 }}
               >
-                <p>tec542445</p>
+                <p>{eventID.split("").slice(0, 12).join("")}</p>
                 <div
                   css={{ cursor: "pointer" }}
-                  onClick={() => handleCopy("tec542445", "Event ID copied")}
+                  onClick={() => handleCopy(`${eventCode}`, "Event ID copied")}
                 >
                   <Image
                     src="/assets/svgs/copy2.svg"
@@ -274,7 +283,7 @@ const HostEventModal = (props: IHostEventModal) => {
             }}
           >
             <Link
-              href={`/dashboard/programs/Heal12548`}
+              href={`/dashboard/programs/${eventID}`}
               css={{
                 fontSize: "1rem",
                 color: "#7C35AB",
@@ -283,7 +292,7 @@ const HostEventModal = (props: IHostEventModal) => {
             >
               VIEW EVENT PAGE
             </Link>
-            <Link href={`/dashboard/manager/tec542445?tab=Overview`}>
+            <Link href={`/dashboard/manager/${eventID}?tab=Overview`}>
               <button
                 css={{
                   fontSize: "0.9rem",

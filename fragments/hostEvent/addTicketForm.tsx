@@ -1,17 +1,94 @@
 /** @jsxImportSource @emotion/react */
 
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { Box,  SelectChangeEvent, useMediaQuery } from "@mui/material";
+import { Box, SelectChangeEvent, useMediaQuery } from "@mui/material";
 import { screen } from "styles/theme";
 import Image from "next/image";
-import {  ChangeEvent, RefObject, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, RefObject, useEffect, useState } from "react";
+import { IReqTicket } from "types/event";
+import { addPerformer, addTicket } from "redux/event/thunkAction";
+import { useAppThunkDispatch, useAppSelector } from "redux/store";
+import { TailSpin } from "react-loader-spinner";
 
-const AddTicketForm = () => {
-  const [ticketType, setTicketType] = useState("paid");
+const AddTicketForm = ({
+  ticketRef,
+  setGetTickets,
+  handleModalClose,
+}: {
+  ticketRef: RefObject<HTMLInputElement>;
+  setGetTickets: React.Dispatch<React.SetStateAction<boolean>>;
+  handleModalClose?: () => void;
+}) => {
+  const [ticketType, setTicketType] = useState("Paid");
   const isTablet = useMediaQuery("(max-width: 780px)");
+  const [newTicketRef, setNewTicketRef] = useState(ticketRef);
+  const [formData, setFormData] = useState<IReqTicket>({
+    tickets: [
+      {
+        ticketType: "",
+        ticketName: "",
+        ticketPrice: 0,
+        ticketQty: 0,
+        ticketHandle: "",
+        ticketRefund: "",
+      },
+    ],
+  });
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent
+  ) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      tickets: [{ ...formData.tickets[0], [name]: value }],
+    });
+  };
 
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      tickets: [{ ...formData.tickets[0], ticketType: ticketType }],
+    });
+  }, [ticketType]);
+
+  const dispatch = useAppThunkDispatch();
+  const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
+  const [eventID, setEventID] = useState("");
+  useEffect(() => {
+    setEventID(localStorage.getItem("currenteventID") || "");
+  }, []);
+
+  const handleNext = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(addTicket({ eventID, formData })).then((res) => {
+      if (res.meta.requestStatus == "fulfilled") {
+        setFormData({
+          tickets: [
+            {
+              ticketType: "",
+              ticketName: "",
+              ticketPrice: 0,
+              ticketQty: 0,
+              ticketHandle: "",
+              ticketRefund: "",
+            },
+          ],
+        });
+        setGetTickets((prevState: boolean) => !prevState);
+        if (newTicketRef.current != null) {
+          newTicketRef.current.focus();
+        }
+        if (isTablet) {
+          handleModalClose && handleModalClose();
+        }
+      }
+    });
+  };
   return (
     <form
+      onSubmit={handleNext}
       css={{
         padding: isTablet ? "0rem" : " 1.5rem 2.5rem",
         display: "grid",
@@ -53,14 +130,14 @@ const AddTicketForm = () => {
             gap: "0.75rem",
             width: isTablet ? "100px" : "110px",
             height: "50px",
-            background: ticketType === "paid" ? "#7C35AB21 " : "",
+            background: ticketType === "Paid" ? "#7C35AB21 " : "",
             border:
-              ticketType === "paid" ? "1px solid #7C35AB" : "1px solid #AEAEAE",
-            color: ticketType === "paid" ? "#7C35AB" : "#AEAEAE",
+              ticketType === "Paid" ? "1px solid #7C35AB" : "1px solid #AEAEAE",
+            color: ticketType === "Paid" ? "#7C35AB" : "#AEAEAE",
             borderRadius: "8px",
             cursor: "pointer",
           }}
-          onClick={() => setTicketType("paid")}
+          onClick={() => setTicketType("Paid")}
         >
           <p>Paid</p>
         </div>
@@ -72,14 +149,14 @@ const AddTicketForm = () => {
             gap: "0.75rem",
             width: isTablet ? "100px" : "110px",
             height: "50px",
-            background: ticketType === "free" ? "#7C35AB21 " : "",
+            background: ticketType === "Free" ? "#7C35AB21 " : "",
             border:
-              ticketType === "free" ? "1px solid #7C35AB" : "1px solid #AEAEAE",
-            color: ticketType === "free" ? "#7C35AB" : "#AEAEAE",
+              ticketType === "Free" ? "1px solid #7C35AB" : "1px solid #AEAEAE",
+            color: ticketType === "Free" ? "#7C35AB" : "#AEAEAE",
             borderRadius: "8px",
             cursor: "pointer",
           }}
-          onClick={() => setTicketType("free")}
+          onClick={() => setTicketType("Free")}
         >
           <p>Free</p>
         </div>
@@ -91,16 +168,16 @@ const AddTicketForm = () => {
             gap: "0.75rem",
             width: isTablet ? "100px" : "110px",
             height: "50px",
-            background: ticketType === "donation" ? "#7C35AB21 " : "",
+            background: ticketType === "Donation" ? "#7C35AB21 " : "",
             border:
-              ticketType === "donation"
+              ticketType === "Donation"
                 ? "1px solid #7C35AB"
                 : "1px solid #AEAEAE",
-            color: ticketType === "donation" ? "#7C35AB" : "#AEAEAE",
+            color: ticketType === "Donation" ? "#7C35AB" : "#AEAEAE",
             borderRadius: "8px",
             cursor: "pointer",
           }}
-          onClick={() => setTicketType("donation")}
+          onClick={() => setTicketType("Donation")}
         >
           <p>Donation</p>
         </div>
@@ -109,10 +186,12 @@ const AddTicketForm = () => {
         <HostEventTextField
           label=""
           placeholder="Name ticket e.g VIP"
-          type="text" 
-          setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
-            throw new Error("Function not implemented.");
-          } }        />
+          type="text"
+          name={"ticketName"}
+          ref={newTicketRef}
+          value={formData.tickets[0].ticketName}
+          setValue={handleChange}
+        />
       </div>
       <div
         css={{
@@ -137,6 +216,10 @@ const AddTicketForm = () => {
           <input
             type="text"
             placeholder="Price (NGN)"
+            value={formData.tickets[0].ticketPrice === 0 ? "" : formData.tickets[0].ticketPrice}
+            name="ticketPrice"
+            onChange={handleChange}
+            inputMode="numeric"
             css={{
               height: "3.3rem",
               width: "90%",
@@ -159,7 +242,7 @@ const AddTicketForm = () => {
           }}
         >
           <p>Fee (NGN)</p>
-          <p>N6,300</p>
+          <p>N300</p>
         </div>
       </div>
       <p css={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
@@ -169,30 +252,45 @@ const AddTicketForm = () => {
       <HostEventTextField
         label=""
         placeholder="Enter ticket quantity"
-        type="text" setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
-          throw new Error("Function not implemented.");
-        } }      />
+        type="text"
+        name="ticketQty"
+        value={formData.tickets[0].ticketQty === 0 ? "" : formData.tickets[0].ticketQty}
+        setValue={handleChange}
+      />
       <HostEventTextField
         label="Who want to handle the fee?"
         placeholder="pass"
         type="select"
+        name="ticketHandle"
         options={[
-          { value: "pass", label: "I want to pass the fees to the attendees" },
+          {
+            value: "i want to pass the fees to the attendees",
+            label: "I want to pass the fees to the attendees",
+          },
           { value: "absorb", label: "I want to absorb the fees" },
-        ]} setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
-          throw new Error("Function not implemented.");
-        } }      />
+        ]}
+        value={formData.tickets[0].ticketHandle}
+        setValue={handleChange}
+      />
       <div>
         <HostEventTextField
           label="Can attendees ask for a refund?"
           placeholder="refundable"
           type="select"
           options={[
-            { value: "refundable", label: "Yes, ticket is refundable" },
-            { value: "non-refundable", label: "No, ticket is non-refundable" },
-          ]} setValue={function (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void | ((e: SelectChangeEvent) => void) {
-            throw new Error("Function not implemented.");
-          } }        />
+            {
+              value: "Yes, ticket is refundable",
+              label: "Yes, ticket is refundable",
+            },
+            {
+              value: "No, ticket is non-refundable",
+              label: "No, ticket is non-refundable",
+            },
+          ]}
+          value={formData.tickets[0].ticketRefund}
+          name="ticketRefund"
+          setValue={handleChange}
+        />
         <p css={{ fontSize: "0.875rem", marginTop: "0.5rem" }}>
           A refund will lead to you getting your payment 3 to 5 working days to
           your wallet after your events have ended.
@@ -211,11 +309,24 @@ const AddTicketForm = () => {
           borderRadius: "26px",
           width: isTablet ? "100%" : "45%",
           cursor: "pointer",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        Add Ticket
+        {loading === "loading" ? (
+          <TailSpin
+            height={15}
+            width={15}
+            color="#7c35ab"
+            ariaLabel="loading"
+            radius={"2"}
+          />
+        ) : (
+          "Add Ticket"
+        )}
       </button>
-      {isTablet && <Box height = {"0.125rem"}/>}
+      {isTablet && <Box height={"0.125rem"} />}
     </form>
   );
 };

@@ -145,7 +145,7 @@ const AddSpeakerModal = (props: IAddSpeakerModal) => {
 
               }}
             >
-              <AddSpeakerForm speakerRef={props.speakerRef} setGetPerformers = {props.setGetPerformers}/>
+              <AddSpeakerForm speakerRef={props.speakerRef} setGetPerformers = {props.setGetPerformers} handleModalClose = {handleClose}/>
             </div>
       </div>
     </Modal>

@@ -20,9 +20,11 @@ import { TailSpin } from "react-loader-spinner";
 const AddSpeakerForm = ({
   speakerRef,
   setGetPerformers,
+  handleModalClose
 }: {
   speakerRef: RefObject<HTMLInputElement>;
   setGetPerformers: React.Dispatch<React.SetStateAction<boolean>>;
+  handleModalClose?: () => void
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [newSpeakerRef, setNewSpeakerRef] = useState(speakerRef);
@@ -64,7 +66,7 @@ const AddSpeakerForm = ({
   };
 
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ event }) => event);
+  const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
   const [eventID, setEventID] = useState("");
   useEffect(() => {
     setEventID(localStorage.getItem("currenteventID") || "");
@@ -91,6 +93,9 @@ const AddSpeakerForm = ({
         setGetPerformers((prevState: boolean) => !prevState);
         if (newSpeakerRef.current != null) {
           newSpeakerRef.current.focus();
+        }
+        if(isTablet) {
+          handleModalClose && handleModalClose()
         }
       }
     });

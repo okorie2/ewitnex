@@ -25,6 +25,8 @@ const Speakers = () => {
       performerTitle: string;
       performerRole: string;
       performerImage: string;
+      aboutPerformer: string;
+      _id: string;
     }[]
   >();
 
@@ -45,6 +47,7 @@ const Speakers = () => {
   const [eventID, setEventID] = useState("");
   useEffect(() => {
     setEventID(localStorage.getItem("currenteventID") || "");
+    setPerformers(JSON.parse(sessionStorage.getItem("performers") || "{}"));
   }, []);
 
   useEffect(() => {
@@ -236,27 +239,38 @@ const Speakers = () => {
                 css={{
                   display: "flex",
                   gap: "1.5rem",
-                  flexWrap: isTablet ? "wrap" : "nowrap",
+                  flexWrap: "wrap",
                 }}
               >
-                {performers?.map((performer) => {
-                  return (
-                    <div>
-                      <Speaker
-                        name={performer.nameOfPerformer}
-                        title={performer.performerTitle}
-                        role={performer.performerRole}
-                        img={performer.performerImage}
-                      />
-                    </div>
-                  );
-                })}
-                {performers && performers.length<1 && <p> No performers have been added to this event </p>}
+                {performers && performers.length > 0 ? (
+                  performers?.map((performer) => {
+                    return (
+                      <div key={performer._id}>
+                        <Speaker
+                          name={performer.nameOfPerformer}
+                          title={performer.performerTitle}
+                          role={performer.performerRole}
+                          img={performer.performerImage}
+                          id={performer._id}
+                        />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+                {performers && performers.length < 1 && (
+                  <p css={{ fontSize: "14px" }}>
+                    {" "}
+                    No performers have been added to this event{" "}
+                  </p>
+                )}
               </div>
               <div>
                 <p css={{ fontSize: "0.875rem" }}>
-                  If this event has multiple performers, click on the button
-                  below to add another performer
+                  {performers && performers.length < 1
+                    ? "Click here to add a performer"
+                    : "If this event has multiple performers, click on the button below to add another performer"}
                 </p>
                 <button
                   css={{
@@ -274,7 +288,9 @@ const Speakers = () => {
                   }}
                   onClick={handleNewSpeakerClick}
                 >
-                  + Add Another Performer
+                  {performers && performers.length < 1
+                    ? "Add Performer"
+                    : " + Add Another Performer"}
                 </button>
               </div>
             </div>
