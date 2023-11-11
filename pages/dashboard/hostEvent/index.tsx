@@ -31,7 +31,7 @@ const HostEvent = () => {
   ]);
 
   const [formData, setFormData] = useState<ICreateEvent>({
-    eventTitle: "",
+    EventTitle: "",
     organizedBy: user?._id || "",
     interests:"",
     category:"",
@@ -181,8 +181,8 @@ const HostEvent = () => {
             label="Event Title"
             placeholder="Name of event"
             type="text" 
-            name = "eventTitle"
-            value = {formData.eventTitle}
+            name = "EventTitle"
+            value = {formData.EventTitle}
             setValue={handleChange}          
           />
           <div css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>

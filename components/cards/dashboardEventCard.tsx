@@ -49,9 +49,10 @@ export default function DashboardEventCard(props: IEventCard) {
         >
           <div
             css={{
-              width: "93px",
+              // width: "93px",
               height: "2.13rem",
               backdropFilter: "brightness(50%) ",
+              paddingInline:"0.25rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

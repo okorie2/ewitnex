@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "@emotion/react";
 
 import DashboardLayout from "../layout/layout";
@@ -11,6 +11,15 @@ import { screen } from "styles/theme";
 import DashboardEventCard from "@/components/cards/dashboardEventCard";
 import EventFilter from "fragments/eventFilter";
 import FeedsCard from "@/components/cards/feedsCard";
+import dynamic from "next/dynamic";
+import Loader from "utitlities/loaders";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { getEvents } from "redux/event/thunkAction";
+import { IEvent } from "types/event";
+
+const DynamicDashboardLayout = dynamic(() => import("../layout/layout"), {
+  loading: () => <Loader />,
+});
 
 const DashboardPrograms = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -25,6 +34,13 @@ const DashboardPrograms = () => {
     setFilterSectionOpen(!filterSectionOpen);
   };
 
+  const { loading, events } = useAppSelector(({ event }) => event);
+  console.log(events)
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    dispatch(getEvents(""));
+  }, []);
+
   const categories = [
     "All",
     "Music",
@@ -37,7 +53,7 @@ const DashboardPrograms = () => {
     "Hangouts",
   ];
   return (
-    <DashboardLayout>
+    <DynamicDashboardLayout>
       <div
         css={{
           display: "grid",
@@ -59,8 +75,8 @@ const DashboardPrograms = () => {
               height: "60px",
               boxShadow: "0px 0px 5px #00000029;",
               paddingInline: "1.5rem",
-          marginTop: isTablet ? "4.5rem" : "",
-          width: isTablet ? "100vw" : "",
+              marginTop: isTablet ? "4.5rem" : "",
+              width: isTablet ? "100vw" : "",
               display: "flex",
               alignItems: "center",
               overflowX: "auto",
@@ -205,7 +221,6 @@ const DashboardPrograms = () => {
                     title="Medical Crusade with Doctor West"
                     img="/assets/pngs/card_2.png"
                   /> */}
-                  
                 </div>
               </div>
             </div>
@@ -231,20 +246,30 @@ const DashboardPrograms = () => {
           >
             {!isTablet ? (
               <>
-                {/* <div>
-                  <DashboardEventCard
-                    label="Concert"
-                    attendees="609"
-                    date="3 DEC. 2022, 10:00 AM"
-                    id="Heal12548"
-                    location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                    organizer="Eko Atlantic"
-                    priceRange="$500-$2K"
-                    title="Medical Crusade with Doctor West"
-                    img="/assets/pngs/card_2.png"
-                  />
-                </div> */}
-                
+                {events.length < 1 && (
+                  <div css={{ textAlign: "center", width: "100%" }}>
+                    <div>
+                      <h4>No Events</h4>
+                      <p>Events will be displayed here</p>
+                    </div>
+                  </div>
+                )}
+                {events &&
+                  events.map((event:IEvent, index) => (
+                    <div key = {index}>
+                      <DashboardEventCard
+                        label={event.category}
+                        attendees="609"
+                        date={event.location?.startDate || "Date: TBD"}
+                        id={event?.eventCode}
+                        location={event.location?.searchLocation || event.location?.enterLocation || "Venue: TBD"}
+                        organizer="Eko Atlantic"
+                        priceRange="$500-$2K"
+                        title={event.EventTitle || "Dummy Data"}
+                        img="/assets/pngs/card_2.png"
+                      />
+                    </div>
+                  ))}
               </>
             ) : (
               <>
@@ -261,8 +286,8 @@ const DashboardPrograms = () => {
                     img="/assets/pngs/card_img.png"
                   />
                 </div> */}
-                
-                <Box height={48}/>
+
+                <Box height={48} />
               </>
             )}
           </div>
@@ -274,7 +299,7 @@ const DashboardPrograms = () => {
           />
         )}
       </div>
-    </DashboardLayout>
+    </DynamicDashboardLayout>
   );
 };
 

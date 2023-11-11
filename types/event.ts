@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export interface ICreateEvent {
-  eventTitle: string;
+  EventTitle: string;
   organizedBy: string;
   interests: string;
   category: string;
@@ -83,4 +83,41 @@ export interface ReqPerformer {
 export interface ReqTicket {
   eventID: string;
   formData: IReqTicket;
+}
+
+export interface IEvent {
+  EventTitle:string
+  OrganizedBy: string;
+  category: string;
+  createdAt: string;
+  description: string;
+  eventCode: string;
+  interests: string;
+  isPublic: boolean;
+  location: {
+    endDate: null | string;
+    enterLocation: string;
+    searchLocation: string;
+    startDate: string;
+    type: string;
+  };
+  performers: {
+    aboutPerformer: string,
+    nameOfPerformer: string,
+    performerImage: string,
+    performerRole: string,
+    performerTitle: string,
+    _id: string
+  }[];
+  tickets: {
+    ticketHandle: string,
+    ticketName: string,
+    ticketPrice: number,
+    ticketQty: number,
+    ticketRefund: string,
+    ticketType: string,
+    _id: string
+  }[];
+  updatedAt: string;
+  _id: string;
 }
