@@ -4,10 +4,12 @@ import { IEvent } from "types/event";
 interface IState {
   loading: "failed" | "loading" | "successful" | "idle";
   events: IEvent[];
+  event: IEvent
 }
 const initialState: IState = {
   loading: "idle",
   events: [],
+  event: {} as IEvent
 };
 const EventSlice = createSlice({
   name: "event",
@@ -18,8 +20,8 @@ const EventSlice = createSlice({
       return { ...state, loading: "loading" };
     });
 
-    builder.addCase(getEventById.fulfilled, (state) => {
-      return { ...state, loading: "successful" };
+    builder.addCase(getEventById.fulfilled, (state, action) => {
+      return { ...state, loading: "successful", event: action.payload };
     });
     builder.addCase(getEventById.rejected, (state) => {
       return { ...state, loading: "failed" };

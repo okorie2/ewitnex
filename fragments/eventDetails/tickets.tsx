@@ -1,16 +1,25 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useEffect } from "react";
 import EventTicket from "@/components/tickets/eventTicket";
 import { H3 } from "styles/components/typography";
 import { screen } from "styles/theme";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { getEventById } from "redux/event/thunkAction";
 
 const EventTickets = () => {
   const router = useRouter();
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
   const isTablet = useMediaQuery("(max-width: 900px)");
+  const { id } = router.query;
+
+  const { loading, event } = useAppSelector(({ event }) => event);
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    dispatch(getEventById(id?.toString() || ""));
+  }, []);
 
   return (
     <div
@@ -44,66 +53,32 @@ const EventTickets = () => {
           gap: "1rem",
         }}
       >
-        <EventTicket
-          title="DevFest Aba"
-          eventID="Tec542445"
-          label="Tech"
-          date="25 NOV. 2021 10:00 AM"
-          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-          type="Regular"
-          price="$500"
-          id={""}
-        />
-        <EventTicket
-          title="DevFest Aba"
-          eventID="Tec542445"
-          label="Tech"
-          date="25 NOV. 2021 10:00 AM"
-          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-          type="VIP"
-          price="$1500"
-          id={""}
-        />
-        <EventTicket
-          title="DevFest Aba"
-          eventID="Tec542445"
-          label="Tech"
-          date="25 NOV. 2021 10:00 AM"
-          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-          type="VVIP"
-          price="$2000"
-          id={""}
-        />
-        <EventTicket
-          title="DevFest Aba"
-          eventID="Tec542445"
-          label="Tech"
-          date="25 NOV. 2021 10:00 AM"
-          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-          type="Exclusive"
-          price="$2500"
-          id={""}
-        />
-        <EventTicket
-          title="DevFest Aba"
-          eventID="Tec542445"
-          label="Tech"
-          date="25 NOV. 2021 10:00 AM"
-          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-          type="VVIP"
-          price="$2000"
-          id={""}
-        />
-        <EventTicket
-          title="DevFest Aba"
-          eventID="Tec542445"
-          label="Tech"
-          date="25 NOV. 2021 10:00 AM"
-          location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-          type="Exclusive"
-          price="$2000"
-          id={""}
-        />
+        {event.tickets && event.tickets.length > 0 ? (
+          event.tickets?.map((ticket) => {
+            return (
+              <div key={ticket._id}>
+                <EventTicket
+                  title={event.EventTitle}
+                  eventID={id?.toString() || ""}
+                  label={event.category}
+                  date={event.location?.startDate || "Date; TBD"}
+                  location={
+                    event.location?.searchLocation ||
+                    event.location?.enterLocation ||
+                    "Venue: TBD"
+                  }
+                  type={ticket.ticketName}
+                  price={`N ${ticket.ticketPrice}`}
+                  id={ticket._id}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <>
+            <p>This event does not have any ticket</p>
+          </>
+        )}
       </div>
     </div>
   );

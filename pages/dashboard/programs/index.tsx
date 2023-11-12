@@ -35,7 +35,6 @@ const DashboardPrograms = () => {
   };
 
   const { loading, events } = useAppSelector(({ event }) => event);
-  console.log(events)
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
     dispatch(getEvents(""));
@@ -261,7 +260,8 @@ const DashboardPrograms = () => {
                         label={event.category}
                         attendees="609"
                         date={event.location?.startDate || "Date: TBD"}
-                        id={event?.eventCode}
+                        id={event?._id}
+                        eventCode = {event?.eventCode}
                         location={event.location?.searchLocation || event.location?.enterLocation || "Venue: TBD"}
                         organizer="Eko Atlantic"
                         priceRange="$500-$2K"

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
@@ -8,12 +8,20 @@ import EventTab from "./[tab]";
 import DashboardLayout from "pages/dashboard/layout/layout";
 import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { getEventById } from "redux/event/thunkAction";
 
 const SingleEvent = () => {
   const router = useRouter();
   const { id } = router.query;
   const activeTab = router.query?.tab || ("Details" as string | undefined);
   const isTablet = useMediaQuery("(max-width: 780px)");
+
+  const { loading, event } = useAppSelector(({ event }) => event);
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    dispatch(getEventById(id?.toString() || ""));
+  }, []);
 
   return (
     <DashboardLayout>
@@ -47,7 +55,7 @@ const SingleEvent = () => {
               height={15}
             />
             <h3 css={{ fontWeight: "bold", width: isTablet ? "80%" : "" }}>
-              Medical Crusade with Doctor West
+              {event.EventTitle || "Dummy Data"}
             </h3>
           </div>
           {!isTablet && (
