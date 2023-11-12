@@ -11,6 +11,7 @@ interface IEventCard {
   title: string;
   favourite?: boolean;
   id: string;
+  eventCode:string;
   date: string;
   location: string;
   priceRange: string;
@@ -110,7 +111,7 @@ export default function DashboardEventCard(props: IEventCard) {
               marginTop: "2%",
             }}
           >
-            {props.id}
+            {props.eventCode}
           </p>
           <H4 color="#F05E78" css={{ marginTop: "1.2rem" }}>
             {props.date}

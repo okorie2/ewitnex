@@ -10,6 +10,8 @@ import ReportEventModal from "@/components/modals/programModal/reportEventModal"
 import EventCountdown from "@/components/events/eventCountdown";
 import { useRouter } from "next/router";
 import MobileModal from "@/components/modals/programModal/mobileModal";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { getEventById } from "redux/event/thunkAction";
 
 const EventDetails = () => {
   const router = useRouter();
@@ -33,6 +35,14 @@ const EventDetails = () => {
       html.style.overflow = mobileModalOpen ? "hidden" : "auto";
     }
   }, [mobileModalOpen]);
+  const { id } = router.query;
+
+  const { loading, event } = useAppSelector(({ event }) => event);
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    dispatch(getEventById(id?.toString() || ""));
+  }, []);
+
   return (
     <div>
       <MobileModal
@@ -61,7 +71,7 @@ const EventDetails = () => {
       <ReportEventModal
         isOpen={reportEventModalOpen}
         onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
-        eventID={"Heal12548"}
+        eventID={event._id}
       />
       <div css={{ width: "100%", height: "394px", position: "relative" }}>
         <div
@@ -73,7 +83,6 @@ const EventDetails = () => {
         >
           <div
             css={{
-              width: "93px",
               height: "2.13rem",
               backdropFilter: "brightness(50%) ",
               display: "flex",
@@ -85,9 +94,10 @@ const EventDetails = () => {
               textTransform: "capitalize",
               backgroundColor: "#fff",
               opacity: "75%",
+              paddingInline: "0.5rem",
             }}
           >
-            concert
+            {event.category}
           </div>
         </div>
         <div
@@ -280,7 +290,7 @@ const EventDetails = () => {
               marginTop: isTablet ? "10rem" : "",
             }}
           >
-            Medical Crusade with Doctor West
+            {event.EventTitle || "Dummy Data"}
           </h1>
           <div css={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <p
@@ -290,7 +300,7 @@ const EventDetails = () => {
                 fontWeight: "600",
               }}
             >
-              Heal12548
+              {event.eventCode}
             </p>
             <Image src="/assets/svgs/copy.svg" alt="" width={24} height={24} />
           </div>
@@ -335,7 +345,7 @@ const EventDetails = () => {
                     fontWeight: "600",
                   }}
                 >
-                  3 DEC. 2022, 10:00 AM
+                  {event.location?.startDate || "Date: TBD"}
                 </p>
               </div>
               <div
@@ -366,7 +376,9 @@ const EventDetails = () => {
                     fontWeight: "600",
                   }}
                 >
-                  Holikins Hotel, 22 Faulks Road, Aba, Abia
+                  {event.location?.searchLocation ||
+                    event.location?.enterLocation ||
+                    "Venue: TBD"}
                 </p>
               </div>
             </div>
@@ -432,7 +444,7 @@ const EventDetails = () => {
                       fontWeight: "600",
                     }}
                   >
-                    Eko Atlantic
+                    {event.OrganizedBy?.slice(0, 10) || ""}
                   </p>
                 </div>
                 <button
@@ -480,7 +492,7 @@ const EventDetails = () => {
                     fontWeight: "600",
                   }}
                 >
-                  Public
+                  {event.isPublic ? "Public" : "Private"}
                 </p>
               </div>
             </div>
@@ -505,43 +517,7 @@ const EventDetails = () => {
                 fontSize: isTablet ? "0.85rem" : "0.875rem",
               }}
             >
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-              invidunt ut labore et dolore magna aliquyam erat, sed diam
-              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-              dolor sit amet.
-            </p>
-            <p
-              css={{
-                lineHeight: "22px",
-                fontSize: isTablet ? "0.85rem" : "0.875rem",
-              }}
-            >
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-              invidunt ut labore et dolore magna aliquyam erat, sed diam
-              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-              Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-              dolor sit amet.
-            </p>
-            <p
-              css={{
-                lineHeight: "22px",
-                fontSize: isTablet ? "0.85rem" : "0.875rem",
-              }}
-            >
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
+              {event.description}
             </p>
           </div>
         </div>
@@ -570,34 +546,25 @@ const EventDetails = () => {
               gap: "1.38rem",
             }}
           >
-            <Performer
-              img="/assets/pngs/speaker1.png"
-              name="John Bosko"
-              title="Software Engineer"
-              role="Performer"
-              id={""}
-            />
-            <Performer
-              img="/assets/pngs/speaker2.png"
-              name="John Bosko"
-              title="Software Engineer"
-              role="Performer"
-              id={""}
-            />
-            <Performer
-              img="/assets/pngs/speaker3.png"
-              name="John Bosko"
-              title="Software Engineer"
-              role="Speaker"
-              id={""}
-            />
-            <Performer
-              img="/assets/pngs/speaker4.png"
-              name="John Bosko"
-              title="Software Engineer"
-              role="Speaker"
-              id={""}
-            />
+            {event.performers && event.performers.length > 0 ? (
+              event.performers?.map((performer) => {
+                return (
+                  <div key={performer._id}>
+                    <Performer
+                      name={performer.nameOfPerformer}
+                      title={performer.performerTitle}
+                      role={performer.performerRole}
+                      img={performer.performerImage}
+                      id={performer._id}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <>
+                <p>This event does not have any performers</p>
+              </>
+            )}
           </div>
         </div>
       </div>

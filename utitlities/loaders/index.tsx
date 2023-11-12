@@ -16,7 +16,8 @@ const style = css`
 const Div = styled.div`
   ${style}
   height: 100px;
-  width: 100px;
+  width: 150px;
+  background:"#333333AD"
 `;
 
 const Loader = () => {

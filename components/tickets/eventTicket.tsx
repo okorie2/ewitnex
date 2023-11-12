@@ -74,7 +74,7 @@ const EventTicket = (props: IEventTicket) => {
                 paddingRight: "5px",
               }}
             >
-              {props.id}
+              {props.id.slice(0,8)}
             </span>
             {props.label}
           </p>
@@ -105,11 +105,14 @@ const EventTicket = (props: IEventTicket) => {
             height: "140px",
             padding: "0.6rem",
             fontFamily: "'Open Sans', sans-serif",
+            display:"flex",
+            flexDirection:"column",
+            justifyContent:"space-around"
           }}
         >
           <p
             css={{
-              fontSize: "1.625rem",
+              fontSize: "1.5rem",
               fontWeight: "bold",
               textAlign: "center",
               marginBottom: "0.2rem",
@@ -119,7 +122,7 @@ const EventTicket = (props: IEventTicket) => {
           </p>
           <p
             css={{
-              fontSize: "2.375rem",
+              fontSize: "1.6rem",
               fontWeight: "500",
               textAlign: "center",
               marginBottom: "0.2rem",
