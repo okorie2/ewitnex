@@ -8,6 +8,7 @@ import { useMediaQuery } from "@mui/material";
 import SettingsModal from "@/components/modals/settingsModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { IUserDetails } from "types/user";
 
 const PersonalInformation = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -34,6 +35,11 @@ const PersonalInformation = () => {
       }
     }
   }, [settingsModalOpen]);
+  const [user,setUser] = useState<IUserDetails>()
+  
+  useEffect(() => {
+   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
   return (
     <>
       <SettingsModal
@@ -85,12 +91,12 @@ const PersonalInformation = () => {
         >
           <SettingsFormCard
             label={"Full Name"}
-            cardTitle={"Blessed Onoriode"}
+            cardTitle={`${user?.firstName || ""} ${user?.lastName || ""}`}
             onClick={() => handleSettingsModalOpen("fullName")}
           />
           <SettingsFormCard
             label={"Username"}
-            cardTitle={"Blessed_one"}
+            cardTitle={user?.username || ""}
             onClick={() => handleSettingsModalOpen("userName")}
           />
           <SettingsFormCard
@@ -105,20 +111,20 @@ const PersonalInformation = () => {
                 />
               </div>
             }
-            cardTitle={"+234 9077728899"}
+            cardTitle={`+234 ${user?.phoneNumber.toString().split("").slice(3,).join("")}`}
           />
           <SettingsFormCard
             label={"Email Address"}
-            cardTitle={"blessedonoriode@gmail.com"}
+            cardTitle={user?.email || ""}
           />
           <SettingsFormCard
             label={"Gender"}
-            cardTitle={"Prefer not to say"}
+            cardTitle={user?.gender || ""}
             onClick={() => handleSettingsModalOpen("gender")}
           />
           <SettingsFormCard
             label={"Location"}
-            cardTitle={"Lagos,Lagos,Nigeria"}
+            cardTitle={user?.city.city || ""}
             onClick={() => handleSettingsModalOpen("location")}
           />
         </div>

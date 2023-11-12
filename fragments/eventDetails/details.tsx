@@ -8,34 +8,37 @@ import Image from "next/image";
 import ContactOrganizerModal from "@/components/modals/programModal/contactOrganizerModal";
 import ReportEventModal from "@/components/modals/programModal/reportEventModal";
 import EventCountdown from "@/components/events/eventCountdown";
-import {useRouter} from 'next/router'
+import { useRouter } from "next/router";
 import MobileModal from "@/components/modals/programModal/mobileModal";
 
 const EventDetails = () => {
   const router = useRouter();
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [favorite, setFavourite] = React.useState(false);
-  const [mobileModalOpen, setMobileModalOpen] = useState(false)  
+  const [mobileModalOpen, setMobileModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contactOrganizerModalOpen, setContactOrganizerModalOpen] =
     useState(false);
   const [reportEventModalOpen, setReportEventModalOpen] = useState(false);
   const handleMenuOpen = () => {
-    if(isTablet){
-      setMobileModalOpen(!mobileModalOpen)
-    }else{
+    if (isTablet) {
+      setMobileModalOpen(!mobileModalOpen);
+    } else {
       setIsMenuOpen(!isMenuOpen);
     }
   };
-  useEffect (() => {
-    const html = document.querySelector('html')
-    if (html) { 
-      html.style.overflow = mobileModalOpen ? "hidden" : "auto"
+  useEffect(() => {
+    const html = document.querySelector("html");
+    if (html) {
+      html.style.overflow = mobileModalOpen ? "hidden" : "auto";
     }
-  }, [mobileModalOpen])
+  }, [mobileModalOpen]);
   return (
     <div>
-      <MobileModal shown={mobileModalOpen} setClose={() => setMobileModalOpen(!mobileModalOpen)} />
+      <MobileModal
+        shown={mobileModalOpen}
+        setClose={() => setMobileModalOpen(!mobileModalOpen)}
+      />
       {isMenuOpen && (
         <div
           css={{
@@ -92,28 +95,30 @@ const EventDetails = () => {
             position: "absolute",
             top: "3%",
             right: "2%",
-           
+
             // opacity: "85%",
           }}
           onClick={handleMenuOpen}
         >
-          <div css = {{
-            opacity:"85%",
-            height: "41px",
-            width: "41px",
-            borderRadius: "50%",
-            backgroundColor: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor:"pointer",
-          }}>
-          <Image
-            src="/assets/svgs/ellipse.svg"
-            alt="card_img"
-            width={20.98}
-            height={19.39}
-          />
+          <div
+            css={{
+              opacity: "85%",
+              height: "41px",
+              width: "41px",
+              borderRadius: "50%",
+              backgroundColor: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <Image
+              src="/assets/svgs/ellipse.svg"
+              alt="card_img"
+              width={20.98}
+              height={19.39}
+            />
           </div>
           {isMenuOpen && (
             <div
@@ -123,7 +128,7 @@ const EventDetails = () => {
                 height: 155,
                 width: 240,
                 left: "-525%",
-                top:"2.2rem",
+                top: "2.2rem",
                 right: "0",
                 zIndex: "2",
                 display: "flex",
@@ -140,7 +145,7 @@ const EventDetails = () => {
                   ":hover": { color: "#7c35ab" },
                   display: "flex",
                   gap: "10%",
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
               >
                 <Image
@@ -158,7 +163,7 @@ const EventDetails = () => {
                   ":hover": { color: "#7c35ab" },
                   display: "flex",
                   gap: "10%",
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => setContactOrganizerModalOpen(true)}
               >
@@ -177,7 +182,7 @@ const EventDetails = () => {
                   ":hover": { color: "#7c35ab" },
                   display: "flex",
                   gap: "10%",
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => setReportEventModalOpen(!reportEventModalOpen)}
               >
@@ -205,8 +210,8 @@ const EventDetails = () => {
         />
         <div
           css={{
-            width: isTablet ? "44%":"193px",
-            height: isTablet ?"200px":"266px",
+            width: isTablet ? "44%" : "193px",
+            height: isTablet ? "200px" : "266px",
             borderRadius: "10px",
             backgroundColor: "#fff",
             boxShadow: `0px 0px 10px ${"#00000029"}`,
@@ -233,7 +238,7 @@ const EventDetails = () => {
             width: "41px",
             borderRadius: "50%",
             backgroundColor: "#fff",
-            display: isTablet ? "none":"flex",
+            display: isTablet ? "none" : "flex",
             alignItems: "center",
             justifyContent: "center",
             position: "absolute",
@@ -255,9 +260,9 @@ const EventDetails = () => {
         <div
           css={{
             minWidth: "77%",
-            width:"82%",
+            width: "82%",
             marginLeft: "auto",
-            position:"relative",
+            position: "relative",
             [screen.desktopLg]: {
               width: "78%",
             },
@@ -270,9 +275,9 @@ const EventDetails = () => {
           <h1
             css={{
               marginBlock: "1rem 0.5rem",
-              fontSize: isTablet? "1.8rem":"2.5rem",
+              fontSize: isTablet ? "1.8rem" : "2.5rem",
               fontWeight: "700",
-              marginTop:isTablet ? "10rem" :""
+              marginTop: isTablet ? "10rem" : "",
             }}
           >
             Medical Crusade with Doctor West
@@ -295,7 +300,7 @@ const EventDetails = () => {
               display: "grid",
               gridTemplateColumns: "auto ",
               [screen.desktopLg]: {
-                gridTemplateColumns: isTablet ? "1fr":"1.2fr 0.8fr",
+                gridTemplateColumns: isTablet ? "1fr" : "1.2fr 0.8fr",
               },
             }}
           >
@@ -365,7 +370,7 @@ const EventDetails = () => {
                 </p>
               </div>
             </div>
-            <div css={{ marginRight: isTablet ? "1rem": "2rem" }}>
+            <div css={{ marginRight: isTablet ? "1rem" : "2rem" }}>
               <div
                 css={{
                   display: "grid",
@@ -481,7 +486,7 @@ const EventDetails = () => {
             </div>
           </div>
         </div>
-        <div css={{ paddingInline:"2%", marginBlock: "2.5rem" }}>
+        <div css={{ paddingInline: "2%", marginBlock: "2.5rem" }}>
           <div
             css={{
               display: "flex",
@@ -494,7 +499,12 @@ const EventDetails = () => {
             <p>About</p>
           </div>
           <div css={{ marginTop: "1.25rem" }}>
-            <p css={{ lineHeight: "22px", fontSize: isTablet ? "0.85rem":"0.875rem" }}>
+            <p
+              css={{
+                lineHeight: "22px",
+                fontSize: isTablet ? "0.85rem" : "0.875rem",
+              }}
+            >
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -506,7 +516,12 @@ const EventDetails = () => {
               Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
               dolor sit amet.
             </p>
-            <p css={{ lineHeight: "22px", fontSize: isTablet ? "0.85rem":"0.875rem" }}>
+            <p
+              css={{
+                lineHeight: "22px",
+                fontSize: isTablet ? "0.85rem" : "0.875rem",
+              }}
+            >
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -518,7 +533,12 @@ const EventDetails = () => {
               Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
               dolor sit amet.
             </p>
-            <p css={{ lineHeight: "22px", fontSize: isTablet ? "0.85rem":"0.875rem" }}>
+            <p
+              css={{
+                lineHeight: "22px",
+                fontSize: isTablet ? "0.85rem" : "0.875rem",
+              }}
+            >
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo
@@ -555,24 +575,28 @@ const EventDetails = () => {
               name="John Bosko"
               title="Software Engineer"
               role="Performer"
+              id={""}
             />
             <Performer
               img="/assets/pngs/speaker2.png"
               name="John Bosko"
               title="Software Engineer"
               role="Performer"
+              id={""}
             />
             <Performer
               img="/assets/pngs/speaker3.png"
               name="John Bosko"
               title="Software Engineer"
               role="Speaker"
+              id={""}
             />
             <Performer
               img="/assets/pngs/speaker4.png"
               name="John Bosko"
               title="Software Engineer"
               role="Speaker"
+              id={""}
             />
           </div>
         </div>

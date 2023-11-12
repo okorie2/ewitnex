@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import SettingsTextField from "@/components/inputs/SettingsInput";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "styles/components/button";
 import GenderType from "@/components/signupComponents/selectGender";
 import { Box } from "@mui/material";
+import { IUserDetails } from "types/user";
 import { useMediaQuery } from "@mui/material";
 
 const GenderModal = ({ closeModal, setSuccess }: { closeModal: () => void, setSuccess: () => void }) => {
@@ -17,6 +18,7 @@ const GenderModal = ({ closeModal, setSuccess }: { closeModal: () => void, setSu
   const handleNext = () => {
     setSuccess()
   };
+  
   return (
     <div css={{ width: "100%", padding: isTablet ? "" : "1rem" }}>
       <div

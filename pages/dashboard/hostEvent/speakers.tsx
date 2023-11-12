@@ -18,13 +18,17 @@ const Speakers = () => {
   const newSpeakerRef = useRef<HTMLInputElement>(null);
   const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
   const [willBePerformers, setWillBePerformers] = useState("Yes");
-  const [getPerformers, setGetPerformers] = useState(true)
-  const [performers , setPerformers] = useState({
-    nameOfPerformer: "",
-    performerTitle:"",
-    performerRole:"",
-    performerImage:""
-  })
+  const [getPerformers, setGetPerformers] = useState(true);
+  const [performers, setPerformers] = useState<
+    {
+      nameOfPerformer: string;
+      performerTitle: string;
+      performerRole: string;
+      performerImage: string;
+      aboutPerformer: string;
+      _id: string;
+    }[]
+  >();
 
   const handleNewSpeakerClick = () => {
     if (willBePerformers) {
@@ -39,24 +43,25 @@ const Speakers = () => {
   };
 
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ getEvent }) => getEvent);
-  const [eventID,setEventID] = useState("")
+  const { loading } = useAppSelector(({ event }) => event);
+  const [eventID, setEventID] = useState("");
   useEffect(() => {
-      setEventID(localStorage.getItem("currenteventID") || "");
-  },[])
+    setEventID(localStorage.getItem("currenteventID") || "");
+    setPerformers(JSON.parse(sessionStorage.getItem("performers") || "{}"));
+  }, []);
 
   useEffect(() => {
     const getPerformers = () => {
       dispatch(getEventById(eventID)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
-          const data = JSON.parse(sessionStorage.getItem("performers") || "{}")
-          let performers = data?.data?.performer
-          setPerformers(performers)
+          const data = JSON.parse(sessionStorage.getItem("performers") || "{}");
+          let performers = data;
+          setPerformers(performers);
         }
       });
-    }
-    getPerformers()
-  },[getPerformers])
+    };
+    getPerformers();
+  }, [getPerformers]);
 
   const handleChange = (
     e:
@@ -64,14 +69,18 @@ const Speakers = () => {
       | SelectChangeEvent
   ) => {
     setWillBePerformers(e.target.value);
+    if (isTablet) {
+      setAddSpeakerModalOpen(!addSpeakerModalOpen);
+    }
   };
 
   return (
     <HostEventLayout>
       <AddSpeakerModal
         isOpen={addSpeakerModalOpen}
-        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)} speakerRef={newSpeakerRef}
-        setGetPerformers = {setGetPerformers}
+        onRequestClose={() => setAddSpeakerModalOpen(!addSpeakerModalOpen)}
+        speakerRef={newSpeakerRef}
+        setGetPerformers={setGetPerformers}
       />
       <div css={{ width: isTablet ? "100vw" : "" }}>
         <div
@@ -187,7 +196,10 @@ const Speakers = () => {
               value={willBePerformers}
             />
             {!isTablet && willBePerformers === "Yes" && (
-              <AddSpeakerForm speakerRef={newSpeakerRef} setGetPerformers = {setGetPerformers} />
+              <AddSpeakerForm
+                speakerRef={newSpeakerRef}
+                setGetPerformers={setGetPerformers}
+              />
             )}
           </div>
           <div
@@ -227,39 +239,38 @@ const Speakers = () => {
                 css={{
                   display: "flex",
                   gap: "1.5rem",
-                  flexWrap: isTablet ? "wrap" : "nowrap",
+                  flexWrap: "wrap",
                 }}
               >
-               
-                <div>
-                  <Speaker
-                    name={performers.nameOfPerformer}
-                    title={performers.performerTitle}
-                    role={performers.performerRole}
-                    img={performers.performerImage}
-                  />
-                </div>
-                <div>
-                  <Speaker
-                    name="John Bosko"
-                    title="Software Engineer"
-                    role="Speaker"
-                    img="/assets/pngs/speaker5.png"
-                  />
-                </div>
-                <div>
-                  <Speaker
-                    name="Jordan Mike"
-                    title="Product Designer"
-                    role="Artiste"
-                    img="/assets/pngs/speaker6.png"
-                  />
-                </div>
+                {performers && performers.length > 0 ? (
+                  performers?.map((performer) => {
+                    return (
+                      <div key={performer._id}>
+                        <Speaker
+                          name={performer.nameOfPerformer}
+                          title={performer.performerTitle}
+                          role={performer.performerRole}
+                          img={performer.performerImage}
+                          id={performer._id}
+                        />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+                {performers && performers.length < 1 && (
+                  <p css={{ fontSize: "14px" }}>
+                    {" "}
+                    No performers have been added to this event{" "}
+                  </p>
+                )}
               </div>
               <div>
                 <p css={{ fontSize: "0.875rem" }}>
-                  If this event has multiple performers, click on the button
-                  below to add another performer
+                  {performers && performers.length < 1
+                    ? "Click here to add a performer"
+                    : "If this event has multiple performers, click on the button below to add another performer"}
                 </p>
                 <button
                   css={{
@@ -277,7 +288,9 @@ const Speakers = () => {
                   }}
                   onClick={handleNewSpeakerClick}
                 >
-                  + Add Another Performer
+                  {performers && performers.length < 1
+                    ? "Add Performer"
+                    : " + Add Another Performer"}
                 </button>
               </div>
             </div>

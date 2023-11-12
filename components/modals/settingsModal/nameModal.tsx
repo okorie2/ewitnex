@@ -1,13 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import SettingsTextField from "@/components/inputs/SettingsInput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "styles/components/button";
 import Image from 'next/image'
 import { useMediaQuery } from "@mui/material";
+import { IUserDetails } from "types/user";
 
 const NameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSuccess: () => void}) => {
+  const [user,setUser] = useState<IUserDetails>()
+  useEffect(() => {
+   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
+
   const [formDetails, setFormDetails] = useState({
-    firstName: "",
+    firstName:  "",
     lastName: "",
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,6 +23,7 @@ const NameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSuccess: (
   const handleNext = () => {setSuccess()};
   const isTablet = useMediaQuery("(max-width: 780px)");
 
+  
   return (
     <div css={{ width: "100%", padding: isTablet ? "":"1rem" }}>
       <div css = {{
@@ -52,14 +59,14 @@ const NameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSuccess: (
           label={"First Name"}
           name="firstName"
           value={formDetails.firstName}
-          placeholder={"Blessed"}
+          placeholder={user?.firstName || ""}
           setValue={handleChange}
         />
         <SettingsTextField
           label={"Last Name"}
           name="lastName"
           value={formDetails.lastName}
-          placeholder={"Onoriode"}
+          placeholder={user?.lastName || ""}
           setValue={handleChange}
         />
         <div

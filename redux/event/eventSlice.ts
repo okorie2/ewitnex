@@ -1,64 +1,62 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { addPerformer, createEvent, eventLocation, fileUpload } from './thunkAction';
-import { ICreateEvent, IEventFiles, IEventLocation } from 'types/event';
+import { createSlice } from "@reduxjs/toolkit";
+import { deleteEventById, getEventById, getEvents } from "./thunkAction";
+import { IEvent } from "types/event";
 interface IState {
-    loading: 'failed' | 'loading' | 'successful' | 'idle';
-    createEventData:ICreateEvent
-    fileUploadData:IEventFiles
-    eventLocationData: IEventLocation
+  loading: "failed" | "loading" | "successful" | "idle";
+  events: IEvent[];
 }
 const initialState: IState = {
-    loading: 'idle',
-    createEventData: <ICreateEvent>{},
-    fileUploadData:<IEventFiles>{},
-    eventLocationData :<IEventLocation>{}
+  loading: "idle",
+  events: [],
 };
-const eventSlice = createSlice({
-    name: 'event',
-    initialState,
-    reducers: {},
-    extraReducers(builder) {
-        builder.addCase(createEvent.pending, (state) => {
-            return { ...state, loading: 'loading' };
-        });
+const EventSlice = createSlice({
+  name: "event",
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(getEventById.pending, (state) => {
+      return { ...state, loading: "loading" };
+    });
 
-        builder.addCase(createEvent.fulfilled, (state, action) => {
-            return { ...state, loading: 'successful', createEventData: action.payload};
-        });
-        builder.addCase(createEvent.rejected, (state) => {
-            return { ...state, loading: 'failed' };
-        });
-        builder.addCase(fileUpload.pending, (state) => {
-            return { ...state, loading: 'loading' };
-        });
+    builder.addCase(getEventById.fulfilled, (state) => {
+      return { ...state, loading: "successful" };
+    });
+    builder.addCase(getEventById.rejected, (state) => {
+      return { ...state, loading: "failed" };
+    });
+    builder.addCase(deleteEventById.pending, (state) => {
+      return { ...state, loading: "loading" };
+    });
 
-        builder.addCase(fileUpload.fulfilled, (state, action) => {
-            return { ...state, loading: 'successful', fileUploadData: action.payload};
-        });
-        builder.addCase(fileUpload.rejected, (state) => {
-            return { ...state, loading: 'failed' };
-        });
-        builder.addCase(eventLocation.pending, (state) => {
-            return { ...state, loading: 'loading' };
-        });
+    builder.addCase(deleteEventById.fulfilled, (state) => {
+      return { ...state, loading: "successful" };
+    });
+    builder.addCase(deleteEventById.rejected, (state) => {
+      return { ...state, loading: "failed" };
+    });
+    builder.addCase(getEvents.pending, (state) => {
+      return {
+        ...state,
+        loading: "loading",
+      };
+    });
 
-        builder.addCase(eventLocation.fulfilled, (state, action) => {
-            return { ...state, loading: 'successful', eventLocationData: action.payload};
-        });
-        builder.addCase(eventLocation.rejected, (state) => {
-            return { ...state, loading: 'failed' };
-        });
-        builder.addCase(addPerformer.pending, (state) => {
-            return { ...state, loading: 'loading' };
-        });
+    builder.addCase(getEvents.fulfilled, (state, action) => {
+        console.log(action.payload, "action")
+      return {
+        ...state,
+        loading: "successful",
+        events: action.payload,
+      };
+    });
 
-        builder.addCase(addPerformer.fulfilled, (state) => {
-            return { ...state, loading: 'successful'};
-        });
-        builder.addCase(addPerformer.rejected, (state) => {
-            return { ...state, loading: 'failed' };
-        });
-    },
+    builder.addCase(getEvents.rejected, (state) => {
+      return {
+        ...state,
+        loading: "failed",
+      };
+    });
+  },
 });
 
-export const EventReducer = eventSlice.reducer;
+export const EventReducer = EventSlice.reducer;

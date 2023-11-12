@@ -66,7 +66,7 @@ const FollowersFragment = ({
                 : inactiveButtonStyle
             }
           >
-            1000K Followers
+            0 Followers
           </button>
           <button
             onClick={handleShowFollowing}
@@ -76,7 +76,7 @@ const FollowersFragment = ({
                 : inactiveButtonStyle
             }
           >
-            500K Following
+            0 Following
           </button>
         </div>
         <div

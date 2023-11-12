@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { RefObject, useState } from "react";
 import Modal from "react-modal";
 import { screen } from "styles/theme";
 import Image from "next/image";
@@ -16,6 +16,8 @@ import AddTicketForm from "fragments/hostEvent/addTicketForm";
 interface IAddTicketModal {
   isOpen: boolean;
   onRequestClose: () => void;
+  ticketRef : RefObject<HTMLInputElement>
+  setGetTickets : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const customStyles = {
@@ -139,7 +141,7 @@ const AddTicketModal = (props: IAddTicketModal) => {
 
               }}
             >
-              <AddTicketForm />
+              <AddTicketForm ticketRef={props.ticketRef} setGetTickets = {props.setGetTickets} handleModalClose={handleClose}/>
             </div>
       </div>
     </Modal>
