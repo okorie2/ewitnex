@@ -222,7 +222,7 @@ const Speakers = () => {
           >
             <div
               css={{
-                width: "70%",
+                width: "100%",
                 display: "grid",
                 gap: "1rem",
                 [screen.lg]: {
@@ -252,6 +252,7 @@ const Speakers = () => {
                           role={performer.performerRole}
                           img={performer.performerImage}
                           id={performer._id}
+                          setGetPerformers={setGetPerformers}
                         />
                       </div>
                     );
@@ -266,7 +267,7 @@ const Speakers = () => {
                   </p>
                 )}
               </div>
-              <div>
+              {isTablet && <div>
                 <p css={{ fontSize: "0.875rem" }}>
                   {performers && performers.length < 1
                     ? "Click here to add a performer"
@@ -292,11 +293,11 @@ const Speakers = () => {
                     ? "Add Performer"
                     : " + Add Another Performer"}
                 </button>
-              </div>
+              </div>}
             </div>
             <div
               css={{
-                width: isTablet ? "100%" : "80%",
+                width: isTablet ? "100%" : "100%",
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "1rem",

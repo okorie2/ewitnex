@@ -40,6 +40,7 @@ export interface IPerformer {
   role: string;
   title: string;
   id: string;
+  setGetPerformers?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IReqPerformer {

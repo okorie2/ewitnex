@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "redux/store";
 
@@ -51,6 +52,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             />
             <link rel="manifest" href="/site.webmanifest" />
           </Head>
+          <Toaster />
           <Component {...pageProps} />
       </Provider>
     </>

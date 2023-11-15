@@ -18,7 +18,6 @@ const FileUpload = () => {
   const { fileUploadData } = useAppSelector(
     ({ hostEvent }) => hostEvent
   );
-  console.log(fileUploadData)
   const addPDFRef = useRef<HTMLInputElement>(null);
   const addCoverImageRef = useRef<HTMLInputElement>(null);
 

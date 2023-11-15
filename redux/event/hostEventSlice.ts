@@ -3,6 +3,7 @@ import {
   addPerformer,
   addTicket,
   createEvent,
+  deletePerformer,
   eventLocation,
   fileUpload,
 } from "./thunkAction";
@@ -74,6 +75,16 @@ const hostEventSlice = createSlice({
       return { ...state, loading: "successful" };
     });
     builder.addCase(addPerformer.rejected, (state) => {
+      return { ...state, loading: "failed" };
+    });
+    builder.addCase(deletePerformer.pending, (state) => {
+      return { ...state, loading: "loading" };
+    });
+
+    builder.addCase(deletePerformer.fulfilled, (state) => {
+      return { ...state, loading: "successful" };
+    });
+    builder.addCase(deletePerformer.rejected, (state) => {
       return { ...state, loading: "failed" };
     });
     builder.addCase(addTicket.pending, (state) => {

@@ -20,6 +20,7 @@ interface Props {
   type?: string;
   width?: string;
   error?: string;
+  required?:boolean
 }
 
 export default function SettingsTextField({ label, name, ...rest }: Props) {
@@ -99,6 +100,7 @@ export default function SettingsTextField({ label, name, ...rest }: Props) {
           onClick={() => setDivFocus(true)}
           type={rest.type || "text"}
           value={rest.value}
+          required = {rest.required}
           name={name}
           disabled={rest.disabled}
           placeholder={rest.placeholder}

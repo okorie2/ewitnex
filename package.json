@@ -25,11 +25,13 @@
     "echarts-for-react": "^3.0.2",
     "eslint": "8.30.0",
     "eslint-config-next": "13.1.0",
+    "lodash": "^4.17.21",
     "nanoid": "^4.0.2",
     "next": "13.1.0",
     "react": "18.2.0",
     "react-data-table-component": "^7.5.3",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^4.7.1",
     "react-loader-spinner": "^5.3.4",
     "react-modal": "^3.16.1",
@@ -45,6 +47,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.201",
     "@types/react-modal": "^3.16.0",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^9.0.2"

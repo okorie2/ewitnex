@@ -19,8 +19,10 @@ interface IHostEventTextField {
   height?: string;
   image?: string;
   options?: { value: string; label: string }[];
-  setValue: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void | ((e:SelectChangeEvent) => void)
-  required?:boolean
+  setValue: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void | ((e: SelectChangeEvent) => void);
+  required?: boolean;
 }
 const HostEventTextField = React.forwardRef(
   (props: IHostEventTextField, ref: Ref<HTMLInputElement>) => {
@@ -50,7 +52,7 @@ const HostEventTextField = React.forwardRef(
             name={props.name}
             onChange={(e) => props.setValue(e)}
             ref={ref}
-            required = {props.required}
+            required={props.required}
             css={{
               height: props.height ? props.height : "3.3rem",
               width: "100%",
@@ -81,7 +83,7 @@ const HostEventTextField = React.forwardRef(
               defaultValue={props.placeholder}
               value={props.value}
               name={props.name}
-              required = {props.required}
+              required={props.required}
               onChange={props.setValue}
               sx={{
                 width: "100%",
@@ -89,13 +91,13 @@ const HostEventTextField = React.forwardRef(
                 opacity: 0.9,
                 borderRadius: "10px",
                 border: `none`,
-                  ":hover": {
-                    fieldset: {
-                      "&.MuiOutlinedInput-notchedOutline": {
-                        border: "2px solid #7C35AB",
-                      },
+                ":hover": {
+                  fieldset: {
+                    "&.MuiOutlinedInput-notchedOutline": {
+                      border: "2px solid #7C35AB",
                     },
                   },
+                },
                 fieldset: {
                   "&.MuiOutlinedInput-notchedOutline": {
                     border: "1px solid #AEAEAE",
@@ -137,6 +139,7 @@ const HostEventTextField = React.forwardRef(
             name={props.name}
             value={props.value}
             onChange={(e) => props.setValue(e)}
+            required={props.required}
             disabled={props.disabled}
             css={{
               height: props.height ? props.height : "8.25rem",
@@ -163,5 +166,5 @@ const HostEventTextField = React.forwardRef(
     );
   }
 );
-HostEventTextField.displayName = "HostEventTextField"
+HostEventTextField.displayName = "HostEventTextField";
 export default HostEventTextField;
