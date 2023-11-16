@@ -38,7 +38,7 @@ const AddSpeakerForm = ({
         aboutPerformer: "",
       },
     ],
-    performerImage: undefined,
+    performerImage: null,
   });
   const handleImageClick = () => {
     if (inputRef.current != null) {
@@ -112,6 +112,7 @@ const AddSpeakerForm = ({
           ref={newSpeakerRef}
           value={formData.newPerformers[0].nameOfPerformer}
           setValue={handleChange}
+          required
         />
         <HostEventTextField
           label="Performer Title"
@@ -120,6 +121,7 @@ const AddSpeakerForm = ({
           name="performerTitle"
           value={formData.newPerformers[0].performerTitle}
           setValue={handleChange}
+          required
         />
         <HostEventTextField
           label="Performing Role"
@@ -138,6 +140,7 @@ const AddSpeakerForm = ({
             { value: "Others", label: "Others" },
           ]}
           setValue={handleChange}
+          required
         />
         <HostEventTextField
           label="About Performer"
@@ -147,6 +150,7 @@ const AddSpeakerForm = ({
           name="aboutPerformer"
           setValue={handleChange}
           color="#000"
+          required
         />
         <div>
           <p

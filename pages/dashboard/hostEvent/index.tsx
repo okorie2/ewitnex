@@ -538,7 +538,7 @@ const HostEvent = () => {
               }}
               // onClick={() => handleDraft}
             >
-              {loading === "loading" ? (
+              {/* {loading === "loading" ? (
                 <div css={{ display: "flex", gap: "0.75rem" }}>
                   <p>Drafting..</p>
                   <TailSpin
@@ -551,7 +551,8 @@ const HostEvent = () => {
                 </div>
               ) : (
                 "SAVE TO DRAFT"
-              )}
+              )} */}
+              SAVE TO DRAFT
             </button>
             <ButtonFormFilled>
               {loading === "loading" ? (

@@ -81,7 +81,11 @@ export const eventLocation = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        if(message.message.includes("Cast to date")){
+          toast.error("Reselect date")
+        }else{
+          toast.error(message.message)
+        }
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -106,9 +110,12 @@ export const addPerformer = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        const message = error.response.data as { message: string };
+        const message = error.response.data as {status:number , message: string };
         console.log(message.message, "error message");
         toast.error(message.message)
+        // if(message.status.toString().startsWith("4")){
+        //   toast.error("Not authorized")
+        // }
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));

@@ -12,6 +12,7 @@ import { IEventFiles } from "types/event";
 import { useRouter } from "next/router";
 import { fileUpload } from "redux/event/thunkAction";
 import { TailSpin } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 const FileUpload = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -65,6 +66,13 @@ const FileUpload = () => {
   useEffect(() => {
       setEventID(localStorage.getItem("currenteventID") || "");
   },[])
+
+  useEffect(() => {
+    if(localStorage.getItem("currenteventID") === null ){
+        toast.error("No current event")
+        router.push("/dashboard/hostEvent")
+    }
+  },[eventID])
 
   const handleNext = () => {
     // if(fileUploadData){

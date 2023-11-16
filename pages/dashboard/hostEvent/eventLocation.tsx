@@ -16,6 +16,7 @@ import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { eventLocation } from "redux/event/thunkAction";
 import { IEventLocation } from "types/event";
 import { TailSpin } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 const EventLocation = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -140,6 +141,13 @@ const EventLocation = () => {
   useEffect(() => {
     setEventID(localStorage.getItem("currenteventID") || "");
   }, []);
+
+  useEffect(() => {
+    if(localStorage.getItem("currenteventID") === null ){
+        toast.error("No current event")
+        router.push("/dashboard/hostEvent")
+    }
+  },[eventID])
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

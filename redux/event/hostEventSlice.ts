@@ -78,7 +78,7 @@ const hostEventSlice = createSlice({
       return { ...state, loading: "failed" };
     });
     builder.addCase(deletePerformer.pending, (state) => {
-      return { ...state, loading: "loading" };
+      return { ...state };
     });
 
     builder.addCase(deletePerformer.fulfilled, (state) => {

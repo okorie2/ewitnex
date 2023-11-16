@@ -52,7 +52,7 @@ export interface IReqPerformer {
       aboutPerformer: string;
     }
   ];
-  performerImage: File | undefined;
+  performerImage: File | undefined | null;
 }
 
 export interface ITicket {

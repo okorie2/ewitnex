@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import MobileModal from "@/components/modals/programModal/mobileModal";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEventById } from "redux/event/thunkAction";
+import { IEvent } from "types/event";
+import { formatNumber } from "utitlities/commonHelpers/numberFormatter";
 
 const EventDetails = () => {
   const router = useRouter();
@@ -42,6 +44,24 @@ const EventDetails = () => {
   useEffect(() => {
     dispatch(getEventById(id?.toString() || ""));
   }, []);
+
+  const ticketRange = (event: IEvent) => {
+    const tickets = event.tickets;
+    const ticketPriceArray: number[] = [];
+
+    if (tickets && tickets.length < 1) {
+      return "Free";
+    } else {
+      tickets &&
+        tickets.map((ticket) => {
+          ticketPriceArray.push(ticket.ticketPrice);
+        });
+      ticketPriceArray.sort((a, b) => a - b);
+      return `${
+        ticketPriceArray[0] === 0 ? "Free" : formatNumber(ticketPriceArray[0])
+      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+    }
+  };
 
   return (
     <div>
@@ -404,7 +424,7 @@ const EventDetails = () => {
                     width={25.5}
                     height={21.6}
                   />
-                  <p css={{ color: "#707070" }}>$500 - $2K</p>
+                  <p css={{ color: "#707070" }}>{ticketRange(event)}</p>
                 </div>
                 <div
                   css={{
@@ -419,7 +439,7 @@ const EventDetails = () => {
                     width={24}
                     height={24}
                   />
-                  <p css={{ color: "#707070" }}>609 Attending</p>
+                  <p css={{ color: "#707070" }}>0 Attending</p>
                 </div>
               </div>
               <div
