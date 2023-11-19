@@ -14,6 +14,7 @@ import ReportEventModal from "@/components/modals/programModal/reportEventModal"
 import Link from "next/link";
 import TicketDetailsFragment from "fragments/tickets/ticketDetailsFragment";
 import TicketDetailsModal from "@/components/modals/tickets/ticketDetails";
+import EmptyState from "fragments/emptyState";
 import { useRouter } from "next/router";
 
 const Tickets = () => {
@@ -44,7 +45,7 @@ const Tickets = () => {
 
   const handleActiveCardID = (id: string) => {
     setActiveCardID(id);
-    if(isTablet){
+    if (isTablet) {
       setTicketDetailsOpen(!ticketDetailsOpen);
     }
   };
@@ -226,9 +227,7 @@ const Tickets = () => {
                   color: "#000",
                 }}
               >
-                <h2>
-                  {/* DevFest Aba */}
-                  </h2>
+                <h2>{/* DevFest Aba */}</h2>
                 <div
                   css={{ cursor: "pointer", position: "relative" }}
                   onClick={handleMenuOpen}
@@ -387,8 +386,15 @@ const UpcomingTicketTab = ({
         active={activeCardID}
         onClick={setAsActiveCardID}
       /> */}
+      <div css={{ marginLeft: "-10vw", marginTop: "4vh" }}>
+        <EmptyState>
+          <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+            <p>You do not have any upcoming tickets</p>
+          </div>
+          <Link href="/dashboard/hostEvent"></Link>
+        </EmptyState>
+      </div>
       <br />
-      
     </div>
   );
 };
@@ -414,7 +420,15 @@ const PreviousTicketTab = ({
         id="Tec542445"
         active={activeCardID}
         onClick={setAsActiveCardID}
-      /> */}
+      />*/}
+      <div css={{ marginLeft: "-10vw", marginTop: "4vh" }}>
+        <EmptyState>
+          <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+            <p>You do not have any previous tickets</p>
+          </div>
+          <Link href="/dashboard/hostEvent"></Link>
+        </EmptyState>
+      </div>
     </div>
   );
 };

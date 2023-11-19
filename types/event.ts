@@ -87,7 +87,7 @@ export interface ReqTicket {
 }
 
 export interface IEvent {
-  EventTitle:string
+  EventTitle: string;
   OrganizedBy: string;
   category: string;
   createdAt: string;
@@ -101,23 +101,25 @@ export interface IEvent {
     searchLocation: string;
     startDate: string;
     type: string;
+    selectHost: string;
+    hostUrl: string;
   };
   performers: {
-    aboutPerformer: string,
-    nameOfPerformer: string,
-    performerImage: string,
-    performerRole: string,
-    performerTitle: string,
-    _id: string
+    aboutPerformer: string;
+    nameOfPerformer: string;
+    performerImage: string;
+    performerRole: string;
+    performerTitle: string;
+    _id: string;
   }[];
   tickets: {
-    ticketHandle: string,
-    ticketName: string,
-    ticketPrice: number,
-    ticketQty: number,
-    ticketRefund: string,
-    ticketType: string,
-    _id: string
+    ticketHandle: string;
+    ticketName: string;
+    ticketPrice: number;
+    ticketQty: number;
+    ticketRefund: string;
+    ticketType: string;
+    _id: string;
   }[];
   updatedAt: string;
   _id: string;

@@ -5,6 +5,7 @@ import { useAxios } from 'utitlities/hooks/useAxios';
 import { ISignInRes, ISignUpRes } from 'types/user';
 import { IFormData } from 'pages/auth/signup/form';
 import { ISignInFormData } from 'pages/auth/signin/form';
+import { setCookie } from "nookies";
 
 export const signUp = createAsyncThunk('auth/signup', async (data: IFormData, thunkAPI) => {
     try {
@@ -39,6 +40,11 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
         const signInData: ISignInRes = response.data;
         localStorage.setItem('token', signInData.token);
         localStorage.setItem('user', JSON.stringify(signInData.user));
+        setCookie(null, "auth", signInData.token, {
+            path: "/",
+            sameSite: "strict",
+            maxAge: 24 * 60 * 60,
+          });
         return response.data.data;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {

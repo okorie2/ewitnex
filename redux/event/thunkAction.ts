@@ -232,9 +232,7 @@ export const getEvents = createAsyncThunk('post/get', async (data: string, thunk
           url: `${config.API_BASE_URL}/events?eventsType=All&page=1&limit=30`,
           method: 'get',
       });
-      //   toast.success(response.data.message);
-      // const signUpData: ISignUpRes = response.data;
-      console.log(response.data.data)
+     
       return response.data.data
   } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

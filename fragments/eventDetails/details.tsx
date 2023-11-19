@@ -14,6 +14,8 @@ import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEventById } from "redux/event/thunkAction";
 import { IEvent } from "types/event";
 import { formatNumber } from "utitlities/commonHelpers/numberFormatter";
+import dayjs from "dayjs";
+import { getOrganizer } from "utitlities/commonHelpers/getOrganizer";
 
 const EventDetails = () => {
   const router = useRouter();
@@ -42,8 +44,9 @@ const EventDetails = () => {
   const { loading, event } = useAppSelector(({ event }) => event);
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
+    console.log(id);
     dispatch(getEventById(id?.toString() || ""));
-  }, []);
+  }, [id]);
 
   const ticketRange = (event: IEvent) => {
     const tickets = event.tickets;
@@ -52,13 +55,17 @@ const EventDetails = () => {
     if (tickets && tickets.length < 1) {
       return "Free";
     } else {
+      if (tickets && tickets.length === 1)
+        return `$${formatNumber(tickets[0].ticketPrice)}`;
       tickets &&
         tickets.map((ticket) => {
           ticketPriceArray.push(ticket.ticketPrice);
         });
       ticketPriceArray.sort((a, b) => a - b);
       return `${
-        ticketPriceArray[0] === 0 ? "Free" : formatNumber(ticketPriceArray[0])
+        ticketPriceArray[0] === 0
+          ? "Free"
+          : `$${formatNumber(ticketPriceArray[0])}`
       } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
     }
   };
@@ -335,7 +342,13 @@ const EventDetails = () => {
             }}
           >
             <div>
-              <EventCountdown />
+              <EventCountdown
+                date={`${dayjs(event.location?.startDate)
+                  .toString()
+                  .split(" ")
+                  .slice(0, -1)
+                  .join(" ")}`}
+              />
               <div
                 css={{
                   display: "grid",
@@ -365,7 +378,12 @@ const EventDetails = () => {
                     fontWeight: "600",
                   }}
                 >
-                  {event.location?.startDate || "Date: TBD"}
+                  <>{
+                    `${dayjs(event.location?.startDate).toString()}
+                    `.includes("Invalid") ? "Date: TBD" : `${dayjs(event.location?.startDate).toString().split(" ")[1]}
+                    ${dayjs(event.location?.startDate).toString().split(" ")[2]}.${dayjs(event.location?.startDate).toString().split(" ")[3]},
+                    ${dayjs(event.location?.startDate).format("hh:mm A")}`}
+                  </>
                 </p>
               </div>
               <div
@@ -397,8 +415,13 @@ const EventDetails = () => {
                   }}
                 >
                   {event.location?.searchLocation ||
-                    event.location?.enterLocation ||
-                    "Venue: TBD"}
+                  event.location?.enterLocation ||
+                  `${event.location?.selectHost}` === "undefined"
+                    ? "Venue: TBD"
+                    : `${event.location?.selectHost}`}
+                </p>
+                <p css={{ fontSize: "0.875rem" }}>
+                  {event.location?.hostUrl && event.location?.hostUrl}
                 </p>
               </div>
             </div>
@@ -464,7 +487,7 @@ const EventDetails = () => {
                       fontWeight: "600",
                     }}
                   >
-                    {event.OrganizedBy?.slice(0, 10) || ""}
+                    {event.OrganizedBy && getOrganizer(event.OrganizedBy)}
                   </p>
                 </div>
                 <button

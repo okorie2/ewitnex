@@ -35,7 +35,7 @@ const EventSpeakers = () => {
         "&::-webkit-scrollbar": {
           display: "none",
         },
-        div: {
+        ">div": {
           display: isTablet ? "flex" : "block",
           flexDirection: "column",
           alignItems: "center",
@@ -54,25 +54,33 @@ const EventSpeakers = () => {
                   position: "relative",
                 }}
               >
-                <Image
-                  src={performer.performerImage}
-                  alt="speaker-img"
-                  fill
-                />
+                <Image src={performer.performerImage} alt="speaker-img" fill />
               </div>
               <div css={{ marginTop: "0.7rem" }}>
                 <h4 css={{ fontSize: "1rem", fontWeight: "700" }}>
                   {performer.nameOfPerformer}
                 </h4>
-                <p
+                <div
                   css={{
+                    display: "flex",
+                    flexDirection: "row",
+                    fontWeight: "600",
                     fontSize: "0.875rem",
-                    marginTop: "0.3rem",
-                    fontWeight: "500",
+                    alignItems: "center",
                   }}
                 >
-                  {performer.performerTitle}
-                </p>
+                  <p>{performer.performerTitle}</p>
+                  <div
+                    css={{
+                      background: "#000",
+                      height: "0.3rem",
+                      width: "0.3rem",
+                      borderRadius: "50%",
+                      marginInline: "0.4rem",
+                    }}
+                  ></div>
+                  <p css={{ fontWeight: "400" }}>{performer.performerRole}</p>
+                </div>
               </div>
               <p
                 css={{
@@ -98,7 +106,6 @@ const EventSpeakers = () => {
           <p>This event does not have any performers</p>
         </>
       )}
-
     </div>
   );
 };

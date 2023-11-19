@@ -2,9 +2,11 @@
 
 import React from "react";
 import { useMediaQuery } from "@mui/material";
+import { useCountDown } from "utitlities/hooks/UseCountDown";
 
-const EventCountdown = () => {
+const EventCountdown = ({date}: {date:string}) => {
   const isTablet = useMediaQuery("(max-width: 900px)");
+  const {days, hours, minutes, seconds } = useCountDown(date)
   return (
     <div
       css={{
@@ -48,7 +50,7 @@ const EventCountdown = () => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>24</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{days}</span>
             Days
           </p>
         </div>
@@ -84,7 +86,7 @@ const EventCountdown = () => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>7</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{hours}</span>
             Hours
           </p>
         </div>
@@ -120,7 +122,7 @@ const EventCountdown = () => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>54</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{minutes}</span>
             Mins
           </p>
         </div>
@@ -156,7 +158,7 @@ const EventCountdown = () => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>20</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{seconds}</span>
             Secs
           </p>
         </div>
