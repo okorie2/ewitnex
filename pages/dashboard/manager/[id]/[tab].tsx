@@ -13,12 +13,12 @@ import TicketSales from "fragments/manageEvents/ticketSales";
 import Attendees from "fragments/manageEvents/attendees";
 
 
-const ManageEventTab = () => {
+const ManageEventTab = ({id}:{id:string}) => {
   const router = useRouter();
   const activeTab = router.query?.tab || ("overview" as string | undefined);
 
   const stateEvents = useMemo(() => {
-    if (activeTab === "Overview") return <EventOverview />;
+    if (activeTab === "Overview") return <EventOverview id = {id}/>;
     else if (activeTab === "TicketSales") return <TicketSales />;
     else if (activeTab === "Attendees") return <Attendees />;
   }, [activeTab]);

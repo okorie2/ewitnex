@@ -22,11 +22,13 @@ import EmptyState from "fragments/emptyState";
 import { Button } from "styles/components/button";
 import Link from "next/link";
 import { TailSpin } from "react-loader-spinner";
+import { useRouter } from "next/router";
 
 const DashboardPrograms = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [active, setActive] = useState("All");
   const [filterSectionOpen, setFilterSectionOpen] = useState(true);
+  const router = useRouter()
 
   const handleActive = (tab: string) => {
     setActive(tab);
@@ -61,8 +63,8 @@ const DashboardPrograms = () => {
   const { loading, events } = useAppSelector(({ event }) => event);
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
-    dispatch(getEvents(""));
-  }, []);
+    dispatch(getEvents(active));
+  }, [active]);
 
   const categories = [
     "All",
@@ -72,6 +74,7 @@ const DashboardPrograms = () => {
     "Weddings",
     "Conference",
     "Sports/Fitness",
+    "Social",
     "Community",
     "Hangouts",
   ];
@@ -340,11 +343,12 @@ const DashboardPrograms = () => {
                         }
                         id={event?._id}
                         eventCode={event?.eventCode}
-                        location={
-                          event.location?.searchLocation ||
-                          event.location?.enterLocation ||
-                          event.location?.selectHost || "Venue: TBD"
-                        }
+                        location={event.location?.type === "live"
+                        ? event.location?.searchLocation ||
+                          event.location?.enterLocation
+                        : `${event.location?.selectHost}` === "undefined"
+                        ? "Venue: TBD"
+                        : `${event.location?.selectHost}`}
                         organizer="Eko Atlantic"
                         priceRange={ticketRange(event)}
                         title={event.EventTitle}

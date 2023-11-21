@@ -229,10 +229,9 @@ export const deleteEventById = createAsyncThunk(
 export const getEvents = createAsyncThunk('post/get', async (data: string, thunkAPI) => {
   try {
       const response = await useAxios({
-          url: `${config.API_BASE_URL}/events?eventsType=All&page=1&limit=30`,
+          url: `${config.API_BASE_URL}/events?eventsType=${data}&page=1&limit=30`,
           method: 'get',
       });
-     
       return response.data.data
   } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

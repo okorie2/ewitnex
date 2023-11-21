@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useState } from "react";
 import { Table, TableContainer } from "styles/components/table";
 import StyledCheckbox from "../inputs/StyledCheckbox";
+import EmptyState from "fragments/emptyState";
 
 export interface TableData {
   ticketID: string;
@@ -21,6 +22,7 @@ const TicketSalesTable = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
   };
+  const [showData, setShowData] = useState(false)
   return (
     <TableContainer>
       <Table>
@@ -41,6 +43,7 @@ const TicketSalesTable = () => {
         </thead>
         <tbody>
           {
+            showData && 
             <>
               <TableRow
                 ticketID="#000123456"
@@ -156,6 +159,12 @@ const TicketSalesTable = () => {
           }
         </tbody>
       </Table>
+      {!showData && 
+      <div css = {{marginTop:"2.5rem", marginLeft:"6vw"}}>
+      <EmptyState>
+        <p>This event does not have any sales yet</p>
+      </EmptyState>
+      </div>}
     </TableContainer>
   );
 };

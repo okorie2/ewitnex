@@ -1,16 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
 import Image from "next/image";
-import React from "react";
+import React , { useState } from "react";
 import { Table, TableContainer } from "styles/components/table";
 import { TableData } from "./ticketSales";
 import StyledCheckbox from "../inputs/StyledCheckbox";
+import EmptyState from "fragments/emptyState";
 
 const AttendeesTable = () => {
   const [checked, setChecked] = React.useState(false);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
   };
+  const [showData, setShowData] = useState(false)
+
   return (
     <TableContainer>
       <Table>
@@ -33,6 +36,7 @@ const AttendeesTable = () => {
         </thead>
         <tbody>
           {
+            showData && 
             <>
               <TableRow
                 ticketID="#000123456"
@@ -148,6 +152,12 @@ const AttendeesTable = () => {
           }
         </tbody>
       </Table>
+      {!showData && 
+      <div css = {{marginTop:"2.5rem", marginLeft:"6vw"}}>
+      <EmptyState>
+        <p>This event does not have any attendees yet</p>
+      </EmptyState>
+      </div>}
     </TableContainer>
   );
 };

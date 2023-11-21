@@ -378,10 +378,22 @@ const EventDetails = () => {
                     fontWeight: "600",
                   }}
                 >
-                  <>{
-                    `${dayjs(event.location?.startDate).toString()}
-                    `.includes("Invalid") ? "Date: TBD" : `${dayjs(event.location?.startDate).toString().split(" ")[1]}
-                    ${dayjs(event.location?.startDate).toString().split(" ")[2]}.${dayjs(event.location?.startDate).toString().split(" ")[3]},
+                  <>
+                    {`${dayjs(event.location?.startDate).toString()}
+                    `.includes("Invalid")
+                      ? "Date: TBD"
+                      : `${
+                          dayjs(event.location?.startDate)
+                            .toString()
+                            .split(" ")[1]
+                        }
+                    ${
+                      dayjs(event.location?.startDate).toString().split(" ")[2]
+                    }.${
+                          dayjs(event.location?.startDate)
+                            .toString()
+                            .split(" ")[3]
+                        },
                     ${dayjs(event.location?.startDate).format("hh:mm A")}`}
                   </>
                 </p>
@@ -414,9 +426,10 @@ const EventDetails = () => {
                     fontWeight: "600",
                   }}
                 >
-                  {event.location?.searchLocation ||
-                  event.location?.enterLocation ||
-                  `${event.location?.selectHost}` === "undefined"
+                  {event.location?.type === "live"
+                    ? event.location?.searchLocation ||
+                      event.location?.enterLocation
+                    : `${event.location?.selectHost}` === "undefined"
                     ? "Venue: TBD"
                     : `${event.location?.selectHost}`}
                 </p>

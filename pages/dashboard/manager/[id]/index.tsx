@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "pages/dashboard/layout/layout";
 import Image from "next/image";
 import ManageEventTab from "./[tab]";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@mui/material";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { getEventById } from "redux/event/thunkAction";
 
 const ManageSingleEvent = () => {
   const [activeMenuBar, setActiveMenuBar] = useState("");
@@ -17,6 +19,12 @@ const ManageSingleEvent = () => {
   const { id } = router.query;
   const activeTab = router.query?.tab || ("overview" as string | undefined);
   const isTablet = useMediaQuery("(max-width: 780px)");
+  const { loading, event } = useAppSelector(({ event }) => event);
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    console.log(id);
+    dispatch(getEventById(id?.toString() || ""));
+  }, [id]);
 
   return (
     <DashboardLayout>
@@ -69,7 +77,7 @@ const ManageSingleEvent = () => {
                   height={15}
                 />
               </Link>
-              <h2>DevFest Aba</h2>
+              <h2>{event.EventTitle}</h2>
             </div>
             <div
               css={{ cursor: "pointer", position: "relative" }}
@@ -233,7 +241,7 @@ const ManageSingleEvent = () => {
               </div>
             </div>
             <div>
-              <ManageEventTab />
+              <ManageEventTab id = {id?.toString() || ""}/>
             </div>
           </div>
         </div>
