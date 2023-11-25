@@ -16,6 +16,7 @@ import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { eventLocation } from "redux/event/thunkAction";
 import { IEventLocation } from "types/event";
 import { TailSpin } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 const EventLocation = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -77,7 +78,6 @@ const EventLocation = () => {
   }, []);
 
   useEffect(() => {
-    console.log(eventLocationData);
     setFormData({
       ...formData,
       type: eventLocationData?.type || formData.type,
@@ -141,6 +141,13 @@ const EventLocation = () => {
   useEffect(() => {
     setEventID(localStorage.getItem("currenteventID") || "");
   }, []);
+
+  useEffect(() => {
+    if(localStorage.getItem("currenteventID") === null ){
+        toast.error("No current event")
+        router.push("/dashboard/hostEvent")
+    }
+  },[eventID])
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -317,7 +324,7 @@ const EventLocation = () => {
                 image={"/assets/svgs/info2.svg"}
                 tooltip="Select from the dropdown the online medium the event will use to take place and paste medium link"
                 type="select"
-                required={formData.type === "online"}
+                required={locationType === "online"}
                 setValue={handleOnlineLocationChange}
                 value={onlineLocation.selectHost}
                 name="selectHost"
@@ -336,7 +343,7 @@ const EventLocation = () => {
                   name="hostUrl"
                   value={onlineLocation.hostUrl}
                   setValue={handleOnlineLocationChange}
-                  required={formData.type === "online"}
+                  required={locationType === "online"}
                 />
               </div>
             </div>
@@ -403,7 +410,8 @@ const EventLocation = () => {
                         : "Search for the address or venue"
                     }
                     type={"text"}
-                    name={manualLocation ? "enterLocation" : "searchLocation"}
+                  required={locationType === "live"}
+                  name={manualLocation ? "enterLocation" : "searchLocation"}
                     value={
                       manualLocation
                         ? liveLocation.enterLocation

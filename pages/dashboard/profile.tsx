@@ -156,7 +156,7 @@ const Profile = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        1000k
+                        0
                       </p>
                       <p css={{ fontSize: "0.875rem", fontWeight: "bold" }}>
                         Followers
@@ -172,7 +172,7 @@ const Profile = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        500k
+                        0
                       </p>
                       <p css={{ fontSize: "0.875rem", fontWeight: "bold" }}>
                         Following

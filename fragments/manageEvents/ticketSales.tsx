@@ -166,15 +166,15 @@ export default TicketSales;
 const ticketViewDetails = [
   {
     view: "All",
-    amount: 102,
+    amount: 0,
   },
   {
     view: "Attending",
-    amount: 92,
+    amount: 0,
   },
   {
     view: "Refunded",
-    amount: 10,
+    amount: 0,
   },
 ];
 

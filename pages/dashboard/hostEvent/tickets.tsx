@@ -12,6 +12,8 @@ import AddTicketModal from "@/components/modals/hostEventModal/addTicketModal";
 import { getEventById } from "redux/event/thunkAction";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import Ticket from "@/components/cards/hostEventTicket";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const HostEventTickets = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -79,6 +81,14 @@ const HostEventTickets = () => {
     };
     getTickets();
   }, [getTickets]);
+  
+  const router = useRouter()
+  useEffect(() => {
+    if(localStorage.getItem("currenteventID") === null ){
+        toast.error("No current event")
+        router.push("/dashboard/hostEvent")
+    }
+  },[eventID])
 
   const handleNext = () => {
     localStorage.removeItem("createEventData");
@@ -238,6 +248,7 @@ const HostEventTickets = () => {
                   <p css={{ fontSize: "0.875rem", fontWeight: "500" }}>
                     {totalTickets}
                   </p>
+                  {isTablet && 
                   <button
                     css={{
                       fontSize: "1rem",
@@ -258,6 +269,7 @@ const HostEventTickets = () => {
                       ? "Add Ticket"
                       : " + Add Another Ticket"}
                   </button>
+}
                 </div>
               </div>
               <div

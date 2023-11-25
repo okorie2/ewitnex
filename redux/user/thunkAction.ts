@@ -31,9 +31,7 @@ export const getUserById = createAsyncThunk('user/getUserById', async (data: str
             url: `${config.API_BASE_URL}/users/user-details/${data}`,
             method: 'get',
         });
-
-        const userData:ILoadUser = response.data;
-        console.log(userData)
+        console.log(response.data)
         return response.data.user
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import { useTheme } from "@emotion/react";
 
 import DashboardLayout from "../layout/layout";
@@ -16,15 +16,19 @@ import Loader from "utitlities/loaders";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEvents } from "redux/event/thunkAction";
 import { IEvent } from "types/event";
-
-const DynamicDashboardLayout = dynamic(() => import("../layout/layout"), {
-  loading: () => <Loader />,
-});
+import { formatNumber } from "utitlities/commonHelpers/numberFormatter";
+import dayjs from "dayjs";
+import EmptyState from "fragments/emptyState";
+import { Button } from "styles/components/button";
+import Link from "next/link";
+import { TailSpin } from "react-loader-spinner";
+import { useRouter } from "next/router";
 
 const DashboardPrograms = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [active, setActive] = useState("All");
   const [filterSectionOpen, setFilterSectionOpen] = useState(true);
+  const router = useRouter()
 
   const handleActive = (tab: string) => {
     setActive(tab);
@@ -34,11 +38,33 @@ const DashboardPrograms = () => {
     setFilterSectionOpen(!filterSectionOpen);
   };
 
+  const ticketRange = (event: IEvent) => {
+    const tickets = event.tickets;
+    const ticketPriceArray: number[] = [];
+
+    if (tickets && tickets.length < 1) {
+      return "Free";
+    } else {
+      if (tickets && tickets.length === 1)
+        return `$${formatNumber(tickets[0].ticketPrice)}`;
+      tickets &&
+        tickets.map((ticket) => {
+          ticketPriceArray.push(ticket.ticketPrice);
+        });
+      ticketPriceArray.sort((a, b) => a - b);
+      return `${
+        ticketPriceArray[0] === 0
+          ? "Free"
+          : `$${formatNumber(ticketPriceArray[0])}`
+      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+    }
+  };
+
   const { loading, events } = useAppSelector(({ event }) => event);
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
-    dispatch(getEvents(""));
-  }, []);
+    dispatch(getEvents(active));
+  }, [active]);
 
   const categories = [
     "All",
@@ -48,11 +74,12 @@ const DashboardPrograms = () => {
     "Weddings",
     "Conference",
     "Sports/Fitness",
+    "Social",
     "Community",
     "Hangouts",
   ];
   return (
-    <DynamicDashboardLayout>
+    <DashboardLayout>
       <div
         css={{
           display: "grid",
@@ -246,26 +273,85 @@ const DashboardPrograms = () => {
             {!isTablet ? (
               <>
                 {events.length < 1 && (
-                  <div css={{ textAlign: "center", width: "100%" }}>
-                    <div>
-                      <h4>No Events</h4>
-                      <p>Events will be displayed here</p>
-                    </div>
-                  </div>
+                  <>
+                    {loading === "loading" ? (
+                      <>
+                        <div
+                          css={{
+                            height: "65vh",
+                            width: "80vw",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <TailSpin
+                            color={"#7c35ab"}
+                            width={100}
+                            height={100}
+                          />
+                        </div>
+                      </>
+                    ) : (
+                      <div css={{ textAlign: "center", width: "100%" }}>
+                        <EmptyState>
+                          <div
+                            css={{ textAlign: "center", fontSize: "0.875rem" }}
+                          >
+                            <p>No events to showcase right now.</p>
+                            <p>
+                              Ready to fill in this space with your exciting
+                              programs?
+                            </p>
+                          </div>
+                          <Link href="/dashboard/hostEvent">
+                            <Button height="52px" fontSize="1rem" width="16rem">
+                              CREATE YOUR EVENT
+                            </Button>
+                          </Link>
+                        </EmptyState>
+                      </div>
+                    )}
+                  </>
                 )}
                 {events &&
-                  events.map((event:IEvent, index) => (
-                    <div key = {index}>
+                  events.map((event: IEvent, index) => (
+                    <div key={index}>
                       <DashboardEventCard
                         label={event.category}
-                        attendees="609"
-                        date={event.location?.startDate || "Date: TBD"}
+                        attendees="0"
+                        date={
+                          `${dayjs(
+                            event.location?.startDate
+                          ).toString()}`.includes("Invalid")
+                            ? "Date: TBD"
+                            : `${
+                                dayjs(event.location?.startDate)
+                                  .toString()
+                                  .split(" ")[1]
+                              } ${
+                                dayjs(event.location?.startDate)
+                                  .toString()
+                                  .split(" ")[2]
+                              }. ${
+                                dayjs(event.location?.startDate)
+                                  .toString()
+                                  .split(" ")[3]
+                              },  ${dayjs(event.location?.startDate).format(
+                                "hh:mm A"
+                              )}`
+                        }
                         id={event?._id}
-                        eventCode = {event?.eventCode}
-                        location={event.location?.searchLocation || event.location?.enterLocation || "Venue: TBD"}
+                        eventCode={event?.eventCode}
+                        location={event.location?.type === "live"
+                        ? event.location?.searchLocation ||
+                          event.location?.enterLocation
+                        : `${event.location?.selectHost}` === "undefined"
+                        ? "Venue: TBD"
+                        : `${event.location?.selectHost}`}
                         organizer="Eko Atlantic"
-                        priceRange="$500-$2K"
-                        title={event.EventTitle || "Dummy Data"}
+                        priceRange={ticketRange(event)}
+                        title={event.EventTitle}
                         img="/assets/pngs/card_2.png"
                       />
                     </div>
@@ -299,7 +385,7 @@ const DashboardPrograms = () => {
           />
         )}
       </div>
-    </DynamicDashboardLayout>
+    </DashboardLayout>
   );
 };
 

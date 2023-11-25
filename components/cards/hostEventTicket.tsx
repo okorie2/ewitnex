@@ -11,7 +11,7 @@ const Ticket = (props: ITicket) => {
         <h3 css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
           {props.ticketName}
         </h3>
-        <p css={{ fontSize: "0.875rem" }}>N{props.ticketPrice}</p>
+        <p css={{ fontSize: "0.875rem" }}>{props.ticketPrice === 0 ? "Free":` N${props.ticketPrice}`}</p>
         <p css={{ fontSize: "0.75rem", color: "#AEAEAE" }}>
           {props.ticketQty} Quantities
         </p>

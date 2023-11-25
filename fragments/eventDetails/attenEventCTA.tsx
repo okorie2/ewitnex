@@ -2,9 +2,34 @@
 
 import Link from "next/link";
 import React from "react";
+import { useAppSelector } from "redux/store";
 import { ButtonFormFilled } from "styles/components/button";
+import { IEvent } from "types/event";
+import { formatNumber } from "utitlities/commonHelpers/numberFormatter";
 
 const AttenEventCTA = ({link}:{link:string}) => {
+  const {event} = useAppSelector(({event}) => event)
+  const ticketRange = (event: IEvent) => {
+    const tickets = event.tickets;
+    const ticketPriceArray: number[] = [];
+
+    if (tickets && tickets.length < 1) {
+      return "Free";
+    } else {
+      if (tickets && tickets.length === 1)
+        return `$${formatNumber(tickets[0].ticketPrice)}`;
+      tickets &&
+        tickets.map((ticket) => {
+          ticketPriceArray.push(ticket.ticketPrice);
+        });
+      ticketPriceArray.sort((a, b) => a - b);
+      return `${
+        ticketPriceArray[0] === 0
+          ? "Free"
+          : `$${formatNumber(ticketPriceArray[0])}`
+      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+    }
+  };
   return (
     <div
       css={{
@@ -29,7 +54,7 @@ const AttenEventCTA = ({link}:{link:string}) => {
         }}
       >
         <p css={{ color: "#000", fontWeight: "bold" }}>
-          $500 - $2K
+        {ticketRange(event)}
         </p>
         <Link href = {link}>
         <ButtonFormFilled css={{ width: "172px" }}>

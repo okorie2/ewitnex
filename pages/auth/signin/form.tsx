@@ -13,7 +13,8 @@ import { useRouter } from "next/router";
 import { TailSpin } from "react-loader-spinner";
 import ErrorSnackBar from "@/components/snackbars/error";
 import SuccessSnackBar from "@/components/snackbars/success";
-import { NextResponse } from 'next/server';
+import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
 
 export type ISignInFormData = {
@@ -63,6 +64,16 @@ export default function Form() {
       }
     }
   },[loading])
+
+  const params = useSearchParams();
+  const isRedirect = params.get("redirect") === "y";
+  const src = params.get("src");
+
+  useEffect(() => {
+    if (isRedirect) {
+      toast.error("Kindly log in");
+    }
+  },[isRedirect]);
   
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
@@ -95,7 +106,11 @@ export default function Form() {
         // })
         setMessage("SignIn successful")
         setSuccessSnackBarOpen(true)
-        router.push("/dashboard/programs");
+        if (src) {
+          router.push(src);
+        } else {
+          router.push("/dashboard/programs");
+        }
       }
     })
   };

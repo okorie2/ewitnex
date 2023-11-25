@@ -8,10 +8,12 @@ import {
   inactiveButtonStyle,
 } from "styles/components/ButtonToggleStyles";
 import DashboardEventCard from "@/components/cards/dashboardEventCard";
-import { useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import FeedsCard from "@/components/cards/feedsCard";
+import EmptyState from "fragments/emptyState";
+import { Button } from "styles/components/button";
 
 const Favourites = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -147,7 +149,6 @@ const Favourites = () => {
                         favourite = {true}
                       />
                     </div> */}
-                   
                   </>
                 ) : (
                   <>
@@ -165,7 +166,14 @@ const Favourites = () => {
                         img="/assets/pngs/card_2.png"
                       />
                     </div> */}
-                    
+                    <Box height={50} />
+                    <EmptyState>
+                      <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+                        <p>No events to showcase right now.</p>
+                        <p>Your favourite events will show here</p>
+                      </div>
+                      <Link href="/dashboard/hostEvent"></Link>
+                    </EmptyState>
                   </>
                 )}
               </div>

@@ -12,6 +12,8 @@ import AddSpeakerForm from "fragments/hostEvent/addSpeakerForm";
 import AddSpeakerModal from "@/components/modals/hostEventModal/addSpeakerModal";
 import { getEventById } from "redux/event/thunkAction";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const Speakers = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -42,6 +44,8 @@ const Speakers = () => {
     }
   };
 
+  const router = useRouter()
+
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ event }) => event);
   const [eventID, setEventID] = useState("");
@@ -49,6 +53,13 @@ const Speakers = () => {
     setEventID(localStorage.getItem("currenteventID") || "");
     setPerformers(JSON.parse(sessionStorage.getItem("performers") || "{}"));
   }, []);
+
+  useEffect(() => {
+    if(localStorage.getItem("currenteventID") === null ){
+        toast.error("No current event")
+        router.push("/dashboard/hostEvent")
+    }
+  },[eventID])
 
   useEffect(() => {
     const getPerformers = () => {
@@ -204,8 +215,9 @@ const Speakers = () => {
           </div>
           <div
             css={{
-              padding: isTablet ? "1rem" : " 1.5rem 2.5rem",
+              padding: isTablet ? "1rem" : " 1.5rem 2rem",
               height: "100%",
+              width: "100%",
               display: "grid",
               justifyContent: "space-between",
               overflowY: "scroll",
@@ -222,7 +234,7 @@ const Speakers = () => {
           >
             <div
               css={{
-                width: "70%",
+                width: "100%",
                 display: "grid",
                 gap: "1rem",
                 [screen.lg]: {
@@ -250,8 +262,9 @@ const Speakers = () => {
                           name={performer.nameOfPerformer}
                           title={performer.performerTitle}
                           role={performer.performerRole}
-                          img={performer.performerImage}
+                          img={typeof performer.performerImage !== "string" ? "" : performer.performerImage}
                           id={performer._id}
+                          setGetPerformers={setGetPerformers}
                         />
                       </div>
                     );
@@ -268,38 +281,40 @@ const Speakers = () => {
               </div>
               <div>
                 <p css={{ fontSize: "0.875rem" }}>
-                  {performers && performers.length < 1
-                    ? "Click here to add a performer"
-                    : "If this event has multiple performers, click on the button below to add another performer"}
+                  {performers && performers.length > 0
+                    ? "If this event has multiple performers, click on the button below to add another performer"
+                    : "Added performers will appear here"}
                 </p>
-                <button
-                  css={{
-                    fontSize: "1rem",
-                    fontWeight: "bold",
-                    fontFamily: "'Nunito', sans-serif",
-                    color: "#7C35AB",
-                    border: `1px solid ${"#7C35AB"}`,
-                    height: "43px",
-                    marginBlock: "0.5rem",
-                    background: "#fff",
-                    borderRadius: "26px",
-                    width: isTablet ? "80%" : "52%",
-                    cursor: "pointer",
-                  }}
-                  onClick={handleNewSpeakerClick}
-                >
-                  {performers && performers.length < 1
-                    ? "Add Performer"
-                    : " + Add Another Performer"}
-                </button>
+                {isTablet && (
+                  <button
+                    css={{
+                      fontSize: "1rem",
+                      fontWeight: "bold",
+                      fontFamily: "'Nunito', sans-serif",
+                      color: "#7C35AB",
+                      border: `1px solid ${"#7C35AB"}`,
+                      height: "43px",
+                      marginBlock: "0.5rem",
+                      background: "#fff",
+                      borderRadius: "26px",
+                      width: isTablet ? "80%" : "52%",
+                      cursor: "pointer",
+                    }}
+                    onClick={handleNewSpeakerClick}
+                  >
+                    {performers && performers.length < 1
+                      ? "Add Performer"
+                      : " + Add Another Performer"}
+                  </button>
+                )}
               </div>
             </div>
             <div
               css={{
-                width: isTablet ? "100%" : "80%",
+                width: isTablet ? "100%" : "100%",
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
-                gap: "1rem",
+                gap: "0.5rem",
                 marginBlock: "auto 1rem",
                 [screen.lg]: {
                   marginBlock: "1rem",

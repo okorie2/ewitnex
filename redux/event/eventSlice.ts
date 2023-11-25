@@ -44,7 +44,6 @@ const EventSlice = createSlice({
     });
 
     builder.addCase(getEvents.fulfilled, (state, action) => {
-        console.log(action.payload, "action")
       return {
         ...state,
         loading: "successful",

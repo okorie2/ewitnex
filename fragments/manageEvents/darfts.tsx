@@ -2,7 +2,9 @@
 
 import ManageEventCard from "@/components/cards/manageEventCard";
 import { useMediaQuery } from "@mui/material";
-
+import EmptyState from "fragments/emptyState";
+import { Button } from "styles/components/button";
+import Link from "next/link";
 
 const Drafts = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -26,7 +28,17 @@ const Drafts = () => {
           attendees="0/500"
           id="Wed542445"
         /> */}
-        
+        <EmptyState>
+        <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+          <p>Your unpublished programs will be displayed here.</p>
+          <p>Ready to fill in this space with your exciting programs?</p>
+        </div>
+        <Link href="/dashboard/hostEvent">
+          <Button height="52px" fontSize="1rem" width="16rem">
+            CREATE YOUR EVENT
+          </Button>
+        </Link>
+      </EmptyState>
       </div>
     );
   };

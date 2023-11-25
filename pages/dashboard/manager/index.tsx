@@ -16,7 +16,7 @@ import CancelledEvents from "fragments/manageEvents/cancelledEvents";
 import Link from "next/link";
 
 const Manager = () => {
-  const [activeTab, setActiveTab] = useState("live");
+  const [activeTab, setActiveTab] = useState("completed");
   const isTablet = useMediaQuery("(max-width: 780px)");
   const tabToView = useMemo(() => {
     if (activeTab === "live") {

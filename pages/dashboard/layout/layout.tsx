@@ -16,6 +16,7 @@ import Notification from "fragments/notifications";
 import MobileLayout from "./mobile";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { logout } from "redux/auth/thunkAction";
+import Cookies from "js-cookie";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -114,6 +115,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       if (res.meta.requestStatus === "fulfilled") {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
+        Cookies.remove("auth")
         router.push("/");
       }
     });

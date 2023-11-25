@@ -220,6 +220,7 @@ const AddTicketForm = ({
             name="ticketPrice"
             onChange={handleChange}
             inputMode="numeric"
+            disabled = {ticketType !== 'Paid'}
             css={{
               height: "3.3rem",
               width: "90%",
@@ -242,11 +243,11 @@ const AddTicketForm = ({
           }}
         >
           <p>Fee (NGN)</p>
-          <p>N300</p>
+          <p>N{ticketType === "Paid" ? 300 : ticketType === "Donation" ? 100 : 0}</p>
         </div>
       </div>
       <p css={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
-        You will be charged N300 + 3% ticket service fee and 3% payment
+        You will be charged N{ticketType === "Paid" ? 300 : ticketType === "Donation" ? 100 : 0} + 3% ticket service fee and 3% payment
         processing fee of the price inputed per ticket sold to attendees
       </p>
       <HostEventTextField
