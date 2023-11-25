@@ -8,17 +8,65 @@ import GenderType from "@/components/signupComponents/selectGender";
 import { Box } from "@mui/material";
 import { IUserDetails } from "types/user";
 import { useMediaQuery } from "@mui/material";
+import { useAppThunkDispatch } from "redux/store";
+import { updateUser } from "redux/user/thunkAction";
 
-const GenderModal = ({ closeModal, setSuccess }: { closeModal: () => void, setSuccess: () => void }) => {
+const GenderModal = ({
+  closeModal,
+  setSuccess,
+}: {
+  closeModal: () => void;
+  setSuccess: () => void;
+}) => {
+  const [user, setUser] = useState<IUserDetails>();
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  }, []);
+
   const [selectedType, setSelectedType] = useState<
     "Male" | "Female" | "Preferred Not To Say"
   >();
 
-  const isTablet = useMediaQuery("(max-width: 780px)");
+  const [formDetails, setFormDetails] = useState({
+    email: "",
+    username: "",
+    gender: "",
+    phoneNumber: "",
+    firstName: "",
+    lastName: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormDetails({
+        ...formDetails,
+        email: user.email,
+        username: user.username,
+        gender: user.gender,
+        phoneNumber: user.phoneNumber.toString(),
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (selectedType) {
+      setFormDetails({ ...formDetails, gender: selectedType });
+    }
+  }, [selectedType]);
+  const dispatch = useAppThunkDispatch();
   const handleNext = () => {
-    setSuccess()
+    dispatch(updateUser({ userId: user?._id || "", form: formDetails })).then(
+      (res) => {
+        if (res.meta.requestStatus === "fulfilled") {
+          setSuccess();
+        }
+      }
+    );
   };
-  
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <div css={{ width: "100%", padding: isTablet ? "" : "1rem" }}>
       <div

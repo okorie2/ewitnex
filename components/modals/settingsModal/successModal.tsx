@@ -45,14 +45,14 @@ const SuccessModal = (props: ISuccessModal) => {
       router.push("/auth/signin");
     }
     if (props.action === "accountVerification") {
-      if(isTablet){
-        router.push("/dashboard")
-      }else{
+      if (isTablet) {
+        router.push("/dashboard");
+      } else {
         props.onRequestClose();
       }
     }
-    if(props.action==="saveChange"){
-      props.onRequestClose()
+    if (props.action === "saveChange") {
+      props.onRequestClose();
     }
   };
   const handleClick = () => {
@@ -70,27 +70,29 @@ const SuccessModal = (props: ISuccessModal) => {
       style={customStyles}
       shouldCloseOnOverlayClick={true}
     >
-      {!isTablet && <div
-        onClick={handleClick}
-        css={{
-          border: "none",
-          background: "none",
-          color: "#fff",
-          fontSize: "1.125rem",
-          cursor: "pointer",
-          width: "67%",
-          height: "90vh",
-        }}
-      >
-        {/* <p>&#x2715; Close</p>  */}
-      </div>}
+      {!isTablet && (
+        <div
+          onClick={handleClick}
+          css={{
+            border: "none",
+            background: "none",
+            color: "#fff",
+            fontSize: "1.125rem",
+            cursor: "pointer",
+            width: "67%",
+            height: "90vh",
+          }}
+        >
+          {/* <p>&#x2715; Close</p>  */}
+        </div>
+      )}
 
       <div
         css={{
-          height: isTablet ? "60vh":"100vh",
-          width: isTablet ? "90vw":"33.3%",
+          height: isTablet ? "60vh" : "100vh",
+          width: isTablet ? "90vw" : "33.3%",
           background: "#fff",
-          position: isTablet ? "relative":"absolute",
+          position: isTablet ? "relative" : "absolute",
           right: "0",
           top: "0",
           padding: isTablet ? "0 0.5rem" : "3% 2% 0",
@@ -98,9 +100,9 @@ const SuccessModal = (props: ISuccessModal) => {
           borderRadius: isTablet ? "18px" : "",
           color: "#000",
           [screen.desktopLg]: {
-            width: isTablet ? "90vw":"33.3%",
-            marginInline:isTablet ? "auto" :"",
-            marginTop:isTablet ? "30vw" :""
+            width: isTablet ? "90vw" : "33.3%",
+            marginInline: isTablet ? "auto" : "",
+            marginTop: isTablet ? "30vw" : "",
           },
           display: "grid",
         }}
@@ -109,15 +111,15 @@ const SuccessModal = (props: ISuccessModal) => {
           css={{
             width: "100%",
             overflowY: "scroll",
-            display:isTablet ? "flex":"",
-            alignItems:isTablet ? "center":"",
-            justifyContent: isTablet ? "center":"",
+            display: isTablet ? "flex" : "",
+            alignItems: isTablet ? "center" : "",
+            justifyContent: isTablet ? "center" : "",
             // "&::-webkit-scrollbar": {
             //   display: "none",
             // },
             "&::-webkit-scrollbar": {
-                  display: isTablet ? "none" : "",
-                  width: "8px",
+              display: isTablet ? "none" : "",
+              width: "8px",
             },
             "&::-webkit-scrollbar-track": {
               background: "#F5f5f5",
@@ -134,7 +136,7 @@ const SuccessModal = (props: ISuccessModal) => {
         >
           <div
             css={{
-              height: isTablet ? "":"80vh",
+              height: isTablet ? "" : "80vh",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -161,7 +163,7 @@ const SuccessModal = (props: ISuccessModal) => {
             </p>
             <div
               css={{
-                width: isTablet ? "":"70%",
+                width: isTablet ? "" : "70%",
                 textAlign: "center",
                 marginBlock: "1.5rem",
                 fontWeight: "550",
@@ -169,8 +171,19 @@ const SuccessModal = (props: ISuccessModal) => {
             >
               {props.action === "accountVerification" ? (
                 <p>Your account has been successfully verified</p>
-              ) :  (
-                <p>{props.action === "saveChange" ? "Your changes have been saved":"Your password has been changed successfully"}</p>
+              ) : (
+                <>
+                  <p>
+                    {props.action === "saveChange"
+                      ? "Your changes have been saved"
+                      : "Your password has been changed successfully"}
+                  </p>
+                  <p>
+                    {props.action === "saveChange"
+                      ? "It may take some time to reflect across the application"
+                      : ""}
+                  </p>
+                </>
               )}
             </div>
             <div
@@ -201,7 +214,10 @@ const SuccessModal = (props: ISuccessModal) => {
                     fontFamily: '"Nunito", sans-serif',
                   }}
                 >
-                  {props.action === "accountVerification" || props.action === "saveChange" ? "OKAY" : "LOG IN"}
+                  {props.action === "accountVerification" ||
+                  props.action === "saveChange"
+                    ? "OKAY"
+                    : "LOG IN"}
                 </p>
                 {loading && (
                   <TailSpin

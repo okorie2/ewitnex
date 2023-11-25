@@ -229,6 +229,7 @@ const HostEventTickets = () => {
                         ticketQty={ticket.ticketQty}
                         ticketRefund={""}
                         id={ticket._id}
+                        setGetTickets={setGetTickets}
                       />
                     ))
                   ) : (

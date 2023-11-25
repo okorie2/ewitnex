@@ -8,6 +8,7 @@ import { UpdatePasswordReducer } from './settings/updatePasswordSlice';
 import { DeleteUserReducer } from './settings/deleteUserByIdSlice';
 import { HostEventReducer } from './event/hostEventSlice';
 import { EventReducer } from './event/eventSlice';
+import { UpdateUserReducer } from './user/updateUserSlice';
 
 
 export const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
     signIn: SignInReducer,
     logout: LogoutReducer,
     user: UserReducer,
+    updateUser: UpdateUserReducer,
     getUserById: GetUserReducer,
     deleteUserById: DeleteUserReducer,
     updatePassword: UpdatePasswordReducer,

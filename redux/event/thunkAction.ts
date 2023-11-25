@@ -177,6 +177,32 @@ export const addTicket = createAsyncThunk(
   }
 );
 
+export const deleteTicket = createAsyncThunk(
+  "event/deleteTicket",
+  async (data: {eventId:string, ticketId:string}, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventId}/tickets/${data.ticketId}`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        method: "delete",
+      });
+
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { message: string };
+        console.log(message.message, "error message");
+        toast.error(message.message)
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
 export const getEventById = createAsyncThunk(
   "event/getPerformerById",
   async (data: string, thunkAPI) => {
@@ -195,7 +221,6 @@ export const getEventById = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        // toast.error(message.message)
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -205,19 +230,19 @@ export const getEventById = createAsyncThunk(
 );
 
 export const deleteEventById = createAsyncThunk(
-  "event/deleteEventById",
+  "events/deleteEventById",
   async (data: string, thunkAPI) => {
     try {
       const response = await useAxios({
-        url: `${config.API_BASE_URL}/event/delete-event/${data}`,
+        url: `${config.API_BASE_URL}/events/delete-event/${data}`,
         method: "delete",
       });
-      console.log(response.data.message);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        const message = error.response.data as { error: string };
-        console.log(message.error, "error message");
+        const message = error.response.data as { message: string };
+        toast.error(message.message)
+        console.log(message.message, "error message");
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));

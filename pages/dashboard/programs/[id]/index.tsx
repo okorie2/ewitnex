@@ -10,6 +10,7 @@ import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEventById } from "redux/event/thunkAction";
+import { IEvent } from "types/event";
 
 const SingleEvent = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const SingleEvent = () => {
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
     dispatch(getEventById(id?.toString() || ""));
-  }, []);
+  }, [id]);
 
   return (
     <DashboardLayout>
@@ -126,7 +127,7 @@ const SingleEvent = () => {
               },
             }}
           >
-            <EventTab />
+            <EventTab/>
           </div>
         </div>
       </div>

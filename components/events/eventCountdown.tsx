@@ -4,19 +4,50 @@ import React from "react";
 import { useMediaQuery } from "@mui/material";
 import { useCountDown } from "utitlities/hooks/UseCountDown";
 
-const EventCountdown = ({date}: {date:string}) => {
+const EventCountdown = ({ date }: { date: string }) => {
   const isTablet = useMediaQuery("(max-width: 900px)");
-  const {days, hours, minutes, seconds } = useCountDown(date)
+  const { days, hours, minutes, seconds } = useCountDown(date);
+  if (days < 0)
+    return (
+      <div
+        css={{
+          display: "grid",
+          placeContent: "center",
+          width: "86px",
+          height: "60px",
+          border: `1px solid ${"#E4E4E4"}`,
+          background: `linear-gradient(60deg, ${"#7C35AB"},${"#FFFFFF"})`,
+          borderRadius: "5px",
+        }}
+      >
+        <div
+          css={{
+            display: "flex",
+            alignItems: "center",
+            width: "92px",
+            height: "55.61px",
+            border: `1px solid ${"#707070"}`,
+            borderRadius: "5px",
+            backgroundColor: "#FFFFFF",
+            gap:"0.5rem",
+            paddingLeft:"0.5rem"
+          }}
+        >
+          <div css = {{height:"10px", width:"10px", background:"#F05E78", borderRadius:"50%"}}></div>
+          <p css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>Ended</p>
+        </div>
+      </div>
+    );
   return (
     <div
       css={{
         display: "flex",
-        gap: isTablet ? "0.5rem":"1.5rem",
+        gap: isTablet ? "0.5rem" : "1.5rem",
         position: isTablet ? "absolute" : "relative",
-        width:"53.5%",
-        flexWrap:isTablet ? "wrap":"nowrap",
-        top:isTablet ? "-27%" : "",
-        right:isTablet ?"0%": ""
+        width: "53.5%",
+        flexWrap: isTablet ? "wrap" : "nowrap",
+        top: isTablet ? "-27%" : "",
+        right: isTablet ? "0%" : "",
       }}
     >
       <div
@@ -50,7 +81,9 @@ const EventCountdown = ({date}: {date:string}) => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{days}</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+              {days}
+            </span>
             Days
           </p>
         </div>
@@ -86,7 +119,9 @@ const EventCountdown = ({date}: {date:string}) => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{hours}</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+              {hours}
+            </span>
             Hours
           </p>
         </div>
@@ -122,7 +157,9 @@ const EventCountdown = ({date}: {date:string}) => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{minutes}</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+              {minutes}
+            </span>
             Mins
           </p>
         </div>
@@ -158,7 +195,9 @@ const EventCountdown = ({date}: {date:string}) => {
               gap: "0.3rem",
             }}
           >
-            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>{seconds}</span>
+            <span css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>
+              {seconds}
+            </span>
             Secs
           </p>
         </div>

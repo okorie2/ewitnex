@@ -9,6 +9,7 @@ import EventSpeakers from "fragments/eventDetails/speakers";
 import EventTickets from "fragments/eventDetails/tickets";
 import { useRouter } from "next/router";
 import AttenEventCTA from "fragments/eventDetails/attenEventCTA";
+import { IEvent } from "types/event";
 
 const EventTab = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const EventTab = () => {
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
 
   const stateEvents = useMemo(() => {
-    if (activeTab === "Details") return <EventDetails />;
+    if (activeTab === "Details") return <EventDetails/>;
     else if (activeTab === "Activities") return <EventActivities />;
     else if (activeTab === "Conversations") return <EventMessages />;
     else if (activeTab === "Tickets") return <EventTickets />;
