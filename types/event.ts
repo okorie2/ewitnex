@@ -61,6 +61,7 @@ export interface ITicket {
   ticketQty: number;
   ticketRefund: string;
   id: string;
+  setGetTickets?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IReqTicket {

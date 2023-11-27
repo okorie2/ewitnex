@@ -42,72 +42,107 @@ const SettingsModal = (props: ISettingsModal) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [success, setSuccess] = useState(false);
   const stateEvents = useMemo(() => {
-    if (props.activeModal === "fullName") return <NameModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
-    else if (props.activeModal === "userName") return <UserNameModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
-    else if (props.activeModal === "gender") return <GenderModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
-    else if (props.activeModal === "location") return <LocationModal closeModal={props.onRequestClose} setSuccess = {()=>setSuccess(true)}/>;
+    if (props.activeModal === "fullName")
+      return (
+        <NameModal
+          closeModal={props.onRequestClose}
+          setSuccess={() => setSuccess(true)}
+        />
+      );
+    else if (props.activeModal === "userName")
+      return (
+        <UserNameModal
+          closeModal={props.onRequestClose}
+          setSuccess={() => setSuccess(true)}
+        />
+      );
+    else if (props.activeModal === "gender")
+      return (
+        <GenderModal
+          closeModal={props.onRequestClose}
+          setSuccess={() => setSuccess(true)}
+        />
+      );
+    else if (props.activeModal === "location")
+      return (
+        <LocationModal
+          closeModal={props.onRequestClose}
+          setSuccess={() => setSuccess(true)}
+        />
+      );
   }, [props.activeModal]);
   return (
     <>
-    {success ? <>
-      <SuccessModal isOpen={success} onRequestClose={() => setSuccess(false)} action={"saveChange"} />
-    </>
-    :
-    <Modal
-      isOpen={props.isOpen}
-      onRequestClose={(e) => {
-        e.stopPropagation();
-        props.onRequestClose;
-      }}
-      style={customStyles}
-      shouldCloseOnOverlayClick={true}
-    >
-      {!isTablet && <div
-        onClick={props.onRequestClose}
-        css={{
-          border: "none",
-          background: "none",
-          color: "#fff",
-          fontSize: "1.125rem",
-          cursor: "pointer",
-          width: "67%",
-          height: "90vh",
-        }}
-      >
-        {/* <p>&#x2715; Close</p>  */}
-      </div>}
-
-      <div
-        css={{
-          height: "100vh",
-          maxWidth: isTablet ? "100vw" :"33.3%",
-          background: "#fff",
-          position: "absolute",
-          right: "0",
-          top: "0",
-          padding: isTablet ? "":"2% 2% 0",
-          color: "#000",
-          [screen.desktopLg]: {
-            width: isTablet ? "100vw" :"50%",
-          },
-        }}
-      >
-        <div
-          css={{
-            display: "grid",
-            gap: "1rem",
-            width: "100%",
-            height: "90%",
-            overflowY: "scroll",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
+      {success ? (
+        <>
+          <SuccessModal
+            isOpen={success}
+            onRequestClose={() => {
+              setSuccess(false);
+              props.onRequestClose();
+            }}
+            action={"saveChange"}
+          />
+        </>
+      ) : (
+        <Modal
+          isOpen={props.isOpen}
+          onRequestClose={(e) => {
+            e.stopPropagation();
+            props.onRequestClose;
           }}
+          style={customStyles}
+          shouldCloseOnOverlayClick={true}
         >
-          {stateEvents}
-        </div>
-      </div>
-    </Modal>}
+          {!isTablet && (
+            <div
+              onClick={props.onRequestClose}
+              css={{
+                border: "none",
+                background: "none",
+                color: "#fff",
+                fontSize: "1.125rem",
+                cursor: "pointer",
+                width: "67%",
+                height: "90vh",
+              }}
+            >
+              {/* <p>&#x2715; Close</p>  */}
+            </div>
+          )}
+
+          <div
+            css={{
+              height: "100vh",
+              maxWidth: isTablet ? "100vw" : "33.3%",
+              background: "#fff",
+              position: "absolute",
+              right: "0",
+              top: "0",
+              padding: isTablet ? "" : "2% 2% 0",
+              color: "#000",
+              [screen.desktopLg]: {
+                width: isTablet ? "100vw" : "50%",
+              },
+            }}
+          >
+            <div
+              css={{
+                display: "grid",
+                gap: "1rem",
+                width: "100%",
+                height: "90%",
+                overflowY: "scroll",
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              {stateEvents}
+            </div>
+          </div>
+        </Modal>
+      )}
     </>
   );
 };

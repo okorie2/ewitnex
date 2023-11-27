@@ -42,11 +42,11 @@ const EventDetails = () => {
   const { id } = router.query;
 
   const { loading, event } = useAppSelector(({ event }) => event);
-  const dispatch = useAppThunkDispatch();
-  useEffect(() => {
-    console.log(id);
-    dispatch(getEventById(id?.toString() || ""));
-  }, [id]);
+  // const dispatch = useAppThunkDispatch();
+  // useEffect(() => {
+  //   console.log(id);
+  //   dispatch(getEventById(id?.toString() || ""));
+  // }, [id]);
 
   const ticketRange = (event: IEvent) => {
     const tickets = event.tickets;
@@ -317,7 +317,7 @@ const EventDetails = () => {
               marginTop: isTablet ? "10rem" : "",
             }}
           >
-            {event.EventTitle || "Dummy Data"}
+            {event.EventTitle || ""}
           </h1>
           <div css={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <p

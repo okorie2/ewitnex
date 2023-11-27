@@ -8,6 +8,7 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEventById } from "redux/event/thunkAction";
+import dayjs from "dayjs";
 
 const EventTickets = () => {
   const router = useRouter();
@@ -61,14 +62,38 @@ const EventTickets = () => {
                   title={event.EventTitle}
                   eventID={id?.toString() || ""}
                   label={event.category}
-                  date={event.location?.startDate || "Date; TBD"}
+                  date={
+                    `${dayjs(event.location?.startDate).toString()}
+                  `.includes("Invalid")
+                      ? "Date: TBD"
+                      : `${
+                          dayjs(event.location?.startDate)
+                            .toString()
+                            .split(" ")[1]
+                        }
+                  ${
+                    dayjs(event.location?.startDate).toString().split(" ")[2]
+                  }.${
+                          dayjs(event.location?.startDate)
+                            .toString()
+                            .split(" ")[3]
+                        },
+                  ${dayjs(event.location?.startDate).format("hh:mm A")}`
+                  }
                   location={
-                    event.location?.searchLocation ||
-                    event.location?.enterLocation ||
-                    "Venue: TBD"
+                    event.location?.type === "live"
+                      ? event.location?.searchLocation ||
+                        event.location?.enterLocation
+                      : `${event.location?.selectHost}` === "undefined"
+                      ? "Venue: TBD"
+                      : `${event.location?.selectHost}`
                   }
                   type={ticket.ticketName}
-                  price={`N ${ticket.ticketPrice}`}
+                  price={
+                    ticket.ticketPrice === 0
+                      ? "Free"
+                      : `N ${ticket.ticketPrice}`
+                  }
                   id={ticket._id}
                 />
               </div>

@@ -5,56 +5,99 @@ import { Button } from "styles/components/button";
 import Image from "next/image";
 import { useMediaQuery } from "@mui/material";
 import { IUserDetails } from "types/user";
+import toast from "react-hot-toast";
+import { useAppThunkDispatch } from "redux/store";
+import { updateUser } from "redux/user/thunkAction";
 
-const UserNameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSuccess: () => void}) => {
-  const [userName, setUserName] = useState("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setUserName(value);
-  };
-  const handleNext = () => {
-    setSuccess()
-  };
+const UserNameModal = ({
+  closeModal,
+  setSuccess,
+}: {
+  closeModal: () => void;
+  setSuccess: () => void;
+}) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
-  const [user,setUser] = useState<IUserDetails>()
+  const [user, setUser] = useState<IUserDetails>();
   useEffect(() => {
-   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
-  },[])
+    setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  }, []);
+  const [formDetails, setFormDetails] = useState({
+    email: "",
+    username: "",
+    gender: "",
+    phoneNumber: "",
+    firstName: "",
+    lastName: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormDetails({
+        ...formDetails,
+        email: user.email,
+        username: user.username,
+        gender: user.gender,
+        phoneNumber: user.phoneNumber.toString(),
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+    }
+  }, [user]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormDetails({ ...formDetails, [name]: value });
+  };
+  const dispatch = useAppThunkDispatch();
+  const handleNext = () => {
+    dispatch(updateUser({ userId: user?._id || "", form: formDetails })).then(
+      (res) => {
+        if (res.meta.requestStatus === "fulfilled") {
+          setSuccess();
+        }
+      }
+    );
+  };
+
   return (
-    <div css={{ width: "100%", padding: isTablet ? "":"1rem" }}>
-      <div css = {{
-        display: isTablet ? "flex":"grid",
-        alignItems: "center",
-        gap:isTablet ? "1rem":"",
-        borderBottom:isTablet ? "1px solid #E4E4E4":"",
-        padding:isTablet ?"1rem":"",
-        width:isTablet ? "100vw":""
-      }}>
-      {isTablet && (
-            <div css={{ display: "flex" }} onClick={closeModal}>
-              <Image
-                src="/assets/svgs/back.svg"
-                alt="back_arrow"
-                width={22}
-                height={15}
-              />
-            </div>
+    <div css={{ width: "100%", padding: isTablet ? "" : "1rem" }}>
+      <div
+        css={{
+          display: isTablet ? "flex" : "grid",
+          alignItems: "center",
+          gap: isTablet ? "1rem" : "",
+          borderBottom: isTablet ? "1px solid #E4E4E4" : "",
+          padding: isTablet ? "1rem" : "",
+          width: isTablet ? "100vw" : "",
+        }}
+      >
+        {isTablet && (
+          <div css={{ display: "flex" }} onClick={closeModal}>
+            <Image
+              src="/assets/svgs/back.svg"
+              alt="back_arrow"
+              width={22}
+              height={15}
+            />
+          </div>
         )}
-      <p css={{ fontSize: "24px", fontWeight: "bold" }}>{isTablet ? "Change":""} Username</p>
+        <p css={{ fontSize: "24px", fontWeight: "bold" }}>
+          {isTablet ? "Change" : ""} Username
+        </p>
       </div>
       <div
         css={{
           display: "flex",
           flexDirection: "column",
           gap: "0.5rem",
-          paddingInline: isTablet ? "1rem":"",
+          paddingInline: isTablet ? "1rem" : "",
           marginTop: "2rem",
         }}
       >
         <SettingsTextField
           label={"Username"}
-          name="userName"
-          value={userName}
+          name="username"
+          value={formDetails.username}
           placeholder={user?.username || ""}
           setValue={handleChange}
           withIcon={true}
@@ -84,7 +127,9 @@ const UserNameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSucces
               <Suggestion
                 key={idx}
                 suggestion={item}
-                onClick={() => setUserName(item)}
+                onClick={() =>
+                  setFormDetails({ ...formDetails, username: item })
+                }
               />
             ))}
           </div>
@@ -96,7 +141,7 @@ const UserNameModal = ({closeModal, setSuccess}:{closeModal:()=> void, setSucces
             marginTop: "2.2rem",
           }}
         >
-          <Button onClick={handleNext} height = "52px" width="100%">
+          <Button onClick={handleNext} height="52px" width="100%">
             <p
               css={{
                 fontSize: "16px",
