@@ -17,13 +17,26 @@ const TicketSales = () => {
   return (
     <div
       css={{
-        paddingRight:isTablet ? "": "2rem",
+        paddingRight: isTablet ? "" : "2rem",
       }}
     >
+      {filterClicked && (
+        <div
+          css={{
+            height: "100vh",
+            width: "calc(100vw - 400px)",
+            right: 0,
+            zIndex: "1",
+            position: "absolute",
+            cursor: "pointer",
+          }}
+          onClick={handleClick}
+        ></div>
+      )}
       <div
         css={{
           padding: "1rem",
-          display: isTablet ? "":"flex",
+          display: isTablet ? "" : "flex",
           justifyContent: "space-between",
         }}
       >
@@ -36,8 +49,8 @@ const TicketSales = () => {
             padding: "0.3rem",
             color: "#AEAEAE",
             gridTemplateColumns: "33% 33% 34%",
-            width: isTablet ? "100%":"45%",
-            marginBottom:isTablet ? "0.5rem":""
+            width: isTablet ? "100%" : "45%",
+            marginBottom: isTablet ? "0.5rem" : "",
           }}
         >
           {ticketViewDetails.map((ticketView) => (
@@ -53,7 +66,7 @@ const TicketSales = () => {
         <div
           css={{
             display: "flex",
-            width: isTablet ? "":"45%",
+            width: isTablet ? "" : "45%",
             justifyContent: "space-between",
           }}
         >
@@ -143,13 +156,21 @@ const TicketSales = () => {
                   width: "7rem",
                   fontSize: "13px",
                   fontWeight: "500",
-                   boxShadow: `0px 0px 5px ${"#00000029"}`,
+                  boxShadow: `0px 0px 5px ${"#00000029"}`,
                 }}
               >
-                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>Recent</p>
-                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>An Hour Ago</p>
-                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>Yesterday</p>
-                <p css = {{":hover": {fontWeight:"bold", color: "#7C35AB"}}}>Custom Time</p>
+                <p css={{ ":hover": { fontWeight: "bold", color: "#7C35AB" } }}>
+                  Recent
+                </p>
+                <p css={{ ":hover": { fontWeight: "bold", color: "#7C35AB" } }}>
+                  An Hour Ago
+                </p>
+                <p css={{ ":hover": { fontWeight: "bold", color: "#7C35AB" } }}>
+                  Yesterday
+                </p>
+                <p css={{ ":hover": { fontWeight: "bold", color: "#7C35AB" } }}>
+                  Custom Time
+                </p>
               </div>
             )}
           </div>

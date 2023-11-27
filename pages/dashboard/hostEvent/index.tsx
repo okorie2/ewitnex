@@ -117,8 +117,8 @@ const HostEvent = () => {
       dispatch(createEvent(formData)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
           localStorage.setItem("createEventData", JSON.stringify(formData));
-          sessionStorage.remove("performers")
-          sessionStorage.remove("tickets")
+          sessionStorage.removeItem("performers")
+          sessionStorage.removeItem("tickets")
           router.push("/dashboard/hostEvent/fileUpload");
         }
       });

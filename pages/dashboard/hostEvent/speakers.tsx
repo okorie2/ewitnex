@@ -282,7 +282,7 @@ const Speakers = () => {
               <div>
                 <p css={{ fontSize: "0.875rem" }}>
                   {performers && performers.length > 0
-                    ? "If this event has multiple performers, click on the button below to add another performer"
+                    ? ""
                     : "Added performers will appear here"}
                 </p>
                 {isTablet && (
@@ -355,7 +355,7 @@ const Speakers = () => {
                     marginBottom: "0.5rem",
                     background: "#7C35AB",
                     borderRadius: "26px",
-                    width: "100%",
+                    width: "14rem",
                     cursor: "pointer",
                   }}
                 >

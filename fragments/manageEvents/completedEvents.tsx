@@ -54,7 +54,7 @@ const CompletedEvents = () => {
       {personalEvents && personalEvents.length > 0 ? (
         personalEvents.map((event, idx) => (
           <ManageEventCard
-          key = {idx}
+            key={idx}
             image="/assets/pngs/devFestAba.png"
             title={event.EventTitle}
             date={
@@ -96,17 +96,21 @@ const CompletedEvents = () => {
           {loading === "loading" ? (
             <Loading />
           ) : (
-            <EmptyState>
-              <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
-                <p>No events to showcase right now.</p>
-                <p>Ready to fill in this space with your exciting programs?</p>
-              </div>
-              <Link href="/dashboard/hostEvent">
-                <Button height="52px" fontSize="1rem" width="16rem">
-                  CREATE YOUR EVENT
-                </Button>
-              </Link>
-            </EmptyState>
+            <div css={{ marginLeft: "10vw", marginTop: "2rem" }}>
+              <EmptyState>
+                <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+                  <p>No events to showcase right now.</p>
+                  <p>
+                    Ready to fill in this space with your exciting programs?
+                  </p>
+                </div>
+                <Link href="/dashboard/hostEvent">
+                  <Button height="52px" fontSize="1rem" width="16rem">
+                    CREATE YOUR EVENT
+                  </Button>
+                </Link>
+              </EmptyState>
+            </div>
           )}
         </>
       )}

@@ -23,6 +23,7 @@ import { Button } from "styles/components/button";
 import Link from "next/link";
 import { TailSpin } from "react-loader-spinner";
 import { useRouter } from "next/router";
+import { getOrganizer } from "utitlities/commonHelpers/getOrganizer";
 
 const DashboardPrograms = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -349,7 +350,7 @@ const DashboardPrograms = () => {
                         : `${event.location?.selectHost}` === "undefined"
                         ? "Venue: TBD"
                         : `${event.location?.selectHost}`}
-                        organizer="Eko Atlantic"
+                        organizer= {getOrganizer(event.OrganizedBy)}
                         priceRange={ticketRange(event)}
                         title={event.EventTitle}
                         img="/assets/pngs/card_2.png"
