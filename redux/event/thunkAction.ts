@@ -8,6 +8,7 @@ import {
   ReqEventFiles,
   ReqEventLocation,
   ReqTicket,
+  IEvent,
 } from "types/event";
 import toast from "react-hot-toast";
 
@@ -24,7 +25,33 @@ export const createEvent = createAsyncThunk(
       localStorage.setItem("currenteventID", response.data.data._id);
       localStorage.setItem("currenteventCode", response.data.data.eventCode);
       toast.success("Event created")
-      console.log(response.data.data);
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { message: string };
+        console.log(message.message, "error message");
+        toast.error(message.message)
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+export const updateEvent = createAsyncThunk(
+  "event/updateEvent",
+  async (data: {eventId: string , formData: IEvent}, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventId}`,
+        method: "put",
+        data: data.formData,
+      });
+
+      localStorage.setItem("currenteventID", response.data.data._id);
+      localStorage.setItem("currenteventCode", response.data.data.eventCode);
+      toast.success("Event updated")
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -75,7 +102,6 @@ export const eventLocation = createAsyncThunk(
         method: "post",
         data: data.location,
       });
-      console.log(response.data.data);
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

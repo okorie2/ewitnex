@@ -9,24 +9,36 @@ import SettingsTextField from "@/components/inputs/SettingsInput";
 import { SelectChangeEvent, Tooltip } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { nanoid } from "nanoid";
-import { ICreateEvent } from "types/event";
+import { ICreateEvent, IEvent } from "types/event";
 import { IUserDetails } from "types/user";
 import { useRouter } from "next/router";
-import { createEvent } from "redux/event/thunkAction";
+import {
+  createEvent,
+  getEventById,
+  updateEvent,
+} from "redux/event/thunkAction";
 import { TailSpin } from "react-loader-spinner";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
-import _ from 'lodash'
+import _ from "lodash";
+import { useSearchParams } from "next/navigation";
 
 const HostEvent = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [organizerInputOpen, setOrganizerInputOpen] = useState(false);
   const [data, setdata] = useState("");
   const [audienceState, setAudienceState] = useState("public");
-  const { createEventData } = useAppSelector(({ hostEvent }) => hostEvent);
+  const params = useSearchParams();
+  const editEvent = params.get("editEvent");
   const [user, setUser] = useState<IUserDetails>();
+  const [createEventData, setCreateEventData] = useState<ICreateEvent>();
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+    setCreateEventData(
+      JSON.parse(localStorage.getItem("createEventData") || "{}")
+    );
   }, []);
+
   const [organizersArray, setOrganizersArray] = useState([
     { user_id: "", user_name: "" },
   ]);
@@ -40,12 +52,32 @@ const HostEvent = () => {
     description: "",
   });
 
+  const [eventID, setEventID] = useState("");
+  const { event } = useAppSelector(({ event }) => event);
+  const [_event, setEvent] = useState<IEvent>();
+  useEffect(() => {
+    setEventID(JSON.parse(sessionStorage.getItem("eventId") || ""));
+    console.log(eventID)
+    dispatch(getEventById(eventID.toString())).then(
+      (res: { meta: { requestStatus: string } }) => {
+        if (res.meta.requestStatus == "fulfilled") {
+          setEvent(event);
+        }
+      }
+    );
+  }, []);
+
   useEffect(() => {
     setFormData({
       ...formData,
-      ...createEventData,
       organizedBy: user?._id || "",
     });
+    if (createEventData) {
+      setFormData({
+        ...formData,
+        ...createEventData,
+      });
+    }
     setOrganizersArray([
       { user_id: user?._id || "", user_name: user?.username || "" },
     ]);
@@ -110,19 +142,41 @@ const HostEvent = () => {
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.removeItem("error");
-    // if (_.isEqual(createEventData, formData)) {
-    //   router.push("/dashboard/hostEvent/fileUpload");
-    // } else {
+    console.log(_event)
+    if (editEvent === "y") {
+      if (_event) {
+        setEvent({
+          ..._event,
+          EventTitle: formData.EventTitle,
+          OrganizedBy: formData?.organizedBy || "",
+          interests: formData.interests,
+          category: formData.category,
+          isPublic: formData.isPublic,
+          description: formData.description,
+        });
+        dispatch(updateEvent({ eventId: eventID, formData: _event })).then(
+          (res) => {
+            if (res.meta.requestStatus == "fulfilled") {
+              localStorage.setItem("createEventData", JSON.stringify(formData));
+              sessionStorage.removeItem("performers");
+              sessionStorage.removeItem("tickets");
+              router.push("/dashboard/hostEvent/fileUpload");
+            }
+          }
+        );
+      }
+    } else {
       dispatch(createEvent(formData)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
           localStorage.setItem("createEventData", JSON.stringify(formData));
-          sessionStorage.removeItem("performers")
-          sessionStorage.removeItem("tickets")
+          sessionStorage.removeItem("performers");
+          sessionStorage.removeItem("tickets");
+          localStorage.removeItem("fileUploadData")
+          localStorage.removeItem("eventLocationData")
           router.push("/dashboard/hostEvent/fileUpload");
         }
       });
-    // }
+    }
   };
 
   const handleDraft = (event: FormEvent<HTMLFormElement>) => {

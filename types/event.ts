@@ -123,5 +123,7 @@ export interface IEvent {
     _id: string;
   }[];
   updatedAt: string;
+  coverImage: string;
+  filePDF: string;
   _id: string;
 }

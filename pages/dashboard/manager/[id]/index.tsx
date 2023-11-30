@@ -35,6 +35,41 @@ const ManageSingleEvent = () => {
 
   const [deleteModal, setDeleteModal] = useState(false);
   const handleDeleteModal = () => setDeleteModal(!deleteModal);
+
+  const handleEditClick = () => {
+    localStorage.setItem(
+      "createEventData",
+      JSON.stringify({
+        EventTitle: event.EventTitle,
+        organizedBy: event.OrganizedBy || "",
+        interests: event.interests,
+        category: event.category,
+        isPublic: event.isPublic,
+        description: event.description,
+      })
+    );
+    localStorage.setItem(
+      "fileUploadData",
+      JSON.stringify({
+        coverImage: { name: event.coverImage || "" },
+        filePDF: { name: event.filePDF || "" },
+      })
+    );
+    localStorage.setItem(
+      "eventLocationData",
+      JSON.stringify({
+        endDate: event.location.endDate,
+        enterLocation: event.location.enterLocation,
+        hostUrl: event.location.hostUrl,
+        searchLocation: event.location.searchLocation,
+        selectHost: event.location.selectHost,
+        startDate: event.location.startDate,
+        type: event.location.type,
+      })
+    );
+    router.push("/dashboard/hostEvent?editEvent=y")
+  };
+
   return (
     <>
       <DeleteEventModal
@@ -169,6 +204,7 @@ const ManageSingleEvent = () => {
                       }}
                       onMouseEnter={() => setActiveMenuBar("edit")}
                       onMouseLeave={() => setActiveMenuBar("")}
+                      onClick={handleEditClick}
                     >
                       {activeMenuBar === "edit" ? (
                         <Image
@@ -201,7 +237,7 @@ const ManageSingleEvent = () => {
                       }}
                       onMouseEnter={() => setActiveMenuBar("cancel")}
                       onMouseLeave={() => setActiveMenuBar("")}
-                      onClick = {handleDeleteModal}
+                      onClick={handleDeleteModal}
                     >
                       {activeMenuBar === "cancel" ? (
                         <Image

@@ -13,7 +13,11 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     switch (activeRoute) {
-      case "/dashboard/hostEvent":
+      case "/dashboard/hostEvent": {
+        setActiveStage(1);
+      }
+      break;
+      case "/dashboard/hostEvent?editEvent=y":
         {
           setActiveStage(1);
         }
@@ -73,9 +77,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
             background: "#fff",
           }}
         >
-          <div css = {{display:"flex",  
-            gap: "0.5rem",
-          }}>
+          <div css={{ display: "flex", gap: "0.5rem" }}>
             <div
               onClick={() => router.back()}
               css={{ display: "flex", alignItems: "center" }}
@@ -98,7 +100,7 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
               css={{
                 display: "flex",
                 gap: "0.6rem",
-                fontSize:"0.9rem"
+                fontSize: "0.9rem",
               }}
             >
               <p
@@ -126,12 +128,12 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
       )}
       <div
         css={{
-          paddingBlock: isTablet ? "":"2.5rem",
-          paddingTop:isTablet ? "3rem":"",
-          borderRight: isTablet ? "":`1px solid ${"#E4E4E4"}`,
+          paddingBlock: isTablet ? "" : "2.5rem",
+          paddingTop: isTablet ? "3rem" : "",
+          borderRight: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
           fontSize: "1rem",
           fontWeight: "500",
-          width: isTablet ? "100vw":""
+          width: isTablet ? "100vw" : "",
         }}
       >
         <div
@@ -143,13 +145,15 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
             justifyContent: "space-between",
           }}
         >
-          {!isTablet &&  <h3 css={{ fontSize: "1.125rem", fontWeight: "bold" }}>
-            Hosting Event
-          </h3>}
+          {!isTablet && (
+            <h3 css={{ fontSize: "1.125rem", fontWeight: "bold" }}>
+              Hosting Event
+            </h3>
+          )}
           <ul
             css={{
               display: isTablet ? "flex" : "grid",
-              marginTop: isTablet ? "2.5rem":"2.5rem",
+              marginTop: isTablet ? "2.5rem" : "2.5rem",
               listStyleType: "none",
               fontWeight: "300",
             }}
@@ -173,12 +177,16 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
                   ></div>
                 )}
                 <Link
-                  href={item.href || ""}
+                  href={
+                    activeStage === item.stage
+                      ? item.secondHref
+                      : item.href || ""
+                  }
                   css={{
                     display: "flex",
                     alignItems: "center",
                     gap: "0.6rem",
-                    pointerEvents: activeStage >= item.stage ? "auto" : "none",
+                    pointerEvents: activeStage > item.stage ? "auto" : "none",
                   }}
                 >
                   {activeStage >= item.stage ? (
@@ -239,13 +247,34 @@ const HostEventLayout = ({ children }: { children: ReactNode }) => {
 export default HostEventLayout;
 
 const hostEventTabs = [
-  { name: "Event Program Info", href: "/dashboard/hostEvent", stage: 1 },
-  { name: "Files Upload", href: "/dashboard/hostEvent/fileUpload", stage: 2 },
+  {
+    name: "Event Program Info",
+    href: "/dashboard/hostEvent?editEvent=y",
+    stage: 1,
+    secondHref: "/dashboard/hostEvent",
+  },
+  {
+    name: "Files Upload",
+    href: "/dashboard/hostEvent/fileUpload",
+    stage: 2,
+    secondHref: "/dashboard/hostEvent/fileUpload",
+  },
   {
     name: "Location, Date and Time",
     href: "/dashboard/hostEvent/eventLocation",
     stage: 3,
+    secondHref: "/dashboard/hostEvent/eventLocation",
   },
-  { name: "Speakers", href: "/dashboard/hostEvent/speakers", stage: 4 },
-  { name: "Tickets", href: "/dashboard/hostEvent/tickets", stage: 5 },
+  {
+    name: "Speakers",
+    href: "/dashboard/hostEvent/speakers",
+    stage: 4,
+    secondHref: "/dashboard/hostEvent/speakers",
+  },
+  {
+    name: "Tickets",
+    href: "/dashboard/hostEvent/tickets",
+    stage: 5,
+    secondHref: "/dashboard/hostEvent/tickets",
+  },
 ];
