@@ -57,7 +57,9 @@ const HostEvent = () => {
   const [_event, setEvent] = useState<IEvent>();
   useEffect(() => {
     setEventID(JSON.parse(sessionStorage.getItem("eventId") || ""));
-    console.log(eventID)
+  }, []);
+
+  useEffect(() => {
     dispatch(getEventById(eventID.toString())).then(
       (res: { meta: { requestStatus: string } }) => {
         if (res.meta.requestStatus == "fulfilled") {
@@ -65,7 +67,7 @@ const HostEvent = () => {
         }
       }
     );
-  }, []);
+  }, [eventID]);
 
   useEffect(() => {
     setFormData({
@@ -139,27 +141,33 @@ const HostEvent = () => {
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
   const router = useRouter();
+  console.log(formData.isPublic);
+
+  useEffect(() => {
+    if (_event) {
+      setEvent({
+        ..._event,
+        EventTitle: formData.EventTitle,
+        OrganizedBy: formData?.organizedBy || "",
+        interests: formData.interests,
+        category: formData.category,
+        isPublic: formData.isPublic,
+        description: formData.description,
+      });
+    }
+  }, [formData]);
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(_event)
     if (editEvent === "y") {
       if (_event) {
-        setEvent({
-          ..._event,
-          EventTitle: formData.EventTitle,
-          OrganizedBy: formData?.organizedBy || "",
-          interests: formData.interests,
-          category: formData.category,
-          isPublic: formData.isPublic,
-          description: formData.description,
-        });
+        console.log(_event);
+        console.log(formData.isPublic);
         dispatch(updateEvent({ eventId: eventID, formData: _event })).then(
           (res) => {
             if (res.meta.requestStatus == "fulfilled") {
               localStorage.setItem("createEventData", JSON.stringify(formData));
-              sessionStorage.removeItem("performers");
-              sessionStorage.removeItem("tickets");
+              localStorage.setItem("currenteventID", eventID);
               router.push("/dashboard/hostEvent/fileUpload");
             }
           }
@@ -171,8 +179,8 @@ const HostEvent = () => {
           localStorage.setItem("createEventData", JSON.stringify(formData));
           sessionStorage.removeItem("performers");
           sessionStorage.removeItem("tickets");
-          localStorage.removeItem("fileUploadData")
-          localStorage.removeItem("eventLocationData")
+          localStorage.removeItem("fileUploadData");
+          localStorage.removeItem("eventLocationData");
           router.push("/dashboard/hostEvent/fileUpload");
         }
       });

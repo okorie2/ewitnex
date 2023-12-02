@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ITicket } from "types/event";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { deleteTicket, getEventById } from "redux/event/thunkAction";
+import UpdateTicketModal from "../modals/hostEventModal/updateTicketModal";
 
 const Ticket = (props: ITicket) => {
   const [eventId, setEventId] = useState("");
@@ -24,7 +25,17 @@ const Ticket = (props: ITicket) => {
       }
     );
   };
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
+    <>
+    <UpdateTicketModal
+      isOpen={modalOpen}
+      onRequestClose={() => setModalOpen(!modalOpen)}
+      setGetTickets={props?.setGetTickets}
+      id = {props.id}
+      eventId = {eventId}
+    />
     <div>
       <div>
         <h3 css={{ fontWeight: "bold", fontSize: "1.125rem" }}>
@@ -49,6 +60,7 @@ const Ticket = (props: ITicket) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
