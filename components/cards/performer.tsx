@@ -13,13 +13,12 @@ const Performer = (props: IPerformer) => {
   const [eventId, setEventId] = useState("");
   const router = useRouter();
   const { event } = useAppSelector(({ event }) => event);
-  
 
   useEffect(() => {
-    if(router.pathname.includes("hostEvent")){
+    if (router.pathname.includes("hostEvent")) {
       setEventId(localStorage.getItem("currenteventID") || "");
-    }else {
-      setEventId(event._id || "")
+    } else {
+      setEventId(event._id || "");
     }
   }, [event]);
   const [user, setUser] = useState<IUserDetails>();
@@ -45,13 +44,14 @@ const Performer = (props: IPerformer) => {
     });
   };
   const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <>
       <UpdateSpeakerModal
         isOpen={modalOpen}
         onRequestClose={() => setModalOpen(!modalOpen)}
         setGetPerformers={props?.setGetPerformers}
-        id = {props.id}
+        id={props.id}
       />
       <div
         css={{
@@ -95,32 +95,40 @@ const Performer = (props: IPerformer) => {
             <p>{props.role}</p>
           </div>
         </div>
-        {router.pathname.includes("host") ||
-          (event.OrganizedBy || createEventData?.organizedBy === user?._id && (
-            <div css={{ display: "flex", gap: "1.8rem", marginTop: "0.5rem" }}>
+        {router.pathname.includes("speakers") ? (
+          <>
+            {(event.OrganizedBy ||
+              createEventData?.organizedBy === user?._id) && (
               <div
-                onClick={() => setModalOpen(!modalOpen)}
-                css={{ cursor: "pointer" }}
+                css={{ display: "flex", gap: "1.8rem", marginTop: "0.5rem" }}
               >
-                <Image
-                  src="/assets/svgs/pencil.svg"
-                  alt=""
-                  width={21}
-                  height={21}
-                  priority
-                />
+                <div
+                  onClick={() => setModalOpen(!modalOpen)}
+                  css={{ cursor: "pointer" }}
+                >
+                  <Image
+                    src="/assets/svgs/pencil.svg"
+                    alt=""
+                    width={21}
+                    height={21}
+                    priority
+                  />
+                </div>
+                <div onClick={deletePerformerFunc} css={{ cursor: "pointer" }}>
+                  <Image
+                    src="/assets/svgs/trash.svg"
+                    alt=""
+                    width={17.88}
+                    height={22}
+                    priority
+                  />
+                </div>
               </div>
-              <div onClick={deletePerformerFunc} css={{ cursor: "pointer" }}>
-                <Image
-                  src="/assets/svgs/trash.svg"
-                  alt=""
-                  width={17.88}
-                  height={22}
-                  priority
-                />
-              </div>
-            </div>
-          ))}
+            )}
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

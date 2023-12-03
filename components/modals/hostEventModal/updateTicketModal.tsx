@@ -141,8 +141,6 @@ const UpdateTicketsModal = (props: IUpdateTicketsModal) => {
                 overflowY: "auto",
                 margin:"0 auto",
                 marginTop:isTablet ? "11vh" :"2rem",
-                
-
               }}
             >
               <UpdateTicketsForm setGetTickets = {props.setGetTickets} handleModalClose = {handleClose} id = {props.id} eventId = {props.eventId}/>

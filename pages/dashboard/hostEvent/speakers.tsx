@@ -63,6 +63,7 @@ const Speakers = () => {
 
   useEffect(() => {
     const getPerformers = () => {
+      console.log("run")
       dispatch(getEventById(eventID)).then((res) => {
         if (res.meta.requestStatus == "fulfilled") {
           const data = JSON.parse(sessionStorage.getItem("performers") || "{}");

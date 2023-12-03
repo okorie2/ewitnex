@@ -60,21 +60,23 @@ const HostEvent = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getEventById(eventID.toString())).then(
-      (res: { meta: { requestStatus: string } }) => {
-        if (res.meta.requestStatus == "fulfilled") {
-          setEvent(event);
+    if (editEvent === "y") {
+      dispatch(getEventById(eventID.toString())).then(
+        (res: { meta: { requestStatus: string } }) => {
+          if (res.meta.requestStatus == "fulfilled") {
+            setEvent(event);
+          }
         }
-      }
-    );
-  }, [eventID]);
+      );
+    }
+  }, [eventID, editEvent]);
 
   useEffect(() => {
     setFormData({
       ...formData,
       organizedBy: user?._id || "",
     });
-    if (createEventData) {
+    if (createEventData && editEvent === "y") {
       setFormData({
         ...formData,
         ...createEventData,
@@ -83,7 +85,7 @@ const HostEvent = () => {
     setOrganizersArray([
       { user_id: user?._id || "", user_name: user?.username || "" },
     ]);
-  }, [user, createEventData]);
+  }, [user, createEventData, editEvent]);
 
   useEffect(() => {
     setFormData({

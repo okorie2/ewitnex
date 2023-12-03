@@ -70,6 +70,7 @@ const UpdateTicketForm = ({
   }, [selectEvent]);
 
   useEffect(() => {
+    setTicketType(selectedTicket.ticketType)
     setFormData({
       ticket: [
         {
@@ -117,18 +118,18 @@ const UpdateTicketForm = ({
         gap: "1.5rem",
         borderRight: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
         height: "100%",
-        overflowY: "scroll",
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
-        [screen.lg]: {
-          overflowY: "initial",
-          borderBottom: `1px solid ${"#E4E4E4"}`,
-        },
-        [screen.desktop]: {
-          overflowY: "initial",
-          borderBottom: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
-        },
+        // overflowY: "scroll",
+        // "&::-webkit-scrollbar": {
+        //   display: "none",
+        // },
+        // [screen.lg]: {
+        //   overflowY: "initial",
+        //   borderBottom: `1px solid ${"#E4E4E4"}`,
+        // },
+        // [screen.desktop]: {
+        //   overflowY: "initial",
+        //   borderBottom: isTablet ? "" : `1px solid ${"#E4E4E4"}`,
+        // },
       }}
     >
       <div css={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
@@ -355,7 +356,7 @@ const UpdateTicketForm = ({
             radius={"2"}
           />
         ) : (
-          "Add Ticket"
+          "Update Ticket"
         )}
       </button>
       {isTablet && <Box height={"0.125rem"} />}
