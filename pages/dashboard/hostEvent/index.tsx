@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { FormEvent, useEffect, useState } from "react";
 import HostEventTextField from "@/components/inputs/hostEventTextField";
-import { ButtonFormFilled } from "styles/components/button";
+import { Button } from "styles/components/button";
 import Image from "next/image";
 import HostEventLayout from "./layout";
 import Link from "next/link";
@@ -620,7 +620,7 @@ const HostEvent = () => {
               )} */}
               SAVE TO DRAFT
             </button>
-            <ButtonFormFilled>
+            <Button fontSize ="0.9rem" height = "48px" width = "100%">
               {loading === "loading" ? (
                 <TailSpin
                   height={15}
@@ -632,7 +632,7 @@ const HostEvent = () => {
               ) : (
                 "SAVE AND CONTINUE"
               )}
-            </ButtonFormFilled>
+            </Button>
           </div>
         </form>
       </div>

@@ -50,7 +50,7 @@ const EventOverview = ({ id }: { id: string }) => {
         handleClose={handleCopyClose}
       />
       {loading === "loading" ? (
-        <div css = {{marginLeft:"-15vw"}}><Loader /></div>
+        <div css = {{marginLeft:isTablet ? "" : "-15vw"}}><Loader /></div>
       ) : (
         <div>
           <div css={{ width: "100%", height: "166px", position: "relative" }}>

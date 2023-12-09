@@ -73,7 +73,7 @@ const Speakers = () => {
       });
     };
     getPerformers();
-  }, [getPerformers]);
+  }, [getPerformers, eventID]);
 
   const handleChange = (
     e:
@@ -356,7 +356,7 @@ const Speakers = () => {
                     marginBottom: "0.5rem",
                     background: "#7C35AB",
                     borderRadius: "26px",
-                    width: "14rem",
+                    width: isTablet ? "100%":"14rem",
                     cursor: "pointer",
                   }}
                 >

@@ -96,7 +96,7 @@ const CompletedEvents = () => {
           {loading === "loading" ? (
             <Loading />
           ) : (
-            <div css={{ marginLeft: "10vw", marginTop: "2rem" }}>
+            <div css={{ marginLeft: isTablet ? "4vw":"10vw", marginTop: "2rem" }}>
               <EmptyState>
                 <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
                   <p>No events to showcase right now.</p>

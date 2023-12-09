@@ -31,7 +31,7 @@ const Drafts = () => {
           attendees="0/500"
           id="Wed542445"
         /> */}
-      <div css={{ marginLeft: "10vw", marginTop: "2rem" }}>
+      <div css={{ marginLeft: isTablet ? "4vw":"10vw", marginTop: "2rem" }}>
         <EmptyState>
           <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
             <p>Your unpublished programs will be displayed here.</p>

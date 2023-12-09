@@ -30,7 +30,7 @@ const CancelledEvents = () => {
           attendees="0/500"
           id="tec542445"
         /> */}
-      <div css={{ marginLeft: "10vw", marginTop: "2rem" }}>
+      <div css={{ marginLeft: isTablet ? "4vw":"10vw", marginTop: "2rem" }}>
         <EmptyState>
           <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
             <p>Your cancelled programs will be displayed here.</p>

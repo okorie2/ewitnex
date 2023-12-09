@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {  useMediaQuery } from "@mui/material";
 
-const EmptyState = ({ children }: { children: React.ReactNode }) => {
+const EmptyFolderState = ({ children }: { children: React.ReactNode }) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
 
   return (
@@ -19,13 +19,13 @@ const EmptyState = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       <Image
-        src="/assets/pngs/mt-state.png"
+        src="/assets/pngs/emptyFolderState.png"
         alt="empty page"
         height={200}
         width={200}
         priority
       />
-      <p css={{ fontWeight: "700",fontSize: isTablet ?"1.3rem":"1.5rem" }}>
+      <p css={{ fontWeight: "700", fontSize: isTablet ?"1.3rem":"1.5rem" }}>
         Uh oh, its a bit empty in here!
       </p>
       {children}
@@ -33,4 +33,4 @@ const EmptyState = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default EmptyState;
+export default EmptyFolderState;

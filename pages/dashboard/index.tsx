@@ -1,16 +1,60 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "./layout/layout";
 import Image from "next/image";
 import { ButtonFormFilled } from "styles/components/button";
 import DashboardHeader from "@/components/header/dashboardHeader";
 import FeedsCard from "@/components/cards/feedsCard";
-import { useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import Link from "next/link";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { IEvent } from "types/event";
+import { getEvents } from "redux/event/thunkAction";
+import { TailSpin } from "react-loader-spinner";
+import dayjs from "dayjs";
+import { getOrganizer } from "utitlities/commonHelpers/getOrganizer";
+import { formatNumber } from "utitlities/commonHelpers/numberFormatter";
 
 const Feeds = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
+  const { loading, events } = useAppSelector(({ event }) => event);
+  const [onlineEvents, setOnlineEvents] = useState<IEvent[] | []>([]);
+
+  const ticketRange = (event: IEvent) => {
+    const tickets = event.tickets;
+    const ticketPriceArray: number[] = [];
+
+    if (tickets && tickets.length < 1) {
+      return "Free";
+    } else {
+      if (tickets && tickets.length === 1)
+        return `$${formatNumber(tickets[0].ticketPrice)}`;
+      tickets &&
+        tickets.map((ticket) => {
+          ticketPriceArray.push(ticket.ticketPrice);
+        });
+      ticketPriceArray.sort((a, b) => a - b);
+      return `${
+        ticketPriceArray[0] === 0
+          ? "Free"
+          : `$${formatNumber(ticketPriceArray[0])}`
+      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+    }
+  };
+  
+  useEffect(() => {
+    let temp: IEvent[] | [] = [];
+    if(events){
+      temp = events.filter((event) => event.location?.type === "online");
+    }
+    setOnlineEvents(temp);
+  }, [events]);
+
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    dispatch(getEvents('All'));
+  }, []);
   return (
     <DashboardLayout>
       <div
@@ -111,28 +155,81 @@ const Feeds = () => {
                   padding: "1rem 0.2rem 1rem 0",
                 }}
               >
-                <FeedsCard
-                  label="Music"
-                  attendees="609"
-                  id="Tec542445"
-                  date="25 NOV. 2021, 10:00 AM"
-                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                  organizer="Connack Foundarion"
-                  priceRange="$500-$2K"
-                  title="Connack Foundation African Music Award Of The Year"
-                  img="/assets/pngs/card_img.png"
-                />
-                <FeedsCard
-                  label="Concert"
-                  attendees="609"
-                  date="3 DEC. 2022, 10:00 AM"
-                  id="Heal12548"
-                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                  organizer="Eko Atlantic"
-                  priceRange="$500-$2K"
-                  title="Medical Crusade with Doctor West"
-                  img="/assets/pngs/card_2.png"
-                />
+                <>
+                    {events.length < 1 && (
+                      <>
+                        {loading === "loading" ? (
+                          <>
+                            <div
+                              css={{
+                                height: "65vh",
+                                width: "80vw",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <TailSpin
+                                color={"#7c35ab"}
+                                width={20}
+                                height={20}
+                              />
+                            </div>
+                          </>
+                        ) : (
+                          <div css={{ textAlign: "center", width: "100%" }}>
+                            <p>No events to show</p>
+                          </div>
+                        )}
+                      </>
+                    )}
+                    {events &&
+                      events.map((event: IEvent, index) => (
+                        <div key={index}>
+                          <FeedsCard
+                            label={event.category}
+                            attendees="0"
+                            id={event?._id}
+                            eventCode={event?.eventCode}
+                            date={
+                              `${dayjs(
+                                event.location?.startDate
+                              ).toString()}`.includes("Invalid")
+                                ? "Date: TBD"
+                                : `${
+                                    dayjs(event.location?.startDate)
+                                      .toString()
+                                      .split(" ")[1]
+                                  } ${
+                                    dayjs(event.location?.startDate)
+                                      .toString()
+                                      .split(" ")[2]
+                                  }. ${
+                                    dayjs(event.location?.startDate)
+                                      .toString()
+                                      .split(" ")[3]
+                                  },  ${dayjs(event.location?.startDate).format(
+                                    "hh:mm A"
+                                  )}`
+                            }
+                            location={
+                              event.location?.type === "live"
+                                ? event.location?.searchLocation ||
+                                  event.location?.enterLocation
+                                : `${event.location?.selectHost}` ===
+                                  "undefined"
+                                ? "Venue: TBD"
+                                : `${event.location?.selectHost}`
+                            }
+                            organizer={getOrganizer(event.OrganizedBy)}
+                            priceRange={ticketRange(event)}
+                            title={event.EventTitle}
+                            img="/assets/pngs/card_img.png"
+                          />
+                        </div>
+                      ))}
+                    <Box height={48} />
+                  </>
               </div>
             </div>
             <div
@@ -171,28 +268,77 @@ const Feeds = () => {
                   padding: "1rem 0.2rem 1rem 0",
                 }}
               >
-                <FeedsCard
-                  label="Concert"
-                  attendees="609"
-                  date="3 DEC. 2022, 10:00 AM"
-                  id="Heal12548"
-                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                  organizer="Eko Atlantic"
-                  priceRange="$500-$2K"
-                  title="Medical Crusade with Doctor West"
-                  img="/assets/pngs/card_2.png"
-                />
-                <FeedsCard
-                  label="Music"
-                  attendees="609"
-                  id="Tec542445"
-                  date="25 NOV. 2021, 10:00 AM"
-                  location="Holikins Hotel, 22 Faulks Road, Aba, Abia"
-                  organizer="Connack Foundarion"
-                  priceRange="$500-$2K"
-                  title="Connack Foundation African Music Award Of The Year"
-                  img="/assets/pngs/card_img.png"
-                />
+                {onlineEvents.length < 1 && (
+                    <>
+                      {loading === "loading" ? (
+                        <>
+                          <div
+                            css={{
+                              height: "65vh",
+                              width: "80vw",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <TailSpin
+                              color={"#7c35ab"}
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <div css={{ textAlign: "center", width: "100%" }}>
+                          <p>No events to show</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  {onlineEvents &&
+                    onlineEvents.map((event: IEvent, index) => (
+                      <div key={index}>
+                        <FeedsCard
+                          label={event.category}
+                          attendees="0"
+                          id={event?._id}
+                          eventCode={event?.eventCode}
+                          date={
+                            `${dayjs(
+                              event.location?.startDate
+                            ).toString()}`.includes("Invalid")
+                              ? "Date: TBD"
+                              : `${
+                                  dayjs(event.location?.startDate)
+                                    .toString()
+                                    .split(" ")[1]
+                                } ${
+                                  dayjs(event.location?.startDate)
+                                    .toString()
+                                    .split(" ")[2]
+                                }. ${
+                                  dayjs(event.location?.startDate)
+                                    .toString()
+                                    .split(" ")[3]
+                                },  ${dayjs(event.location?.startDate).format(
+                                  "hh:mm A"
+                                )}`
+                          }
+                          location={
+                            event.location?.type === "live"
+                              ? event.location?.searchLocation ||
+                                event.location?.enterLocation
+                              : `${event.location?.selectHost}` === "undefined"
+                              ? "Venue: TBD"
+                              : `${event.location?.selectHost}`
+                          }
+                          organizer={getOrganizer(event.OrganizedBy)}
+                          priceRange={ticketRange(event)}
+                          title={event.EventTitle}
+                          img="/assets/pngs/card_img.png"
+                        />
+                      </div>
+                    ))}
               </div>
             </div>
           </div>

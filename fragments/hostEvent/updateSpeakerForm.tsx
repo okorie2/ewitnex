@@ -63,9 +63,11 @@ const UpdateSpeakerForm = ({
     _id: "",
   });
   useEffect(() => {
-    let performers = selectEvent.performers;
-    const selected = performers.filter((performer) => performer._id === id);
-    setSelectedPerformer(selected[0]);
+    if(selectEvent){
+      let performers = selectEvent.performers;
+      const selected = performers.filter((performer) => performer._id === id);
+      setSelectedPerformer(selected[0]);
+    }
   }, [selectEvent]);
   useEffect(() => {
     setFormData({

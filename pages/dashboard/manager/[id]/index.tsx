@@ -67,6 +67,7 @@ const ManageSingleEvent = () => {
         type: event.location.type,
       })
     );
+    localStorage.setItem("currentEventID", event._id)
     router.push("/dashboard/hostEvent?editEvent=y")
   };
 

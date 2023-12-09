@@ -18,7 +18,7 @@ const UpdateTicketForm = ({
   setGetTickets?: React.Dispatch<React.SetStateAction<boolean>>;
   handleModalClose?: () => void;
   id: string;
-  eventId: string
+  eventId: string;
 }) => {
   const [ticketType, setTicketType] = useState("Paid");
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -64,13 +64,15 @@ const UpdateTicketForm = ({
     ticketRefund: "",
   });
   useEffect(() => {
-    let tickets = selectEvent.tickets;
-    const selected = tickets.filter((ticket) => ticket._id === id);
-    setSelectedTicket(selected[0]);
+    if (selectEvent) {
+      let tickets = selectEvent.tickets;
+      const selected = tickets.filter((ticket) => ticket._id === id);
+      setSelectedTicket(selected[0]);
+    }
   }, [selectEvent]);
 
   useEffect(() => {
-    setTicketType(selectedTicket.ticketType)
+    setTicketType(selectedTicket.ticketType);
     setFormData({
       ticket: [
         {
