@@ -65,7 +65,7 @@ const DashboardPrograms = () => {
   const [onlineEvents, setOnlineEvents] = useState<IEvent[] | []>([]);
   useEffect(() => {
     let temp: IEvent[] | [] = [];
-    if(events){
+    if (events) {
       temp = events.filter((event) => event.location?.type === "online");
     }
     setOnlineEvents(temp);
@@ -416,7 +416,15 @@ const DashboardPrograms = () => {
                         </div>
                       </>
                     ) : (
-                      <div css={{ textAlign: "center", width: "100%" }}>
+                      <div
+                        css={{
+                          textAlign: "center",
+                          width: filterSectionOpen ? "60vw" : "70vw",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
                         <EmptyState>
                           <div
                             css={{ textAlign: "center", fontSize: "0.875rem" }}
@@ -505,7 +513,7 @@ const DashboardPrograms = () => {
                         </div>
                       </>
                     ) : (
-                      <div css={{ textAlign: "center", width: "100%" }}>
+                      <div css={{ textAlign: "center", width: "100%", display:"flex", alignItems:"center", justifyContent:"center" }}>
                         <EmptyState>
                           <div
                             css={{ textAlign: "center", fontSize: "0.875rem" }}

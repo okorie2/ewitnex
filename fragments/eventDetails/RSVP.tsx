@@ -1,17 +1,24 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RSVPCard from "@/components/cards/RSVPCard";
 import { H3 } from "styles/components/typography";
 import { screen } from "styles/theme";
 import { ButtonFormFilled } from "styles/components/button";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
+import { IUserDetails } from "types/user";
 
 const RSVP = () => {
   const router = useRouter();
   const isTablet = useMediaQuery("(max-width: 900px)");
   const loggedIn = router.pathname === "/dashboard/programs/[id]";
+  const [user,setUser] = useState<IUserDetails>()
+  
+  useEffect(() => {
+   setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+  },[])
+  
   return (
     <div
       css={{
@@ -43,15 +50,15 @@ const RSVP = () => {
           }}
         >
           <div>
-            <H3>405</H3>
+            <H3>0</H3>
             <p css={{ color: "#707070", fontWeight: "500" }}>
               persons will be attending
             </p>
           </div>
           <div>
-            <H3>40</H3>
+            <H3>0</H3>
             <p css={{ color: "#707070", fontWeight: "500" }}>
-              persons are from your location, Uyo
+              persons are from your location {user?.city ? `, ${user.city.city}` : ""}
             </p>
           </div>
         </div>

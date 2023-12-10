@@ -13,7 +13,7 @@ interface ILogo {
 const Logo = (props: ILogo) => {
   const [loggedIn, setLoggedIn] = useState(false)
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = sessionStorage.getItem('token')
     if(token){
       setLoggedIn(true)
     }

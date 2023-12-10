@@ -5,6 +5,8 @@ import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEventById } from "redux/event/thunkAction";
+import Loader from "utitlities/loaders";
+import EmptyState from "fragments/emptyState";
 
 const EventSpeakers = () => {
   const router = useRouter();
@@ -54,7 +56,7 @@ const EventSpeakers = () => {
                   position: "relative",
                 }}
               >
-                <Image src={performer.performerImage} alt="speaker-img" fill />
+                <Image src={performer.performerImage || ""} alt="speaker-img" fill />
               </div>
               <div css={{ marginTop: "0.7rem" }}>
                 <h4 css={{ fontSize: "1rem", fontWeight: "700" }}>
@@ -103,7 +105,15 @@ const EventSpeakers = () => {
         })
       ) : (
         <>
-          <p>This event does not have any performers</p>
+          {loading === "loading" ? (
+            <div css = {{display:"grid", placeItems:"center"}}>
+            <Loader />
+            </div>
+          ) : (
+            <EmptyState>
+              <p>This event does not have any performers</p>
+            </EmptyState>
+          )}
         </>
       )}
     </div>

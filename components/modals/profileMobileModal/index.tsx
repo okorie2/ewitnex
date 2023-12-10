@@ -24,7 +24,7 @@ const ProfileMobileModal = ({
     dispatch(logout("")).then((res) => {
       if (res.meta.requestStatus === "fulfilled") {
         localStorage.removeItem("user");
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
         router.push("/");
       }
     });

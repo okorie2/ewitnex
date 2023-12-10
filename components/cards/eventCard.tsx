@@ -16,6 +16,7 @@ interface IEventCard {
   attendees: string;
   organizer: string;
   width?: string;
+  eventCode: string;
   favourite: boolean;
 }
 
@@ -34,38 +35,41 @@ export default function EventCard(props: IEventCard) {
       }}
     >
       <div css={{ position: "relative", width: "100%", height: "171px" }}>
-        <Image
-          src={props.img}
-          alt="card_img"
-          css={{ borderRadius: "10px", objectFit: "cover" }}
-          fill
-        />
-        <div
-          css={{
-            position: "absolute",
-            top: "3%",
-            right: "2%",
-          }}
-        >
+        <Link href={`/events/${props.id}`}>
+          <Image
+            src={props.img}
+            alt="card_img"
+            css={{ borderRadius: "10px", objectFit: "cover" }}
+            fill
+          />
           <div
             css={{
-              width: "93px",
-              height: "2.13rem",
-              backdropFilter: "brightness(50%) ",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "16px",
-              borderRadius: "10px",
-              fontWeight: 500,
-              textTransform: "capitalize",
-              backgroundColor: "#fff",
-              opacity: "75%",
+              position: "absolute",
+              top: "3%",
+              right: "2%",
             }}
           >
-            {props.label}
+            <div
+              css={{
+                // width: "93px",
+                height: "2.13rem",
+                backdropFilter: "brightness(50%) ",
+                paddingInline: "0.25rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "16px",
+                borderRadius: "10px",
+                fontWeight: 500,
+                textTransform: "capitalize",
+                backgroundColor: "#fff",
+                opacity: "75%",
+              }}
+            >
+              {props.label}
+            </div>
           </div>
-        </div>
+        </Link>
         <div
           css={{
             height: "41px",
@@ -110,7 +114,7 @@ export default function EventCard(props: IEventCard) {
               marginTop: "2%",
             }}
           >
-            {props.id}
+            {props.eventCode?.slice(0, 12) || ""}
           </p>
           <H4 color="#F05E78" css={{ marginTop: "1.2rem" }}>
             2{props.date}
