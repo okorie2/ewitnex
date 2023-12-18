@@ -12,7 +12,7 @@ import { screen } from "styles/theme";
 export default function UpcomingEventsFragment() {
   const [seeAllHover, setSeeAllHover] = useState(false);
   const [scrollRightHover, setScrollRightHover] = useState(false);
-  const isTablet = useMediaQuery("(max-width: 900px)" );
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <div css={{ padding: "2% 4%", marginTop: "3rem" }}>
       <div
@@ -42,19 +42,19 @@ export default function UpcomingEventsFragment() {
       <div
         css={{
           display: "flex",
-          gap: isTablet ? "1rem":"0.125rem",
+          gap: isTablet ? "1rem" : "0.125rem",
           justifyContent: "space-between",
-          flexWrap: isTablet ? "nowrap": "wrap",
+          flexWrap: isTablet ? "nowrap" : "wrap",
           marginTop: isTablet ? "1.5rem" : "",
-          overflowX:'auto',
-          paddingInline:"2px"
+          overflowX: "auto",
+          paddingInline: "2px",
         }}
       >
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -68,15 +68,16 @@ export default function UpcomingEventsFragment() {
             organizer="Connack Foundarion"
             priceRange="$500-$2K"
             title="Connack Foundation African Music Award Of The Year"
-            width= {isTablet ? "90vw" : "100%"}
+            width={isTablet ? "90vw" : "100%"}
             img="/assets/pngs/card_img.png"
+            eventCode={"Tec542445"}
           />
         </div>
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -90,15 +91,16 @@ export default function UpcomingEventsFragment() {
             organizer="Eko Atlantic"
             priceRange="$500-$2K"
             title="Medical Crusade with Doctor West"
-            width= {isTablet ? "90vw" : "100%"}
+            width={isTablet ? "90vw" : "100%"}
             img="/assets/pngs/card_2.png"
+            eventCode={"Heal12548"}
           />
         </div>
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -112,15 +114,16 @@ export default function UpcomingEventsFragment() {
             organizer="Ada and Obi"
             priceRange="Free"
             title="Ada weds Obi"
-            width= {isTablet ? "90vw" : "100%"}
+            width={isTablet ? "90vw" : "100%"}
             id="Wed54254"
+            eventCode={"Wed54254"}
           />
         </div>
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -134,8 +137,9 @@ export default function UpcomingEventsFragment() {
             location="IG Hub, 22 Faulks Road, Aba, Abia"
             organizer="GDG Aba"
             priceRange="$500-$2K"
-            width= {isTablet ? "90vw" : "100%"}
+            width={isTablet ? "90vw" : "100%"}
             title="Google Developers Festival Aba"
+            eventCode={"Tec542445"}
           />
         </div>
       </div>

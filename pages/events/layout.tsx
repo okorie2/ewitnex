@@ -21,12 +21,12 @@ export default function Layout({ children }: { children: ReactNode }) {
   const handleFilterSectionOpen = () => {
     setFilterSectionOpen(!filterSectionOpen);
   };
-  useEffect (() => {
-    const html = document.querySelector('html')
-    if (html) { 
-      html.style.overflow = filterSectionOpen ? "hidden" : "auto"
+  useEffect(() => {
+    const html = document.querySelector("html");
+    if (html) {
+      html.style.overflow = filterSectionOpen ? "hidden" : "auto";
     }
-  }, [filterSectionOpen])
+  }, [filterSectionOpen]);
   const categories = [
     "All",
     "Music",
@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     "Hangouts",
   ];
   return (
-    <div css={{ fontFamily: "'Poppins', sans-serif" , maxWidth: "100vw"}}>
+    <div css={{ fontFamily: "'Poppins', sans-serif", maxWidth: "100vw" }}>
       <div
         css={{
           display: "flex",
@@ -75,23 +75,50 @@ export default function Layout({ children }: { children: ReactNode }) {
       </div>
       <div
         css={{
-          display: "grid",
-          gridTemplateColumns: filterSectionOpen ? isTablet ? "100vw 1fr":" 258px 1fr 10vw" :isTablet ?"60px 1fr": " 75px 1fr 10vw",
+          display: filterSectionOpen ? "grid":"",
+          gridTemplateColumns: filterSectionOpen
+            ? isTablet
+              ? "100vw 1fr"
+              : " 258px 1fr 10vw"
+            : isTablet
+            ? "80px 1fr"
+            : " 75px 1fr 10vw",
           height: "100%",
           maxHeight: "100vh",
           marginTop: "8.7rem",
+          width: isTablet ? "100vw" : ""
         }}
       >
         <EventFilter
           open={filterSectionOpen}
-          external = {true}
+          external={true}
           setOpen={handleFilterSectionOpen}
         />
-        <div css={{ padding: "2% 1%", maxHeight: "calc(100vh - 120px)", overflowY: "auto", "&::-webkit-scrollbar": {
-            display: "none",
-          }, }}>{children}</div>
-        <div css={{ padding: "20% 0.5%" , display:isTablet ? "none": "block"}}>
-          <div css={{ display: "flex", marginBottom: "0.8rem", alignItems: "center", gap:"5px"}}>
+        <div
+          css={{
+            padding: "2% 1%",
+            maxHeight: "calc(100vh - 120px)",
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+            marginLeft: isTablet ? "80px":'',
+            width: "calc(100vw - 80px)",
+          }}
+        >
+          {children}
+        </div>
+        <div
+          css={{ padding: "20% 0.5%", display: isTablet ? "none" : "block" }}
+        >
+          <div
+            css={{
+              display: "flex",
+              marginBottom: "0.8rem",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
             <p>All Events</p>
             <Image src={Right} alt="right" />
           </div>

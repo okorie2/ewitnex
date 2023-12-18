@@ -110,9 +110,11 @@ const EventSpeakers = () => {
             <Loader />
             </div>
           ) : (
+            <div css = {{marginLeft:"", textAlign:"center"}}>
             <EmptyState>
               <p>This event does not have any performers</p>
             </EmptyState>
+            </div>
           )}
         </>
       )}

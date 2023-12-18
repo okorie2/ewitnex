@@ -10,6 +10,7 @@ import ProgramSvg from "public/assets/svgs/programs";
 import HomeSvg from "public/assets/svgs/home";
 import ProfileSvg from "public/assets/svgs/profile";
 import LogoutSvg from "public/assets/svgs/logout";
+import EmptyNotification from "fragments/emptyNotifications";
 
 const Notifications = ({
   shown,
@@ -189,7 +190,7 @@ const Notifications = ({
               </div>
             )}
           </div>
-          <div
+           <div
             css={{
               width: "100%",
               overflowY: "auto",
@@ -202,7 +203,7 @@ const Notifications = ({
               },
             }}
           >
-            <NotificationCard
+           {/* <NotificationCard
               uploaded="Just Now"
               type="message"
               messageType="witness"
@@ -272,6 +273,11 @@ const Notifications = ({
               eventname="DevFest Aba"
               eventID="123456"
             />
+             */}
+             <EmptyNotification>
+              <p>Your notification center is currently empty</p>
+              <p>Stay tuned for updates, and feel free to explore other features in the meantime</p>
+             </EmptyNotification>
           </div>
         </div>
       </div>

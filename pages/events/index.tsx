@@ -60,6 +60,7 @@ export default function Index() {
   useEffect(() => {
     dispatch(getEvents("All"));
   }, []);
+
   return (
     <div>
       <Navbar />
@@ -69,6 +70,7 @@ export default function Index() {
             padding: "4% 2.5%",
             display: isTablet ? "flex" : "none",
             gap: "15px",
+            width:"100%"
           }}
         >
           <div css={{ display: "flex", marginBottom: "0.8rem", gap: "5px" }}>
@@ -79,7 +81,7 @@ export default function Index() {
           </div>
           <div>
             <p css={{ fontSize: "16px" }}>
-              <b>123456</b>
+              <b>{events?.length || "0"}</b>
             </p>
             <p css={{ color: "#707070" }}>events found</p>
           </div>
@@ -113,7 +115,7 @@ export default function Index() {
                 ) : (
                   <div css={{ textAlign: "center", width: "100%" }}>
                     <EmptyState>
-                      <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+                      <div css={{ textAlign: "center", fontSize: "0.75rem" }}>
                         <p>No events to showcase right now.</p>
                         <p>
                           Ready to fill in this space with your exciting
