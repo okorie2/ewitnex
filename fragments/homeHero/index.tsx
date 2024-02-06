@@ -15,7 +15,6 @@ const HomeHero = () => {
         height: isTablet ? "585px" :"474px",
         backgroundColor: "#7C35AB33",
         width: "100%",
-        marginTop: "4rem",
         display: "flex",
         flexDirection: "row",
         fontFamily: '"Poppins", sans-serif',
