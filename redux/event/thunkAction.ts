@@ -8,6 +8,8 @@ import {
   ReqEventFiles,
   ReqEventLocation,
   ReqTicket,
+  IEvent,
+  IReqUpdateTicket,
 } from "types/event";
 import toast from "react-hot-toast";
 
@@ -23,14 +25,40 @@ export const createEvent = createAsyncThunk(
 
       localStorage.setItem("currenteventID", response.data.data._id);
       localStorage.setItem("currenteventCode", response.data.data.eventCode);
-      toast.success("Event created")
-      console.log(response.data.data);
+      toast.success("Event created");
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        toast.error(message.message);
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+export const updateEvent = createAsyncThunk(
+  "event/updateEvent",
+  async (data: { eventId: string; formData: IEvent }, thunkAPI) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventId}`,
+        method: "put",
+        data: data.formData,
+      });
+
+      localStorage.setItem("currenteventID", response.data.data._id);
+      localStorage.setItem("currenteventCode", response.data.data.eventCode);
+      toast.success("Event updated");
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as { message: string };
+        console.log(message.message, "error message");
+        toast.error(message.message);
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -57,7 +85,7 @@ export const fileUpload = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        toast.error(message.message);
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -75,16 +103,15 @@ export const eventLocation = createAsyncThunk(
         method: "post",
         data: data.location,
       });
-      console.log(response.data.data);
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        if(message.message.includes("Cast to date")){
-          toast.error("Reselect date")
-        }else{
-          toast.error(message.message)
+        if (message.message.includes("Cast to date")) {
+          toast.error("Reselect date");
+        } else {
+          toast.error(message.message);
         }
         return thunkAPI.rejectWithValue(error.message);
       } else {
@@ -110,9 +137,48 @@ export const addPerformer = createAsyncThunk(
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        const message = error.response.data as {status:number , message: string };
+        const message = error.response.data as {
+          status: number;
+          message: string;
+        };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        toast.error(message.message);
+        // if(message.status.toString().startsWith("4")){
+        //   toast.error("Not authorized")
+        // }
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+export const updatePerformer = createAsyncThunk(
+  "event/updatePerformer",
+  async (
+    data: { eventID: string; performerId: string; form: FormData },
+    thunkAPI
+  ) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventID}/performers/${data.performerId}/performer`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        method: "put",
+        data: data.form,
+      });
+      toast.success("Performer updated succesfully");
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as {
+          status: number;
+          message: string;
+        };
+        console.log(message.message, "error message");
+        toast.error(message.message);
         // if(message.status.toString().startsWith("4")){
         //   toast.error("Not authorized")
         // }
@@ -126,7 +192,7 @@ export const addPerformer = createAsyncThunk(
 
 export const deletePerformer = createAsyncThunk(
   "event/deletePerformer",
-  async (data: {eventId:string, performerId:string}, thunkAPI) => {
+  async (data: { eventId: string; performerId: string }, thunkAPI) => {
     try {
       const response = await useAxios({
         url: `${config.API_BASE_URL}/events/${data.eventId}/performers/${data.performerId}/delete-performer`,
@@ -141,7 +207,7 @@ export const deletePerformer = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        toast.error(message.message);
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -168,7 +234,7 @@ export const addTicket = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        toast.error(message.message);
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -177,9 +243,46 @@ export const addTicket = createAsyncThunk(
   }
 );
 
+export const updateTicket = createAsyncThunk(
+  "event/updatePerformer",
+  async (
+    data: { eventID: string; ticketId: string; form: IReqUpdateTicket },
+    thunkAPI
+  ) => {
+    try {
+      const response = await useAxios({
+        url: `${config.API_BASE_URL}/events/${data.eventID}/tickets/${data.ticketId}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "put",
+        data: data.form,
+      });
+      toast.success("Ticket updated succesfully");
+      return response.data.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const message = error.response.data as {
+          status: number;
+          message: string;
+        };
+        console.log(message.message, "error message");
+        toast.error(message.message);
+        // if(message.status.toString().startsWith("4")){
+        //   toast.error("Not authorized")
+        // }
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue(String(error));
+      }
+    }
+  }
+);
+
+
 export const deleteTicket = createAsyncThunk(
   "event/deleteTicket",
-  async (data: {eventId:string, ticketId:string}, thunkAPI) => {
+  async (data: { eventId: string; ticketId: string }, thunkAPI) => {
     try {
       const response = await useAxios({
         url: `${config.API_BASE_URL}/events/${data.eventId}/tickets/${data.ticketId}`,
@@ -194,7 +297,7 @@ export const deleteTicket = createAsyncThunk(
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
         console.log(message.message, "error message");
-        toast.error(message.message)
+        toast.error(message.message);
         return thunkAPI.rejectWithValue(error.message);
       } else {
         return thunkAPI.rejectWithValue(String(error));
@@ -241,7 +344,7 @@ export const deleteEventById = createAsyncThunk(
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const message = error.response.data as { message: string };
-        toast.error(message.message)
+        toast.error(message.message);
         console.log(message.message, "error message");
         return thunkAPI.rejectWithValue(error.message);
       } else {
@@ -251,20 +354,23 @@ export const deleteEventById = createAsyncThunk(
   }
 );
 
-export const getEvents = createAsyncThunk('post/get', async (data: string, thunkAPI) => {
-  try {
+export const getEvents = createAsyncThunk(
+  "post/get",
+  async (data: string, thunkAPI) => {
+    try {
       const response = await useAxios({
-          url: `${config.API_BASE_URL}/events?eventsType=${data}&page=1&limit=30`,
-          method: 'get',
+        url: `${config.API_BASE_URL}/events?eventsType=${data}&page=1&limit=30`,
+        method: "get",
       });
-      return response.data.data
-  } catch (error) {
+      return response.data.data;
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-          console.log(error.response);
-          const message = error.response.data as { message: string };
-          return thunkAPI.rejectWithValue(error.message);
+        console.log(error.response);
+        const message = error.response.data as { message: string };
+        return thunkAPI.rejectWithValue(error.message);
       } else {
-          return thunkAPI.rejectWithValue(String(error));
+        return thunkAPI.rejectWithValue(String(error));
       }
+    }
   }
-});
+);

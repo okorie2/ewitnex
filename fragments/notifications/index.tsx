@@ -6,6 +6,11 @@ import NotificationCard from "@/components/cards/notificationCard";
 import { SidebarItem } from "pages/dashboard/layout/layout";
 import { useMediaQuery } from "@mui/material";
 import Link from "next/link";
+import ProgramSvg from "public/assets/svgs/programs";
+import HomeSvg from "public/assets/svgs/home";
+import ProfileSvg from "public/assets/svgs/profile";
+import LogoutSvg from "public/assets/svgs/logout";
+import EmptyNotification from "fragments/emptyNotifications";
 
 const Notifications = ({
   shown,
@@ -16,19 +21,19 @@ const Notifications = ({
 }) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [showMoreOptions, setShowMoreOptions] = useState(false);
-  useEffect (() => {
-    const html = document.querySelector('html')
-    if (html) { 
-      html.style.overflow = shown ? "hidden" : "auto"
+  useEffect(() => {
+    const html = document.querySelector("html");
+    if (html) {
+      html.style.overflow = shown ? "hidden" : "auto";
     }
-  }, [shown])
+  }, [shown]);
   return (
     <>
       <div
         css={{
-          position: isTablet ? "fixed":"absolute",
-          width: isTablet ? "100vw":"40vw",
-          height:isTablet ? "100vh" : "",
+          position: isTablet ? "fixed" : "absolute",
+          width: isTablet ? "100vw" : "40vw",
+          height: isTablet ? "100vh" : "",
           maxHeight: "100vh",
           borderRight: "1px solid #e4e4e4",
           marginLeft: shown ? "0" : "-100vw",
@@ -36,141 +41,169 @@ const Notifications = ({
           zIndex: 21,
           transition: "margin-left 1s",
           display: "grid",
-          gridTemplateColumns: isTablet ? "1fr":"101px 1fr",
+          gridTemplateColumns: isTablet ? "1fr" : "101px 1fr",
           fontFamily: '"Nunito", sans-serif',
-          top:isTablet ? "0":""
+          top: isTablet ? "0" : "",
         }}
       >
-        {!isTablet && <div
-          css={{
-            borderRight: "1px solid #e4e4e4",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            maxHeight: "100vh",
-          }}
-        >
-          <div>
-            <div css={{ marginTop: "1rem", textAlign: "center" }}>
+        {!isTablet && (
+          <div
+            css={{
+              borderRight: "1px solid #e4e4e4",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              maxHeight: "100vh",
+            }}
+          >
+            <div>
+              <div css={{ marginTop: "1rem", textAlign: "center" }}>
+                <Image
+                  src="/assets/svgs/mini-logo.svg"
+                  alt="logo"
+                  height={50}
+                  width={30}
+                />
+              </div>
+              <ul
+                css={{
+                  listStyleType: "none",
+                  display: "grid",
+                  gap: "2.5rem",
+                  width: "100%",
+                  marginInline: "auto",
+                  marginTop: "2.1rem",
+                }}
+              >
+                <li css={{ textAlign: "center" }}>
+                  <Link
+                    href={"/dashboard"}
+                    css={{
+                      ":hover": {
+                        color: "#7c35ab",
+                        svg: {
+                          path: {
+                            fill: "#7c35ab",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    <HomeSvg />
+                  </Link>
+                </li>
+                <li css={{ textAlign: "center" }}>
+                  <Link
+                    href="/dashboard/programs"
+                    css={{
+                      ":hover": {
+                        color: "#7c35ab",
+                        svg: {
+                          path: {
+                            fill: "#7c35ab",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    <ProgramSvg />
+                  </Link>
+                </li>
+                <li
+                  css={{ textAlign: "center", cursor: "pointer" }}
+                  onClick={setClose}
+                >
+                  <Image
+                    src={`/assets/svgs/notification-active.svg`}
+                    alt=""
+                    width={20}
+                    height={20}
+                  />
+                </li>
+                <li css={{ textAlign: "center" }}>
+                  <Link
+                    href="/dashboard/profile"
+                    css={{
+                      ":hover": {
+                        color: "#7c35ab",
+                        svg: {
+                          path: {
+                            fill: "#7c35ab",
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    <ProfileSvg />
+                  </Link>
+                </li>
+              </ul>
+              {showMoreOptions && <MoreOptions />}
+            </div>
+            <div
+              css={{ textAlign: "center", cursor: "pointer" }}
+              onClick={() => setShowMoreOptions(!showMoreOptions)}
+            >
               <Image
-                src="/assets/svgs/mini-logo.svg"
-                alt="logo"
-                height={50}
-                width={30}
+                src="/assets/svgs/hamburger.svg"
+                alt=""
+                width={20}
+                height={20}
               />
             </div>
-            <ul
-              css={{
-                listStyleType: "none",
-                display: "grid",
-                gap: "2.5rem",
-                width: "100%",
-                marginInline: "auto",
-                marginTop: "2.1rem",
-              }}
-            >
-              <li css={{ textAlign: "center" }}>
-                <Link href={"/dashboard"}>
-                  <Image
-                    src="/assets/svgs/home.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-              </li>
-              <li css={{ textAlign: "center" }}>
-                <Link href="/dashboard/programs">
-                  <Image
-                    src={`/assets/svgs/programs.svg`}
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-              </li>
-              <li
-                css={{ textAlign: "center", cursor: "pointer" }}
-                onClick={setClose}
-              >
-                <Image
-                  src={`/assets/svgs/notification-active.svg`}
-                  alt=""
-                  width={20}
-                  height={20}
-                />
-              </li>
-              <li css={{ textAlign: "center" }}>
-                <Link href="/dashboard/profile">
-                  <Image
-                    src={`/assets/svgs/profile.svg`}
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-              </li>
-            </ul>
-            {showMoreOptions && <MoreOptions />}
           </div>
-          <div
-            css={{ textAlign: "center", cursor: "pointer" }}
-            onClick={() => setShowMoreOptions(!showMoreOptions)}
-          >
-            <Image
-              src="/assets/svgs/hamburger.svg"
-              alt=""
-              width={20}
-              height={20}
-            />
-          </div>
-        </div>}
+        )}
         <div
           css={{
             display: "grid",
-            gridTemplateRows:"5rem 1fr",
+            gridTemplateRows: "5rem 1fr",
           }}
         >
-          <div css = {{
-              borderBottom: "1px solid #E4E4E4",
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"space-between"
-          }}>
-          <p
+          <div
             css={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              paddingLeft: isTablet?"1.25rem":"2.5rem",
-              paddingTop: isTablet ? "0.875rem":"1.5rem",
+              borderBottom: "1px solid #E4E4E4",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
-            Notifications
-          </p>
-          {isTablet && <div css = {{marginRight:"1.5rem", marginTop:"1.2rem"}}>
-            <Link href={"/dashboard/search"} >
-              <Image
-                src="/assets/svgs/search.svg"
-                width={20}
-                height={20}
-                alt="logo"
-              />
-            </Link></div>}
+            <p
+              css={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                paddingLeft: isTablet ? "1.25rem" : "2.5rem",
+                paddingTop: isTablet ? "0.875rem" : "1.5rem",
+              }}
+            >
+              Notifications
+            </p>
+            {isTablet && (
+              <div css={{ marginRight: "1.5rem", marginTop: "1.2rem" }}>
+                <Link href={"/dashboard/search"}>
+                  <Image
+                    src="/assets/svgs/search.svg"
+                    width={20}
+                    height={20}
+                    alt="logo"
+                  />
+                </Link>
+              </div>
+            )}
           </div>
-          <div
+           <div
             css={{
               width: "100%",
               overflowY: "auto",
-              height: isTablet ? "calc(100vh - 9rem)":"calc(100vh - 80px)",
-              paddingLeft: isTablet ? "1rem":"2.5rem",
+              height: isTablet ? "calc(100vh - 9rem)" : "calc(100vh - 80px)",
+              paddingLeft: isTablet ? "1rem" : "2.5rem",
               paddingTop: "1rem",
-             paddingBottom:"5rem",
+              paddingBottom: "5rem",
               "&::-webkit-scrollbar": {
-                  visibility:"hidden",
+                visibility: "hidden",
               },
             }}
           >
-            <NotificationCard
+           {/* <NotificationCard
               uploaded="Just Now"
               type="message"
               messageType="witness"
@@ -240,6 +273,11 @@ const Notifications = ({
               eventname="DevFest Aba"
               eventID="123456"
             />
+             */}
+             <EmptyNotification>
+              <p>Your notification center is currently empty</p>
+              <p>Stay tuned for updates, and feel free to explore other features in the meantime</p>
+             </EmptyNotification>
           </div>
         </div>
       </div>
@@ -304,9 +342,17 @@ const MoreOptions = () => {
           width: "65%",
           marginInline: "auto",
           paddingBlock: "0.8rem",
+          ":hover": {
+            color: "#7c35ab",
+            svg: {
+              path: {
+                fill: "#7c35ab",
+              },
+            },
+          },
         }}
       >
-        <Image src="/assets/svgs/logout.svg" alt="" width={20} height={20} />
+        <LogoutSvg />
         <p>Log out</p>
       </Link>
     </div>

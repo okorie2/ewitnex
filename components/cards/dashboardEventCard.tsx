@@ -11,7 +11,7 @@ interface IEventCard {
   title: string;
   favourite?: boolean;
   id: string;
-  eventCode:string;
+  eventCode: string;
   date: string;
   location: string;
   priceRange: string;
@@ -35,39 +35,41 @@ export default function DashboardEventCard(props: IEventCard) {
       }}
     >
       <div css={{ position: "relative", width: "100%", height: "171px" }}>
-        <Image
-          src={props.img}
-          alt="card_img"
-          css={{ borderRadius: "10px", objectFit: "cover" }}
-          fill
-        />
-        <div
-          css={{
-            position: "absolute",
-            top: "3%",
-            right: "2%",
-          }}
-        >
+        <Link href={`/dashboard/programs/${props.id}`}>
+          <Image
+            src={props.img}
+            alt="card_img"
+            css={{ borderRadius: "10px", objectFit: "cover" }}
+            fill
+          />
           <div
             css={{
-              // width: "93px",
-              height: "2.13rem",
-              backdropFilter: "brightness(50%) ",
-              paddingInline:"0.25rem",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "16px",
-              borderRadius: "10px",
-              fontWeight: 500,
-              textTransform: "capitalize",
-              backgroundColor: "#fff",
-              opacity: "75%",
+              position: "absolute",
+              top: "3%",
+              right: "2%",
             }}
           >
-            {props.label}
+            <div
+              css={{
+                // width: "93px",
+                height: "2.13rem",
+                backdropFilter: "brightness(50%) ",
+                paddingInline: "0.25rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "16px",
+                borderRadius: "10px",
+                fontWeight: 500,
+                textTransform: "capitalize",
+                backgroundColor: "#fff",
+                opacity: "75%",
+              }}
+            >
+              {props.label}
+            </div>
           </div>
-        </div>
+        </Link>
         <div
           css={{
             height: "41px",

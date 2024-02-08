@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Logo from "@/components/logo";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,6 +7,10 @@ import Notification from "fragments/notifications";
 import Link from "next/link";
 import EventFilter from "fragments/eventFilter";
 import ProfileMobileModal from "@/components/modals/profileMobileModal";
+import HomeSvg from "public/assets/svgs/home";
+import ProgramSvg from "public/assets/svgs/programs";
+import NotificationSvg from "public/assets/svgs/notification";
+import ProfileSvg from "public/assets/svgs/profile";
 
 const MobileLayout = ({ children }: { children: React.ReactNode }) => {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -28,6 +32,36 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
   const showMobileDashboard = () => {
     return forMobileDashboard.includes(router.route) && filterOpen === false;
   };
+  const active = useMemo(() => {
+    let route = router.route;
+    if (route.includes("manager")) {
+      route = "/dashboard/manager";
+    }
+    if (route.includes("programs")) {
+      route = "/dashboard/programs";
+    }
+    switch (route) {
+      case "/dashboard":
+        {
+          return "feeds";
+        }
+      case "/dashboard/programs":
+        {
+          return "programs";
+        }
+      case "/dashboard/notifications":
+        {
+          return "notifications";
+        }
+      case "/dashboard/profile":
+        {
+          return "profile";
+        }
+      default: {
+        return "feeds";
+      }
+    }
+  }, [router.route]);
   return (
     <>
       {filterOpen && (
@@ -138,21 +172,23 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
                 paddingInline: "5%",
               }}
             >
-              <Link href={"/dashboard"}>
-                <Image
-                  src="/assets/svgs/home.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                />
+              <Link href={"/dashboard"} css = {{
+                svg: {
+                  path: {
+                    fill: active === "feeds" && !open ? "#7c35ab" : "",
+                  },
+                },
+              }}>
+                <HomeSvg />
               </Link>
-              <Link href="/dashboard/programs">
-                <Image
-                  src={`/assets/svgs/programs.svg`}
-                  alt=""
-                  width={20}
-                  height={20}
-                />
+              <Link href="/dashboard/programs" css = {{
+                svg: {
+                  path: {
+                    fill: active === "programs" && !open ? "#7c35ab" : "",
+                  },
+                },
+              }}>
+                <ProgramSvg />
               </Link>
               <div
                 css={{
@@ -181,11 +217,14 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
                     border: "1px solid #7c35ab",
                   }}
                 >
-                  <Link href="/dashboard/hostEvent" css = {{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}>
+                  <Link
+                    href="/dashboard/hostEvent"
+                    css={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Image
                       src="/assets/svgs/host.svg"
                       alt=""
@@ -195,21 +234,23 @@ const MobileLayout = ({ children }: { children: React.ReactNode }) => {
                   </Link>
                 </div>
               </div>
-              <div onClick={() => setOpen(!open)}>
-                <Image
-                  src={`/assets/svgs/notification.svg`}
-                  alt=""
-                  width={20}
-                  height={20}
-                />
+              <div onClick={() => setOpen(!open)} css = {{
+                svg: {
+                  path: {
+                    fill: open ? "#7c35ab" : "",
+                  },
+                },
+              }}>
+                <NotificationSvg />
               </div>
-              <Link href="/dashboard/profile">
-                <Image
-                  src={`/assets/svgs/profile.svg`}
-                  alt=""
-                  width={20}
-                  height={20}
-                />
+              <Link href="/dashboard/profile" css = {{
+                svg: {
+                  path: {
+                    fill: active === "profile" && !open ? "#7c35ab" : "",
+                  },
+                },
+              }}>
+                <ProfileSvg />
               </Link>
             </div>
           </>

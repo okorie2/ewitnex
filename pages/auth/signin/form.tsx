@@ -98,12 +98,7 @@ export default function Form() {
       console.log(res, "resss");
 
       if (res.meta.requestStatus === "fulfilled") {
-        // const nextRes = NextResponse.next()
-        // nextRes.cookies.set({
-        //     name: 'loggedIn',
-        //     value: 'true',
-        //     httpOnly: true
-        // })
+       
         setMessage("SignIn successful")
         setSuccessSnackBarOpen(true)
         if (src) {

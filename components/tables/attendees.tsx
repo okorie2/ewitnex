@@ -1,18 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
 import Image from "next/image";
-import React , { useState } from "react";
+import React, { useState } from "react";
 import { Table, TableContainer } from "styles/components/table";
 import { TableData } from "./ticketSales";
 import StyledCheckbox from "../inputs/StyledCheckbox";
-import EmptyState from "fragments/emptyState";
+import EmptyFolderState from "fragments/emptyFolderState";
+import {  useMediaQuery } from "@mui/material";
 
 const AttendeesTable = () => {
   const [checked, setChecked] = React.useState(false);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
   };
-  const [showData, setShowData] = useState(false)
+  const [showData, setShowData] = useState(false);
+  const isTablet = useMediaQuery("(max-width: 780px)");
 
   return (
     <TableContainer>
@@ -21,10 +23,7 @@ const AttendeesTable = () => {
           <tr>
             <th css={{ display: "flex", width: "6rem", alignItems: "center" }}>
               {/* <input type="checkbox" css ={{marginInline: "9%"}}/> */}
-              <StyledCheckbox
-                checked={checked}
-                onChange={handleChange}
-              />
+              <StyledCheckbox checked={checked} onChange={handleChange} />
               Ticket ID
             </th>
             <th>User</th>
@@ -35,8 +34,7 @@ const AttendeesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            showData && 
+          {showData && (
             <>
               <TableRow
                 ticketID="#000123456"
@@ -149,15 +147,19 @@ const AttendeesTable = () => {
                 location="Abuja"
               />
             </>
-          }
+          )}
         </tbody>
       </Table>
-      {!showData && 
-      <div css = {{marginTop:"2.5rem", marginLeft:"6vw"}}>
-      <EmptyState>
-        <p>This event does not have any attendees yet</p>
-      </EmptyState>
-      </div>}
+      {!showData && (
+        <div css={{ marginTop: "2.5rem", marginLeft: isTablet ? "6vw":"6vw"  }}>
+          <EmptyFolderState>
+            <div css = {{display:"flex", alignItems:"center", flexDirection:"column", textAlign:"center"}}>
+              <p>No attendees to showcase right now</p>
+              <p>Ready to fill this space with your attendees?</p>
+            </div>
+          </EmptyFolderState>
+        </div>
+      )}
     </TableContainer>
   );
 };
@@ -172,10 +174,7 @@ const TableRow = (props: TableData) => {
   return (
     <tr>
       <td css={{ display: "flex", alignItems: "center" }}>
-        <StyledCheckbox 
-          checked={checked}
-          onChange={handleChange}
-        />
+        <StyledCheckbox checked={checked} onChange={handleChange} />
         {props.ticketID}
       </td>
       <td>

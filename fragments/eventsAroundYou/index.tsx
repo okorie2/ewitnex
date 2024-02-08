@@ -11,7 +11,7 @@ import Link from "next/link";
 export default function EventsAroundYouFragment() {
   const [seeAllHover, setSeeAllHover] = useState(false);
   const [scrollRightHover, setScrollRightHover] = useState(false);
-  const isTablet = useMediaQuery("(max-width: 900px)" );
+  const isTablet = useMediaQuery("(max-width: 900px)");
   return (
     <div css={{ padding: "2% 4%", marginTop: "3rem" }}>
       <div
@@ -21,7 +21,7 @@ export default function EventsAroundYouFragment() {
         }}
       >
         <div>
-          <H2 small = {isTablet}>Events Around You</H2>
+          <H2 small={isTablet}>Events Around You</H2>
         </div>
         <div
           css={{
@@ -41,19 +41,19 @@ export default function EventsAroundYouFragment() {
       <div
         css={{
           display: "flex",
-          gap: isTablet ? "1rem":"0.125rem",
+          gap: isTablet ? "1rem" : "0.125rem",
           justifyContent: "space-between",
-          flexWrap: isTablet ? "nowrap": "wrap",
+          flexWrap: isTablet ? "nowrap" : "wrap",
           marginTop: isTablet ? "1.5rem" : "",
-          overflowX:'auto',
-          paddingInline:"2px"
+          overflowX: "auto",
+          paddingInline: "2px",
         }}
       >
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -68,14 +68,15 @@ export default function EventsAroundYouFragment() {
             priceRange="$500-$2K"
             title="Connack Foundation African Music Award Of The Year"
             img="/assets/pngs/card_img.png"
-            width= {isTablet ? "90vw" : "100%"}
+            width={isTablet ? "90vw" : "100%"}
+            eventCode={"Tec542445"}
           />
         </div>
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -90,15 +91,15 @@ export default function EventsAroundYouFragment() {
             priceRange="$500-$2K"
             title="Medical Crusade with Doctor West"
             img="/assets/pngs/card_2.png"
-            width= {isTablet ? "90vw" : "100%"}
-
+            width={isTablet ? "90vw" : "100%"}
+            eventCode={"Heal12548"}
           />
         </div>
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -113,15 +114,15 @@ export default function EventsAroundYouFragment() {
             priceRange="Free"
             title="Ada weds Obi"
             id="Wed54254"
-            width= {isTablet ? "90vw" : "100%"}
-
+            width={isTablet ? "90vw" : "100%"}
+            eventCode={"Wed54254"}
           />
         </div>
         <div
           css={{
-            width: isTablet ? "100%":"24%",
+            width: isTablet ? "100%" : "24%",
             [screen.desktop]: {
-              width: isTablet ? "100%": "32%",
+              width: isTablet ? "100%" : "32%",
             },
           }}
         >
@@ -136,8 +137,8 @@ export default function EventsAroundYouFragment() {
             organizer="GDG Aba"
             priceRange="$500-$2K"
             title="Google Developers Festival Aba"
-            width= {isTablet ? "90vw" : "100%"}
-
+            width={isTablet ? "90vw" : "100%"}
+            eventCode={"Tec542445"}
           />
         </div>
       </div>
@@ -175,7 +176,9 @@ export default function EventsAroundYouFragment() {
           onMouseEnter={() => setSeeAllHover(true)}
           onMouseLeave={() => setSeeAllHover(false)}
         >
-          <Link href = "/events"><p>See all events</p></Link>
+          <Link href="/events">
+            <p>See all events</p>
+          </Link>
           {seeAllHover ? (
             <Image
               src={"/assets/svgs/elbow-right-white.svg"}
@@ -192,7 +195,13 @@ export default function EventsAroundYouFragment() {
             />
           )}
         </div>
-        <div css={{ display: "flex", gap: "1rem", marginTop: isTablet ? "1%" : "" }}>
+        <div
+          css={{
+            display: "flex",
+            gap: "1rem",
+            marginTop: isTablet ? "1%" : "",
+          }}
+        >
           <div
             css={{
               width: isTablet ? "40px" : "46px",

@@ -16,9 +16,11 @@ import toast from "react-hot-toast";
 
 const FileUpload = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
-  const { fileUploadData } = useAppSelector(
-    ({ hostEvent }) => hostEvent
-  );
+  const[ fileUploadData, setFileUploadData] = useState<IEventFiles>()
+
+  useEffect(() => {
+    setFileUploadData(JSON.parse(localStorage.getItem("fileUploadData") || "{}"))
+  }, []);
   const addPDFRef = useRef<HTMLInputElement>(null);
   const addCoverImageRef = useRef<HTMLInputElement>(null);
 
@@ -75,16 +77,17 @@ const FileUpload = () => {
   },[eventID])
 
   const handleNext = () => {
-    // if(fileUploadData){
-    //   router.push("/dashboard/hostEvent/eventLocation")
-    // }else{
+    if(fileUploadData){
+      router.push("/dashboard/hostEvent/eventLocation")
+    }else{
     dispatch(fileUpload({eventID, formData})).then((res) => {
       if (res.meta.requestStatus == "fulfilled") {
+        localStorage.setItem("fileUploadData", JSON.stringify(formData))
         router.push("/dashboard/hostEvent/eventLocation")
       }
     });
   };
-  // }
+  }
 
   return (
     <HostEventLayout>
@@ -380,7 +383,7 @@ const FileUpload = () => {
               marginTop: "1.5rem",
             }}
           >
-            <Link href="/dashboard/hostEvent">
+            <Link href="/dashboard/hostEvent?editEvent=y">
               <button
                 css={{
                   fontSize: "1rem",

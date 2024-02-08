@@ -72,7 +72,7 @@ const ChangePassword = () => {
         if (res.meta.requestStatus === "fulfilled") {
           setSuccess(true);
           localStorage.removeItem('user')
-          localStorage.removeItem('token')
+          sessionStorage.removeItem('token')
         }
       });
     }

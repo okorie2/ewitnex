@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { Table, TableContainer } from "styles/components/table";
 import StyledCheckbox from "../inputs/StyledCheckbox";
-import EmptyState from "fragments/emptyState";
+import EmptyFolderState from "fragments/emptyFolderState";
+import {  useMediaQuery } from "@mui/material";
 
 export interface TableData {
   ticketID: string;
@@ -22,7 +23,9 @@ const TicketSalesTable = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(!checked);
   };
-  const [showData, setShowData] = useState(false)
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
+  const [showData, setShowData] = useState(false);
   return (
     <TableContainer>
       <Table>
@@ -42,8 +45,7 @@ const TicketSalesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            showData && 
+          {showData && (
             <>
               <TableRow
                 ticketID="#000123456"
@@ -156,15 +158,19 @@ const TicketSalesTable = () => {
                 location="Abuja"
               />
             </>
-          }
+          )}
         </tbody>
       </Table>
-      {!showData && 
-      <div css = {{marginTop:"2.5rem", marginLeft:"6vw"}}>
-      <EmptyState>
-        <p>This event does not have any sales yet</p>
-      </EmptyState>
-      </div>}
+      {!showData && (
+        <div css={{ marginTop: "2.5rem", marginLeft: isTablet ? "6vw":"6vw" }}>
+          <EmptyFolderState>
+            <div css = {{display:"flex", alignItems:"center", flexDirection:"column"}}>
+              <p>No tickets have been sold yet.</p>
+              <p>Share your event to get attendees</p>
+            </div>
+          </EmptyFolderState>
+        </div>
+      )}
     </TableContainer>
   );
 };

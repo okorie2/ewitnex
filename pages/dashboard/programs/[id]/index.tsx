@@ -47,16 +47,17 @@ const SingleEvent = () => {
               alignItems: "center",
               gap: isTablet ? "1rem" : "0.7rem",
             }}
-            onClick={() => router.back()}
           >
-            <Image
-              src="/assets/svgs/arrow-left.svg"
-              alt=""
-              width={22}
-              height={15}
-            />
+            <Link href="/dashboard/programs">
+              <Image
+                src="/assets/svgs/arrow-left.svg"
+                alt=""
+                width={22}
+                height={15}
+              />
+            </Link>
             <h3 css={{ fontWeight: "bold", width: isTablet ? "80%" : "" }}>
-              {event.EventTitle || "Dummy Data"}
+              {event.EventTitle || ""}
             </h3>
           </div>
           {!isTablet && (
@@ -101,7 +102,7 @@ const SingleEvent = () => {
                 display: "none",
               },
               gap: "0.125rem",
-              marginBottom: isTablet ? "0rem":""
+              marginBottom: isTablet ? "0rem" : "",
             }}
           >
             {eventNav.map((navItem) => (
@@ -115,11 +116,11 @@ const SingleEvent = () => {
           </ul>
           <div
             css={{
-              width: isTablet ? "100vw":"97%",
+              width: isTablet ? "100vw" : "97%",
               marginInline: "auto",
               paddingBottom: "5rem",
               boxShadow: `0px 0px 10px ${"#00000029"}`,
-              borderRadius: isTablet ? "0":"20px",
+              borderRadius: isTablet ? "0" : "20px",
               height: "calc(100vh - (80px + 4rem))",
               overflowY: "scroll",
               "&::-webkit-scrollbar": {
@@ -127,7 +128,7 @@ const SingleEvent = () => {
               },
             }}
           >
-            <EventTab/>
+            <EventTab />
           </div>
         </div>
       </div>

@@ -30,16 +30,18 @@ const CancelledEvents = () => {
           attendees="0/500"
           id="tec542445"
         /> */}
-      <EmptyState>
-        <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
-          <p>Your cancelled programs will be displayed here.</p>
-        </div>
-        <Link href="/dashboard/hostEvent">
-          <Button height="52px" fontSize="1rem" width="16rem">
-            CREATE YOUR EVENT
-          </Button>
-        </Link>
-      </EmptyState>
+      <div css={{ marginLeft: isTablet ? "4vw":"10vw", marginTop: "2rem" }}>
+        <EmptyState>
+          <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
+            <p>Your cancelled programs will be displayed here.</p>
+          </div>
+          <Link href="/dashboard/hostEvent">
+            <Button height="52px" fontSize="1rem" width="16rem">
+              CREATE YOUR EVENT
+            </Button>
+          </Link>
+        </EmptyState>
+      </div>
     </div>
   );
 };

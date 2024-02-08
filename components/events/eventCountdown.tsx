@@ -13,7 +13,7 @@ const EventCountdown = ({ date }: { date: string }) => {
         css={{
           display: "grid",
           placeContent: "center",
-          width: "86px",
+          width: "90px",
           height: "60px",
           border: `1px solid ${"#E4E4E4"}`,
           background: `linear-gradient(60deg, ${"#7C35AB"},${"#FFFFFF"})`,
@@ -23,18 +23,27 @@ const EventCountdown = ({ date }: { date: string }) => {
         <div
           css={{
             display: "flex",
-            alignItems: "center",
-            width: "92px",
+            placeContent: "center",
+            width: "82px",
             height: "55.61px",
             border: `1px solid ${"#707070"}`,
             borderRadius: "5px",
             backgroundColor: "#FFFFFF",
-            gap:"0.5rem",
-            paddingLeft:"0.5rem"
+            marginTop:"0.15rem",
+            marginLeft:"0.05rem"
           }}
         >
-          <div css = {{height:"10px", width:"10px", background:"#F05E78", borderRadius:"50%"}}></div>
-          <p css={{ fontSize: "1.5rem", fontWeight: "bolder" }}>Ended</p>
+          <p
+            css={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              alignItems: "center",
+              display: "flex",
+              gap: "0.3rem",
+            }}
+          >
+            Ended
+          </p>
         </div>
       </div>
     );

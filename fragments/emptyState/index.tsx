@@ -1,11 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
+import {  useMediaQuery } from "@mui/material";
 
 const EmptyState = ({ children }: { children: React.ReactNode }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
+
   return (
     <div
       css={{
-        width: "50vw",
+        width: isTablet ? "78.5vw":"50vw",
         height: "70vh",
         display: "flex",
         flexDirection: "column",
@@ -22,7 +25,7 @@ const EmptyState = ({ children }: { children: React.ReactNode }) => {
         width={200}
         priority
       />
-      <p css={{ fontWeight: "700", fontSize: "1.5rem" }}>
+      <p css={{ fontWeight: "700",fontSize: isTablet ?"1.2rem":"1.5rem" }}>
         Uh oh, its a bit empty in here!
       </p>
       {children}

@@ -18,6 +18,7 @@ interface IFeedsCard {
   organizer: string;
   favourite?: boolean;
   width?: string;
+  eventCode:string
 }
 
 const FeedsCard = (props: IFeedsCard) => {
@@ -91,10 +92,12 @@ const FeedsCard = (props: IFeedsCard) => {
           css={{
             display: "flex",
             alignItems: "center",
+            justifyContent:"space-between",
+            width:"100%"
           }}
         >
           <Link href={`/dashboard/programs/${props.id}`}>
-            <h4 css={{ width: isTablet ? "" : "78%" }}>
+            <h4 css={{ width: isTablet ? "" : "100%" }}>
               {props.title.slice(0, 37)} {props.title.length > 37 && "..."}
             </h4>
           </Link>
@@ -105,7 +108,7 @@ const FeedsCard = (props: IFeedsCard) => {
               backgroundColor: "#fff",
               display: "flex",
               justifyContent: "center",
-              zIndex: "31",
+              zIndex: "1",
             }}
             onClick={() => setFavourite(!_favourite)}
           >
@@ -134,7 +137,7 @@ const FeedsCard = (props: IFeedsCard) => {
               fontWeight: 600,
             }}
           >
-            {props.id}
+            {props.eventCode.slice(0,12)}
           </p>
           <H4 color="#F05E78" css={{ marginTop: "0.5rem" }}>
             {props.date}
