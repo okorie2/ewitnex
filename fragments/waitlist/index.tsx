@@ -26,7 +26,7 @@ const Waitlist = () => {
         <h1
           css={{
             fontSize: '2.3rem',
-            [screen.mobile]: { fontSize: '1.5rem' },
+            [screen.mobile]: { fontSize: '1.8rem' },
           }}
         >
           Join the Waitlist for{' '}
@@ -39,7 +39,15 @@ const Waitlist = () => {
           </strong>
         </h1>
 
-        <p css={{ marginTop: '1.2rem', marginBottom: '3rem' }}>
+        <p
+          css={{
+            marginTop: '1.2rem',
+            marginBottom: '3rem',
+            [screen.mobile]: {
+              marginBottom: '2rem',
+            },
+          }}
+        >
           Be the first to experience the future of seamless event management and
           get exclusive early access to the Ewitnex platform before the public
           launch
@@ -68,15 +76,17 @@ const Waitlist = () => {
               padding: '0 1rem',
               fontSize: '1rem',
               backgroundColor: 'inherit',
+              color: '#707070',
               '::placeholder': {
                 fontSize: '1rem',
                 fontFamily: '"Poppins", sans-serif',
+                color: ' #707070',
               },
 
               [screen.mobile]: {
-                fontSize: '.7rem',
+                fontSize: '.9rem',
                 '::placeholder': {
-                  fontSize: '.8rem',
+                  fontSize: '.9rem',
                 },
               },
             }}
@@ -90,7 +100,7 @@ const Waitlist = () => {
               height: '3rem',
               width: '14rem',
               [screen.desktop]: { width: '19rem' },
-              [screen.tablet]: { width: '20rem' },
+              [screen.tablet]: { width: '16rem' },
               [screen.mobile]: { width: '13rem', fontSize: '.8rem' },
             }}
             onClick={() => setOpenAddedWaitingList(!openAddedWaitingList)}
