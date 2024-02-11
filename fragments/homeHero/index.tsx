@@ -17,10 +17,10 @@ const HomeHero = () => {
     <React.Fragment>
       <div
         css={{
-          height: '21rem',
+          height: '27rem',
           backgroundColor: '#7C35AB',
           [screen.mobile]: {
-            height: '11rem',
+            height: '12rem',
           },
         }}
       >
@@ -28,15 +28,13 @@ const HomeHero = () => {
           <Image
             src='/assets/pngs/screen-shot.png'
             alt='Ewitnex'
-            height={isMobile ? 500 : 700}
-            width={isMobile ? 400 : 700}
+            height={isMobile ? 500 : 900}
+            width={isMobile ? 400 : 900}
+            priority={true}
             style={{
               borderRadius: '20px',
               objectFit: 'contain',
-              marginTop: '-10rem',
-              [screen.mobile]: {
-                marginTop: '11rem',
-              },
+              marginTop: isMobile ? '-8.6rem' : '-12.3rem',
             }}
           />
         </div>
@@ -139,26 +137,14 @@ const HomeHero = () => {
             unforgettable.
           </p>
           <Link href='/auth/signup' style={{ width: '13rem' }}>
-            {isMobile ? (
-              <Button
-                css={{
-                  width: '13rem',
-                  [screen.desktop]: { width: '12rem' },
-                  [screen.mobile]: { margin: '1rem 0' },
-                }}
-              >
-                Create Event
-              </Button>
-            ) : (
-              <Button
-                css={{
-                  width: '13rem',
-                  [screen.desktop]: { width: '12rem' },
-                }}
-              >
-                Get Started
-              </Button>
-            )}
+            <Button
+              css={{
+                width: '13rem',
+                [screen.desktop]: { width: '12rem' },
+              }}
+            >
+              Get Started
+            </Button>
           </Link>
         </div>
         <div
@@ -179,7 +165,6 @@ const HomeHero = () => {
               style={{
                 borderRadius: '20px',
                 marginTop: isTablet ? '5rem' : '8rem',
-                // marginRight: "-14%",
               }}
             />
           </div>

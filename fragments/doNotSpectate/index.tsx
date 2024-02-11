@@ -20,6 +20,7 @@ const DontSpectateFragment = () => {
         gridTemplateColumns: "1fr 1fr",
         background: "#C8AADC",
         fontFamily: '"Poppins", sans-serif',
+        marginBottom: "7rem"
       }}
     >
       <div>

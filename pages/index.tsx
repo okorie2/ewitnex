@@ -6,9 +6,6 @@ import Waitlist from 'fragments/waitlist';
 import FindEventFragment from 'fragments/findEvent/findEvent';
 import EventsAroundYouFragment from 'fragments/eventsAroundYou';
 
-import UpcomingEventsFragment from 'fragments/upcomingEvents';
-import FeaturedEventsFragment from 'fragments/featuredEvents';
-
 import PublicSiteFooter from '@/components/footer/publicSite';
 import { Lines } from '@/components/lines';
 import HomeHero from 'fragments/homeHero';
@@ -30,11 +27,13 @@ export default function Home() {
       <Waitlist/>
       <HomeHero />
       <FindEventFragment />
-      <EventsAroundYouFragment />
+      <EventsAroundYouFragment title="Events Around You" description='Discover local happenings, concerts, weddings, workshops hangouts,
+            and more, all in one place, ensuring you never miss out on the
+            vibrant experiences in your vicinity.' />
       <WhyUseEwitnexFragment />
-      <UpcomingEventsFragment />
+       <EventsAroundYouFragment title="Upcoming Events" description='Explore a diverse range of upcoming gatherings, conferences, festivals, and more, and be the first to secure your spot in these highly anticipated occasions.' />
       <DontSpectateFragment />
-      <FeaturedEventsFragment />
+      <EventsAroundYouFragment title="Featured Events" description='Explore a curated collection of exceptional gatherings that promise unforgettable experiences and create lasting memories."' />
       <SimplifyTicketFragment />
       <DiscoverVenueFragment />
       <FindVendorsFragment />

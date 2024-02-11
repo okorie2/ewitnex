@@ -14,6 +14,8 @@ const Waitlist = () => {
           fontFamily: '"Poppins", sans-serif',
           margin: '10rem auto',
           width: '50%',
+          marginBottom: '60px',
+          marginTop: '8rem',
           [screen.desktop]: { margin: '12rem auto', width: '70%' },
           [screen.tablet]: { margin: '9rem auto', width: '80%' },
           [screen.mobile]: {
@@ -58,7 +60,7 @@ const Waitlist = () => {
             display: 'flex',
             width: '70%',
             margin: '0 auto',
-            border: '4px solid #F2F7FB',
+            border: '3px solid #E4E4E4',
             borderRadius: '56px',
             overflow: 'hidden',
             padding: '0 .2rem 0 1rem',
@@ -75,7 +77,7 @@ const Waitlist = () => {
               border: 'none',
               padding: '0 1rem',
               fontSize: '1rem',
-              backgroundColor: 'inherit',
+              backgroundColor: 'inherit',              
               color: '#707070',
               '::placeholder': {
                 fontSize: '1rem',
