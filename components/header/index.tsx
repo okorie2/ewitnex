@@ -11,6 +11,7 @@ import MobileNav from 'fragments/homeHero/mobileNav';
 
 export default function Navbar() {
   const isTablet = useMediaQuery('(max-width: 900px)');
+  const isLarge = useMediaQuery('(max-width: 1200px)');
   const isMobile = useMediaQuery('(max-width: 425px)');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
@@ -72,6 +73,7 @@ export default function Navbar() {
           right: '0',
           top: '0',
           zIndex: '2',
+          width: '100vw',
           [screen.tablet]: {
             width: '100vw',
             padding: '0 2%',
@@ -83,7 +85,7 @@ export default function Navbar() {
           css={{
             borderRadius: '66px',
             backgroundColor: '#F5F5F5',
-            width: '33.2%',
+            width: isTablet ? '20%' : '33.2%',
             height: '2.625rem',
             display: isTablet ? 'none' : 'flex',
             alignItems: 'center',

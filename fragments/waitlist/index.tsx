@@ -58,7 +58,7 @@ const Waitlist = () => {
         <div
           css={{
             display: 'flex',
-            width: '70%',
+            width: '75%',
             margin: '0 auto',
             border: '3px solid #E4E4E4',
             borderRadius: '56px',
@@ -101,8 +101,8 @@ const Waitlist = () => {
               padding: '0 1rem',
               height: '3rem',
               width: '14rem',
-              [screen.desktop]: { width: '19rem' },
-              [screen.tablet]: { width: '16rem' },
+              [screen.desktop]: { width: '19rem', fontSize: '1rem' },
+              [screen.tablet]: { width: '16rem', fontSize: '1rem' },
               [screen.mobile]: { width: '13rem', fontSize: '.8rem' },
             }}
             onClick={() => setOpenAddedWaitingList(!openAddedWaitingList)}

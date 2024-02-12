@@ -9,8 +9,8 @@ import { useMediaQuery } from 'react-responsive';
 import { screen } from 'styles/theme';
 
 const HomeHero = () => {
-  const isTablet = useMediaQuery({ query: '(max-width: 900px)' });
-
+  const isLarge = useMediaQuery({ query: '(max-width: 1024px)' });
+  const isTablet = useMediaQuery({ query: '(max-width: 900px)' });  
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
 
   return (
@@ -19,6 +19,9 @@ const HomeHero = () => {
         css={{
           height: '27rem',
           backgroundColor: '#7C35AB',
+          [screen.desktop]: {
+            height: '20rem'
+          },
           [screen.mobile]: {
             height: '12rem',
           },
@@ -28,13 +31,13 @@ const HomeHero = () => {
           <Image
             src='/assets/pngs/screen-shot.png'
             alt='Ewitnex'
-            height={isMobile ? 500 : 900}
-            width={isMobile ? 400 : 900}
+            height={isMobile ? 500 : isLarge ? 600 : 900}
+            width={isMobile ? 320 : isLarge ? 600 : 900}
             priority={true}
             style={{
               borderRadius: '20px',
               objectFit: 'contain',
-              marginTop: isMobile ? '-8.6rem' : '-12.3rem',
+              marginTop: isMobile ? '-8.6rem' : isLarge ? '-6.7rem' : '-12.3rem',
             }}
           />
         </div>

@@ -4,7 +4,7 @@ import { useMediaQuery } from '@mui/material';
 import { H1 } from 'styles/components/typography';
 
 const JoinRevolutionFragment = () => {
-  const isTablet = useMediaQuery('(max-width: 900px)');
+  const isTablet = useMediaQuery('(max-width: 900px)');  
 
   const reviews = [
     {
@@ -96,6 +96,7 @@ const Review = ({
   reviewerImage: string;
 }) => {
   const isTablet = useMediaQuery('(max-width: 900px)');
+  const isLarge = useMediaQuery('(max-width: 1024px)');
   return (
     <div
       css={{
@@ -104,7 +105,7 @@ const Review = ({
         borderRadius: '20px',
         boxShadow: '0px 0px 10px #00000029',
         padding: '2% 5.4%',
-        height: isTablet ? '355px' : '325px',
+        height: isLarge ? '400px' : isTablet ? '355px' : '325px',
         position: 'relative',
       }}
     >
@@ -124,7 +125,9 @@ const Review = ({
           height={55}
         />
       </div>
-      <p css={{ letterSpacing: '0.28px', fontSize: '0.855rem' }}>&ldquo{review}&rdquo</p>
+      <p css={{ letterSpacing: '0.28px', fontSize: '0.855rem' }}>
+        &ldquo{review}&rdquo
+      </p>
       <div
         css={{
           display: 'flex',

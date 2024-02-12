@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { H3, H4 } from 'styles/components/typography';
 import Link from 'next/link';
+import { useMediaQuery } from '@mui/material';
 
 interface IEventCard {
   img: string;
@@ -21,6 +22,7 @@ interface IEventCard {
 
 export default function EventCard(props: IEventCard) {
   const [_favourite, setFavourite] = useState(props.favourite);
+  const isMobile = useMediaQuery('(max-width: 425px)');
   return (
     <div
       css={{
@@ -181,6 +183,7 @@ export default function EventCard(props: IEventCard) {
               color: '#707070',
               fontWeight: 500,
               fontSize: '0.75rem',
+              marginBottom: isMobile ? '2rem': '0'
             }}
           >
             Organized by

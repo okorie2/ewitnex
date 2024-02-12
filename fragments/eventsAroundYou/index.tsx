@@ -190,7 +190,7 @@ export default function EventsAroundYouFragment(props: {
                   priceRange={each.priceRange}
                   title={each.title}
                   img={each.img}
-                  width={isLarge ? '30vw' : isTablet ? '50vw' : '23vw'}
+                  width={isMobile ? '90vw' : isTablet ? '50vw' : isLarge ? '30vw' : '23vw'}
                 />
               </div>
             );
