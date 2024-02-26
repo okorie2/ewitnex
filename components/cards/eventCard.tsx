@@ -25,7 +25,7 @@ export default function EventCard(props: IEventCard) {
   return (
     <div
       css={{
-        Height: "500px",
+        height: "500px",
         width: props.width || "100%",
         borderRadius: "10px",
         backgroundColor: "#fff",
