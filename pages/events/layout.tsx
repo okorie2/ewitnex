@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     "Hangouts",
   ];
   return (
-    <div css={{ fontFamily: "'Poppins', sans-serif", maxWidth: "100vw" }}>
+    <div css={{ fontFamily: "'Poppins', sans-serif", maxWidth: "100vw"}}>
       <div
         css={{
           display: "flex",
@@ -75,7 +75,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       </div>
       <div
         css={{
-          display: filterSectionOpen ? "grid":"",
+          display: filterSectionOpen ? "grid": "grid",
           gridTemplateColumns: filterSectionOpen
             ? isTablet
               ? "100vw 1fr"
@@ -86,7 +86,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           height: "100%",
           maxHeight: "100vh",
           marginTop: "8.7rem",
-          width: isTablet ? "100vw" : ""
+          width: isTablet ? "100vw" : "",
         }}
       >
         <EventFilter
@@ -108,8 +108,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         >
           {children}
         </div>
-        <div
-          css={{ padding: "20% 0.5%", display: isTablet ? "none" : "block" }}
+        {/* <div
+          css={{ padding: "20% 0.5%", display: isTablet ? "none" : "block", border: '2px solid red' }}
         >
           <div
             css={{
@@ -128,7 +128,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             </p>
             <p css={{ color: "#707070" }}>events found</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

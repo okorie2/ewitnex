@@ -168,7 +168,7 @@ const EventFilter = ({
         },
         maxHeight: isTablet ? "100vh" : "inherit",
         height: isTablet ? "100vh" : "",
-        position: isTablet ? "absolute" : "relative",
+        position: isTablet ? "fixed" : "",
         paddingBottom: isTablet ? (loggedIn ? "20rem" : "5rem") : "",
         zIndex: "32",
         transition: "width 325ms cubic-bezier(0, 0, 0.2, 1) 0ms",
