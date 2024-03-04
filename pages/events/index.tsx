@@ -71,8 +71,8 @@ export default function Index() {
         <div
           css={{
             padding: "4% 2.5%",
-            display: isTablet ? "flex" : "none",
-            flexDirection: isTablet ? "column" : "",
+            display: isTablet ? "block" : "none",
+            flexDirection: isTablet ? "column" : "row",
             gap: isTablet ? "0" : "15px",
             width: "100%",
           }}
@@ -144,7 +144,7 @@ export default function Index() {
               <div
                 css={{
                   display: "flex",
-                  flexDirection: isTablet ? "column" : "",
+                  flexDirection: isTablet ? "column" : "row",
                   gap: isTablet ? "1rem" : "0.125rem",
                   justifyContent: "space-between",
                   flexWrap: isTablet ? "nowrap" : "wrap",
@@ -154,6 +154,7 @@ export default function Index() {
               >
                 {EventJson.map((data) => (
                   <div
+                  key={data.id}
                     css={{
                       width: isTablet ? "100%" : "32%",
                       [screen.desktop]: {
