@@ -21,9 +21,12 @@ import Link from "next/link";
 import { TailSpin } from "react-loader-spinner";
 import { useRouter } from "next/router";
 import { getOrganizer } from "utitlities/commonHelpers/getOrganizer";
+import EventJson from "../../utitlities/json/eventsData.json";
+import { H1, H2, H3, H4 } from "styles/components/typography";
 
 export default function Index() {
   const isTablet = useMediaQuery("(max-width: 900px)");
+
   const ticketRange = (event: IEvent) => {
     const tickets = event.tickets;
     const ticketPriceArray: number[] = [];
@@ -68,9 +71,10 @@ export default function Index() {
         <div
           css={{
             padding: "4% 2.5%",
-            display: isTablet ? "flex" : "none",
-            gap: "15px",
-            width:"100%"
+            display: isTablet ? "block" : "none",
+            flexDirection: isTablet ? "column" : "row",
+            gap: isTablet ? "0" : "15px",
+            width: "100%",
           }}
         >
           <div css={{ display: "flex", marginBottom: "0.8rem", gap: "5px" }}>
@@ -89,14 +93,11 @@ export default function Index() {
         <div
           css={{
             display: "flex",
-            gap: "3px",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            marginBottom: "2rem",
+            width: isTablet ?  "90%" : "80%",
           }}
         >
           <>
-            {events.length < 1 && (
+            {/* {events.length < 1 && (
               <>
                 {loading === "loading" ? (
                   <>
@@ -121,7 +122,7 @@ export default function Index() {
                           Ready to fill in this space with your exciting
                           programs?
                         </p>
-                      </div>
+                      </div> 
                       <Link href="/dashboard/hostEvent">
                         <Button height="52px" fontSize="1rem" width="16rem">
                           CREATE YOUR EVENT
@@ -131,27 +132,80 @@ export default function Index() {
                   </div>
                 )}
               </>
-            )}
+            )} */}
+
             <div
               css={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                height: isTablet ? "" : "calc(100vh - 130px)",
+                display: "flex",
+                width: "100%",
                 gap: "1rem",
-                overflowY: "scroll",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                },
-                padding: "1.125rem",
-                [screen.lg]: {
-                  gridTemplateColumns: "1fr 1fr",
-                },
-                [screen.desktop]: {
-                  gridTemplateColumns: isTablet ? "1fr" : "1fr 1fr",
-                },
-              }}
+              }} 
             >
-              {events &&
+              <div
+                css={{
+                  display: "flex",
+                  flexDirection: isTablet ? "column" : "row",
+                  gap: isTablet ? "1rem" : "0.125rem",
+                  justifyContent: "space-between",
+                  flexWrap: isTablet ? "nowrap" : "wrap",
+                  marginTop: isTablet ? "1.5rem" : "",
+                  paddingInline: "2px",
+                }}
+              >
+                {EventJson.map((data) => (
+                  <div
+                  key={data.id}
+                    css={{
+                      width: isTablet ? "100%" : "32%",
+                      [screen.desktop]: {
+                        width: isTablet ? "100%" : "32%",
+                      },
+                    }}
+                  >
+                    <EventCard
+                      label={data.label}
+                      attendees={data.attendees}
+                      date={data.date}
+                      id={data.id}
+                      eventCode={data.eventCode}
+                      location={data.location}
+                      organizer={data.organizer}
+                      priceRange={data.priceRange}
+                      title={data.title}
+                      img={data.img}
+                      favourite={data.favourite}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div
+                css={{
+                  display: isTablet ? "none" : "block",
+                  width: '20%'
+                }}
+              >
+                <div
+                  css={{
+                    display: "flex",
+                    marginBottom: "0.8rem",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <p>All Events</p>
+                  <Image src={Right} alt="right" />
+                </div>
+                <div>
+                  <p css={{ fontSize: "16px" }}>
+                    <b>123456</b>
+                  </p>
+                  <p css={{ color: "#707070" }}>events found</p>
+                </div>
+              </div>
+            </div>
+
+            {/* data from events endpoint */}
+            {/* {events &&
                 events.map((event: IEvent, index) => (
                   <div key={index}>
                     <EventCard
@@ -195,8 +249,7 @@ export default function Index() {
                       favourite={false}
                     />
                   </div>
-                ))}
-            </div>
+                ))} */}
             <Box height={48} />
           </>
         </div>
