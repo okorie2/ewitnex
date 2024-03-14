@@ -37,7 +37,7 @@ const HomeHero = () => {
             style={{
               borderRadius: '20px',
               objectFit: 'contain',
-              height: '500px',
+              height: isMobile ? '250px' : isLarge ? '400px': '500px',
               // marginTop: isMobile ? '-8.6rem' : isLarge ? '-6.7rem' : '-12.3rem',
             }}
           />
