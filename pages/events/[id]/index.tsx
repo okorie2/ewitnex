@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, {useEffect} from "react";
 import PublicSiteFooter from "@/components/footer/publicSite";
 import Navbar from "@/components/header";
 import { Lines } from "@/components/lines";
@@ -9,6 +9,9 @@ import Link from "next/link";
 import { eventNav } from "fragments/eventDetails/event.data";
 import { useMediaQuery } from "@mui/material";
 import EventTab from "./[tab]";
+import { useAppSelector, useAppThunkDispatch } from "redux/store";
+import { getEventById } from "redux/event/thunkAction";
+import { IEvent } from "types/event";
 
 const SingleEvent = () => {
   const isTablet = useMediaQuery("(max-width: 900px)");
@@ -16,8 +19,14 @@ const SingleEvent = () => {
   const { id } = router.query;
   const activeTab = router.query?.tab || ("Details" as string | undefined);
 
+  const { loading, event } = useAppSelector(({ event }) => event);
+  const dispatch = useAppThunkDispatch();
+  useEffect(() => {
+    dispatch(getEventById(id?.toString() || ""));
+  }, [id]);
+
   return (
-    <div css={{ fontFamily: "'Poppins', sans-serif" }}>
+    <div css={{ fontFamily: "'Poppins', sans-serif",  }}>
       <Navbar />
       <div
         css={{

@@ -386,7 +386,7 @@ const UpcomingTicketTab = ({
         active={activeCardID}
         onClick={setAsActiveCardID}
       /> */}
-      <div css={{ marginLeft: "-10vw", marginTop: "4vh" }}>
+      <div css={{ marginLeft:isTablet ? "1rem": "-10vw", marginTop: "4vh" }}>
         <EmptyState>
           <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
             <p>You do not have any upcoming tickets</p>
@@ -406,6 +406,7 @@ const PreviousTicketTab = ({
   activeCardID: string;
   setAsActiveCardID: (id: string) => void;
 }) => {
+  const isTablet = useMediaQuery("(max-width: 780px)");
   return (
     <div>
       {/* <TicketCard
@@ -421,7 +422,7 @@ const PreviousTicketTab = ({
         active={activeCardID}
         onClick={setAsActiveCardID}
       />*/}
-      <div css={{ marginLeft: "-10vw", marginTop: "4vh" }}>
+      <div css={{ marginLeft: isTablet ? "1rem":"-10vw", marginTop: "4vh" }}>
         <EmptyState>
           <div css={{ textAlign: "center", fontSize: "0.875rem" }}>
             <p>You do not have any previous tickets</p>

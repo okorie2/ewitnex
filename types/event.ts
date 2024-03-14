@@ -77,6 +77,19 @@ export interface IReqTicket {
   ];
 }
 
+export interface IReqUpdateTicket {
+  ticket: [
+    {
+      ticketType: string;
+      ticketName: string;
+      ticketPrice: number;
+      ticketQty: number;
+      ticketHandle: string;
+      ticketRefund: string;
+    }
+  ];
+}
+
 export interface ReqPerformer {
   eventID: string;
   form: FormData;
@@ -123,5 +136,7 @@ export interface IEvent {
     _id: string;
   }[];
   updatedAt: string;
+  coverImage: string;
+  filePDF: string;
   _id: string;
 }

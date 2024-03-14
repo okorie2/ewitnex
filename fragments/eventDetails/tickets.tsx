@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { getEventById } from "redux/event/thunkAction";
 import dayjs from "dayjs";
+import EmptyState from "fragments/emptyState";
 
 const EventTickets = () => {
   const router = useRouter();
@@ -50,8 +51,9 @@ const EventTickets = () => {
         css={{
           display: isTablet ? "flex" : "grid",
           flexDirection: "column",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns:  "1fr 1fr",
           gap: "1rem",
+          alignItems:"center"
         }}
       >
         {event.tickets && event.tickets.length > 0 ? (
@@ -100,9 +102,11 @@ const EventTickets = () => {
             );
           })
         ) : (
-          <>
-            <p>This event does not have any ticket</p>
-          </>
+          <div css = {{marginLeft:"", textAlign:"center"}}>
+            <EmptyState>
+              <p>No tickets were created for this event</p>
+            </EmptyState>
+            </div>
         )}
       </div>
     </div>

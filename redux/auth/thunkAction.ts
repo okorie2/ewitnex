@@ -38,7 +38,7 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
             data: data,
         });
         const signInData: ISignInRes = response.data;
-        localStorage.setItem('token', signInData.token);
+        sessionStorage.setItem('token', signInData.token);
         localStorage.setItem('user', JSON.stringify(signInData.user));
         setCookie(null, "auth", signInData.token, {
             path: "/",

@@ -142,101 +142,121 @@ const EventFilter = ({
   }, [priceValue]);
 
   return (
-    <>
-      {open ? (
+    <div
+      css={{
+        backgroundColor: "#fff",
+        borderLeft: `1px solid ${"#E4E4E4"}`,
+        borderRight: `1px solid ${"#E4E4E4"}`,
+        fontFamily: "'Poppins', sans-serif",
+        maxWidth: open
+          ? isTablet
+            ? "100vw"
+            : "258px"
+          : isTablet
+          ? "80px"
+          : "75px",
+        width: open
+          ? isTablet
+            ? "100vw"
+            : "258px"
+          : isTablet
+          ? "80px"
+          : "75px",
+        overflowY: "scroll",
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
+        maxHeight: isTablet ? "100vh" : "inherit",
+        height: isTablet ? "100vh" : "",
+        position: isTablet ? "fixed" : "inherit",
+        paddingBottom: isTablet ? (loggedIn ? "20rem" : "5rem") : "",
+        zIndex: "32",
+        transition: "width 325ms cubic-bezier(0, 0, 0.2, 1) 0ms",
+      }}
+    >
+      <div
+        css={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isTablet ? "left" : "space-between",
+          height: "80px",
+          flexDirection: external ? "row-reverse" : "row",
+          paddingInline: "1.5rem",
+          borderBottom: open ? `1px solid ${"#E4E4E4"}` : "",
+          cursor: "pointer",
+          WebkitTapHighlightColor: "transparent",
+        }}
+        onClick={isTablet ? () => {} : setOpen}
+      >
+        {open && !isTablet && (
+          <>
+            {external ? (
+              <Image src={Left} alt="left" />
+            ) : (
+              <Image
+                src="/assets/svgs/elbow-right-light.svg"
+                alt=""
+                width={15}
+                height={15}
+              />
+            )}
+          </>
+        )}
         <div
           css={{
-            backgroundColor: "#fff",
-            borderLeft: `1px solid ${"#E4E4E4"}`,
-            borderRight: `1px solid ${"#E4E4E4"}`,
-            fontFamily: "'Poppins', sans-serif",
-            maxWidth: isTablet ? "100vw" : "258px",
-            width: isTablet ? "100vw" : "258px",
-            overflowY: "scroll",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
-            maxHeight: isTablet ? "100vh" : "inherit",
-            height: isTablet ? "100vh" : "",
-            position: isTablet ? "absolute" : "relative",
-            paddingBottom: isTablet ? loggedIn ? "20rem" : "5rem" : "",
-            zIndex: "32",
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            flexDirection: external ? "row-reverse" : "row",
           }}
         >
+          {isTablet && loggedIn && (
+            <div onClick={setOpen} css={{ marginTop: "0.5rem" }}>
+              <Image
+                src={"/assets/svgs/back.svg"}
+                alt="close"
+                width={25}
+                height={25}
+              />
+            </div>
+          )}
+          {open && (
+            <p css={{ fontSize: "1.125", fontWeight: "bold" }}>Filters</p>
+          )}
           <div
             css={{
+              padding: "0rem",
               display: "flex",
               alignItems: "center",
-              justifyContent: isTablet ? "left" : "space-between",
-              height: "80px",
-              flexDirection: external ? "row-reverse" : "row",
-              paddingInline: "1.5rem",
-              borderBottom: `1px solid ${"#E4E4E4"}`,
-              cursor: "pointer",
-              WebkitTapHighlightColor: "transparent",
             }}
-            onClick={isTablet ? () => {} : setOpen}
           >
-            {!isTablet && (
+            {isTablet ? (
               <>
-                {external ? (
-                  <Image src={Left} alt="left" />
-                ) : (
-                  <Image
-                    src="/assets/svgs/elbow-right-light.svg"
-                    alt=""
-                    width={15}
-                    height={15}
-                  />
-                )}
+                {!loggedIn &&
+                  (open ? (
+                    <div css={{ marginTop: "0.5rem" }} onClick={setOpen}>
+                      <Image
+                        src={"/assets/svgs/close.svg"}
+                        alt="close"
+                        width={45}
+                        height={45}
+                      />
+                    </div>
+                  ) : (
+                    <div css={{ marginTop: "0.5rem" }} onClick={setOpen}>
+                      <Image src={Filter} alt="fill" />
+                    </div>
+                  ))}
               </>
+            ) : (
+              <Image src={Filter} alt="fill" />
             )}
-            <div
-              css={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                flexDirection: external ? "row-reverse" : "row",
-              }}
-            >
-              {isTablet && loggedIn && (
-                <div onClick={setOpen} css={{ marginTop: "0.5rem" }}>
-                  <Image
-                    src={"/assets/svgs/back.svg"}
-                    alt="close"
-                    width={25}
-                    height={25}
-                  />
-                </div>
-              )}
-              <p css={{ fontSize: "1.125", fontWeight: "bold" }}>Filters</p>
-              <div
-                css={{
-                  padding: "0rem",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                {isTablet ? (
-                  <>
-                    {!loggedIn && (
-                      <div css={{ marginTop: "0.5rem" }} onClick={setOpen}>
-                        <Image
-                          src={"/assets/svgs/close.svg"}
-                          alt="close"
-                          width={45}
-                          height={45}
-                        />
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Image src={Filter} alt="fill" />
-                )}
-              </div>
-            </div>
           </div>
-          <div css = {{overflowY:"auto"}}>
+        </div>
+      </div>
+      <div css={{ overflowY: "auto" }}>
+        {open && (
+          <>
             <div
               css={{
                 padding: "8% 2rem",
@@ -726,37 +746,38 @@ const EventFilter = ({
                 </Button>
               </div>
             )}
-          </div>
-        </div>
-      ) : (
-        <div
-          css={{
-            maxWidth: "75px",
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "center",
-            borderLeft: `1px solid ${"#E4E4E4"}`,
-            borderRight: `1px solid ${"#E4E4E4"}`,
-          }}
-        >
-          <div
-            css={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              cursor: "pointer",
-              marginTop: "1rem",
-              background: isTablet ? "#E4E4E4" : "",
-              padding: "0.75rem",
-              borderRadius: "8px",
-            }}
-            onClick={setOpen}
-          >
-            <Image src={Filter} alt="filter" priority />
-          </div>
-        </div>
-      )}
-    </>
+          </>
+        )}
+      </div>
+    </div>
+    // {/* ) : (
+    //   <div
+    //     css={{
+    //       maxWidth: "75px",
+    //       display: "flex",
+    //       alignItems: "flex-start",
+    //       justifyContent: "center",
+    //       borderLeft: `1px solid ${"#E4E4E4"}`,
+    //       borderRight: `1px solid ${"#E4E4E4"}`,
+    //     }}
+    //   >
+    //     <div
+    //       css={{
+    //         display: "flex",
+    //         alignItems: "center",
+    //         gap: "1rem",
+    //         cursor: "pointer",
+    //         marginTop: "1rem",
+    //         background: isTablet ? "#E4E4E4" : "",
+    //         padding: "0.75rem",
+    //         borderRadius: "8px",
+    //       }}
+    //       onClick={setOpen}
+    //     >
+    //       <Image src={Filter} alt="filter" priority />
+    //     </div>
+    //   </div>
+    // )} */}
   );
 };
 

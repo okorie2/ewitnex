@@ -50,7 +50,7 @@ export default function Home() {
       />
       <WhyUseEwitnexFragment />
       <EventsAroundYouFragment
-       title={fragments[1].title}
+        title={fragments[1].title}
         description={fragments[1].description}
       />
       <DontSpectateFragment />

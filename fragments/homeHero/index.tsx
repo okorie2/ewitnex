@@ -10,7 +10,7 @@ import { screen } from 'styles/theme';
 
 const HomeHero = () => {
   const isLarge = useMediaQuery({ query: '(max-width: 1024px)' });
-  const isTablet = useMediaQuery({ query: '(max-width: 900px)' });  
+  const isTablet = useMediaQuery({ query: '(max-width: 900px)' });
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
 
   return (
@@ -20,7 +20,7 @@ const HomeHero = () => {
           height: '27rem',
           backgroundColor: '#7C35AB',
           [screen.desktop]: {
-            height: '20rem'
+            height: '20rem',
           },
           [screen.mobile]: {
             height: '12rem',
@@ -37,7 +37,8 @@ const HomeHero = () => {
             style={{
               borderRadius: '20px',
               objectFit: 'contain',
-              marginTop: isMobile ? '-8.6rem' : isLarge ? '-6.7rem' : '-12.3rem',
+              height: '500px',
+              // marginTop: isMobile ? '-8.6rem' : isLarge ? '-6.7rem' : '-12.3rem',
             }}
           />
         </div>

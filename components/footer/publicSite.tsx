@@ -15,7 +15,7 @@ export default function PublicSiteFooter() {
       css={{
         fontFamily: "'Poppins', sans-serif",
         background: "#fff",
-        zIndex: "2",
+        zIndex: "35",
         position: "relative",
       }}
     >

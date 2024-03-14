@@ -17,6 +17,16 @@ import MobileLayout from "./mobile";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import { logout } from "redux/auth/thunkAction";
 import Cookies from "js-cookie";
+import HomeSvg from "public/assets/svgs/home";
+import ProgramSvg from "public/assets/svgs/programs";
+import NotificationSvg from "public/assets/svgs/notification";
+import ProfileSvg from "public/assets/svgs/profile";
+import ManagerSvg from "public/assets/svgs/manager";
+import TicketsSvg from "public/assets/svgs/tickets";
+import FavouritesSvg from "public/assets/svgs/favourites";
+import WalletSvg from "public/assets/svgs/wallet";
+import SettingsSvg from "public/assets/svgs/settings";
+import LogoutSvg from "public/assets/svgs/logout";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const isTablet = useMediaQuery("(max-width: 780px)");
@@ -110,17 +120,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     dispatch(logout("")).then((res) => {
-      console.log(res, "resss");
-
       if (res.meta.requestStatus === "fulfilled") {
         localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        Cookies.remove("auth")
+        sessionStorage.removeItem("token");
+        Cookies.remove("auth");
         router.push("/");
+        sessionStorage.clear();
+        localStorage.clear();
       }
     });
   };
-
 
   return (
     <>
@@ -167,8 +176,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                       }}
                     >
                       <li
-                        onMouseEnter={() => setFeedsHovered(true)}
-                        onMouseLeave={() => setFeedsHovered(false)}
+                       
                       >
                         <Link
                           href="/dashboard"
@@ -176,6 +184,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                             display: "flex",
                             gap: "0.5rem",
                             alignItems: "center",
+                            ":hover": {
+                              color: "#7c35ab",
+                              svg: {
+                                path: {
+                                  fill: "#7c35ab",
+                                },
+                              },
+                            },
                           }}
                         >
                           {active === "feeds" ? (
@@ -186,19 +202,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                               height={20}
                             />
                           ) : (
-                            <Image
-                              src="/assets/svgs/home.svg"
-                              alt=""
-                              width={20}
-                              height={20}
-                            />
+                            <HomeSvg />
                           )}
                           <p
                             css={{
-                              color:
-                                active === "feeds" || feedsHovered
-                                  ? "#7C35AB"
-                                  : "#000",
+                              color: active === "feeds" ? "#7C35AB" : "",
                             }}
                           >
                             Feeds
@@ -213,27 +221,25 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                         <div
                           css={{
                             display: "flex",
-                            gap: "0.5rem",
+                            gap: "0.25rem",
                             cursor: "pointer",
+                            alignItems:"center",
+                            ":hover": {
+                              color: "#7c35ab",
+                              svg: {
+                                path: {
+                                  fill: "#7c35ab",
+                                },
+                              },
+                            },
                           }}
                           onClick={() => {
                             setOpen(true);
                             setShowMore(false);
                           }}
                         >
-                          <Image
-                            src="/assets/svgs/notification.svg"
-                            alt=""
-                            width={20}
-                            height={20}
-                          />
-                          <p
-                            css={{
-                              color: notificationsHovered ? "#7c35ab" : "",
-                            }}
-                          >
-                            Notifications
-                          </p>
+                          <NotificationSvg />
+                          <p>Notifications</p>
                         </div>
                       </li>
                       <SidebarItem item={"profile"} activeItem={active} />
@@ -284,15 +290,18 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                             marginInline: "auto",
                             paddingBlock: "1rem",
                             cursor: "pointer",
+                            ":hover": {
+                              color: "#7c35ab",
+                              svg: {
+                                path: {
+                                  fill: "#7c35ab",
+                                },
+                              },
+                            },
                           }}
                           onClick={handleLogout}
                         >
-                          <Image
-                            src="/assets/svgs/logout.svg"
-                            alt=""
-                            width={20}
-                            height={20}
-                          />
+                          <LogoutSvg />
                           <p>Log out</p>
                         </div>
                         <hr
@@ -370,12 +379,10 @@ export const SidebarItem = ({
   activeItem: string;
   notification?: boolean;
 }) => {
-  const [hovered, setHovered] = useState(false);
   return (
     <li
       css={{ paddingBlock: notification ? "2.5%" : "" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      
     >
       <Link
         href={`/dashboard/${item}`}
@@ -383,6 +390,15 @@ export const SidebarItem = ({
           display: "flex",
           gap: notification ? "1.5rem" : "0.5rem",
           alignItems: "center",
+          ":hover": {
+            color: "#7c35ab",
+            svg: {
+              path: {
+                fill: "#7c35ab",
+                stroke: item === "manager" || item === "settings" ? "#7c35ab" : ""
+              },
+            },
+          },
         }}
       >
         {activeItem === item ? (
@@ -394,14 +410,17 @@ export const SidebarItem = ({
             priority
           />
         ) : (
-          <Image
-            src={`/assets/svgs/${item}.svg`}
-            alt=""
-            width={20}
-            height={20}
-          />
+          <>
+            {item === "programs" && <ProgramSvg />}
+            {item === "profile" && <ProfileSvg />}
+            {item === "manager" && <ManagerSvg />}
+            {item === "tickets" && <TicketsSvg />}
+            {item === "favourites" && <FavouritesSvg />}
+            {item === "wallet" && <WalletSvg />}
+            {item === "settings" && <SettingsSvg />}
+          </>
         )}
-        <p css={{ color: activeItem === item || hovered ? "#7C35AB" : "#000" }}>
+        <p css={{ color: activeItem === item ? "#7C35AB" : "" }}>
           {item.charAt(0).toUpperCase() + item.slice(1)}
         </p>
       </Link>

@@ -71,11 +71,11 @@ const EventDetails = () => {
   };
 
   return (
-    <div>
-      <MobileModal
+    <div css = {{maxWidth:"100vw"}}>
+      {mobileModalOpen && <MobileModal
         shown={mobileModalOpen}
         setClose={() => setMobileModalOpen(!mobileModalOpen)}
-      />
+      />}
       {isMenuOpen && (
         <div
           css={{
@@ -89,17 +89,17 @@ const EventDetails = () => {
           onClick={handleMenuOpen}
         ></div>
       )}
-      <ContactOrganizerModal
+      {contactOrganizerModalOpen && <ContactOrganizerModal
         isOpen={contactOrganizerModalOpen}
         onRequestClose={() =>
           setContactOrganizerModalOpen(!contactOrganizerModalOpen)
         }
-      />
-      <ReportEventModal
+      />}
+      {reportEventModalOpen && <ReportEventModal
         isOpen={reportEventModalOpen}
         onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
         eventID={event._id}
-      />
+      />}
       <div css={{ width: "100%", height: "394px", position: "relative" }}>
         <div
           css={{

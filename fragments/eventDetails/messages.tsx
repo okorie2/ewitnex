@@ -5,6 +5,7 @@ import EventMessage from "@/components/messages/eventMessage";
 import { useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import EmptyConversation from "fragments/emptyConversation";
 
 const EventMessages = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const EventMessages = () => {
           },
         }}
       >
-        <EventMessage
+        {/* <EventMessage
           image="/assets/pngs/profile1.png"
           background={"#F5F5F5"}
           userName="Jiga Usaina"
@@ -77,7 +78,10 @@ const EventMessages = () => {
           time="Now"
           text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit"
           textColor={"#fff"}
-        />
+        /> */}
+        <EmptyConversation>
+          <p>You can check back later of be the first to get the conversation started</p>
+        </EmptyConversation>
       </div>
       <hr
         css={{

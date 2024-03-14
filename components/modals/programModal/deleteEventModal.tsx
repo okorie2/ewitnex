@@ -42,8 +42,8 @@ const DeleteEventModal = (props: IDeleteEventModal) => {
   const { loading } = useAppSelector(({ event }) => event);
   const [id, setId] = useState("")
   useEffect(() => {
-    setId(JSON.parse(sessionStorage.getItem("eventId") || ""))
-  },[])
+    setId(JSON.parse(sessionStorage.getItem("eventId") || "") || "")
+  },[props.isOpen])
 
   const handleDeleteEvent = (id: string) => {
     dispatch(deleteEventById(id)).then((res) => {

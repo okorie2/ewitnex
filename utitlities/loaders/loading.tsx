@@ -1,19 +1,30 @@
 /** @jsxImportSource @emotion/react */
-import { TailSpin } from "react-loader-spinner";
+import { TailSpin } from 'react-loader-spinner';
 
-const Loading = () => {
+interface LoadingType {
+  width?: String;
+  height?: String;
+  tailWidth?: Number;
+  tailHeight?: Number;
+}
+
+const Loading = ({ width, height, tailWidth, tailHeight }: LoadingType) => {
   return (
     <>
       <div
         css={{
-          height: "65vh",
-          width: "80vw",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          height: `${height}` || '65vh',
+          width: `${width}` || '80vw',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <TailSpin color={"#7c35ab"} width={100} height={100} />
+        <TailSpin
+          color={'#7c35ab'}
+          width={tailWidth || 100}
+          height={tailHeight || 100}
+        />
       </div>
     </>
   );

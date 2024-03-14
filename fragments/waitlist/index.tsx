@@ -1,11 +1,50 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'styles/components/button';
 import { screen } from 'styles/theme';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { joinWaitlist } from '../../redux/waitlist/thunkAction';
+import Loading from 'utitlities/loaders';
+
+export interface IJoinWaitlistFormData {
+  email: String;
+}
+
+export interface IJoinWaitlistRes {
+  status: Boolean;
+  message: String;
+  type: String;
+  data: {
+    email: String;
+    createdAt: String;
+  };
+}
 
 const Waitlist = () => {
   const [openAddedWaitingList, setOpenAddedWaitingList] = useState(false);
+
+  const dispatch: any = useDispatch();
+  const [email, setEmail] = useState('');
+  const loading = useSelector((state: any) => state.joinWaitlist.loading);
+  const error = useSelector((state: any) => state.joinWaitlist.error);
+
+  const handleSubmit = () => {
+    const formData: IJoinWaitlistFormData = { email };
+    dispatch(joinWaitlist(formData));
+  };
+
+  useEffect(() => {
+    if (loading === 'successful') {
+      setOpenAddedWaitingList(!openAddedWaitingList);
+      setEmail('');
+    }
+
+    if (loading === 'failed') {
+      console.log(error);
+    }
+  }, [loading]);
+
   return (
     <React.Fragment>
       <div
@@ -72,12 +111,14 @@ const Waitlist = () => {
           <input
             type='text'
             placeholder='Enter your email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             css={{
               width: '85%',
               border: 'none',
               padding: '0 1rem',
               fontSize: '1rem',
-              backgroundColor: 'inherit',              
+              backgroundColor: 'inherit',
               color: '#707070',
               '::placeholder': {
                 fontSize: '1rem',
@@ -105,9 +146,22 @@ const Waitlist = () => {
               [screen.tablet]: { width: '16rem', fontSize: '1rem' },
               [screen.mobile]: { width: '13rem', fontSize: '.8rem' },
             }}
-            onClick={() => setOpenAddedWaitingList(!openAddedWaitingList)}
+            onClick={() => {
+              handleSubmit();
+            }}
           >
-            Join the waitlist
+            {loading === 'loading' ? (
+              <Loading
+                width={30}
+                height={20}
+                color='#fff'
+                background='#7c35ab'
+                coverHeight='max-content'
+                coverWidth='max-content'
+              />
+            ) : (
+              'Join the waitlist'
+            )}
           </Button>
         </div>
       </div>
