@@ -4,8 +4,8 @@ import { TailSpin } from 'react-loader-spinner';
 interface LoadingType {
   width?: String;
   height?: String;
-  tailWidth?: Number;
-  tailHeight?: Number;
+  tailWidth?: 'string | number';
+  tailHeight?: 'string | number';
 }
 
 const Loading = ({ width, height, tailWidth, tailHeight }: LoadingType) => {
