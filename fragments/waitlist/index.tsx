@@ -39,10 +39,6 @@ const Waitlist = () => {
       setOpenAddedWaitingList(!openAddedWaitingList);
       setEmail('');
     }
-
-    if (loading === 'failed') {
-      console.log(error);
-    }
   }, [loading]);
 
   return (
@@ -164,6 +160,26 @@ const Waitlist = () => {
             )}
           </Button>
         </div>
+
+        {loading === 'failed' ? (
+          <div
+            css={{
+              width: '75%',
+              margin: 'auto',
+              marginTop: '.6rem',
+              textAlign: 'left',
+              paddingLeft: '1rem',
+            }}
+          >
+            <p
+              css={{
+                color: 'red',
+              }}
+            >
+              {error.message}
+            </p>
+          </div>
+        ) : null}
       </div>
 
       {openAddedWaitingList ? (
