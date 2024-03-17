@@ -41,6 +41,8 @@ const Waitlist = () => {
     }
   }, [loading]);
 
+  console.log(error)
+
   return (
     <React.Fragment>
       <div
@@ -176,7 +178,7 @@ const Waitlist = () => {
                 color: 'red',
               }}
             >
-              {error.message}
+              {/* {error?.message} */}
             </p>
           </div>
         ) : null}
