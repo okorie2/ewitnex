@@ -25,8 +25,8 @@ export const waitlistSlice = createSlice({
             return { ...state, loading: 'successful', error: null };
         });
 
-        builder.addCase(joinWaitlist.rejected, (state, action: unknown) => {
-            const error: any = action.error ? action.payload.message : 'Unknown error';
+        builder.addCase(joinWaitlist.rejected, (state, action: any) => {
+            const error: any = action.error ? action.payload?.message : 'Unknown error';
             return { ...state, loading: 'failed', error };
         });
     },
