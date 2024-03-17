@@ -1,11 +1,46 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'styles/components/button';
 import { screen } from 'styles/theme';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { joinWaitlist } from '../../redux/waitlist/thunkAction';
+import Loading from 'utitlities/loaders';
+
+export interface IJoinWaitlistFormData {
+  email: String;
+}
+
+export interface IJoinWaitlistRes {
+  status: Boolean;
+  message: String;
+  type: String;
+  data: {
+    email: String;
+    createdAt: String;
+  };
+}
 
 const Waitlist = () => {
   const [openAddedWaitingList, setOpenAddedWaitingList] = useState(false);
+
+  const dispatch: any = useDispatch();
+  const [email, setEmail] = useState('');
+  const loading = useSelector((state: any) => state.joinWaitlist.loading);
+  const error = useSelector((state: any) => state.joinWaitlist.error);
+
+  const handleSubmit = () => {
+    const formData: IJoinWaitlistFormData = { email };
+    dispatch(joinWaitlist(formData));
+  };
+
+  useEffect(() => {
+    if (loading === 'successful') {
+      setOpenAddedWaitingList(!openAddedWaitingList);
+      setEmail('');
+    }
+  }, [loading]);
+
   return (
     <React.Fragment>
       <div
@@ -14,6 +49,8 @@ const Waitlist = () => {
           fontFamily: '"Poppins", sans-serif',
           margin: '10rem auto',
           width: '50%',
+          marginBottom: '60px',
+          marginTop: '8rem',
           [screen.desktop]: { margin: '12rem auto', width: '70%' },
           [screen.tablet]: { margin: '9rem auto', width: '80%' },
           [screen.mobile]: {
@@ -26,7 +63,7 @@ const Waitlist = () => {
         <h1
           css={{
             fontSize: '2.3rem',
-            [screen.mobile]: { fontSize: '1.5rem' },
+            [screen.mobile]: { fontSize: '1.8rem' },
           }}
         >
           Join the Waitlist for{' '}
@@ -39,7 +76,15 @@ const Waitlist = () => {
           </strong>
         </h1>
 
-        <p css={{ marginTop: '1.2rem', marginBottom: '3rem' }}>
+        <p
+          css={{
+            marginTop: '1.2rem',
+            marginBottom: '3rem',
+            [screen.mobile]: {
+              marginBottom: '2rem',
+            },
+          }}
+        >
           Be the first to experience the future of seamless event management and
           get exclusive early access to the Ewitnex platform before the public
           launch
@@ -48,9 +93,9 @@ const Waitlist = () => {
         <div
           css={{
             display: 'flex',
-            width: '70%',
+            width: '75%',
             margin: '0 auto',
-            border: '4px solid #F2F7FB',
+            border: '3px solid #E4E4E4',
             borderRadius: '56px',
             overflow: 'hidden',
             padding: '0 .2rem 0 1rem',
@@ -62,21 +107,25 @@ const Waitlist = () => {
           <input
             type='text'
             placeholder='Enter your email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             css={{
               width: '85%',
               border: 'none',
               padding: '0 1rem',
               fontSize: '1rem',
               backgroundColor: 'inherit',
+              color: '#707070',
               '::placeholder': {
                 fontSize: '1rem',
                 fontFamily: '"Poppins", sans-serif',
+                color: ' #707070',
               },
 
               [screen.mobile]: {
-                fontSize: '.7rem',
+                fontSize: '.9rem',
                 '::placeholder': {
-                  fontSize: '.8rem',
+                  fontSize: '.9rem',
                 },
               },
             }}
@@ -89,15 +138,48 @@ const Waitlist = () => {
               padding: '0 1rem',
               height: '3rem',
               width: '14rem',
-              [screen.desktop]: { width: '19rem' },
-              [screen.tablet]: { width: '20rem' },
+              [screen.desktop]: { width: '19rem', fontSize: '1rem' },
+              [screen.tablet]: { width: '16rem', fontSize: '1rem' },
               [screen.mobile]: { width: '13rem', fontSize: '.8rem' },
             }}
-            onClick={() => setOpenAddedWaitingList(!openAddedWaitingList)}
+            onClick={() => {
+              handleSubmit();
+            }}
           >
-            Join the waitlist
+            {loading === 'loading' ? (
+              <Loading
+                width={30}
+                height={20}
+                color='#fff'
+                background='#7c35ab'
+                coverHeight='max-content'
+                coverWidth='max-content'
+              />
+            ) : (
+              'Join the waitlist'
+            )}
           </Button>
         </div>
+
+        {loading === 'failed' ? (
+          <div
+            css={{
+              width: '75%',
+              margin: 'auto',
+              marginTop: '.6rem',
+              textAlign: 'left',
+              paddingLeft: '1rem',
+            }}
+          >
+            <p
+              css={{
+                color: 'red',
+              }}
+            >
+              {error.message}
+            </p>
+          </div>
+        ) : null}
       </div>
 
       {openAddedWaitingList ? (

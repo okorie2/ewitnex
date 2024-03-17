@@ -6,9 +6,6 @@ import Waitlist from 'fragments/waitlist';
 import FindEventFragment from 'fragments/findEvent/findEvent';
 import EventsAroundYouFragment from 'fragments/eventsAroundYou';
 
-import UpcomingEventsFragment from 'fragments/upcomingEvents';
-import FeaturedEventsFragment from 'fragments/featuredEvents';
-
 import PublicSiteFooter from '@/components/footer/publicSite';
 import { Lines } from '@/components/lines';
 import HomeHero from 'fragments/homeHero';
@@ -23,18 +20,44 @@ import AsAnOrganizerFragment from 'fragments/asAnOrganizer';
 import JoinRevolutionFragment from 'fragments/joinTheRevolution';
 
 export default function Home() {
+  const fragments = [
+    {
+      title: 'Events Around You',
+      description:
+        'Discover local happenings, concerts, weddings, workshops hangouts, and more, all in one place, ensuring you never miss out on the vibrant experiences in your vicinity.',
+    },
+    {
+      title: 'Upcoming Events',
+      description:
+        'Explore a diverse range of upcoming gatherings, conferences, festivals, and more, and be the first to secure your spot in these highly anticipated occasions.',
+    },
+    {
+      title: 'Featured Events',
+      description:
+        'Explore a curated collection of exceptional gatherings that promise unforgettable experiences and create lasting memories.',
+    },
+  ];
   return (
     <>
-      <Navbar />      
+      <Navbar />
       {/* <HomeSlide /> */}
-      <Waitlist/>
+      <Waitlist />
       <HomeHero />
       <FindEventFragment />
-      <EventsAroundYouFragment />
+      <EventsAroundYouFragment
+        title={fragments[0].title}
+        description={fragments[0].description}
+      />
       <WhyUseEwitnexFragment />
-      <UpcomingEventsFragment />
+      <EventsAroundYouFragment
+        title={fragments[1].title}
+        description={fragments[1].description}
+      />
       <DontSpectateFragment />
-      <FeaturedEventsFragment />
+      <EventsAroundYouFragment
+        title={fragments[2].title}
+        description={fragments[2].description}
+      />
       <SimplifyTicketFragment />
       <DiscoverVenueFragment />
       <FindVendorsFragment />

@@ -9,6 +9,7 @@ import { DeleteUserReducer } from './settings/deleteUserByIdSlice';
 import { HostEventReducer } from './event/hostEventSlice';
 import { EventReducer } from './event/eventSlice';
 import { UpdateUserReducer } from './user/updateUserSlice';
+import { WaitlistReducer } from './waitlist/joinWaitlist';
 
 
 export const rootReducer = combineReducers({
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
     deleteUserById: DeleteUserReducer,
     updatePassword: UpdatePasswordReducer,
     hostEvent: HostEventReducer,
-    event: EventReducer
+    event: EventReducer,
+    joinWaitlist: WaitlistReducer
 })
 
