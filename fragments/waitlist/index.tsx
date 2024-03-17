@@ -178,7 +178,7 @@ const Waitlist = () => {
                 color: 'red',
               }}
             >
-              {/* {error?.message} */}
+              {error}
             </p>
           </div>
         ) : null}

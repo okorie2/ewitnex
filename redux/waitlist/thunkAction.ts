@@ -18,9 +18,9 @@ export const joinWaitlist = createAsyncThunk(
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 console.log(error)
-                return thunkAPI.rejectWithValue(error);
+                return thunkAPI.rejectWithValue(error.response.data);
             } else {
-                return thunkAPI.rejectWithValue(String(error));
+                return thunkAPI.rejectWithValue(error);
             }
         }
     }

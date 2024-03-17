@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { joinWaitlist } from './thunkAction'; // Import your joinWaitlist async thunk action
+import { AxiosError } from 'axios';
 
 interface IState {
-    loading: 'failed' | 'loading' | 'successful' | 'idle'
+    loading: 'failed' | 'loading' | 'successful' | 'idle';
+    error: string | null;
 }
 
 const initialState: IState = {
     loading: 'idle',
+    error: null,
 };
 
 export const waitlistSlice = createSlice({
@@ -15,15 +18,16 @@ export const waitlistSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(joinWaitlist.pending, (state) => {
-            return { ...state, loading: 'loading' };
+            return { ...state, loading: 'loading', error: null };
         });
 
         builder.addCase(joinWaitlist.fulfilled, (state) => {
-            return { ...state, loading: 'successful' };
+            return { ...state, loading: 'successful', error: null };
         });
 
-        builder.addCase(joinWaitlist.rejected, (state) => {
-            return { ...state, loading: 'failed' };
+        builder.addCase(joinWaitlist.rejected, (state, action: unknown) => {
+            const error: any = action.error ? action.payload.message : 'Unknown error';
+            return { ...state, loading: 'failed', error };
         });
     },
 });
