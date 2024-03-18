@@ -11,7 +11,7 @@ export const useAxios = async (
       authorization: `Bearer ${sessionStorage.getItem("token")}`,
       mode: "cors",
     },
-    withCredentials:true
+    withCredentials: false
   });
   if (response.status === 401) {
     console.log("clear");
