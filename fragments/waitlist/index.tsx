@@ -41,7 +41,7 @@ const Waitlist = () => {
     }
   }, [loading]);
 
-  console.log(error)
+  console.log(error);
 
   return (
     <React.Fragment>
@@ -144,6 +144,7 @@ const Waitlist = () => {
               [screen.tablet]: { width: '16rem', fontSize: '1rem' },
               [screen.mobile]: { width: '13rem', fontSize: '.8rem' },
             }}
+            disabled={loading === 'loading'}
             onClick={() => {
               handleSubmit();
             }}

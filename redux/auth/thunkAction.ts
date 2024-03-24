@@ -10,8 +10,8 @@ import { setCookie } from "nookies";
 export const signUp = createAsyncThunk('auth/signup', async (data: IFormData, thunkAPI) => {
     try {
         const response = await useAxios({
-            url: `${config.API_BASE_URL}/users/create-user`,
-            method: 'post',
+            url: `${config.API_BASE_URL}/auth/signup`,
+            method: 'POST',
             data: data,
         });
 
@@ -22,7 +22,7 @@ export const signUp = createAsyncThunk('auth/signup', async (data: IFormData, th
         if (axios.isAxiosError(error) && error.response) {
             const message = error.response.data as { error: string };
             console.log(message.error, "error message")
-            localStorage.setItem('error', message.error )
+            localStorage.setItem('error', message.error)
             return thunkAPI.rejectWithValue(error.message);
         } else {
             return thunkAPI.rejectWithValue(String(error));
@@ -44,12 +44,12 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
             path: "/",
             sameSite: "strict",
             maxAge: 24 * 60 * 60,
-          });
+        });
         return response.data.data;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
             console.log(error.response);
-            const message = error.response.data as {error:string};
+            const message = error.response.data as { error: string };
             localStorage.setItem('error', message.error)
             return thunkAPI.rejectWithValue(error.message);
         } else {
@@ -58,8 +58,8 @@ export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormDa
     }
 });
 
-export const logout = createAsyncThunk('auth/logout', async (data:string, thunkAPI) => {
-    try{
+export const logout = createAsyncThunk('auth/logout', async (data: string, thunkAPI) => {
+    try {
         const response = await useAxios({
             url: `${config.API_BASE_URL}/users/logout`,
             method: 'get',
@@ -67,10 +67,10 @@ export const logout = createAsyncThunk('auth/logout', async (data:string, thunkA
 
         return response.data.message;
 
-    }catch(error){
+    } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
             console.log(error.response);
-            const message = error.response.data as {error:string};
+            const message = error.response.data as { error: string };
             console.log('error', message.error)
             return thunkAPI.rejectWithValue(error.message);
         } else {
