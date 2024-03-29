@@ -4,6 +4,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { config } from '../../config/api';
 import { useMediaQuery } from '@mui/material';
 import Logo from '@/components/logo';
 import { screen } from 'styles/theme';
@@ -56,8 +57,6 @@ export default function Navbar() {
     }
   }, [router.route]);
 
-  const waitlist: boolean = true;
-
   return (
     <>
       <div
@@ -83,7 +82,7 @@ export default function Navbar() {
         }}
       >
         <Logo image='/assets/pngs/logo.png' />
-        {!waitlist ? (
+        {config.production ? (
           <>
             <div
               css={{

@@ -33,7 +33,7 @@ export const signUp = createAsyncThunk('auth/signup', async (data: IFormData, th
 export const signIn = createAsyncThunk('auth/signin', async (data: ISignInFormData, thunkAPI) => {
     try {
         const response = await useAxios({
-            url: `${config.API_BASE_URL}/users/login`,
+            url: `${config.API_BASE_URL}/auth/signin`,
             method: 'post',
             data: data,
         });
