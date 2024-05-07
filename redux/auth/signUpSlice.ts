@@ -1,29 +1,62 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { signUp } from './thunkAction';
-interface IState {
-    loading: 'failed' | 'loading' | 'successful' | 'idle';
+import { createSlice } from "@reduxjs/toolkit";
+import { signIn, signUpWithGoogle } from "./thunkAction";
+
+// Define types for loading status and error
+type LoadingStatus = "idle" | "loading" | "success" | "failure";
+interface LoadingState {
+    status: LoadingStatus;
+    error?: string;
 }
-const initialState: IState = {
-    loading: 'idle',
+
+// Define the initial loading state
+const initialLoadingState: LoadingState = {
+    status: "idle",
+    error: undefined,
 };
+
+// Define the initial state interface
+interface SignUpState {
+    loading: LoadingState;
+    loggedIn: boolean;
+    googleSignUp: LoadingState;
+}
+
+// Define the initial state
+const initialState: SignUpState = {
+    loading: initialLoadingState,
+    loggedIn: false,
+    googleSignUp: initialLoadingState,
+};
+
+// Create the auth slice
 const signUpSlice = createSlice({
-    name: 'signup',
+    name: "signUp",
     initialState,
     reducers: {},
-    extraReducers(builder) {
-        builder.addCase(signUp.pending, (state) => {
-            return { ...state, loading: 'loading' };
-        });
-
-        builder.addCase(signUp.fulfilled, (state) => {
-            return { ...state, loading: 'successful' };
-            // Add user to the state array
-        });
-        builder.addCase(signUp.rejected, (state) => {
-            return { ...state, loading: 'failed' };
-
-            // Add user to the state array
-        });
+    extraReducers: (builder) => {
+        builder
+            // Reducers for regular sign-in
+            .addCase(signIn.pending, (state) => {
+                state.loading = { status: "loading" };
+            })
+            .addCase(signIn.fulfilled, (state) => {
+                state.loading = { status: "success" };
+                state.loggedIn = true;
+            })
+            .addCase(signIn.rejected, (state: any, action: any) => {
+                state.loading = { status: "failure", error: action.payload.message };
+            })
+            // Reducers for sign-in with Google
+            .addCase(signUpWithGoogle.pending, (state) => {
+                state.googleSignUp = { status: "loading" };
+            })
+            .addCase(signUpWithGoogle.fulfilled, (state) => {
+                state.googleSignUp = { status: "success" };
+                state.loggedIn = true; // Assuming Google sign-in also logs in the user
+            })
+            .addCase(signUpWithGoogle.rejected, (state: any, action: any) => {
+                state.googleSignUp = { status: "failure", error: action?.payload ? action?.payload.message : '' };
+            });
     },
 });
 

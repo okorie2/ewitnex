@@ -52,7 +52,7 @@ export default function Home() {
     <>
       <Navbar />
       {/* <HomeSlide /> */}
-      <Waitlist />
+      {!config.production ? <Waitlist />: null}
       <HomeHero />
       <FindEventFragment />
       <EventsFragment fragmentNumber={0} />

@@ -1,31 +1,62 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signIn} from "./thunkAction";
-interface IState {
-  loading: "failed" | "loading" | "successful" | "idle";
-  loggedIn:boolean
+import { signIn, signInWithGoogle } from "./thunkAction";
+
+// Define types for loading status and error
+type LoadingStatus = "idle" | "loading" | "success" | "failure";
+interface LoadingState {
+  status: LoadingStatus;
+  error?: string;
 }
-const initialState: IState = {
-  loading: "idle",
-  loggedIn: false
+
+// Define the initial loading state
+const initialLoadingState: LoadingState = {
+  status: "idle",
+  error: undefined,
 };
+
+// Define the initial state interface
+interface SignInState {
+  loading: LoadingState;
+  loggedIn: boolean;
+  googleSignIn: LoadingState;
+}
+
+// Define the initial state
+const initialState: SignInState = {
+  loading: initialLoadingState,
+  loggedIn: false,
+  googleSignIn: initialLoadingState,
+};
+
+// Create the auth slice
 const signInSlice = createSlice({
-  name: "signin",
+  name: "signIn",
   initialState,
   reducers: {},
-  extraReducers(builder) {
-    builder.addCase(signIn.pending, (state) => {
-      return { ...state, loading: "loading" };
-    });
-
-    builder.addCase(signIn.fulfilled, (state) => {
-      return { ...state, loading: "successful", loggedIn:true };
-      // Add user to the state array
-    });
-    builder.addCase(signIn.rejected, (state) => {
-      return { ...state, loading: "failed" };
-
-      // Add user to the state array
-    });
+  extraReducers: (builder) => {
+    builder
+      // Reducers for regular sign-in
+      .addCase(signIn.pending, (state) => {
+        state.loading = { status: "loading" };
+      })
+      .addCase(signIn.fulfilled, (state) => {
+        state.loading = { status: "success" };
+        state.loggedIn = true;
+      })
+      .addCase(signIn.rejected, (state: any, action: any) => {
+        state.loading = { status: "failure", error: action.payload.message };
+      })
+      // Reducers for sign-in with Google
+      .addCase(signInWithGoogle.pending, (state) => {
+        state.googleSignIn = { status: "loading" };
+      })
+      .addCase(signInWithGoogle.fulfilled, (state) => {
+        state.googleSignIn = { status: "success" };
+        state.loggedIn = true; // Assuming Google sign-in also logs in the user
+      })
+      .addCase(signInWithGoogle.rejected, (state: any, action: any) => {
+        state.googleSignIn = { status: "failure", error: action?.payload.message };
+      });
   },
 });
 

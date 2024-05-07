@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteEventById, getEventById, getEvents } from "./thunkAction";
+import { deleteEventById, getEventById, getEvents, updateEventProgram } from "./thunkAction";
 import { IEvent } from "types/event";
+
 interface IState {
   loading: "failed" | "loading" | "successful" | "idle";
   events: IEvent[];
@@ -56,7 +57,29 @@ const EventSlice = createSlice({
         ...state,
         loading: "failed",
       };
+    });   
+
+    builder.addCase(updateEventProgram.pending, (state) => {
+      return {
+        ...state,
+        loading: "loading",
+      };
     });
+
+    builder.addCase(updateEventProgram.fulfilled, (state, action) => {
+      return {
+        ...state,
+        loading: "successful",
+        events: action.payload,
+      };
+    });
+
+    builder.addCase(updateEventProgram.rejected, (state) => {
+      return {
+        ...state,
+        loading: "failed",
+      };
+    });   
   },
 });
 
