@@ -21,21 +21,24 @@ const AddSpeakerForm = ({
   speakerRef,
   setGetPerformers,
   handleModalClose,
+  onSubmit,
 }: {
   speakerRef: RefObject<HTMLInputElement>;
   setGetPerformers: React.Dispatch<React.SetStateAction<boolean>>;
   handleModalClose?: () => void;
+  onSubmit?: () => void;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [newSpeakerRef, setNewSpeakerRef] = useState(speakerRef);
   const isTablet = useMediaQuery('(max-width: 780px)');
-  const [formData, setFormData] = useState<IReqPerformer>({
+  const [formData, setFormData] = useState<any>({
     newPerformers: [
       {
         nameOfPerformer: '',
         performerTitle: '',
         performerRole: '',
         aboutPerformer: '',
+        willBePerformers: '',
       },
     ],
     performerImage: null,
@@ -49,6 +52,7 @@ const AddSpeakerForm = ({
     if (event.target.files && event.target.files[0]) {
       const fileObj = event.target.files[0];
       setFormData({ ...formData, performerImage: fileObj });
+      localStorage.setItem('performerImage', formData);
       event.target.files = null;
     }
   };
@@ -63,6 +67,7 @@ const AddSpeakerForm = ({
       ...formData,
       newPerformers: [{ ...formData.newPerformers[0], [name]: value }],
     });
+    // localStorage.setItem([name], formData);
   };
 
   const dispatch = useAppThunkDispatch();
@@ -72,38 +77,60 @@ const AddSpeakerForm = ({
     setEventID(localStorage.getItem('currenteventID') || '');
   }, []);
 
-  const handleNext = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = new FormData();
-    form.append('newPerformers', JSON.stringify(formData.newPerformers));
-    form.append('performerImage', formData.performerImage || '');
-    dispatch(addPerformer({ eventID, form })).then((res) => {
-      if (res.meta.requestStatus == 'fulfilled') {
-        setFormData({
-          newPerformers: [
-            {
-              nameOfPerformer: '',
-              performerTitle: '',
-              performerRole: '',
-              aboutPerformer: '',
-            },
-          ],
-          performerImage: undefined,
-        });
-        setGetPerformers((prevState: boolean) => !prevState);
-        if (newSpeakerRef.current != null) {
-          newSpeakerRef.current.focus();
-        }
-        if (isTablet) {
-          handleModalClose && handleModalClose();
-        }
-      }
-    });
+  // const handleSubmit = event => {
+  //   props.onSubmit(formData)
+  // }
+
+  // onSubmit(formData);
+
+  const handleNext = () => {
+    // event.preventDefault();
+    // console.log(formData)
+    // props.handleSubmit(formData)
+    // event.preventDefault();
+    // const form = new FormData();
+    // form.append('newPerformers', JSON.stringify(formData.newPerformers));
+    // form.append('performerImage', formData.performerImage || '');
+    // console.log(form)
+    // dispatch(addPerformer({ eventID, form })).then((res) => {
+    //   if (res.meta.requestStatus == 'fulfilled') {
+    //     setFormData({
+    //       newPerformers: [
+    //         {
+    //           nameOfPerformer: '',
+    //           performerTitle: '',
+    //           performerRole: '',
+    //           aboutPerformer: '',
+    //           willBePerformers: ''
+    //         },
+    //       ],
+    //       performerImage: undefined,
+    //     });
+    //     setGetPerformers((prevState: boolean) => !prevState);
+    //     if (newSpeakerRef.current != null) {
+    //       newSpeakerRef.current.focus();
+    //     }
+    //     if (isTablet) {
+    //       handleModalClose && handleModalClose();
+    //     }
+    //   }
+    // });
   };
 
   return (
     <form onSubmit={handleNext}>
       <div css={{ display: 'grid', gap: '1.5rem' }}>
+        <HostEventTextField
+          label='Does this event have performers and will like to be shown in the program?'
+          placeholder='Yes'
+          type='select'
+          options={[
+            { value: 'Yes', label: 'Yes' },
+            { value: 'No', label: 'No' },
+          ]}
+          setValue={handleChange}
+          value={formData.willBePerformers}
+        />
         <HostEventTextField
           label='Name of performer'
           placeholder='Enter full name'
@@ -120,25 +147,6 @@ const AddSpeakerForm = ({
           type='text'
           name='performerTitle'
           value={formData.newPerformers[0].performerTitle}
-          setValue={handleChange}
-          required
-        />
-        <HostEventTextField
-          label='Performing Role'
-          placeholder='Host'
-          value={formData.newPerformers[0].performerRole}
-          name='performerRole'
-          type='select'
-          options={[
-            { value: 'Host', label: 'Host' },
-            { value: 'Speaker', label: 'Speaker' },
-            { value: 'Artiste', label: 'Artiste' },
-            { value: 'Preacher', label: 'Preacher' },
-            { value: 'Anchor', label: 'Anchor' },
-            { value: 'Celebrant', label: 'Celebrant' },
-            { value: 'Comedian', label: 'Comedian' },
-            { value: 'Others', label: 'Others' },
-          ]}
           setValue={handleChange}
           required
         />
@@ -200,7 +208,7 @@ const AddSpeakerForm = ({
               {formData.performerImage ? (
                 <>
                   <p css={{ fontSize: '1rem' }}>
-                    {formData.performerImage.name}
+                    {formData.performerImage?.name}
                   </p>
                   <p>Click to change uploaded file</p>
                 </>

@@ -20,7 +20,7 @@ import toast from 'react-hot-toast';
 
 const EventLocation = () => {
   const isTablet = useMediaQuery('(max-width: 780px)');
-  const [locationType, setLocationType] = useState('live');
+  const [locationType, setLocationType] = useState('Physical');
   const [undecided, setUndecided] = useState(false);
   const [endUndecided, setEndUndecided] = useState(false);
   const [isManualInputFocused, setIsManualInputFocused] = useState(false);
@@ -31,8 +31,8 @@ const EventLocation = () => {
   const [_startDate, setStartDate] = useState('');
   const [_endDate, setEndDate] = useState('');
 
-  const [formData, setFormData] = useState<IEventLocation>({
-    type: locationType === 'live' ? 'live' : 'online',
+  const [formData, setFormData] = useState<any>({
+    locationType: locationType === 'Physical' ? 'Physical' : 'Online',
     startDate: _startDate || '',
     endDate: _endDate || '',
   });
@@ -64,7 +64,7 @@ const EventLocation = () => {
   useEffect(() => {
     setFormData({
       ...formData,
-      type: locationType === 'live' ? 'live' : 'online',
+      locationType: locationType === 'Physical' ? 'Physical' : 'Online',
       startDate: _startDate,
       endDate: _endDate,
     });
@@ -84,6 +84,7 @@ const EventLocation = () => {
       startDate: eventLocationData?.startDate || formData.startDate,
       endDate: eventLocationData?.endDate || formData.endDate,
     });
+
     if (eventLocationData && eventLocationData?.startDate === '') {
       setUndecided(true);
     }
@@ -122,7 +123,16 @@ const EventLocation = () => {
   };
 
   useEffect(() => {
-    setFormData({ ...formData, ...liveLocation, ...onlineLocation });
+    setFormData({
+      ...formData,
+      address: {
+        name: !manualLocation
+          ? liveLocation.searchLocation
+          : liveLocation.enterLocation,
+        lat: 2.4,
+        long: -2.1,
+      },
+    });
   }, [liveLocation, onlineLocation]);
 
   useEffect(() => {
@@ -151,17 +161,27 @@ const EventLocation = () => {
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.setItem('eventLocationData', JSON.stringify(formData));
-    const location = {
-      location: formData,
-    };
+    setFormData({
+      ...formData,
+      startDate:
+        new Date(formData.startDate) instanceof Date
+          ? new Date(formData.startDate).toISOString()
+          : new Date(formData.startDate),
+      endDate:
+        new Date(formData.endDate) instanceof Date
+          ? new Date(formData.endDate).toISOString()
+          : new Date(formData.endDate),
+    });  
 
-    dispatch(eventLocation({ eventID, location })).then((res) => {
+    localStorage.setItem('eventLocationData', JSON.stringify(formData));
+
+    dispatch(eventLocation({ eventID, location: formData })).then((res) => {
       if (res.meta.requestStatus == 'fulfilled') {
         router.push('/dashboard/hostEvent/speakers');
       }
     });
   };
+
   return (
     <HostEventLayout>
       <div css={{ width: isTablet ? '100vw' : '' }}>
@@ -274,16 +294,16 @@ const EventLocation = () => {
                 gap: '0.75rem',
                 width: '110px',
                 height: '50px',
-                background: locationType === 'live' ? '#7C35AB21 ' : '',
+                background: locationType === 'Physical' ? '#7C35AB21 ' : '',
                 border:
-                  locationType === 'live'
+                  locationType === 'Physical'
                     ? '1px solid #7C35AB'
                     : '1px solid #AEAEAE',
-                color: locationType === 'live' ? '#7C35AB' : '#AEAEAE',
+                color: locationType === 'Physical' ? '#7C35AB' : '#AEAEAE',
                 borderRadius: '8px',
                 cursor: 'pointer',
               }}
-              onClick={() => setLocationType('live')}
+              onClick={() => setLocationType('Physical')}
             >
               <p>Venue</p>
             </div>
@@ -295,22 +315,22 @@ const EventLocation = () => {
                 gap: '0.75rem',
                 width: '110px',
                 height: '50px',
-                background: locationType === 'online' ? '#7C35AB21 ' : '',
+                background: locationType === 'Online' ? '#7C35AB21 ' : '',
                 border:
-                  locationType === 'online'
+                  locationType === 'Online'
                     ? '1px solid #7C35AB'
                     : '1px solid #AEAEAE',
-                color: locationType === 'online' ? '#7C35AB' : '#AEAEAE',
+                color: locationType === 'Online' ? '#7C35AB' : '#AEAEAE',
                 borderRadius: '8px',
                 cursor: 'pointer',
               }}
-              onClick={() => setLocationType('online')}
+              onClick={() => setLocationType('Online')}
             >
               <p>Online</p>
             </div>
           </div>
 
-          {locationType === 'online' ? (
+          {locationType === 'Online' ? (
             <div
               css={{
                 display: 'grid',
@@ -324,10 +344,10 @@ const EventLocation = () => {
                 image={'/assets/svgs/info2.svg'}
                 tooltip='Select from the dropdown the online medium the event will use to take place and paste medium link'
                 type='select'
-                required={locationType === 'online'}
+                required={locationType === 'Online'}
                 setValue={handleOnlineLocationChange}
                 value={onlineLocation.selectHost}
-                name='selectHost'
+                name='onlineMedia'
                 options={[
                   { value: 'none', label: 'Select an online medium' },
                   { label: 'Ewitnex', value: 'Ewitnex' },
@@ -340,10 +360,10 @@ const EventLocation = () => {
                 <HostEventTextField
                   placeholder='Paste medium links to live streams'
                   type='text'
-                  name='hostUrl'
+                  name='liveStreamUrl'
                   value={onlineLocation.hostUrl}
                   setValue={handleOnlineLocationChange}
-                  required={locationType === 'online'}
+                  required={locationType === 'Online'}
                 />
               </div>
             </div>
@@ -410,7 +430,7 @@ const EventLocation = () => {
                         : 'Search for the address or venue'
                     }
                     type={'text'}
-                    required={locationType === 'live'}
+                    required={locationType === 'Physical'}
                     name={manualLocation ? 'enterLocation' : 'searchLocation'}
                     value={
                       manualLocation
