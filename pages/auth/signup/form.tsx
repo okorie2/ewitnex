@@ -1,32 +1,39 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from 'react';
+import { Dispatch } from 'redux';
+import axios from 'axios';
+import { config } from '../../../config/api';
 import BasicTextField, {
   PasswordTextField,
   PhoneTextField,
-} from "@/components/inputs/BasicTextField";
-import Image from "next/image";
-import Link from "next/link";
-import { css } from "@emotion/react";
-import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
-import { Box } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import GenderType from "@/components/signupComponents/selectGender";
-import Chip, { chipData } from "@/components/signupComponents/chip";
-import { useRouter } from "next/router";
-import { useAppSelector, useAppThunkDispatch } from "redux/store";
-import { signUp } from "redux/auth/thunkAction";
-import { TailSpin } from "react-loader-spinner";
-import ErrorSnackBar from "@/components/snackbars/error";
-import SuccessSnackBar from "@/components/snackbars/success";
+} from '@/components/inputs/BasicTextField';
+import Image from 'next/image';
+import Link from 'next/link';
+import { css } from '@emotion/react';
+import { ButtonFormFilled, ButtonFormOutline } from 'styles/components/button';
+import { Box } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
+import GenderType from '@/components/signupComponents/selectGender';
+import Chip, { chipData } from '@/components/signupComponents/chip';
+import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
+import { useAppSelector, useAppThunkDispatch } from 'redux/store';
+import { signUp } from 'redux/auth/thunkAction';
+import { TailSpin } from 'react-loader-spinner';
+import ErrorSnackBar from '@/components/snackbars/error';
+import SuccessSnackBar from '@/components/snackbars/success';
+import { useGoogleLogin } from '@react-oauth/google';
+import { useDispatch, useSelector } from 'react-redux';
+import { signUpWithGoogle } from '../../../redux/auth/thunkAction';
 
 type ISignupFormLevels =
-  | "whoYouAre"
-  | "password"
-  | "gender"
-  | "location"
-  | "username"
-  | "interests";
+  | 'whoYouAre'
+  | 'password'
+  | 'gender'
+  | 'location'
+  | 'username'
+  | 'interests';
 
 export type IFormData = {
   firstName: string;
@@ -55,23 +62,23 @@ interface FormLevelProps {
 
 export default function Form() {
   const [formLevel, setFormLevel] =
-    React.useState<ISignupFormLevels>("whoYouAre");
+    React.useState<ISignupFormLevels>('whoYouAre');
 
   const [formData, setFormData] = React.useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    gender: "",
-    city: "",
-    providedUsername: "",
-    interests: [""],
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    gender: '',
+    city: '',
+    providedUsername: '',
+    interests: [''],
   });
 
   const displayFormLevel = (formLevel: ISignupFormLevels) => {
     switch (formLevel) {
-      case "whoYouAre":
+      case 'whoYouAre':
         return (
           <WhoYouAre
             formLevel={formLevel}
@@ -80,7 +87,7 @@ export default function Form() {
             setFormData={setFormData}
           />
         );
-      case "password":
+      case 'password':
         return (
           <Password
             formLevel={formLevel}
@@ -89,7 +96,7 @@ export default function Form() {
             setFormData={setFormData}
           />
         );
-      case "gender":
+      case 'gender':
         return (
           <Gender
             formLevel={formLevel}
@@ -98,7 +105,7 @@ export default function Form() {
             setFormData={setFormData}
           />
         );
-      case "location":
+      case 'location':
         return (
           <Location
             formLevel={formLevel}
@@ -107,7 +114,7 @@ export default function Form() {
             setFormData={setFormData}
           />
         );
-      case "username":
+      case 'username':
         return (
           <Username
             formLevel={formLevel}
@@ -116,7 +123,7 @@ export default function Form() {
             setFormData={setFormData}
           />
         );
-      case "interests":
+      case 'interests':
         return (
           <Interests
             formLevel={formLevel}
@@ -138,82 +145,127 @@ export default function Form() {
     }
   };
 
-  console.log(formData)
+  // console.log(formData);
   return <>{displayFormLevel(formLevel)}</>;
 }
 
 const WhoYouAre = (props: FormLevelProps) => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const isTablet = useMediaQuery('(max-width: 900px)');
+
+  const [errorSnackOpen, setErrorSnackOpen] = useState(false);
+  const [successSnackOpen, setSuccessSnackOpen] = useState(false);
   const [formValues, setFormValues] = useState({
-    firstName: props.formData.firstName || "",
-    lastName: props.formData.lastName || "",
+    firstName: props.formData.firstName || '',
+    lastName: props.formData.lastName || '',
   });
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [fNameError, setFNameError] = useState('');
+  const [lNameError, setLNameError] = useState('');
+
+  const dispatch = useDispatch();
+  const { loading, googleSignUp } = useAppSelector(({ signUp }) => signUp);
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-    if (name === "firstName") {
+
+    if (name === 'firstName') {
       handleFNameError();
     }
-    if (name === "lastName") {
+
+    if (name === 'lastName') {
       handleLNameError();
     }
   };
 
-  const [fNameError, setFNameError] = useState("");
-  const [lNameError, setLNameError] = useState("");
-
   const handleFNameError = () => {
     if (formValues.firstName.length + 1 < 3) {
-      setFNameError("This field requires at least 3 characters");
+      setFNameError('This field requires at least 3 characters');
     }
     if (formValues.firstName.length + 1 > 2) {
-      setFNameError("");
+      setFNameError('');
     }
   };
   const handleLNameError = () => {
     if (formValues.lastName.length + 1 < 3) {
-      setLNameError("This field requires at least 3 characters");
+      setLNameError('This field requires at least 3 characters');
     }
+
     if (formValues.lastName.length + 1 > 2) {
-      setLNameError("");
+      setLNameError('');
     }
   };
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.setFormLevel("password");
+    props.setFormLevel('password');
     props.setFormData({
       ...props.formData,
       firstName: formValues.firstName,
       lastName: formValues.lastName,
     });
   };
+
+  const handleSignUpWithGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const response = await dispatch<any>(signUpWithGoogle(tokenResponse));
+        // console.log('Sign-up with Google successful:', response);
+
+        if (response.error && response.error.message === 'Rejected') {
+          setErrorSnackOpen(true);
+        } else {
+          setSuccessSnackOpen(true);
+          setTimeout(() => router.push('dashboard/programs'), 1000);
+        }
+      } catch (error) {
+        console.error('Error signing up with Google:', error);
+        setErrorSnackOpen(true);
+      }
+    },
+    onError: (error) => {
+      console.error('Google authentication failure:', error);
+      // Handle authentication failure, if needed
+    },
+  });
+
   return (
     <div>
-      <Link href="/">
-        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+      <SuccessSnackBar
+        open={successSnackOpen}
+        message={'Successfully signed up'}
+        handleClose={() => setSuccessSnackOpen(false)}
+      />
+      <ErrorSnackBar
+        open={errorSnackOpen}
+        message={loading?.error || googleSignUp?.error || ''}
+        handleClose={() => setErrorSnackOpen(false)}
+      />
+      <Link href='/'>
+        <div css={{ margin: '3rem 0', cursor: 'pointer' }}>
           <button
-            type="button"
+            type='button'
             css={{
               fontFamily: "'Nunito', sans-serif",
-              cursor: "pointer",
-              border: "none",
-              outline: "none",
-              background: "none",
-              display: "flex",
-              gap: "0.7rem",
-              alignItems: "center",
+              cursor: 'pointer',
+              border: 'none',
+              outline: 'none',
+              background: 'none',
+              display: 'flex',
+              gap: '0.7rem',
+              alignItems: 'center',
             }}
           >
             <Image
-              src="/assets/svgs/back.svg"
-              alt="back_arrow"
+              src='/assets/svgs/back.svg'
+              alt='back_arrow'
               width={22}
               height={15}
             />
             {!isTablet && (
-              <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+              <p css={{ fontSize: '1rem', fontWeight: '500' }}>Back</p>
             )}
           </button>
         </div>
@@ -221,8 +273,8 @@ const WhoYouAre = (props: FormLevelProps) => {
       <div
         css={{
           fontFamily: "'Nunito', sans-serif",
-          fontSize: "1.5rem",
-          marginBottom: "4.3rem",
+          fontSize: '1.5rem',
+          marginBottom: '4.3rem',
           fontWeight: isTablet ? 700 : 600,
         }}
       >
@@ -230,64 +282,81 @@ const WhoYouAre = (props: FormLevelProps) => {
         <p>Who You Are</p>
       </div>
       <form onSubmit={handleNext}>
-        <div css={{ marginBottom: "2.4rem" }}>
+        <div css={{ marginBottom: '2.4rem' }}>
           <BasicTextField
-            label="First Name"
+            label='First Name'
             value={formValues.firstName}
             setValue={handleChange}
-            name="firstName"
-            weight="bold"
+            name='firstName'
+            weight='bold'
             error={fNameError}
-            pattern="[a-zA-Z]{3,}"
+            pattern='[a-zA-Z]{3,}'
             required
           />
         </div>
-        <div css={{ marginBottom: "2.4rem" }}>
+        <div css={{ marginBottom: '2.4rem' }}>
           <BasicTextField
-            weight="bold"
-            label="Last Name"
+            weight='bold'
+            label='Last Name'
             value={formValues.lastName}
-            name="lastName"
+            name='lastName'
             error={lNameError}
             setValue={handleChange}
-            pattern="[a-zA-Z]{3,}"
+            pattern='[a-zA-Z]{3,}'
             required
           />
         </div>
 
         <div>
-          <ButtonFormFilled>CONTINUE</ButtonFormFilled>
+          <ButtonFormFilled disabled={loading.status === 'loading'}>
+            CONTINUE
+          </ButtonFormFilled>
         </div>
       </form>
       <p
         css={{
-          margin: "3rem 0",
-          textAlign: "center",
+          margin: '3rem 0',
+          textAlign: 'center',
           fontFamily: "'Nunito', sans-serif",
         }}
       >
         OR
       </p>
-      <div css={{ width: "100%" }}>
-        <ButtonFormOutline>
-          <p css={{ marginTop: "4px" }}>
-            <Image
-              src="/assets/svgs/google.svg"
-              alt="appstore"
-              width={21}
-              height={21}
+      <div css={{ width: '100%' }}>
+        <ButtonFormOutline
+          onClick={() => handleSignUpWithGoogle()}
+          disabled={googleSignUp.status === 'loading'}
+        >
+          {googleSignUp.status === 'loading' ? (
+            <TailSpin
+              height={20}
+              width={20}
+              color='#7C35AB'
+              ariaLabel='loading'
+              radius={'2'}
             />
-          </p>
-          <p>Get Started With Google</p>
+          ) : (
+            <>
+              <p css={{ marginTop: '4px' }}>
+                <Image
+                  src='/assets/svgs/google.svg'
+                  alt='appstore'
+                  width={21}
+                  height={21}
+                />
+              </p>
+              <p>Get Started With Google</p>
+            </>
+          )}
         </ButtonFormOutline>
       </div>
-      <div css={{ marginTop: "2rem", marginBottom: "1rem" }}>
-        <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: "center" }}>
+      <div css={{ marginTop: '2rem', marginBottom: '1rem' }}>
+        <p css={{ fontFamily: "'Nunito', sans-serif", textAlign: 'center' }}>
           Already Have An Account?
           <span
-            css={{ fontWeight: 700, color: isTablet ? "#7C35AB" : "#f05e78" }}
+            css={{ fontWeight: 700, color: isTablet ? '#7C35AB' : '#f05e78' }}
           >
-            <Link href="/auth/signin"> Log In</Link>
+            <Link href='/auth/signin'> Log In</Link>
           </span>
         </p>
       </div>
@@ -300,22 +369,24 @@ const Password = (props: FormLevelProps) => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [passwordValid, setPasswordValid] = useState(true);
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const isTablet = useMediaQuery('(max-width: 900px)');
   const [valid, setValid] = useState(true);
   const [emailValid, setEmailValid] = useState(true);
-  const { loading } = useAppSelector(({ signUp }) => signUp);
+  const { loading } : { loading: any } = useAppSelector(
+    ({ signUp }) => signUp
+  );
   const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (loading === "failed") {
-      if (localStorage.getItem("error") && localStorage) {
-        const error = localStorage.getItem("error") || "";
-        if (error.includes("Phone")) {
+    if (loading.status === 'failure') {
+      if (localStorage.getItem('error') && localStorage) {
+        const error = localStorage.getItem('error') || '';
+        if (error.includes('Phone')) {
           setMessage(error);
           setSnackBarOpen(true);
         }
-        localStorage.setItem("error", "");
+        localStorage.setItem('error', '');
       }
     }
   }, [loading]);
@@ -324,17 +395,17 @@ const Password = (props: FormLevelProps) => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setSnackBarOpen(false);
   };
 
   const [formDetails, setFormDetails] = useState({
-    email: props.formData.email || "",
-    phoneNumber: props.formData.phoneNumber || "",
-    password: "",
-    confirmPassword: "",
+    email: props.formData.email || '',
+    phoneNumber: props.formData.phoneNumber || '',
+    password: '',
+    confirmPassword: '',
   });
 
   const validateEmail = (email: string) => {
@@ -376,7 +447,7 @@ const Password = (props: FormLevelProps) => {
   }, [formDetails.password]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage("");
+    setMessage('');
     const { name, value } = e.target;
     setEmailValid(validateEmail(formDetails.email));
     setFormDetails({ ...formDetails, [name]: value });
@@ -388,13 +459,13 @@ const Password = (props: FormLevelProps) => {
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.removeItem("error");
+    localStorage.removeItem('error');
     setValid(validatePhoneNumber(formDetails.phoneNumber));
     setPasswordMatch(
       validatePasswordMatch(formDetails.password, formDetails.confirmPassword)
     );
     if (valid && passwordValid && passwordMatch) {
-      props.setFormLevel("gender");
+      props.setFormLevel('gender');
       props.setFormData({
         ...props.formData,
         email: formDetails.email,
@@ -408,108 +479,107 @@ const Password = (props: FormLevelProps) => {
     <>
       <ErrorSnackBar
         open={snackBarOpen}
-        message={message}
+        message={message || loading?.error}
         handleClose={handleSnackbarClose}
       />
       <div>
-        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+        <div css={{ margin: '3rem 0', cursor: 'pointer' }}>
           <button
-            type="button"
-            onClick={() => props.setFormLevel("whoYouAre")}
+            type='button'
+            onClick={() => props.setFormLevel('whoYouAre')}
             css={{
               fontFamily: "'Nunito', sans-serif",
-              cursor: "pointer",
-              border: "none",
-              outline: "none",
-              background: "none",
-              display: "flex",
-              gap: "0.7rem",
-              alignItems: "center",
+              cursor: 'pointer',
+              border: 'none',
+              outline: 'none',
+              background: 'none',
+              display: 'flex',
+              gap: '0.7rem',
+              alignItems: 'center',
             }}
           >
             <Image
-              src="/assets/svgs/back.svg"
-              alt="back_arrow"
+              src='/assets/svgs/back.svg'
+              alt='back_arrow'
               width={22}
               height={15}
             />
             {!isTablet && (
-              <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+              <p css={{ fontSize: '1rem', fontWeight: '500' }}>Back</p>
             )}
           </button>
         </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
-            fontSize: "1.5rem",
-            marginBottom: isTablet ? "2rem" : "3rem",
+            fontSize: '1.5rem',
+            marginBottom: isTablet ? '2rem' : '3rem',
             p: {
-              marginBottom: "1.3rem",
+              marginBottom: '1.3rem',
             },
           }}
         >
-          <p css={{ fontWeight: "500" }}>Sign Up</p>
-      
+          <p css={{ fontWeight: '500' }}>Sign Up</p>
         </div>
 
         <form onSubmit={(e) => handleNext(e)}>
-          <div css={{ marginBottom: "2.4rem" }}>
-            <div css = {{marginBottom:"2rem"}}>
-            <BasicTextField
-              label="Email Address"
-              value={formDetails.email}
-              weight="bold"
-              name="email"
-              setValue={handleChange}
-              error={
-                emailValid
-                  ? message
-                    ? "Email already exists"
-                    : ""
-                  : "Provide a valid email"
-              }
-              required
-            />
+          <div css={{ marginBottom: '2.4rem' }}>
+            <div css={{ marginBottom: '2rem' }}>
+              <BasicTextField
+                label='Email Address'
+                value={formDetails.email}
+                weight='bold'
+                name='email'
+                setValue={handleChange}
+                error={
+                  emailValid
+                    ? message
+                      ? 'Email already exists'
+                      : ''
+                    : 'Provide a valid email'
+                }
+                required
+              />
             </div>
             <PhoneTextField
-              label="Phone Number"
+              label='Phone Number'
               value={formDetails.phoneNumber}
-              name="phoneNumber"
+              name='phoneNumber'
               setValue={handleChange}
               setPhoneValue={handlePhoneChange}
               error={
                 message
-                  ? "Phone number already in use by another user"
+                  ? 'Phone number already in use by another user'
                   : valid
-                  ? ""
-                  : "Please enter a valid phone number using the format +(234) XXX XXX XXX X"
+                  ? ''
+                  : 'Please enter a valid phone number using the format +(234) XXX XXX XXX X'
               }
               required
             />
           </div>
           <PasswordTextField
-            label="Password"
+            label='Password'
             visible={passwordVisible}
             setVisible={setPasswordVisible}
             setValue={handleChange}
-            name="password"
+            name='password'
             value={formDetails.password}
             error={
               passwordValid
-                ? ""
-                : "Kindly ensure your password has at least one capital letter, small letter, numerical and special character. It must also be at least 8 letters long"
+                ? ''
+                : 'Kindly ensure your password has at least one capital letter, small letter, numerical and special character. It must also be at least 8 letters long'
             }
             required
           />
           <Box height={35} />
           <PasswordTextField
-            label="Confirm Password"
+            label='Confirm Password'
             visible={confirmPasswordVisible}
             setVisible={setConfirmPasswordVisible}
             setValue={handleChange}
-            name="confirmPassword"
+            name='confirmPassword'
             value={formDetails.confirmPassword}
-            error={passwordMatch ? "" : "Passwords do not match!"}
+            error={passwordMatch ? '' : 'Passwords do not match!'}
             required
           />
           <Box height={35} />
@@ -522,13 +592,12 @@ const Password = (props: FormLevelProps) => {
 };
 
 const Gender = (props: FormLevelProps) => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
-  const [selectedType, setSelectedType] = useState<
-    "Male" | "Female" | "Preferred Not To Say"
-  >();
+  const isTablet = useMediaQuery('(max-width: 900px)');
+  const [selectedType, setSelectedType] =
+    useState<'Male' | 'Female' | 'Preferred Not To Say'>();
   const handleNext = () => {
     if (selectedType) {
-      props.setFormLevel("location");
+      props.setFormLevel('location');
       props.setFormData({
         ...props.formData,
         gender: selectedType,
@@ -538,40 +607,40 @@ const Gender = (props: FormLevelProps) => {
   return (
     <>
       <div>
-        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+        <div css={{ margin: '3rem 0', cursor: 'pointer' }}>
           <button
-            type="button"
-            onClick={() => props.setFormLevel("password")}
+            type='button'
+            onClick={() => props.setFormLevel('password')}
             css={{
               fontFamily: "'Nunito', sans-serif",
-              cursor: "pointer",
-              border: "none",
-              outline: "none",
-              background: "none",
-              display: "flex",
-              gap: "0.7rem",
-              alignItems: "center",
+              cursor: 'pointer',
+              border: 'none',
+              outline: 'none',
+              background: 'none',
+              display: 'flex',
+              gap: '0.7rem',
+              alignItems: 'center',
             }}
           >
             <Image
-              src="/assets/svgs/back.svg"
-              alt="back_arrow"
+              src='/assets/svgs/back.svg'
+              alt='back_arrow'
               width={22}
               height={15}
             />
             {!isTablet && (
-              <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+              <p css={{ fontSize: '1rem', fontWeight: '500' }}>Back</p>
             )}
           </button>
         </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
-            fontSize: "1.5rem",
-            marginBottom: isTablet ? "3rem" : "4.3rem",
-            fontWeight: "500",
+            fontSize: '1.5rem',
+            marginBottom: isTablet ? '3rem' : '4.3rem',
+            fontWeight: '500',
             p: {
-              marginBottom: "1.3rem",
+              marginBottom: '1.3rem',
             },
           }}
         >
@@ -582,28 +651,28 @@ const Gender = (props: FormLevelProps) => {
               font-weight: normal;
             `}
           >
-            {" "}
+            {' '}
             Select your gender
           </p>
         </div>
         <div>
           <GenderType
             selectedType={selectedType}
-            gender="Male"
+            gender='Male'
             setSelectedType={setSelectedType}
           />
           <Box height={22} />
 
           <GenderType
             selectedType={selectedType}
-            gender="Female"
+            gender='Female'
             setSelectedType={setSelectedType}
           />
           <Box height={22} />
 
           <GenderType
             selectedType={selectedType}
-            gender="Preferred Not To Say"
+            gender='Preferred Not To Say'
             setSelectedType={setSelectedType}
           />
           <Box height={35} />
@@ -616,16 +685,16 @@ const Gender = (props: FormLevelProps) => {
 };
 
 const Location = (props: FormLevelProps) => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const isTablet = useMediaQuery('(max-width: 900px)');
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.setFormLevel("username");
+    props.setFormLevel('username');
     props.setFormData({
       ...props.formData,
       city: value,
     });
   };
-  const [value, setValue] = useState(props.formData.city || "");
+  const [value, setValue] = useState(props.formData.city || '');
   const [cities, setCities] = useState<ILocation>();
 
   useEffect(() => {
@@ -634,7 +703,7 @@ const Location = (props: FormLevelProps) => {
         `https://api.teleport.org/api/cities/?search=${value}`
       );
       const data = await res.json();
-      setCities(data._embedded["city:search-results"]);
+      setCities(data._embedded['city:search-results']);
     };
     searchedCities();
   }, [value]);
@@ -642,19 +711,19 @@ const Location = (props: FormLevelProps) => {
     <>
       <div>
         <button
-          type="button"
-          onClick={() => props.setFormLevel("gender")}
+          type='button'
+          onClick={() => props.setFormLevel('gender')}
           css={{
-            margin: "3rem 0",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            background: "none",
+            margin: '3rem 0',
+            cursor: 'pointer',
+            border: 'none',
+            outline: 'none',
+            background: 'none',
           }}
         >
           <Image
-            src="/assets/svgs/back.svg"
-            alt="back_arrow"
+            src='/assets/svgs/back.svg'
+            alt='back_arrow'
             width={22}
             height={15}
           />
@@ -662,11 +731,11 @@ const Location = (props: FormLevelProps) => {
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
-            fontSize: "1.5rem",
-            marginBottom: isTablet ? "2rem" : "4.3rem",
-            fontWeight: "600",
+            fontSize: '1.5rem',
+            marginBottom: isTablet ? '2rem' : '4.3rem',
+            fontWeight: '600',
             p: {
-              marginBottom: "1.3rem",
+              marginBottom: '1.3rem',
             },
           }}
         >
@@ -674,19 +743,19 @@ const Location = (props: FormLevelProps) => {
           <p
             css={css`
               font-size: 16px;
-              font-weight: "normal";
+              font-weight: 'normal';
             `}
           >
-            {" "}
+            {' '}
             This will give you event feeds happening around you based on your
             location
           </p>
         </div>
         <form onSubmit={handleNext}>
           <BasicTextField
-            label="Search City"
+            label='Search City'
             value={value}
-            weight="bold"
+            weight='bold'
             setValue={(e) => setValue(e.target.value)}
             required
           />
@@ -695,14 +764,14 @@ const Location = (props: FormLevelProps) => {
           {cities && value.length > 0 && (
             <div
               css={{
-                height: "fit-content",
-                maxHeight: "8rem",
-                width: "100%",
-                border: "1px solid #AEAEAE",
-                paddingInline: "0",
-                paddingBlock: "0.2rem",
-                overflowY: "auto",
-                marginBottom: "2rem",
+                height: 'fit-content',
+                maxHeight: '8rem',
+                width: '100%',
+                border: '1px solid #AEAEAE',
+                paddingInline: '0',
+                paddingBlock: '0.2rem',
+                overflowY: 'auto',
+                marginBottom: '2rem',
               }}
             >
               {cities.map((city, idx) => (
@@ -710,13 +779,13 @@ const Location = (props: FormLevelProps) => {
                   key={idx}
                   css={{
                     fontFamily: "'Nunito', sans-serif",
-                    padding: "0.5rem",
-                    paddingLeft: "0.5rem",
-                    fontSize: "1rem",
-                    cursor: "pointer",
-                    ":hover": {
-                      background: "#7c35ab",
-                      color: "#FFF",
+                    padding: '0.5rem',
+                    paddingLeft: '0.5rem',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    ':hover': {
+                      background: '#7c35ab',
+                      color: '#FFF',
                     },
                   }}
                   onClick={() => setValue(city?.matching_full_name)}
@@ -735,54 +804,54 @@ const Location = (props: FormLevelProps) => {
 };
 
 const Username = (props: FormLevelProps) => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const isTablet = useMediaQuery('(max-width: 900px)');
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.setFormLevel("interests");
+    props.setFormLevel('interests');
     props.setFormData({
       ...props.formData,
       providedUsername: value,
     });
   };
-  const [value, setValue] = useState(props.formData.providedUsername || "");
+  const [value, setValue] = useState(props.formData.providedUsername || '');
 
   return (
     <>
       <div>
-        <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+        <div css={{ margin: '3rem 0', cursor: 'pointer' }}>
           <button
-            type="button"
-            onClick={() => props.setFormLevel("location")}
+            type='button'
+            onClick={() => props.setFormLevel('location')}
             css={{
               fontFamily: "'Nunito', sans-serif",
-              cursor: "pointer",
-              border: "none",
-              outline: "none",
-              background: "none",
-              display: "flex",
-              gap: "0.7rem",
-              alignItems: "center",
+              cursor: 'pointer',
+              border: 'none',
+              outline: 'none',
+              background: 'none',
+              display: 'flex',
+              gap: '0.7rem',
+              alignItems: 'center',
             }}
           >
             <Image
-              src="/assets/svgs/back.svg"
-              alt="back_arrow"
+              src='/assets/svgs/back.svg'
+              alt='back_arrow'
               width={22}
               height={15}
             />
             {!isTablet && (
-              <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+              <p css={{ fontSize: '1rem', fontWeight: '500' }}>Back</p>
             )}
           </button>
         </div>
         <div
           css={{
             fontFamily: "'Nunito', sans-serif",
-            fontSize: "1.5rem",
-            marginBottom: "4.3rem",
-            fontWeight: "500",
+            fontSize: '1.5rem',
+            marginBottom: '4.3rem',
+            fontWeight: '500',
             p: {
-              marginBottom: "1.3rem",
+              marginBottom: '1.3rem',
             },
           }}
         >
@@ -793,21 +862,21 @@ const Username = (props: FormLevelProps) => {
               font-weight: normal;
             `}
           >
-            {" "}
+            {' '}
             Username is your unique ID to look for you and to purchase ticket
             for you
           </p>
         </div>
         <form onSubmit={handleNext}>
           <BasicTextField
-            label="Username"
+            label='Username'
             value={value}
-            weight="bold"
+            weight='bold'
             withIcon
             setValue={(e) => setValue(e.target.value)}
             iconComponent={
               <button
-                type="button"
+                type='button'
                 onClick={() => {}}
                 css={css`
                   /* outline: none; */
@@ -815,20 +884,20 @@ const Username = (props: FormLevelProps) => {
                   background: none;
                 `}
               >
-                {" "}
+                {' '}
                 <Image
-                  src="/assets/svgs/reset.svg"
-                  alt="reset-icon"
+                  src='/assets/svgs/reset.svg'
+                  alt='reset-icon'
                   width={16.29}
                   height={18.21}
-                />{" "}
+                />{' '}
               </button>
             }
             required
           />
           <label
             css={css`
-              font-family: "Poppins", sans-serif;
+              font-family: 'Poppins', sans-serif;
               margin-top: 9px;
               display: block;
             `}
@@ -840,7 +909,7 @@ const Username = (props: FormLevelProps) => {
             css={css`
               text-align: center;
               font-weight: bold;
-              font-family: "Nunito", sans-serif;
+              font-family: 'Nunito', sans-serif;
             `}
           >
             SUGGESTED USERNAMES
@@ -854,19 +923,19 @@ const Username = (props: FormLevelProps) => {
               align-items: center;
             `}
           >
-            {[" Blessed_1", "Bles_one", "B_one", "B_lone"].map(
+            {[' Blessed_1', 'Bles_one', 'B_one', 'B_lone'].map(
               (name, index) => (
                 <div
                   key={index}
                   onClick={() => setValue(name)}
                   css={css`
                     height: 31px;
-                    border: 2px solid ${"#000"};
+                    border: 2px solid ${'#000'};
                     border-radius: 16px;
                     padding: 5px 15px;
                     font-size: 14px;
                     font-weight: 500;
-                    color: ${"#AEAEAE"};
+                    color: ${'#AEAEAE'};
                     cursor: pointer;
                   `}
                 >
@@ -885,22 +954,23 @@ const Username = (props: FormLevelProps) => {
 };
 
 const Interests = (props: FormLevelProps) => {
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const isTablet = useMediaQuery('(max-width: 900px)');
   const router = useRouter();
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ signUp }) => signUp);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const {setFormLevel} = props
+  const [message, setMessage] = useState('');
+  const { setFormLevel } = props;
+
   useEffect(() => {
-    if (loading === "failed") {
-      if (localStorage.getItem("error") && localStorage) {
-        const error = localStorage.getItem("error") || "";
-        if (error === "Email already exists") {
-          setFormLevel("password");
+    if (loading.status === 'failure') {
+      if (localStorage.getItem('error') && localStorage) {
+        const error = localStorage.getItem('error') || '';
+        if (error === 'Email already exists') {
+          setFormLevel('password');
         }
-        if (error === "Phone number is already in use by another user") {
-          setFormLevel("password");
+        if (error === 'Phone number is already in use by another user') {
+          setFormLevel('password');
         }
       }
     }
@@ -910,7 +980,7 @@ const Interests = (props: FormLevelProps) => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setSnackBarOpen(false);
@@ -922,15 +992,15 @@ const Interests = (props: FormLevelProps) => {
       interests: selectedInterests,
     });
     dispatch(signUp(props.formData)).then((res) => {
-      if (res.meta.requestStatus == "fulfilled") {
-        router.push("/auth/signin");
-        setMessage("Signup successful");
+      if (res.meta.requestStatus == 'fulfilled') {
+        router.push('/auth/signin');
+        setMessage('Signup successful');
         setSnackBarOpen(true);
       }
     });
     // router.push("/dashboard/programs");
   };
-  const [selectedInterests, setSelectedInterests] = useState([""]);
+  const [selectedInterests, setSelectedInterests] = useState(['']);
   const [chipDetails, setChiDetails] = useState(chipData);
   return (
     <div>
@@ -939,29 +1009,29 @@ const Interests = (props: FormLevelProps) => {
         message={message}
         handleClose={handleSnackbarClose}
       />
-      <div css={{ margin: "3rem 0", cursor: "pointer" }}>
+      <div css={{ margin: '3rem 0', cursor: 'pointer' }}>
         <button
-          type="button"
-          onClick={() => props.setFormLevel("username")}
+          type='button'
+          onClick={() => props.setFormLevel('username')}
           css={{
             fontFamily: "'Nunito', sans-serif",
-            cursor: "pointer",
-            border: "none",
-            outline: "none",
-            background: "none",
-            display: "flex",
-            gap: "0.7rem",
-            alignItems: "center",
+            cursor: 'pointer',
+            border: 'none',
+            outline: 'none',
+            background: 'none',
+            display: 'flex',
+            gap: '0.7rem',
+            alignItems: 'center',
           }}
         >
           <Image
-            src="/assets/svgs/back.svg"
-            alt="back_arrow"
+            src='/assets/svgs/back.svg'
+            alt='back_arrow'
             width={22}
             height={15}
           />
           {!isTablet && (
-            <p css={{ fontSize: "1rem", fontWeight: "500" }}>Back</p>
+            <p css={{ fontSize: '1rem', fontWeight: '500' }}>Back</p>
           )}
         </button>
       </div>
@@ -969,11 +1039,11 @@ const Interests = (props: FormLevelProps) => {
       <div
         css={{
           fontFamily: "'Nunito', sans-serif",
-          fontSize: "1.5rem",
-          marginBottom: "4.3rem",
-          fontWeight: "500",
+          fontSize: '1.5rem',
+          marginBottom: '4.3rem',
+          fontWeight: '500',
           p: {
-            marginBottom: "1.3rem",
+            marginBottom: '1.3rem',
           },
         }}
       >
@@ -999,16 +1069,16 @@ const Interests = (props: FormLevelProps) => {
       <Box height={35} />
 
       <ButtonFormFilled onClick={handleSubmit}>
-        {loading === "loading" ? (
+        {loading.status === 'loading' ? (
           <TailSpin
             height={15}
             width={15}
-            color="#FFF"
-            ariaLabel="loading"
-            radius={"2"}
+            color='#FFF'
+            ariaLabel='loading'
+            radius={'2'}
           />
         ) : (
-          "SIGN UP"
+          'SIGN UP'
         )}
       </ButtonFormFilled>
     </div>

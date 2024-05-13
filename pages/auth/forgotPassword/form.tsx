@@ -1,16 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { FormEvent, useEffect, useState } from "react";
-import BasicTextField from "@/components/inputs/BasicTextField";
-import { ButtonFormFilled, ButtonFormOutline } from "styles/components/button";
-import { useAppSelector, useAppThunkDispatch } from "redux/store";
-import { useRouter } from "next/router";
-import { TailSpin } from "react-loader-spinner";
-import ErrorSnackBar from "@/components/snackbars/error";
-import SuccessSnackBar from "@/components/snackbars/success";
-import PinInputGrid from "@/components/inputs/PinInput";
+import React, { FormEvent, useEffect, useState } from 'react';
+import BasicTextField from '@/components/inputs/BasicTextField';
+import { ButtonFormFilled, ButtonFormOutline } from 'styles/components/button';
+import { useAppSelector, useAppThunkDispatch } from 'redux/store';
+import { useRouter } from 'next/router';
+import { TailSpin } from 'react-loader-spinner';
+import ErrorSnackBar from '@/components/snackbars/error';
+import SuccessSnackBar from '@/components/snackbars/success';
+import PinInputGrid from '@/components/inputs/PinInput';
+import { forgotPassword, verifyOTP } from 'redux/auth/thunkAction';
 
-type IForgotPasswordFormLevels = "getOTP" | "validation";
+type IForgotPasswordFormLevels = 'getOTP' | 'validation';
 
 interface FormLevelProps {
   formLevel: IForgotPasswordFormLevels;
@@ -21,11 +22,11 @@ interface FormLevelProps {
 
 export default function Form() {
   const [formLevel, setFormLevel] =
-    React.useState<IForgotPasswordFormLevels>("getOTP");
-  const [identifier, setIdentifier] = useState("");
+    React.useState<IForgotPasswordFormLevels>('getOTP');
+  const [identifier, setIdentifier] = useState('');
   const displayFormLevel = (formLevel: IForgotPasswordFormLevels) => {
     switch (formLevel) {
-      case "getOTP":
+      case 'getOTP':
         return (
           <GetOTP
             formLevel={formLevel}
@@ -34,7 +35,7 @@ export default function Form() {
             setIdentifier={setIdentifier}
           />
         );
-      case "validation":
+      case 'validation':
         return (
           <Validation
             formLevel={formLevel}
@@ -61,22 +62,24 @@ export default function Form() {
 const GetOTP = (props: FormLevelProps) => {
   const router = useRouter();
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ signIn }) => signIn);
+  const { loading }: { loading: any } = useAppSelector(
+    ({ forgotPassword }) => forgotPassword
+  );
   const [errorSnackBarOpen, setErrorSnackBarOpen] = useState(false);
   const [successSnackBarOpen, setSuccessSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const [values, setValues] = useState({
-    identifier: "",
+    identifier: '',
   });
 
   useEffect(() => {
-    if (loading === "failed") {
-      if (localStorage.getItem("error") && localStorage) {
-        const error = localStorage.getItem("error") || "";
+    if (loading.status === 'failure') {
+      if (localStorage.getItem('error') && localStorage) {
+        const error = localStorage.getItem('error') || '';
         setMessage(error);
         setErrorSnackBarOpen(true);
-        localStorage.setItem("error", "");
+        localStorage.setItem('error', '');
       }
     }
   }, [loading]);
@@ -85,7 +88,7 @@ const GetOTP = (props: FormLevelProps) => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setErrorSnackBarOpen(false);
@@ -95,64 +98,68 @@ const GetOTP = (props: FormLevelProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-    setMessage("");
+    setMessage('');
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.setIdentifier(values.identifier)
-    // dispatch(signIn(values)).then((res) => {
-    //   console.log(res, "resss");
-
-    //   if (res.meta.requestStatus === "fulfilled") {
-    //     setMessage("SignIn successful")
-    //     setSuccessSnackBarOpen(true)
-    //     router.push("/dashboard/programs");
-    //   }
-    // })
-    props.setFormLevel("validation");
+    dispatch(forgotPassword(values))
+      .then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          setMessage('SignIn successful');
+          props.setFormLevel('validation');
+          props.setIdentifier(values.identifier);
+          // setSuccessSnackBarOpen(true)
+          // router.push("/dashboard/programs");
+        } else {
+          setErrorSnackBarOpen(true);
+        }
+      })
+      .catch((err) => {
+          setErrorSnackBarOpen(true);
+      });
   };
 
   return (
     <>
       <ErrorSnackBar
         open={errorSnackBarOpen}
-        message={message}
+        message={loading.error}
         handleClose={handleSnackbarClose}
       />
       <SuccessSnackBar
         open={successSnackBarOpen}
-        message={message}
+        message={`Code successfully sent to ${values.identifier}`}
         handleClose={handleSnackbarClose}
       />
       <div>
-        <p css={{ fontWeight: 400, marginBlock: "2rem" }}>
+        <p css={{ fontWeight: 400, marginBlock: '2rem' }}>
           Enter The Email or Phone Number used in creating your account to
           receive a Reset Code For reseting your password.
         </p>
         <form onSubmit={handleSubmit}>
-          <div css={{ marginBottom: "2.4rem" }}>
+          <div css={{ marginBottom: '2.4rem' }}>
             <BasicTextField
-              label="Email Or Phone"
+              label='Email Or Phone'
               value={values.identifier}
-              name={"identifier"}
+              name={'identifier'}
               setValue={handleChange}
-              error={""}
+              error={''}
               required
             />
           </div>
           <div>
-            <ButtonFormFilled>
-              {loading === "loading" ? (
+            <ButtonFormFilled disabled={loading.status === 'loading'}>
+              {loading.status === 'loading' ? (
                 <TailSpin
                   height={20}
                   width={20}
-                  color="#FFF"
-                  ariaLabel="loading"
-                  radius={"2"}
+                  color='#FFF'
+                  ariaLabel='loading'
+                  radius={'2'}
                 />
               ) : (
-                "SEND CODE"
+                'SEND CODE'
               )}
             </ButtonFormFilled>
           </div>
@@ -165,10 +172,13 @@ const GetOTP = (props: FormLevelProps) => {
 const Validation = (props: FormLevelProps) => {
   const router = useRouter();
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ signIn }) => signIn);
+  const { loading } = useAppSelector(({ verifyOTP }) => verifyOTP);
+  const { loading: loadingforgotPassword } = useAppSelector(
+    ({ forgotPassword }) => forgotPassword
+  );
   const [errorSnackBarOpen, setErrorSnackBarOpen] = useState(false);
   const [successSnackBarOpen, setSuccessSnackBarOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const PIN_LENGTH = 6;
   const [pin, setPin] = useState<Array<number | undefined>>(
@@ -181,19 +191,19 @@ const Validation = (props: FormLevelProps) => {
     setPin(newPin);
   };
 
-  const [values, setValues] = useState("");
+  const [values, setValues] = useState('');
 
   useEffect(() => {
     setValues(pin.join());
   }, [pin]);
 
   useEffect(() => {
-    if (loading === "failed") {
-      if (localStorage.getItem("error") && localStorage) {
-        const error = localStorage.getItem("error") || "";
+    if (loading.status === 'failure') {
+      if (localStorage.getItem('error') && localStorage) {
+        const error = localStorage.getItem('error') || '';
         setMessage(error);
         setErrorSnackBarOpen(true);
-        localStorage.setItem("error", "");
+        localStorage.setItem('error', '');
       }
     }
   }, [loading]);
@@ -202,7 +212,7 @@ const Validation = (props: FormLevelProps) => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setErrorSnackBarOpen(false);
@@ -211,23 +221,51 @@ const Validation = (props: FormLevelProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // dispatch(signIn(values)).then((res) => {
-    //   console.log(res, "resss");
+    const pin = values.split(',').join('');
+    const val = {
+      pin: pin.toString(),
+      email: props.identifier,
+    };
 
-    //   if (res.meta.requestStatus === "fulfilled") {
-    //     setMessage("SignIn successful")
-    //     setSuccessSnackBarOpen(true)
-    //     router.push("/dashboard/programs");
-    //   }
-    // })
-    router.push("/auth/resetPassword")
+    dispatch(verifyOTP(val))
+      .then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          setMessage('SignIn successful');
+          setSuccessSnackBarOpen(true);
+
+          setTimeout(() => {
+            router.push('/dashboard/programs');
+          }, 1000);
+        } else {
+          setErrorSnackBarOpen(true);
+        }
+      })
+      .catch((err) => {
+        setErrorSnackBarOpen(true);
+      });
+  };
+
+  const handleResendCode = () => {
+    dispatch(forgotPassword({ identifier: props.identifier }))
+      .then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
+          setMessage('SignIn successful');
+          // setSuccessSnackBarOpen(true)
+          // router.push("/dashboard/programs");
+        } else {
+          setErrorSnackBarOpen(true);
+        }
+      })
+      .catch((err) => {
+        setErrorSnackBarOpen(true);
+      });
   };
 
   return (
     <>
       <ErrorSnackBar
         open={errorSnackBarOpen}
-        message={message}
+        message={loading.error || ''}
         handleClose={handleSnackbarClose}
       />
       <SuccessSnackBar
@@ -236,31 +274,46 @@ const Validation = (props: FormLevelProps) => {
         handleClose={handleSnackbarClose}
       />
       <div>
-        <p css={{ fontWeight: 400, marginBlock: "2rem" }}>
+        <p css={{ fontWeight: 400, marginBlock: '2rem' }}>
           We sent a Password Reset Code to <b>{props.identifier}</b>
         </p>
         <form onSubmit={handleSubmit}>
-          <div css={{ marginBottom: "2.4rem" }}>
-            <p css = {{fontWeight:"700"}}>Enter Code</p>
+          <div css={{ marginBottom: '2.4rem' }}>
+            <p css={{ fontWeight: '700' }}>Enter Code</p>
             <PinInputGrid
               onPinChanged={onPinChanged}
               pin={pin}
               pinLength={PIN_LENGTH}
             />
-            <p>Didnt receive an Email? <b>Resend</b></p>
+            <p css={{ display: 'flex', gap: '.3rem' }}>
+              Didn&apos;t receive an Email?{' '}
+              <b onClick={handleResendCode} css={{ cursor: 'pointer' }}>
+                {loadingforgotPassword.status === 'loading' ? (
+                  <TailSpin
+                    height={20}
+                    width={20}
+                    color='#7c35ab'
+                    ariaLabel='loading'
+                    radius={'2'}
+                  />
+                ) : (
+                  'Resend'
+                )}
+              </b>
+            </p>
           </div>
           <div>
-            <ButtonFormFilled>
-              {loading === "loading" ? (
+            <ButtonFormFilled disabled={loading.status === 'loading'}>
+              {loading.status === 'loading' ? (
                 <TailSpin
                   height={20}
                   width={20}
-                  color="#FFF"
-                  ariaLabel="loading"
-                  radius={"2"}
+                  color='#FFF'
+                  ariaLabel='loading'
+                  radius={'2'}
                 />
               ) : (
-                "CONFIRM"
+                'CONFIRM'
               )}
             </ButtonFormFilled>
           </div>

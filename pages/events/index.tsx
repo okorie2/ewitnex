@@ -1,38 +1,38 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useState } from "react";
-import EventCard from "@/components/cards/eventCard";
-import PublicSiteFooter from "@/components/footer/publicSite";
-import Navbar from "@/components/header";
-import { Lines } from "@/components/lines";
-import { screen } from "styles/theme";
-import Right from "public/assets/svgs/right_ar.svg";
-import Image from "next/image";
-import { Box, useMediaQuery } from "@mui/material";
-import Layout from "./layout";
-import { useAppSelector, useAppThunkDispatch } from "redux/store";
-import { getEvents } from "redux/event/thunkAction";
-import { IEvent } from "types/event";
-import { formatNumber } from "utitlities/commonHelpers/numberFormatter";
-import dayjs from "dayjs";
-import EmptyState from "fragments/emptyState";
-import { Button } from "styles/components/button";
-import Link from "next/link";
-import { TailSpin } from "react-loader-spinner";
-import { useRouter } from "next/router";
-import { getOrganizer } from "utitlities/commonHelpers/getOrganizer";
-import EventJson from "../../utitlities/json/eventsData.json";
-import { H1, H2, H3, H4 } from "styles/components/typography";
+import React, { useEffect, useState } from 'react';
+import EventCard from '@/components/cards/eventCard';
+import PublicSiteFooter from '@/components/footer/publicSite';
+import Navbar from '@/components/header';
+import { Lines } from '@/components/lines';
+import { screen } from 'styles/theme';
+import Right from 'public/assets/svgs/right_ar.svg';
+import Image from 'next/image';
+import { Box, useMediaQuery } from '@mui/material';
+import Layout from './layout';
+import { useAppSelector, useAppThunkDispatch } from 'redux/store';
+import { getEvents } from 'redux/event/thunkAction';
+import { IEvent } from 'types/event';
+import { formatNumber } from 'utitlities/commonHelpers/numberFormatter';
+import dayjs from 'dayjs';
+import EmptyState from 'fragments/emptyState';
+import { Button } from 'styles/components/button';
+import Link from 'next/link';
+import { TailSpin } from 'react-loader-spinner';
+import { useRouter } from 'next/router';
+import { getOrganizer } from 'utitlities/commonHelpers/getOrganizer';
+import EventJson from '../../utitlities/json/eventsData.json';
+import { H1, H2, H3, H4 } from 'styles/components/typography';
 
 export default function Index() {
-  const isTablet = useMediaQuery("(max-width: 900px)");
+  const isTablet = useMediaQuery('(max-width: 900px)');
 
   const ticketRange = (event: IEvent) => {
     const tickets = event.tickets;
     const ticketPriceArray: number[] = [];
 
     if (tickets && tickets.length < 1) {
-      return "Free";
+      return 'Free';
     } else {
       if (tickets && tickets.length === 1)
         return `$${formatNumber(tickets[0].ticketPrice)}`;
@@ -43,7 +43,7 @@ export default function Index() {
       ticketPriceArray.sort((a, b) => a - b);
       return `${
         ticketPriceArray[0] === 0
-          ? "Free"
+          ? 'Free'
           : `$${formatNumber(ticketPriceArray[0])}`
       } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
     }
@@ -54,14 +54,14 @@ export default function Index() {
   useEffect(() => {
     let temp: IEvent[] | [] = [];
     if (events) {
-      temp = events.filter((event) => event.location?.type === "online");
+      temp = events.filter((event) => event.location?.type === 'online');
     }
     setOnlineEvents(temp);
   }, [events]);
 
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
-    dispatch(getEvents("All"));
+    dispatch(getEvents('All'));
   }, []);
 
   return (
@@ -70,30 +70,30 @@ export default function Index() {
       <Layout>
         <div
           css={{
-            padding: "4% 2.5%",
-            display: isTablet ? "block" : "none",
-            flexDirection: isTablet ? "column" : "row",
-            gap: isTablet ? "0" : "15px",
-            width: "100%",
+            padding: '4% 2.5%',
+            display: isTablet ? 'block' : 'none',
+            flexDirection: isTablet ? 'column' : 'row',
+            gap: isTablet ? '0' : '15px',
+            width: '100%',
           }}
         >
-          <div css={{ display: "flex", marginBottom: "0.8rem", gap: "5px" }}>
+          <div css={{ display: 'flex', marginBottom: '0.8rem', gap: '5px' }}>
             <p>All Events</p>
             <div>
-              <Image src={Right} alt="right" />
+              <Image src={Right} alt='right' />
             </div>
           </div>
           <div>
-            <p css={{ fontSize: "16px" }}>
-              <b>{events?.length || "0"}</b>
+            <p css={{ fontSize: '16px' }}>
+              <b>{events?.length || '0'}</b>
             </p>
-            <p css={{ color: "#707070" }}>events found</p>
+            <p css={{ color: '#707070' }}>events found</p>
           </div>
         </div>
         <div
           css={{
-            display: "flex",
-            width: isTablet ?  "90%" : "80%",
+            display: 'flex',
+            width: isTablet ? '90%' : '80%',
           }}
         >
           <>
@@ -136,29 +136,29 @@ export default function Index() {
 
             <div
               css={{
-                display: "flex",
-                width: "100%",
-                gap: "1rem",
-              }} 
+                display: 'flex',
+                width: '100%',
+                gap: '1rem',
+              }}
             >
               <div
                 css={{
-                  display: "flex",
-                  flexDirection: isTablet ? "column" : "row",
-                  gap: isTablet ? "1rem" : "0.125rem",
-                  justifyContent: "space-between",
-                  flexWrap: isTablet ? "nowrap" : "wrap",
-                  marginTop: isTablet ? "1.5rem" : "",
-                  paddingInline: "2px",
+                  display: 'flex',
+                  flexDirection: isTablet ? 'column' : 'row',
+                  gap: isTablet ? '1rem' : '0.125rem',
+                  justifyContent: 'space-between',
+                  flexWrap: isTablet ? 'nowrap' : 'wrap',
+                  marginTop: isTablet ? '1.5rem' : '',
+                  paddingInline: '2px',
                 }}
               >
                 {EventJson.map((data) => (
                   <div
-                  key={data.id}
+                    key={data.id}
                     css={{
-                      width: isTablet ? "100%" : "32%",
+                      width: isTablet ? '100%' : '32%',
                       [screen.desktop]: {
-                        width: isTablet ? "100%" : "32%",
+                        width: isTablet ? '100%' : '32%',
                       },
                     }}
                   >
@@ -180,26 +180,26 @@ export default function Index() {
               </div>
               <div
                 css={{
-                  display: isTablet ? "none" : "block",
-                  width: '20%'
+                  display: isTablet ? 'none' : 'block',
+                  width: '20%',
                 }}
               >
                 <div
                   css={{
-                    display: "flex",
-                    marginBottom: "0.8rem",
-                    alignItems: "center",
-                    gap: "5px",
+                    display: 'flex',
+                    marginBottom: '0.8rem',
+                    alignItems: 'center',
+                    gap: '5px',
                   }}
                 >
                   <p>All Events</p>
-                  <Image src={Right} alt="right" />
+                  <Image src={Right} alt='right' />
                 </div>
                 <div>
-                  <p css={{ fontSize: "16px" }}>
+                  <p css={{ fontSize: '16px' }}>
                     <b>123456</b>
                   </p>
-                  <p css={{ color: "#707070" }}>events found</p>
+                  <p css={{ color: '#707070' }}>events found</p>
                 </div>
               </div>
             </div>

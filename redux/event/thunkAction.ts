@@ -9,18 +9,17 @@ import {
   ReqEventLocation,
   ReqTicket,
   IEvent,
-  IReqUpdateTicket,
+  IReqUpdateTicket
 } from "types/event";
 import toast from "react-hot-toast";
 
 export const createEvent = createAsyncThunk(
   "event/createEvent",
-  async (data: ICreateEvent, thunkAPI) => {
+  async (_data, thunkAPI) => {
     try {
       const response = await useAxios({
-        url: `${config.API_BASE_URL}/events/create`,
+        url: `${config.API_BASE_URL}/event/initialize`,
         method: "post",
-        data: data,
       });
 
       localStorage.setItem("currenteventID", response.data.data._id);
@@ -40,13 +39,23 @@ export const createEvent = createAsyncThunk(
   }
 );
 
-export const updateEvent = createAsyncThunk(
-  "event/updateEvent",
-  async (data: { eventId: string; formData: IEvent }, thunkAPI) => {
+export const updateEventProgram = createAsyncThunk(
+  "event/updateEventProgram",
+  async (data: {
+    eventId: any,
+    formData: {
+      title: string,
+      organizersId: string[],
+      eventTypeId: Number,
+      eventCategoryId: Number,
+      isPublic: boolean,
+      about: string,
+    }
+  }, thunkAPI) => {
     try {
       const response = await useAxios({
-        url: `${config.API_BASE_URL}/events/${data.eventId}`,
-        method: "put",
+        url: `${config.API_BASE_URL}/program_info/${data.eventId}`,
+        method: "patch",
         data: data.formData,
       });
 

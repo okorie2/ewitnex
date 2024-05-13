@@ -41,8 +41,6 @@ const Waitlist = () => {
     }
   }, [loading]);
 
-  console.log(error)
-
   return (
     <React.Fragment>
       <div
@@ -107,7 +105,7 @@ const Waitlist = () => {
           }}
         >
           <input
-            type='text'
+            type='email'
             placeholder='Enter your email'
             onChange={(e) => setEmail(e.target.value)}
             value={email}
@@ -117,6 +115,7 @@ const Waitlist = () => {
               padding: '0 1rem',
               fontSize: '1rem',
               backgroundColor: 'inherit',
+              fontFamily: '"Poppins", sans-serif',
               color: '#707070',
               '::placeholder': {
                 fontSize: '1rem',
@@ -144,6 +143,7 @@ const Waitlist = () => {
               [screen.tablet]: { width: '16rem', fontSize: '1rem' },
               [screen.mobile]: { width: '13rem', fontSize: '.8rem' },
             }}
+            disabled={loading === 'loading' || email.length === 0}
             onClick={() => {
               handleSubmit();
             }}

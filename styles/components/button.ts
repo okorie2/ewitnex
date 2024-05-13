@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
+
 interface Props {
   background?: string;
-  height?:string
-  border?:string
-  width?:string
-  color?:string
-  fontSize?:string
+  height?: string
+  border?: string
+  width?: string
+  color?: string
+  fontSize?: string
+  onClick?: () => void
+  disabled?: boolean
 }
 
 export const Button = styled.button<Props>`
   background-color: ${(props) =>
-    props.background ? props.background :"#7C35AB"};
+    props.background ? props.background : "#7C35AB"};
   border-radius: 56px;
   color: ${(props) => props.color ? props.color : "#fff"};
   height: ${(props) => props.height ? props.height : "64px"};
