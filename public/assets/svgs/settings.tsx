@@ -11,7 +11,7 @@ export default function SettingsSvg() {
         <filter id="Path_67534">
           <feOffset dy="3"  />
           <feGaussianBlur stdDeviation="3" result="blur" />
-          <feFlood flood-opacity="0.161" result="color" />
+          <feFlood floodOpacity="0.161" result="color" />
           <feComposite operator="out" in="SourceGraphic" in2="blur" />
           <feComposite operator="in" in="color" />
           <feComposite operator="in" in2="SourceGraphic" />
@@ -48,7 +48,7 @@ export default function SettingsSvg() {
             transform="translate(1022.829 3014.215)"
             fill="none"
             stroke="#000"
-            stroke-width="0.5"
+            strokeWidth="0.5"
           />
         </g>
         <path

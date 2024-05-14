@@ -1,33 +1,33 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { ICreateEvent, IPerformer } from "types/event";
-import { useAppSelector, useAppThunkDispatch } from "redux/store";
-import { deletePerformer, getEventById } from "redux/event/thunkAction";
-import { IUserDetails } from "types/user";
-import { useRouter } from "next/router";
-import UpdateSpeakerModal from "../modals/hostEventModal/updateSpeakerModal";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { ICreateEvent, IPerformer } from 'types/event';
+import { useAppSelector, useAppThunkDispatch } from 'redux/store';
+import { deletePerformer, getEventById } from 'redux/event/thunkAction';
+import { IUserDetails } from 'types/user';
+import { useRouter } from 'next/router';
+import UpdateSpeakerModal from '../modals/hostEventModal/updateSpeakerModal';
 
 const Performer = (props: IPerformer) => {
-  const [eventId, setEventId] = useState("");
+  const [eventId, setEventId] = useState('');
   const router = useRouter();
   const { event } = useAppSelector(({ event }) => event);
 
   useEffect(() => {
-    if (router.pathname.includes("hostEvent")) {
-      setEventId(localStorage.getItem("currenteventID") || "");
+    if (router.pathname.includes('hostEvent')) {
+      setEventId(localStorage.getItem('currenteventID') || '');
     } else {
-      setEventId(event._id || "");
+      setEventId(event._id || '');
     }
   }, [event]);
   const [user, setUser] = useState<IUserDetails>();
   const [createEventData, setCreateEventData] = useState<ICreateEvent>();
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+    setUser(JSON.parse(localStorage.getItem('user') || '{}'));
     setCreateEventData(
-      JSON.parse(localStorage.getItem("createEventData") || "{}")
+      JSON.parse(localStorage.getItem('createEventData') || '{}')
     );
   }, []);
 
@@ -36,7 +36,7 @@ const Performer = (props: IPerformer) => {
     dispatch(
       deletePerformer({ eventId: event._id, performerId: props.id })
     ).then((res) => {
-      if (res.meta.requestStatus == "fulfilled") {
+      if (res.meta.requestStatus == 'fulfilled') {
         dispatch(getEventById(eventId));
         props.setGetPerformers &&
           props.setGetPerformers((prevState: boolean) => !prevState);
@@ -60,64 +60,64 @@ const Performer = (props: IPerformer) => {
       >
         <div
           css={{
-            width: "177px",
-            height: "194px",
-            borderRadius: "10px",
-            position: "relative",
+            width: '177px',
+            height: '194px',
+            borderRadius: '10px',
+            position: 'relative',
           }}
         >
           <Image
-            src={props.img || ""}
-            alt=""
+            src={props.img || ''}
+            alt=''
             css={{
-              objectPosition: "center",
-              objectFit: "cover",
-              borderRadius: "10px",
+              objectPosition: 'center',
+              objectFit: 'cover',
+              borderRadius: '10px',
             }}
             fill
           />
         </div>
-        <div css={{ marginTop: "0.7rem" }}>
-          <h4 css={{ fontSize: "1rem" }}>{props.name}</h4>
+        <div css={{ marginTop: '0.7rem' }}>
+          <h4 css={{ fontSize: '1rem' }}>{props.name}</h4>
           <div
-            css={{ display: "flex", fontSize: "0.75rem", alignItems: "center" }}
+            css={{ display: 'flex', fontSize: '0.75rem', alignItems: 'center' }}
           >
             <p>{props.title}</p>
             <div
               css={{
-                background: "#000",
-                height: "0.3rem",
-                width: "0.3rem",
-                borderRadius: "50%",
-                marginInline: "0.4rem",
+                background: '#000',
+                height: '0.3rem',
+                width: '0.3rem',
+                borderRadius: '50%',
+                marginInline: '0.4rem',
               }}
             ></div>
             <p>{props.role}</p>
           </div>
         </div>
-        {router.pathname.includes("speakers") ? (
+        {router.pathname.includes('speakers') ? (
           <>
             {(event.OrganizedBy ||
               createEventData?.organizedBy === user?._id) && (
               <div
-                css={{ display: "flex", gap: "1.8rem", marginTop: "0.5rem" }}
+                css={{ display: 'flex', gap: '1.8rem', marginTop: '0.5rem' }}
               >
                 <div
                   onClick={() => setModalOpen(!modalOpen)}
-                  css={{ cursor: "pointer" }}
+                  css={{ cursor: 'pointer' }}
                 >
                   <Image
-                    src="/assets/svgs/pencil.svg"
-                    alt=""
+                    src='/assets/svgs/pencil.svg'
+                    alt=''
                     width={21}
                     height={21}
                     priority
                   />
                 </div>
-                <div onClick={deletePerformerFunc} css={{ cursor: "pointer" }}>
+                <div onClick={deletePerformerFunc} css={{ cursor: 'pointer' }}>
                   <Image
-                    src="/assets/svgs/trash.svg"
-                    alt=""
+                    src='/assets/svgs/trash.svg'
+                    alt=''
                     width={17.88}
                     height={22}
                     priority

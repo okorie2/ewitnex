@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const SignInLeftcss = styled.div`
-  border: 3px solid ${(props) =>"#7C35AB"};
+  border: 3px solid ${(props) => "#7C35AB"};
   max-height: 100vh;
   button {
     background: none;

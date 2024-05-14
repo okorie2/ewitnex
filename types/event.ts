@@ -7,6 +7,7 @@ export interface ICreateEvent {
   category: string;
   isPublic: boolean;
   description: string;
+  id: string;
 }
 
 export interface IEventFiles {
@@ -139,4 +140,13 @@ export interface IEvent {
   coverImage: string;
   filePDF: string;
   _id: string;
+}
+
+interface IEventProgramInfo { 
+  title: string; 
+  eventTypeId: Number; 
+  eventCategoryId: Number; 
+  isPublic: boolean; 
+  organizersId: string[]; 
+  about: string
 }
