@@ -17,34 +17,6 @@ const HomeHero = () => {
     <React.Fragment>
       <div
         css={{
-          height: '27rem',
-          backgroundColor: '#7C35AB',
-          [screen.desktop]: {
-            height: '20rem',
-          },
-          [screen.mobile]: {
-            height: '12rem',
-          },
-        }}
-      >
-        <div css={{ margin: 'auto', width: 'max-content' }}>
-          <Image
-            src='/assets/pngs/screen-shot.png'
-            alt='Ewitnex'
-            height={isMobile ? 500 : isLarge ? 600 : 900}
-            width={isMobile ? 320 : isLarge ? 600 : 900}
-            priority={true}
-            style={{
-              borderRadius: '20px',
-              objectFit: 'contain',
-              height: isMobile ? '250px' : isLarge ? '400px': '500px',
-              // marginTop: isMobile ? '-8.6rem' : isLarge ? '-6.7rem' : '-12.3rem',
-            }}
-          />
-        </div>
-      </div>
-      <div
-        css={{
           height: isTablet ? '585px' : '474px',
           backgroundColor: '#7C35AB33',
           width: '100%',
