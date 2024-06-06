@@ -10,7 +10,7 @@ import { SelectChangeEvent, useMediaQuery } from '@mui/material';
 import Speaker from '@/components/cards/performer';
 import AddSpeakerForm from 'fragments/hostEvent/addSpeakerForm';
 import AddSpeakerModal from '@/components/modals/hostEventModal/addSpeakerModal';
-import { getEventById } from 'redux/event/thunkAction';
+import { getEventById, addPerformer } from 'redux/event/thunkAction';
 import { useAppSelector, useAppThunkDispatch } from 'redux/store';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -19,6 +19,7 @@ const Speakers = () => {
   const isTablet = useMediaQuery('(max-width: 780px)');
   const newSpeakerRef = useRef<HTMLInputElement>(null);
   const [addSpeakerModalOpen, setAddSpeakerModalOpen] = useState(false);
+  const [formData, setFormData] = useState();
   const [willBePerformers, setWillBePerformers] = useState('Yes');
   const [getPerformers, setGetPerformers] = useState(true);
   const [performers, setPerformers] =
@@ -68,54 +69,24 @@ const Speakers = () => {
         if (res.meta.requestStatus == 'fulfilled') {
           const data = JSON.parse(sessionStorage.getItem('performers') || '{}');
           let performers = data;
-          setPerformers(performers);
+          setPerformers(performers);         
         }
       });
     };
     getPerformers();
   }, [getPerformers, eventID]);
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent
-  ) => {
-    setWillBePerformers(e.target.value);
-    if (isTablet) {
-      setAddSpeakerModalOpen(!addSpeakerModalOpen);
-    }
+  const handleFormChange = (updatedFormData) => {
+    setFormData(updatedFormData);
   };
-  
-  const handleNext = () => {
-    // if(event?.type === "click"){
-    //   const form = new FormData();
-    // // form.append('newPerformers', JSON.stringify(formData.newPerformers));
-    // // form.append('performerImage', formData.performerImage || '');
-    // console.log(localStorage.getItem('performers'))
-    // dispatch(addPerformer({ eventID, form })).then((res) => {
-    //   if (res.meta.requestStatus == 'fulfilled') {
-    //     setFormData({
-    //       newPerformers: [
-    //         {
-    //           nameOfPerformer: '',
-    //           performerTitle: '',
-    //           performerRole: '',
-    //           aboutPerformer: '',
-    //           willBePerformers: ''
-    //         },
-    //       ],
-    //       performerImage: undefined,
-    //     });
-    //     setGetPerformers((prevState: boolean) => !prevState);
-    //     if (newSpeakerRef.current != null) {
-    //       newSpeakerRef.current.focus();
-    //     }
-    //     if (isTablet) {
-    //       handleModalClose && handleModalClose();
-    //     }
-    //   }
-    // });
-    // }    
+
+  const handleNext = () => {    
+    dispatch(addPerformer({ eventID, form: formData })).then((res) => {
+      if (res.meta.requestStatus == 'fulfilled') {
+        setGetPerformers((prevState: boolean) => !prevState);
+        router.push('/dashboard/hostEvent/tickets');
+      }
+    });
   };
 
   return (
@@ -227,11 +198,11 @@ const Speakers = () => {
                 borderBottom: isTablet ? '' : `1px solid ${'#E4E4E4'}`,
               },
             }}
-          >            
+          >
             {!isTablet && willBePerformers === 'Yes' && (
               <AddSpeakerForm
                 speakerRef={newSpeakerRef}
-                onSubmit={handleNext}
+                onFormChange={handleFormChange}
                 setGetPerformers={setGetPerformers}
               />
             )}
@@ -312,7 +283,7 @@ const Speakers = () => {
                     ? ''
                     : 'Added performers will appear here'}
                 </p>
-                {isTablet && (
+                {/* {isTablet && (
                   <button
                     css={{
                       fontSize: '1rem',
@@ -333,7 +304,7 @@ const Speakers = () => {
                       ? 'Add Performer'
                       : ' + Add Another Performer'}
                   </button>
-                )}
+                )} */}
               </div>
             </div>
             <div

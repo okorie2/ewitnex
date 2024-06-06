@@ -24,7 +24,7 @@ interface IFeedsCard {
 const FeedsCard = (props: IFeedsCard) => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [_favourite, setFavourite] = useState(props.favourite);
-
+console.log(props)
   return (
     <div
       css={{
@@ -98,7 +98,7 @@ const FeedsCard = (props: IFeedsCard) => {
         >
           <Link href={`/dashboard/programs/${props.id}`}>
             <h4 css={{ width: isTablet ? "" : "100%" }}>
-              {props.title.slice(0, 37)} {props.title.length > 37 && "..."}
+              {props?.title?.slice(0, 37)} {props?.title?.length > 37 && "..."}
             </h4>
           </Link>
           <div
@@ -137,7 +137,7 @@ const FeedsCard = (props: IFeedsCard) => {
               fontWeight: 600,
             }}
           >
-            {props.eventCode.slice(0,12)}
+            {props?.eventCode?.slice(0,12)}
           </p>
           <H4 color="#F05E78" css={{ marginTop: "0.5rem" }}>
             {props.date}
@@ -201,7 +201,7 @@ const FeedsCard = (props: IFeedsCard) => {
           >
             Organized by
           </p>
-          <H4>{props.organizer}</H4>
+          {props.organizer?.map(each => (<H4>{props.organizer[0]}</H4>))}
         </Link>
       </div>
     </div>

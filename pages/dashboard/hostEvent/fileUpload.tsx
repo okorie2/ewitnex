@@ -16,7 +16,7 @@ import toast from 'react-hot-toast';
 
 const FileUpload = () => {
   const isTablet = useMediaQuery('(max-width: 780px)');
-  const [fileUploadData, setFileUploadData] = useState<IEventFiles>();
+  const [fileUploadData, setFileUploadData] = useState();
 
   useEffect(() => {
     setFileUploadData(
@@ -26,14 +26,14 @@ const FileUpload = () => {
   const addPDFRef = useRef<HTMLInputElement>(null);
   const addCoverImageRef = useRef<HTMLInputElement>(null);
 
-  const [formData, setFormData] = useState<IEventFiles>({
-    coverImage: undefined,
-    filePDF: undefined,
+  const [formData, setFormData] = useState({
+    coverPhoto: undefined,
+    program: undefined,
   });
 
-  useEffect(() => {
-    setFormData({ ...formData, ...fileUploadData });
-  }, [fileUploadData]);
+  // useEffect(() => {
+  //   setFormData({ ...formData, ...fileUploadData });
+  // }, [fileUploadData]);
 
   const handleAddPDFClick = () => {
     if (addPDFRef.current != null) {
@@ -48,7 +48,7 @@ const FileUpload = () => {
   const handlePDFFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const fileObj = event.target.files[0];
-      setFormData({ ...formData, filePDF: fileObj });
+      setFormData({ ...formData, program: fileObj });
       event.target.files = null;
     }
   };
@@ -58,7 +58,7 @@ const FileUpload = () => {
   ) => {
     if (event.target.files && event.target.files[0]) {
       const fileObj = event.target.files[0];
-      setFormData({ ...formData, coverImage: fileObj });
+      setFormData({ ...formData, coverPhoto: fileObj });
       event.target.files = null;
     }
   };
@@ -79,16 +79,16 @@ const FileUpload = () => {
   }, [eventID]);
 
   const handleNext = () => {
-    if (fileUploadData) {
-      router.push('/dashboard/hostEvent/eventLocation');
-    } else {
+    // if (fileUploadData) {
+    //   router.push('/dashboard/hostEvent/eventLocation');
+    // } else {
       dispatch(fileUpload({ eventID, formData })).then((res) => {
-        if (res.meta.requestStatus == 'fulfilled') {
-          localStorage.setItem('fileUploadData', JSON.stringify(formData));
+        if (res.meta.requestStatus === 'fulfilled') {
+          // localStorage.setItem('fileUploadData', JSON.stringify(formData));
           router.push('/dashboard/hostEvent/eventLocation');
         }
       });
-    }
+    // }
   };
 
   return (
@@ -219,9 +219,9 @@ const FileUpload = () => {
                     width={26.44}
                     height={30.85}
                   />
-                  {formData.filePDF ? (
+                  {formData.program ? (
                     <>
-                      <p css={{ fontSize: '1rem' }}>{formData.filePDF.name}</p>
+                      <p css={{ fontSize: '1rem' }}>{formData.program.name}</p>
                       <p>Click to change uploaded file</p>
                     </>
                   ) : (
@@ -348,10 +348,10 @@ const FileUpload = () => {
                     width={26.44}
                     height={30.85}
                   />
-                  {formData.coverImage ? (
+                  {formData.coverPhoto ? (
                     <>
                       <p css={{ fontSize: '1rem' }}>
-                        {formData.coverImage.name}
+                        {formData.coverPhoto.name}
                       </p>
                       <p>Click to change uploaded file</p>
                     </>

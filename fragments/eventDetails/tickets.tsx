@@ -17,7 +17,7 @@ const EventTickets = () => {
   const isTablet = useMediaQuery("(max-width: 900px)");
   const { id } = router.query;
 
-  const { loading, event } = useAppSelector(({ event }) => event);
+  const event = useAppSelector((state) => state.event.currentEvent);
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
     dispatch(getEventById(id?.toString() || ""));
@@ -59,44 +59,45 @@ const EventTickets = () => {
         {event.tickets && event.tickets.length > 0 ? (
           event.tickets?.map((ticket) => {
             return (
-              <div key={ticket._id}>
+              <div key={ticket.id}>
                 <EventTicket
-                  title={event.EventTitle}
+                  title={event.title}
                   eventID={id?.toString() || ""}
-                  label={event.category}
+                  label={event.category?.name}
                   date={
-                    `${dayjs(event.location?.startDate).toString()}
+                    `${dayjs(event?.startDate).toString()}
                   `.includes("Invalid")
                       ? "Date: TBD"
                       : `${
-                          dayjs(event.location?.startDate)
+                          dayjs(event?.startDate)
                             .toString()
                             .split(" ")[1]
                         }
                   ${
-                    dayjs(event.location?.startDate).toString().split(" ")[2]
+                    dayjs(event?.startDate).toString().split(" ")[2]
                   }.${
-                          dayjs(event.location?.startDate)
+                          dayjs(event?.startDate)
                             .toString()
                             .split(" ")[3]
                         },
-                  ${dayjs(event.location?.startDate).format("hh:mm A")}`
+                  ${dayjs(event?.startDate).format("hh:mm A")}`
                   }
                   location={
-                    event.location?.type === "live"
-                      ? event.location?.searchLocation ||
-                        event.location?.enterLocation
-                      : `${event.location?.selectHost}` === "undefined"
-                      ? "Venue: TBD"
-                      : `${event.location?.selectHost}`
+                    // event.location?.type === "live"
+                    //   ? event.location?.searchLocation ||
+                    //     event.location?.enterLocation
+                    //   : `${event.location?.selectHost}` === "undefined"
+                    //   ? "Venue: TBD"
+                    //   : `${event.location?.selectHost}`
+                    event?.address?.name
                   }
-                  type={ticket.ticketName}
+                  type={ticket.name}
                   price={
-                    ticket.ticketPrice === 0
+                    ticket.price === 0
                       ? "Free"
-                      : `N ${ticket.ticketPrice}`
+                      : `N ${ticket.price}`
                   }
-                  id={ticket._id}
+                  id={ticket.id}
                 />
               </div>
             );

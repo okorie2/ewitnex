@@ -9,7 +9,7 @@ import HostEventModal from "@/components/modals/hostEventModal";
 import { useMediaQuery } from "@mui/material";
 import AddTicketForm from "fragments/hostEvent/addTicketForm";
 import AddTicketModal from "@/components/modals/hostEventModal/addTicketModal";
-import { getEventById } from "redux/event/thunkAction";
+import { getEventById, addTicket, publishEvent } from "redux/event/thunkAction";
 import { useAppSelector, useAppThunkDispatch } from "redux/store";
 import Ticket from "@/components/cards/hostEventTicket";
 import toast from "react-hot-toast";
@@ -18,9 +18,14 @@ import { useRouter } from "next/router";
 const HostEventTickets = () => {
   const isTablet = useMediaQuery("(max-width: 780px)");
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppThunkDispatch();
+  const [formData, setFormData] = useState();
   const [addTicketModalOpen, setAddTicketModalOpen] = useState(false);
   const handleModalClose = () => {
     setIsOpen(false);
+  };
+    const handleFormChange = (updatedFormData) => {
+      setFormData(updatedFormData);
   };
   const newTicketRef = useRef<HTMLInputElement>(null);
   const [getTickets, setGetTickets] = useState(true);
@@ -62,7 +67,6 @@ const HostEventTickets = () => {
     calcTotalTickets();
   }, [tickets]);
 
-  const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ event }) => event);
   const [eventID, setEventID] = useState("");
   useEffect(() => {
@@ -91,11 +95,29 @@ const HostEventTickets = () => {
   },[eventID])
 
   const handleNext = () => {
-    localStorage.removeItem("createEventData");
-    localStorage.removeItem("eventLocationData");
-    sessionStorage.removeItem("performers");
-    sessionStorage.removeItem("tickets");
-    setIsOpen(true);
+    // localStorage.removeItem("createEventData");
+    // localStorage.removeItem("eventLocationData");
+    // sessionStorage.removeItem("performers");
+    // sessionStorage.removeItem("tickets");
+    console.log(formData)
+    dispatch(addTicket({eventID, formData})).then(res => {
+        if (res.meta.requestStatus == "fulfilled") {
+           dispatch(publishEvent(eventID)).then(res => {
+            if (res.meta.requestStatus == "fulfilled") {
+              router.push('/dashboard')
+            }
+        })
+      }
+    })
+    // dispatch(addTicket({eventID, formData}).then((res) => {
+    //     if (res.meta.requestStatus == "fulfilled") {
+    //       const data = JSON.parse(sessionStorage.getItem("tickets") || "{}");
+    //       let tickets = data;
+    //       setTickets(tickets);
+    //     }
+    //   }));
+    // };
+    // setIsOpen(true);
   };
   return (
     <>
@@ -179,6 +201,7 @@ const HostEventTickets = () => {
               <AddTicketForm
                 ticketRef={newTicketRef}
                 setGetTickets={setGetTickets}
+                onFormChange={handleFormChange}
               />
             )}
             <div

@@ -165,12 +165,12 @@ const EventLocation = () => {
       ...formData,
       startDate:
         new Date(formData.startDate) instanceof Date
-          ? new Date(formData.startDate).toISOString()
-          : new Date(formData.startDate),
+          ? new Date(formData.startDate)
+          : new Date(formData.startDate).toISOString(),
       endDate:
         new Date(formData.endDate) instanceof Date
-          ? new Date(formData.endDate).toISOString()
-          : new Date(formData.endDate),
+          ? new Date(formData.endDate)
+          : new Date(formData.endDate).toISOString(),
     });  
 
     localStorage.setItem('eventLocationData', JSON.stringify(formData));

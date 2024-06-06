@@ -16,23 +16,27 @@ const EventTab = () => {
   const activeTab = router.query?.tab || ('Details' as string | undefined);
   const loggedIn = router.pathname === '/dashboard/programs/[id]';
 
-  const stateEvents = useMemo(() => {
+  return (
+    <div css={{ position: 'relative' }}>
+      <div>
+        <StateEvents activeTab={activeTab} />
+      </div>
+      {/* {(activeTab === 'Details' || !loggedIn) && (
+        <AttenEventCTA link={`/events/Tec542445?tab=Tickets`} />
+      )} */}
+    </div>
+  );
+};
+
+export default EventTab;
+
+ const StateEvents = ({activeTab}) => {
     if (activeTab === 'Details') return <EventDetails />;
     else if (activeTab === 'Activities') return <EventActivities />;
     else if (activeTab === 'Conversations') return <EventMessages />;
     else if (activeTab === 'Tickets') return <EventTickets />;
     else if (activeTab === 'Performers') return <EventSpeakers />;
     else if (activeTab === 'RSVPs') return <RSVP />;
-  }, [activeTab]);
 
-  return (
-    <div css={{ position: 'relative' }}>
-      <div>{stateEvents}</div>
-      {(activeTab === 'Details' || !loggedIn) && (
-        <AttenEventCTA link={`/events/Tec542445?tab=Tickets`} />
-      )}
-    </div>
-  );
-};
-
-export default EventTab;
+    return <EventDetails tab={router} />
+  };

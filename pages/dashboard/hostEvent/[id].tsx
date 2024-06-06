@@ -12,11 +12,7 @@ import { nanoid } from 'nanoid';
 import { ICreateEvent, IEvent } from 'types/event';
 import { IUserDetails } from 'types/user';
 import { useRouter } from 'next/router';
-import {
-  createEvent,
-  getEventById,
-  updateEventProgram,
-} from 'redux/event/thunkAction';
+import { getEventById, updateEventProgram } from 'redux/event/thunkAction';
 import { TailSpin } from 'react-loader-spinner';
 import { useAppSelector, useAppThunkDispatch } from 'redux/store';
 import _ from 'lodash';
@@ -144,7 +140,7 @@ const HostEvent = () => {
   };
 
   const dispatch = useAppThunkDispatch();
-  const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
+  const { loading } = useAppSelector(({ event }) => event);
 
   // useEffect(() => {
   //   if (_event) {
@@ -167,17 +163,14 @@ const HostEvent = () => {
     // console.log(router.query.id);
     //   if (_event) {
 
-    dispatch(updateEventProgram({ formData, eventId: router.query?.id }));
-    // .then(
-    //   (res) => {
-    //     if (res.meta.requestStatus == 'fulfilled') {
-    //       console.log(res)
-    //       // localStorage.setItem('createEventData', JSON.stringify(formData));
-    //       // localStorage.setItem('currenteventID', eventID);
-    //       // router.push('/dashboard/hostEvent/fileUpload');
-    //     }
-    //   }
-    // ))
+    dispatch(updateEventProgram({ formData, eventId: router.query?.id })).then(
+      (res) => {
+        if (res.meta.requestStatus == 'fulfilled') {         
+          localStorage.setItem('currenteventID', router.query?.id);
+          router.push('/dashboard/hostEvent/fileUpload');
+        }
+      }
+    );
 
     //     dispatch(updateEvent({ eventId: eventID, formData: _event })).then(
     //       (res) => {

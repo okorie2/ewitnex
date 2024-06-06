@@ -40,28 +40,18 @@ const DashboardPrograms = () => {
     setFilterSectionOpen(!filterSectionOpen);
   };
 
-  const ticketRange = (event: IEvent) => {
-    const tickets = event.tickets;
-    const ticketPriceArray: number[] = [];
+  const ticketRange = (prices) => {
+    const priceArr = prices.replace(/[NGN]/g, '').split('-');    
 
-    if (tickets && tickets.length < 1) {
-      return 'Free';
-    } else {
-      if (tickets && tickets.length === 1)
-        return `$${formatNumber(tickets[0].ticketPrice)}`;
-      tickets &&
-        tickets.map((ticket) => {
-          ticketPriceArray.push(ticket.ticketPrice);
-        });
-      ticketPriceArray.sort((a, b) => a - b);
-      return `${
-        ticketPriceArray[0] === 0
-          ? 'Free'
-          : `$${formatNumber(ticketPriceArray[0])}`
-      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
-    }
+    if(priceArr[0] === priceArr[1]){
+      if(priceArr[0] === 0) return 'Free';          
+      return `#${formatNumber(priceArr[0])}`;
+    }else{
+      return `#${formatNumber(priceArr[0])}`
+      - `#${formatNumber(priceArr[priceArr.length - 1])}`
+    }    
   };
-
+  
   const { loading, events } = useAppSelector(({ event }) => event);
   const [onlineEvents, setOnlineEvents] = useState<IEvent[] | []>([]);
   useEffect(() => {
@@ -479,43 +469,36 @@ const DashboardPrograms = () => {
                   events.map((event: IEvent, index) => (
                     <div key={index}>
                       <DashboardEventCard
-                        label={event.category}
-                        attendees='0'
-                        date={
-                          `${dayjs(
-                            event.location?.startDate
-                          ).toString()}`.includes('Invalid')
-                            ? 'Date: TBD'
-                            : `${
-                                dayjs(event.location?.startDate)
-                                  .toString()
-                                  .split(' ')[1]
-                              } ${
-                                dayjs(event.location?.startDate)
-                                  .toString()
-                                  .split(' ')[2]
-                              }. ${
-                                dayjs(event.location?.startDate)
-                                  .toString()
-                                  .split(' ')[3]
-                              },  ${dayjs(event.location?.startDate).format(
-                                'hh:mm A'
-                              )}`
-                        }
-                        id={event?._id}
-                        eventCode={event?.eventCode}
-                        location={
-                          event.location?.type === 'live'
-                            ? event.location?.searchLocation ||
-                              event.location?.enterLocation
-                            : `${event.location?.selectHost}` === 'undefined'
-                            ? 'Venue: TBD'
-                            : `${event.location?.selectHost}`
-                        }
-                        organizer={getOrganizer(event.OrganizedBy)}
-                        priceRange={ticketRange(event)}
+                        label={event.eventType}
+                        attendees={event.attendanceCount}
+                         date={
+                            `${dayjs(
+                              event?.startDate
+                            ).toString()}`.includes('Invalid')
+                              ? 'Date: TBD'
+                              : `${
+                                  dayjs(event?.startDate)
+                                    .toString()
+                                    .split(' ')[1]
+                                } ${
+                                  dayjs(event?.startDate)
+                                    .toString()
+                                    .split(' ')[2]
+                                }. ${
+                                  dayjs(event?.startDate)
+                                    .toString()
+                                    .split(' ')[3]
+                                },  ${dayjs(event?.startDate).format(
+                                  'hh:mm A'
+                                )}`
+                          }
+                        id={event?.id}
+                        eventCode={event?.eventId}
+                       location={event.location}
+                        organizer={event.organizers}
+                        priceRange={ticketRange(event.priceRange)}
                         title={event.EventTitle}
-                        img='/assets/pngs/card_2.png'
+                        img={event.coverPhotoUrl}
                       />
                     </div>
                   ))}

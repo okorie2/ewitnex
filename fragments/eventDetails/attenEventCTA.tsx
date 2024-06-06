@@ -9,27 +9,40 @@ import { formatNumber } from 'utitlities/commonHelpers/numberFormatter';
 
 const AttenEventCTA = ({ link }: { link: string }) => {
   const { event } = useAppSelector(({ event }) => event);
-  const ticketRange = (event: IEvent) => {
-    const tickets = event.tickets;
-    const ticketPriceArray: number[] = [];
+  // const ticketRange = (event: IEvent) => {
+  //   const tickets = event.tickets;
+  //   const ticketPriceArray: number[] = [];
 
-    if (tickets && tickets.length < 1) {
-      return 'Free';
+  //   if (tickets && tickets.length < 1) {
+  //     return 'Free';
+  //   } else {
+  //     if (tickets && tickets.length === 1)
+  //       return `$${formatNumber(tickets[0].ticketPrice)}`;
+  //     tickets &&
+  //       tickets.map((ticket) => {
+  //         ticketPriceArray.push(ticket.ticketPrice);
+  //       });
+  //     ticketPriceArray.sort((a, b) => a - b);
+  //     return `${
+  //       ticketPriceArray[0] === 0
+  //         ? 'Free'
+  //         : `$${formatNumber(ticketPriceArray[0])}`
+  //     } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+  //   }
+  // };
+
+    const ticketRange = (prices) => {
+    const priceArr = prices.replace(/[NGN]/g, '').split('-');
+
+    if (priceArr[0] === priceArr[1]) {
+      if (priceArr[0] === 0) return 'Free';
+      return `#${formatNumber(priceArr[0])}`;
     } else {
-      if (tickets && tickets.length === 1)
-        return `$${formatNumber(tickets[0].ticketPrice)}`;
-      tickets &&
-        tickets.map((ticket) => {
-          ticketPriceArray.push(ticket.ticketPrice);
-        });
-      ticketPriceArray.sort((a, b) => a - b);
-      return `${
-        ticketPriceArray[0] === 0
-          ? 'Free'
-          : `$${formatNumber(ticketPriceArray[0])}`
-      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+      return (
+        `#${formatNumber(priceArr[0])}` -
+        `#${formatNumber(priceArr[priceArr.length - 1])}`
+      );
     }
-  };
   return (
     <div
       css={{
@@ -53,7 +66,7 @@ const AttenEventCTA = ({ link }: { link: string }) => {
           gap: '1.2rem',
         }}
       >
-        <p css={{ color: '#000', fontWeight: 'bold' }}>{ticketRange(event)}</p>
+        <p css={{ color: '#000', fontWeight: 'bold' }}>{ticketRange(event.priceRange)}</p>
         <Link href={link}>
           <ButtonFormFilled css={{ width: '172px' }}>
             ATTEND EVENT

@@ -15,7 +15,7 @@ const HomeHero = () => {
 
   return (
     <React.Fragment>
-      <div
+      {/* <div
         css={{
           height: '27rem',
           backgroundColor: '#7C35AB',
@@ -42,7 +42,7 @@ const HomeHero = () => {
             }}
           />
         </div>
-      </div>
+      </div> */}
       <div
         css={{
           height: isTablet ? '585px' : '474px',
@@ -140,11 +140,18 @@ const HomeHero = () => {
             {!isTablet && <br />} technology meets community, and events become
             unforgettable.
           </p>
-          <Link href='/auth/signup' style={{ width: '13rem' }}>
+          <Link href='/auth/signup'>
             <Button
               css={{
                 width: '13rem',
-                [screen.desktop]: { width: '12rem' },
+                [screen.desktop]: { width: '12rem', marginTop: 0 },
+                [screen.mobile]: {
+                  width: 'max-content',
+                  padding: '.7rem 1.2rem',
+                  marginTop: '1rem',
+                  height: 'max-content',
+                  fontSize: '1rem',
+                },
               }}
             >
               Get Started

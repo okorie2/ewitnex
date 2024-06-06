@@ -12,13 +12,13 @@ import UpdateSpeakerModal from '../modals/hostEventModal/updateSpeakerModal';
 const Performer = (props: IPerformer) => {
   const [eventId, setEventId] = useState('');
   const router = useRouter();
-  const { event } = useAppSelector(({ event }) => event);
+  const event = useAppSelector((state) => state.event.currentEvent);
 
   useEffect(() => {
     if (router.pathname.includes('hostEvent')) {
       setEventId(localStorage.getItem('currenteventID') || '');
     } else {
-      setEventId(event._id || '');
+      setEventId(event.id || '');
     }
   }, [event]);
   const [user, setUser] = useState<IUserDetails>();
@@ -34,7 +34,7 @@ const Performer = (props: IPerformer) => {
   const dispatch = useAppThunkDispatch();
   const deletePerformerFunc = () => {
     dispatch(
-      deletePerformer({ eventId: event._id, performerId: props.id })
+      deletePerformer({ eventId: event.id, performerId: props.id })
     ).then((res) => {
       if (res.meta.requestStatus == 'fulfilled') {
         dispatch(getEventById(eventId));
@@ -98,7 +98,7 @@ const Performer = (props: IPerformer) => {
         {router.pathname.includes('speakers') ? (
           <>
             {(event.OrganizedBy ||
-              createEventData?.organizedBy === user?._id) && (
+              createEventData?.organizedBy === user?.id) && (
               <div
                 css={{ display: 'flex', gap: '1.8rem', marginTop: '0.5rem' }}
               >

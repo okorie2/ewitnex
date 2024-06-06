@@ -14,44 +14,82 @@ const AddTicketForm = ({
   ticketRef,
   setGetTickets,
   handleModalClose,
+  onFormChange
 }: {
   ticketRef: RefObject<HTMLInputElement>;
   setGetTickets: React.Dispatch<React.SetStateAction<boolean>>;
   handleModalClose?: () => void;
+  onFormChange?: (formData) => void
 }) => {
-  const [ticketType, setTicketType] = useState('Paid');
+  const [type, setTicketType] = useState('Paid');
   const isTablet = useMediaQuery('(max-width: 780px)');
   const [newTicketRef, setNewTicketRef] = useState(ticketRef);
   const [formData, setFormData] = useState<IReqTicket>({
-    tickets: [
-      {
-        ticketType: '',
-        ticketName: '',
-        ticketPrice: 0,
-        ticketQty: 0,
-        ticketHandle: '',
-        ticketRefund: '',
-      },
-    ],
+        type: '',
+        name: '',
+        price: 0,
+        quantity: 0,
+        feeBearer: '',
+        isRefundable: '',
   });
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
       | SelectChangeEvent
   ) => {
-    const { name, value } = e.target;
-    setFormData({
+    const { name, value } = e.target;         
+      if(name == "quantity")  {
+         setFormData({
       ...formData,
-      tickets: [{ ...formData.tickets[0], [name]: value }],
-    });
+      [name]: Number(value)
+    });    
+         onFormChange({
+      ...formData,
+      [name]: Number(value)
+    })
+  } else if(name == "price") { 
+     setFormData({
+      ...formData,
+      [name]: Number(value)
+    });    
+       onFormChange({
+      ...formData,
+      [name]: Number(value)
+    })} else{
+       setFormData({
+      ...formData,
+      [name]: value
+    });    
+
+ onFormChange({
+      ...formData,
+      [name]: value 
+    })
+    }
+
+          
+  //   if(name === "isRefundable"){  
+  //   onFormChange({
+  //     ...formData,
+  //     isRefundable: value === "Yes, ticket is refundable",
+  //     [name]: value,
+  //   })
+  // } else if(name === "feeBearer"){    
+  //     onFormChange({
+  //     ...formData,
+  //      feeBearer: value === "i want to pass the fees to the attendees" ? "Attendee" : "Owner",
+  //     [name]: value,
+  //   })    
+  //   } else{
+    // }      
   };
 
   useEffect(() => {
     setFormData({
       ...formData,
-      tickets: [{ ...formData.tickets[0], ticketType: ticketType }],
+      type: type,
     });
-  }, [ticketType]);
+  }, [type]);
 
   const dispatch = useAppThunkDispatch();
   const { loading } = useAppSelector(({ hostEvent }) => hostEvent);
@@ -65,16 +103,15 @@ const AddTicketForm = ({
     dispatch(addTicket({ eventID, formData })).then((res) => {
       if (res.meta.requestStatus == 'fulfilled') {
         setFormData({
-          tickets: [
-            {
-              ticketType: '',
-              ticketName: '',
-              ticketPrice: 0,
-              ticketQty: 0,
-              ticketHandle: '',
-              ticketRefund: '',
+          tickets: {
+              type: '',
+              name: '',
+              price: 0,
+              quantity: 0,
+              feeBearer: '',
+              isRefundable: '',
             },
-          ],
+          
         });
         setGetTickets((prevState: boolean) => !prevState);
         if (newTicketRef.current != null) {
@@ -130,10 +167,10 @@ const AddTicketForm = ({
             gap: '0.75rem',
             width: isTablet ? '100px' : '110px',
             height: '50px',
-            background: ticketType === 'Paid' ? '#7C35AB21 ' : '',
+            background: type === 'Paid' ? '#7C35AB21 ' : '',
             border:
-              ticketType === 'Paid' ? '1px solid #7C35AB' : '1px solid #AEAEAE',
-            color: ticketType === 'Paid' ? '#7C35AB' : '#AEAEAE',
+              type === 'Paid' ? '1px solid #7C35AB' : '1px solid #AEAEAE',
+            color: type === 'Paid' ? '#7C35AB' : '#AEAEAE',
             borderRadius: '8px',
             cursor: 'pointer',
           }}
@@ -149,10 +186,10 @@ const AddTicketForm = ({
             gap: '0.75rem',
             width: isTablet ? '100px' : '110px',
             height: '50px',
-            background: ticketType === 'Free' ? '#7C35AB21 ' : '',
+            background: type === 'Free' ? '#7C35AB21 ' : '',
             border:
-              ticketType === 'Free' ? '1px solid #7C35AB' : '1px solid #AEAEAE',
-            color: ticketType === 'Free' ? '#7C35AB' : '#AEAEAE',
+              type === 'Free' ? '1px solid #7C35AB' : '1px solid #AEAEAE',
+            color: type === 'Free' ? '#7C35AB' : '#AEAEAE',
             borderRadius: '8px',
             cursor: 'pointer',
           }}
@@ -168,12 +205,12 @@ const AddTicketForm = ({
             gap: '0.75rem',
             width: isTablet ? '100px' : '110px',
             height: '50px',
-            background: ticketType === 'Donation' ? '#7C35AB21 ' : '',
+            background: type === 'Donation' ? '#7C35AB21 ' : '',
             border:
-              ticketType === 'Donation'
+              type === 'Donation'
                 ? '1px solid #7C35AB'
                 : '1px solid #AEAEAE',
-            color: ticketType === 'Donation' ? '#7C35AB' : '#AEAEAE',
+            color: type === 'Donation' ? '#7C35AB' : '#AEAEAE',
             borderRadius: '8px',
             cursor: 'pointer',
           }}
@@ -187,9 +224,9 @@ const AddTicketForm = ({
           label=''
           placeholder='Name ticket e.g VIP'
           type='text'
-          name={'ticketName'}
+          name={'name'}
           ref={newTicketRef}
-          value={formData.tickets[0].ticketName}
+          value={formData.name}
           setValue={handleChange}
         />
       </div>
@@ -217,14 +254,14 @@ const AddTicketForm = ({
             type='text'
             placeholder='Price (NGN)'
             value={
-              formData.tickets[0].ticketPrice === 0
+              formData.price === 0
                 ? ''
-                : formData.tickets[0].ticketPrice
+                : formData.price
             }
-            name='ticketPrice'
+            name='price'
             onChange={handleChange}
             inputMode='numeric'
-            disabled={ticketType !== 'Paid'}
+            disabled={type !== 'Paid'}
             css={{
               height: '3.3rem',
               width: '90%',
@@ -248,13 +285,13 @@ const AddTicketForm = ({
         >
           <p>Fee (NGN)</p>
           <p>
-            N{ticketType === 'Paid' ? 300 : ticketType === 'Donation' ? 100 : 0}
+            N{type === 'Paid' ? 300 : type === 'Donation' ? 100 : 0}
           </p>
         </div>
       </div>
       <p css={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
         You will be charged N
-        {ticketType === 'Paid' ? 300 : ticketType === 'Donation' ? 100 : 0} + 3%
+        {type === 'Paid' ? 300 : type === 'Donation' ? 100 : 0} + 3%
         ticket service fee and 3% payment processing fee of the price inputed
         per ticket sold to attendees
       </p>
@@ -262,11 +299,11 @@ const AddTicketForm = ({
         label=''
         placeholder='Enter ticket quantity'
         type='text'
-        name='ticketQty'
+        name='quantity'
         value={
-          formData.tickets[0].ticketQty === 0
+          formData.quantity === 0
             ? ''
-            : formData.tickets[0].ticketQty
+            : formData.quantity
         }
         setValue={handleChange}
       />
@@ -274,15 +311,15 @@ const AddTicketForm = ({
         label='Who want to handle the fee?'
         placeholder='pass'
         type='select'
-        name='ticketHandle'
+        name='feeBearer'
         options={[
           {
-            value: 'i want to pass the fees to the attendees',
+            value: 'attendee',
             label: 'I want to pass the fees to the attendees',
           },
-          { value: 'absorb', label: 'I want to absorb the fees' },
+          { value: 'owner', label: 'I want to absorb the fees' },
         ]}
-        value={formData.tickets[0].ticketHandle}
+        value={formData.feeBearer}
         setValue={handleChange}
       />
       <div>
@@ -292,16 +329,16 @@ const AddTicketForm = ({
           type='select'
           options={[
             {
-              value: 'Yes, ticket is refundable',
+              value: true,
               label: 'Yes, ticket is refundable',
             },
             {
-              value: 'No, ticket is non-refundable',
+              value: false,
               label: 'No, ticket is non-refundable',
             },
           ]}
-          value={formData.tickets[0].ticketRefund}
-          name='ticketRefund'
+          value={formData.isRefundable}
+          name='isRefundable'
           setValue={handleChange}
         />
         <p css={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>

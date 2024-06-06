@@ -6,6 +6,7 @@ import {
   deletePerformer,
   eventLocation,
   fileUpload,
+  publishEvent
 } from "./thunkAction";
 import { ICreateEvent, IEventFiles, IEventLocation } from "types/event";
 
@@ -93,11 +94,12 @@ const hostEventSlice = createSlice({
         state.loading = { status: "loading" }
       })
 
-      .addCase(addPerformer.fulfilled, (state: any) => {
+      .addCase(addPerformer.fulfilled, (state: any, action: any) => {
         return {
           ...state, loading: {
             status: "successful"
-          }
+          },
+          data: action.payload
         };
       })
 
@@ -125,15 +127,33 @@ const hostEventSlice = createSlice({
         state.loading = { status: "loading" }
       })
 
-      .addCase(addTicket.fulfilled, (state: any) => {
+      .addCase(addTicket.fulfilled, (state: any, action: any) => {
         return {
           ...state, loading: {
             status: "successful"
-          }
+          },
+          data: action.payload
         };
       })
 
       .addCase(addTicket.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
+
+       .addCase(publishEvent.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
+
+      .addCase(publishEvent.fulfilled, (state: any, action: any) => {
+        return {
+          ...state, loading: {
+            status: "successful"
+          },
+          data: action.payload
+        };
+      })
+
+      .addCase(publishEvent.rejected, (state: any, action: any) => {
         state.loading = { status: "failed", error: action.payload.message }
       })
   }

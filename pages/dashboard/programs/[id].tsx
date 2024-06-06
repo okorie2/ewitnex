@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { eventNav } from 'fragments/eventDetails/event.data';
-import EventTab from './[tab]';
+import EventTab from './[...id].tsx';
 import DashboardLayout from 'pages/dashboard/layout/layout';
 import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
@@ -18,11 +18,18 @@ const SingleEvent = () => {
   const activeTab = router.query?.tab || ('Details' as string | undefined);
   const isTablet = useMediaQuery('(max-width: 780px)');
 
-  const { loading, event } = useAppSelector(({ event }) => event);
+  const currentEvent = useAppSelector((state) => state.event.currentEvent);
   const dispatch = useAppThunkDispatch();
+
   useEffect(() => {
-    dispatch(getEventById(id?.toString() || ''));
-  }, [id]);
+    if (id) {
+      dispatch(getEventById(id as string)).then((res) => {
+        console.log('Thunk response:', res);
+      });
+      console.log('Current Event after dispatch:', currentEvent);
+      console.log('Event ID:', id);
+    }
+  }, [id, dispatch]);
 
   return (
     <DashboardLayout>
@@ -57,19 +64,19 @@ const SingleEvent = () => {
               />
             </Link>
             <h3 css={{ fontWeight: 'bold', width: isTablet ? '80%' : '' }}>
-              {event.EventTitle || ''}
+              {currentEvent?.EventTitle || ''}
             </h3>
           </div>
-          {!isTablet && (
+          {!isTablet && currentEvent?.coverPhotoUrl && (
             <div css={{ display: 'flex', alignItems: 'center', gap: '0.7rem' }}>
               <Image
-                src='/assets/svgs/plus.svg'
+                src={currentEvent.coverPhotoUrl}
                 alt=''
                 width={41}
                 height={41}
               />
               <p css={{ fontWeight: 'bold', fontSize: '1.125rem' }}>
-                witness this event
+                Witness this event
               </p>
             </div>
           )}
@@ -128,7 +135,7 @@ const SingleEvent = () => {
               },
             }}
           >
-            <EventTab />
+            {currentEvent?.id ? <EventTab /> : null}
           </div>
         </div>
       </div>

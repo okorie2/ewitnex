@@ -14,7 +14,7 @@ const EventSpeakers = () => {
   const isTablet = useMediaQuery("(max-width: 900px)");
   const { id } = router.query;
 
-  const { loading, event } = useAppSelector(({ event }) => event);
+  const { loading, currentEvent: event } = useAppSelector(({ event }) => event);
   const dispatch = useAppThunkDispatch();
   useEffect(() => {
     dispatch(getEventById(id?.toString() || ""));
@@ -47,7 +47,7 @@ const EventSpeakers = () => {
       {event.performers && event.performers.length > 0 ? (
         event.performers?.map((performer) => {
           return (
-            <div key={performer._id}>
+            <div key={performer.id}>
               <div
                 css={{
                   width: "185px",
@@ -56,11 +56,11 @@ const EventSpeakers = () => {
                   position: "relative",
                 }}
               >
-                <Image src={performer.performerImage || ""} alt="speaker-img" fill />
+                <Image src={performer.imageUrl || ""} alt="speaker-img" fill />
               </div>
               <div css={{ marginTop: "0.7rem" }}>
                 <h4 css={{ fontSize: "1rem", fontWeight: "700" }}>
-                  {performer.nameOfPerformer}
+                  {performer.name}
                 </h4>
                 <div
                   css={{
@@ -71,7 +71,7 @@ const EventSpeakers = () => {
                     alignItems: "center",
                   }}
                 >
-                  <p>{performer.performerTitle}</p>
+                  <p>{performer.title}</p>
                   <div
                     css={{
                       background: "#000",
@@ -81,7 +81,7 @@ const EventSpeakers = () => {
                       marginInline: "0.4rem",
                     }}
                   ></div>
-                  <p css={{ fontWeight: "400" }}>{performer.performerRole}</p>
+                  <p css={{ fontWeight: "400" }}>{performer.role}</p>
                 </div>
               </div>
               <p
@@ -91,7 +91,7 @@ const EventSpeakers = () => {
                   fontSize: "0.875rem",
                 }}
               >
-                {performer.aboutPerformer}
+                {performer.about}
               </p>
               <hr
                 css={{

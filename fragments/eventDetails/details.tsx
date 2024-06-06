@@ -41,32 +41,25 @@ const EventDetails = () => {
   }, [mobileModalOpen]);
   const { id } = router.query;
 
-  const { loading, event } = useAppSelector(({ event }) => event);
-  // const dispatch = useAppThunkDispatch();
+  const event = useAppSelector((state) => state.event.currentEvent);
+  const dispatch = useAppThunkDispatch();
   // useEffect(() => {
   //   console.log(id);
-  //   dispatch(getEventById(id?.toString() || ""));
+  //   dispatch(getEventById(id));
   // }, [id]);
+  console.log(event)
 
-  const ticketRange = (event: IEvent) => {
-    const tickets = event.tickets;
-    const ticketPriceArray: number[] = [];
+  const ticketRange = (prices) => {
+    const priceArr = prices.replace(/[NGN]/g, '').split('-');
 
-    if (tickets && tickets.length < 1) {
-      return 'Free';
+    if (priceArr[0] === priceArr[1]) {
+      if (priceArr[0] === 0) return 'Free';
+      return `#${formatNumber(priceArr[0])}`;
     } else {
-      if (tickets && tickets.length === 1)
-        return `$${formatNumber(tickets[0].ticketPrice)}`;
-      tickets &&
-        tickets.map((ticket) => {
-          ticketPriceArray.push(ticket.ticketPrice);
-        });
-      ticketPriceArray.sort((a, b) => a - b);
-      return `${
-        ticketPriceArray[0] === 0
-          ? 'Free'
-          : `$${formatNumber(ticketPriceArray[0])}`
-      } - $${formatNumber(ticketPriceArray[ticketPriceArray.length - 1])}`;
+      return (
+        `#${formatNumber(priceArr[0])}` -
+        `#${formatNumber(priceArr[priceArr.length - 1])}`
+      );
     }
   };
 
@@ -103,7 +96,7 @@ const EventDetails = () => {
         <ReportEventModal
           isOpen={reportEventModalOpen}
           onRequestClose={() => setReportEventModalOpen(!reportEventModalOpen)}
-          eventID={event._id}
+          eventID={event.id}
         />
       )}
       <div css={{ width: '100%', height: '394px', position: 'relative' }}>
@@ -130,7 +123,7 @@ const EventDetails = () => {
               paddingInline: '0.5rem',
             }}
           >
-            {event.category}
+            {event?.category?.name}
           </div>
         </div>
         <div
@@ -241,7 +234,7 @@ const EventDetails = () => {
           )}
         </div>
         <Image
-          src='/assets/pngs/card_2.png'
+          src={event.coverPhotoUrl}
           alt='header-img'
           css={{
             borderRadius: '10px 10px 0 0',
@@ -323,7 +316,7 @@ const EventDetails = () => {
               marginTop: isTablet ? '10rem' : '',
             }}
           >
-            {event.EventTitle || ''}
+            {event?.title || ''}
           </h1>
           <div css={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <p
@@ -333,7 +326,7 @@ const EventDetails = () => {
                 fontWeight: '600',
               }}
             >
-              {event.eventCode}
+              {event.eventId}
             </p>
             <Image src='/assets/svgs/copy.svg' alt='' width={24} height={24} />
           </div>
@@ -349,7 +342,7 @@ const EventDetails = () => {
           >
             <div>
               <EventCountdown
-                date={`${dayjs(event.location?.startDate)
+                date={`${dayjs(event?.startDate)
                   .toString()
                   .split(' ')
                   .slice(0, -1)
@@ -385,22 +378,14 @@ const EventDetails = () => {
                   }}
                 >
                   <>
-                    {`${dayjs(event.location?.startDate).toString()}
+                    {`${dayjs(event?.startDate).toString()}
                     `.includes('Invalid')
                       ? 'Date: TBD'
-                      : `${
-                          dayjs(event.location?.startDate)
-                            .toString()
-                            .split(' ')[1]
-                        }
-                    ${
-                      dayjs(event.location?.startDate).toString().split(' ')[2]
-                    }.${
-                          dayjs(event.location?.startDate)
-                            .toString()
-                            .split(' ')[3]
+                      : `${dayjs(event?.startDate).toString().split(' ')[1]}
+                    ${dayjs(event?.startDate).toString().split(' ')[2]}.${
+                          dayjs(event?.startDate).toString().split(' ')[3]
                         },
-                    ${dayjs(event.location?.startDate).format('hh:mm A')}`}
+                    ${dayjs(event?.startDate).format('hh:mm A')}`}
                   </>
                 </p>
               </div>
@@ -432,15 +417,10 @@ const EventDetails = () => {
                     fontWeight: '600',
                   }}
                 >
-                  {event.location?.type === 'live'
-                    ? event.location?.searchLocation ||
-                      event.location?.enterLocation
-                    : `${event.location?.selectHost}` === 'undefined'
-                    ? 'Venue: TBD'
-                    : `${event.location?.selectHost}`}
+                  {event?.address?.name}
                 </p>
                 <p css={{ fontSize: '0.875rem' }}>
-                  {event.location?.hostUrl && event.location?.hostUrl}
+                  {/* {event.location?.hostUrl && event.location?.hostUrl} */}
                 </p>
               </div>
             </div>
@@ -466,7 +446,9 @@ const EventDetails = () => {
                     width={25.5}
                     height={21.6}
                   />
-                  <p css={{ color: '#707070' }}>{ticketRange(event)}</p>
+                  <p css={{ color: '#707070' }}>
+                    {ticketRange(event?.priceRange)}
+                  </p>
                 </div>
                 <div
                   css={{
@@ -481,7 +463,9 @@ const EventDetails = () => {
                     width={24}
                     height={24}
                   />
-                  <p css={{ color: '#707070' }}>0 Attending</p>
+                  <p css={{ color: '#707070' }}>
+                    {event.attendanceCount} Attending
+                  </p>
                 </div>
               </div>
               <div
@@ -500,14 +484,14 @@ const EventDetails = () => {
                   }}
                 >
                   <p css={{ color: '#707070' }}>Organized by</p>
-                  <p
+                  {event.organizers?.map(each => <p
                     css={{
                       fontSize: '1.125rem',
                       fontWeight: '600',
                     }}
                   >
-                    {event.OrganizedBy && getOrganizer(event.OrganizedBy)}
-                  </p>
+                    {each.firstName}
+                  </p>)}
                 </div>
                 <button
                   type='button'
@@ -579,7 +563,7 @@ const EventDetails = () => {
                 fontSize: isTablet ? '0.85rem' : '0.875rem',
               }}
             >
-              {event.description}
+              {event.about}
             </p>
           </div>
         </div>
@@ -611,13 +595,13 @@ const EventDetails = () => {
             {event.performers && event.performers.length > 0 ? (
               event.performers?.map((performer) => {
                 return (
-                  <div key={performer._id}>
+                  <div key={performer.id}>
                     <Performer
-                      name={performer.nameOfPerformer}
-                      title={performer.performerTitle}
-                      role={performer.performerRole}
-                      img={performer.performerImage}
-                      id={performer._id}
+                      name={performer.name}
+                      title={performer.title}
+                      role={performer.role}
+                      img={performer.imageUrl}
+                      id={performer.id}
                     />
                   </div>
                 );
