@@ -142,6 +142,7 @@ const Waitlist = () => {
               [screen.tablet]: { width: "16rem", fontSize: "1rem" },
               [screen.mobile]: { width: "13rem", fontSize: ".8rem" },
             }}
+            disabled={loading === "loading" || email.length === 0}
             onClick={() => {
               handleSubmit();
             }}

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
+import { config } from '../config/api';
 import Navbar from 'components/header';
 
 import Waitlist from 'fragments/waitlist';
@@ -37,34 +38,35 @@ export default function Home() {
         'Explore a curated collection of exceptional gatherings that promise unforgettable experiences and create lasting memories.',
     },
   ];
+
+  const EventsFragment = ({ fragmentNumber }: { fragmentNumber: number }) => {
+    return config.production ? (
+      <EventsAroundYouFragment
+        title={fragments[fragmentNumber].title}
+        description={fragments[fragmentNumber].description}
+      />
+    ) : null;
+  };
+
   return (
     <>
       <Navbar />
       {/* <HomeSlide /> */}
-      <Waitlist />
+      {!config.production ? <Waitlist />: null}
       <HomeHero />
       <FindEventFragment />
-      <EventsAroundYouFragment
-        title={fragments[0].title}
-        description={fragments[0].description}
-      />
+      <EventsFragment fragmentNumber={0} />
       <WhyUseEwitnexFragment />
-      <EventsAroundYouFragment
-        title={fragments[1].title}
-        description={fragments[1].description}
-      />
+      <EventsFragment fragmentNumber={1} />
       <DontSpectateFragment />
-      <EventsAroundYouFragment
-        title={fragments[2].title}
-        description={fragments[2].description}
-      />
+      <EventsFragment fragmentNumber={2} />
       <SimplifyTicketFragment />
       <DiscoverVenueFragment />
       <FindVendorsFragment />
       <AsAnAttendeeFragment />
       <SaveTreesFragment />
       <AsAnOrganizerFragment />
-      <JoinRevolutionFragment />
+      {config.production ? <JoinRevolutionFragment /> : null}
       <Lines />
       <PublicSiteFooter />
     </>

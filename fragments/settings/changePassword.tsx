@@ -1,37 +1,38 @@
 /** @jsxImportSource @emotion/react */
 
-import { SettingsPasswordTextField } from "@/components/inputs/SettingsInput";
-import SuccessModal from "@/components/modals/settingsModal/successModal";
-import React, { FormEvent, useEffect, useState } from "react";
-import { useMediaQuery } from "@mui/material";
-import { Button } from "styles/components/button";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useAppSelector, useAppThunkDispatch } from "redux/store";
-import { updatePassword } from "redux/settings/thunkAction";
+import { SettingsPasswordTextField } from '@/components/inputs/SettingsInput';
+import SuccessModal from '@/components/modals/settingsModal/successModal';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { useMediaQuery } from '@mui/material';
+import { Button } from 'styles/components/button';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useAppSelector, useAppThunkDispatch } from 'redux/store';
+import { updatePassword } from 'redux/settings/thunkAction';
+import { TailSpin } from 'react-loader-spinner';
 
 export type IUpdatePassword = {
-  oldPassword: string;
   newPassword: string;
   confirmPassword: string;
 };
 
 const ChangePassword = () => {
-  const isTablet = useMediaQuery("(max-width: 780px)");
+  const isTablet = useMediaQuery('(max-width: 780px)');
   const [success, setSuccess] = useState(false);
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [passwordValid, setPasswordValid] = useState(true);
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [formDetails, setFormDetails] = useState<IUpdatePassword>({
-    oldPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    newPassword: '',
+    confirmPassword: '',
   });
-  const { loading } = useAppSelector(({ updatePassword }) => updatePassword);
+  const { loading, error }: { loading: string; error: any } = useAppSelector(
+    ({ updatePassword }) => updatePassword
+  );
   const dispatch = useAppThunkDispatch();
   const validatePassword = (password: string) => {
     const passwordPattern =
@@ -45,7 +46,10 @@ const ChangePassword = () => {
 
   useEffect(() => {
     setPasswordMatch(
-      validatePasswordMatch(formDetails.newPassword, formDetails.confirmPassword)
+      validatePasswordMatch(
+        formDetails.newPassword,
+        formDetails.confirmPassword
+      )
     );
   }, [formDetails.confirmPassword]);
 
@@ -56,32 +60,39 @@ const ChangePassword = () => {
   }, [formDetails.newPassword]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage("")
+    setMessage('');
     const { name, value } = e.target;
     setFormDetails({ ...formDetails, [name]: value });
   };
 
   const handleNext = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.removeItem("error");
+    localStorage.removeItem('error');
     setPasswordMatch(
-      validatePasswordMatch(formDetails.newPassword, formDetails.confirmPassword)
+      validatePasswordMatch(
+        formDetails.newPassword,
+        formDetails.confirmPassword
+      )
     );
     if (passwordValid && passwordMatch) {
-      dispatch(updatePassword(formDetails)).then((res) => {
-        if (res.meta.requestStatus === "fulfilled") {
+      dispatch(
+        updatePassword({
+          newPassword: formDetails.newPassword,
+        })
+      ).then((res) => {
+        if (res.meta.requestStatus === 'fulfilled') {
           setSuccess(true);
-          localStorage.removeItem('user')
-          sessionStorage.removeItem('token')
+          localStorage.removeItem('user');
+          sessionStorage.removeItem('token');
         }
       });
     }
   };
 
   useEffect(() => {
-    if (loading === "failed") {
-      if (localStorage.getItem("error") && localStorage) {
-        const error = localStorage.getItem("error") || "";
+    if (loading === 'failed') {
+      if (localStorage.getItem('error') && localStorage) {
+        const error = localStorage.getItem('error') || '';
         setMessage(error);
       }
     }
@@ -98,7 +109,7 @@ const ChangePassword = () => {
         refuseBackButton();
       } else {
         window.onpopstate = () => {
-          router.push("/dashboard/settings");
+          router.push('/dashboard/settings');
         };
       }
     }
@@ -106,33 +117,33 @@ const ChangePassword = () => {
   return (
     <div
       css={{
-        height: "100vh",
+        height: '100vh',
       }}
     >
       <SuccessModal
         isOpen={success}
         onRequestClose={() => setSuccess(false)}
-        action={"passwordReset"}
+        action={'passwordReset'}
       />
       <div
         css={{
-          height: "80px",
-          borderBottom: `1px solid ${"#E4E4E4"}`,
-          display: isTablet ? "flex" : "grid",
-          gridTemplateColumns: "1fr auto",
-          alignItems: "center",
-          paddingInline: "1.5rem",
-          paddingRight: "2.5rem",
-          gap: isTablet ? "1rem" : "",
-          color: "#000",
+          height: '80px',
+          borderBottom: `1px solid ${'#E4E4E4'}`,
+          display: isTablet ? 'flex' : 'grid',
+          gridTemplateColumns: '1fr auto',
+          alignItems: 'center',
+          paddingInline: '1.5rem',
+          paddingRight: '2.5rem',
+          gap: isTablet ? '1rem' : '',
+          color: '#000',
         }}
       >
         {isTablet && (
-          <Link href="/dashboard/settings">
-            <div css={{ display: "flex" }}>
+          <Link href='/dashboard/settings'>
+            <div css={{ display: 'flex' }}>
               <Image
-                src="/assets/svgs/back.svg"
-                alt="back_arrow"
+                src='/assets/svgs/back.svg'
+                alt='back_arrow'
                 width={22}
                 height={15}
               />
@@ -143,17 +154,17 @@ const ChangePassword = () => {
       </div>
       <div
         css={{
-          height: "calc(100vh - 80px)",
-          padding: "1.2rem",
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            display: "none",
+          height: 'calc(100vh - 80px)',
+          padding: '1.2rem',
+          overflowY: 'scroll',
+          '&::-webkit-scrollbar': {
+            display: 'none',
           },
         }}
       >
-        <div css={{ width: isTablet ? "100%" : "60%" }}>
+        <div css={{ width: isTablet ? '100%' : '60%' }}>
           <form onSubmit={handleNext}>
-            <SettingsPasswordTextField
+            {/* <SettingsPasswordTextField
               label="Current Password"
               visible={passwordVisible}
               setVisible={setPasswordVisible}
@@ -162,47 +173,65 @@ const ChangePassword = () => {
               value={formDetails.oldPassword}
               placeholder="Enter current password"
               error={message.includes("old") ? message : ""}
-            />
+            /> */}
             <SettingsPasswordTextField
-              label="New Password"
+              label='New Password'
               visible={confirmPasswordVisible}
               setVisible={setConfirmPasswordVisible}
               setValue={handleChange}
-              name="newPassword"
+              name='newPassword'
               value={formDetails.newPassword}
-              placeholder="Enter New Password"
-              error = {
+              placeholder='Enter New Password'
+              error={
                 passwordValid
-                ? ""
-                : "Kindly ensure your password has at least one capital letter, small letter, numerical and special character. It must also be at least 8 letters long"}
+                  ? ''
+                  : 'Kindly ensure your password has at least one capital letter, small letter, numerical and special character. It must also be at least 8 letters long'
+              }
             />
             <SettingsPasswordTextField
-              label="Confirm New Password"
+              label='Confirm New Password'
               visible={confirmPasswordVisible}
               setVisible={setConfirmPasswordVisible}
               setValue={handleChange}
-              name="confirmPassword"
+              name='confirmPassword'
               value={formDetails.confirmPassword}
-              placeholder="Enter New Password"
-              error = {message.includes("match") ? "Passwords does not match": passwordMatch ? "" : "Passwords do not match!"}
+              placeholder='Enter New Password'
+              error={
+                message.includes('match')
+                  ? 'Passwords does not match'
+                  : passwordMatch
+                  ? ''
+                  : 'Passwords do not match!'
+              }
             />
+            { error ?? <p>{error}</p> }
             <div
               css={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "2rem",
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '2rem',
               }}
             >
-              <Button height="52px" width="100%">
-                <p
-                  css={{
-                    fontSize: "16px",
-                    fontFamily: '"Nunito", sans-serif',
-                    paddingInline: isTablet ? "2rem" : "6rem",
-                  }}
-                >
-                  CHANGE PASSWORD
-                </p>
+              <Button height='52px' width='100%' disabled={loading === 'loading'}>
+                {loading === 'loading' ? (
+                  <TailSpin
+                    height={15}
+                    width={15}
+                    color='#7C35AB'
+                    ariaLabel='loading'
+                    radius={'2'}
+                  />
+                ) : (
+                  <p
+                    css={{
+                      fontSize: '16px',
+                      fontFamily: '"Nunito", sans-serif',
+                      paddingInline: isTablet ? '2rem' : '6rem',
+                    }}
+                  >
+                    CHANGE PASSWORD
+                  </p>
+                )}
               </Button>
             </div>
           </form>

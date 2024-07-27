@@ -5,10 +5,13 @@ import { useAxios } from 'utitlities/hooks/useAxios';
 import { ILoadUser, IUserDetails, ReqUpdateUser } from 'types/user';
 
 
-export const loadUser = createAsyncThunk('user/loadUser', async (data:string, thunkAPI) => {
+export const loadUser = createAsyncThunk('user/loadUser', async (data: any, thunkAPI) => {
+
+    const key = Object.keys(data)[0];
+    console.log(data)
     try {
         const response = await useAxios({
-        url: `${config.API_BASE_URL}/users/load-user`,
+            url: `${config.API_BASE_URL}/user/find_user?${key}=${data[key]}`,
             method: 'get',
         });
 
@@ -24,10 +27,10 @@ export const loadUser = createAsyncThunk('user/loadUser', async (data:string, th
     }
 });
 
-export const updateUser = createAsyncThunk('user/updateUser', async (data: {userId:string, form: ReqUpdateUser}, thunkAPI) => {
+export const updateUser = createAsyncThunk('user/updateUser', async (data: { userId: string, form: ReqUpdateUser }, thunkAPI) => {
     try {
         const response = await useAxios({
-        url: `${config.API_BASE_URL}/users/update-user/${data.userId}`,
+            url: `${config.API_BASE_URL}/users/update-user/${data.userId}`,
             method: 'put',
             data: data.form
         });

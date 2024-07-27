@@ -8,14 +8,23 @@ import {
   fileUpload,
 } from "./thunkAction";
 import { ICreateEvent, IEventFiles, IEventLocation } from "types/event";
+
+interface ILoadingState {
+  status: "failed" | "loading" | "successful" | "idle";
+  error?: undefined
+}
+
 interface IState {
-  loading: "failed" | "loading" | "successful" | "idle";
+  loading: ILoadingState;
   createEventData: ICreateEvent;
   fileUploadData: IEventFiles;
   eventLocationData: IEventLocation;
 }
 const initialState: IState = {
-  loading: "idle",
+  loading: {
+    status: "idle",
+    error: undefined
+  },
   createEventData: <ICreateEvent>{},
   fileUploadData: <IEventFiles>{},
   eventLocationData: <IEventLocation>{},
@@ -25,79 +34,108 @@ const hostEventSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(createEvent.pending, (state) => {
-      return { ...state, loading: "loading" };
-    });
+    builder
+      .addCase(createEvent.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
 
-    builder.addCase(createEvent.fulfilled, (state, action) => {
-      return {
-        ...state,
-        loading: "successful",
-        createEventData: action.payload,
-      };
-    });
-    builder.addCase(createEvent.rejected, (state) => {
-      return { ...state, loading: "failed" };
-    });
-    builder.addCase(fileUpload.pending, (state) => {
-      return { ...state, loading: "loading" };
-    });
+      .addCase(createEvent.fulfilled, (state: any, action: any) => {
+        return {
+          ...state,
+          loading: {
+            status: "successful"
+          },
+          createEventData: action.payload,
+        };
+      })
 
-    builder.addCase(fileUpload.fulfilled, (state, action) => {
-      return {
-        ...state,
-        loading: "successful",
-        fileUploadData: action.payload,
-      };
-    });
-    builder.addCase(fileUpload.rejected, (state) => {
-      return { ...state, loading: "failed" };
-    });
-    builder.addCase(eventLocation.pending, (state) => {
-      return { ...state, loading: "loading" };
-    });
+      .addCase(createEvent.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
 
-    builder.addCase(eventLocation.fulfilled, (state, action) => {
-      return {
-        ...state,
-        loading: "successful",
-        eventLocationData: action.payload,
-      };
-    });
-    builder.addCase(eventLocation.rejected, (state) => {
-      return { ...state, loading: "failed" };
-    });
-    builder.addCase(addPerformer.pending, (state) => {
-      return { ...state, loading: "loading" };
-    });
+      .addCase(fileUpload.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
 
-    builder.addCase(addPerformer.fulfilled, (state) => {
-      return { ...state, loading: "successful" };
-    });
-    builder.addCase(addPerformer.rejected, (state) => {
-      return { ...state, loading: "failed" };
-    });
-    builder.addCase(deletePerformer.pending, (state) => {
-      return { ...state };
-    });
+      .addCase(fileUpload.fulfilled, (state: any, action: any) => {
+        return {
+          ...state,
+          loading: {
+            status: "successful"
+          },
+          fileUploadData: action.payload,
+        };
+      })
 
-    builder.addCase(deletePerformer.fulfilled, (state) => {
-      return { ...state, loading: "successful" };
-    });
-    builder.addCase(deletePerformer.rejected, (state) => {
-      return { ...state, loading: "failed" };
-    });
-    builder.addCase(addTicket.pending, (state) => {
-      return { ...state, loading: "loading" };
-    });
+      .addCase(fileUpload.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
 
-    builder.addCase(addTicket.fulfilled, (state) => {
-      return { ...state, loading: "successful" };
-    });
-    builder.addCase(addTicket.rejected, (state) => {
-      return { ...state, loading: "failed" };
-    });
-  },
-});
+      .addCase(eventLocation.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
 
+      .addCase(eventLocation.fulfilled, (state: any, action: any) => {
+        return {
+          ...state,
+          loading: {
+            status: "successful"
+          },
+          eventLocationData: action.payload,
+        };
+      })
+
+      .addCase(eventLocation.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
+
+      .addCase(addPerformer.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
+
+      .addCase(addPerformer.fulfilled, (state: any) => {
+        return {
+          ...state, loading: {
+            status: "successful"
+          }
+        };
+      })
+
+      .addCase(addPerformer.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
+
+      .addCase(deletePerformer.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
+
+      .addCase(deletePerformer.fulfilled, (state: any) => {
+        return {
+          ...state, loading: {
+            status: "successful"
+          }
+        };
+      })
+
+      .addCase(deletePerformer.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
+
+      .addCase(addTicket.pending, (state: any) => {
+        state.loading = { status: "loading" }
+      })
+
+      .addCase(addTicket.fulfilled, (state: any) => {
+        return {
+          ...state, loading: {
+            status: "successful"
+          }
+        };
+      })
+
+      .addCase(addTicket.rejected, (state: any, action: any) => {
+        state.loading = { status: "failed", error: action.payload.message }
+      })
+  }
+})
 export const HostEventReducer = hostEventSlice.reducer;

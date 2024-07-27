@@ -2,13 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { config } from '../../config/api';
 import { useAxios } from 'utitlities/hooks/useAxios';
-import { IUpdatePassword } from 'fragments/settings/changePassword';
 
-export const updatePassword = createAsyncThunk('user/getUserById', async (data: IUpdatePassword, thunkAPI) => {
+export const updatePassword = createAsyncThunk('auth/changePassword', async (data: { newPassword: string }, thunkAPI) => {
     try {
         const response = await useAxios({
-            url: `${config.API_BASE_URL}/users/update-user-password`,
-            method: 'put',
+            url: `${config.API_BASE_URL}/auth/reset_password`,
+            method: 'post',
             data: data
         });
         console.log(response.data.message)
