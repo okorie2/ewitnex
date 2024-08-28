@@ -1,32 +1,50 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { screen } from "styles/theme";
 import Down from "public/assets/svgs/down_ar.svg";
 import { useMediaQuery } from "@mui/material";
-import Image from 'next/image'
+import Image from "next/image";
 
 interface SearchSelectProps {
   placeholder: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  handleSelect: (name:string , value:string) => void
+  handleSelect: (name: string, value: string) => void;
   menuList: string[];
   inputWidth: string;
   height?: string;
-  name: string
-  value:string;
+  name: string;
+  value: string;
   width?: string;
   zIndex?: number;
-  containerSize: string
-  paddingInline?:string
-  active?:string
-  handleActive: (name: string) => void
+  containerSize: string;
+  paddingInline?: string;
+  active?: string;
+  handleActive: (name: string) => void;
 }
 
 export default function SearchSelect({ ...rest }: SearchSelectProps) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const isTablet = useMediaQuery("(max-width: 900px)" );
+  const isTablet = useMediaQuery("(max-width: 900px)");
+  // const ref = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   function handleClickOutside(event: MouseEvent) {
+  //     event.stopPropagation();
+  //     if (ref.current && !ref.current.contains(event.target as Node)) {
+  //       // alert("we are outside");
+  //       console.log("we are outside");
+  //     } else {
+  //       console.log("we are inside");
+  //     }
+  //   }
+
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [ref, rest]);
 
   return (
     <div
@@ -38,12 +56,13 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
         width: rest.containerSize,
         background: "#fff",
       }}
+      // ref={ref}
     >
       <input
         type="text"
         placeholder={rest.placeholder}
         onChange={rest.onChange}
-        value = {rest.value}
+        value={rest.value}
         css={{
           backgroundColor: "#fff",
           outline: "none",
@@ -61,25 +80,20 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           },
         }}
       />
-      <div
-        css={{ marginTop: "7px", cursor: "pointer" }}
-      >
+      <div css={{ marginTop: "7px", cursor: "pointer" }}>
         {rest.name === rest.active ? (
           <div
-          css={{
-            transform: "rotate(180deg)",
-            marginTop: "-50%",
-          }}
-        onClick={() => rest.handleActive("")}
-
-        >
-          <Image src={Down} alt="down" />
-        </div>
+            css={{
+              transform: "rotate(180deg)",
+              marginTop: "-50%",
+            }}
+            onClick={() => rest.handleActive("")}
+          >
+            <Image src={Down} alt="down" />
+          </div>
         ) : (
-          <div 
-          onClick={() => rest.handleActive(rest.name)}
-        >
-          <Image src={Down} alt="down" />
+          <div onClick={() => rest.handleActive(rest.name)}>
+            <Image src={Down} alt="down" />
           </div>
         )}
       </div>
@@ -106,25 +120,61 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
           "&::-webkit-scrollbar-thumb": {
             background: "#AEAEAE",
             borderRadius: "8px",
-            height:"5px",
+            height: "5px",
             ":hover": {
               background: ` ${"#707070"}`,
             },
           },
         }}
       >
-        {rest.placeholder === "Search events in" && 
-          <div css = {{borderBottom: "1px solid #AEAEAE", fontSize: "14px", fontWeight: "600"}}>
-            <div css = {{paddingBlock: "0.5rem", paddingLeft: "5%", display: "flex", alignItems: "center",gap: "14px" ,cursor: "pointer", ":hover" : {backgroundColor: "#F2F7FB"}}}>
-              <Image src = {"/assets/svgs/location-pin.svg"} alt= "" width = {18} height = {18}/>
+        {rest.placeholder === "Search events in" && (
+          <div
+            css={{
+              borderBottom: "1px solid #AEAEAE",
+              fontSize: "14px",
+              fontWeight: "600",
+            }}
+          >
+            <div
+              css={{
+                paddingBlock: "0.5rem",
+                paddingLeft: "5%",
+                display: "flex",
+                alignItems: "center",
+                gap: "14px",
+                cursor: "pointer",
+                ":hover": { backgroundColor: "#F2F7FB" },
+              }}
+            >
+              <Image
+                src={"/assets/svgs/location-pin.svg"}
+                alt=""
+                width={18}
+                height={18}
+              />
               Use my current location
             </div>
-            <div css = {{paddingBlock: "0.5rem", paddingLeft: "5%", display: "flex", alignItems: "center", gap: "14px", cursor: "pointer", ":hover" : {backgroundColor: "#F2F7FB"}}}>
-              <Image src = {"/assets/svgs/online-event.svg"} alt= "" width = {18} height = {18}/>
+            <div
+              css={{
+                paddingBlock: "0.5rem",
+                paddingLeft: "5%",
+                display: "flex",
+                alignItems: "center",
+                gap: "14px",
+                cursor: "pointer",
+                ":hover": { backgroundColor: "#F2F7FB" },
+              }}
+            >
+              <Image
+                src={"/assets/svgs/online-event.svg"}
+                alt=""
+                width={18}
+                height={18}
+              />
               Explore online events
             </div>
           </div>
-        }
+        )}
         {rest.menuList.map((name, i) => (
           <div
             key={i}
@@ -132,13 +182,16 @@ export default function SearchSelect({ ...rest }: SearchSelectProps) {
               marginBlock: "0.5rem",
               fontSize: "14px",
               fontWeight: "600",
-              paddingInline: rest.paddingInline ? "18%":"",
+              paddingInline: rest.paddingInline ? "18%" : "",
               cursor: "pointer",
               ":hover": {
                 color: "#7C35AB",
               },
             }}
-            onClick = {() => rest.handleSelect(rest.name, name)}
+            onClick={() => {
+              rest.handleSelect(rest.name, name);
+              rest.handleActive("");
+            }}
           >
             {name}
           </div>
